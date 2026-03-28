@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Hero Section v1",
       "description": "Full hero block: two-column headline/CTA, brands marquee strip, and animated macOS terminal integration demo.",
-      "dependencies": ["geist"],
+      "dependencies": ["geist@^1.7.0"],
       "registryDependencies": ["button"],
       "files": [
         {
@@ -28,7 +28,7 @@
         },
         {
           "path": "registry/new-york/blocks/hero-section-v1/brands-section-v1.css",
-          "type": "registry:component",
+          "type": "registry:file",
           "target": "app/hero-section-v1/brands-section-v1.css"
         },
         {
@@ -43,7 +43,7 @@
         },
         {
           "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal.css",
-          "type": "registry:component",
+          "type": "registry:file",
           "target": "app/hero-section-v1/mac-os-terminal.css"
         },
         {
@@ -132,7 +132,7 @@
         },
         {
           "path": "registry/new-york/blocks/brands-section-v1/brands-section-v1.css",
-          "type": "registry:component",
+          "type": "registry:file",
           "target": "app/brands-section-v1/brands-section-v1.css"
         },
         {
@@ -221,7 +221,7 @@
         },
         {
           "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.css",
-          "type": "registry:component",
+          "type": "registry:file",
           "target": "app/mac-os-terminal/mac-os-terminal.css"
         }
       ]
@@ -245,7 +245,7 @@
         },
         {
           "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.css",
-          "type": "registry:component",
+          "type": "registry:file",
           "target": "app/cursor-terminal/cursor-terminal.css"
         }
       ]

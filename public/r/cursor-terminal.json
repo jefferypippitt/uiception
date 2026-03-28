@@ -20,7 +20,7 @@
     {
       "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.css",
       "content": "/* cursor-terminal — scoped so consumers need not import app globals */\n\n.crt-terminal .crt-cursor {\n  display: inline-block;\n  width: 8px;\n  height: 1em;\n  margin-left: 1px;\n  vertical-align: text-bottom;\n  background-color: #cccccc;\n  animation: crt-terminal-blink 1.15s step-start infinite;\n}\n\n@keyframes crt-terminal-blink {\n  0%,\n  49.9% {\n    opacity: 1;\n  }\n  50%,\n  100% {\n    opacity: 0;\n  }\n}\n\n.crt-terminal .crt-line-in {\n  animation: crt-terminal-line-fade 0.12s ease-out both;\n}\n\n@keyframes crt-terminal-line-fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n\n.crt-terminal .crt-body::-webkit-scrollbar {\n  display: none;\n}\n",
-      "type": "registry:component",
+      "type": "registry:file",
       "target": "app/cursor-terminal/cursor-terminal.css"
     }
   ],
