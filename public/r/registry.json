@@ -47,11 +47,6 @@
           "target": "app/hero-section-v1/mac-os-terminal.css"
         },
         {
-          "path": "public/images/hero-section-v1-bg.png",
-          "type": "registry:file",
-          "target": "public/images/hero-section-v1-bg.png"
-        },
-        {
           "path": "public/svg/ClaudeAI_dark.svg",
           "type": "registry:file",
           "target": "public/svg/ClaudeAI_dark.svg"

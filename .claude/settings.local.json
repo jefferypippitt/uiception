@@ -20,7 +20,8 @@
       "WebFetch(domain:equals.com)",
       "Bash(pnpm build:*)",
       "WebFetch(domain:ui.shadcn.com)",
-      "Bash(pnpm:*)"
+      "Bash(pnpm:*)",
+      "Bash(npx shadcn:*)"
     ]
   }
 }

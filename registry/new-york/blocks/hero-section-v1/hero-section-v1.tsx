@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { GeistPixelCircle } from "geist/font/pixel"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRightIcon } from "lucide-react"
@@ -42,13 +41,12 @@ export default function HeroSectionV1() {
 
       <section className="px-4 pb-16 md:pb-20 lg:pb-24">
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl px-4 py-10 md:px-8 md:py-14">
-          {/* Replace /images/hero-section-v1-bg.png with your own background image */}
-          <Image
-            src="/images/hero-section-v1-bg.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://uiception.com/images/hero-section-v1-bg.png"
             alt=""
-            fill
-            className="pointer-events-none object-cover object-center"
-            aria-hidden
+            className="pointer-events-none object-cover object-center absolute inset-0 w-full h-full"
+            aria-hidden={true}
           />
           <div className="relative mx-auto max-w-2xl">
             <MacOsTerminal />
