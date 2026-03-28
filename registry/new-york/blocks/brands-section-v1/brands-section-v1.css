@@ -1,0 +1,89 @@
+.bs1-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.bs1-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0.35rem 0;
+  backface-visibility: hidden;
+}
+
+/* Pixel-accurate distance via --bs1-shift (one full .bs1-set width) avoids subpixel % stutter */
+.bs1-track.bs1-track--run {
+  animation: bs1-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.bs1-set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2.5rem;
+  padding-inline: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .bs1-set {
+    gap: 3.75rem;
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bs1-set {
+    gap: 4rem;
+  }
+}
+
+.bs1-slot {
+  padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .bs1-slot {
+    padding-inline: 1.5rem;
+  }
+}
+
+.bs1-fade {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  width: 64px;
+}
+
+.bs1-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, var(--background) 0%, transparent 100%);
+}
+
+.bs1-fade-right {
+  right: 0;
+  background: linear-gradient(270deg, var(--background) 0%, transparent 100%);
+}
+
+@keyframes bs1-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-1 * var(--bs1-shift)), 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs1-track.bs1-track--run {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+  .bs1-fade {
+    display: none;
+  }
+}

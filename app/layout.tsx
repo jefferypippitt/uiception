@@ -1,15 +1,16 @@
-import { Geist, Geist_Mono } from "next/font/google"
-
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import {
+  GeistPixelSquare,
+  GeistPixelGrid,
+  GeistPixelCircle,
+  GeistPixelTriangle,
+  GeistPixelLine,
+} from "geist/font/pixel"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
+import { cn } from "@/lib/utils"
+import Providers from "@/components/providers"
+import { ViewTransitions } from "next-view-transitions"
 
 export default function RootLayout({
   children,
@@ -17,14 +18,26 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
-    >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={cn(
+          "antialiased",
+          GeistSans.variable,
+          GeistMono.variable,
+          GeistPixelSquare.variable,
+          GeistPixelGrid.variable,
+          GeistPixelCircle.variable,
+          GeistPixelTriangle.variable,
+          GeistPixelLine.variable,
+          "font-sans",
+        )}
+      >
+        <body>
+          <Providers>{children}</Providers>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

@@ -1,12 +1,18 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    --font-pixel-square: var(--font-geist-pixel-square);
+    --font-pixel-grid: var(--font-geist-pixel-grid);
+    --font-pixel-circle: var(--font-geist-pixel-circle);
+    --font-pixel-triangle: var(--font-geist-pixel-triangle);
+    --font-pixel-line: var(--font-geist-pixel-line);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -119,11 +125,403 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Shiki code panel */
+.shiki-panel .shiki {
+  background: transparent !important;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: 1rem;
+  tab-size: 2;
+}
+
+.shiki-panel code {
+  counter-reset: line;
+}
+
+.shiki-panel code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.75rem;
+  margin-right: 1rem;
+  text-align: right;
+  opacity: 0.3;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Noir code workspace — softer gutters, match min theme contrast */
+.code-view-noir .shiki-panel-noir code .line::before {
+  opacity: 0.22;
+}
+
+/*
+ * Radix ScrollArea wraps content in display:table + minWidth:100%, so wide labels
+ * widen the inner layer; the viewport then clips rows without text-overflow ellipsis.
+ * Force block + full width so row buttons and .file-tree-label get a real width cap.
+ */
+.file-tree-scroll-area [data-slot="scroll-area-viewport"] > div {
+  display: block !important;
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.file-tree-scroll-area .file-tree-label {
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+/* View Transitions — navigation */
+:not(.theme-transitioning):not(.badge-nav)::view-transition-old(root) {
+  animation: vt-out 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+:not(.theme-transitioning):not(.badge-nav)::view-transition-new(root) {
+  animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* View Transitions — theme toggle */
+.theme-transitioning::view-transition-group(root) {
+  animation-duration: 0.5s;
+}
+
+.theme-transitioning::view-transition-new(root) {
+  animation: vt-theme-reveal 0.5s ease-in-out both;
+}
+
+.theme-transitioning::view-transition-old(root),
+.dark.theme-transitioning::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+@keyframes vt-theme-reveal {
+  from {
+    clip-path: polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%);
+  }
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes vt-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px) brightness(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-40px);
+    filter: blur(16px) brightness(1.5);
+  }
+}
+
+@keyframes vt-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.08) translateY(60px);
+    filter: blur(20px) brightness(0.7);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+/* Category title jump — group moves between positions, images stay natural size (no zoom) */
+::view-transition-group(title-navbar),
+::view-transition-group(title-hero-section),
+::view-transition-group(title-brands),
+::view-transition-group(title-how-it-works),
+::view-transition-group(title-case-study),
+::view-transition-group(title-about-us),
+::view-transition-group(title-resources),
+::view-transition-group(title-value-proposition),
+::view-transition-group(title-features),
+::view-transition-group(title-integrations),
+::view-transition-group(title-pricing),
+::view-transition-group(title-testimonials),
+::view-transition-group(title-cta),
+::view-transition-group(title-faq),
+::view-transition-group(title-stats),
+::view-transition-group(title-footer) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: visible;
+}
+
+::view-transition-image-pair(title-navbar),
+::view-transition-image-pair(title-hero-section),
+::view-transition-image-pair(title-brands),
+::view-transition-image-pair(title-how-it-works),
+::view-transition-image-pair(title-case-study),
+::view-transition-image-pair(title-about-us),
+::view-transition-image-pair(title-resources),
+::view-transition-image-pair(title-value-proposition),
+::view-transition-image-pair(title-features),
+::view-transition-image-pair(title-integrations),
+::view-transition-image-pair(title-pricing),
+::view-transition-image-pair(title-testimonials),
+::view-transition-image-pair(title-cta),
+::view-transition-image-pair(title-faq),
+::view-transition-image-pair(title-stats),
+::view-transition-image-pair(title-footer) {
+  overflow: visible;
+}
+
+::view-transition-old(title-navbar),
+::view-transition-old(title-hero-section),
+::view-transition-old(title-brands),
+::view-transition-old(title-how-it-works),
+::view-transition-old(title-case-study),
+::view-transition-old(title-about-us),
+::view-transition-old(title-resources),
+::view-transition-old(title-value-proposition),
+::view-transition-old(title-features),
+::view-transition-old(title-integrations),
+::view-transition-old(title-pricing),
+::view-transition-old(title-testimonials),
+::view-transition-old(title-cta),
+::view-transition-old(title-faq),
+::view-transition-old(title-stats),
+::view-transition-old(title-footer) {
+  width: auto;
+  height: auto;
+  animation: vt-title-out 0.12s ease-in forwards;
+}
+
+::view-transition-new(title-navbar),
+::view-transition-new(title-hero-section),
+::view-transition-new(title-brands),
+::view-transition-new(title-how-it-works),
+::view-transition-new(title-case-study),
+::view-transition-new(title-about-us),
+::view-transition-new(title-resources),
+::view-transition-new(title-value-proposition),
+::view-transition-new(title-features),
+::view-transition-new(title-integrations),
+::view-transition-new(title-pricing),
+::view-transition-new(title-testimonials),
+::view-transition-new(title-cta),
+::view-transition-new(title-faq),
+::view-transition-new(title-stats),
+::view-transition-new(title-footer) {
+  width: auto;
+  height: auto;
+  animation: vt-title-in 0.3s 0.1s ease-out both;
+}
+
+@keyframes vt-title-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-title-in {
+  from { opacity: 0; }
+}
+
+/* View Transitions — changelog badge click (carousel slide) */
+.badge-nav::view-transition-old(root) {
+  animation: vt-carousel-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.badge-nav::view-transition-new(root) {
+  animation: vt-carousel-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes vt-carousel-out {
+  from { transform: translateX(0) scale(1); opacity: 1; }
+  to   { transform: translateX(30%) scale(0.9); opacity: 0; }
+}
+
+@keyframes vt-carousel-in {
+  from { transform: translateX(-30%) scale(0.9); opacity: 0; }
+  to   { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* Logo cloud — infinite horizontal marquee + soft edge composite */
+@keyframes logo-marquee {
+    from {
+        transform: translate3d(0, 0, 0);
     }
-  html {
-    @apply font-sans;
+    to {
+        /* -50% only when the track is exactly two identical segments with no gap between them */
+        transform: translate3d(-50%, 0, 0);
     }
 }
+
+/*
+ * Edge fog only (no viewport mask): stacking a mask on the whole row + blurred
+ * overlays exaggerates opacity steps and reads as vertical banding / streaks.
+ */
+.logo-marquee-viewport {
+    isolation: isolate;
+}
+
+.logo-marquee-edge {
+    position: absolute;
+    inset-block: 0;
+    z-index: 10;
+    width: min(42vw, 15rem);
+    pointer-events: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* Slightly lower saturate() reduces posterized fringe next to blur */
+    backdrop-filter: blur(88px) saturate(1.08);
+    -webkit-backdrop-filter: blur(88px) saturate(1.08);
+}
+
+.logo-marquee-edge--left {
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        var(--background) 0%,
+        color-mix(in oklch, var(--background) 94%, transparent) 8%,
+        color-mix(in oklch, var(--background) 72%, transparent) 22%,
+        color-mix(in oklch, var(--background) 44%, transparent) 40%,
+        color-mix(in oklch, var(--background) 22%, transparent) 58%,
+        color-mix(in oklch, var(--background) 8%, transparent) 76%,
+        transparent 100%
+    );
+    /* Long feathered mask avoids a hard “vertical seam” in the blur composite */
+    mask-image: linear-gradient(
+        90deg,
+        black 0%,
+        rgb(0 0 0 / 0.98) 12%,
+        rgb(0 0 0 / 0.82) 28%,
+        rgb(0 0 0 / 0.52) 48%,
+        rgb(0 0 0 / 0.22) 72%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        black 0%,
+        rgb(0 0 0 / 0.98) 12%,
+        rgb(0 0 0 / 0.82) 28%,
+        rgb(0 0 0 / 0.52) 48%,
+        rgb(0 0 0 / 0.22) 72%,
+        transparent 100%
+    );
+}
+
+.logo-marquee-edge--right {
+    right: 0;
+    background: linear-gradient(
+        270deg,
+        var(--background) 0%,
+        color-mix(in oklch, var(--background) 94%, transparent) 8%,
+        color-mix(in oklch, var(--background) 72%, transparent) 22%,
+        color-mix(in oklch, var(--background) 44%, transparent) 40%,
+        color-mix(in oklch, var(--background) 22%, transparent) 58%,
+        color-mix(in oklch, var(--background) 8%, transparent) 76%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        270deg,
+        black 0%,
+        rgb(0 0 0 / 0.98) 12%,
+        rgb(0 0 0 / 0.82) 28%,
+        rgb(0 0 0 / 0.52) 48%,
+        rgb(0 0 0 / 0.22) 72%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        270deg,
+        black 0%,
+        rgb(0 0 0 / 0.98) 12%,
+        rgb(0 0 0 / 0.82) 28%,
+        rgb(0 0 0 / 0.52) 48%,
+        rgb(0 0 0 / 0.22) 72%,
+        transparent 100%
+    );
+}
+
+@media (min-width: 768px) {
+    .logo-marquee-edge {
+        width: min(38vw, 18rem);
+    }
+}
+
+.logo-marquee-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    animation: logo-marquee var(--logo-marquee-duration, 48s) linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-marquee-track {
+        animation: none;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Block preview — styled scrollbar to match Radix ScrollArea                  */
+/* -------------------------------------------------------------------------- */
+
+.preview-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.preview-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.preview-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.preview-scrollbar::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Iframe loads /view/* with .preview-embed-root — scrollbar is on html/body */
+html:has(.preview-embed-root) {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html:has(.preview-embed-root)::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+html:has(.preview-embed-root) body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html:has(.preview-embed-root) body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+

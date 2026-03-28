@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(curl:*)",
+      "Bash(find C:/projects/uiception/registry -type f -name *hero*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(mkdir -p components)",
+      "Bash(mv hero-section-v1.tsx components/)",
+      "Bash(mv headline.tsx components/)",
+      "Bash(mv hero-preview.tsx components/)",
+      "Bash(rm -rf ui)",
+      "Bash(node:*)",
+      "Bash(find /c/projects/uiception -type f -name *hero*)",
+      "WebFetch(domain:equals.com)",
+      "Bash(pnpm build:*)"
+    ]
+  }
+}

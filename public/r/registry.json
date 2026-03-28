@@ -1,0 +1,254 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "uiception",
+  "homepage": "https://uiception.vercel.app",
+  "items": [
+    {
+      "name": "hero-section-v1",
+      "type": "registry:block",
+      "title": "Hero Section v1",
+      "description": "Full hero block: two-column headline/CTA, brands marquee strip, and animated macOS terminal integration demo.",
+      "dependencies": ["geist"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/hero-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/hero-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/brands-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/brands-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/brands-section-v1.css",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/brands-section-v1.css"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/mac-os-terminal.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal-code-segments.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v1/mac-os-terminal-code-segments.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal.css",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/mac-os-terminal.css"
+        },
+        {
+          "path": "public/images/hero-section-v1-bg.png",
+          "type": "registry:file",
+          "target": "public/images/hero-section-v1-bg.png"
+        },
+        {
+          "path": "public/svg/ClaudeAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/ClaudeAI_dark.svg"
+        },
+        {
+          "path": "public/svg/ClaudeAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/ClaudeAI_light.svg"
+        },
+        {
+          "path": "public/svg/Gemini_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Gemini_dark.svg"
+        },
+        {
+          "path": "public/svg/Gemini_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Gemini_light.svg"
+        },
+        {
+          "path": "public/svg/Grok_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Grok_dark.svg"
+        },
+        {
+          "path": "public/svg/Grok_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Grok_light.svg"
+        },
+        {
+          "path": "public/svg/Nvidia_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Nvidia_dark.svg"
+        },
+        {
+          "path": "public/svg/Nvidia_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Nvidia_light.svg"
+        },
+        {
+          "path": "public/svg/OpenAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/OpenAI_dark.svg"
+        },
+        {
+          "path": "public/svg/OpenAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/OpenAI_light.svg"
+        },
+        {
+          "path": "public/svg/PerplexityAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/PerplexityAI_dark.svg"
+        },
+        {
+          "path": "public/svg/PerplexityAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/PerplexityAI_light.svg"
+        }
+      ]
+    },
+    {
+      "name": "brands-section-v1",
+      "type": "registry:block",
+      "title": "Brands Section v1",
+      "description": "Compact brands strip with a trust label and an infinite marquee of light and dark mode logos. Ships SVG logos into public/svg/ for use at /svg/… (Nvidia, OpenAI, Grok, Perplexity AI, Claude AI, Gemini).",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v1/brands-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v1/brands-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v1/brands-section-v1.css",
+          "type": "registry:component",
+          "target": "app/brands-section-v1/brands-section-v1.css"
+        },
+        {
+          "path": "public/svg/ClaudeAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/ClaudeAI_dark.svg"
+        },
+        {
+          "path": "public/svg/ClaudeAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/ClaudeAI_light.svg"
+        },
+        {
+          "path": "public/svg/Gemini_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Gemini_dark.svg"
+        },
+        {
+          "path": "public/svg/Gemini_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Gemini_light.svg"
+        },
+        {
+          "path": "public/svg/Grok_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Grok_dark.svg"
+        },
+        {
+          "path": "public/svg/Grok_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Grok_light.svg"
+        },
+        {
+          "path": "public/svg/Nvidia_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/Nvidia_dark.svg"
+        },
+        {
+          "path": "public/svg/Nvidia_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/Nvidia_light.svg"
+        },
+        {
+          "path": "public/svg/OpenAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/OpenAI_dark.svg"
+        },
+        {
+          "path": "public/svg/OpenAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/OpenAI_light.svg"
+        },
+        {
+          "path": "public/svg/PerplexityAI_dark.svg",
+          "type": "registry:file",
+          "target": "public/svg/PerplexityAI_dark.svg"
+        },
+        {
+          "path": "public/svg/PerplexityAI_light.svg",
+          "type": "registry:file",
+          "target": "public/svg/PerplexityAI_light.svg"
+        }
+      ]
+    },
+    {
+      "name": "mac-os-terminal",
+      "type": "registry:block",
+      "title": "Mac OS Terminal",
+      "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install output—ideal for integrations and developer tooling sections.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/page.tsx",
+          "type": "registry:page",
+          "target": "app/mac-os-terminal/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.tsx",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/mac-os-terminal.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal-code-segments.ts",
+          "type": "registry:lib",
+          "target": "app/mac-os-terminal/mac-os-terminal-code-segments.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.css",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/mac-os-terminal.css"
+        }
+      ]
+    },
+    {
+      "name": "cursor-terminal",
+      "type": "registry:block",
+      "title": "Cursor Terminal",
+      "description": "VS Code / Cursor panel mock with PowerShell prompt and a typed shadcn add flow for the hero-section-v1 registry block.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/page.tsx",
+          "type": "registry:page",
+          "target": "app/cursor-terminal/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.tsx",
+          "type": "registry:component",
+          "target": "app/cursor-terminal/cursor-terminal.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.css",
+          "type": "registry:component",
+          "target": "app/cursor-terminal/cursor-terminal.css"
+        }
+      ]
+    }
+  ]
+}
