@@ -39,4 +39,5 @@ next-env.d.ts
 .next-docs/
 
 # binary image assets (replace with your own)
-/public/images/
+/public/images/*
+!/public/images/hero-section-v1-bg.png
