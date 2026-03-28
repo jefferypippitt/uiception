@@ -4,7 +4,8 @@
   "rsc": true,
   "tsx": true,
   "registries": {
-    "@svgl": "https://svgl.app/r/{name}.json"
+    "@svgl": "https://svgl.app/r/{name}.json",
+    "@uiception": "https://uiception.com/r/{name}.json"
   },
   "tailwind": {
     "config": "",

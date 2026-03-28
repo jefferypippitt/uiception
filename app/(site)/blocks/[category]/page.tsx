@@ -6,6 +6,8 @@ import { BlockPreviewToolbar } from "@/components/block-preview-toolbar"
 import { Button } from "@/components/ui/button"
 import { blockCategories } from "@/lib/blocks"
 
+import { BlocksCategoryHashScroll } from "./blocks-category-hash-scroll"
+
 type CategoryPageProps = {
   params: Promise<{ category: string }>
 }
@@ -24,6 +26,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="pb-14 md:pb-20">
+      <BlocksCategoryHashScroll />
       <div className="mx-auto w-full max-w-6xl px-6">
         <Button variant="link" asChild className="h-auto justify-start px-0 py-1.5">
           <Link href="/blocks">
@@ -44,7 +47,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         ) : (
           <div className="mt-8 space-y-16">
             {categoryData.versions.map((version) => (
-              <section key={version.id} id={version.id}>
+              <section
+                key={version.id}
+                id={version.id}
+                className="scroll-mt-24"
+              >
                 <BlockPreviewToolbar version={version} />
               </section>
             ))}
