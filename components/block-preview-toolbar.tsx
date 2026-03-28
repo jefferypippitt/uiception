@@ -31,7 +31,13 @@ import {
 } from "@/components/ui/tooltip"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import type { BlockVersion } from "@/lib/blocks"
+import registry from "@/registry.json"
 import { cn } from "@/lib/utils"
+
+const registryJsonBaseUrl =
+  typeof registry.homepage === "string" && registry.homepage.length > 0
+    ? registry.homepage.replace(/\/$/, "")
+    : "https://uiception.com"
 
 // ---------------------------------------------------------------------------
 // Shiki — singleton highlighter (lazy, shared across all instances)
@@ -457,7 +463,7 @@ export function BlockPreviewToolbar({
     }
   }, [mainView, versionId, registryFiles, codeError])
 
-  const installCommand = `npx shadcn@latest add ${versionId}`
+  const installCommand = `npx shadcn@latest add "${registryJsonBaseUrl}/r/${versionId}.json"`
   const previewPath = `/view/${versionId}`
 
   // If the iframe navigates to a new preview URL, ensure the loading overlay
