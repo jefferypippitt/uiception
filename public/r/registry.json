@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "uiception",
-  "homepage": "https://uiception.vercel.app",
+  "homepage": "https://uiception.com",
   "items": [
     {
       "name": "hero-section-v1",

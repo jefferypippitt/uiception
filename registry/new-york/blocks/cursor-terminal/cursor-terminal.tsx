@@ -12,7 +12,7 @@ const ICON_XS = "size-3 shrink-0 stroke-[1.75]"
 
 const PROMPT = "PS C:\\projects\\uiception> "
 const COMMAND =
-  'pnpm dlx shadcn@latest add "https://uiception.vercel.app/r/hero-section-v1.json"'
+  'pnpm dlx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"'
 const TYPE_SPEED = 38
 
 const PANEL_TABS = ["Problems", "Output", "Debug Console", "Terminal", "Ports", "GitLens"] as const
