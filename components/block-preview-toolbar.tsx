@@ -14,7 +14,6 @@ import {
   Tablet,
 } from "lucide-react"
 import { createHighlighter, type Highlighter } from "shiki"
-import Image from "next/image"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -32,6 +31,15 @@ import {
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import type { BlockVersion } from "@/lib/blocks"
 import { cn } from "@/lib/utils"
+import { ReactLight } from "@/components/ui/svgs/reactLight"
+import { ReactDark } from "@/components/ui/svgs/reactDark"
+import { Typescript } from "@/components/ui/svgs/typescript"
+import { Javascript } from "@/components/ui/svgs/javascript"
+import { CssOld } from "@/components/ui/svgs/cssOld"
+import { MarkdownLight } from "@/components/ui/svgs/markdownLight"
+import { MarkdownDark } from "@/components/ui/svgs/markdownDark"
+import { Bash } from "@/components/ui/svgs/bash"
+import { BashDark } from "@/components/ui/svgs/bashDark"
 
 // ---------------------------------------------------------------------------
 // Shiki — singleton highlighter (lazy, shared across all instances)
@@ -86,71 +94,24 @@ function binaryPlaceholder(path: string): string {
 // File-type icons
 // ---------------------------------------------------------------------------
 
-/** Swaps between _light.svg and _dark.svg from /public/svg/ based on theme */
-function ThemedIcon({ name, className }: { name: string; className?: string }) {
-  return (
-    <>
-      <Image
-        src={`/svg/${name}_light.svg`}
-        width={16}
-        height={16}
-        className={cn("shrink-0 dark:hidden", className)}
-        aria-hidden
-        alt=""
-      />
-      <Image
-        src={`/svg/${name}_dark.svg`}
-        width={16}
-        height={16}
-        className={cn("hidden shrink-0 dark:block", className)}
-        aria-hidden
-        alt=""
-      />
-    </>
-  )
-}
-
 function FileTypeIcon({ name }: { name: string }) {
   const ext = name.split(".").pop()?.toLowerCase() ?? ""
 
   if (ext === "tsx" || ext === "jsx") {
-    return <ThemedIcon name="React" className="size-4" />
+    return (
+      <>
+        <ReactLight className="size-4 shrink-0 dark:hidden" aria-hidden />
+        <ReactDark className="size-4 shrink-0 hidden dark:block" aria-hidden />
+      </>
+    )
   }
 
   if (ext === "ts") {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
-        <rect width="16" height="16" rx="2.5" fill="#3178C6" />
-        <text
-          x="2.5"
-          y="12"
-          fontSize="8.5"
-          fontWeight="700"
-          fontFamily="ui-monospace,monospace"
-          fill="white"
-        >
-          TS
-        </text>
-      </svg>
-    )
+    return <Typescript className="size-4 shrink-0" aria-hidden />
   }
 
   if (ext === "css") {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
-        <rect width="16" height="16" rx="2.5" fill="#7c3aed" />
-        <text
-          x="1"
-          y="12"
-          fontSize="7"
-          fontWeight="700"
-          fontFamily="ui-monospace,monospace"
-          fill="white"
-        >
-          CSS
-        </text>
-      </svg>
-    )
+    return <CssOld className="size-4 shrink-0" aria-hidden />
   }
 
   if (ext === "json") {
@@ -172,20 +133,24 @@ function FileTypeIcon({ name }: { name: string }) {
   }
 
   if (ext === "js" || ext === "mjs") {
+    return <Javascript className="size-4 shrink-0" aria-hidden />
+  }
+
+  if (ext === "md" || ext === "mdx") {
     return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
-        <rect width="16" height="16" rx="2.5" fill="#F0D91D" />
-        <text
-          x="2.5"
-          y="12"
-          fontSize="8.5"
-          fontWeight="700"
-          fontFamily="ui-monospace,monospace"
-          fill="#1a1a1a"
-        >
-          JS
-        </text>
-      </svg>
+      <>
+        <MarkdownLight className="size-4 shrink-0 dark:hidden" aria-hidden />
+        <MarkdownDark className="size-4 shrink-0 hidden dark:block" aria-hidden />
+      </>
+    )
+  }
+
+  if (ext === "sh") {
+    return (
+      <>
+        <Bash className="size-4 shrink-0 dark:hidden" aria-hidden />
+        <BashDark className="size-4 shrink-0 hidden dark:block" aria-hidden />
+      </>
     )
   }
 

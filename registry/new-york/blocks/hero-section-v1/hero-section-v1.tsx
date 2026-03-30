@@ -2,8 +2,8 @@ import { GeistPixelCircle } from "geist/font/pixel"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import BrandsSectionV1 from "./brands-section-v1"
-import MacOsTerminal from "./mac-os-terminal"
+import BrandsSectionV1 from "./components/brands-section-v1"
+import MacOsTerminal from "./components/mac-os-terminal"
 
 export default function HeroSectionV1() {
   return (

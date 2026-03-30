@@ -1,0 +1,78 @@
+.bs2-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* Track holds two identical sets side-by-side → always 2× one set wide.
+   Animating to -50% is therefore always exactly one set — no JS needed. */
+.bs2-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  backface-visibility: hidden;
+  animation: bs2-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.bs2-set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+
+.bs2-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  padding: 0.75rem 0;
+  border-right: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .bs2-slot {
+    width: 10rem;
+    padding: 1rem 0;
+  }
+}
+
+.bs2-fade {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  width: 140px;
+}
+
+.bs2-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, var(--background) 0%, transparent 100%);
+}
+
+.bs2-fade-right {
+  right: 0;
+  background: linear-gradient(270deg, var(--background) 0%, transparent 100%);
+}
+
+@keyframes bs2-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs2-track {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+  .bs2-fade {
+    display: none;
+  }
+}

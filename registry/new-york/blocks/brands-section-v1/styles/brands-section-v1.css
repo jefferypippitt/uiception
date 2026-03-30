@@ -3,6 +3,8 @@
   overflow: hidden;
 }
 
+/* Track holds two identical sets side-by-side → always 2× one set wide.
+   Animating to -50% is therefore always exactly one set — no JS needed. */
 .bs1-track {
   display: flex;
   width: max-content;
@@ -10,10 +12,6 @@
   align-items: center;
   padding: 0.35rem 0;
   backface-visibility: hidden;
-}
-
-/* Pixel-accurate distance via --bs1-shift (one full .bs1-set width) avoids subpixel % stutter */
-.bs1-track.bs1-track--run {
   animation: bs1-marquee 28s linear infinite;
   will-change: transform;
 }
@@ -73,12 +71,12 @@
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(calc(-1 * var(--bs1-shift)), 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bs1-track.bs1-track--run {
+  .bs1-track {
     animation-duration: 0.01ms;
     animation-iteration-count: 1;
   }

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-plugin",
+  "title": "Code Plugin",
+  "description": "Frameless JSON typing animation with edge fade—no borders, no syntax colors, just a muted infinite loop of structured data flowing through a masked viewport.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/code-plugin/page.tsx",
+      "content": "import CodePlugin from \"./code-plugin\"\n\nexport default function Page() {\n  return <CodePlugin />\n}\n",
+      "type": "registry:page",
+      "target": "app/code-plugin/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/code-plugin/code-plugin.tsx",
+      "content": "\"use client\"\n\nimport { useCodeAnimation } from \"./hooks/use-code-animation\"\nimport { CODE_CONTENT } from \"./lib/config\"\n\nimport \"./styles/code-plugin.css\"\n\nexport default function CodePlugin() {\n  const { charIdx, phase, scrollRef } = useCodeAnimation()\n  const visible = CODE_CONTENT.slice(0, charIdx)\n  const isTyping = phase === \"typing\"\n\n  return (\n    <div className=\"cp-root relative w-full overflow-hidden\" style={{ height: \"18rem\" }}>\n      <div\n        ref={scrollRef}\n        className=\"cp-body h-full overflow-y-auto px-2 pb-16 pt-4\"\n        style={{ scrollbarWidth: \"none\" }}\n      >\n        <pre className=\"cp-text m-0 whitespace-pre font-mono text-[13px] leading-relaxed\">\n          {visible}\n          {isTyping && <span className=\"cp-cursor\" />}\n        </pre>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/code-plugin/code-plugin.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/code-plugin/hooks/use-code-animation.ts",
+      "content": "// Phase flow: idle → typing → done → idle (loops)\nimport { useEffect, useRef, useState } from \"react\"\n\nimport {\n  CODE_CONTENT,\n  DONE_PAUSE_MS,\n  IDLE_PAUSE_MS,\n  TYPE_CHAR_MS,\n  TYPE_NEWLINE_MS,\n  type Phase,\n} from \"../lib/config\"\n\nexport function useCodeAnimation() {\n  const [charIdx, setCharIdx] = useState(0)\n  const [phase, setPhase] = useState<Phase>(\"idle\")\n  const scrollRef = useRef<HTMLDivElement>(null)\n\n  useEffect(() => {\n    if (scrollRef.current) {\n      scrollRef.current.scrollTop = scrollRef.current.scrollHeight\n    }\n  }, [charIdx])\n\n  useEffect(() => {\n    if (phase !== \"idle\") return\n    const t = setTimeout(() => setPhase(\"typing\"), IDLE_PAUSE_MS)\n    return () => clearTimeout(t)\n  }, [phase])\n\n  useEffect(() => {\n    if (phase !== \"typing\") return\n    if (charIdx >= CODE_CONTENT.length) {\n      const t = setTimeout(() => setPhase(\"done\"), DONE_PAUSE_MS)\n      return () => clearTimeout(t)\n    }\n    const ch = CODE_CONTENT[charIdx]\n    const delay = ch === \"\\n\" ? TYPE_NEWLINE_MS : TYPE_CHAR_MS\n    const t = setTimeout(() => setCharIdx((i) => i + 1), delay)\n    return () => clearTimeout(t)\n  }, [phase, charIdx])\n\n  useEffect(() => {\n    if (phase !== \"done\") return\n    const t = setTimeout(() => {\n      setCharIdx(0)\n      setPhase(\"idle\")\n    }, 600)\n    return () => clearTimeout(t)\n  }, [phase])\n\n  return { charIdx, phase, scrollRef }\n}\n",
+      "type": "registry:hook",
+      "target": "app/code-plugin/hooks/use-code-animation.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/code-plugin/lib/config.ts",
+      "content": "export type Phase = \"idle\" | \"typing\" | \"done\"\n\nexport const TYPE_CHAR_MS = 16\nexport const TYPE_NEWLINE_MS = 38\nexport const DONE_PAUSE_MS = 2800\nexport const IDLE_PAUSE_MS = 500\n\nexport const CODE_CONTENT = `{\n  \"event\": \"order.created\",\n  \"timestamp\": \"2024-03-15T10:22:07Z\",\n  \"data\": {\n    \"order_id\": \"ord_8f3k2x9p\",\n    \"status\": \"confirmed\",\n    \"customer\": {\n      \"id\": \"cus_4m9xp1r\",\n      \"name\": \"Sarah Mitchell\",\n      \"email\": \"s.mitchell@example.com\"\n    },\n    \"items\": [\n      {\n        \"product_id\": \"prod_tv3m8n\",\n        \"name\": \"Merino Wool Sweater\",\n        \"price\": {\n          \"amount\": 89.99,\n          \"currency_code\": \"GBP\"\n        },\n        \"quantity\": 1\n      },\n      {\n        \"product_id\": \"prod_kx9p2r\",\n        \"name\": \"Classic Leather Belt\",\n        \"price\": {\n          \"amount\": 3.99,\n          \"currency_code\": \"GBP\"\n        },\n        \"quantity\": 2\n      }\n    ],\n    \"shipping\": {\n      \"method\": \"standard\",\n      \"address\": {\n        \"line1\": \"42 Westbourne Grove\",\n        \"city\": \"London\",\n        \"postcode\": \"W2 5SH\",\n        \"country\": \"GB\"\n      },\n      \"estimated_delivery\": \"2024-03-18\"\n    },\n    \"totals\": {\n      \"subtotal\": 97.97,\n      \"shipping_fee\": 3.95,\n      \"tax\": 20.39,\n      \"total\": 122.31,\n      \"currency_code\": \"GBP\"\n    }\n  }\n}`\n",
+      "type": "registry:lib",
+      "target": "app/code-plugin/lib/config.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/code-plugin/styles/code-plugin.css",
+      "content": "/* code-plugin — frameless JSON typing animation with edge fade */\n\n.cp-root {\n  --cp-text-color: #71717a;\n  --cp-cursor-color: #a1a1aa;\n}\n\n.dark .cp-root {\n  --cp-text-color: #a1a1aa;\n  --cp-cursor-color: #71717a;\n}\n\n.cp-root {\n  -webkit-mask-image: linear-gradient(\n    to bottom,\n    transparent 0%,\n    black 22%,\n    black 78%,\n    transparent 100%\n  );\n  mask-image: linear-gradient(\n    to bottom,\n    transparent 0%,\n    black 22%,\n    black 78%,\n    transparent 100%\n  );\n}\n\n.cp-body::-webkit-scrollbar {\n  display: none;\n}\n\n.cp-text {\n  color: var(--cp-text-color);\n}\n\n.cp-cursor {\n  display: inline-block;\n  width: 6px;\n  height: 1em;\n  margin-left: 1px;\n  vertical-align: text-bottom;\n  background-color: var(--cp-cursor-color);\n  animation: cp-blink 1.15s step-start infinite;\n}\n\n@keyframes cp-blink {\n  0%,\n  49.9% {\n    opacity: 1;\n  }\n  50%,\n  100% {\n    opacity: 0;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "app/code-plugin/styles/code-plugin.css"
+    }
+  ],
+  "type": "registry:block"
+}

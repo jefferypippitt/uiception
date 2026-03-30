@@ -46,6 +46,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v1",
         registryPath: "registry/new-york/blocks/hero-section-v1",
       },
+      {
+        id: "hero-section-v2",
+        title: "Hero Section v2",
+        registryPath: "registry/new-york/blocks/hero-section-v2",
+      },
     ],
   },
   {
@@ -57,6 +62,11 @@ export const blockCategories: BlockCategory[] = [
         id: "brands-section-v1",
         title: "Brands Section v1",
         registryPath: "registry/new-york/blocks/brands-section-v1",
+      },
+      {
+        id: "brands-section-v2",
+        title: "Brands Section v2",
+        registryPath: "registry/new-york/blocks/brands-section-v2",
       },
     ],
   },
@@ -80,6 +90,11 @@ export const blockCategories: BlockCategory[] = [
         id: "cursor-terminal",
         title: "Cursor Terminal",
         registryPath: "registry/new-york/blocks/cursor-terminal",
+      },
+      {
+        id: "event-stream",
+        title: "Event Stream",
+        registryPath: "registry/new-york/blocks/event-stream",
       },
     ],
   },

@@ -1,6 +1,5 @@
 /* mac-os-terminal — scoped so consumers need not import app globals */
 
-/* ─── Whole widget: light (default) vs dark (.dark ancestor) ───────── */
 
 .mot-terminal {
   --mot-t-shell-bg: #fafafa;
@@ -110,7 +109,7 @@
   display: none;
 }
 
-/* ─── Syntax panel: light (default) / dark (.dark ancestor) ───────── */
+/* Syntax highlight panel — token colors swap via CSS vars on .dark */
 
 .mot-codeblock {
   --mot-sh-kw: #b83280;

@@ -4,6 +4,136 @@
   "homepage": "https://uiception.com/",
   "items": [
     {
+      "name": "hero-section-v2",
+      "type": "registry:block",
+      "title": "Hero Section v2",
+      "description": "Two-column hero with headline on the left, live event-stream animation on the right, and a brands marquee strip below. GSAP timeline animates each section on mount.",
+      "dependencies": ["gsap"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/hero-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/hero-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/hero-content.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/hero-content.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/hooks/use-hero-animation.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v2/hooks/use-hero-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/event-stream.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/event-stream.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/token-text.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/token-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/brands-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/brands-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/marquee.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/marquee.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v2/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/hooks/use-event-animation.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v2/hooks/use-event-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v2/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v2/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/styles/event-stream.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v2/styles/event-stream.css"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v2/styles/brands-section-v2.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v2/styles/brands-section-v2.css"
+        },
+        {
+          "path": "components/ui/svgs/convex.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/convex.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tursoLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tursoLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tursoDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tursoDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/upstash.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/upstash.tsx"
+        },
+        {
+          "path": "components/ui/svgs/neon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/neon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscale.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/planetscale.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscaleDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/planetscaleDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/mongodbIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/mongodbIconDark.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-section-v1",
       "type": "registry:block",
       "title": "Hero Section v1",
@@ -22,89 +152,158 @@
           "target": "app/hero-section-v1/hero-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/brands-section-v1.tsx",
+          "path": "registry/new-york/blocks/hero-section-v1/components/brands-section-v1.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v1/brands-section-v1.tsx"
+          "target": "app/hero-section-v1/components/brands-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/brands-section-v1.css",
+          "path": "registry/new-york/blocks/hero-section-v1/styles/brands-section-v1.css",
           "type": "registry:file",
-          "target": "app/hero-section-v1/brands-section-v1.css"
+          "target": "app/hero-section-v1/styles/brands-section-v1.css"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal.tsx",
+          "path": "registry/new-york/blocks/hero-section-v1/components/mac-os-terminal.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v1/mac-os-terminal.tsx"
+          "target": "app/hero-section-v1/components/mac-os-terminal.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal-code-segments.ts",
+          "path": "registry/new-york/blocks/hero-section-v1/lib/mac-os-terminal-code-segments.ts",
           "type": "registry:lib",
-          "target": "app/hero-section-v1/mac-os-terminal-code-segments.ts"
+          "target": "app/hero-section-v1/lib/mac-os-terminal-code-segments.ts"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/mac-os-terminal.css",
+          "path": "registry/new-york/blocks/hero-section-v1/styles/mac-os-terminal.css",
           "type": "registry:file",
-          "target": "app/hero-section-v1/mac-os-terminal.css"
+          "target": "app/hero-section-v1/styles/mac-os-terminal.css"
         },
         {
-          "path": "public/svg/ClaudeAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/ClaudeAI_dark.svg"
+          "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nvidiaWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/ClaudeAI_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/ClaudeAI_light.svg"
+          "path": "components/ui/svgs/nvidiaWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nvidiaWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Gemini_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Gemini_dark.svg"
+          "path": "components/ui/svgs/openaiWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/openaiWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Gemini_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Gemini_light.svg"
+          "path": "components/ui/svgs/openaiWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/openaiWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Grok_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Grok_dark.svg"
+          "path": "components/ui/svgs/grokWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/grokWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Grok_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Grok_light.svg"
+          "path": "components/ui/svgs/grokWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/grokWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Nvidia_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Nvidia_dark.svg"
+          "path": "components/ui/svgs/perplexityWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/perplexityWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Nvidia_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Nvidia_light.svg"
+          "path": "components/ui/svgs/perplexityWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/perplexityWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/OpenAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/OpenAI_dark.svg"
+          "path": "components/ui/svgs/claudeAiWordmarkIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/claudeAiWordmarkIconLight.tsx"
         },
         {
-          "path": "public/svg/OpenAI_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/OpenAI_light.svg"
+          "path": "components/ui/svgs/claudeAiWordmarkIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/claudeAiWordmarkIconDark.tsx"
         },
         {
-          "path": "public/svg/PerplexityAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/PerplexityAI_dark.svg"
+          "path": "components/ui/svgs/googleWordmark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/googleWordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "brands-section-v2",
+      "type": "registry:block",
+      "title": "Brands Section v2",
+      "description": "Infinite marquee of brand logos rendered as a seamless row of borderless-radius cards—full border container, no gaps, shared dividers between slots.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v2/page.tsx"
         },
         {
-          "path": "public/svg/PerplexityAI_light.svg",
+          "path": "registry/new-york/blocks/brands-section-v2/brands-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v2/brands-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v2/styles/brands-section-v2.css",
           "type": "registry:file",
-          "target": "public/svg/PerplexityAI_light.svg"
+          "target": "app/brands-section-v2/styles/brands-section-v2.css"
+        },
+        {
+          "path": "components/ui/svgs/convex.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/convex.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tursoLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tursoLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tursoDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tursoDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/upstash.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/upstash.tsx"
+        },
+        {
+          "path": "components/ui/svgs/neon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/neon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscale.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/planetscale.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscaleDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/planetscaleDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/mongodbIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/mongodbIconDark.tsx"
         }
       ]
     },
@@ -112,7 +311,7 @@
       "name": "brands-section-v1",
       "type": "registry:block",
       "title": "Brands Section v1",
-      "description": "Compact brands strip with a trust label and an infinite marquee of light and dark mode logos. Ships SVG logos into public/svg/ for use at /svg/… (Nvidia, OpenAI, Grok, Perplexity AI, Claude AI, Gemini).",
+      "description": "Compact brands strip with a trust label and an infinite marquee of AI brand logos with light/dark mode support (Nvidia, OpenAI, Grok, Perplexity AI, Claude AI, Gemini).",
       "registryDependencies": [],
       "files": [
         {
@@ -126,69 +325,64 @@
           "target": "app/brands-section-v1/brands-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v1/brands-section-v1.css",
+          "path": "registry/new-york/blocks/brands-section-v1/styles/brands-section-v1.css",
           "type": "registry:file",
-          "target": "app/brands-section-v1/brands-section-v1.css"
+          "target": "app/brands-section-v1/styles/brands-section-v1.css"
         },
         {
-          "path": "public/svg/ClaudeAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/ClaudeAI_dark.svg"
+          "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nvidiaWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/ClaudeAI_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/ClaudeAI_light.svg"
+          "path": "components/ui/svgs/nvidiaWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nvidiaWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Gemini_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Gemini_dark.svg"
+          "path": "components/ui/svgs/openaiWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/openaiWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Gemini_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Gemini_light.svg"
+          "path": "components/ui/svgs/openaiWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/openaiWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Grok_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Grok_dark.svg"
+          "path": "components/ui/svgs/grokWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/grokWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Grok_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Grok_light.svg"
+          "path": "components/ui/svgs/grokWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/grokWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/Nvidia_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/Nvidia_dark.svg"
+          "path": "components/ui/svgs/perplexityWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/perplexityWordmarkLight.tsx"
         },
         {
-          "path": "public/svg/Nvidia_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/Nvidia_light.svg"
+          "path": "components/ui/svgs/perplexityWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/perplexityWordmarkDark.tsx"
         },
         {
-          "path": "public/svg/OpenAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/OpenAI_dark.svg"
+          "path": "components/ui/svgs/claudeAiWordmarkIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/claudeAiWordmarkIconLight.tsx"
         },
         {
-          "path": "public/svg/OpenAI_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/OpenAI_light.svg"
+          "path": "components/ui/svgs/claudeAiWordmarkIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/claudeAiWordmarkIconDark.tsx"
         },
         {
-          "path": "public/svg/PerplexityAI_dark.svg",
-          "type": "registry:file",
-          "target": "public/svg/PerplexityAI_dark.svg"
-        },
-        {
-          "path": "public/svg/PerplexityAI_light.svg",
-          "type": "registry:file",
-          "target": "public/svg/PerplexityAI_light.svg"
+          "path": "components/ui/svgs/googleWordmark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/googleWordmark.tsx"
         }
       ]
     },
@@ -210,14 +404,53 @@
           "target": "app/mac-os-terminal/mac-os-terminal.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal-code-segments.ts",
+          "path": "registry/new-york/blocks/mac-os-terminal/lib/mac-os-terminal-code-segments.ts",
           "type": "registry:lib",
-          "target": "app/mac-os-terminal/mac-os-terminal-code-segments.ts"
+          "target": "app/mac-os-terminal/lib/mac-os-terminal-code-segments.ts"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.css",
+          "path": "registry/new-york/blocks/mac-os-terminal/styles/mac-os-terminal.css",
           "type": "registry:file",
-          "target": "app/mac-os-terminal/mac-os-terminal.css"
+          "target": "app/mac-os-terminal/styles/mac-os-terminal.css"
+        }
+      ]
+    },
+    {
+      "name": "event-stream",
+      "type": "registry:block",
+      "title": "Event Stream",
+      "description": "Frameless cycling JSON animation—three webhook events type out in sequence with edge fade, no borders, no syntax colors, designed to embed in any section.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/event-stream/page.tsx",
+          "type": "registry:page",
+          "target": "app/event-stream/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/event-stream/event-stream.tsx",
+          "type": "registry:component",
+          "target": "app/event-stream/event-stream.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/event-stream/components/token-text.tsx",
+          "type": "registry:component",
+          "target": "app/event-stream/components/token-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/event-stream/hooks/use-event-animation.ts",
+          "type": "registry:hook",
+          "target": "app/event-stream/hooks/use-event-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/event-stream/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/event-stream/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/event-stream/styles/event-stream.css",
+          "type": "registry:file",
+          "target": "app/event-stream/styles/event-stream.css"
         }
       ]
     },
@@ -239,9 +472,9 @@
           "target": "app/cursor-terminal/cursor-terminal.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.css",
+          "path": "registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css",
           "type": "registry:file",
-          "target": "app/cursor-terminal/cursor-terminal.css"
+          "target": "app/cursor-terminal/styles/cursor-terminal.css"
         }
       ]
     }
