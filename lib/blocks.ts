@@ -144,7 +144,18 @@ export const blockCategories: BlockCategory[] = [
     id: "cta",
     title: "CTA",
     description: "Call-to-action banners and conversion sections.",
-    versions: [],
+    versions: [
+      {
+        id: "cta-section-v1",
+        title: "CTA Section v1",
+        registryPath: "registry/new-york/blocks/cta-section-v1",
+      },
+      {
+        id: "cta-section-v2",
+        title: "CTA Section v2",
+        registryPath: "registry/new-york/blocks/cta-section-v2",
+      },
+    ],
   },
   {
     id: "about-us",
@@ -162,7 +173,13 @@ export const blockCategories: BlockCategory[] = [
     id: "footer",
     title: "Footer",
     description: "Site footer layouts with links and branding.",
-    versions: [],
+    versions: [
+      {
+        id: "footer-section-v1",
+        title: "Footer Section v1",
+        registryPath: "registry/new-york/blocks/footer-section-v1",
+      },
+    ],
   },
 ]
 

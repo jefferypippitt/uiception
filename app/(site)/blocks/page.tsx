@@ -277,8 +277,8 @@ export default function BlocksPage() {
   return (
     <div className="pb-14 md:pb-20">
       <div className="mx-auto w-full max-w-6xl px-6">
-        <h1 className="text-2xl font-semibold tracking-tight md:text-4xl">
-          UI blocks for your next project
+        <h1 className="text-2xl font-semibold tracking-tight md:text-4xl text-center">
+          Explore All Categories
         </h1>
 
         <section className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

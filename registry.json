@@ -8,7 +8,9 @@
       "type": "registry:block",
       "title": "Hero Section v2",
       "description": "Two-column hero with headline on the left, live event-stream animation on the right, and a brands marquee strip below. GSAP timeline animates each section on mount.",
-      "dependencies": ["gsap"],
+      "dependencies": [
+        "gsap"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -138,8 +140,12 @@
       "type": "registry:block",
       "title": "Hero Section v1",
       "description": "Full hero block: two-column headline/CTA, brands marquee strip, and animated macOS terminal integration demo.",
-      "dependencies": ["geist@^1.7.0"],
-      "registryDependencies": ["button"],
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
@@ -475,6 +481,90 @@
           "path": "registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css",
           "type": "registry:file",
           "target": "app/cursor-terminal/styles/cursor-terminal.css"
+        }
+      ]
+    },
+    {
+      "name": "cta-section-v1",
+      "type": "registry:block",
+      "title": "CTA Section v1",
+      "description": "Two-column CTA block with headline and description on the left, dual action buttons on the right, and a full-width background image frame below.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cta-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/cta-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v1/cta-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v1/cta-section-v1.tsx"
+        },
+        {
+          "path": "public/images/cta-section-v1.png",
+          "type": "registry:file",
+          "target": "public/images/cta-section-v1.png"
+        }
+      ]
+    },
+    {
+      "name": "cta-section-v2",
+      "type": "registry:block",
+      "title": "CTA Section v2",
+      "description": "Centered CTA block with oversized headline and a single square-corner download button with right-side icon.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cta-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/cta-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v2/cta-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v2/cta-section-v2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-section-v1",
+      "type": "registry:block",
+      "title": "Footer Section v1",
+      "description": "Muted rounded footer with brand copy, four link columns, and a bottom row with Instagram and TikTok links.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/footer-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/footer-section-v1/footer-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/footer-section-v1/footer-section-v1.tsx"
+        },
+        {
+          "path": "components/ui/svgs/instagramIcon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/instagramIcon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tiktokIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tiktokIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tiktokIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tiktokIconDark.tsx"
         }
       ]
     }

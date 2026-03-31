@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-section-v2",
+  "title": "CTA Section v2",
+  "description": "Centered CTA block with oversized headline and a single square-corner download button with right-side icon.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/cta-section-v2/page.tsx",
+      "content": "import CtaSectionV2 from \"./cta-section-v2\"\n\nexport default function Page() {\n  return <CtaSectionV2 />\n}\n",
+      "type": "registry:page",
+      "target": "app/cta-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/cta-section-v2/cta-section-v2.tsx",
+      "content": "import { ArrowDownToLine } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nexport default function CtaSectionV2() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <h2 className=\"text-5xl tracking-tight sm:text-6xl lg:text-7xl\">\n            Try uiception now.\n          </h2>\n          <Button variant=\"default\" size=\"lg\" className=\"h-12 px-6 rounded-full text-base\">\n            Download for Windows\n            <ArrowDownToLine className=\"size-4\" />\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/cta-section-v2/cta-section-v2.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

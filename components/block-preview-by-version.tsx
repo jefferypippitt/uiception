@@ -5,6 +5,9 @@ import CursorTerminal from "@/registry/new-york/blocks/cursor-terminal/cursor-te
 import MacOsTerminal from "@/registry/new-york/blocks/mac-os-terminal/mac-os-terminal"
 import EventStream from "@/registry/new-york/blocks/event-stream/event-stream"
 import HeroSectionV2 from "@/registry/new-york/blocks/hero-section-v2/hero-section-v2"
+import CtaSectionV1 from "@/registry/new-york/blocks/cta-section-v1/cta-section-v1"
+import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/cta-section-v2"
+import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/footer-section-v1"
 
 
 
@@ -16,6 +19,9 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cursor-terminal": CursorTerminal,
   "event-stream": EventStream,
   "hero-section-v2": HeroSectionV2,
+  "cta-section-v1": CtaSectionV1,
+  "cta-section-v2": CtaSectionV2,
+  "footer-section-v1": FooterSectionV1,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

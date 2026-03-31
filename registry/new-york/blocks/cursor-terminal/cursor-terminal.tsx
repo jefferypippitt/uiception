@@ -13,13 +13,35 @@ import "./styles/cursor-terminal.css"
 
 function colorCls(c?: LineColor) {
   if (c === "green") return "text-[#16c60c]"
-  if (c === "cyan")  return "text-[#61d6d6]"
-  if (c === "dim")   return "text-[#767676]"
+  if (c === "cyan") return "text-[#61d6d6]"
+  if (c === "dim") return "text-[#767676]"
   return "text-[#cccccc]"
 }
 
+function renderFirstStepCommand(text: string) {
+  const npxToken = "npx"
+  const commandPrefix = "npx shadcn@latest add "
+
+  if (!text.startsWith(npxToken)) {
+    return <span className="min-w-0">{text}</span>
+  }
+
+  const npxEnd = npxToken.length
+  const argStart = commandPrefix.length
+
+  return (
+    <span className="min-w-0">
+      <span className="text-[#dcdcaa]">{npxToken}</span>
+      {text.slice(npxEnd, Math.min(text.length, argStart))}
+      {text.length > argStart && (
+        <span className="text-[#4fc1ff]">{text.slice(argStart)}</span>
+      )}
+    </span>
+  )
+}
+
 export default function CursorTerminal() {
-  const { lines, typed, phase, scrollRef } = useTerminalAnimation()
+  const { lines, prompt, scrollRef } = useTerminalAnimation()
 
   return (
     <div className="crt-terminal w-full overflow-hidden rounded-md border border-white/8 bg-[#1e1e1e] shadow-lg shadow-black/40">
@@ -75,31 +97,33 @@ export default function CursorTerminal() {
 
       <div
         ref={scrollRef}
-        className="crt-body h-[22rem] overflow-y-auto bg-[#1e1e1e] px-4 py-2.5 text-left font-mono text-[13px] leading-relaxed text-[#cccccc]"
+        className="crt-body h-88 overflow-y-auto bg-[#1e1e1e] px-4 py-2.5 text-left font-mono text-[13px] leading-relaxed text-[#cccccc]"
         style={{ scrollbarWidth: "none" }}
       >
         {lines.map((line) => (
-          <div key={line.id} className={cn("crt-line-in", colorCls(line.color))}>
-            {line.spinning ? (
-              <span><Spinner /> {line.text}</span>
-            ) : (
-              line.text || "\u00A0"
-            )}
-          </div>
+          line.promptLine ? (
+            <div key={line.id}>
+              <div className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-0">
+                <PromptShell dot={line.dot ?? "grey"} showPath />
+                {renderFirstStepCommand(line.text)}
+              </div>
+            </div>
+          ) : (
+            <div key={line.id} className={cn("crt-line-in", colorCls(line.color))}>
+              {line.spinning ? (
+                <span><Spinner /> {line.text}</span>
+              ) : (
+                line.text || "\u00A0"
+              )}
+            </div>
+          )
         ))}
 
-        {(phase === "idle" || phase === "typing") && (
-          <div className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-0">
-            <PromptShell />
-            <span className="min-w-0">{typed}</span>
-            <span className="crt-cursor" />
-          </div>
-        )}
-
-        {phase === "done" && (
-          <div className="flex items-center gap-x-1">
-            <PromptShell />
-            <span className="crt-cursor" />
+        {prompt.showPrompt && (
+          <div className={cn("flex min-w-0 flex-wrap items-center gap-x-1 gap-y-0", prompt.animateIn && "crt-line-in")}>
+            <PromptShell dot={prompt.dot} showPath={prompt.showPath} />
+            {prompt.typed && renderFirstStepCommand(prompt.typed)}
+            {prompt.cursor && <span className="crt-cursor" />}
           </div>
         )}
       </div>

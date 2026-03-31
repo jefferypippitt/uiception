@@ -1,9 +1,9 @@
 // Phase flow: idle → typing → output → done → idle (loops)
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import {
   COMMAND, INIT_LINES, OUTPUT_SEQUENCE, PROMPT, TYPE_SPEED,
-  type Line, type Phase,
+  type Line, type Phase, type PromptState,
 } from "../lib/config"
 
 export function useTerminalAnimation() {
@@ -11,6 +11,7 @@ export function useTerminalAnimation() {
   const [typed, setTyped] = useState("")
   const [phase, setPhase] = useState<Phase>("idle")
   const [outIdx, setOutIdx] = useState(0)
+  const [firstStepBlue, setFirstStepBlue] = useState(false)
   const idRef = useRef(10)
   const spinTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -34,7 +35,7 @@ export function useTerminalAnimation() {
       return () => clearTimeout(t)
     }
     const t = setTimeout(() => {
-      setLines((prev) => [...prev, { id: idRef.current++, text: `${PROMPT}${COMMAND}` }])
+      setLines((prev) => [...prev, { id: idRef.current++, text: COMMAND, promptLine: true, dot: "grey" }])
       setTyped("")
       setOutIdx(0)
       setPhase("output")
@@ -78,15 +79,45 @@ export function useTerminalAnimation() {
 
   useEffect(() => {
     if (phase !== "done") return
-    const t = setTimeout(() => {
+    setLines((prev) => prev.map((line) => (line.promptLine ? { ...line, dot: "grey" } : line)))
+    setFirstStepBlue(false)
+    const blueTimer = setTimeout(() => {
+      setFirstStepBlue(true)
+      setLines((prev) => prev.map((line) => (line.promptLine ? { ...line, dot: "blue" } : line)))
+    }, 700)
+    const resetTimer = setTimeout(() => {
       idRef.current = 10
       setTyped("")
       setOutIdx(0)
+      setFirstStepBlue(false)
       setLines(INIT_LINES)
       setPhase("idle")
     }, 5500)
-    return () => clearTimeout(t)
+    return () => {
+      clearTimeout(blueTimer)
+      clearTimeout(resetTimer)
+    }
   }, [phase])
 
-  return { lines, typed, phase, scrollRef }
+  const prompt = useMemo<PromptState>(() => {
+    switch (phase) {
+      case "idle":
+        return { dot: "grey", showPrompt: true, showPath: true, typed: "", cursor: true, animateIn: false }
+      case "typing":
+        return { dot: "grey", showPrompt: true, showPath: true, typed, cursor: true, animateIn: false }
+      case "output":
+        return { dot: "grey", showPrompt: false, showPath: false, typed: "", cursor: false, animateIn: false }
+      case "done":
+        return {
+          dot: "grey",
+          showPrompt: true,
+          showPath: true,
+          typed: "",
+          cursor: false,
+          animateIn: true,
+        }
+    }
+  }, [firstStepBlue, phase, typed])
+
+  return { lines, prompt, scrollRef }
 }

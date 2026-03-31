@@ -44,11 +44,10 @@ export default async function ChangelogPage() {
                 key={`${entry.date}-${entry.title}`}
                 className="pb-12 last:pb-0"
               >
-
                 {/* Date */}
                 <time
                   dateTime={entry.date}
-                  className="font-pixel-circle mb-3 block text-sm font-medium tracking-tight text-foreground"
+                  className="font-mono mb-3 text-sm block"
                 >
                   {entry.dateDisplay}
                 </time>

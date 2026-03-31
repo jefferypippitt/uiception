@@ -2,11 +2,22 @@ export type LineColor = "green" | "cyan" | "dim"
 
 export type Phase = "idle" | "typing" | "output" | "done"
 
+export interface PromptState {
+  dot: "blue" | "grey"
+  showPrompt: boolean
+  showPath: boolean
+  typed: string
+  cursor: boolean
+  animateIn: boolean
+}
+
 export interface Line {
   id: number
   text: string
   color?: LineColor
   spinning?: boolean
+  promptLine?: boolean
+  dot?: "blue" | "grey"
 }
 
 export type OutputItem =
@@ -14,7 +25,7 @@ export type OutputItem =
   | { type: "spinner"; text: string; doneText?: string; delay: number; duration: number }
 
 export const PROMPT = "PS C:\\projects\\uiception> "
-export const COMMAND = 'pnpm dlx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"'
+export const COMMAND = 'npx shadcn@latest add "@uiception/hero-section-v1"'
 export const TYPE_SPEED = 38
 
 export const ICON_SM = "size-3.5 shrink-0 stroke-[1.75]"
