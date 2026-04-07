@@ -10,7 +10,7 @@
   ],
   "registryDependencies": [
     "button",
-    "stats-section-v1"
+    "@uiception/stats-section-v1"
   ],
   "files": [
     {

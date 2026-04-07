@@ -230,6 +230,46 @@
           "target": "app/hero-section-v1/components/mac-os-terminal.tsx"
         },
         {
+          "path": "registry/new-york/blocks/hero-section-v1/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/components/prompt-shell.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/components/prompt-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/components/spinner.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/components/spinner.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/components/syntax-code.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/components/syntax-code.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/components/traffic-lights.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v1/components/traffic-lights.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/hooks/use-terminal-animation.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v1/hooks/use-terminal-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v1/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v1/lib/terminal-config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v1/lib/terminal-config.ts"
+        },
+        {
           "path": "registry/new-york/blocks/hero-section-v1/lib/mac-os-terminal-code-segments.ts",
           "type": "registry:lib",
           "target": "app/hero-section-v1/lib/mac-os-terminal-code-segments.ts"
@@ -465,6 +505,36 @@
           "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.tsx",
           "type": "registry:component",
           "target": "app/mac-os-terminal/mac-os-terminal.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/components/prompt-shell.tsx",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/components/prompt-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/components/spinner.tsx",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/components/spinner.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/components/syntax-code.tsx",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/components/syntax-code.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/components/traffic-lights.tsx",
+          "type": "registry:component",
+          "target": "app/mac-os-terminal/components/traffic-lights.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/hooks/use-terminal-animation.ts",
+          "type": "registry:hook",
+          "target": "app/mac-os-terminal/hooks/use-terminal-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-os-terminal/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/mac-os-terminal/lib/config.ts"
         },
         {
           "path": "registry/new-york/blocks/mac-os-terminal/lib/mac-os-terminal-code-segments.ts",
@@ -757,6 +827,16 @@
           "path": "registry/new-york/blocks/feature-section-v1/styles/feature-section-v1.css",
           "type": "registry:file",
           "target": "app/feature-section-v1/styles/feature-section-v1.css"
+        },
+        {
+          "path": "public/images/ggi_feature-section-v1_top.png",
+          "type": "registry:file",
+          "target": "public/images/ggi_feature-section-v1_top.png"
+        },
+        {
+          "path": "public/images/ggi_feature-section-v1_btm.png",
+          "type": "registry:file",
+          "target": "public/images/ggi_feature-section-v1_btm.png"
         }
       ]
     },
@@ -772,7 +852,7 @@
       ],
       "registryDependencies": [
         "button",
-        "stats-section-v1"
+        "@uiception/stats-section-v1"
       ],
       "files": [
         {
