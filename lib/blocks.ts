@@ -51,6 +51,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v2",
         registryPath: "registry/new-york/blocks/hero-section-v2",
       },
+      {
+        id: "hero-section-v3",
+        title: "Hero Section v3",
+        registryPath: "registry/new-york/blocks/hero-section-v3",
+      },
+      {
+        id: "hero-section-v4",
+        title: "Hero Section v4",
+        registryPath: "registry/new-york/blocks/hero-section-v4",
+      },
     ],
   },
   {
@@ -74,7 +84,13 @@ export const blockCategories: BlockCategory[] = [
     id: "features",
     title: "Features",
     description: "Showcase product features in grids or lists.",
-    versions: [],
+    versions: [
+      {
+        id: "feature-section-v1",
+        title: "Feature Section v1",
+        registryPath: "registry/new-york/blocks/feature-section-v1",
+      },
+    ],
   },
   {
     id: "integrations",
@@ -95,6 +111,16 @@ export const blockCategories: BlockCategory[] = [
         id: "event-stream",
         title: "Event Stream",
         registryPath: "registry/new-york/blocks/event-stream",
+      },
+      {
+        id: "chat-bot",
+        title: "Chat Bot",
+        registryPath: "registry/new-york/blocks/chat-bot",
+      },
+      {
+        id: "simple-chatbot",
+        title: "Simple Chatbot",
+        registryPath: "registry/new-york/blocks/simple-chatbot",
       },
     ],
   },
@@ -126,7 +152,13 @@ export const blockCategories: BlockCategory[] = [
     id: "stats",
     title: "Stats",
     description: "Metrics, numbers, and achievement highlights.",
-    versions: [],
+    versions: [
+      {
+        id: "stats-section-v1",
+        title: "Stats Section v1",
+        registryPath: "registry/new-york/blocks/stats-section-v1",
+      },
+    ],
   },
   {
     id: "pricing",

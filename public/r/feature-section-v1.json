@@ -1,0 +1,53 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-section-v1",
+  "title": "Feature Section v1",
+  "description": "Six-card feature grid with accent-colored icon containers, staggered IntersectionObserver entrance animation, and per-card radial glow on hover.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/page.tsx",
+      "content": "import FeatureSectionV1 from \"./feature-section-v1\"\n\nexport default function Page() {\n  return <FeatureSectionV1 />\n}\n",
+      "type": "registry:page",
+      "target": "app/feature-section-v1/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/feature-section-v1.tsx",
+      "content": "import FeatureGrid from \"./components/feature-grid\"\n\nimport \"./styles/feature-section-v1.css\"\n\nexport default function FeatureSectionV1() {\n  return (\n    <section className=\"bg-muted/35 py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mb-12 flex flex-col items-center text-center md:mb-14\">\n          <h2 className=\"max-w-xl text-2xl font-medium tracking-tighter sm:text-3xl lg:text-[2rem] lg:leading-[1.2]\">\n            Help that fits the way you live\n          </h2>\n          <p className=\"mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground\">\n            Support that meets your family where you are, without another\n            dashboard to babysit.\n          </p>\n        </div>\n\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v1/feature-section-v1.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/components/feature-grid.tsx",
+      "content": "\"use client\"\n\nimport { useFeatureAnimation } from \"../hooks/use-feature-animation\"\nimport { features } from \"../lib/features\"\nimport FeatureCard from \"./feature-card\"\n\nexport default function FeatureGrid() {\n  const { ref, isVisible } = useFeatureAnimation()\n\n  return (\n    <div\n      ref={ref}\n      className=\"grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3 lg:grid-rows-2\"\n    >\n      {features.map((feature, i) => (\n        <FeatureCard\n          key={feature.id}\n          feature={feature}\n          index={i}\n          isVisible={isVisible}\n        />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v1/components/feature-grid.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/components/feature-card.tsx",
+      "content": "import Image from \"next/image\"\n\nimport { cn } from \"@/lib/utils\"\nimport type { Feature } from \"../lib/features\"\n\ntype Props = {\n  feature: Feature\n  index: number\n  isVisible: boolean\n}\n\nexport default function FeatureCard({ feature, index, isVisible }: Props) {\n  const Icon = feature.icon\n  const isWide = feature.layout === \"wide\"\n\n  return (\n    <article\n      className={cn(\n        \"fsv1-card group relative overflow-hidden rounded-2xl border bg-card shadow-sm\",\n        isWide ? \"lg:col-span-2\" : \"lg:col-span-1\",\n      )}\n      data-visible={isVisible}\n      data-layout={feature.layout}\n      style={{ transitionDelay: `${index * 80}ms` }}\n    >\n      {isWide && feature.imageSrc ? (\n        <div className=\"flex h-full min-h-0 flex-col gap-5 p-5 lg:flex-row lg:items-stretch\">\n          <div className=\"relative aspect-4/3 w-full shrink-0 overflow-hidden rounded-xl lg:aspect-auto lg:w-1/2 lg:min-h-[220px]\">\n            <Image\n              src={feature.imageSrc}\n              alt=\"\"\n              fill\n              className=\"object-cover object-center\"\n              sizes=\"(max-width: 1024px) 100vw, 50vw\"\n              priority={index === 0}\n            />\n          </div>\n          <div className=\"flex flex-col justify-center gap-3 lg:w-1/2 lg:py-1\">\n            <div className=\"fsv1-icon-wrap flex h-10 w-10 shrink-0 items-center justify-center rounded-xl\">\n              <Icon className=\"fsv1-icon size-[18px]\" strokeWidth={1.75} />\n            </div>\n            <div className=\"flex flex-col gap-1.5\">\n              <h3 className=\"text-base font-semibold tracking-tight\">\n                {feature.title}\n              </h3>\n              <p className=\"text-sm leading-relaxed text-muted-foreground\">\n                {feature.description}\n              </p>\n            </div>\n          </div>\n        </div>\n      ) : (\n        <div className=\"flex h-full flex-col gap-4 p-6\">\n          <div className=\"fsv1-icon-wrap flex h-10 w-10 shrink-0 items-center justify-center rounded-xl\">\n            <Icon className=\"fsv1-icon size-[18px]\" strokeWidth={1.75} />\n          </div>\n          <div className=\"flex flex-col gap-1.5\">\n            <h3 className=\"text-base font-semibold tracking-tight\">\n              {feature.title}\n            </h3>\n            <p className=\"text-sm leading-relaxed text-muted-foreground\">\n              {feature.description}\n            </p>\n          </div>\n        </div>\n      )}\n    </article>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v1/components/feature-card.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/hooks/use-feature-animation.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useRef, useState } from \"react\"\n\nexport function useFeatureAnimation() {\n  const ref = useRef<HTMLDivElement>(null)\n  const [isVisible, setIsVisible] = useState(false)\n\n  useEffect(() => {\n    const el = ref.current\n    if (!el) return\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting) {\n          setIsVisible(true)\n          observer.disconnect()\n        }\n      },\n      { threshold: 0.1 },\n    )\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [])\n\n  return { ref, isVisible }\n}\n",
+      "type": "registry:hook",
+      "target": "app/feature-section-v1/hooks/use-feature-animation.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/lib/features.ts",
+      "content": "import { Cog, Activity, MessageCircle, BrainCog } from \"lucide-react\"\nimport type { LucideIcon } from \"lucide-react\"\n\nexport type FeatureLayout = \"wide\" | \"narrow\"\n\nexport type Feature = {\n  id: string\n  layout: FeatureLayout\n  imageSrc?: string\n  icon: LucideIcon\n  title: string\n  description: string\n}\n\nexport const features: Feature[] = [\n  {\n    id: \"next-level-home-ai\",\n    layout: \"wide\",\n    imageSrc: \"/images/ggi_feature-section-v1_top.png\",\n    icon: BrainCog,\n    title: \"Learns how your home runs\",\n    description:\n      \"It picks up your rhythms and rolls with you when life gets busy or plans change.\",\n  },\n  {\n    id: \"effortless-daily-automation\",\n    layout: \"narrow\",\n    icon: Cog,\n    title: \"Take back your evenings\",\n    description:\n      \"Hand off the repetitive stuff so you're not stuck on the same tasks every night.\",\n  },\n  {\n    id: \"smart-family-insights\",\n    layout: \"narrow\",\n    icon: Activity,\n    title: \"A calmer read on home life\",\n    description:\n      \"Small, clear updates on how everyone is doing, without you playing detective.\",\n  },\n  {\n    id: \"ai-powered-home-support\",\n    layout: \"wide\",\n    imageSrc: \"/images/ggi_feature-section-v1_btm.png\",\n    icon: MessageCircle,\n    title: \"Someone to ask, anytime\",\n    description:\n      \"Patient, upbeat help when you need an answer, a nudge, or a little company.\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/feature-section-v1/lib/features.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v1/styles/feature-section-v1.css",
+      "content": "/* feature-section-v1 — all classes scoped with fsv1- prefix */\n\n/* ─── Card entrance ──────────────────────────────────────────── */\n\n.fsv1-card {\n  opacity: 0;\n  transform: translateY(20px);\n  transition-property: opacity, transform, box-shadow;\n  transition-duration: 0.55s;\n  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);\n}\n\n.fsv1-card[data-visible=\"true\"] {\n  opacity: 1;\n  transform: translateY(0);\n}\n\n/* ─── Card hover lift ────────────────────────────────────────── */\n\n.fsv1-card:hover {\n  box-shadow:\n    0 2px 8px -2px rgb(0 0 0 / 0.06),\n    0 8px 24px -6px rgb(0 0 0 / 0.08);\n}\n\n.dark .fsv1-card:hover {\n  box-shadow:\n    0 2px 8px -2px rgb(0 0 0 / 0.3),\n    0 8px 24px -6px rgb(0 0 0 / 0.4);\n}\n\n/* ─── Icon tile (dark glass, light glyph) ────────────────────── */\n\n.fsv1-icon-wrap {\n  position: relative;\n  isolation: isolate;\n  overflow: hidden;\n  border: 1px solid rgb(255 255 255 / 0.22);\n  background: linear-gradient(\n    165deg,\n    rgb(30 41 59 / 0.78) 0%,\n    rgb(15 23 42 / 0.55) 45%,\n    rgb(15 23 42 / 0.42) 100%\n  );\n  backdrop-filter: blur(12px) saturate(1.4);\n  -webkit-backdrop-filter: blur(12px) saturate(1.4);\n  box-shadow:\n    0 1px 0 rgb(255 255 255 / 0.22) inset,\n    0 -1px 0 rgb(0 0 0 / 0.28) inset,\n    0 1px 2px rgb(0 0 0 / 0.1),\n    0 4px 10px -2px rgb(0 0 0 / 0.16),\n    0 10px 24px -8px rgb(0 0 0 / 0.14);\n}\n\n.fsv1-icon {\n  color: hsl(0 0% 98%);\n  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));\n}\n\n.dark .fsv1-icon-wrap {\n  border-color: rgb(255 255 255 / 0.16);\n  background: linear-gradient(\n    165deg,\n    rgb(255 255 255 / 0.14) 0%,\n    rgb(255 255 255 / 0.06) 40%,\n    rgb(15 23 42 / 0.65) 100%\n  );\n  box-shadow:\n    0 1px 0 rgb(255 255 255 / 0.14) inset,\n    0 -1px 0 rgb(0 0 0 / 0.55) inset,\n    0 2px 4px rgb(0 0 0 / 0.35),\n    0 10px 22px -6px rgb(0 0 0 / 0.5);\n}\n\n.dark .fsv1-icon {\n  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.45));\n}\n\n/* ─── Reduced motion ─────────────────────────────────────────── */\n\n@media (prefers-reduced-motion: reduce) {\n  .fsv1-card {\n    opacity: 1;\n    transform: none;\n    transition: box-shadow 0.2s ease;\n  }\n\n  .fsv1-card[data-visible=\"true\"] {\n    transform: none;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "app/feature-section-v1/styles/feature-section-v1.css"
+    }
+  ],
+  "type": "registry:block"
+}

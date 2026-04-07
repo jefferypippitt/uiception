@@ -7,6 +7,13 @@ import {
   GeistPixelTriangle,
   GeistPixelLine,
 } from "geist/font/pixel"
+import { IBM_Plex_Serif } from "next/font/google"
+
+const ibmPlexSerif = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-serif",
+})
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import Providers from "@/components/providers"
@@ -31,6 +38,7 @@ export default function RootLayout({
           GeistPixelCircle.variable,
           GeistPixelTriangle.variable,
           GeistPixelLine.variable,
+          ibmPlexSerif.variable,
           "font-sans",
         )}
       >

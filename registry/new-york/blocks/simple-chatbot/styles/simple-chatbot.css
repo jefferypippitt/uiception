@@ -1,0 +1,156 @@
+/* simple-chatbot — prompt card with typing placeholder (light / dark via .dark ancestor) */
+
+/* ── Tokens — light ───────────────────────────────────────────────────────── */
+
+.scb-root {
+  --scb-card-bg: #fafafa;
+  --scb-card-border: #e4e4e7;
+  --scb-card-ring: rgba(0, 0, 0, 0.06);
+
+  --scb-prompt: #18181b;
+
+  --scb-icon: #71717a;
+  --scb-icon-hover: #18181b;
+  --scb-icon-hover-bg: rgba(0, 0, 0, 0.06);
+
+  --scb-mic-bg: #18181b;
+  --scb-mic-fg: #fafafa;
+}
+
+/* ── Tokens — dark ────────────────────────────────────────────────────────── */
+
+.dark .scb-root {
+  --scb-card-bg: #0a0a0a;
+  --scb-card-border: #262626;
+  --scb-card-ring: rgba(255, 255, 255, 0.03);
+
+  --scb-prompt: #fafafa;
+
+  --scb-icon: #a1a1aa;
+  --scb-icon-hover: #e4e4e7;
+  --scb-icon-hover-bg: rgba(255, 255, 255, 0.06);
+
+  --scb-mic-bg: #ffffff;
+  --scb-mic-fg: #0a0a0a;
+}
+
+/* ── Page ─────────────────────────────────────────────────────────────────── */
+
+.scb-page {
+  padding: 18px 14px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.scb-page-inner {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+
+.scb-card {
+  border-radius: 12px;
+  border: 1px solid var(--scb-card-border);
+  background: var(--scb-card-bg);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--scb-card-ring);
+}
+
+/* ── Input zone ───────────────────────────────────────────────────────────── */
+
+.scb-body {
+  min-height: 76px;
+  padding: 14px 14px 8px;
+}
+
+.scb-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 40px;
+}
+
+/* Softer typed copy; cursor stays a sharp "|" */
+.scb-text {
+  color: var(--scb-prompt);
+  user-select: none;
+  filter: blur(0.22px);
+}
+
+/* Pipe cursor: no blur / glow — blink only while idle (hold / between) */
+.scb-caret {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 500;
+  font-size: 1.22em;
+  line-height: 1;
+  color: var(--scb-prompt);
+  vertical-align: text-top;
+  flex-shrink: 0;
+  transform: translateY(0.06em);
+  filter: none;
+  animation: scb-caret-blink 0.92s step-start infinite;
+}
+
+.scb-caret--solid {
+  animation: none;
+  opacity: 1;
+}
+
+/* ── Toolbar (shadcn Button + block tokens) ───────────────────────────────── */
+
+.scb-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 10px 10px 12px;
+}
+
+.scb-toolbar-left,
+.scb-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.scb-toolbar-left {
+  flex-wrap: wrap;
+}
+
+.scb-root .scb-btn-icon {
+  color: var(--scb-icon);
+  background-color: transparent;
+}
+
+.scb-root .scb-btn-icon:hover {
+  color: var(--scb-icon-hover);
+  background-color: var(--scb-icon-hover-bg);
+}
+
+.scb-root .scb-btn-mic {
+  color: var(--scb-mic-fg);
+  background-color: var(--scb-mic-bg);
+}
+
+.scb-root .scb-btn-mic:hover {
+  opacity: 0.95;
+  color: var(--scb-mic-fg);
+  background-color: var(--scb-mic-bg);
+}
+
+.scb-mic-icon {
+  color: var(--scb-mic-fg);
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
+
+@keyframes scb-caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
