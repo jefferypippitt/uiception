@@ -16,7 +16,7 @@ export const features: Feature[] = [
   {
     id: "next-level-home-ai",
     layout: "wide",
-    imageSrc: "/images/ggi_feature-section-v1_top.png",
+    imageSrc: "https://uiception.com/images/ggi_feature-section-v1_top.png",
     icon: BrainCog,
     title: "Learns how your home runs",
     description:
@@ -41,7 +41,7 @@ export const features: Feature[] = [
   {
     id: "ai-powered-home-support",
     layout: "wide",
-    imageSrc: "/images/ggi_feature-section-v1_btm.png",
+    imageSrc: "https://uiception.com/images/ggi_feature-section-v1_btm.png",
     icon: MessageCircle,
     title: "Someone to ask, anytime",
     description:

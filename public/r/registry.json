@@ -428,6 +428,21 @@
           "target": "app/brands-section-v1/brands-section-v1.tsx"
         },
         {
+          "path": "registry/new-york/blocks/brands-section-v1/components/marquee.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v1/components/marquee.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v1/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v1/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v1/lib/brands.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v1/lib/brands.ts"
+        },
+        {
           "path": "registry/new-york/blocks/brands-section-v1/styles/brands-section-v1.css",
           "type": "registry:file",
           "target": "app/brands-section-v1/styles/brands-section-v1.css"
@@ -666,7 +681,7 @@
       "type": "registry:block",
       "title": "Footer Section v1",
       "description": "Muted rounded footer with brand copy, four link columns, and a bottom row with Instagram and TikTok links.",
-      "registryDependencies": [],
+      "registryDependencies": ["card"],
       "files": [
         {
           "path": "registry/new-york/blocks/footer-section-v1/page.tsx",
@@ -907,16 +922,6 @@
           "path": "registry/new-york/blocks/feature-section-v1/styles/feature-section-v1.css",
           "type": "registry:file",
           "target": "app/feature-section-v1/styles/feature-section-v1.css"
-        },
-        {
-          "path": "public/images/ggi_feature-section-v1_top.png",
-          "type": "registry:file",
-          "target": "public/images/ggi_feature-section-v1_top.png"
-        },
-        {
-          "path": "public/images/ggi_feature-section-v1_btm.png",
-          "type": "registry:file",
-          "target": "public/images/ggi_feature-section-v1_btm.png"
         }
       ]
     },
@@ -969,11 +974,6 @@
           "path": "registry/new-york/blocks/hero-section-v4/styles/hero-section-v4.css",
           "type": "registry:file",
           "target": "app/hero-section-v4/styles/hero-section-v4.css"
-        },
-        {
-          "path": "public/images/hero-section-v4-bg.png",
-          "type": "registry:file",
-          "target": "public/images/hero-section-v4-bg.png"
         }
       ]
     },

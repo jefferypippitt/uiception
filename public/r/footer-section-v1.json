@@ -3,7 +3,9 @@
   "name": "footer-section-v1",
   "title": "Footer Section v1",
   "description": "Muted rounded footer with brand copy, four link columns, and a bottom row with Instagram and TikTok links.",
-  "registryDependencies": [],
+  "registryDependencies": [
+    "card"
+  ],
   "files": [
     {
       "path": "registry/new-york/blocks/footer-section-v1/page.tsx",

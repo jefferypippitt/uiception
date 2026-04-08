@@ -15,7 +15,7 @@ export function HeroHalftoneImage() {
       grainOverlay={0.2}
       grainSize={0.5}
       grid="hex"
-      image="/images/hero-section-v4-bg.png"
+      image="https://uiception.com/images/hero-section-v4-bg.png"
       inverted={false}
       originalColors={false}
       radius={1.5}
