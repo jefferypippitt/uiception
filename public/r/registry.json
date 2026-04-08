@@ -786,6 +786,86 @@
       ]
     },
     {
+      "name": "how-it-works-section-v1",
+      "type": "registry:block",
+      "title": "How It Works Section v1",
+      "description": "Three-step process section with accent-colored heading prefix, top-border step numbers, and staggered IntersectionObserver entrance animation.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/how-it-works-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/how-it-works-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v1/how-it-works-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/components/steps-grid.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v1/components/steps-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/components/step-card.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v1/components/step-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/lib/steps.ts",
+          "type": "registry:lib",
+          "target": "app/how-it-works-section-v1/lib/steps.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v1/styles/how-it-works-section-v1.css",
+          "type": "registry:file",
+          "target": "app/how-it-works-section-v1/styles/how-it-works-section-v1.css"
+        }
+      ]
+    },
+    {
+      "name": "how-it-works-section-v2",
+      "type": "registry:block",
+      "title": "How It Works Section v2",
+      "description": "Timeline-style three-step process section with a GSAP ScrollTrigger beam that travels between week badges as you scroll, revealing each step.",
+      "dependencies": ["gsap"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/how-it-works-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/how-it-works-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v2/how-it-works-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/components/steps-grid.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v2/components/steps-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/components/step-card.tsx",
+          "type": "registry:component",
+          "target": "app/how-it-works-section-v2/components/step-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/lib/steps.ts",
+          "type": "registry:lib",
+          "target": "app/how-it-works-section-v2/lib/steps.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/styles/how-it-works-section-v2.css",
+          "type": "registry:file",
+          "target": "app/how-it-works-section-v2/styles/how-it-works-section-v2.css"
+        }
+      ]
+    },
+    {
       "name": "feature-section-v1",
       "type": "registry:block",
       "title": "Feature Section v1",
@@ -913,6 +993,46 @@
           "path": "registry/new-york/blocks/stats-section-v1/stats-section-v1.tsx",
           "type": "registry:component",
           "target": "app/stats-section-v1/stats-section-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:block",
+      "title": "Code Block",
+      "description": "Tabbed package-manager code block with npm/pnpm/yarn/bun switcher, syntax-highlighted command output, and a one-click copy button.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/code-block/page.tsx",
+          "type": "registry:page",
+          "target": "app/code-block/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/code-block/code-block.tsx",
+          "type": "registry:component",
+          "target": "app/code-block/code-block.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/code-block/components/code-tabs.tsx",
+          "type": "registry:component",
+          "target": "app/code-block/components/code-tabs.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/code-block/hooks/use-code-block.ts",
+          "type": "registry:hook",
+          "target": "app/code-block/hooks/use-code-block.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/code-block/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/code-block/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/code-block/styles/code-block.css",
+          "type": "registry:file",
+          "target": "app/code-block/styles/code-block.css"
         }
       ]
     }

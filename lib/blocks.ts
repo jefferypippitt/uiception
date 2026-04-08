@@ -122,13 +122,29 @@ export const blockCategories: BlockCategory[] = [
         title: "Simple Chatbot",
         registryPath: "registry/new-york/blocks/simple-chatbot",
       },
+      {
+        id: "code-block",
+        title: "Code Block",
+        registryPath: "registry/new-york/blocks/code-block",
+      },
     ],
   },
   {
     id: "how-it-works",
     title: "How it works",
     description: "Process sections that explain steps, flows, and timelines.",
-    versions: [],
+    versions: [
+      {
+        id: "how-it-works-section-v1",
+        title: "How It Works Section v1",
+        registryPath: "registry/new-york/blocks/how-it-works-section-v1",
+      },
+      {
+        id: "how-it-works-section-v2",
+        title: "How It Works Section v2",
+        registryPath: "registry/new-york/blocks/how-it-works-section-v2",
+      },
+    ],
   },
   {
     id: "value-proposition",

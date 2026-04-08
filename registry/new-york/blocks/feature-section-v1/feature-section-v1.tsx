@@ -11,8 +11,8 @@ export default function FeatureSectionV1() {
             Help that fits the way you live
           </h2>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
-            Support that meets your family where you are, without another
-            dashboard to babysit.
+            Thoughtful help that learns your home, lightens your evenings, and
+            shows up whenever your family needs it.
           </p>
         </div>
 

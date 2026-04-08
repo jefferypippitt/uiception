@@ -14,6 +14,9 @@ import SimpleChatbot from "@/registry/new-york/blocks/simple-chatbot/simple-chat
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/feature-section-v1"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/stats-section-v1"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/hero-section-v4"
+import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/how-it-works-section-v1"
+import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/how-it-works-section-v2"
+import CodeBlock from "@/registry/new-york/blocks/code-block/code-block"
 
 
 
@@ -36,6 +39,9 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v1": FeatureSectionV1,
   "stats-section-v1": StatsSectionV1,
   "hero-section-v4": HeroSectionV4,
+  "how-it-works-section-v1": HowItWorksSectionV1,
+  "how-it-works-section-v2": HowItWorksSectionV2,
+  "code-block": CodeBlock,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

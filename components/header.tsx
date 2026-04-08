@@ -17,7 +17,7 @@ export default function Header() {
     const pathname = usePathname()
 
     return (
-        <header className='bg-background/90 sticky top-0 z-50 backdrop-blur-2xl'>
+        <header className='bg-background sticky top-0 z-50 backdrop-blur-none'>
             <div className='mx-auto w-full max-w-6xl px-6'>
                 <div className='flex h-16 items-center justify-between'>
                     <div className='flex items-center gap-6'>

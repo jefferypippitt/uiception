@@ -8,7 +8,7 @@ export default function HeroSectionV3() {
     <section className="py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
-          <Badge variant="secondary" className="text-base italic">
+          <Badge variant="secondary" className="text-sm italic">
             Always open, always ready
           </Badge>
 

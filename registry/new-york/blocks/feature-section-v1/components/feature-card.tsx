@@ -24,7 +24,7 @@ export default function FeatureCard({ feature, index, isVisible }: Props) {
       style={{ transitionDelay: `${index * 80}ms` }}
     >
       {isWide && feature.imageSrc ? (
-        <div className="flex h-full min-h-0 flex-col gap-5 p-5 lg:flex-row lg:items-stretch">
+        <div className="flex h-full min-h-0 flex-col gap-5 p-5 lg:flex-row lg:items-start">
           <div className="relative aspect-4/3 w-full shrink-0 overflow-hidden rounded-xl lg:aspect-auto lg:w-1/2 lg:min-h-[220px]">
             <Image
               src={feature.imageSrc}
@@ -35,7 +35,7 @@ export default function FeatureCard({ feature, index, isVisible }: Props) {
               priority={index === 0}
             />
           </div>
-          <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:py-1">
+          <div className="flex flex-col justify-start gap-3 lg:w-1/2 lg:py-1">
             <div className="fsv1-icon-wrap flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
               <Icon className="fsv1-icon size-[18px]" strokeWidth={1.75} />
             </div>

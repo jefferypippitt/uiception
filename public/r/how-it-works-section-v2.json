@@ -1,0 +1,49 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "how-it-works-section-v2",
+  "title": "How It Works Section v2",
+  "description": "Timeline-style three-step process section with a GSAP ScrollTrigger beam that travels between week badges as you scroll, revealing each step.",
+  "dependencies": [
+    "gsap"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/page.tsx",
+      "content": "import HowItWorksSectionV2 from \"./how-it-works-section-v2\"\n\nexport default function Page() {\n  return <HowItWorksSectionV2 />\n}\n",
+      "type": "registry:page",
+      "target": "app/how-it-works-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/how-it-works-section-v2.tsx",
+      "content": "\"use client\"\n\nimport StepsGrid from \"./components/steps-grid\"\nimport \"./styles/how-it-works-section-v2.css\"\n\nexport default function HowItWorksSectionV2() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <StepsGrid\n        title={\n          <h2\n            className=\"text-4xl font-light tracking-tight leading-tight sm:text-5xl lg:text-6xl\"\n          >\n            How It Works\n          </h2>\n        }\n      />\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/how-it-works-section-v2/how-it-works-section-v2.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/components/steps-grid.tsx",
+      "content": "\"use client\"\n\nimport type { ReactNode } from \"react\"\nimport { useRef } from \"react\"\n\nimport { Badge } from \"@/components/ui/badge\"\n\nimport { useHiw2V2Animations } from \"../hooks/use-hiw2-v2-animations\"\nimport { STEP_LABEL_BADGE_VARIANT, steps } from \"../lib/steps\"\nimport StepCard from \"./step-card\"\n\ntype StepsGridProps = {\n  title: ReactNode\n}\n\nexport default function StepsGrid({ title }: StepsGridProps) {\n  const titleRef = useRef<HTMLDivElement>(null)\n  const cardRefs = useRef<(HTMLDivElement | null)[]>([])\n  const borderRefs = useRef<(HTMLDivElement | null)[]>([])\n\n  useHiw2V2Animations({\n    title: titleRef,\n    cards: cardRefs,\n    borders: borderRefs,\n  })\n\n  return (\n    <div className=\"mx-auto max-w-6xl px-4\">\n      <div ref={titleRef} className=\"mb-12 md:mb-16\">\n        {title}\n      </div>\n\n      <div className=\"grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-14\">\n        {steps.map((step, i) => (\n          <div\n            key={step.id}\n            ref={(el) => {\n              cardRefs.current[i] = el\n            }}\n          >\n            <Badge\n              variant={STEP_LABEL_BADGE_VARIANT}\n              className=\"uppercase\"\n            >\n              {step.label}\n            </Badge>\n\n            <div\n              ref={(el) => {\n                borderRefs.current[i] = el\n              }}\n              className=\"hiw2-card-border\"\n            />\n\n            <StepCard step={step} />\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/how-it-works-section-v2/components/steps-grid.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/components/step-card.tsx",
+      "content": "import { CheckCircle2 } from \"lucide-react\"\n\nimport type { Step } from \"../lib/steps\"\n\ntype Props = {\n  step: Step\n}\n\nexport default function StepCard({ step }: Props) {\n  return (\n    <div className=\"flex flex-col gap-4 pt-4\">\n      <h3 className=\"text-xl font-medium tracking-tight leading-snug text-foreground\">\n        {step.title}\n      </h3>\n\n      <ul className=\"flex flex-col gap-3\">\n        {step.features.map((feature, index) => (\n          <li\n            key={index}\n            data-hiw2-feature=\"\"\n            className=\"flex items-start gap-3 text-sm text-muted-foreground leading-relaxed\"\n          >\n            <CheckCircle2 className=\"hiw2-check-icon h-4 w-4 fill-foreground stroke-background\" />\n            <span>{feature}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/how-it-works-section-v2/components/step-card.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/lib/steps.ts",
+      "content": "export const STEP_LABEL_BADGE_VARIANT = \"outline\" as const\n\nexport type StepFeature = string\n\nexport type Step = {\n  id: string\n  label: string\n  title: string\n  features: StepFeature[]\n}\n\nexport const steps: Step[] = [\n  {\n    id: \"step-1\",\n    label: \"Step 1\",\n    title: \"Create your project\",\n    features: [\n      \"Scaffold a new Next.js app with a single command\",\n      \"Choose Tailwind CSS and App Router when prompted\",\n      \"TypeScript support included out of the box\",\n    ],\n  },\n  {\n    id: \"step-2\",\n    label: \"Step 2\",\n    title: \"Initialize shadcn/ui\",\n    features: [\n      \"Run the shadcn CLI to configure your project\",\n      \"Sets up components.json with your preferred style\",\n      \"Adds the necessary Tailwind and import alias config\",\n    ],\n  },\n  {\n    id: \"step-3\",\n    label: \"Step 3\",\n    title: \"Add components\",\n    features: [\n      \"Install only the components you actually need\",\n      \"Code is copied directly into your project\",\n      \"Fully customizable — no black-box dependencies\",\n    ],\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/how-it-works-section-v2/lib/steps.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/how-it-works-section-v2/styles/how-it-works-section-v2.css",
+      "content": ".hiw2-check-icon {\n  color: hsl(var(--foreground));\n  flex-shrink: 0;\n  margin-top: 2px;\n}\n\n.hiw2-card-border {\n  height: 1px;\n  background: hsl(var(--border));\n  margin-bottom: 1rem;\n}\n",
+      "type": "registry:file",
+      "target": "app/how-it-works-section-v2/styles/how-it-works-section-v2.css"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,11 @@
+.hiw2-check-icon {
+  color: hsl(var(--foreground));
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.hiw2-card-border {
+  height: 1px;
+  background: hsl(var(--border));
+  margin-bottom: 1rem;
+}

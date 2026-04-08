@@ -63,13 +63,20 @@ export const metadata: Metadata = {
     creator: "@jefferypippitt",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/icon1.png",
-    apple: "/apple-icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon1.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon_192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon_512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
   },
-  manifest: `${siteConfig.url}/manifest.json`,
+  manifest: "/manifest.json",
   appleWebApp: {
+    capable: true,
     title: siteConfig.name,
+    statusBarStyle: "black-translucent",
   },
 }
 

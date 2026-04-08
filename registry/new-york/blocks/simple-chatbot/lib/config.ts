@@ -13,10 +13,10 @@ export const HOLD_MS = 1500
 export const BETWEEN_MS = 280
 
 export const PLACEHOLDER_PROMPTS = [
-  "Compare pricing and plans…",
-  "How do team seats and billing work?",
-  "Book a product demo this week",
-  "Integrate with our REST API",
-  "What security and compliance do you offer?",
-  "Start a trial—no credit card required",
+  "Explain the concept of quantum entanglement.",
+  "Why does time slow down near a black hole?",
+  "What is the Fermi Paradox and why does it matter?",
+  "How did the universe begin before the Big Bang?",
+  "What would happen if you fell into a black hole?",
+  "Is mathematics discovered or invented by humans?",
 ] as const

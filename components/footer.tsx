@@ -24,7 +24,7 @@ export default function Footer() {
                             <Avatar size='sm' className='size-4'>
                                 <AvatarImage
                                     alt='uiception'
-                                    src='/icon_512x512.png'
+                                    src='/icon0.svg'
                                 />
                                 <AvatarFallback>UI</AvatarFallback>
                             </Avatar>
