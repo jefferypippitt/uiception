@@ -25,7 +25,7 @@ export type OutputItem =
   | { type: "spinner"; text: string; doneText?: string; delay: number; duration: number }
 
 export const PROMPT = "PS C:\\projects\\uiception> "
-export const COMMAND = 'npx shadcn@latest add "@uiception/hero-section-v1"'
+export const COMMAND = 'npx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"'
 export const TYPE_SPEED = 38
 
 export const ICON_SM = "size-3.5 shrink-0 stroke-[1.75]"

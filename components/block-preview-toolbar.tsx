@@ -422,7 +422,7 @@ export function BlockPreviewToolbar({
     }
   }, [mainView, versionId, registryFiles, codeError])
 
-  const installCommand = `npx shadcn@latest add "@uiception/${versionId}"`
+  const installCommand = `npx shadcn@latest add "https://uiception.com/r/${versionId}.json"`
   const previewPath = `/view/${versionId}`
 
   // If the iframe navigates to a new preview URL, ensure the loading overlay
