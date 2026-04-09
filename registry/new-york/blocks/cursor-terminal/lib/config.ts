@@ -50,7 +50,7 @@ export const OUTPUT_SEQUENCE: OutputItem[] = [
   { type: "line", text: "  - app/hero-section-v1/hero-section-v1.tsx", color: "cyan", delay: 80 },
   { type: "line", text: "  - app/hero-section-v1/brands-section-v1.tsx", color: "cyan", delay: 80 },
   { type: "line", text: "  - app/hero-section-v1/mac-os-terminal.tsx", color: "cyan", delay: 80 },
-  { type: "line", text: "  - public/images/hero-section-v1-bg.png", color: "cyan", delay: 80 },
+  { type: "line", text: "  - public/images/blocks/hero-section-v1/hero-section-v1-bg.png", color: "cyan", delay: 80 },
   {
     type: "line",
     text: "  … +15 files (CSS, terminal TS/CSS, code segments, 12 brand SVGs)",

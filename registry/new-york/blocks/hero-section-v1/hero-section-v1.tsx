@@ -1,5 +1,6 @@
 import { GeistPixelCircle } from "geist/font/pixel"
 import { Button } from "@/components/ui/button"
+import { blockImageUrl } from "@/lib/block-image-url"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import BrandsSectionV1 from "./components/brands-section-v1"
@@ -43,7 +44,10 @@ export default function HeroSectionV1() {
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl px-4 py-10 md:px-8 md:py-14">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://uiception.com/images/hero-section-v1-bg.png"
+            src={blockImageUrl(
+              "https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png",
+              "/images/blocks/hero-section-v1/hero-section-v1-bg.png",
+            )}
             alt=""
             className="pointer-events-none object-cover object-center absolute inset-0 w-full h-full"
             aria-hidden={true}

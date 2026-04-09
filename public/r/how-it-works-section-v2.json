@@ -6,7 +6,9 @@
   "dependencies": [
     "gsap"
   ],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "badge"
+  ],
   "files": [
     {
       "path": "registry/new-york/blocks/how-it-works-section-v2/page.tsx",

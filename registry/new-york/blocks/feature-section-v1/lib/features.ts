@@ -1,6 +1,8 @@
 import { Cog, Activity, MessageCircle, BrainCog } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
+import { blockImageUrl } from "@/lib/block-image-url"
+
 export type FeatureLayout = "wide" | "narrow"
 
 export type Feature = {
@@ -16,7 +18,10 @@ export const features: Feature[] = [
   {
     id: "next-level-home-ai",
     layout: "wide",
-    imageSrc: "https://uiception.com/images/ggi_feature-section-v1_top.png",
+    imageSrc: blockImageUrl(
+      "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
+      "/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
+    ),
     icon: BrainCog,
     title: "Learns how your home runs",
     description:
@@ -41,7 +46,10 @@ export const features: Feature[] = [
   {
     id: "ai-powered-home-support",
     layout: "wide",
-    imageSrc: "https://uiception.com/images/ggi_feature-section-v1_btm.png",
+    imageSrc: blockImageUrl(
+      "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
+      "/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
+    ),
     icon: MessageCircle,
     title: "Someone to ask, anytime",
     description:

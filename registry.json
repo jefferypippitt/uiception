@@ -205,6 +205,16 @@
       ],
       "files": [
         {
+          "path": "lib/block-image-url.ts",
+          "type": "registry:lib",
+          "target": "lib/block-image-url.ts"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png"
+        },
+        {
           "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
           "type": "registry:page",
           "target": "app/hero-section-v1/page.tsx"
@@ -639,6 +649,11 @@
       ],
       "files": [
         {
+          "path": "lib/block-image-url.ts",
+          "type": "registry:lib",
+          "target": "lib/block-image-url.ts"
+        },
+        {
           "path": "registry/new-york/blocks/cta-section-v1/page.tsx",
           "type": "registry:page",
           "target": "app/cta-section-v1/page.tsx"
@@ -649,9 +664,9 @@
           "target": "app/cta-section-v1/cta-section-v1.tsx"
         },
         {
-          "path": "public/images/cta-section-v1.png",
+          "path": "public/images/blocks/cta-section-v1/cta-section-v1.png",
           "type": "registry:file",
-          "target": "public/images/cta-section-v1.png"
+          "target": "public/images/blocks/cta-section-v1/cta-section-v1.png"
         }
       ]
     },
@@ -806,7 +821,7 @@
       "title": "How It Works Section v1",
       "description": "Three-step process section with accent-colored heading prefix, top-border step numbers, and staggered IntersectionObserver entrance animation.",
       "dependencies": [],
-      "registryDependencies": [],
+      "registryDependencies": ["card"],
       "files": [
         {
           "path": "registry/new-york/blocks/how-it-works-section-v1/page.tsx",
@@ -846,7 +861,7 @@
       "title": "How It Works Section v2",
       "description": "Timeline-style three-step process section with a GSAP ScrollTrigger beam that travels between week badges as you scroll, revealing each step.",
       "dependencies": ["gsap"],
-      "registryDependencies": [],
+      "registryDependencies": ["badge"],
       "files": [
         {
           "path": "registry/new-york/blocks/how-it-works-section-v2/page.tsx",
@@ -888,6 +903,21 @@
       "dependencies": [],
       "registryDependencies": [],
       "files": [
+        {
+          "path": "lib/block-image-url.ts",
+          "type": "registry:lib",
+          "target": "lib/block-image-url.ts"
+        },
+        {
+          "path": "public/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png"
+        },
+        {
+          "path": "public/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png"
+        },
         {
           "path": "registry/new-york/blocks/feature-section-v1/page.tsx",
           "type": "registry:page",
@@ -940,6 +970,16 @@
         "@uiception/stats-section-v1"
       ],
       "files": [
+        {
+          "path": "lib/block-image-url.ts",
+          "type": "registry:lib",
+          "target": "lib/block-image-url.ts"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png"
+        },
         {
           "path": "registry/new-york/blocks/hero-section-v4/page.tsx",
           "type": "registry:page",

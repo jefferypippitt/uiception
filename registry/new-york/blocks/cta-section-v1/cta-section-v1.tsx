@@ -2,6 +2,7 @@ import { GeistPixelCircle } from "geist/font/pixel"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { blockImageUrl } from "@/lib/block-image-url"
 
 export default function CtaSectionV1() {
   return (
@@ -41,7 +42,10 @@ export default function CtaSectionV1() {
           <div className="relative mt-6 aspect-16/5 w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/cta-section-v1.png"
+              src={blockImageUrl(
+                "https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png",
+                "/images/blocks/cta-section-v1/cta-section-v1.png",
+              )}
               alt=""
               aria-hidden={true}
               className="absolute inset-0 h-full w-full object-cover object-top"

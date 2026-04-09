@@ -2,6 +2,8 @@
 
 import { HalftoneDots } from "@paper-design/shaders-react"
 
+import { blockImageUrl } from "@/lib/block-image-url"
+
 export function HeroHalftoneImage() {
   return (
     <HalftoneDots
@@ -15,7 +17,10 @@ export function HeroHalftoneImage() {
       grainOverlay={0.2}
       grainSize={0.5}
       grid="hex"
-      image="https://uiception.com/images/hero-section-v4-bg.png"
+      image={blockImageUrl(
+        "https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+        "/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+      )}
       inverted={false}
       originalColors={false}
       radius={1.5}

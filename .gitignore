@@ -43,9 +43,5 @@ next-env.d.ts
 
 # binary image assets (replace with your own)
 /public/images/*
-!/public/images/hero-section-v1-bg.png
-!/public/images/cta-section-v1.png
-!/public/images/hero-section-v4-bg.png
-!/public/images/ggi_feature-section-v1_top.png
-!/public/images/ggi_feature-section-v1_btm.png
-!/public/images/hero-section-v4-bg.png
+!/public/images/blocks/
+!/public/images/blocks/**/*
