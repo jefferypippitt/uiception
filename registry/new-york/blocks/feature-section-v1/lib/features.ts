@@ -20,7 +20,6 @@ export const features: Feature[] = [
     layout: "wide",
     imageSrc: blockImageUrl(
       "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
-      "/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
     ),
     icon: BrainCog,
     title: "Learns how your home runs",
@@ -48,7 +47,6 @@ export const features: Feature[] = [
     layout: "wide",
     imageSrc: blockImageUrl(
       "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
-      "/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
     ),
     icon: MessageCircle,
     title: "Someone to ask, anytime",

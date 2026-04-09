@@ -19,7 +19,6 @@ export function HeroHalftoneImage() {
       grid="hex"
       image={blockImageUrl(
         "https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png",
-        "/images/blocks/hero-section-v4/hero-section-v4-bg.png",
       )}
       inverted={false}
       originalColors={false}

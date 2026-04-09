@@ -44,7 +44,6 @@ export default function CtaSectionV1() {
             <img
               src={blockImageUrl(
                 "https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png",
-                "/images/blocks/cta-section-v1/cta-section-v1.png",
               )}
               alt=""
               aria-hidden={true}

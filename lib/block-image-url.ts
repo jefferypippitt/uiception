@@ -1,7 +1,7 @@
 /**
- * Use CDN image URLs on the hosted uiception.com app; use shipped `/public` assets for registry installs.
- * Set `NEXT_PUBLIC_UICEPTION_IMAGES=cdn` in production for uiception.com only.
+ * Returns the CDN image URL. Images are always served from uiception.com —
+ * binary assets can't be safely embedded in registry JSON, so local copies are not used.
  */
-export function blockImageUrl(remote: string, local: string): string {
-  return process.env.NEXT_PUBLIC_UICEPTION_IMAGES === "cdn" ? remote : local
+export function blockImageUrl(remote: string): string {
+  return remote
 }

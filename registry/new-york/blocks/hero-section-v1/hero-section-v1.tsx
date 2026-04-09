@@ -46,7 +46,6 @@ export default function HeroSectionV1() {
           <img
             src={blockImageUrl(
               "https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png",
-              "/images/blocks/hero-section-v1/hero-section-v1-bg.png",
             )}
             alt=""
             className="pointer-events-none object-cover object-center absolute inset-0 w-full h-full"
