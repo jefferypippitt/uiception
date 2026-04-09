@@ -69,6 +69,22 @@ const SHADCN_COMPONENTS: Record<string, string> = {
 
 const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 
+describe("registry registryDependencies format", () => {
+  it("uses full URLs (not @uiception/ aliases) for cross-registry dependencies", () => {
+    const { items } = loadRegistry()
+    const blocks = items.filter((i) => i.type === "registry:block")
+
+    for (const block of blocks) {
+      for (const dep of block.registryDependencies ?? []) {
+        expect(
+          dep,
+          `${block.name}: registryDependency "${dep}" uses @uiception/ alias — use the full URL "https://uiception.com/r/<name>.json" so consumers without the registry alias can install it`,
+        ).not.toMatch(/^@uiception\//)
+      }
+    }
+  })
+})
+
 describe("registry shadcn registryDependencies", () => {
   it("declares every imported shadcn component in registryDependencies", () => {
     const { items } = loadRegistry()

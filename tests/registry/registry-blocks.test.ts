@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
@@ -43,6 +43,36 @@ describe("registry.json blocks", () => {
 
         const abs = join(root, f.path)
         expect(existsSync(abs), `source file exists: ${f.path}`).toBe(true)
+      }
+    }
+  })
+
+  it("declares every file in the block folder in registry.json", () => {
+    const { items } = loadRegistry()
+    const blocks = items.filter((i) => i.type === "registry:block")
+
+    function walk(dir: string, results: string[] = []): string[] {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const full = join(dir, entry.name)
+        if (entry.isDirectory()) walk(full, results)
+        else results.push(full.replace(/\\/g, "/"))
+      }
+      return results
+    }
+
+    for (const block of blocks) {
+      const blockDir = join(root, "registry/new-york/blocks", block.name!)
+      if (!existsSync(blockDir)) continue
+
+      const declared = new Set(
+        (block.files ?? []).map((f) => join(root, f.path).replace(/\\/g, "/")),
+      )
+
+      for (const file of walk(blockDir)) {
+        expect(
+          declared.has(file),
+          `${block.name}: file on disk not declared in registry.json — add it to the files array: ${file.replace(root.replace(/\\/g, "/") + "/", "")}`,
+        ).toBe(true)
       }
     }
   })

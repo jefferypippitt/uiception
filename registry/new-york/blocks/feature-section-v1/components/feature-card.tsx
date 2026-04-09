@@ -30,6 +30,7 @@ export default function FeatureCard({ feature, index, isVisible }: Props) {
               src={feature.imageSrc}
               alt=""
               fill
+              unoptimized
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority={index === 0}

@@ -10,7 +10,7 @@
   ],
   "registryDependencies": [
     "button",
-    "@uiception/stats-section-v1"
+    "https://uiception.com/r/stats-section-v1.json"
   ],
   "files": [
     {

@@ -359,6 +359,21 @@
           "target": "app/brands-section-v2/brands-section-v2.tsx"
         },
         {
+          "path": "registry/new-york/blocks/brands-section-v2/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v2/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v2/components/marquee.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v2/components/marquee.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v2/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/brands-section-v2/lib/brands.ts"
+        },
+        {
           "path": "registry/new-york/blocks/brands-section-v2/styles/brands-section-v2.css",
           "type": "registry:file",
           "target": "app/brands-section-v2/styles/brands-section-v2.css"
@@ -625,6 +640,31 @@
           "target": "app/cursor-terminal/cursor-terminal.tsx"
         },
         {
+          "path": "registry/new-york/blocks/cursor-terminal/components/panel-icon-button.tsx",
+          "type": "registry:component",
+          "target": "app/cursor-terminal/components/panel-icon-button.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/components/prompt-shell.tsx",
+          "type": "registry:component",
+          "target": "app/cursor-terminal/components/prompt-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/components/spinner.tsx",
+          "type": "registry:component",
+          "target": "app/cursor-terminal/components/spinner.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation.ts",
+          "type": "registry:hook",
+          "target": "app/cursor-terminal/hooks/use-terminal-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/cursor-terminal/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/cursor-terminal/lib/config.ts"
+        },
+        {
           "path": "registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css",
           "type": "registry:file",
           "target": "app/cursor-terminal/styles/cursor-terminal.css"
@@ -882,6 +922,11 @@
           "target": "app/how-it-works-section-v2/components/step-card.tsx"
         },
         {
+          "path": "registry/new-york/blocks/how-it-works-section-v2/hooks/use-hiw2-v2-animations.ts",
+          "type": "registry:hook",
+          "target": "app/how-it-works-section-v2/hooks/use-hiw2-v2-animations.ts"
+        },
+        {
           "path": "registry/new-york/blocks/how-it-works-section-v2/lib/steps.ts",
           "type": "registry:lib",
           "target": "app/how-it-works-section-v2/lib/steps.ts"
@@ -955,7 +1000,7 @@
       ],
       "registryDependencies": [
         "button",
-        "@uiception/stats-section-v1"
+        "https://uiception.com/r/stats-section-v1.json"
       ],
       "files": [
         {
