@@ -431,6 +431,199 @@
       ]
     },
     {
+      "name": "brands-section-v3",
+      "type": "registry:block",
+      "title": "Brands Section v3",
+      "description": "Logo grid: muted icons, hover reveals brand color, inset border, flickering grid, and label.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/brands-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v3/brands-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/components/brand-grid.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v3/components/brand-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/components/brand-cell.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v3/components/brand-cell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/components/flickering-grid.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v3/components/flickering-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/brands-section-v3/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v3/styles/brands-section-v3.css",
+          "type": "registry:file",
+          "target": "app/brands-section-v3/styles/brands-section-v3.css"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convex.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/convex.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercel.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/vercel.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/vercelDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/neon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/neon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/upstash.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/upstash.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tursoLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tursoLight.tsx"
+        }
+      ]
+    },
+    {
+      "name": "brands-section-v4",
+      "type": "registry:block",
+      "title": "Brands Section v4",
+      "description": "Logo grid: brand colors always active, inset border, flickering grid always on, and label always visible.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/brands-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v4/brands-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/components/brand-grid.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v4/components/brand-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/components/brand-cell.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v4/components/brand-cell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/components/flickering-grid.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v4/components/flickering-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/brands-section-v4/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v4/styles/brands-section-v4.css",
+          "type": "registry:file",
+          "target": "app/brands-section-v4/styles/brands-section-v4.css"
+        },
+        {
+          "path": "components/ui/svgs/tiktokIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tiktokIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/tiktokIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/tiktokIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/bluesky.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/bluesky.tsx"
+        },
+        {
+          "path": "components/ui/svgs/reddit.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/reddit.tsx"
+        },
+        {
+          "path": "components/ui/svgs/redditDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/redditDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/meta.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/meta.tsx"
+        },
+        {
+          "path": "components/ui/svgs/metaDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/metaDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/x.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/x.tsx"
+        },
+        {
+          "path": "components/ui/svgs/xDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/xDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/instagramIcon.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/instagramIcon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/instagramIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/instagramIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/telegram.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/telegram.tsx"
+        },
+        {
+          "path": "components/ui/svgs/telegramDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/telegramDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/youtube.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/youtube.tsx"
+        }
+      ]
+    },
+    {
       "name": "brands-section-v1",
       "type": "registry:block",
       "title": "Brands Section v1",
@@ -942,15 +1135,10 @@
       "name": "feature-section-v1",
       "type": "registry:block",
       "title": "Feature Section v1",
-      "description": "Six-card feature grid with accent-colored icon containers, staggered IntersectionObserver entrance animation, and per-card radial glow on hover.",
-      "dependencies": [],
+      "description": "Cream-toned six-cell grid with line-art SVG icons, monospace titles, and NO. indexes below sharp-cornered muted cards.",
+      "dependencies": ["geist"],
       "registryDependencies": [],
       "files": [
-        {
-          "path": "lib/block-image-url.ts",
-          "type": "registry:lib",
-          "target": "lib/block-image-url.ts"
-        },
         {
           "path": "registry/new-york/blocks/feature-section-v1/page.tsx",
           "type": "registry:page",
@@ -967,14 +1155,14 @@
           "target": "app/feature-section-v1/components/feature-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/components/feature-card.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v1/components/feature-card.tsx"
+          "path": "registry/new-york/blocks/feature-section-v1/styles/feature-grid.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v1/styles/feature-grid.css"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/hooks/use-feature-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v1/hooks/use-feature-animation.ts"
+          "path": "registry/new-york/blocks/feature-section-v1/components/feature-icons.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v1/components/feature-icons.tsx"
         },
         {
           "path": "registry/new-york/blocks/feature-section-v1/lib/features.ts",

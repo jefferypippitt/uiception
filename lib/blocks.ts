@@ -78,6 +78,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Brands Section v2",
         registryPath: "registry/new-york/blocks/brands-section-v2",
       },
+      {
+        id: "brands-section-v3",
+        title: "Brands Section v3",
+        registryPath: "registry/new-york/blocks/brands-section-v3",
+      },
+      {
+        id: "brands-section-v4",
+        title: "Brands Section v4",
+        registryPath: "registry/new-york/blocks/brands-section-v4",
+      },
     ],
   },
   {

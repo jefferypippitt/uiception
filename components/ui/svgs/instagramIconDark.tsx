@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
+const InstagramIconDark = (props: SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -8,8 +8,8 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <defs>
       <radialGradient
-        xlinkHref="#instagram_icon__a"
-        id="instagram_icon__f"
+        xlinkHref="#instagram_icon_dark__a"
+        id="instagram_icon_dark__f"
         cx="158.429"
         cy="578.088"
         r="52.352"
@@ -19,8 +19,8 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        xlinkHref="#instagram_icon__b"
-        id="instagram_icon__g"
+        xlinkHref="#instagram_icon_dark__b"
+        id="instagram_icon_dark__g"
         cx="172.615"
         cy="600.692"
         r="65"
@@ -30,8 +30,8 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        xlinkHref="#instagram_icon__c"
-        id="instagram_icon__h"
+        xlinkHref="#instagram_icon_dark__c"
+        id="instagram_icon_dark__h"
         cx="144.012"
         cy="51.337"
         r="67.081"
@@ -41,8 +41,8 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        xlinkHref="#instagram_icon__d"
-        id="instagram_icon__e"
+        xlinkHref="#instagram_icon_dark__d"
+        id="instagram_icon_dark__e"
         cx="199.788"
         cy="628.438"
         r="52.352"
@@ -51,19 +51,19 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientTransform="matrix(-3.10797 .87652 -.6315 -2.23914 1345.65 1374.198)"
         gradientUnits="userSpaceOnUse"
       />
-      <linearGradient id="instagram_icon__d">
+      <linearGradient id="instagram_icon_dark__d">
         <stop offset="0" stopColor="#ff005f" />
         <stop offset="1" stopColor="#fc01d8" />
       </linearGradient>
-      <linearGradient id="instagram_icon__c">
+      <linearGradient id="instagram_icon_dark__c">
         <stop offset="0" stopColor="#780cff" />
         <stop offset="1" stopColor="#820bff" stopOpacity="0" />
       </linearGradient>
-      <linearGradient id="instagram_icon__b">
+      <linearGradient id="instagram_icon_dark__b">
         <stop offset="0" stopColor="#fc0" />
         <stop offset="1" stopColor="#fc0" stopOpacity="0" />
       </linearGradient>
-      <linearGradient id="instagram_icon__a">
+      <linearGradient id="instagram_icon_dark__a">
         <stop offset="0" stopColor="#fc0" />
         <stop offset=".124" stopColor="#fc0" />
         <stop offset=".567" stopColor="#fe4a05" />
@@ -72,22 +72,22 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
       </linearGradient>
     </defs>
     <path
-      fill="url(#instagram_icon__e)"
+      fill="url(#instagram_icon_dark__e)"
       d="M204.15 18.143c-55.23 0-71.383.057-74.523.317-11.334.943-18.387 2.728-26.07 6.554-5.922 2.942-10.592 6.351-15.201 11.13-8.394 8.716-13.481 19.439-15.323 32.184-.895 6.188-1.156 7.45-1.209 39.056-.02 10.536 0 24.4 0 42.999 0 55.2.062 71.341.326 74.476.916 11.032 2.645 17.973 6.308 25.565 7 14.533 20.37 25.443 36.12 29.514 5.453 1.404 11.476 2.178 19.208 2.544 3.277.142 36.669.244 70.081.244 33.413 0 66.826-.04 70.02-.203 8.954-.422 14.153-1.12 19.901-2.606 15.852-4.09 28.977-14.838 36.12-29.575 3.591-7.409 5.412-14.614 6.236-25.07.18-2.28.255-38.626.255-74.924 0-36.304-.082-72.583-.26-74.863-.835-10.625-2.656-17.77-6.364-25.32-3.042-6.182-6.42-10.799-11.324-15.519-8.752-8.361-19.455-13.45-32.21-15.29-6.18-.894-7.41-1.158-39.033-1.213z"
       transform="translate(-71.816 -18.143)"
     />
     <path
-      fill="url(#instagram_icon__f)"
+      fill="url(#instagram_icon_dark__f)"
       d="M204.15 18.143c-55.23 0-71.383.057-74.523.317-11.334.943-18.387 2.728-26.07 6.554-5.922 2.942-10.592 6.351-15.201 11.13-8.394 8.716-13.481 19.439-15.323 32.184-.895 6.188-1.156 7.45-1.209 39.056-.02 10.536 0 24.4 0 42.999 0 55.2.062 71.341.326 74.476.916 11.032 2.645 17.973 6.308 25.565 7 14.533 20.37 25.443 36.12 29.514 5.453 1.404 11.476 2.178 19.208 2.544 3.277.142 36.669.244 70.081.244 33.413 0 66.826-.04 70.02-.203 8.954-.422 14.153-1.12 19.901-2.606 15.852-4.09 28.977-14.838 36.12-29.575 3.591-7.409 5.412-14.614 6.236-25.07.18-2.28.255-38.626.255-74.924 0-36.304-.082-72.583-.26-74.863-.835-10.625-2.656-17.77-6.364-25.32-3.042-6.182-6.42-10.799-11.324-15.519-8.752-8.361-19.455-13.45-32.21-15.29-6.18-.894-7.41-1.158-39.033-1.213z"
       transform="translate(-71.816 -18.143)"
     />
     <path
-      fill="url(#instagram_icon__g)"
+      fill="url(#instagram_icon_dark__g)"
       d="M204.15 18.143c-55.23 0-71.383.057-74.523.317-11.334.943-18.387 2.728-26.07 6.554-5.922 2.942-10.592 6.351-15.201 11.13-8.394 8.716-13.481 19.439-15.323 32.184-.895 6.188-1.156 7.45-1.209 39.056-.02 10.536 0 24.4 0 42.999 0 55.2.062 71.341.326 74.476.916 11.032 2.645 17.973 6.308 25.565 7 14.533 20.37 25.443 36.12 29.514 5.453 1.404 11.476 2.178 19.208 2.544 3.277.142 36.669.244 70.081.244 33.413 0 66.826-.04 70.02-.203 8.954-.422 14.153-1.12 19.901-2.606 15.852-4.09 28.977-14.838 36.12-29.575 3.591-7.409 5.412-14.614 6.236-25.07.18-2.28.255-38.626.255-74.924 0-36.304-.082-72.583-.26-74.863-.835-10.625-2.656-17.77-6.364-25.32-3.042-6.182-6.42-10.799-11.324-15.519-8.752-8.361-19.455-13.45-32.21-15.29-6.18-.894-7.41-1.158-39.033-1.213z"
       transform="translate(-71.816 -18.143)"
     />
     <path
-      fill="url(#instagram_icon__h)"
+      fill="url(#instagram_icon_dark__h)"
       d="M204.15 18.143c-55.23 0-71.383.057-74.523.317-11.334.943-18.387 2.728-26.07 6.554-5.922 2.942-10.592 6.351-15.201 11.13-8.394 8.716-13.481 19.439-15.323 32.184-.895 6.188-1.156 7.45-1.209 39.056-.02 10.536 0 24.4 0 42.999 0 55.2.062 71.341.326 74.476.916 11.032 2.645 17.973 6.308 25.565 7 14.533 20.37 25.443 36.12 29.514 5.453 1.404 11.476 2.178 19.208 2.544 3.277.142 36.669.244 70.081.244 33.413 0 66.826-.04 70.02-.203 8.954-.422 14.153-1.12 19.901-2.606 15.852-4.09 28.977-14.838 36.12-29.575 3.591-7.409 5.412-14.614 6.236-25.07.18-2.28.255-38.626.255-74.924 0-36.304-.082-72.583-.26-74.863-.835-10.625-2.656-17.77-6.364-25.32-3.042-6.182-6.42-10.799-11.324-15.519-8.752-8.361-19.455-13.45-32.21-15.29-6.18-.894-7.41-1.158-39.033-1.213z"
       transform="translate(-71.816 -18.143)"
     />
@@ -98,4 +98,4 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export { InstagramIcon };
+export { InstagramIconDark };

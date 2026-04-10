@@ -1,56 +1,69 @@
-import { Cog, Activity, MessageCircle, BrainCog } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import type { ComponentType, SVGProps } from "react"
 
-import { blockImageUrl } from "@/lib/block-image-url"
+import {
+  IconBrain,
+  IconGitMerge,
+  IconLightning,
+  IconMagnifier,
+  IconPlug,
+  IconShield,
+} from "../components/feature-icons"
 
-export type FeatureLayout = "wide" | "narrow"
-
-export type Feature = {
+export type FeatureDefinition = {
   id: string
-  layout: FeatureLayout
-  imageSrc?: string
-  icon: LucideIcon
   title: string
   description: string
+  index: number
+  Icon: ComponentType<SVGProps<SVGSVGElement>>
 }
 
-export const features: Feature[] = [
+export const featureSectionItems: FeatureDefinition[] = [
   {
-    id: "next-level-home-ai",
-    layout: "wide",
-    imageSrc: blockImageUrl(
-      "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_top.png",
-    ),
-    icon: BrainCog,
-    title: "Learns how your home runs",
+    id: "smart-automation",
+    title: "Smart automation",
     description:
-      "It picks up your rhythms and rolls with you when life gets busy or plans change.",
+      "Stop wasting time on tasks your tools should be handling. We help you automate the boring parts so your team can spend their energy on work that actually makes a difference.",
+    index: 1,
+    Icon: IconBrain,
   },
   {
-    id: "effortless-daily-automation",
-    layout: "narrow",
-    icon: Cog,
-    title: "Take back your evenings",
+    id: "deep-analytics",
+    title: "Deep analytics",
     description:
-      "Hand off the repetitive stuff so you're not stuck on the same tasks every night.",
+      "Gut feeling is great, but data is better. Get a clear picture of what is driving results, where things are slipping, and what your team should be paying attention to right now.",
+    index: 2,
+    Icon: IconMagnifier,
   },
   {
-    id: "smart-family-insights",
-    layout: "narrow",
-    icon: Activity,
-    title: "A calmer read on home life",
+    id: "team-collaboration",
+    title: "Team collaboration",
     description:
-      "Small, clear updates on how everyone is doing, without you playing detective.",
+      "Nobody likes being out of the loop. Keep your whole team aligned with shared workflows, real-time updates, and one place where decisions actually get made.",
+    index: 3,
+    Icon: IconGitMerge,
   },
   {
-    id: "ai-powered-home-support",
-    layout: "wide",
-    imageSrc: blockImageUrl(
-      "https://uiception.com/images/blocks/feature-section-v1/ggi_feature-section-v1_btm.png",
-    ),
-    icon: MessageCircle,
-    title: "Someone to ask, anytime",
+    id: "instant-performance",
+    title: "Instant performance",
     description:
-      "Patient, upbeat help when you need an answer, a nudge, or a little company.",
+      "Slow software costs you users. Everything we build is optimized to be fast from day one, and it stays that way as your traffic grows and your product gets more complex.",
+    index: 4,
+    Icon: IconLightning,
+  },
+  {
+    id: "100-integrations",
+    title: "100+ integrations",
+    description:
+      "Your team already has tools they love. We connect with over a hundred of them so you can plug us in without changing how you work or asking engineering for a favor.",
+    index: 5,
+    Icon: IconPlug,
+  },
+  {
+    id: "secure-by-default",
+    title: "Secure by default",
+    description:
+      "Security should not be an afterthought. We built it into the foundation so you are covered from the start, whether you are a two-person startup or a team of thousands.",
+    index: 6,
+    Icon: IconShield,
   },
 ]

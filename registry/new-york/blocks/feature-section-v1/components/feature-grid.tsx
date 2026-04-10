@@ -1,25 +1,24 @@
-"use client"
+import { featureSectionItems } from "../lib/features"
 
-import { useFeatureAnimation } from "../hooks/use-feature-animation"
-import { features } from "../lib/features"
-import FeatureCard from "./feature-card"
+import "../styles/feature-grid.css"
 
 export default function FeatureGrid() {
-  const { ref, isVisible } = useFeatureAnimation()
-
   return (
-    <div
-      ref={ref}
-      className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3 lg:grid-rows-2"
-    >
-      {features.map((feature, i) => (
-        <FeatureCard
-          key={feature.id}
-          feature={feature}
-          index={i}
-          isVisible={isVisible}
-        />
+    <ul className="fsv1-grid">
+      {featureSectionItems.map(({ id, title, description, index, Icon }) => (
+        <li key={id} className="fsv1-cell">
+          <div className="fsv1-card">
+            <div className="fsv1-card-front">
+              <Icon className="fsv1-card-icon" />
+              <p className="fsv1-card-title">{title}</p>
+            </div>
+            <div className="fsv1-card-back">
+              <p className="fsv1-card-desc">{description}</p>
+            </div>
+          </div>
+          <p className="fsv1-index">[{index.toString().padStart(2, "0")}]</p>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

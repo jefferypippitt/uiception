@@ -14,7 +14,10 @@ export default function Home() {
                         <Badge asChild variant='secondary'>
                             <Link href='/changelog' className='inline-flex items-center gap-1'>
                                 What&apos;s New
-                                <ArrowRight className='size-4' />
+                                <ArrowRight
+                                    className='size-4 shrink-0 transition-transform duration-200 ease-out motion-safe:group-hover/badge:translate-x-0.5'
+                                    aria-hidden
+                                />
                             </Link>
                         </Badge>
                     </section>
