@@ -45,6 +45,18 @@ function parseDate(date: string) {
   return new Date(0)
 }
 
+function formatDateDisplay(dateStr: string): string {
+  // Parse YYYY-MM-DD as UTC to avoid timezone-shift issues
+  const [year, month, day] = dateStr.split("-").map(Number)
+  const d = new Date(Date.UTC(year, month - 1, day))
+  return d.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+}
+
 function formatItemLabel(name: string) {
   return name
     .split("-")
@@ -117,7 +129,7 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
         summary: frontmatter.summary,
         description: frontmatter.description,
         date: dateStr,
-        dateDisplay: dateStr,
+        dateDisplay: formatDateDisplay(dateStr),
         items: normalizeItems(frontmatter.items),
         body: Body,
       } satisfies ChangelogEntry

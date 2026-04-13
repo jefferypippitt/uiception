@@ -4,6 +4,7 @@ import { ArrowUpRightIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { getChangelogEntries, type ChangelogEntry } from "@/lib/changelog"
 import { ChangelogBadgeLink } from "./badge-link"
+import { ChangelogList } from "./changelog-list"
 
 export const metadata: Metadata = {
   title: "Changelog",
@@ -31,29 +32,30 @@ export default async function ChangelogPage() {
           <p className="mt-2 text-muted-foreground">Latest updates and announcements.</p>
         </div>
 
-        <div>
-          {entries.length === 0 && (
-            <p className="text-sm text-muted-foreground">
-              No changelog entries yet. Add one in <code>content/changelog</code>.
-            </p>
-          )}
-
-          <div className="space-y-0">
+        {entries.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            No changelog entries yet. Add one in <code>content/changelog</code>.
+          </p>
+        ) : (
+          <ChangelogList>
             {entries.map((entry: ChangelogEntry) => (
               <div
                 key={`${entry.date}-${entry.title}`}
-                className="pb-12 last:pb-0"
+                id={`entry-${entry.date}`}
+                className="cl-row flex flex-col md:flex-row md:gap-12 pb-12 last:pb-0"
               >
-                {/* Date */}
-                <time
-                  dateTime={entry.date}
-                  className="font-mono mb-3 text-sm block"
-                >
-                  {entry.dateDisplay}
-                </time>
+                {/* Left — sticky date */}
+                <div className="w-full md:w-36 shrink-0 mb-3 md:mb-0">
+                  <time
+                    dateTime={entry.date}
+                    className="cl-date sticky top-20 block font-mono text-sm text-muted-foreground"
+                  >
+                    {entry.dateDisplay}
+                  </time>
+                </div>
 
-                {/* Entry card */}
-                <div className="rounded-none border p-5 shadow-none">
+                {/* Right — entry card */}
+                <div className="cl-card flex-1 min-w-0 rounded-none border p-5 shadow-none">
                   <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                     {entry.title}
                   </h2>
@@ -102,8 +104,9 @@ export default async function ChangelogPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </ChangelogList>
+        )}
+
       </div>
     </div>
   )
