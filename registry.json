@@ -1177,6 +1177,130 @@
       ]
     },
     {
+      "name": "feature-section-v2",
+      "type": "registry:block",
+      "title": "Feature Section v2",
+      "description": "Interactive two-panel feature showcase with a numbered nav list on the left and an animated detail card on the right.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/feature-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/feature-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/feature-showcase.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/feature-showcase.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v2/lib/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/feature-section-v2.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/feature-section-v2.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/workflow-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/workflow-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/analytics-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/analytics-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/access-control-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/access-control-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/integrations-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/integrations-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-fsv2-illustration-active.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v2/hooks/use-fsv2-illustration-active.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-workflow-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v2/hooks/use-workflow-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-analytics-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v2/hooks/use-analytics-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-access-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v2/hooks/use-access-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-integrations-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v2/hooks/use-integrations-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/fsv2-illustrations.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/fsv2-illustrations.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/workflow-illustration.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/workflow-illustration.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/analytics-illustration.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/analytics-illustration.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/access-control-illustration.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/access-control-illustration.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/styles/integrations-illustration.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v2/styles/integrations-illustration.css"
+        },
+        {
+          "path": "components/ui/svgs/githubDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/githubDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/vercelDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/openaiDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/openaiDark.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-section-v4",
       "type": "registry:block",
       "title": "Hero Section v4",
@@ -1234,6 +1358,52 @@
       ]
     },
     {
+      "name": "hero-section-v5",
+      "type": "registry:block",
+      "title": "Hero Section v5",
+      "description": "Centered hero with headline, description, CTA, and an embedded simple chatbot prompt card with animated typing placeholder.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/hero-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v5/hero-section-v5.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/components/simple-chatbot.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v5/components/simple-chatbot.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/components/prompt-input.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v5/components/prompt-input.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/hooks/use-placeholder-loop.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v5/hooks/use-placeholder-loop.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v5/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v5/styles/simple-chatbot.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v5/styles/simple-chatbot.css"
+        }
+      ]
+    },
+    {
       "name": "stats-section-v1",
       "type": "registry:block",
       "title": "Stats Section v1",
@@ -1249,6 +1419,91 @@
           "path": "registry/new-york/blocks/stats-section-v1/stats-section-v1.tsx",
           "type": "registry:component",
           "target": "app/stats-section-v1/stats-section-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-section-v2",
+      "type": "registry:block",
+      "title": "Stats Section v2",
+      "description": "Live npm download stats for 6 infra brands — Supabase, Convex, Vercel, Neon, Upstash, Turso — with a combobox-driven trend chart and brand colors.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "chart",
+        "combobox"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/stats-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/stats-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/stats-section-v2/stats-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/components/downloads-panel.tsx",
+          "type": "registry:component",
+          "target": "app/stats-section-v2/components/downloads-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/components/stat-cell.tsx",
+          "type": "registry:component",
+          "target": "app/stats-section-v2/components/stat-cell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/lib/series.ts",
+          "type": "registry:lib",
+          "target": "app/stats-section-v2/lib/series.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/lib/api.ts",
+          "type": "registry:lib",
+          "target": "app/stats-section-v2/lib/api.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v2/hooks/use-count-up.ts",
+          "type": "registry:hook",
+          "target": "app/stats-section-v2/hooks/use-count-up.ts"
+        },
+        {
+          "path": "components/ui/svgs/nextjsIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nextjsIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vite.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/vite.tsx"
+        },
+        {
+          "path": "components/ui/svgs/laravel.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/laravel.tsx"
+        },
+        {
+          "path": "components/ui/svgs/astroIconLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/astroIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/astroIconDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/astroIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/nuxt.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/nuxt.tsx"
+        },
+        {
+          "path": "components/ui/svgs/svelte.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/svelte.tsx"
         }
       ]
     },

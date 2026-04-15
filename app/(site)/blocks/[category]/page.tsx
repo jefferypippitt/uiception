@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { IconChevronLeft } from "@tabler/icons-react"
 import { Link } from "next-view-transitions"
 import { notFound } from "next/navigation"
@@ -14,6 +15,16 @@ type CategoryPageProps = {
 
 export function generateStaticParams() {
   return blockCategories.map((category) => ({ category: category.id }))
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { category } = await params
+  const categoryData = blockCategories.find((item) => item.id === category)
+  if (!categoryData) return {}
+  return {
+    title: categoryData.title,
+    description: categoryData.description,
+  }
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {

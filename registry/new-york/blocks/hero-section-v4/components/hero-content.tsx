@@ -1,11 +1,18 @@
+import { IBM_Plex_Serif } from "next/font/google"
+
 import CtaButtons from "./cta-buttons"
+
+const ibmPlexSerif = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+})
 
 const TITLE_WORDS = ["Turn", "AI", "from", "noise", "into", "results."]
 
 export default function HeroContent() {
   return (
     <div className="flex flex-col items-center gap-6 text-center">
-      <h1 className="font-serif text-3xl font-medium tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]">
+      <h1 className={`${ibmPlexSerif.className} text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]`}>
         {TITLE_WORDS.map((word, i) => (
           <span
             key={i}

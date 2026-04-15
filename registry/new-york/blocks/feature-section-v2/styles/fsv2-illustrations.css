@@ -1,0 +1,70 @@
+/* feature-section-v2 illustrations — compact panel motion (see cursor-terminal block) */
+
+@keyframes fsv2-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fsv2-enter {
+  animation: fsv2-fade-up 0.16s ease-out both;
+}
+
+@keyframes fsv2-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 3px transparent;
+  }
+}
+
+.fsv2-live-pulse {
+  animation: fsv2-live-pulse 1.45s ease-in-out infinite;
+}
+
+@keyframes fsv2-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.fsv2-shimmer-bar {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--muted) 70%, transparent) 0%,
+    color-mix(in oklab, var(--primary) 25%, transparent) 50%,
+    color-mix(in oklab, var(--muted) 70%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: fsv2-shimmer 2.2s ease-in-out infinite;
+}
+
+/* Status ping — small glyphs only */
+@keyframes fsv2-pulse-dot-kf {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.fsv2-pulse-dot {
+  animation: fsv2-pulse-dot-kf 1.15s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fsv2-pulse-dot {
+    animation: none;
+    opacity: 1;
+  }
+}

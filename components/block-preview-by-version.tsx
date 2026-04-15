@@ -12,6 +12,7 @@ import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/footer
 import ChatBot from "@/registry/new-york/blocks/chat-bot/chat-bot"
 import SimpleChatbot from "@/registry/new-york/blocks/simple-chatbot/simple-chatbot"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/stats-section-v1"
+import StatsSectionV2 from "@/registry/new-york/blocks/stats-section-v2/stats-section-v2"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/hero-section-v4"
 import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/how-it-works-section-v1"
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/how-it-works-section-v2"
@@ -19,6 +20,8 @@ import CodeBlock from "@/registry/new-york/blocks/code-block/code-block"
 import BrandsSectionV3 from "@/registry/new-york/blocks/brands-section-v3/brands-section-v3"
 import BrandsSectionV4 from "@/registry/new-york/blocks/brands-section-v4/brands-section-v4"
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/feature-section-v1"
+import FeatureSectionV2 from "@/registry/new-york/blocks/feature-section-v2/feature-section-v2"
+import HeroSectionV5 from "@/registry/new-york/blocks/hero-section-v5/hero-section-v5"
 
 
 
@@ -40,6 +43,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "chat-bot": ChatBot,
   "simple-chatbot": SimpleChatbot,
   "stats-section-v1": StatsSectionV1,
+  "stats-section-v2": StatsSectionV2,
   "hero-section-v4": HeroSectionV4,
   "how-it-works-section-v1": HowItWorksSectionV1,
   "how-it-works-section-v2": HowItWorksSectionV2,
@@ -47,6 +51,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v3": BrandsSectionV3,
   "brands-section-v4": BrandsSectionV4,
   "feature-section-v1": FeatureSectionV1,
+  "feature-section-v2": FeatureSectionV2,
+  "hero-section-v5": HeroSectionV5,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

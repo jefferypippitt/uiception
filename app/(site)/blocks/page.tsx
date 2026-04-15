@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import { Link } from "next-view-transitions"
 
 import { blockCategories, type BlockCategoryId } from "@/lib/blocks"
+
+export const metadata: Metadata = {
+  title: "Blocks",
+  description: "Browse all UI block categories — hero sections, navbars, features, pricing, and more. Copy-paste ready for Next.js and shadcn.",
+}
 
 const sk = "animate-pulse rounded bg-foreground/10"
 

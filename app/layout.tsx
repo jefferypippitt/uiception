@@ -8,7 +8,7 @@ import {
   GeistPixelTriangle,
   GeistPixelLine,
 } from "geist/font/pixel"
-import { IBM_Plex_Serif } from "next/font/google"
+import { IBM_Plex_Serif, Instrument_Serif } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
@@ -21,6 +21,13 @@ const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-ibm-plex-serif",
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
 })
 
 export const metadata: Metadata = {
@@ -100,6 +107,7 @@ export default function RootLayout({
           GeistPixelTriangle.variable,
           GeistPixelLine.variable,
           ibmPlexSerif.variable,
+          instrumentSerif.variable,
           "font-sans",
         )}
       >
