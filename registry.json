@@ -1180,8 +1180,15 @@
       "name": "feature-section-v2",
       "type": "registry:block",
       "title": "Feature Section v2",
-      "description": "Interactive two-panel feature showcase with a numbered nav list on the left and an animated detail card on the right.",
-      "registryDependencies": [],
+      "description": "Four-card feature grid — terminal run log, live analytics dashboard with an area chart, invite-teammate form with a walking cursor, and a ⌘K command palette with brand marks. Each card opens with a real top bar and follows the illustrations skill system.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "badge",
+        "chart",
+        "skeleton"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/feature-section-v2/page.tsx",
@@ -1207,6 +1214,11 @@
           "path": "registry/new-york/blocks/feature-section-v2/styles/feature-section-v2.css",
           "type": "registry:file",
           "target": "app/feature-section-v2/styles/feature-section-v2.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/components/cursor.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/components/cursor.tsx"
         },
         {
           "path": "registry/new-york/blocks/feature-section-v2/components/workflow-illustration.tsx",
@@ -1254,49 +1266,39 @@
           "target": "app/feature-section-v2/hooks/use-integrations-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/fsv2-illustrations.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v2/styles/fsv2-illustrations.css"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/workflow-illustration.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v2/styles/workflow-illustration.css"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/analytics-illustration.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v2/styles/analytics-illustration.css"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/access-control-illustration.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v2/styles/access-control-illustration.css"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/integrations-illustration.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v2/styles/integrations-illustration.css"
-        },
-        {
           "path": "components/ui/svgs/githubDark.tsx",
-          "type": "registry:component",
+          "type": "registry:ui",
           "target": "components/ui/svgs/githubDark.tsx"
         },
         {
-          "path": "components/ui/svgs/vercelDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/vercelDark.tsx"
+          "path": "components/ui/svgs/githubLight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/githubLight.tsx"
         },
         {
-          "path": "components/ui/svgs/supabase.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/supabase.tsx"
+          "path": "components/ui/svgs/openai.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/openai.tsx"
         },
         {
           "path": "components/ui/svgs/openaiDark.tsx",
-          "type": "registry:component",
+          "type": "registry:ui",
           "target": "components/ui/svgs/openaiDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/vercel.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelDark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/vercelDark.tsx"
         }
       ]
     },
@@ -1544,6 +1546,127 @@
           "path": "registry/new-york/blocks/code-block/styles/code-block.css",
           "type": "registry:file",
           "target": "app/code-block/styles/code-block.css"
+        }
+      ]
+    },
+    {
+      "name": "changelog-section-v1",
+      "type": "registry:block",
+      "title": "Changelog Section v1",
+      "description": "Three-column changelog section with monospace dates, entry titles, and excerpts, plus a 'See all releases' link.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/changelog-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/changelog-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v1/changelog-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v1/changelog-section-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v3",
+      "type": "registry:block",
+      "title": "Feature Section v3",
+      "description": "Roomy headline with numbered tags on key phrases, plus three looping mini UIs for funnel health, friction, and experiment progress.",
+      "dependencies": [
+        "geist@^1.7.0",
+        "recharts"
+      ],
+      "registryDependencies": [
+        "badge",
+        "card",
+        "chart",
+        "label",
+        "progress",
+        "separator",
+        "skeleton",
+        "table"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/feature-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/feature-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/components/feature-showcase.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/feature-showcase.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/components/cursor.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/cursor.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/components/funnel-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/funnel-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/components/dropoff-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/dropoff-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/components/experiment-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/experiment-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-fsv3-illustration-active.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v3/hooks/use-fsv3-illustration-active.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-funnel-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v3/hooks/use-funnel-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-dropoff-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v3/hooks/use-dropoff-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-experiment-animation.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v3/hooks/use-experiment-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v3/lib/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/styles/feature-section-v3.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v3/styles/feature-section-v3.css"
+        },
+        {
+          "path": "components/ui/svgs/chrome.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/chrome.tsx"
+        },
+        {
+          "path": "components/ui/svgs/safari.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/safari.tsx"
         }
       ]
     }

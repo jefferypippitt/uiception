@@ -14,6 +14,7 @@ import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import Providers from "@/components/providers"
 import { ViewTransitions } from "next-view-transitions"
+import { Analytics } from "@vercel/analytics/next"
 
 const ogImagePath = new URL(siteConfig.ogImage).pathname
 
@@ -113,6 +114,7 @@ export default function RootLayout({
       >
         <body>
           <Providers>{children}</Providers>
+          <Analytics />
         </body>
       </html>
     </ViewTransitions>

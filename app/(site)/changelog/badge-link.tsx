@@ -10,6 +10,10 @@ interface ChangelogBadgeLinkProps {
   children: ReactNode
 }
 
+type StartViewTransition = (callback?: () => void | Promise<void>) => {
+  finished: Promise<void>
+}
+
 export function ChangelogBadgeLink({ href, className, children }: ChangelogBadgeLinkProps) {
   const router = useRouter()
   const isExternal = /^https?:\/\//.test(href)
@@ -19,12 +23,13 @@ export function ChangelogBadgeLink({ href, className, children }: ChangelogBadge
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
       return
     }
-    if (isExternal || !("startViewTransition" in document)) return
+    const startViewTransition = (document as any).startViewTransition?.bind(document) as StartViewTransition | undefined
+    if (isExternal || typeof startViewTransition !== "function") return
 
     e.preventDefault()
     const html = document.documentElement
     html.classList.add("badge-nav")
-    const transition = document.startViewTransition(() => {
+    const transition = startViewTransition(() => {
       router.push(href)
     })
     transition.finished.finally(() => html.classList.remove("badge-nav"))

@@ -1,7 +1,6 @@
 import FeatureShowcase from "./components/feature-showcase"
 
 import "./styles/feature-section-v2.css"
-import "./styles/fsv2-illustrations.css"
 
 export default function FeatureSectionV2() {
   return (
@@ -12,8 +11,8 @@ export default function FeatureSectionV2() {
             Everything your team needs
           </h2>
           <p className="max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground">
-            Help your team ship faster, stay in sync, and grow with less
-            busywork standing in the way.
+            See what is happening in real time, let automations handle the routine, and connect
+            the tools you already use without any extra setup.
           </p>
         </div>
         <FeatureShowcase />

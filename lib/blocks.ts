@@ -15,6 +15,7 @@ export type BlockCategoryId =
   | "faq"
   | "stats"
   | "footer"
+  | "changelog"
 
 export type BlockVersion = {
   id: string
@@ -109,6 +110,11 @@ export const blockCategories: BlockCategory[] = [
         id: "feature-section-v2",
         title: "Feature Section v2",
         registryPath: "registry/new-york/blocks/feature-section-v2",
+      },
+      {
+        id: "feature-section-v3",
+        title: "Feature Section v3",
+        registryPath: "registry/new-york/blocks/feature-section-v3",
       },
     ],
   },
@@ -251,6 +257,18 @@ export const blockCategories: BlockCategory[] = [
         id: "footer-section-v1",
         title: "Footer Section v1",
         registryPath: "registry/new-york/blocks/footer-section-v1",
+      },
+    ],
+  },
+  {
+    id: "changelog",
+    title: "Changelog",
+    description: "Release notes and update sections with dated entries.",
+    versions: [
+      {
+        id: "changelog-section-v1",
+        title: "Changelog Section v1",
+        registryPath: "registry/new-york/blocks/changelog-section-v1",
       },
     ],
   },

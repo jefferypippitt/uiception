@@ -1,141 +1,136 @@
 "use client"
 
-import { useEffect, useReducer, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
-export type SyncStatus = "connected" | "syncing"
+/**
+ * Integrations animation — drives a `Connect an integration…` command palette for card 04.
+ *
+ * Story (one loop):
+ *   setup     → palette open with all 4 rows pending; cursor idle at left
+ *   acting    → cursor moves down through rows (GitHub → Vercel → Supabase),
+ *               landing on the Supabase row; typed query ("supa") fills the search;
+ *               cursor press at the end highlights the Connect chip
+ *   result    → Supabase row shows the purple `Connect` chip + chevron
+ *   holding   → resolved state holds
+ *   resetting → soft reset
+ */
 
-export interface Integration {
-  id:     string
-  name:   string
-  metric: string
-  base:   number
+export type IntegrationsPhase =
+  | "setup"
+  | "acting"
+  | "result"
+  | "holding"
+  | "resetting"
+
+const TIMING: Record<IntegrationsPhase, number> = {
+  setup: 500,
+  acting: 2200,
+  result: 300,
+  holding: 3000,
+  resetting: 320,
 }
 
-export const INTEGRATIONS: Integration[] = [
-  { id: "github",   name: "GitHub",   metric: "commits",   base: 847  },
-  { id: "vercel",   name: "Vercel",   metric: "deploys",   base: 23   },
-  { id: "supabase", name: "Supabase", metric: "queries",   base: 5200 },
-  { id: "openai",   name: "OpenAI",   metric: "tokens",    base: 12400},
+export type Integration = {
+  id: "github" | "vercel" | "supabase" | "openai"
+  name: string
+  kind: string
+}
+
+/** Row order matches vertical layout — cursor percentages target each row's center */
+export const INTEGRATIONS: readonly Integration[] = [
+  { id: "github", name: "GitHub", kind: "Code" },
+  { id: "vercel", name: "Vercel", kind: "Deploy" },
+  { id: "supabase", name: "Supabase", kind: "Database" },
+  { id: "openai", name: "OpenAI", kind: "AI" },
 ]
 
-const HISTORY_LEN = 24
+/** The target row the cursor lands on — animating in on it creates the story */
+export const INTEGRATIONS_TARGET_IDX = 2
 
-/** Seed a believable ramp into the current counter so the first frame is not flat */
-function seedHistory(base: number): number[] {
-  const spread = Math.max(6, Math.round(base * 0.035))
-  const start  = Math.max(0, base - spread)
-  return Array.from({ length: HISTORY_LEN }, (_, i) =>
-    Math.round(start + ((base - start) * i) / (HISTORY_LEN - 1)),
-  )
-}
-
-type MetricsState = {
-  metrics:       number[]
-  metricHistory: number[][]
-}
-
-function initialMetricsState(): MetricsState {
-  return {
-    metrics:       INTEGRATIONS.map((i) => i.base),
-    metricHistory: INTEGRATIONS.map((i) => seedHistory(i.base)),
-  }
-}
-
-function tickMetrics(state: MetricsState): MetricsState {
-  const next = state.metrics.map((m, i) => {
-    if (i === 0) return m + Math.floor(Math.random() * 3) + 1
-    if (i === 1) return m + (Math.random() < 0.35 ? 1 : 0)
-    if (i === 2) return m + Math.floor(Math.random() * 150) + 50
-    if (i === 3) return m + Math.floor(Math.random() * 400) + 100
-    return m
-  })
-  const metricHistory = state.metricHistory.map((row, i) => [...row.slice(1), next[i]!])
-  return { metrics: next, metricHistory }
-}
-
-function metricsReducer(state: MetricsState, _action: "tick"): MetricsState {
-  return tickMetrics(state)
-}
-
-const METRIC_INTERVAL_MS = 1600
-const FLASH_MS = 550
-
-/** Rotate through rows; each sync is a short pulse then idle before the next row */
-const SYNC_ORDER = [2, 3, 0, 1] as const
-
-// ─────────────────────────────────────────────────────────────────────────────
+export const INTEGRATIONS_QUERY = "supa"
 
 export function useIntegrationsAnimation(active: boolean) {
-  const [{ metrics, metricHistory }, dispatchTick] = useReducer(
-    metricsReducer,
-    undefined,
-    initialMetricsState,
-  )
-
-  const [statuses, setStatuses] = useState<SyncStatus[]>(() =>
-    INTEGRATIONS.map(() => "connected"),
-  )
-  const [flashIdx, setFlashIdx] = useState<number | null>(null)
-
-  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const turnRef = useRef(0)
-
-  useEffect(() => {
-    if (!active) return
-    const t = setInterval(() => dispatchTick("tick"), METRIC_INTERVAL_MS)
-    return () => clearInterval(t)
-  }, [active])
+  const [phase, setPhase] = useState<IntegrationsPhase>("setup")
+  const [hoverIdx, setHoverIdx] = useState(-1)
+  const [typed, setTyped] = useState(0)
+  const [pressed, setPressed] = useState(false)
 
   useEffect(() => {
     if (!active) return
 
-    let cancelled = false
-    const pending: ReturnType<typeof setTimeout>[] = []
-
-    const clearPending = () => {
-      for (const id of pending) clearTimeout(id)
-      pending.length = 0
+    const next: Record<IntegrationsPhase, IntegrationsPhase> = {
+      setup: "acting",
+      acting: "result",
+      result: "holding",
+      holding: "resetting",
+      resetting: "setup",
     }
 
-    const scheduleSyncCycle = () => {
-      if (cancelled) return
+    const t = setTimeout(() => setPhase(next[phase]), TIMING[phase])
+    return () => clearTimeout(t)
+  }, [active, phase])
 
-      const idx = SYNC_ORDER[turnRef.current % SYNC_ORDER.length]!
-      turnRef.current++
+  useEffect(() => {
+    if (!active) return
 
-      setStatuses((prev) => prev.map((_, i) => (i === idx ? "syncing" : "connected")))
-      setFlashIdx(idx)
-      if (flashTimerRef.current) clearTimeout(flashTimerRef.current)
-      flashTimerRef.current = setTimeout(() => setFlashIdx(null), FLASH_MS)
-
-      const pulseMs = 680 + Math.floor(Math.random() * 420)
-      const gapMs   = 2000 + Math.floor(Math.random() * 1600)
-
-      pending.push(
-        setTimeout(() => {
-          if (cancelled) return
-          setStatuses((prev) => prev.map(() => "connected"))
-        }, pulseMs),
-      )
-
-      pending.push(
-        setTimeout(() => {
-          if (cancelled) return
-          clearPending()
-          scheduleSyncCycle()
-        }, pulseMs + gapMs),
-      )
+    if (phase === "setup" || phase === "resetting") {
+      setHoverIdx(-1)
+      setTyped(0)
+      setPressed(false)
+      return
     }
 
-    scheduleSyncCycle()
+    if (phase === "result" || phase === "holding") {
+      setHoverIdx(INTEGRATIONS_TARGET_IDX)
+      setTyped(INTEGRATIONS_QUERY.length)
+      setPressed(false)
+      return
+    }
+
+    // acting — 3 hover ticks ending on the target row, then a press
+    const stops = [0, 1, INTEGRATIONS_TARGET_IDX]
+    const stepMs = TIMING.acting / (stops.length + 1)
+    const timers: Array<ReturnType<typeof setTimeout>> = []
+
+    stops.forEach((s, i) => {
+      timers.push(
+        setTimeout(() => setHoverIdx(s), i * stepMs),
+      )
+    })
+    // Press feedback just before phase transitions to result
+    timers.push(
+      setTimeout(() => setPressed(true), TIMING.acting - 200),
+    )
+    timers.push(setTimeout(() => setPressed(false), TIMING.acting - 40))
 
     return () => {
-      cancelled = true
-      clearPending()
-      if (flashTimerRef.current) clearTimeout(flashTimerRef.current)
-      flashTimerRef.current = null
+      timers.forEach(clearTimeout)
     }
-  }, [active])
+  }, [active, phase])
 
-  return { integrations: INTEGRATIONS, metrics, metricHistory, statuses, flashIdx }
+  useEffect(() => {
+    if (!active) return
+    if (phase !== "acting") return
+    const total = INTEGRATIONS_QUERY.length
+    const charMs = 110
+    let i = 0
+    setTyped(0)
+    const iv = setInterval(() => {
+      i++
+      setTyped(i)
+      if (i >= total) clearInterval(iv)
+    }, charMs)
+    return () => clearInterval(iv)
+  }, [active, phase])
+
+  return {
+    phase,
+    hoverIdx,
+    typed,
+    pressed,
+    query: INTEGRATIONS_QUERY.slice(0, typed),
+    isActing: phase === "acting",
+    isResult: phase === "result" || phase === "holding",
+    isHolding: phase === "holding",
+  }
 }

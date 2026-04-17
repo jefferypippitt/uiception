@@ -1,102 +1,118 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
-/** Points on the line = active users in the window; headline = last point */
-const SERIES_LEN = 22
-const TICK_MS = 1000
-const FLASH_MS = 400
+export type AnalyticsPhase =
+  | "setup"
+  | "acting"
+  | "result"
+  | "holding"
+  | "resetting"
 
-/** ~50k band with room for visible swings */
-const USER_MIN = 43_000
-const USER_MAX = 58_000
+export type AnalyticsView = "7d" | "30d"
 
-function clamp(n: number, lo: number, hi: number) {
-  return Math.min(hi, Math.max(lo, n))
+const TIMING: Record<AnalyticsPhase, number> = {
+  setup:     500,
+  acting:    1400,
+  result:    300,
+  holding:   3200,
+  resetting: 320,
 }
 
-function formatCount(n: number): string {
-  return Math.round(n).toLocaleString("en-US")
+export type AnalyticsViewConfig = {
+  label:    string
+  series:   readonly { day: string; v: number }[]
+  target:   number
+  trend:    string
+  color:    string
 }
 
-/** Start mid-40s → low-50s so the first frame already shows movement */
-function seedSeries(): number[] {
-  const lo = 47_800
-  const hi = 51_200
-  return Array.from({ length: SERIES_LEN }, (_, i) =>
-    Math.round(lo + ((hi - lo) * i) / (SERIES_LEN - 1)),
-  )
+export const ANALYTICS_VIEWS: Record<AnalyticsView, AnalyticsViewConfig> = {
+  "7d": {
+    label:  "Last 7d",
+    target: 12_482,
+    trend:  "+18%",
+    color:  "var(--chart-1)",
+    series: [
+      { day: "Mon", v: 8_420  },
+      { day: "Tue", v: 9_140  },
+      { day: "Wed", v: 8_860  },
+      { day: "Thu", v: 10_380 },
+      { day: "Fri", v: 9_820  },
+      { day: "Sat", v: 11_070 },
+      { day: "Sun", v: 12_482 },
+    ],
+  },
+  "30d": {
+    label:  "Last 30d",
+    target: 54_180,
+    trend:  "+34%",
+    color:  "oklch(72.3% 0.219 149.579)",
+    series: [
+      { day: "Mon", v: 32_410 },
+      { day: "Tue", v: 36_820 },
+      { day: "Wed", v: 39_150 },
+      { day: "Thu", v: 44_780 },
+      { day: "Fri", v: 46_200 },
+      { day: "Sat", v: 50_940 },
+      { day: "Sun", v: 54_180 },
+    ],
+  },
 }
 
-function eventsPerMinuteFromUsers(activeUsers: number): number {
-  return Math.round(clamp(activeUsers * 0.38, 14_200, 25_800))
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
+export const ANALYTICS_SERIES = ANALYTICS_VIEWS["7d"].series
 
 export function useAnalyticsAnimation(active: boolean) {
-  const [series, setSeries] = useState(seedSeries)
-  const [flashUser, setFlashUser] = useState(false)
+  const [phase, setPhase] = useState<AnalyticsPhase>("setup")
+  const [view, setView]   = useState<AnalyticsView>("7d")
+  const [users, setUsers] = useState(ANALYTICS_VIEWS["7d"].target)
 
-  const prevLatestRef = useRef(series[series.length - 1]!)
-  const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const latest = series[series.length - 1]!
-  const windowAvg =
-    series.reduce((acc, v) => acc + v, 0) / series.length
-  /** Green when live count is at/above the dashed window average, red when below */
-  const trend: "up" | "down" = latest >= windowAvg ? "up" : "down"
-
-  const users = formatCount(latest)
-  const events = formatCount(eventsPerMinuteFromUsers(latest))
+  const config = ANALYTICS_VIEWS[view]
 
   useEffect(() => {
     if (!active) return
 
-    const id = setInterval(() => {
-      setSeries((prev) => {
-        const last = prev[prev.length - 1]!
-        // Steep slopes + frequent spikes (independent rolls so some ticks stack)
-        let delta = Math.round(-1_050 + Math.random() * 2_100)
-        if (Math.random() < 0.32) {
-          delta += Math.round((Math.random() - 0.4) * 10_000)
-        }
-        if (Math.random() < 0.18) {
-          delta += Math.round((Math.random() - 0.5) * 6_800)
-        }
-        if (Math.random() < 0.08) {
-          delta += Math.round((Math.random() - 0.45) * 14_000)
-        }
-        const next = clamp(last + delta, USER_MIN, USER_MAX)
-        return [...prev.slice(1), next]
-      })
-    }, TICK_MS)
+    const next: Record<AnalyticsPhase, AnalyticsPhase> = {
+      setup: "acting", acting: "result", result: "holding",
+      holding: "resetting", resetting: "setup",
+    }
 
-    return () => clearInterval(id)
-  }, [active])
+    const nextPhase = next[phase]
+    const t = setTimeout(() => {
+      if (nextPhase === "acting") setView(v => v === "7d" ? "30d" : "7d")
+      setPhase(nextPhase)
+    }, TIMING[phase])
+
+    return () => clearTimeout(t)
+  }, [active, phase])
 
   useEffect(() => {
-    const l = series[series.length - 1]!
-    if (l > prevLatestRef.current) {
-      if (flashTimer.current) clearTimeout(flashTimer.current)
-      setFlashUser(true)
-      flashTimer.current = setTimeout(() => setFlashUser(false), FLASH_MS)
+    if (!active) return
+    if (phase === "setup" || phase === "resetting") return
+    if (phase === "result" || phase === "holding") {
+      setUsers(config.target)
+      return
     }
-    prevLatestRef.current = l
-  }, [series])
-
-  useEffect(
-    () => () => {
-      if (flashTimer.current) clearTimeout(flashTimer.current)
-    },
-    [],
-  )
+    const startedAt = performance.now()
+    const duration  = TIMING.acting
+    let raf = 0
+    const tick = (now: number) => {
+      const t      = Math.min(1, (now - startedAt) / duration)
+      const eased  = 1 - (1 - t) ** 3
+      setUsers(Math.round(eased * config.target))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [active, phase, view])
 
   return {
-    chartData: series,
+    phase,
+    view,
     users,
-    events,
-    flashUser,
-    trend,
+    config,
+    isActing:  phase === "acting",
+    isResult:  phase === "result" || phase === "holding",
+    isHolding: phase === "holding",
   }
 }

@@ -86,3 +86,26 @@
   min-height: calc(0.8125rem * 1.55 * 3);
 }
 
+/* ── Caret blink (type-on, per SKILL § 5 · Caret) ── */
+/* Used by access-control email field and integrations search input */
+
+@keyframes fsv2-caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.fsv2-caret {
+  animation: fsv2-caret-blink 1s steps(2) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fsv2-caret {
+    animation: none;
+  }
+}
+

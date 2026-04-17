@@ -277,7 +277,8 @@
 ::view-transition-group(title-cta),
 ::view-transition-group(title-faq),
 ::view-transition-group(title-stats),
-::view-transition-group(title-footer) {
+::view-transition-group(title-footer),
+::view-transition-group(title-changelog) {
   animation-duration: 0.4s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   overflow: visible;
@@ -298,7 +299,8 @@
 ::view-transition-image-pair(title-cta),
 ::view-transition-image-pair(title-faq),
 ::view-transition-image-pair(title-stats),
-::view-transition-image-pair(title-footer) {
+::view-transition-image-pair(title-footer),
+::view-transition-image-pair(title-changelog) {
   overflow: visible;
 }
 
@@ -317,7 +319,8 @@
 ::view-transition-old(title-cta),
 ::view-transition-old(title-faq),
 ::view-transition-old(title-stats),
-::view-transition-old(title-footer) {
+::view-transition-old(title-footer),
+::view-transition-old(title-changelog) {
   width: auto;
   height: auto;
   animation: vt-title-out 0.12s ease-in forwards;
@@ -338,7 +341,8 @@
 ::view-transition-new(title-cta),
 ::view-transition-new(title-faq),
 ::view-transition-new(title-stats),
-::view-transition-new(title-footer) {
+::view-transition-new(title-footer),
+::view-transition-new(title-changelog) {
   width: auto;
   height: auto;
   animation: vt-title-in 0.3s 0.1s ease-out both;

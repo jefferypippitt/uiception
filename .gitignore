@@ -35,6 +35,10 @@ pnpm-debug.log*
 # claude / cursor — local permission overrides (machine-specific)
 .claude/settings.local.json
 
+# illustration skills- testing not ready for production
+.claude/skills/illustrations/
+.agents/skills/illustrations/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

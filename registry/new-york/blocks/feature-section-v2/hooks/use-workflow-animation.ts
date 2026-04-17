@@ -1,85 +1,116 @@
 "use client"
 
-// Phase flow: idle → running (steps 0..N in sequence) → done → idle (loops)
-
 import { useEffect, useState } from "react"
 
-export type StepStatus = "pending" | "running" | "done"
+export type WorkflowPhase =
+  | "setup"
+  | "acting"
+  | "result"
+  | "holding"
+  | "resetting"
 
-export interface WorkflowStep {
-  id:       string
-  label:    string
-  detail:   string
-  badge:    string
-  duration: number   // ms the step stays "running"
+export type RetryState = "failed" | "retrying" | null
+
+const TIMING: Record<WorkflowPhase, number> = {
+  setup:     500,
+  acting:    3600,
+  result:    300,
+  holding:   3000,
+  resetting: 320,
 }
 
-type Phase = "idle" | "running" | "done"
+const STEP_MS   = 520
+const RETRY_IDX = 2
 
-// ─────────────────────────────────────────────────────────────────────────────
+export type WorkflowStep = {
+  id: string
+  label: string
+  ms: string
+  runColor: string
+  msColor: string
+}
 
-export const STEPS: WorkflowStep[] = [
-  { id: "signup",  label: "User Signed Up",  detail: "POST /hooks/auth/signup",      badge: "1ms",   duration: 850  },
-  { id: "account", label: "Account Created", detail: "workspace provisioned",        badge: "38ms",  duration: 700  },
-  { id: "email",   label: "Welcome Email",   detail: "via sendgrid  →  delivered",   badge: "94ms",  duration: 900  },
-  { id: "slack",   label: "Slack Notified",  detail: "channel  #new-customers",      badge: "210ms", duration: 750  },
-  { id: "trial",   label: "Trial Started",   detail: "14-day trial activated",       badge: "5ms",   duration: 650  },
+export const WORKFLOW_STEPS: readonly WorkflowStep[] = [
+  { id: "signup",    label: "User signed up",     ms: "61ms",  runColor: "text-sky-500",    msColor: "text-emerald-500" },
+  { id: "email",     label: "Verify email",        ms: "18ms",  runColor: "text-amber-500",  msColor: "text-emerald-500" },
+  { id: "workspace", label: "Provision workspace", ms: "820ms", runColor: "text-violet-500", msColor: "text-red-500"     },
+  { id: "welcome",   label: "Send welcome",        ms: "290ms", runColor: "text-rose-500",   msColor: "text-amber-500"   },
 ]
 
-const IDLE_MS = 900
-const DONE_MS = 2600
-
-// ─────────────────────────────────────────────────────────────────────────────
+export const RETRY_STEP_IDX = RETRY_IDX
 
 export function useWorkflowAnimation(active: boolean) {
-  const [phase,    setPhase]    = useState<Phase>("idle")
-  const [statuses, setStatuses] = useState<StepStatus[]>(STEPS.map(() => "pending"))
-  const [current,  setCurrent]  = useState(-1)
+  const [phase, setPhase]           = useState<WorkflowPhase>("setup")
+  const [lineIdx, setLineIdx]       = useState(0)
+  const [retryState, setRetryState] = useState<RetryState>(null)
 
-  const allDone = phase === "done"
-
-  // idle → start
   useEffect(() => {
-    if (!active || phase !== "idle") return
-    const t = setTimeout(() => {
-      setStatuses(STEPS.map(() => "pending"))
-      setCurrent(0)
-      setPhase("running")
-    }, IDLE_MS)
-    return () => clearTimeout(t)
-  }, [phase, active])
+    if (!active) {
+      setPhase("setup")
+      setLineIdx(0)
+      setRetryState(null)
+      return
+    }
 
-  // running: animate the current step, then advance
+    const next: Record<WorkflowPhase, WorkflowPhase> = {
+      setup: "acting", acting: "result", result: "holding",
+      holding: "resetting", resetting: "setup",
+    }
+
+    const t = setTimeout(() => setPhase(next[phase]), TIMING[phase])
+    return () => clearTimeout(t)
+  }, [active, phase])
+
   useEffect(() => {
-    if (!active || phase !== "running" || current < 0) return
+    if (!active) return
 
-    // Mark current step as running
-    setStatuses((prev) => prev.map((s, i) => (i === current ? "running" : s)))
+    if (phase === "setup" || phase === "resetting") {
+      setLineIdx(0)
+      setRetryState(null)
+      return
+    }
+    if (phase === "result" || phase === "holding") {
+      setLineIdx(WORKFLOW_STEPS.length)
+      setRetryState(null)
+      return
+    }
+    if (phase !== "acting") return
 
-    const step = STEPS[current]!
-    const t = setTimeout(() => {
-      // Resolve step to done
-      setStatuses((prev) => prev.map((s, i) => (i === current ? "done" : s)))
+    const timers: ReturnType<typeof setTimeout>[] = []
+    setLineIdx(0)
+    setRetryState(null)
 
-      if (current + 1 < STEPS.length) {
-        setCurrent(current + 1)
-      } else {
-        setPhase("done")
-        setCurrent(-1)
-      }
-    }, step.duration)
+    // Steps before the retry step
+    for (let i = 1; i <= RETRY_IDX; i++) {
+      timers.push(setTimeout(() => setLineIdx(i), STEP_MS * i))
+    }
 
-    return () => clearTimeout(t)
-  }, [phase, current, active])
+    // Retry sequence: running → failed → retrying → done
+    const retryStart = STEP_MS * (RETRY_IDX + 1)
+    timers.push(setTimeout(() => setRetryState("failed"),   retryStart))
+    timers.push(setTimeout(() => setRetryState("retrying"), retryStart + 700))
+    timers.push(setTimeout(() => {
+      setRetryState(null)
+      setLineIdx(RETRY_IDX + 1)
+    }, retryStart + 1500))
 
-  // done → reset
-  useEffect(() => {
-    if (!active || phase !== "done") return
-    const t = setTimeout(() => {
-      setPhase("idle")
-    }, DONE_MS)
-    return () => clearTimeout(t)
-  }, [phase, active])
+    // Steps after the retry step
+    for (let i = RETRY_IDX + 2; i <= WORKFLOW_STEPS.length; i++) {
+      timers.push(setTimeout(
+        () => setLineIdx(i),
+        retryStart + 1500 + STEP_MS * (i - RETRY_IDX - 1),
+      ))
+    }
 
-  return { steps: STEPS, statuses, allDone }
+    return () => timers.forEach(clearTimeout)
+  }, [active, phase])
+
+  return {
+    phase,
+    lineIdx,
+    retryState,
+    isActing:  phase === "acting",
+    isResult:  phase === "result" || phase === "holding",
+    isHolding: phase === "holding",
+  }
 }

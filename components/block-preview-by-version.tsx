@@ -22,6 +22,8 @@ import BrandsSectionV4 from "@/registry/new-york/blocks/brands-section-v4/brands
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/feature-section-v1"
 import FeatureSectionV2 from "@/registry/new-york/blocks/feature-section-v2/feature-section-v2"
 import HeroSectionV5 from "@/registry/new-york/blocks/hero-section-v5/hero-section-v5"
+import FeatureSectionV3 from "@/registry/new-york/blocks/feature-section-v3/feature-section-v3"
+import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/changelog-section-v1"
 
 
 
@@ -53,6 +55,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v1": FeatureSectionV1,
   "feature-section-v2": FeatureSectionV2,
   "hero-section-v5": HeroSectionV5,
+  "feature-section-v3": FeatureSectionV3,
+  "changelog-section-v1": ChangelogSectionV1,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {
