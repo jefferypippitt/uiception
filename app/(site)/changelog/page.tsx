@@ -27,8 +27,8 @@ export default async function ChangelogPage() {
       <div className="mx-auto w-full max-w-6xl px-6">
 
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-2xl font-semibold tracking-tight md:text-4xl">Changelog</h1>
+        <div className="mb-12 text-center">
+        <h1 className="text-3xl tracking-tighter md:text-4xl">Changelog</h1>
           <p className="mt-2 text-muted-foreground">Latest updates and announcements.</p>
         </div>
 

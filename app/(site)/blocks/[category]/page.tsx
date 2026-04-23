@@ -47,7 +47,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </Button>
 
         <h1
-          className="mt-4 text-2xl font-semibold tracking-tight md:text-4xl"
+          className="mt-4 text-3xl tracking-tighter md:text-4xl"
           style={{ viewTransitionName: `title-${categoryData.id}` } as React.CSSProperties}
         >
           {categoryData.title}

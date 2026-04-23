@@ -1,0 +1,75 @@
+import type { CSSProperties } from "react"
+import { Link } from "next-view-transitions"
+
+import type { BlockCategory } from "@/lib/blocks"
+import type { BlockPeriodicCell } from "@/lib/block-periodic-layout"
+import { cn } from "@/lib/utils"
+
+import { BlockCategoryTitle } from "./block-category-title"
+
+type BlockPeriodicTileProps = {
+  category: BlockCategory
+  cell: BlockPeriodicCell
+  periodic?: boolean
+  className?: string
+  style?: CSSProperties
+}
+
+export function BlockPeriodicTile({
+  category,
+  cell,
+  periodic = false,
+  className,
+  style,
+}: BlockPeriodicTileProps) {
+  const count = category.versions.length
+
+  return (
+    <Link
+      href={`/blocks/${category.id}`}
+      style={style}
+      className={cn(
+        "group relative flex flex-col overflow-hidden bg-card text-left transition",
+        "hover:bg-muted/40",
+        periodic
+          ? "border border-border/60 min-h-28"
+          : "rounded-lg border border-border shadow-sm min-h-24",
+        className
+      )}
+    >
+      {/* Block count — top left */}
+      <span className="pointer-events-none absolute left-1.5 top-1 font-mono text-[9px] tabular-nums">
+        {count}
+      </span>
+
+      {/* Symbol — pixel font, family-specific variant */}
+      <div className="flex flex-1 items-center justify-center px-1 pt-4">
+        <span
+          className={cn(
+            "font-pixel-square uppercase text-foreground/75 transition group-hover:text-foreground",
+            periodic ? "text-2xl leading-none" : "text-4xl"
+          )}
+        >
+          {cell.symbol}
+        </span>
+      </div>
+
+      {/* Title label — full name, clean sans */}
+      <div className="px-1.5 pb-1.5 pt-1">
+        <BlockCategoryTitle
+          id={category.id}
+          title={category.title}
+          className={cn(
+            "text-center font-medium leading-snug text-muted-foreground",
+            periodic ? "text-[9px]" : "text-xs sm:text-sm"
+          )}
+        />
+        {!periodic && (
+          <p className="mt-0.5 text-center font-mono text-[10px] text-muted-foreground/60 tabular-nums">
+            {count} {count === 1 ? "block" : "blocks"}
+          </p>
+        )}
+      </div>
+    </Link>
+  )
+}

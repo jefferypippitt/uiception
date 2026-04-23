@@ -16,6 +16,20 @@ export type BlockCategoryId =
   | "stats"
   | "footer"
   | "changelog"
+  | "team"
+  | "contact"
+  | "blog"
+  | "gallery"
+  | "video"
+  | "timeline"
+  | "comparison"
+  | "newsletter"
+  | "waitlist"
+  | "social-proof"
+  | "partners"
+  | "backgrounds"
+  | "sidebar"
+  | "banner"
 
 export type BlockVersion = {
   id: string
@@ -271,6 +285,90 @@ export const blockCategories: BlockCategory[] = [
         registryPath: "registry/new-york/blocks/changelog-section-v1",
       },
     ],
+  },
+  {
+    id: "team",
+    title: "Team",
+    description: "Team member grids, bios, and org structures.",
+    versions: [],
+  },
+  {
+    id: "contact",
+    title: "Contact",
+    description: "Contact forms, maps, and support entry points.",
+    versions: [],
+  },
+  {
+    id: "blog",
+    title: "Blog",
+    description: "Article grids, featured posts, and editorial layouts.",
+    versions: [],
+  },
+  {
+    id: "gallery",
+    title: "Gallery",
+    description: "Image and media grids with lightbox and masonry layouts.",
+    versions: [],
+  },
+  {
+    id: "video",
+    title: "Video",
+    description: "Video embeds, players, and media-forward hero sections.",
+    versions: [],
+  },
+  {
+    id: "timeline",
+    title: "Timeline",
+    description: "Chronological event and milestone sections.",
+    versions: [],
+  },
+  {
+    id: "comparison",
+    title: "Comparison",
+    description: "Side-by-side feature and plan comparison tables.",
+    versions: [],
+  },
+  {
+    id: "newsletter",
+    title: "Newsletter",
+    description: "Email capture and subscription sections.",
+    versions: [],
+  },
+  {
+    id: "waitlist",
+    title: "Waitlist",
+    description: "Pre-launch signup and early access capture sections.",
+    versions: [],
+  },
+  {
+    id: "social-proof",
+    title: "Social Proof",
+    description: "Press logos, awards, and third-party validation sections.",
+    versions: [],
+  },
+  {
+    id: "partners",
+    title: "Partners",
+    description: "Partner, investor, and ecosystem logo grids.",
+    versions: [],
+  },
+  {
+    id: "backgrounds",
+    title: "Backgrounds",
+    description: "Decorative background patterns, gradients, and canvas effects.",
+    versions: [],
+  },
+  {
+    id: "sidebar",
+    title: "Sidebar",
+    description: "Side navigation panels, drawers, and collapsible menus.",
+    versions: [],
+  },
+  {
+    id: "banner",
+    title: "Banner",
+    description: "Promotional banners, announcement bars, and cookie consent strips.",
+    versions: [],
   },
 ]
 

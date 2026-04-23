@@ -44,8 +44,8 @@ export const ROLE_MENU_OPTIONS: readonly MemberRole[] = [
 
 export const ACCESS_TABLE_CURSOR = {
   role: { x: 71, y: 50 },
-  /** Editor row in the drop-up menu (second item). */
-  menuEditor: { x: 72, y: 42 },
+  /** Editor row in the drop-up menu (second item — near top of drop-up). */
+  menuEditor: { x: 72, y: 2 },
   save: { x: 91, y: 50 },
 } as const
 

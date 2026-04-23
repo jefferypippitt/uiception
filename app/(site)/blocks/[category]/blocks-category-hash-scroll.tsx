@@ -13,11 +13,6 @@ function scrollToHash(): boolean {
   return true
 }
 
-/**
- * next/navigation client navigations (including router.push with a hash) do not
- * reliably scroll to the fragment. Changelog badge links use view transitions +
- * router.push, so we align the viewport after mount and on hash changes.
- */
 export function BlocksCategoryHashScroll() {
   const pathname = usePathname()
 
