@@ -40,11 +40,16 @@ function renderFirstStepCommand(text: string) {
   )
 }
 
-export default function CursorTerminal() {
+export default function CursorTerminal({ className }: { className?: string }) {
   const { lines, prompt, scrollRef } = useTerminalAnimation()
 
   return (
-    <div className="crt-terminal w-full overflow-hidden rounded-md border border-white/8 bg-[#1e1e1e] shadow-lg shadow-black/40">
+    <div
+      className={cn(
+        "crt-terminal mx-auto w-full min-w-0 max-w-3xl overflow-hidden rounded-md border border-white/8 bg-[#1e1e1e] shadow-lg shadow-black/40",
+        className,
+      )}
+    >
       <div className="flex h-9 min-h-9 select-none items-stretch border-b border-white/6 bg-[#252526]">
         <div className="flex min-w-0 flex-1 items-stretch overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {PANEL_TABS.map((name) => {

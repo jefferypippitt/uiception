@@ -19,7 +19,7 @@ export default async function BlockViewPage({ params }: PageProps) {
   }
 
   return (
-    <div className="w-full min-w-0">
+    <div className="w-full min-w-0 mt-4">
       <BlockPreviewByVersionId versionId={versionId} />
     </div>
   )

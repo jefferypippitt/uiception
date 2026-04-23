@@ -63,9 +63,7 @@ export default function HeroSectionV1() {
             className="pointer-events-none object-cover object-center absolute inset-0 w-full h-full"
             aria-hidden={true}
           />
-          <div className="relative mx-auto max-w-2xl">
-            <MacOsTerminal />
-          </div>
+          <MacOsTerminal />
         </div>
       </section>
     </>

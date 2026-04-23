@@ -9,13 +9,13 @@
   "files": [
     {
       "path": "registry/new-york/blocks/simple-chatbot/page.tsx",
-      "content": "import SimpleChatbot from \"./simple-chatbot\"\n\nexport default function Page() {\n  return (\n    <div className=\"mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14\">\n      <SimpleChatbot />\n    </div>\n  )\n}\n",
+      "content": "import SimpleChatbot from \"./simple-chatbot\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <SimpleChatbot />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/simple-chatbot/page.tsx"
     },
     {
       "path": "registry/new-york/blocks/simple-chatbot/simple-chatbot.tsx",
-      "content": "\"use client\"\n\nimport PromptInput from \"./components/prompt-input\"\nimport { usePlaceholderLoop } from \"./hooks/use-placeholder-loop\"\nimport \"./styles/simple-chatbot.css\"\n\nexport default function SimpleChatbot() {\n  const { displayText, showCursor, caretSolid } = usePlaceholderLoop()\n\n  return (\n    <div className=\"scb-root scb-page\">\n      <div className=\"scb-page-inner\">\n        <PromptInput\n          displayText={displayText}\n          showCursor={showCursor}\n          caretSolid={caretSolid}\n        />\n      </div>\n    </div>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport PromptInput from \"./components/prompt-input\"\nimport { usePlaceholderLoop } from \"./hooks/use-placeholder-loop\"\nimport \"./styles/simple-chatbot.css\"\n\nexport default function SimpleChatbot({ className }: { className?: string }) {\n  const { displayText, showCursor, caretSolid } = usePlaceholderLoop()\n\n  return (\n    <div className={cn(\"scb-root scb-page mx-auto w-full min-w-0 max-w-3xl\", className)}>\n      <div className=\"scb-page-inner\">\n        <PromptInput\n          displayText={displayText}\n          showCursor={showCursor}\n          caretSolid={caretSolid}\n        />\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/simple-chatbot/simple-chatbot.tsx"
     },

@@ -25,11 +25,16 @@ function colorCls(c?: LineColor) {
   }
 }
 
-export default function MacOsTerminal() {
+export default function MacOsTerminal({ className }: { className?: string }) {
   const { lines, typed, phase, codeIdx, scrollRef } = useTerminalAnimation()
 
   return (
-    <div className="mot-terminal mot-terminal-shell w-full overflow-hidden rounded-md">
+    <div
+      className={cn(
+        "mot-terminal mot-terminal-shell mx-auto w-full min-w-0 max-w-3xl overflow-hidden rounded-md",
+        className,
+      )}
+    >
       <div className="mot-terminal-titlebar relative flex h-8 shrink-0 select-none items-center">
         <TrafficLights />
         <div

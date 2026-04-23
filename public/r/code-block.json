@@ -8,13 +8,13 @@
   "files": [
     {
       "path": "registry/new-york/blocks/code-block/page.tsx",
-      "content": "import CodeBlock from \"./code-block\"\n\nexport default function Page() {\n  return (\n    <div className=\"mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14\">\n      <CodeBlock />\n    </div>\n  )\n}\n",
+      "content": "import CodeBlock from \"./code-block\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <CodeBlock />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/code-block/page.tsx"
     },
     {
       "path": "registry/new-york/blocks/code-block/code-block.tsx",
-      "content": "\"use client\"\n\nimport CodeTabs from \"./components/code-tabs\"\nimport { useCodeBlock } from \"./hooks/use-code-block\"\nimport \"./styles/code-block.css\"\n\nexport default function CodeBlock() {\n  const { activeTab, setActiveTab, copied, handleCopy } = useCodeBlock()\n\n  return (\n    <div className=\"cb-root\">\n      <div className=\"cb-inner\">\n        <CodeTabs\n          activeTab={activeTab}\n          copied={copied}\n          onTabChange={setActiveTab}\n          onCopy={handleCopy}\n        />\n      </div>\n    </div>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport CodeTabs from \"./components/code-tabs\"\nimport { useCodeBlock } from \"./hooks/use-code-block\"\nimport \"./styles/code-block.css\"\n\nexport default function CodeBlock({ className }: { className?: string }) {\n  const { activeTab, setActiveTab, copied, handleCopy } = useCodeBlock()\n\n  return (\n    <div className={cn(\"cb-root mx-auto w-full min-w-0 max-w-3xl\", className)}>\n      <div className=\"cb-inner\">\n        <CodeTabs\n          activeTab={activeTab}\n          copied={copied}\n          onTabChange={setActiveTab}\n          onCopy={handleCopy}\n        />\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/code-block/code-block.tsx"
     },

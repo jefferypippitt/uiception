@@ -31,7 +31,7 @@ export default function HeroSectionV3() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-4 pt-4">
+      <div className="px-4 pt-4">
         <ChatBot />
       </div>
     </section>

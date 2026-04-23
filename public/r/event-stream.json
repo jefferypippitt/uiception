@@ -7,13 +7,13 @@
   "files": [
     {
       "path": "registry/new-york/blocks/event-stream/page.tsx",
-      "content": "import EventStream from \"./event-stream\"\n\nexport default function Page() {\n  return (\n    <div className=\"mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14\">\n      <EventStream />\n    </div>\n  )\n}\n",
+      "content": "import EventStream from \"./event-stream\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <EventStream />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/event-stream/page.tsx"
     },
     {
       "path": "registry/new-york/blocks/event-stream/event-stream.tsx",
-      "content": "\"use client\"\n\nimport { useEventAnimation } from \"./hooks/use-event-animation\"\nimport TokenText from \"./components/token-text\"\n\nimport \"./styles/event-stream.css\"\n\nexport default function EventStream() {\n  const { text, scrollRef } = useEventAnimation()\n\n  return (\n    <div className=\"es-root relative w-full overflow-hidden\" style={{ height: \"18rem\" }}>\n      <div\n        ref={scrollRef}\n        className=\"es-body flex h-full justify-center overflow-y-auto pb-16 pt-4\"\n        style={{ scrollbarWidth: \"none\" }}\n      >\n        <pre className=\"es-text m-0 w-fit whitespace-pre font-mono text-[13px] leading-relaxed\">\n          <TokenText text={text} />\n          <span className=\"es-cursor\" />\n        </pre>\n      </div>\n    </div>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { useEventAnimation } from \"./hooks/use-event-animation\"\nimport TokenText from \"./components/token-text\"\n\nimport \"./styles/event-stream.css\"\n\nexport default function EventStream({ className }: { className?: string }) {\n  const { text, scrollRef } = useEventAnimation()\n\n  return (\n    <div\n      className={cn(\"es-root relative mx-auto w-full min-w-0 max-w-3xl overflow-hidden\", className)}\n      style={{ height: \"18rem\" }}\n    >\n      <div\n        ref={scrollRef}\n        className=\"es-body flex h-full justify-center overflow-y-auto pb-16 pt-4\"\n        style={{ scrollbarWidth: \"none\" }}\n      >\n        <pre className=\"es-text m-0 w-fit whitespace-pre font-mono text-[13px] leading-relaxed\">\n          <TokenText text={text} />\n          <span className=\"es-cursor\" />\n        </pre>\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/event-stream/event-stream.tsx"
     },

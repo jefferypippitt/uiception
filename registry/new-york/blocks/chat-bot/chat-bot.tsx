@@ -9,13 +9,13 @@ import ChatInput from "./components/chat-input"
 import { SUGGESTIONS } from "./lib/config"
 import "./styles/chat-bot.css"
 
-export default function ChatBot() {
+export default function ChatBot({ className }: { className?: string }) {
   const { phase, inputText, userMessage, botText, thinkSeconds, settled } = useChatAnimation()
   const showMessages = userMessage !== null
   const isPaused = phase === "paused"
 
   return (
-    <div className="cb-root">
+    <div className={cn("cb-root mx-auto w-full min-w-0 max-w-3xl", className)}>
       <div className="cb-layout">
 
         {/* Messages panel */}
