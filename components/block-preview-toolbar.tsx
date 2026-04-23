@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { IconCheck, IconTerminal2 } from "@tabler/icons-react"
 import {
   Check,
   ChevronRight,
@@ -383,6 +384,7 @@ export function BlockPreviewToolbar({
   const {
     copyToClipboard: copyInstallCommand,
     isCopied: installCopied,
+    isCopying: installCopying,
   } = useCopyToClipboard()
   const { copyToClipboard: copyFileContent, isCopied: fileCopied } = useCopyToClipboard()
   const { resolvedTheme } = useTheme()
@@ -422,7 +424,8 @@ export function BlockPreviewToolbar({
     }
   }, [mainView, versionId, registryFiles, codeError])
 
-  const installCommand = `npx shadcn@latest add "https://uiception.com/r/${versionId}.json"`
+  const installCommandCopy = `npx shadcn@latest add "https://uiception.com/r/${versionId}.json"`
+  const installCommandDisplay = `npx shadcn add ${versionId}`
   const previewPath = `/view/${versionId}`
 
   // If the iframe navigates to a new preview URL, ensure the loading overlay
@@ -590,22 +593,36 @@ export function BlockPreviewToolbar({
             </TooltipProvider>
           )}
 
-          <button
+          <Button
             type="button"
-            onClick={() => copyInstallCommand(installCommand)}
+            variant="outline"
+            size="default"
+            disabled={installCopying}
+            onClick={() => copyInstallCommand(installCommandCopy)}
+            aria-label={
+              installCopying
+                ? "Copying install command"
+                : installCopied
+                  ? "Install command copied"
+                  : "Copy install command"
+            }
+            title={installCommandCopy}
             className={cn(
-              "hidden w-[min(100vw-2rem,22rem)] items-center gap-2 rounded-lg border border-border/70 bg-muted/20 px-2.5 text-left font-mono text-xs text-foreground transition-colors hover:bg-muted/40 sm:inline-flex",
+              "hidden max-w-[min(100vw-2rem,26rem)] min-w-0 font-normal tracking-tight sm:inline-flex",
               TOOLBAR_CTRL_H
             )}
-            title={installCommand}
           >
-            <span className="min-w-0 flex-1 truncate">{installCommand}</span>
-            <span className="shrink-0 text-muted-foreground">
-              {installCopied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-            </span>
-          </button>
+            {installCopying ? (
+              <Spinner data-icon="inline-start" className="size-4" />
+            ) : installCopied ? (
+              <IconCheck data-icon="inline-start" className="size-4 text-muted-foreground" stroke={1.75} />
+            ) : (
+              <IconTerminal2 data-icon="inline-start" className="size-4" stroke={1.75} />
+            )}
+            <span className="min-w-0 truncate">{installCommandDisplay}</span>
+          </Button>
 
-          <OpenInV0Button name={versionId} className={cn(TOOLBAR_CTRL_H, "px-3 text-xs")} />
+          <OpenInV0Button name={versionId} className={cn(TOOLBAR_CTRL_H, "px-3")} />
         </div>
       </div>
 

@@ -722,6 +722,9 @@
       "type": "registry:block",
       "title": "Mac OS Terminal",
       "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install output—ideal for integrations and developer tooling sections.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
       "registryDependencies": [],
       "files": [
         {

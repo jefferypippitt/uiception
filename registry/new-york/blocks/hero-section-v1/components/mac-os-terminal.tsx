@@ -1,5 +1,6 @@
 "use client"
 
+import { GeistSans } from "geist/font/sans"
 import { Folder } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -31,7 +32,12 @@ export default function MacOsTerminal() {
     <div className="mot-terminal mot-terminal-shell w-full overflow-hidden rounded-md">
       <div className="mot-terminal-titlebar relative flex h-8 shrink-0 select-none items-center">
         <TrafficLights />
-        <div className="mot-terminal-title flex w-full items-center justify-center gap-1.5 px-20 text-center font-sans text-[12px] font-medium tracking-tight">
+        <div
+          className={cn(
+            GeistSans.className,
+            "mot-terminal-title flex w-full items-center justify-center gap-1.5 px-20 text-center text-[12px] font-medium tracking-tight",
+          )}
+        >
           <Folder size={14} className="size-3.5 shrink-0" fill="#3b8eea" stroke="none" strokeWidth={0} aria-hidden />
           <span>Projects</span>
           <span className="text-[#a1a1aa] dark:text-[#6b6b6b]" aria-hidden>—</span>
@@ -43,7 +49,7 @@ export default function MacOsTerminal() {
 
       <div
         ref={scrollRef}
-        className="mot-terminal-body max-h-[48rem] min-h-[30rem] overflow-y-auto px-4 py-2.5 text-left font-mono text-[13px] leading-relaxed"
+        className="mot-terminal-body max-h-192 min-h-120 overflow-y-auto px-4 py-2.5 text-left font-mono text-[13px] leading-relaxed"
         style={{ scrollbarWidth: "none" }}
       >
         {lines.map((line) => (
@@ -58,7 +64,7 @@ export default function MacOsTerminal() {
 
         {(phase === "typingCode" || phase === "done") && (
           <div className={codeBlockWrap}>
-            <pre className="m-0 whitespace-pre-wrap break-words font-mono">
+            <pre className="m-0 whitespace-pre-wrap wrap-break-word font-mono">
               <SyntaxCode visibleChars={phase === "done" ? CODE_DEMO.length : codeIdx} />
               {phase === "typingCode" && <span className="mot-terminal-cursor" />}
             </pre>

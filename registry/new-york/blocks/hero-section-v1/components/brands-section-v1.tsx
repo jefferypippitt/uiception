@@ -1,6 +1,9 @@
+import { GeistSans } from "geist/font/sans"
+
 import type { Brand } from "../lib/brands"
 import { brands } from "../lib/brands"
 import BrandLogo from "./brand-logo"
+import { cn } from "@/lib/utils"
 
 import "../styles/brands-section-v1.css"
 
@@ -35,7 +38,12 @@ export default function BrandsSectionV1() {
     <section className="py-10 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid items-center gap-8 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:gap-10 lg:gap-14">
-          <p className="max-w-[16rem] text-base font-medium leading-snug text-muted-foreground md:text-lg">
+          <p
+            className={cn(
+              GeistSans.className,
+              "max-w-[16rem] text-base font-medium leading-snug text-muted-foreground md:text-lg",
+            )}
+          >
             Trusted by the best leading brands:
           </p>
           <Marquee brands={brands} />

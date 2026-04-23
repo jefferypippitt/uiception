@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/new-york/blocks/cursor-terminal/page.tsx",
-      "content": "import CursorTerminal from \"./cursor-terminal\"\r\n\r\nexport default function Page() {\r\n  return <CursorTerminal />\r\n}\r\n",
+      "content": "import CursorTerminal from \"./cursor-terminal\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14\">\r\n      <CursorTerminal />\r\n    </div>\r\n  )\r\n}\r\n",
       "type": "registry:page",
       "target": "app/cursor-terminal/page.tsx"
     },

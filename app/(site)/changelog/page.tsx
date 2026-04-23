@@ -26,86 +26,86 @@ export default async function ChangelogPage() {
     <div className="pb-14 md:pb-20">
       <div className="mx-auto w-full max-w-6xl px-6">
 
-        {/* Header */}
-        <div className="mb-12 text-center">
-        <h1 className="text-3xl tracking-tighter md:text-4xl">Changelog</h1>
-          <p className="mt-2 text-muted-foreground">Latest updates and announcements.</p>
-        </div>
+          {/* Header */}
+          <div className="mb-12 text-center">
+            <h1 className="text-3xl tracking-tighter md:text-4xl">Changelog</h1>
+            <p className="mt-2 text-muted-foreground">Latest updates and announcements.</p>
+          </div>
 
-        {entries.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            No changelog entries yet. Add one in <code>content/changelog</code>.
-          </p>
-        ) : (
-          <ChangelogList>
-            {entries.map((entry: ChangelogEntry) => (
-              <div
-                key={`${entry.date}-${entry.title}`}
-                id={`entry-${entry.date}`}
-                className="cl-row flex flex-col md:flex-row md:gap-12 pb-12 last:pb-0"
-              >
-                {/* Left — sticky date */}
-                <div className="w-full md:w-36 shrink-0 mb-3 md:mb-0">
-                  <time
-                    dateTime={entry.date}
-                    className="cl-date sticky top-20 block font-mono text-sm text-muted-foreground"
-                  >
-                    {entry.dateDisplay}
-                  </time>
-                </div>
-
-                {/* Right — entry card */}
-                <div className="cl-card flex-1 min-w-0 rounded-none border p-5 shadow-none">
-                  <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
-                    {entry.title}
-                  </h2>
-
-                  {(entry.summary || entry.description) && (
-                    <p className="mt-2 max-w-2xl text-sm font-normal leading-relaxed text-muted-foreground">
-                      {entry.summary ?? entry.description}
-                    </p>
-                  )}
-
-                  <div
-                    className={[
-                      "changelog-entry-body prose prose-sm mt-5 max-w-none text-sm leading-relaxed",
-                      "text-foreground/90 prose-p:my-2 prose-li:my-0.5",
-                      "prose-headings:scroll-mt-20 prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground",
-                      "dark:prose-invert",
-                    ].join(" ")}
-                  >
-                    <entry.body />
+          {entries.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              No changelog entries yet. Add one in <code>content/changelog</code>.
+            </p>
+          ) : (
+            <ChangelogList>
+              {entries.map((entry: ChangelogEntry) => (
+                <div
+                  key={`${entry.date}-${entry.title}`}
+                  id={`entry-${entry.date}`}
+                  className="cl-row flex flex-col md:flex-row md:gap-12 pb-12 last:pb-0"
+                >
+                  {/* Left — sticky date */}
+                  <div className="w-full md:w-36 shrink-0 mb-3 md:mb-0">
+                    <time
+                      dateTime={entry.date}
+                      className="cl-date sticky top-20 block font-mono text-sm text-muted-foreground"
+                    >
+                      {entry.dateDisplay}
+                    </time>
                   </div>
 
-                  {entry.items.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {entry.items.map((item: ChangelogEntry["items"][number], index: number) => (
-                        <span key={item.name}>
-                          {item.href ? (
-                            <Badge
-                              asChild
-                              className={`transition-colors ${badgeColorClasses[index % badgeColorClasses.length]}`}
-                            >
-                              <ChangelogBadgeLink href={item.href}>
-                                {item.label} <ArrowUpRightIcon data-icon="inline-end" />
-                              </ChangelogBadgeLink>
-                            </Badge>
-                          ) : (
-                            <Badge
-                              className={`transition-colors ${badgeColorClasses[index % badgeColorClasses.length]}`}
-                            >
-                              {item.label}
-                            </Badge>
-                          )}
-                        </span>
-                      ))}
+                  {/* Right — entry card */}
+                  <div className="cl-card flex-1 min-w-0 rounded-none border p-5 shadow-none">
+                    <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+                      {entry.title}
+                    </h2>
+
+                    {(entry.summary || entry.description) && (
+                      <p className="mt-2 max-w-2xl text-sm font-normal leading-relaxed text-muted-foreground">
+                        {entry.summary ?? entry.description}
+                      </p>
+                    )}
+
+                    <div
+                      className={[
+                        "changelog-entry-body prose prose-sm mt-5 max-w-none text-sm leading-relaxed",
+                        "text-foreground/90 prose-p:my-2 prose-li:my-0.5",
+                        "prose-headings:scroll-mt-20 prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground",
+                        "dark:prose-invert",
+                      ].join(" ")}
+                    >
+                      <entry.body />
                     </div>
-                  )}
+
+                    {entry.items.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {entry.items.map((item: ChangelogEntry["items"][number], index: number) => (
+                          <span key={item.name}>
+                            {item.href ? (
+                              <Badge
+                                asChild
+                                className={`transition-colors ${badgeColorClasses[index % badgeColorClasses.length]}`}
+                              >
+                                <ChangelogBadgeLink href={item.href}>
+                                  {item.label} <ArrowUpRightIcon data-icon="inline-end" />
+                                </ChangelogBadgeLink>
+                              </Badge>
+                            ) : (
+                              <Badge
+                                className={`transition-colors ${badgeColorClasses[index % badgeColorClasses.length]}`}
+                              >
+                                {item.label}
+                              </Badge>
+                            )}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </ChangelogList>
-        )}
+              ))}
+            </ChangelogList>
+          )}
 
       </div>
     </div>

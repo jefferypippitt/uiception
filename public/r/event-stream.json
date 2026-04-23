@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/new-york/blocks/event-stream/page.tsx",
-      "content": "import EventStream from \"./event-stream\"\n\nexport default function Page() {\n  return <EventStream />\n}\n",
+      "content": "import EventStream from \"./event-stream\"\n\nexport default function Page() {\n  return (\n    <div className=\"mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14\">\n      <EventStream />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/event-stream/page.tsx"
     },

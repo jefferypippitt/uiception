@@ -198,21 +198,23 @@
 }
 
 /* View Transitions — navigation */
-:not(.theme-transitioning):not(.badge-nav)::view-transition-old(root) {
-  animation: vt-out 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+:not(.theme-transitioning)::view-transition-old(root) {
+  animation: vt-out 0.2s cubic-bezier(0.4, 0, 1, 1) both;
+  will-change: transform, opacity;
 }
 
-:not(.theme-transitioning):not(.badge-nav)::view-transition-new(root) {
-  animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+:not(.theme-transitioning)::view-transition-new(root) {
+  animation: vt-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
 }
 
 /* View Transitions — theme toggle */
 .theme-transitioning::view-transition-group(root) {
-  animation-duration: 0.5s;
+  animation-duration: 0.35s;
 }
 
 .theme-transitioning::view-transition-new(root) {
-  animation: vt-theme-reveal 0.5s ease-in-out both;
+  animation: vt-theme-reveal 0.28s ease-out both;
 }
 
 .theme-transitioning::view-transition-old(root),
@@ -225,10 +227,10 @@
 
 @keyframes vt-theme-reveal {
   from {
-    clip-path: polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%);
+    opacity: 0;
   }
   to {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
   }
 }
 
@@ -236,20 +238,17 @@
   from {
     opacity: 1;
     transform: scale(1) translateY(0);
-    filter: blur(0px) brightness(1);
   }
   to {
     opacity: 0;
-    transform: scale(0.9) translateY(-40px);
-    filter: blur(16px) brightness(1.5);
+    transform: scale(0.985) translateY(-8px);
   }
 }
 
 @keyframes vt-in {
   0% {
     opacity: 0;
-    transform: scale(1.08) translateY(60px);
-    filter: blur(20px) brightness(0.7);
+    transform: scale(1.015) translateY(10px);
   }
   50% {
     opacity: 1;
@@ -257,7 +256,6 @@
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
-    filter: blur(0px) brightness(1);
   }
 }
 
@@ -293,7 +291,7 @@
 ::view-transition-group(title-backgrounds),
 ::view-transition-group(title-sidebar),
 ::view-transition-group(title-banner) {
-  animation-duration: 0.4s;
+  animation-duration: 0.26s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   overflow: visible;
 }
@@ -401,7 +399,7 @@
 ::view-transition-new(title-banner) {
   width: auto;
   height: auto;
-  animation: vt-title-in 0.3s 0.1s ease-out both;
+  animation: vt-title-in 0.2s ease-out both;
 }
 
 @keyframes vt-title-out {
@@ -412,23 +410,75 @@
   from { opacity: 0; }
 }
 
-/* View Transitions — changelog badge click (carousel slide) */
-.badge-nav::view-transition-old(root) {
-  animation: vt-carousel-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-.badge-nav::view-transition-new(root) {
-  animation: vt-carousel-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-@keyframes vt-carousel-out {
-  from { transform: translateX(0) scale(1); opacity: 1; }
-  to   { transform: translateX(30%) scale(0.9); opacity: 0; }
-}
-
-@keyframes vt-carousel-in {
-  from { transform: translateX(-30%) scale(0.9); opacity: 0; }
-  to   { transform: translateX(0) scale(1); opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  :not(.theme-transitioning)::view-transition-old(root),
+  :not(.theme-transitioning)::view-transition-new(root),
+  .theme-transitioning::view-transition-group(root),
+  .theme-transitioning::view-transition-new(root),
+  ::view-transition-old(title-navbar),
+  ::view-transition-old(title-hero-section),
+  ::view-transition-old(title-brands),
+  ::view-transition-old(title-how-it-works),
+  ::view-transition-old(title-case-study),
+  ::view-transition-old(title-about-us),
+  ::view-transition-old(title-resources),
+  ::view-transition-old(title-value-proposition),
+  ::view-transition-old(title-features),
+  ::view-transition-old(title-integrations),
+  ::view-transition-old(title-pricing),
+  ::view-transition-old(title-testimonials),
+  ::view-transition-old(title-cta),
+  ::view-transition-old(title-faq),
+  ::view-transition-old(title-stats),
+  ::view-transition-old(title-footer),
+  ::view-transition-old(title-changelog),
+  ::view-transition-old(title-team),
+  ::view-transition-old(title-contact),
+  ::view-transition-old(title-blog),
+  ::view-transition-old(title-gallery),
+  ::view-transition-old(title-video),
+  ::view-transition-old(title-timeline),
+  ::view-transition-old(title-comparison),
+  ::view-transition-old(title-newsletter),
+  ::view-transition-old(title-waitlist),
+  ::view-transition-old(title-social-proof),
+  ::view-transition-old(title-partners),
+  ::view-transition-old(title-backgrounds),
+  ::view-transition-old(title-sidebar),
+  ::view-transition-old(title-banner),
+  ::view-transition-new(title-navbar),
+  ::view-transition-new(title-hero-section),
+  ::view-transition-new(title-brands),
+  ::view-transition-new(title-how-it-works),
+  ::view-transition-new(title-case-study),
+  ::view-transition-new(title-about-us),
+  ::view-transition-new(title-resources),
+  ::view-transition-new(title-value-proposition),
+  ::view-transition-new(title-features),
+  ::view-transition-new(title-integrations),
+  ::view-transition-new(title-pricing),
+  ::view-transition-new(title-testimonials),
+  ::view-transition-new(title-cta),
+  ::view-transition-new(title-faq),
+  ::view-transition-new(title-stats),
+  ::view-transition-new(title-footer),
+  ::view-transition-new(title-changelog),
+  ::view-transition-new(title-team),
+  ::view-transition-new(title-contact),
+  ::view-transition-new(title-blog),
+  ::view-transition-new(title-gallery),
+  ::view-transition-new(title-video),
+  ::view-transition-new(title-timeline),
+  ::view-transition-new(title-comparison),
+  ::view-transition-new(title-newsletter),
+  ::view-transition-new(title-waitlist),
+  ::view-transition-new(title-social-proof),
+  ::view-transition-new(title-partners),
+  ::view-transition-new(title-backgrounds),
+  ::view-transition-new(title-sidebar),
+  ::view-transition-new(title-banner) {
+    animation: none !important;
+  }
 }
 
 /* Logo cloud — infinite horizontal marquee + soft edge composite */

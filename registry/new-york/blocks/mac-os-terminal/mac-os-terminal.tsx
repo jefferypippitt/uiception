@@ -1,5 +1,6 @@
 "use client"
 
+import { GeistSans } from "geist/font/sans"
 import { Folder } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -31,7 +32,12 @@ export default function MacOsTerminal() {
     <div className="mot-terminal mot-terminal-shell w-full overflow-hidden rounded-md">
       <div className="mot-terminal-titlebar relative flex h-8 shrink-0 select-none items-center">
         <TrafficLights />
-        <div className="mot-terminal-title flex w-full items-center justify-center gap-1.5 px-20 text-center font-sans text-[12px] font-medium tracking-tight">
+        <div
+          className={cn(
+            GeistSans.className,
+            "mot-terminal-title flex w-full items-center justify-center gap-1.5 px-20 text-center text-[12px] font-medium tracking-tight",
+          )}
+        >
           <Folder size={14} className="size-3.5 shrink-0" fill="#3b8eea" stroke="none" strokeWidth={0} aria-hidden />
           <span>Projects</span>
           <span className="text-[#a1a1aa] dark:text-[#6b6b6b]" aria-hidden>—</span>
