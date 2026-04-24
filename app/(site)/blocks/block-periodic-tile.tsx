@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProperties } from "react"
 import { Link } from "next-view-transitions"
 
@@ -24,10 +26,24 @@ export function BlockPeriodicTile({
 }: BlockPeriodicTileProps) {
   const count = category.versions.length
 
+  function clearOtherTitles() {
+    document.querySelectorAll<HTMLElement>("[data-vt-category-title]").forEach((el) => {
+      const name = el.dataset.vtCategoryTitle === category.id ? `title-${category.id}` : "none"
+      el.style.setProperty("view-transition-name", name)
+    })
+  }
+
   return (
     <Link
       href={`/blocks/${category.id}`}
       style={style}
+      onPointerDown={clearOtherTitles}
+      onClick={clearOtherTitles}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          clearOtherTitles()
+        }
+      }}
       className={cn(
         "group relative flex flex-col overflow-hidden bg-card text-left transition",
         "hover:bg-muted/40",
@@ -37,12 +53,12 @@ export function BlockPeriodicTile({
         className
       )}
     >
-      {/* Block count — top left */}
+     
       <span className="pointer-events-none absolute left-1.5 top-1 font-mono text-[9px] tabular-nums">
         {count}
       </span>
 
-      {/* Symbol — pixel font, family-specific variant */}
+    
       <div className="flex flex-1 items-center justify-center px-1 pt-4">
         <span
           className={cn(
@@ -54,7 +70,7 @@ export function BlockPeriodicTile({
         </span>
       </div>
 
-      {/* Title label — full name, clean sans */}
+ 
       <div className="px-1.5 pb-1.5 pt-1">
         <BlockCategoryTitle
           id={category.id}

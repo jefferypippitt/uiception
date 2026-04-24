@@ -1,5 +1,5 @@
 import { Link } from 'next-view-transitions'
-import { ArrowRight, Blocks } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -23,17 +23,12 @@ export default function Home() {
                     </section>
 
                     <section className='flex flex-col items-center gap-3'>
-                        <h1 className='max-w-4xl text-4xl font-pixel-circle  tracking-tight md:text-5xl lg:text-6xl'>
-                            Beautiful UI. Zero bloat.
+                        <h1 className='max-w-4xl text-4xl font-pixel-circle tracking-tight [word-spacing:-0.13em] md:text-5xl lg:text-6xl'>
+                            Skip to the good part.
                         </h1>
 
                         <p className='max-w-3xl font-light tracking-tight md:text-lg'>
-                            Copy and paste{' '}
-                            <Blocks
-                                className='mx-1 inline size-4 align-[-0.125em] text-foreground'
-                                strokeWidth={2.4}
-                            />
-                            blocks. Ship today. Tweak everything.
+                            Start from sections that feel complete. You change the code, not the grid.
                         </p>
                     </section>
 

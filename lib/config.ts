@@ -8,7 +8,7 @@ export const siteConfig = {
   url: "https://uiception.com",
   ogImage: "https://uiception.com/icon_512x512.png",
   description:
-    "Beautiful UI. Zero bloat. Copy and paste blocks. Ship today.",
+    "Start from sections that feel complete. You change the code, not the grid.",
   keywords: [
     "Next.js",
     "React",

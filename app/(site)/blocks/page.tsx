@@ -1,7 +1,10 @@
 import type { Metadata } from "next"
 
 import { blockCategories } from "@/lib/blocks"
-import { blockPeriodicCells, type BlockPeriodicCell } from "@/lib/block-periodic-layout"
+import {
+  blockPeriodicCellsByPlacement,
+  type BlockPeriodicCell,
+} from "@/lib/block-periodic-layout"
 
 import { BlockPeriodicTile } from "./block-periodic-tile"
 
@@ -38,7 +41,7 @@ function extendedPlacement(cell: BlockPeriodicCell) {
   } as const
 }
 
-const allCategories = withCategory(blockPeriodicCells)
+const allCategories = withCategory(blockPeriodicCellsByPlacement)
 const mainCategories = allCategories.filter(({ cell }) => cell.row < EXTENDED_ROW_START)
 const extendedCategories = allCategories.filter(({ cell }) => cell.row >= EXTENDED_ROW_START)
 

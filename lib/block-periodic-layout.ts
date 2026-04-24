@@ -52,6 +52,20 @@ export const blockPeriodicCells: BlockPeriodicCell[] = [
   { id: "banner",            z: 31, symbol: "Bn", row: 6, col: 3  },
 ]
 
+/** Top-to-bottom page order (row then column), for DOM / mobile order vs grid placement. */
+export function compareBlockPeriodicByPlacement(
+  a: BlockPeriodicCell,
+  b: BlockPeriodicCell,
+): number {
+  if (a.row !== b.row) return a.row - b.row
+  if (a.col !== b.col) return a.col - b.col
+  return a.id.localeCompare(b.id)
+}
+
+export const blockPeriodicCellsByPlacement = [...blockPeriodicCells].sort(
+  compareBlockPeriodicByPlacement,
+)
+
 const byId = Object.fromEntries(blockPeriodicCells.map((c) => [c.id, c])) as Record<
   BlockCategoryId,
   BlockPeriodicCell
