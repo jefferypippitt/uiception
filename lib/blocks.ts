@@ -81,6 +81,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v5",
         registryPath: "registry/new-york/blocks/hero-section-v5",
       },
+      {
+        id: "hero-section-v6",
+        title: "Hero Section v6",
+        registryPath: "registry/new-york/blocks/hero-section-v6",
+      },
     ],
   },
   {
@@ -108,6 +113,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Brands Section v4",
         registryPath: "registry/new-york/blocks/brands-section-v4",
       },
+      {
+        id: "brands-section-v5",
+        title: "Brands Section v5",
+        registryPath: "registry/new-york/blocks/brands-section-v5",
+      },
     ],
   },
   {
@@ -129,6 +139,11 @@ export const blockCategories: BlockCategory[] = [
         id: "feature-section-v3",
         title: "Feature Section v3",
         registryPath: "registry/new-york/blocks/feature-section-v3",
+      },
+      {
+        id: "feature-section-v4",
+        title: "Feature Section v4",
+        registryPath: "registry/new-york/blocks/feature-section-v4",
       },
     ],
   },
@@ -225,7 +240,13 @@ export const blockCategories: BlockCategory[] = [
     id: "pricing",
     title: "Pricing",
     description: "Pricing tables and plan comparison layouts.",
-    versions: [],
+    versions: [
+      {
+        id: "pricing-section-v1",
+        title: "Pricing Section v1",
+        registryPath: "registry/new-york/blocks/pricing-section-v1",
+      },
+    ],
   },
   {
     id: "faq",

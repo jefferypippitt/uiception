@@ -1,0 +1,92 @@
+/* Outer bordered box — very slight radius to match the reference */
+.bs5-box {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Text label cell on the left */
+.bs5-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid var(--border);
+}
+
+/* Scrolling marquee area */
+.bs5-marquee-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.bs5-track {
+  display: flex;
+  width: max-content;
+  min-height: 100%;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  backface-visibility: hidden;
+  animation: bs5-marquee 12s linear infinite;
+  will-change: transform;
+}
+
+.bs5-set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  min-height: 100%;
+}
+
+/* Each logo lives in its own cell with a right border divider */
+.bs5-slot {
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem;
+}
+
+.bs5-slot::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+@media (min-width: 768px) {
+  .bs5-slot {
+    padding: 1.5rem 2rem;
+  }
+}
+
+.bs5-logo {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+@keyframes bs5-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs5-track {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

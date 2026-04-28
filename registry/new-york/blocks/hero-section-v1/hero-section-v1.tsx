@@ -11,7 +11,7 @@ import MacOsTerminal from "./components/mac-os-terminal"
 export default function HeroSectionV1() {
   return (
     <>
-      <section className="pt-16 md:pt-20 lg:pt-24">
+      <section className="py-10 md:py-14 lg:py-16">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
             <h1

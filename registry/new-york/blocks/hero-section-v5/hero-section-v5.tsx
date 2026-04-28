@@ -11,7 +11,7 @@ const instrumentSerif = Instrument_Serif({
 
 export default function HeroSectionV5() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-10 md:py-14 lg:py-16">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
           <h1 className={`${instrumentSerif.className} text-3xl font-medium sm:text-4xl lg:text-5xl lg:leading-[1.15]`}>

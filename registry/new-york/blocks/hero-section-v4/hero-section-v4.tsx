@@ -6,7 +6,7 @@ import "./styles/hero-section-v4.css"
 
 export default function HeroSectionV4() {
   return (
-    <section className="hero-v4 py-16 md:py-20 lg:py-24">
+    <section className="hero-v4 py-10 md:py-14 lg:py-16">
       <HeroV4Root>
         <StatsSectionV1Content />
       </HeroV4Root>

@@ -27,7 +27,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v4/hero-section-v4.tsx",
-      "content": "import { StatsSectionV1Content } from \"../stats-section-v1/stats-section-v1\"\n\nimport { HeroV4Root } from \"./components/hero-v4-root\"\n\nimport \"./styles/hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"hero-v4 py-16 md:py-20 lg:py-24\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
+      "content": "import { StatsSectionV1Content } from \"../stats-section-v1/stats-section-v1\"\n\nimport { HeroV4Root } from \"./components/hero-v4-root\"\n\nimport \"./styles/hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"hero-v4 py-10 md:py-14 lg:py-16\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v4/hero-section-v4.tsx"
     },

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-section-v4",
+  "title": "Feature Section v4",
+  "description": "Industrial-style three-card feature grid with uppercase heading, blank top card placeholders, and compact data-first copy.",
+  "dependencies": [
+    "geist@^1.7.0"
+  ],
+  "registryDependencies": [
+    "badge",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/page.tsx",
+      "content": "import FeatureSectionV4 from \"./feature-section-v4\"\n\nexport default function Page() {\n  return <FeatureSectionV4 />\n}\n",
+      "type": "registry:page",
+      "target": "app/feature-section-v4/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/feature-section-v4.tsx",
+      "content": "import FeatureGrid from \"./components/feature-grid\"\n\nexport default function FeatureSectionV4() {\n  \n  const featureImageById = {\n    \"cognitive-ai\": \"/images/blocks/feature-section-v4/feature-section-v4-brain.png\",\n    \"global-reach\": \"/images/blocks/feature-section-v4/feature-section-v4-planet.png\",\n    \"limitless-growth\": \"/images/blocks/feature-section-v4/feature-section-v4-hand.png\",\n  } as const\n\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"mb-9 grid gap-3 lg:mb-11 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end lg:gap-10\">\n          <h2 className=\"max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-medium uppercase leading-[1.06] tracking-[-0.02em]\">\n            Built for What&apos;s Possible\n          </h2>\n          <p className=\"max-w-[42ch] text-[0.9375rem] font-normal leading-[1.72] text-muted-foreground lg:pb-1\">\n            When you are building what comes next, you need tools that learn from\n            real use, work across regions, and grow with every goal you add.\n          </p>\n        </div>\n        <FeatureGrid imageById={featureImageById} />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v4/feature-section-v4.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/components/feature-grid.tsx",
+      "content": "import Image from \"next/image\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport {\n  Card,\n  CardContent,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { featureSectionItems } from \"../lib/features\"\nimport \"../styles/feature-grid.css\"\n\ntype FeatureId = (typeof featureSectionItems)[number][\"id\"]\n\ntype FeatureGridProps = {\n  imageById: Record<FeatureId, string>\n}\n\nexport default function FeatureGrid({ imageById }: FeatureGridProps) {\n  return (\n    <ul className=\"fsv4-grid\">\n      {featureSectionItems.map(({ id, labelPrimary, labelSecondary, title, points }) => (\n        <li key={id} className=\"fsv4-cell\">\n          <Card className=\"fsv4-card relative h-full w-full\">\n            {/* Card photo filter: edit here (e.g. grayscale, grayscale-[50%], grayscale-0). */}\n            <Image\n              alt=\"\"\n              aria-hidden={true}\n              className=\"z-0 object-cover object-center grayscale\"\n              fill\n              loading=\"lazy\"\n              sizes=\"(max-width: 1023px) 100vw, 33vw\"\n              src={imageById[id]}\n            />\n            <div className=\"pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-black via-black/80 to-black/10\" />\n            <div className=\"relative z-20 mt-auto flex flex-col\">\n              <CardHeader className=\"fsv4-card-header grid gap-2 px-[0.72rem] pb-3! pt-2! sm:px-4 sm:pb-3.5! sm:pt-2.5!\">\n                <div className=\"flex flex-wrap gap-1.5\">\n                  <Badge\n                    className=\"h-auto rounded-md border border-[#cfcfcf] bg-[#f3f3f3] py-0.5 text-[0.68rem] font-semibold uppercase leading-none tracking-[0.03em] text-[#111] hover:bg-[#e8e8e8] dark:hover:bg-[#e8e8e8]\"\n                  >\n                    {labelPrimary}\n                  </Badge>\n                  <Badge\n                    className=\"h-auto rounded-md border border-[#cfcfcf] bg-[#f3f3f3] py-0.5 text-[0.68rem] font-semibold uppercase leading-none tracking-[0.03em] text-[#111] hover:bg-[#e8e8e8] dark:hover:bg-[#e8e8e8]\"\n                  >\n                    {labelSecondary}\n                  </Badge>\n                </div>\n                <CardTitle className=\"fsv4-card-title font-mono text-[#efefef]\">\n                  {title}\n                </CardTitle>\n              </CardHeader>\n              <CardContent className=\"fsv4-card-content px-[0.72rem] pb-4 pt-0 sm:px-4\">\n                <ul className=\"fsv4-points\">\n                  {points.map((point) => (\n                    <li key={point}>{point}</li>\n                  ))}\n                </ul>\n              </CardContent>\n            </div>\n          </Card>\n        </li>\n      ))}\n    </ul>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v4/components/feature-grid.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/styles/feature-grid.css",
+      "content": ".fsv4-grid {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 0.75rem;\n}\n\n@media (min-width: 640px) {\n  .fsv4-grid {\n    gap: 0.85rem;\n  }\n}\n\n@media (min-width: 1024px) {\n  .fsv4-grid {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n    gap: 0.9rem;\n  }\n}\n\n.fsv4-cell {\n  min-width: 0;\n}\n\n.fsv4-card {\n  display: flex;\n  flex-direction: column;\n  min-height: 17rem;\n  gap: 0;\n  padding: 0;\n}\n\n@media (min-width: 640px) {\n  .fsv4-card {\n    min-height: 20rem;\n  }\n}\n\n@media (min-width: 1024px) {\n  .fsv4-card {\n    min-height: 22rem;\n  }\n}\n\n.fsv4-card-header[data-slot=\"card-header\"] {\n  background: transparent;\n  border-radius: 0;\n}\n\n.fsv4-card-title[data-slot=\"card-title\"] {\n  margin: 0;\n  line-height: 1.28;\n  letter-spacing: -0.015em;\n  min-height: calc(1.03rem * 1.28 * 2);\n  text-transform: uppercase;\n  font-size: 1.03rem;\n  font-weight: 600;\n}\n\n.fsv4-points {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  display: grid;\n  gap: 0.22rem;\n  color: #c8cccc;\n  font-family: var(--font-mono, ui-monospace, monospace);\n  text-transform: uppercase;\n  font-size: 0.73rem;\n  line-height: 1.5;\n  letter-spacing: 0.025em;\n}\n\n.fsv4-points li {\n  position: relative;\n  padding-left: 0.92rem;\n}\n\n.fsv4-points li::before {\n  content: \"✶\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  color: #cfd3d3;\n}\n",
+      "type": "registry:file",
+      "target": "app/feature-section-v4/styles/feature-grid.css"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/lib/features.ts",
+      "content": "export type FeatureDefinition = {\n  id: \"cognitive-ai\" | \"global-reach\" | \"limitless-growth\"\n  labelPrimary: string\n  labelSecondary: string\n  title: string\n  points: [string, string]\n}\n\nexport const featureSectionItems: FeatureDefinition[] = [\n  {\n    id: \"cognitive-ai\",\n    labelPrimary: \"AI\",\n    labelSecondary: \"Intelligence\",\n    title: \"Cognitive AI Engine\",\n    points: [\"Learns from every interaction\", \"Surfaces insights instantly\"],\n  },\n  {\n    id: \"global-reach\",\n    labelPrimary: \"Global\",\n    labelSecondary: \"Scale\",\n    title: \"Planetary-Scale Reach\",\n    points: [\"Deploys across every region\", \"Connects teams worldwide\"],\n  },\n  {\n    id: \"limitless-growth\",\n    labelPrimary: \"Growth\",\n    labelSecondary: \"Ambition\",\n    title: \"Reach Beyond Limits\",\n    points: [\"Built for what's next\", \"Grows with your vision\"],\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/feature-section-v4/lib/features.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v4/styles/feature-section-v4.css",
+      "content": "/* feature-section v4 — section shell */\n\n.fsv4-section {\n  color: var(--foreground);\n}\n",
+      "type": "registry:file",
+      "target": "app/feature-section-v4/styles/feature-section-v4.css"
+    }
+  ],
+  "type": "registry:block"
+}
