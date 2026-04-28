@@ -2,56 +2,43 @@
 
 import { useEffect, useRef, useCallback } from "react"
 
-// ── Canvas ─────────────────────────────────────────────────
 const W = 800
 const H = 352
 const GROUND_Y = H - 72
 
-// ── Physics (normalized to 60fps ticks) ────────────────────
 const GRAVITY = 0.6
 const JUMP_VEL = -13
-const INITIAL_SPEED = 6
-const SPEED_INC = 0.004
-const MAX_SPEED = 13
+const INITIAL_SPEED = 5
+const SPEED_INC = 0.002    // max speed reached ~score 30000 (~8–10 min)
+const MAX_SPEED = 40       // ~800px/40 = 20 frames cactus transit — edge of human reaction
 const FRAME_MS = 1000 / 60
 
-// ── Sprite sheet (2× / HDPI) ───────────────────────────────
 const SPRITE_URL = "https://trex-runner.com/img/offline-sprite-2x.png"
 
-// T-Rex for trex-runner sprite sheet: base x=1338, y=2, each frame 88×94 in HDPI
 const TX = 1338, TY = 2, TW = 88, TH = 94
-// Frame x-offsets from TX (1× offset × 2 for HDPI sheet):
-//   jump=0, blink=88, run1=176, run2=264, crash=440
 const FR = { JUMP: 0, RUN1: 176, RUN2: 264, CRASH: 440 }
 
-// 2x sprite sheet -> logical game units (0.5), then upscale for this canvas.
 const SPRITE_NATIVE_SCALE = 0.5
 const GAME_SCALE = 1.5
 const SPRITE_SCALE = SPRITE_NATIVE_SCALE * GAME_SCALE
 const scaleSprite = (value: number) => Math.round(value * SPRITE_SCALE)
 
-// Dino dimensions tuned to match Chrome runner proportions.
-const DX = 80                   // fixed x position
+const DX = 80                   
 const DW = scaleSprite(TW)
 const DH = scaleSprite(TH)
 const REST_Y = GROUND_Y - DH
 
-// Cloud: 92×28 in 2x sheet
 const CL_SX = 166, CL_SY = 2, CL_W = 92, CL_H = 28
 const CL_DW = scaleSprite(CL_W)
 const CL_DH = scaleSprite(CL_H)
 
-// Small cactus: units packed from x=446, each unit 34px wide, 70px tall
 const SC_SX = 446, SC_SY = 2, SC_UW = 34, SC_H = 70
-// Large cactus: units packed from x=652, each unit 50px wide, 100px tall
 const LC_SX = 652, LC_SY = 2, LC_UW = 50, LC_H = 100
 
-// Horizon strip: source 1200×26 at (2,104), 2x sheet
 const HZ_SX = 2, HZ_SY = 104, HZ_SW = 1200, HZ_SH = 26
 const HZ_TW = 600
 const HZ_TH = scaleSprite(HZ_SH)
 
-// ── Types ──────────────────────────────────────────────────
 type CactusKind = "S" | "L"
 interface Cactus { x: number; kind: CactusKind; units: number; w: number; h: number }
 interface Cloud  { x: number; y: number }
@@ -67,7 +54,6 @@ interface State {
   landingBlend: number
 }
 
-// ── Helpers ────────────────────────────────────────────────
 function makeState(hiScore = 0): State {
   return {
     started: false, running: false, dead: false,
@@ -81,9 +67,11 @@ function makeState(hiScore = 0): State {
   }
 }
 
-function spawnCactus(): Cactus {
+function spawnCactus(score = 0): Cactus {
   const kind: CactusKind = Math.random() < 0.5 ? "S" : "L"
-  const units = Math.ceil(Math.random() * 3)
+  const bigClusterChance = Math.min(0.45, score / 8000)
+  const maxUnits = Math.random() < bigClusterChance ? 4 : 3
+  const units = Math.ceil(Math.random() * maxUnits)
   const uw = kind === "S" ? SC_UW : LC_UW
   const h  = kind === "S" ? SC_H  : LC_H
   return {
@@ -95,16 +83,18 @@ function spawnCactus(): Cactus {
   }
 }
 
-function cactusGap(speed: number): number {
-  // Keep obstacle cadence close to Chrome Dino:
-  // wider time gaps at low speed, tighter gaps as speed increases.
-  const speedRatio = speed / INITIAL_SPEED
-  const minGap = Math.max(45, Math.round(78 / speedRatio))
-  const maxGap = Math.max(minGap + 20, Math.round(150 / speedRatio))
-  return minGap + Math.floor(Math.random() * (maxGap - minGap + 1))
-}
+const SAFE_GAP_FRAMES = 62
 
-// ── Draw functions ─────────────────────────────────────────
+function cactusGap(speed: number, score: number): number {
+  const progress = score / 5000  
+  const minGapPx = Math.round(550 - progress * 250)  
+  const maxGapPx = Math.round(1000 - progress * 400)  
+
+  const minFrames = Math.max(SAFE_GAP_FRAMES, Math.round(minGapPx / speed))
+  const maxFrames = Math.max(minFrames + 20, Math.round(maxGapPx / speed))
+
+  return minFrames + Math.floor(Math.random() * (maxFrames - minFrames + 1))
+}
 
 function drawBg(ctx: CanvasRenderingContext2D, sprite: boolean) {
   ctx.fillStyle = sprite ? "#f7f7f7" : "#181818"
@@ -151,7 +141,6 @@ function drawDino(
           ? FR.RUN1
           : FR.RUN2
   if (img) {
-    // Snap to pixel grid to avoid apparent clipping/jitter between run frames.
     ctx.drawImage(img, TX + offset, TY, TW, TH, Math.round(DX), Math.round(y), DW, DH)
   } else {
     drawDinoFallback(ctx, DX, y, onGround, legFrame, dead)
@@ -205,6 +194,35 @@ function drawScore(
   ctx.fillText(String(Math.floor(score)).padStart(5, "0"), W - 60, 26)
 }
 
+function drawHUD(
+  ctx: CanvasRenderingContext2D,
+  fps: number,
+  speed: number,
+  sprite: boolean,
+) {
+  const ratio = Math.min(1, (speed - INITIAL_SPEED) / (MAX_SPEED - INITIAL_SPEED))
+  ctx.font = "bold 11px 'Courier New', Courier, monospace"
+
+  ctx.fillStyle = sprite ? "#aaaaaa" : "#666666"
+  ctx.fillText(`FPS ${String(fps).padStart(2)}`, 12, 18)
+
+  ctx.fillText("SPD", 12, 34)
+
+  const barX = 46, barY = 25, barW = 72, barH = 7
+  const filled = Math.round(barW * ratio)
+
+  ctx.fillStyle = sprite ? "#dddddd" : "#2a2a2a"
+  ctx.fillRect(barX, barY, barW, barH)
+
+  const r = Math.min(255, Math.round(ratio * 2 * 255))
+  const g = Math.min(255, Math.round((1 - ratio) * 1.6 * 255))
+  ctx.fillStyle = sprite ? `rgb(${r},${g},0)` : `rgb(${r},${g},50)`
+  ctx.fillRect(barX, barY, filled, barH)
+
+  ctx.fillStyle = sprite ? "#535353" : "#888888"
+  ctx.fillText(speed.toFixed(1), barX + barW + 5, 34)
+}
+
 function drawPrompt(ctx: CanvasRenderingContext2D, text: string, sprite: boolean) {
   ctx.fillStyle = sprite ? "#535353" : "#cccccc"
   ctx.font = "bold 14px 'Courier New', Courier, monospace"
@@ -224,7 +242,6 @@ function drawGameOver(ctx: CanvasRenderingContext2D, sprite: boolean) {
   ctx.textAlign = "left"
 }
 
-// ── Pixel-art dino fallback (dark theme) ───────────────────
 const S = 2
 function drawDinoFallback(
   ctx: CanvasRenderingContext2D,
@@ -232,18 +249,18 @@ function drawDinoFallback(
   onGround: boolean, legFrame: number, dead: boolean,
 ) {
   ctx.fillStyle = "#535353"
-  ctx.fillRect(x + 6*S, y,         5*S, 2*S)   // crown
-  ctx.fillRect(x + 5*S, y + 1*S,   8*S, 7*S)   // head
-  ctx.fillRect(x +11*S, y + 7*S,   3*S, 1*S)   // jaw
-  ctx.fillRect(x + 3*S, y + 5*S,   5*S, 4*S)   // neck
-  ctx.fillRect(x + 0*S, y + 7*S,  13*S, 6*S)   // body
+  ctx.fillRect(x + 6*S, y,         5*S, 2*S)   
+  ctx.fillRect(x + 5*S, y + 1*S,   8*S, 7*S)   
+  ctx.fillRect(x +11*S, y + 7*S,   3*S, 1*S)   
+  ctx.fillRect(x + 3*S, y + 5*S,   5*S, 4*S)   
+  ctx.fillRect(x + 0*S, y + 7*S,  13*S, 6*S)   
   ctx.fillRect(x + 1*S, y +12*S,  11*S, 2*S)
   ctx.fillRect(x + 2*S, y +13*S,   8*S, 1*S)
-  ctx.fillRect(x + 0*S, y + 8*S,   2*S, 5*S)   // tail
-  ctx.fillRect(x + 7*S, y + 9*S,   4*S, 2*S)   // arm
+  ctx.fillRect(x + 0*S, y + 8*S,   2*S, 5*S)   
+  ctx.fillRect(x + 7*S, y + 9*S,   4*S, 2*S)   
   ctx.fillRect(x +10*S, y +10*S,   2*S, 2*S)
   ctx.fillStyle = "#1e1e1e"
-  ctx.fillRect(x +10*S, y + 2*S,   2*S, 2*S)   // eye
+  ctx.fillRect(x +10*S, y + 2*S,   2*S, 2*S)   
   if (dead) {
     ctx.fillStyle = "#535353"
     ctx.fillRect(x + 9*S, y + 1*S, 4*S, 4*S)
@@ -274,7 +291,6 @@ function drawDinoFallback(
   }
 }
 
-// ── Collision ──────────────────────────────────────────────
 function hitTest(dinoY: number, c: Cactus): boolean {
   const PAD = 10
   return (
@@ -285,13 +301,13 @@ function hitTest(dinoY: number, c: Cactus): boolean {
   )
 }
 
-// ── Component ──────────────────────────────────────────────
 export default function TrexRunner() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const stateRef  = useRef<State>(makeState())
   const rafRef    = useRef<number>(0)
   const imgRef    = useRef<HTMLImageElement | null>(null)
   const lastTsRef = useRef<number>(0)
+  const fpsTsRef  = useRef<number[]>([])
 
   const jump = useCallback(() => {
     const s = stateRef.current
@@ -303,14 +319,12 @@ export default function TrexRunner() {
     if (s.onGround)  { s.dinoVY = JUMP_VEL; s.onGround = false }
   }, [])
 
-  // Sprite loader
   useEffect(() => {
     const img = new Image()
     img.onload = () => { imgRef.current = img }
     img.src = SPRITE_URL
   }, [])
 
-  // Game loop
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -320,11 +334,17 @@ export default function TrexRunner() {
     function tick(ts: number) {
       const s   = stateRef.current
       const img = imgRef.current
-      const sp  = img?.complete ?? false  // sprite ready?
+      const sp  = img?.complete ?? false  
       const prevTs = lastTsRef.current || ts
       const dtMs = Math.min(100, ts - prevTs)
       const frameStep = dtMs / FRAME_MS
       lastTsRef.current = ts
+
+      fpsTsRef.current.push(ts)
+      while (fpsTsRef.current.length > 0 && ts - fpsTsRef.current[0] > 1000) {
+        fpsTsRef.current.shift()
+      }
+      const fps = fpsTsRef.current.length
 
       drawBg(ctx, sp)
 
@@ -360,7 +380,6 @@ export default function TrexRunner() {
           s.dinoVY = 0
           s.onGround = true
           if (wasAirborne) {
-            // Briefly hold the first run frame before alternating legs.
             s.landingBlend = 4
             s.legFrame = 0
             s.runAnimTick = 0
@@ -381,8 +400,8 @@ export default function TrexRunner() {
 
         s.nextCactus -= frameStep
         if (s.nextCactus <= 0) {
-          s.cacti.push(spawnCactus())
-          s.nextCactus = cactusGap(s.speed)
+          s.cacti.push(spawnCactus(s.score))
+          s.nextCactus = cactusGap(s.speed, s.score)
         }
         s.cacti = s.cacti
           .map(c => ({ ...c, x: c.x - s.speed * frameStep }))
@@ -400,6 +419,7 @@ export default function TrexRunner() {
       s.cacti.forEach(c   => drawCactus(ctx, img, c))
       drawDino(ctx, img, s.dinoY, s.onGround, s.legFrame, s.landingBlend, s.dead)
       drawScore(ctx, s.score, s.hiScore, sp)
+      drawHUD(ctx, fps, s.speed, sp)
       if (s.dead) drawGameOver(ctx, sp)
 
       rafRef.current = requestAnimationFrame(tick)
@@ -409,7 +429,6 @@ export default function TrexRunner() {
     return () => cancelAnimationFrame(rafRef.current)
   }, [])
 
-  // Keyboard
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); jump() }
@@ -419,18 +438,19 @@ export default function TrexRunner() {
   }, [jump])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={W}
-      height={H}
-      onClick={jump}
-      className="w-full cursor-pointer"
-      style={{
-        height: "22rem",
-        imageRendering: "pixelated",
-        touchAction: "manipulation",
-      }}
-      aria-label="Dino runner — press Space or tap to play"
-    />
+    <div className="h-96 overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        width={W}
+        height={H}
+        onClick={jump}
+        className="h-full w-full cursor-pointer"
+        style={{
+          imageRendering: "pixelated",
+          touchAction: "manipulation",
+        }}
+        aria-label="Dino runner — press Space or tap to play"
+      />
+    </div>
   )
 }

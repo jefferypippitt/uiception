@@ -10,10 +10,17 @@ import PromptShell from "@/registry/new-york/blocks/cursor-terminal/components/p
 import PanelIconButton from "@/registry/new-york/blocks/cursor-terminal/components/panel-icon-button"
 import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/lib/config"
 import TrexRunner from "./trex-runner"
+import Wordle from "./wordle"
+import ReactionTime from "./reaction-time"
 
 import "@/registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css"
 
-const PANEL_TABS = ["Problems", "Output", "Debug Console", "Terminal", "trex-runner", "Ports", "GitLens"] as const
+const PANEL_TABS = [
+  "Terminal",
+  "Trex Runner",
+  "Wordle",
+  "Reaction Time",
+] as const
 
 function colorCls(c?: LineColor) {
   if (c === "green") return "text-[#16c60c]"
@@ -54,7 +61,16 @@ export function CursorTerminal() {
         <div className="flex min-w-0 flex-1 items-stretch overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {PANEL_TABS.map((name) => {
             const active = name === activeTab
-            const isTrexTab = name === "trex-runner"
+            const tabAccent =
+              name === "Trex Runner"
+                ? "border-t border-t-[#d7ba2f]"
+                : name === "Wordle"
+                  ? "border-t border-t-[#16c60c]"
+                  : name === "Reaction Time"
+                    ? "border-t border-t-[#4fc1ff]"
+                  : name === "Terminal"
+                    ? "border-t border-t-[#007fd4]"
+                    : "border-t border-t-transparent"
             return (
               <button
                 key={name}
@@ -63,13 +79,10 @@ export function CursorTerminal() {
                 className={cn(
                   "shrink-0 px-3 text-[11px] transition-colors",
                   active
-                    ? cn(
-                        "bg-[#1e1e1e] text-[#e8e8e8]",
-                        isTrexTab ? "border-t border-t-[#d7ba2f]" : "border-t border-t-[#007fd4]",
-                      )
+                    ? cn("bg-[#1e1e1e] text-[#e8e8e8]", tabAccent)
                     : cn(
                         "text-[#858585] hover:text-[#c0c0c0]",
-                        isTrexTab ? "border-t border-t-[#d7ba2f]" : "border-t border-t-transparent",
+                        tabAccent,
                       ),
                 )}
               >
@@ -106,8 +119,12 @@ export function CursorTerminal() {
         </div>
       </div>
 
-      {activeTab === "trex-runner" ? (
+      {activeTab === "Trex Runner" ? (
         <TrexRunner />
+      ) : activeTab === "Wordle" ? (
+        <Wordle />
+      ) : activeTab === "Reaction Time" ? (
+        <ReactionTime />
       ) : (
         <>
           <div
