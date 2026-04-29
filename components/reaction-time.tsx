@@ -1,5 +1,6 @@
 "use client"
 
+import { RotateCcw } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -108,8 +109,8 @@ export default function ReactionTime() {
       : phase === "waiting"
         ? "bg-[#e74856]"
         : phase === "too-soon"
-          ? "bg-[#35171c]"
-          : "bg-[#1a1a1a]"
+          ? "bg-[#d7ba2f]"
+          : "bg-black"
 
   const heading =
     phase === "waiting"
@@ -136,59 +137,97 @@ export default function ReactionTime() {
   )
   const speedBand = SPEED_BANDS.find((band) => averageMs >= band.minMs) ?? SPEED_BANDS[0]
 
+  const sessionBestMs =
+    attempts.length > 0 ? Math.min(...attempts) : null
+  const attemptsLabel = `${attempts.length}/${TOTAL_ATTEMPTS}`
+  const bestDisplay =
+    sessionBestMs != null ? `${sessionBestMs}\u00a0ms` : "—"
+
   return (
     <div
-      className="flex h-96 min-h-0 flex-col bg-[#121212] p-0 text-[#d7dadc]"
+      className="flex h-96 min-h-0 flex-col overflow-hidden bg-black text-[#d7dadc]"
       aria-label="Reaction time test game"
     >
-      {phase === "completed" ? (
-        <div className="relative flex h-full flex-col items-center justify-center bg-[#1a1a1a] p-6">
-          <div className="w-full max-w-md text-center">
-            <p className="text-sm uppercase tracking-[0.2em] text-[#9aa0a6]">Average Score</p>
-            <p className="mt-2 font-mono text-5xl font-semibold tracking-tight text-white">{averageMs}ms</p>
-          </div>
+      <div
+        className="flex w-full min-w-0 shrink-0 items-baseline justify-between gap-4 border-b border-white/8 px-2.5 pt-1.5 pb-1.5 text-[11px] leading-tight sm:px-3 sm:text-xs"
+        aria-label="Attempts and best time this session"
+      >
+        <div className="min-w-0 text-left">
+          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+            Attempts
+          </span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
+            {attemptsLabel}
+          </span>
+        </div>
+        <div className="min-w-0 text-right">
+          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+            Best
+          </span>
+          <span className="font-mono text-[12px] tabular-nums tracking-tight text-white/90 sm:text-sm">
+            {bestDisplay}
+          </span>
+        </div>
+      </div>
 
-          <div className="mt-5 w-full max-w-sm">
-            <p className="mb-1.5 text-left text-[11px] uppercase tracking-[0.12em] text-[#9aa0a6]">
-              Percentile
-            </p>
-            <div className="h-7 overflow-hidden border border-white/20 bg-[#0f0f0f]">
-              <div
-                className="flex h-full items-center justify-between px-2 text-xs font-semibold text-white transition-all"
-                style={{
-                  width: `${Math.max(percentile, 8)}%`,
-                  backgroundColor: speedBand.color,
-                }}
-              >
-                <span className="truncate">{speedBand.label}</span>
-                <span>{percentile}%</span>
+      {phase === "completed" ? (
+        <div className="relative flex min-h-0 w-full min-w-0 flex-1 flex-col items-center justify-center bg-black px-2.5 py-4 sm:px-3">
+          <div className="flex w-full max-w-sm flex-col gap-5">
+            <div className="text-center">
+              <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+                Average score
+              </span>
+              <p className="mt-1.5 font-mono text-4xl font-semibold tabular-nums tracking-tight text-white sm:text-5xl">
+                {averageMs}
+                <span className="ml-1 text-white/85">ms</span>
+              </p>
+            </div>
+
+            <div className="w-full">
+              <p className="mb-1.5 text-left text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+                Percentile
+              </p>
+              <div className="h-8 overflow-hidden rounded-sm border border-white/15 bg-[#0f0f0f]">
+                <div
+                  className="flex h-full min-w-0 items-center justify-between gap-2 px-2.5 font-mono text-[11px] font-semibold tabular-nums tracking-tight text-white transition-[width] duration-300 sm:text-sm"
+                  style={{
+                    width: `${Math.max(percentile, 8)}%`,
+                    backgroundColor: speedBand.color,
+                  }}
+                >
+                  <span className="min-w-0 truncate">{speedBand.label}</span>
+                  <span className="shrink-0">{percentile}%</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="absolute right-2 bottom-1.5 flex max-w-[50%] flex-wrap items-center justify-end gap-1 text-[10px] leading-tight">
+          <div className="absolute right-2.5 bottom-3 sm:right-3">
             <button
               type="button"
               onClick={handlePlayAgain}
-              className="shrink-0 rounded border border-white/20 px-1.5 py-px font-mono text-[10px] font-semibold tracking-[0.05em] outline-none hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] disabled:opacity-50"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white outline-none transition hover:bg-white/25 focus-visible:ring-1 focus-visible:ring-white/80 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20"
+              aria-label="Play again"
             >
-              Play Again
+              <RotateCcw className="h-5 w-5" aria-hidden />
             </button>
           </div>
 
-          <div className="absolute bottom-1.5 left-2 right-20">
-            <p className="mb-1 text-left text-[10px] uppercase tracking-widest text-[#7f7f7f]">
-              Speed Legend
+          <div className="absolute bottom-1.5 left-2.5 right-20 sm:left-3">
+            <p className="mb-1 text-left text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+              Speed legend
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               {SPEED_BANDS.map((band) => (
                 <div key={band.label} className="flex items-center gap-1.5">
                   <span
-                    className="h-2.5 w-2.5 shrink-0 border border-white/20"
+                    className="h-2.5 w-6 shrink-0 rounded-full border border-white/20"
                     style={{ backgroundColor: band.color }}
                     aria-hidden
                   />
-                  <span className="font-mono text-[9px] text-[#9aa0a6]">{band.label}</span>
+                  <span className="font-mono text-[11px] font-semibold tabular-nums tracking-tight text-white/90 sm:text-sm">
+                    {band.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -199,13 +238,10 @@ export default function ReactionTime() {
           type="button"
           onClick={handlePrimaryAction}
           className={cn(
-            "relative flex min-h-0 flex-1 items-center justify-center p-4 text-center outline-none transition-colors focus-visible:ring-1 focus-visible:ring-[#4fc1ff] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121212]",
+            "relative flex min-h-0 w-full min-w-0 flex-1 items-center justify-center rounded-none border-0 px-3 py-6 text-center outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#4fc1ff] focus-visible:ring-inset sm:px-4",
             panelCls
           )}
         >
-          <p className="absolute top-3 left-3 text-xs font-medium tracking-wide text-[#d7dadc]">
-            Attempts: {attempts.length}/{TOTAL_ATTEMPTS}
-          </p>
           <div className="font-mono">
             <p className="text-[34px] font-semibold tracking-tight">{heading}</p>
             {helperText ? <p className="mt-2 text-sm text-[#d7dadc]">{helperText}</p> : null}

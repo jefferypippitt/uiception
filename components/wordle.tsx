@@ -330,7 +330,7 @@ export default function Wordle() {
     if (result === "present") return "border-[#c9b458] bg-[#c9b458] text-white"
     if (result === "absent") return "border-[#3a3a3c] bg-[#3a3a3c] text-white"
     if (hasLetter) return "border-[#565758] bg-transparent text-[#d7dadc]"
-    return "border-[#3a3a3c] bg-transparent text-transparent"
+    return "border-white/10 bg-white/5 text-transparent"
   }
 
   function keyCapClasses(ch: string): string {
@@ -351,17 +351,36 @@ export default function Wordle() {
   return (
     <div
       data-wordle-root
-      className="relative flex h-96 min-h-0 flex-col bg-[#121213] px-1.5 py-1 text-[#d7dadc]"
+      className="relative flex h-96 min-h-0 flex-col bg-black px-1.5 py-1 text-[#d7dadc]"
       aria-label="Word guessing game"
     >
-      <div className="flex items-start justify-between font-mono text-[9px] leading-tight text-[#7f7f7f]">
-        <p className="font-medium tracking-[0.06em]">
-          {`Daily #${puzzleNumber}`}
-        </p>
-        <div className="text-right">
-          <p className="font-medium tracking-[0.06em]">
-            {`Local ${formattedLocalDate}`}
-          </p>
+      <div
+        className="flex shrink-0 items-baseline gap-x-1 border-b border-white/8 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
+        aria-label="Daily puzzle and reset time"
+      >
+        <div className="min-w-0 flex-1 text-left">
+          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+            Daily
+          </span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
+            #{puzzleNumber}
+          </span>
+        </div>
+        <div className="min-w-0 flex-1 border-x border-white/6 px-1.5 text-center sm:px-2">
+          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+            Local
+          </span>
+          <span className="font-mono text-[12px] tabular-nums text-white/90 sm:text-sm">
+            {formattedLocalDate}
+          </span>
+        </div>
+        <div className="min-w-0 flex-1 text-right">
+          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+            Next word
+          </span>
+          <span className="font-mono text-[12px] tabular-nums tracking-tight text-white/90 sm:text-sm">
+            {nextPuzzleCountdown}
+          </span>
         </div>
       </div>
 
@@ -481,15 +500,11 @@ export default function Wordle() {
         </div>
       </div>
 
-      <p className="absolute bottom-1.5 left-2 font-mono text-[9px] leading-tight font-medium tracking-[0.06em] text-[#7f7f7f]">
-        Next Word {nextPuzzleCountdown}
-      </p>
-
       {status === "won" && <ConfettiCanvas />}
 
       {(status === "won" || status === "lost") && (
         <div className="absolute right-2 bottom-1.5 flex items-center gap-1.5">
-          <span className="font-mono text-[10px] font-medium tracking-[0.02em] text-[#d7dadc]">
+          <span className="font-mono text-[12px] font-semibold tabular-nums tracking-tight text-white sm:text-sm">
             {status === "won"
               ? "You won!"
               : revealedAnswer
@@ -500,7 +515,7 @@ export default function Wordle() {
             <button
               type="button"
               onClick={resetBoard}
-              className="shrink-0 rounded border border-white/20 px-1.5 py-px font-mono text-[10px] font-semibold tracking-[0.05em] outline-none hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213]"
+              className="shrink-0 rounded border border-white/20 px-1.5 py-px font-mono text-[11px] font-semibold tracking-wide outline-none hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] sm:text-xs"
             >
               Try Again
             </button>
