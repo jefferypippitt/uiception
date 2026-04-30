@@ -1,8 +1,24 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ChevronUp, MoreHorizontal, Plus, Terminal, X } from "lucide-react"
+import {
+  ChevronDown,
+  ChevronUp,
+  MoreHorizontal,
+  Plus,
+  Terminal,
+  Volume2,
+  VolumeX,
+  X,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
+import {
+  SoundPreferenceProvider,
+  useSoundPreference,
+} from "@/contexts/sound-preference"
+import { playSound } from "@/lib/sound-engine"
+import { switchOffSound } from "@/lib/switch-off"
+import { switchOnSound } from "@/lib/switch-on"
 
 import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation"
 import Spinner from "@/registry/new-york/blocks/cursor-terminal/components/spinner"
@@ -53,11 +69,41 @@ function renderFirstStepCommand(text: string) {
   )
 }
 
+function TerminalSoundToggle() {
+  const { soundEnabled, setSoundEnabled } = useSoundPreference()
+
+  return (
+    <PanelIconButton
+      label={soundEnabled ? "Mute game sounds" : "Unmute game sounds"}
+      ariaPressed={soundEnabled}
+      tabIndex={0}
+      onClick={() => {
+        if (soundEnabled) {
+          void playSound(switchOffSound.dataUri, { volume: 0.32 })
+          setSoundEnabled(false)
+        } else {
+          setSoundEnabled(true)
+          queueMicrotask(() => {
+            void playSound(switchOnSound.dataUri, { volume: 0.32 })
+          })
+        }
+      }}
+    >
+      {soundEnabled ? (
+        <Volume2 className={ICON_SM} aria-hidden />
+      ) : (
+        <VolumeX className={ICON_SM} aria-hidden />
+      )}
+    </PanelIconButton>
+  )
+}
+
 export function CursorTerminal() {
   const { lines, prompt, scrollRef } = useTerminalAnimation()
   const [activeTab, setActiveTab] = useState<string>("Terminal")
 
   return (
+    <SoundPreferenceProvider>
     <div className="crt-terminal w-full overflow-hidden rounded-md border border-white/8 bg-[#1e1e1e] shadow-lg shadow-black/40">
       <div className="flex h-9 min-h-9 select-none items-stretch border-b border-white/6 bg-[#252526]">
         <div className="flex min-w-0 flex-1 items-stretch overflow-x-auto [&::-webkit-scrollbar]:hidden">
@@ -97,6 +143,7 @@ export function CursorTerminal() {
         </div>
 
         <div className="flex shrink-0 items-center gap-px pr-1 pl-2">
+          <TerminalSoundToggle />
           <button
             type="button"
             aria-hidden
@@ -172,5 +219,6 @@ export function CursorTerminal() {
         </>
       )}
     </div>
+    </SoundPreferenceProvider>
   )
 }

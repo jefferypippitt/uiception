@@ -3,10 +3,6 @@
   "style": "radix-nova",
   "rsc": true,
   "tsx": true,
-  "registries": {
-    "@svgl": "https://svgl.app/r/{name}.json",
-    "@uiception": "https://uiception.com/r/{name}.json"
-  },
   "tailwind": {
     "config": "",
     "css": "app/globals.css",
@@ -14,6 +10,7 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
@@ -21,5 +18,9 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "iconLibrary": "lucide"
+  "registries": {
+    "@svgl": "https://svgl.app/r/{name}.json",
+    "@uiception": "https://uiception.com/r/{name}.json",
+    "@soundcn": "https://soundcn.xyz/r/{name}.json"
+  }
 }

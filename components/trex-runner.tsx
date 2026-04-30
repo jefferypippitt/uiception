@@ -1,6 +1,10 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
+import { useSound } from "@/hooks/use-sound"
+import { useOptionalSoundPreference } from "@/contexts/sound-preference"
+import { select008Sound } from "@/lib/select-008"
+import { uEscapeScreenOpenSound } from "@/lib/u-escape-screen-open"
 
 const W = 800
 const H = 352
@@ -309,6 +313,12 @@ export default function TrexRunner() {
   const lastTsRef = useRef<number>(0)
   const fpsTsRef  = useRef<number[]>([])
 
+  const soundEnabled = useOptionalSoundPreference()
+  const [playJumpSound] = useSound(select008Sound, { volume: 0.35, interrupt: true, soundEnabled })
+  const [playCrashSound] = useSound(uEscapeScreenOpenSound, { volume: 0.5, interrupt: true, soundEnabled })
+  const playCrashRef = useRef(playCrashSound)
+  playCrashRef.current = playCrashSound
+
   const jump = useCallback(() => {
     const s = stateRef.current
     if (s.dead) {
@@ -316,8 +326,12 @@ export default function TrexRunner() {
       return
     }
     if (!s.started) { s.started = true; s.running = true; return }
-    if (s.onGround)  { s.dinoVY = JUMP_VEL; s.onGround = false }
-  }, [])
+    if (s.onGround) {
+      playJumpSound()
+      s.dinoVY = JUMP_VEL
+      s.onGround = false
+    }
+  }, [playJumpSound])
 
   useEffect(() => {
     const img = new Image()
@@ -408,6 +422,7 @@ export default function TrexRunner() {
           .filter(c => c.x + c.w > 0)
 
         if (s.cacti.some(c => hitTest(s.dinoY, c))) {
+          playCrashRef.current()
           s.running = false
           s.dead    = true
           if (s.score > s.hiScore) s.hiScore = Math.floor(s.score)

@@ -1,8 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { Delete } from "lucide-react"
+import { Delete, RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useSound } from "@/hooks/use-sound"
+import { useOptionalSoundPreference } from "@/contexts/sound-preference"
+import { switch005Sound } from "@/lib/switch-005"
+import { gFireworkBoomGeneral1Sound } from "@/lib/g-firework-boom-general-1"
+import { back001Sound } from "@/lib/back-001"
+import { select006Sound } from "@/lib/select-006"
 import type { WordleTileResult } from "@/lib/wordle-score"
 import { getWordleTodayMeta } from "@/lib/wordle/client"
 import { submitWordleGuess } from "@/lib/wordle/actions"
@@ -180,6 +186,28 @@ function mergeKeyStates(
 }
 
 export default function Wordle() {
+  const soundEnabled = useOptionalSoundPreference()
+  const [playLetterInput] = useSound(switch005Sound, {
+    volume: 0.35,
+    interrupt: true,
+    soundEnabled,
+  })
+  const [playWin] = useSound(gFireworkBoomGeneral1Sound, {
+    volume: 0.5,
+    interrupt: false,
+    soundEnabled,
+  })
+  const [playBackspace] = useSound(back001Sound, {
+    volume: 0.35,
+    interrupt: true,
+    soundEnabled,
+  })
+  const [playNotInList] = useSound(select006Sound, {
+    volume: 0.4,
+    interrupt: true,
+    soundEnabled,
+  })
+
   const browserTimeZone = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
     []
@@ -250,14 +278,16 @@ export default function Wordle() {
       if (!playing || submitting || draft.length >= COLS) return
       setDraft((d) => d + ch.toLowerCase())
       setHint(null)
+      playLetterInput()
     },
-    [playing, submitting, draft.length]
+    [playing, submitting, draft.length, playLetterInput]
   )
 
   const backspace = useCallback(() => {
     if (!playing || submitting) return
     setDraft((d) => d.slice(0, -1))
-  }, [playing, submitting])
+    playBackspace()
+  }, [playing, submitting, playBackspace])
 
   const submit = useCallback(async () => {
     if (!playing || submitting) return
@@ -277,6 +307,7 @@ export default function Wordle() {
         if (data.error === "not_in_list") {
           setShake(true)
           setHint("Not in word list")
+          playNotInList()
           window.setTimeout(() => setShake(false), 450)
         } else if (data.error === "bad_puzzle") {
           setHint("That puzzle is not available")
@@ -284,6 +315,10 @@ export default function Wordle() {
           setHint("Could not submit guess")
         }
         return
+      }
+
+      if (data.won) {
+        window.setTimeout(() => playWin(), 130)
       }
 
       setRows((r) => [...r, { guess: w, scores: data.scores }])
@@ -298,7 +333,16 @@ export default function Wordle() {
     } finally {
       setSubmitting(false)
     }
-  }, [playing, submitting, draft, rows.length, puzzleNumber, browserTimeZone])
+  }, [
+    playing,
+    submitting,
+    draft,
+    rows.length,
+    puzzleNumber,
+    browserTimeZone,
+    playWin,
+    playNotInList,
+  ])
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -326,19 +370,19 @@ export default function Wordle() {
     result: WordleTileResult | undefined,
     hasLetter: boolean
   ): string {
-    if (result === "correct") return "border-[#6aaa64] bg-[#6aaa64] text-white"
-    if (result === "present") return "border-[#c9b458] bg-[#c9b458] text-white"
-    if (result === "absent") return "border-[#3a3a3c] bg-[#3a3a3c] text-white"
-    if (hasLetter) return "border-[#565758] bg-transparent text-[#d7dadc]"
-    return "border-white/10 bg-white/5 text-transparent"
+    if (result === "correct") return "border-green-800/50 bg-green-950 text-green-300"
+    if (result === "present") return "border-amber-700/50 bg-amber-950 text-amber-300"
+    if (result === "absent") return "border-white/[0.06] bg-white/[0.04] text-white/25"
+    if (hasLetter) return "border-white/30 bg-white/[0.07] text-white/90"
+    return "border-white/[0.07] bg-white/[0.03] text-transparent"
   }
 
   function keyCapClasses(ch: string): string {
     const st = keyStates.get(ch)
-    if (st === "correct") return "bg-[#6aaa64] text-white"
-    if (st === "present") return "bg-[#c9b458] text-white"
-    if (st === "absent") return "bg-[#3a3a3c] text-white"
-    return "bg-[#818384] text-white"
+    if (st === "correct") return "bg-green-950 border border-green-800/40 text-green-300"
+    if (st === "present") return "bg-amber-950 border border-amber-700/40 text-amber-300"
+    if (st === "absent") return "bg-white/[0.03] border border-white/5 text-white/20"
+    return "bg-white/[0.07] border border-white/10 text-white/70 hover:bg-white/[0.12] hover:text-white/90"
   }
 
   const msUntilNextPuzzle = nextLocalMidnightMs(nowMs) - nowMs
@@ -355,7 +399,7 @@ export default function Wordle() {
       aria-label="Word guessing game"
     >
       <div
-        className="flex shrink-0 items-baseline gap-x-1 border-b border-white/8 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
+        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
         aria-label="Daily puzzle and reset time"
       >
         <div className="min-w-0 flex-1 text-left">
@@ -366,7 +410,7 @@ export default function Wordle() {
             #{puzzleNumber}
           </span>
         </div>
-        <div className="min-w-0 flex-1 border-x border-white/6 px-1.5 text-center sm:px-2">
+        <div className="min-w-0 flex-1 px-1.5 text-center sm:px-2">
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Local
           </span>
@@ -422,7 +466,7 @@ export default function Wordle() {
                       <div
                         key={col}
                         className={cn(
-                          "flex aspect-square max-h-[26px] min-h-0 w-full items-center justify-center border font-mono text-[11px] font-semibold tracking-[0.02em] uppercase sm:max-h-[28px] sm:text-xs",
+                          "flex aspect-square max-h-[26px] min-h-0 w-full items-center justify-center rounded-sm border font-mono text-[11px] font-medium tracking-wide uppercase sm:max-h-[28px] sm:text-xs",
                           tileClasses(result, has)
                         )}
                       >
@@ -450,7 +494,7 @@ export default function Wordle() {
                         disabled={submitting}
                         onClick={() => void submit()}
                         className={cn(
-                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded px-0.5 font-mono text-[8px] font-semibold tracking-widest outline-none select-none focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] enabled:cursor-pointer disabled:opacity-50 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
+                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 font-mono text-[8px] font-medium tracking-[0.18em] outline-none select-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
                           keyCapClasses("")
                         )}
                       >
@@ -467,7 +511,7 @@ export default function Wordle() {
                         disabled={submitting}
                         onClick={backspace}
                         className={cn(
-                          "flex h-7 min-w-[32px] shrink-0 items-center justify-center rounded px-1 outline-none focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] enabled:cursor-pointer disabled:opacity-50 sm:h-8 sm:min-w-[36px]",
+                          "flex h-7 min-w-[32px] shrink-0 items-center justify-center rounded-md px-1 outline-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[36px]",
                           keyCapClasses("")
                         )}
                       >
@@ -486,7 +530,7 @@ export default function Wordle() {
                       disabled={submitting}
                       onClick={() => addLetter(key)}
                       className={cn(
-                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded font-mono text-[10px] font-semibold tracking-[0.03em] outline-none focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] enabled:cursor-pointer disabled:opacity-50 sm:h-8 sm:text-[11px]",
+                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md font-mono text-[10px] font-medium tracking-wide outline-none select-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
                         keyCapClasses(key)
                       )}
                     >
@@ -503,24 +547,23 @@ export default function Wordle() {
       {status === "won" && <ConfettiCanvas />}
 
       {(status === "won" || status === "lost") && (
-        <div className="absolute right-2 bottom-1.5 flex items-center gap-1.5">
-          <span className="font-mono text-[12px] font-semibold tabular-nums tracking-tight text-white sm:text-sm">
-            {status === "won"
-              ? "You won!"
-              : revealedAnswer
-                ? `Word: ${revealedAnswer.toUpperCase()}`
-                : "You lost!"}
-          </span>
-          {status === "lost" && (
+        <>
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1">
+<p className="font-mono text-7xl font-bold tracking-[0.25em] text-white/[0.32] uppercase sm:text-8xl">
+              {status === "won" ? "ezpz" : revealedAnswer ?? ""}
+            </p>
+          </div>
+          <div className="absolute right-2 bottom-1.5">
             <button
               type="button"
               onClick={resetBoard}
-              className="shrink-0 rounded border border-white/20 px-1.5 py-px font-mono text-[11px] font-semibold tracking-wide outline-none hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-[#d7ba2f] focus-visible:ring-offset-1 focus-visible:ring-offset-[#121213] sm:text-xs"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white outline-none transition hover:bg-white/25 focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black"
+              aria-label={status === "won" ? "Play again" : "Try again"}
             >
-              Try Again
+              <RotateCcw className="h-4 w-4" aria-hidden />
             </button>
-          )}
-        </div>
+          </div>
+        </>
       )}
 
       <style jsx global>{`
