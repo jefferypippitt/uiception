@@ -28,7 +28,7 @@ export default function Home() {
                         </h1>
 
                         <p className='max-w-3xl font-light tracking-tight md:text-lg'>
-                            Start from sections that feel complete. You change the code, not the grid.
+                            Start from sections that feel complete. Just make it yours.
                         </p>
                     </section>
 

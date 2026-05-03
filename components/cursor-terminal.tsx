@@ -29,6 +29,7 @@ import TrexRunner from "./trex-runner"
 import Wordle from "./wordle"
 import ReactionTime from "./reaction-time"
 import ColorMemory from "./color-memory"
+import SequenceMemory from "./sequence-memory"
 
 import "@/registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css"
 
@@ -38,6 +39,7 @@ const PANEL_TABS = [
   "Wordle",
   "Reaction Time",
   "Color Memory",
+  "Sequence Memory",
 ] as const
 
 function colorCls(c?: LineColor) {
@@ -118,6 +120,8 @@ export function CursorTerminal() {
                     ? "border-t border-t-[#4fc1ff]"
                   : name === "Color Memory"
                     ? "border-t border-t-[#c586f8]"
+                  : name === "Sequence Memory"
+                    ? "border-t border-t-[#f97316]"
                   : name === "Terminal"
                     ? "border-t border-t-[#007fd4]"
                     : "border-t border-t-transparent"
@@ -178,6 +182,8 @@ export function CursorTerminal() {
         <ReactionTime />
       ) : activeTab === "Color Memory" ? (
         <ColorMemory />
+      ) : activeTab === "Sequence Memory" ? (
+        <SequenceMemory />
       ) : (
         <>
           <div

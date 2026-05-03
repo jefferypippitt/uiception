@@ -193,33 +193,33 @@ export default function ReactionTime() {
 
   return (
     <div
-      className="flex h-96 min-h-0 flex-col overflow-hidden bg-black font-sans text-[#d7dadc] antialiased"
+      className="relative flex h-96 min-h-0 flex-col overflow-hidden bg-black px-1.5 py-1 font-sans text-[#d7dadc] antialiased"
       aria-label="Reaction time test game"
     >
       <div
-        className="flex w-full min-w-0 shrink-0 items-baseline justify-between gap-4 px-2.5 pt-1.5 pb-1.5 text-[11px] leading-snug sm:px-3 sm:text-xs"
+        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
         aria-label="Attempts and best time this session"
       >
-        <div className="min-w-0 text-left">
+        <div className="min-w-0 flex-1 text-left">
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Attempts
           </span>
-          <span className="text-[12px] font-semibold tabular-nums text-white sm:text-sm">
+          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
             {attemptsLabel}
           </span>
         </div>
-        <div className="min-w-0 text-right">
+        <div className="min-w-0 flex-1 text-right">
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Best
           </span>
-          <span className="text-[12px] tabular-nums tracking-normal text-white/90 sm:text-sm">
+          <span className="font-mono text-[12px] tabular-nums tracking-normal text-white/90 sm:text-sm">
             {bestDisplay}
           </span>
         </div>
       </div>
 
       {phase === "completed" ? (
-        <div className="relative flex min-h-0 w-full min-w-0 flex-1 flex-col items-center justify-center bg-black px-2.5 py-4 sm:px-3">
+        <div className="relative flex min-h-0 w-full min-w-0 flex-1 flex-col items-center justify-center bg-black px-1 py-4 sm:px-1.5">
           <div className="flex w-full max-w-sm flex-col gap-5">
             <div className="text-center">
               <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
@@ -244,14 +244,14 @@ export default function ReactionTime() {
                     transition: "width 1400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   }}
                 />
-                <span className="pointer-events-none absolute inset-y-0 right-2.5 flex items-center text-[11px] font-semibold tabular-nums tracking-normal text-white sm:text-sm">
+                <span className="pointer-events-none absolute inset-y-0 right-1 flex items-center text-[11px] font-semibold tabular-nums tracking-normal text-white sm:right-1.5 sm:text-sm">
                   {displayedPercentile}%
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="absolute right-2.5 bottom-3 sm:right-3">
+          <div className="absolute right-1 bottom-3 sm:right-1.5">
             <button
               type="button"
               onClick={handlePlayAgain}
@@ -262,7 +262,7 @@ export default function ReactionTime() {
             </button>
           </div>
 
-          <div className="absolute bottom-1.5 left-2.5 right-20 sm:left-3">
+          <div className="absolute bottom-1.5 left-1 right-20 sm:left-1.5">
             <p className="mb-1 text-left text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
               Speed legend
             </p>

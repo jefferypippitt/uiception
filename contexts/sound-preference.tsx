@@ -5,11 +5,60 @@ import {
   useCallback,
   useContext,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react"
 
 const STORAGE_KEY = "uiception.terminal.soundEnabled"
+
+const listeners = new Set<() => void>()
+
+function emitSoundPreferenceChange() {
+  listeners.forEach((listener) => {
+    listener()
+  })
+}
+
+function subscribe(callback: () => void) {
+  listeners.add(callback)
+
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY || e.key === null) {
+      emitSoundPreferenceChange()
+    }
+  }
+  if (typeof window !== "undefined") {
+    window.addEventListener("storage", onStorage)
+  }
+
+  return () => {
+    listeners.delete(callback)
+    if (typeof window !== "undefined") {
+      window.removeEventListener("storage", onStorage)
+    }
+  }
+}
+
+function readSoundEnabled(): boolean {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw === "0") return false
+    if (raw === "1") return true
+  } catch {
+    // ignore
+  }
+  return true
+}
+
+function getSnapshot(): boolean {
+  if (typeof window === "undefined") return true
+  return readSoundEnabled()
+}
+
+/** Must match what the server renders so hydration succeeds */
+function getServerSnapshot(): boolean {
+  return true
+}
 
 type SoundPreferenceValue = {
   soundEnabled: boolean
@@ -20,36 +69,29 @@ type SoundPreferenceValue = {
 const SoundPreferenceContext = createContext<SoundPreferenceValue | null>(null)
 
 export function SoundPreferenceProvider({ children }: { children: ReactNode }) {
-  const [soundEnabled, setSoundEnabledState] = useState(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw === "0") return false
-      if (raw === "1") return true
-    } catch {
-      // ignore
-    }
-    return true
-  })
+  const soundEnabled = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  )
 
   const setSoundEnabled = useCallback((next: boolean) => {
-    setSoundEnabledState(next)
     try {
       localStorage.setItem(STORAGE_KEY, next ? "1" : "0")
     } catch {
       // ignore
     }
+    emitSoundPreferenceChange()
   }, [])
 
   const toggleSound = useCallback(() => {
-    setSoundEnabledState((prev) => {
-      const next = !prev
-      try {
-        localStorage.setItem(STORAGE_KEY, next ? "1" : "0")
-      } catch {
-        // ignore
-      }
-      return next
-    })
+    const next = !readSoundEnabled()
+    try {
+      localStorage.setItem(STORAGE_KEY, next ? "1" : "0")
+    } catch {
+      // ignore
+    }
+    emitSoundPreferenceChange()
   }, [])
 
   const value = useMemo<SoundPreferenceValue>(
