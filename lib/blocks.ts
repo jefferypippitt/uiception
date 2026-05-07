@@ -49,7 +49,23 @@ export const blockCategories: BlockCategory[] = [
     id: "navbar",
     title: "Navbar",
     description: "Header and top-level navigation patterns.",
-    versions: [],
+    versions: [
+      {
+        id: "navbar-section-v1",
+        title: "Navbar Section v1",
+        registryPath: "registry/new-york/blocks/navbar-section-v1",
+      },
+      {
+        id: "navbar-section-v2",
+        title: "Navbar Section v2",
+        registryPath: "registry/new-york/blocks/navbar-section-v2",
+      },
+      {
+        id: "navbar-section-v3",
+        title: "Navbar Section v3",
+        registryPath: "registry/new-york/blocks/navbar-section-v3",
+      },
+    ],
   },
   {
     id: "hero-section",
@@ -292,6 +308,11 @@ export const blockCategories: BlockCategory[] = [
         id: "footer-section-v1",
         title: "Footer Section v1",
         registryPath: "registry/new-york/blocks/footer-section-v1",
+      },
+      {
+        id: "footer-section-v2",
+        title: "Footer Section v2",
+        registryPath: "registry/new-york/blocks/footer-section-v2",
       },
     ],
   },

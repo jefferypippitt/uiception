@@ -845,6 +845,95 @@
       ]
     },
     {
+      "name": "navbar-section-v1",
+      "type": "registry:block",
+      "title": "Navbar Section v1",
+      "description": "Sticky blurred header with optional lorem-demo below the install page for scroll testing.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v1/navbar-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v1/navbar-section-v1.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v1/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v1/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v2",
+      "type": "registry:block",
+      "title": "Navbar Section v2",
+      "description": "Centered three-column navbar with product dropdown, frosted backdrop, and full-screen mobile sheet navigation.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "sheet"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v2/navbar-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v2/navbar-section-v2.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v2/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v2/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v3",
+      "type": "registry:block",
+      "title": "Navbar Section v3",
+      "description": "Centered three-column navbar with product dropdown, frosted backdrop, and full-screen mobile sheet navigation.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "dialog", "input", "kbd", "label", "sheet"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v3/navbar-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v3/navbar-section-v3.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v3/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v3/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
       "name": "mac-os-terminal",
       "type": "registry:block",
       "title": "Mac OS Terminal",
@@ -1077,6 +1166,27 @@
           "path": "components/ui/svgs/tiktokIconDark.tsx",
           "type": "registry:component",
           "target": "components/ui/svgs/tiktokIconDark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-section-v2",
+      "type": "registry:block",
+      "title": "Footer Section v2",
+      "description": "Card-wrapped footer with five link columns: Product, Resources, Company, Legal, and Connect.",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/footer-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/footer-section-v2/footer-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/footer-section-v2/footer-section-v2.tsx"
         }
       ]
     },

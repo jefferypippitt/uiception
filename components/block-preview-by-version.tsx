@@ -9,6 +9,7 @@ import HeroSectionV3 from "@/registry/new-york/blocks/hero-section-v3/hero-secti
 import CtaSectionV1 from "@/registry/new-york/blocks/cta-section-v1/cta-section-v1"
 import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/cta-section-v2"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/footer-section-v1"
+import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/footer-section-v2"
 import ChatBot from "@/registry/new-york/blocks/chat-bot/chat-bot"
 import SimpleChatbot from "@/registry/new-york/blocks/simple-chatbot/simple-chatbot"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/stats-section-v1"
@@ -28,11 +29,37 @@ import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/brands-section-v5"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/hero-section-v6"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/pricing-section-v1"
+import LoremDemo from "@/components/blocks/navbar-lorem-demo"
+import NavbarSectionV1 from "@/registry/new-york/blocks/navbar-section-v1/navbar-section-v1"
+import NavbarSectionV2 from "@/registry/new-york/blocks/navbar-section-v2/navbar-section-v2"
+import NavbarSectionV3 from "@/registry/new-york/blocks/navbar-section-v3/navbar-section-v3"
 
+function NavbarSectionV1WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV1 />
+      <LoremDemo />
+    </>
+  )
+}
 
+function NavbarSectionV2WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV2 />
+      <LoremDemo />
+    </>
+  )
+}
 
-
-
+function NavbarSectionV3WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV3 />
+      <LoremDemo />
+    </>
+  )
+}
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -46,6 +73,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cta-section-v1": CtaSectionV1,
   "cta-section-v2": CtaSectionV2,
   "footer-section-v1": FooterSectionV1,
+  "footer-section-v2": FooterSectionV2,
   "chat-bot": ChatBot,
   "simple-chatbot": SimpleChatbot,
   "stats-section-v1": StatsSectionV1,
@@ -65,6 +93,9 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v4": FeatureSectionV4,
   "changelog-section-v1": ChangelogSectionV1,
   "pricing-section-v1": PricingSectionV1,
+  "navbar-section-v1": NavbarSectionV1WithLoremDemo,
+  "navbar-section-v2": NavbarSectionV2WithLoremDemo,
+  "navbar-section-v3": NavbarSectionV3WithLoremDemo,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {
