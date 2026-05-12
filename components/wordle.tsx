@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { Delete, RotateCcw } from "lucide-react"
+import { Delete } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 import { useOptionalSoundPreference } from "@/contexts/sound-preference"
@@ -9,9 +9,14 @@ import { switch005Sound } from "@/lib/switch-005"
 import { gFireworkBoomGeneral1Sound } from "@/lib/g-firework-boom-general-1"
 import { back001Sound } from "@/lib/back-001"
 import { select006Sound } from "@/lib/select-006"
-import type { WordleTileResult } from "@/lib/wordle-score"
-import { getWordleTodayMeta } from "@/lib/wordle/client"
+import type { WordleTileResult } from "@/lib/wordle/score"
+import {
+  getWordleTodayMeta,
+  nextDailyPuzzleBoundaryUtcMs,
+  normalizeWordleTimeZone,
+} from "@/lib/wordle/daily"
 import { submitWordleGuess } from "@/lib/wordle/actions"
+import { toast } from "sonner"
 
 const ROWS = 6
 const COLS = 5
@@ -22,8 +27,19 @@ const KEYBOARD_ROWS = [
   ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACK"],
 ] as const
 
+/** Client-side gap after validation errors so ENTER cannot be hammered. */
+const COOLDOWN_NOT_IN_LIST_MS = 2200
+const COOLDOWN_SHORT_HINT_MS = 1000
+
 type GuessRow = { guess: string; scores: WordleTileResult[] }
-const CONFETTI_COLORS = ["#6aaa64", "#c9b458", "#16c60c", "#d7ba2f", "#4fc1ff", "#ff7aa2"] as const
+const CONFETTI_COLORS = [
+  "#6aaa64",
+  "#c9b458",
+  "#16c60c",
+  "#d7ba2f",
+  "#4fc1ff",
+  "#ff7aa2",
+] as const
 
 function formatCountdown(msRemaining: number): string {
   const totalSeconds = Math.max(0, Math.floor(msRemaining / 1000))
@@ -42,19 +58,6 @@ function rankTile(a: WordleTileResult): number {
   return 1
 }
 
-function nextLocalMidnightMs(nowMs: number): number {
-  const now = new Date(nowMs)
-  return new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 1,
-    0,
-    0,
-    0,
-    0
-  ).getTime()
-}
-
 function ConfettiCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -65,24 +68,29 @@ function ConfettiCanvas() {
 
     const W = canvas.offsetWidth
     const H = canvas.offsetHeight
-    canvas.width  = W
+    canvas.width = W
     canvas.height = H
 
-    const GRAVITY   = 750    
-    const COUNT     = 90     
+    const GRAVITY = 750
+    const COUNT = 90
     const SPEED_MIN = 300
     const SPEED_MAX = 680
-    const CONE_MIN  = 5      
-    const CONE_MAX  = 65     
-    const cannonY   = H * 0.66
+    const CONE_MIN = 5
+    const CONE_MAX = 65
+    const cannonY = H * 0.66
 
     type Particle = {
-      x: number; y: number
-      vx: number; vy: number
-      w: number; h: number
-      rot: number; spin: number
+      x: number
+      y: number
+      vx: number
+      vy: number
+      w: number
+      h: number
+      rot: number
+      spin: number
       color: string
-      alpha: number; decay: number
+      alpha: number
+      decay: number
       isCircle: boolean
     }
 
@@ -90,23 +98,24 @@ function ConfettiCanvas() {
 
     function spawnCannon(fromLeft: boolean) {
       const dir = fromLeft ? 1 : -1
-      const ox  = fromLeft ? 2 : W - 2
+      const ox = fromLeft ? 2 : W - 2
       for (let i = 0; i < COUNT; i++) {
         const angleDeg = CONE_MIN + Math.random() * (CONE_MAX - CONE_MIN)
-        const rad      = angleDeg * Math.PI / 180
-        const speed    = SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN)
+        const rad = (angleDeg * Math.PI) / 180
+        const speed = SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN)
         particles.push({
-          x:        ox,
-          y:        cannonY + (Math.random() - 0.5) * 14,
-          vx:       dir * Math.cos(rad) * speed,
-          vy:      -Math.sin(rad) * speed,
-          w:        3 + Math.random() * 5,
-          h:        6 + Math.random() * 6,
-          rot:      Math.random() * Math.PI * 2,
-          spin:     (Math.random() - 0.5) * 18,
-          color:    CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
-          alpha:    1,
-          decay:    0.36 + Math.random() * 0.26,  
+          x: ox,
+          y: cannonY + (Math.random() - 0.5) * 14,
+          vx: dir * Math.cos(rad) * speed,
+          vy: -Math.sin(rad) * speed,
+          w: 3 + Math.random() * 5,
+          h: 6 + Math.random() * 6,
+          rot: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 18,
+          color:
+            CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+          alpha: 1,
+          decay: 0.36 + Math.random() * 0.26,
           isCircle: Math.random() < 0.2,
         })
       }
@@ -115,7 +124,7 @@ function ConfettiCanvas() {
     spawnCannon(true)
     spawnCannon(false)
 
-    let raf   = 0
+    let raf = 0
     let lastTs = 0
 
     function tick(ts: number) {
@@ -129,11 +138,11 @@ function ConfettiCanvas() {
         if (p.alpha <= 0) continue
         alive = true
 
-        p.vy    += GRAVITY * dt
-        p.x     += p.vx * dt
-        p.y     += p.vy * dt
-        p.rot   += p.spin * dt
-        p.alpha  = Math.max(0, p.alpha - p.decay * dt)
+        p.vy += GRAVITY * dt
+        p.x += p.vx * dt
+        p.y += p.vy * dt
+        p.rot += p.spin * dt
+        p.alpha = Math.max(0, p.alpha - p.decay * dt)
 
         ctx.save()
         ctx.globalAlpha = p.alpha
@@ -168,6 +177,34 @@ function ConfettiCanvas() {
       style={{ width: "100%", height: "100%" }}
     />
   )
+}
+
+type SavedState = {
+  rows: GuessRow[]
+  status: "playing" | "won" | "lost"
+  revealedAnswer: string | null
+}
+
+const EMPTY_SAVED: SavedState = {
+  rows: [],
+  status: "playing",
+  revealedAnswer: null,
+}
+
+function loadDayState(dayKey: string): SavedState {
+  try {
+    const raw = localStorage.getItem(`wordle-${dayKey}`)
+    if (!raw) return EMPTY_SAVED
+    const p = JSON.parse(raw) as Record<string, unknown>
+    return {
+      rows: Array.isArray(p.rows) ? (p.rows as GuessRow[]) : [],
+      status: p.status === "won" || p.status === "lost" ? p.status : "playing",
+      revealedAnswer:
+        typeof p.revealedAnswer === "string" ? p.revealedAnswer : null,
+    }
+  } catch {
+    return EMPTY_SAVED
+  }
 }
 
 function mergeKeyStates(
@@ -208,23 +245,54 @@ export default function Wordle() {
     soundEnabled,
   })
 
-  const browserTimeZone = useMemo(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
-    []
-  )
-  const [rows, setRows] = useState<GuessRow[]>([])
+  const [visitorTimeZone] = useState<string>(() => {
+    const raw = Intl.DateTimeFormat().resolvedOptions().timeZone?.trim()
+    return normalizeWordleTimeZone(raw || undefined)
+  })
+  /** When > Date.now(), submit (Enter + button) is ignored and ENTER is disabled. */
+  const [submitCooldownUntilMs, setSubmitCooldownUntilMs] = useState(0)
+  const [initMeta] = useState(() => getWordleTodayMeta(visitorTimeZone))
+  const [savedState] = useState(() => loadDayState(initMeta.dayKey))
+  const [dayKey, setDayKey] = useState(initMeta.dayKey)
+  const [puzzleNumber, setPuzzleNumber] = useState(initMeta.puzzleNumber)
+  const [rows, setRows] = useState<GuessRow[]>(savedState.rows)
   const [draft, setDraft] = useState("")
   const [shake, setShake] = useState(false)
-  const [hint, setHint] = useState<string | null>(null)
-  const [status, setStatus] = useState<"playing" | "won" | "lost">("playing")
+  const [status, setStatus] = useState<"playing" | "won" | "lost">(
+    savedState.status
+  )
   const [submitting, setSubmitting] = useState(false)
-  const initialMeta = useMemo(() => getWordleTodayMeta(browserTimeZone), [browserTimeZone])
-  const [dayKey, setDayKey] = useState<string>(initialMeta.dayKey)
-  const [puzzleNumber, setPuzzleNumber] = useState<number>(initialMeta.puzzleNumber)
-  const [revealedAnswer, setRevealedAnswer] = useState<string | null>(null)
+  const [revealedAnswer, setRevealedAnswer] = useState<string | null>(
+    savedState.revealedAnswer
+  )
   const [nowMs, setNowMs] = useState(() => Date.now())
 
   const playing = status === "playing"
+
+  useEffect(() => {
+    if (rows.length === 0 && status === "playing") return
+    try {
+      localStorage.setItem(
+        `wordle-${dayKey}`,
+        JSON.stringify({ rows, status, revealedAnswer })
+      )
+    } catch {
+      /* storage full or unavailable */
+    }
+  }, [rows, status, revealedAnswer, dayKey])
+
+  useEffect(() => {
+    if (submitCooldownUntilMs <= 0) return
+    const ms = submitCooldownUntilMs - Date.now()
+    if (ms <= 0) {
+      setSubmitCooldownUntilMs(0)
+      return
+    }
+    const id = window.setTimeout(() => setSubmitCooldownUntilMs(0), ms)
+    return () => window.clearTimeout(id)
+  }, [submitCooldownUntilMs])
+
+  const submitOnCooldown = Date.now() < submitCooldownUntilMs
 
   const keyStates = useMemo(() => {
     let m = new Map<string, WordleTileResult>()
@@ -237,15 +305,15 @@ export default function Wordle() {
   const resetBoard = useCallback(() => {
     setRows([])
     setDraft("")
-    setHint(null)
     setStatus("playing")
     setShake(false)
     setRevealedAnswer(null)
+    setSubmitCooldownUntilMs(0)
   }, [])
 
   useEffect(() => {
     const sync = () => {
-      const t = getWordleTodayMeta(browserTimeZone)
+      const t = getWordleTodayMeta(visitorTimeZone)
       setPuzzleNumber((prev) => {
         if (t.puzzleNumber !== prev) {
           queueMicrotask(() => {
@@ -257,6 +325,7 @@ export default function Wordle() {
         return prev
       })
     }
+    sync()
     const id = window.setInterval(sync, 60_000)
     const onVis = () => {
       if (document.visibilityState === "visible") sync()
@@ -266,7 +335,7 @@ export default function Wordle() {
       window.clearInterval(id)
       document.removeEventListener("visibilitychange", onVis)
     }
-  }, [browserTimeZone, resetBoard])
+  }, [visitorTimeZone, resetBoard])
 
   useEffect(() => {
     const id = window.setInterval(() => setNowMs(Date.now()), 1000)
@@ -277,7 +346,6 @@ export default function Wordle() {
     (ch: string) => {
       if (!playing || submitting || draft.length >= COLS) return
       setDraft((d) => d + ch.toLowerCase())
-      setHint(null)
       playLetterInput()
     },
     [playing, submitting, draft.length, playLetterInput]
@@ -290,29 +358,37 @@ export default function Wordle() {
   }, [playing, submitting, playBackspace])
 
   const submit = useCallback(async () => {
-    if (!playing || submitting) return
+    if (!playing || submitting || submitOnCooldown) return
     if (draft.length !== COLS) {
-      setHint("Not enough letters")
+      setSubmitCooldownUntilMs(Date.now() + COOLDOWN_SHORT_HINT_MS)
+      toast("Not enough letters", { id: "wordle-hint" })
       return
     }
     const w = draft.toLowerCase()
     if (!/^[a-z]{5}$/.test(w)) return
 
     setSubmitting(true)
-    setHint(null)
     try {
-      const data = await submitWordleGuess(w, rows.length, puzzleNumber, browserTimeZone)
+      const data = await submitWordleGuess(
+        w,
+        rows.length,
+        puzzleNumber,
+        visitorTimeZone
+      )
 
       if (!data.ok) {
         if (data.error === "not_in_list") {
+          setSubmitCooldownUntilMs(Date.now() + COOLDOWN_NOT_IN_LIST_MS)
           setShake(true)
-          setHint("Not in word list")
+          toast("Not in word list", { id: "wordle-hint" })
           playNotInList()
           window.setTimeout(() => setShake(false), 450)
         } else if (data.error === "bad_puzzle") {
-          setHint("That puzzle is not available")
+          setSubmitCooldownUntilMs(Date.now() + COOLDOWN_SHORT_HINT_MS)
+          toast.error("That puzzle is not available", { id: "wordle-hint" })
         } else {
-          setHint("Could not submit guess")
+          setSubmitCooldownUntilMs(Date.now() + COOLDOWN_SHORT_HINT_MS)
+          toast.error("Could not submit guess", { id: "wordle-hint" })
         }
         return
       }
@@ -329,17 +405,18 @@ export default function Wordle() {
         setRevealedAnswer(data.answer)
       }
     } catch {
-      setHint("Network error — try again")
+      toast.error("Network error — try again", { id: "wordle-hint" })
     } finally {
       setSubmitting(false)
     }
   }, [
     playing,
     submitting,
+    submitOnCooldown,
     draft,
     rows.length,
     puzzleNumber,
-    browserTimeZone,
+    visitorTimeZone,
     playWin,
     playNotInList,
   ])
@@ -370,22 +447,29 @@ export default function Wordle() {
     result: WordleTileResult | undefined,
     hasLetter: boolean
   ): string {
-    if (result === "correct") return "border-green-800/50 bg-green-950 text-green-300"
-    if (result === "present") return "border-amber-700/50 bg-amber-950 text-amber-300"
-    if (result === "absent") return "border-white/[0.06] bg-white/[0.04] text-white/25"
+    if (result === "correct")
+      return "border-green-800/50 bg-green-950 text-green-300"
+    if (result === "present")
+      return "border-amber-700/50 bg-amber-950 text-amber-300"
+    if (result === "absent")
+      return "border-white/[0.06] bg-white/[0.04] text-white/25"
     if (hasLetter) return "border-white/30 bg-white/[0.07] text-white/90"
     return "border-white/[0.07] bg-white/[0.03] text-transparent"
   }
 
   function keyCapClasses(ch: string): string {
     const st = keyStates.get(ch)
-    if (st === "correct") return "bg-green-950 border border-green-800/40 text-green-300"
-    if (st === "present") return "bg-amber-950 border border-amber-700/40 text-amber-300"
-    if (st === "absent") return "bg-white/[0.03] border border-white/5 text-white/20"
+    if (st === "correct")
+      return "bg-green-950 border border-green-800/40 text-green-300"
+    if (st === "present")
+      return "bg-amber-950 border border-amber-700/40 text-amber-300"
+    if (st === "absent")
+      return "bg-white/[0.03] border border-white/5 text-white/20"
     return "bg-white/[0.07] border border-white/10 text-white/70 hover:bg-white/[0.12] hover:text-white/90"
   }
 
-  const msUntilNextPuzzle = nextLocalMidnightMs(nowMs) - nowMs
+  const msUntilNextPuzzle =
+    nextDailyPuzzleBoundaryUtcMs(new Date(nowMs), visitorTimeZone) - nowMs
   const nextPuzzleCountdown = formatCountdown(msUntilNextPuzzle)
   const formattedLocalDate = (() => {
     const [year, month, day] = dayKey.split("-")
@@ -406,7 +490,7 @@ export default function Wordle() {
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Daily
           </span>
-          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
+          <span className="font-mono text-[12px] font-semibold text-white tabular-nums sm:text-sm">
             #{puzzleNumber}
           </span>
         </div>
@@ -414,7 +498,7 @@ export default function Wordle() {
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Local
           </span>
-          <span className="font-mono text-[12px] tabular-nums text-white/90 sm:text-sm">
+          <span className="font-mono text-[12px] text-white/90 tabular-nums sm:text-sm">
             {formattedLocalDate}
           </span>
         </div>
@@ -422,20 +506,11 @@ export default function Wordle() {
           <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
             Next word
           </span>
-          <span className="font-mono text-[12px] tabular-nums tracking-tight text-white/90 sm:text-sm">
+          <span className="font-mono text-[12px] tracking-tight text-white/90 tabular-nums sm:text-sm">
             {nextPuzzleCountdown}
           </span>
         </div>
       </div>
-
-      {hint ? (
-        <p
-          className="pt-0.5 text-center font-mono text-[10px] leading-tight font-medium tracking-[0.02em] text-[#d7dadc]"
-          role="status"
-        >
-          {hint}
-        </p>
-      ) : null}
 
       <div className="flex min-h-0 flex-1 items-center justify-center">
         <div className="flex w-full max-w-[320px] flex-col items-center gap-3">
@@ -491,10 +566,10 @@ export default function Wordle() {
                       <button
                         key={key}
                         type="button"
-                        disabled={submitting}
+                        disabled={submitting || submitOnCooldown}
                         onClick={() => void submit()}
                         className={cn(
-                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 font-mono text-[8px] font-medium tracking-[0.18em] outline-none select-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
+                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 font-mono text-[8px] font-medium tracking-[0.18em] transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
                           keyCapClasses("")
                         )}
                       >
@@ -511,7 +586,7 @@ export default function Wordle() {
                         disabled={submitting}
                         onClick={backspace}
                         className={cn(
-                          "flex h-7 min-w-[32px] shrink-0 items-center justify-center rounded-md px-1 outline-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[36px]",
+                          "flex h-7 min-w-[32px] shrink-0 items-center justify-center rounded-md px-1 transition-colors outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[36px]",
                           keyCapClasses("")
                         )}
                       >
@@ -530,7 +605,7 @@ export default function Wordle() {
                       disabled={submitting}
                       onClick={() => addLetter(key)}
                       className={cn(
-                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md font-mono text-[10px] font-medium tracking-wide outline-none select-none transition-colors focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
+                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md font-mono text-[10px] font-medium tracking-wide transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
                         keyCapClasses(key)
                       )}
                     >
@@ -547,23 +622,11 @@ export default function Wordle() {
       {status === "won" && <ConfettiCanvas />}
 
       {(status === "won" || status === "lost") && (
-        <>
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1">
-<p className="font-mono text-7xl font-bold tracking-[0.25em] text-white/[0.32] uppercase sm:text-8xl">
-              {status === "won" ? "ezpz" : revealedAnswer ?? ""}
-            </p>
-          </div>
-          <div className="absolute right-2 bottom-1.5">
-            <button
-              type="button"
-              onClick={resetBoard}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white outline-none transition hover:bg-white/25 focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black"
-              aria-label={status === "won" ? "Play again" : "Try again"}
-            >
-              <RotateCcw className="h-4 w-4" aria-hidden />
-            </button>
-          </div>
-        </>
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1">
+          <p className="font-mono text-7xl font-bold tracking-[0.25em] text-white/32 uppercase sm:text-8xl">
+            {status === "won" ? "congrats" : (revealedAnswer ?? "")}
+          </p>
+        </div>
       )}
 
       <style jsx global>{`

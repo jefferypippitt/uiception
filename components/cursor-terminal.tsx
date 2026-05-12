@@ -25,8 +25,9 @@ import Spinner from "@/registry/new-york/blocks/cursor-terminal/components/spinn
 import PromptShell from "@/registry/new-york/blocks/cursor-terminal/components/prompt-shell"
 import PanelIconButton from "@/registry/new-york/blocks/cursor-terminal/components/panel-icon-button"
 import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/lib/config"
+import dynamic from "next/dynamic"
 import TrexRunner from "./trex-runner"
-import Wordle from "./wordle"
+const Wordle = dynamic(() => import("./wordle"), { ssr: false })
 import ReactionTime from "./reaction-time"
 import ColorMemory from "./color-memory"
 import SequenceMemory from "./sequence-memory"
@@ -174,17 +175,20 @@ export function CursorTerminal() {
         </div>
       </div>
 
+      {/* Wordle stays mounted to avoid re-firing the submit-gate server action on every tab switch */}
+      <div className={activeTab !== "Wordle" ? "hidden" : ""}>
+        <Wordle />
+      </div>
+
       {activeTab === "Trex Runner" ? (
         <TrexRunner />
-      ) : activeTab === "Wordle" ? (
-        <Wordle />
       ) : activeTab === "Reaction Time" ? (
         <ReactionTime />
       ) : activeTab === "Color Memory" ? (
         <ColorMemory />
       ) : activeTab === "Sequence Memory" ? (
         <SequenceMemory />
-      ) : (
+      ) : activeTab !== "Wordle" ? (
         <>
           <div
             ref={scrollRef}
@@ -223,7 +227,7 @@ export function CursorTerminal() {
             Ctrl+K to generate command
           </div>
         </>
-      )}
+      ) : null}
     </div>
     </SoundPreferenceProvider>
   )

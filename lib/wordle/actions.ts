@@ -1,9 +1,9 @@
 "use server"
 
-import { dailyPuzzleNumberForTimeZone, WORDLE_DAILY_EPOCH } from "@/lib/wordle-daily"
-import { dailySolutionForTimeZone } from "@/lib/wordle-daily-server"
-import { scoreGuess, type WordleTileResult } from "@/lib/wordle-score"
-import { ALLOWED_GUESSES } from "@/lib/wordle-words"
+import { solutionForPuzzleNumber } from "@/lib/wordle/answer"
+import { dailyPuzzleNumberForTimeZone } from "@/lib/wordle/daily"
+import { scoreGuess, type WordleTileResult } from "@/lib/wordle/score"
+import { ALLOWED_GUESSES } from "@/lib/wordle/words"
 
 export type WordleGuessActionResult =
   | {
@@ -36,7 +36,8 @@ export async function submitWordleGuess(
   }
 
   const todayPuzzleNumber = dailyPuzzleNumberForTimeZone(new Date(), timeZone)
-  const targetPuzzleNumber = puzzleNumber == null ? todayPuzzleNumber : puzzleNumber
+  const targetPuzzleNumber =
+    puzzleNumber == null ? todayPuzzleNumber : puzzleNumber
   if (
     !Number.isInteger(targetPuzzleNumber) ||
     targetPuzzleNumber < 1 ||
@@ -45,9 +46,7 @@ export async function submitWordleGuess(
     return { ok: false, error: "bad_puzzle" }
   }
 
-  const date = new Date(WORDLE_DAILY_EPOCH)
-  date.setUTCDate(date.getUTCDate() + (targetPuzzleNumber - 1))
-  const solution = dailySolutionForTimeZone(date, timeZone)
+  const solution = solutionForPuzzleNumber(targetPuzzleNumber)
   const scores = scoreGuess(guessRaw, solution)
   const won = guessRaw === solution
   const lost = !won && row === 5

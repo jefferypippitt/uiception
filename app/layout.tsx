@@ -13,6 +13,7 @@ import "./globals.css"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import Providers from "@/components/providers"
+import { Toaster } from "@/components/ui/sonner"
 import { ViewTransitions } from "next-view-transitions"
 import { Analytics } from "@vercel/analytics/next"
 
@@ -114,6 +115,7 @@ export default function RootLayout({
       >
         <body>
           <Providers>{children}</Providers>
+          <Toaster position="bottom-right" />
           <Analytics />
         </body>
       </html>
