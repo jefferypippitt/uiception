@@ -8,8 +8,10 @@ import HeroSectionV2 from "@/registry/new-york/blocks/hero-section-v2/hero-secti
 import HeroSectionV3 from "@/registry/new-york/blocks/hero-section-v3/hero-section-v3"
 import CtaSectionV1 from "@/registry/new-york/blocks/cta-section-v1/cta-section-v1"
 import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/cta-section-v2"
+import CtaSectionV3 from "@/registry/new-york/blocks/cta-section-v3/cta-section-v3"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/footer-section-v1"
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/footer-section-v2"
+import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/footer-section-v3"
 import ChatBot from "@/registry/new-york/blocks/chat-bot/chat-bot"
 import SimpleChatbot from "@/registry/new-york/blocks/simple-chatbot/simple-chatbot"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/stats-section-v1"
@@ -25,6 +27,7 @@ import FeatureSectionV2 from "@/registry/new-york/blocks/feature-section-v2/feat
 import HeroSectionV5 from "@/registry/new-york/blocks/hero-section-v5/hero-section-v5"
 import FeatureSectionV3 from "@/registry/new-york/blocks/feature-section-v3/feature-section-v3"
 import FeatureSectionV4 from "@/registry/new-york/blocks/feature-section-v4/feature-section-v4"
+import FeatureSectionV5 from "@/registry/new-york/blocks/feature-section-v5/feature-section-v5"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/changelog-section-v1"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/brands-section-v5"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/hero-section-v6"
@@ -33,6 +36,7 @@ import LoremDemo from "@/components/blocks/navbar-lorem-demo"
 import NavbarSectionV1 from "@/registry/new-york/blocks/navbar-section-v1/navbar-section-v1"
 import NavbarSectionV2 from "@/registry/new-york/blocks/navbar-section-v2/navbar-section-v2"
 import NavbarSectionV3 from "@/registry/new-york/blocks/navbar-section-v3/navbar-section-v3"
+import NavbarSectionV4 from "@/registry/new-york/blocks/navbar-section-v4/navbar-section-v4"
 
 function NavbarSectionV1WithLoremDemo() {
   return (
@@ -61,6 +65,17 @@ function NavbarSectionV3WithLoremDemo() {
   )
 }
 
+function NavbarSectionV4WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV4 />
+      <div className="pb-32 sm:pb-28">
+        <LoremDemo />
+      </div>
+    </>
+  )
+}
+
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
   "brands-section-v2": BrandsSectionV2,
@@ -72,8 +87,10 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v3": HeroSectionV3,
   "cta-section-v1": CtaSectionV1,
   "cta-section-v2": CtaSectionV2,
+  "cta-section-v3": CtaSectionV3,
   "footer-section-v1": FooterSectionV1,
   "footer-section-v2": FooterSectionV2,
+  "footer-section-v3": FooterSectionV3,
   "chat-bot": ChatBot,
   "simple-chatbot": SimpleChatbot,
   "stats-section-v1": StatsSectionV1,
@@ -91,11 +108,13 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v6": HeroSectionV6,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
+  "feature-section-v5": FeatureSectionV5,
   "changelog-section-v1": ChangelogSectionV1,
   "pricing-section-v1": PricingSectionV1,
   "navbar-section-v1": NavbarSectionV1WithLoremDemo,
   "navbar-section-v2": NavbarSectionV2WithLoremDemo,
   "navbar-section-v3": NavbarSectionV3WithLoremDemo,
+  "navbar-section-v4": NavbarSectionV4WithLoremDemo,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

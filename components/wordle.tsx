@@ -471,10 +471,6 @@ export default function Wordle() {
   const msUntilNextPuzzle =
     nextDailyPuzzleBoundaryUtcMs(new Date(nowMs), visitorTimeZone) - nowMs
   const nextPuzzleCountdown = formatCountdown(msUntilNextPuzzle)
-  const formattedLocalDate = (() => {
-    const [year, month, day] = dayKey.split("-")
-    return month && day && year ? `${month}-${day}-${year}` : dayKey
-  })()
 
   return (
     <div
@@ -483,30 +479,16 @@ export default function Wordle() {
       aria-label="Word guessing game"
     >
       <div
-        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
-        aria-label="Daily puzzle and reset time"
+        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[10px] leading-tight text-[#d7dadc] sm:text-[11px]"
+        aria-label="Time until next daily word"
       >
-        <div className="min-w-0 flex-1 text-left">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Daily
-          </span>
-          <span className="font-mono text-[12px] font-semibold text-white tabular-nums sm:text-sm">
-            #{puzzleNumber}
-          </span>
-        </div>
-        <div className="min-w-0 flex-1 px-1.5 text-center sm:px-2">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Local
-          </span>
-          <span className="font-mono text-[12px] text-white/90 tabular-nums sm:text-sm">
-            {formattedLocalDate}
-          </span>
-        </div>
+        <div className="min-w-0 flex-1" aria-hidden />
+        <div className="min-w-0 flex-1" aria-hidden />
         <div className="min-w-0 flex-1 text-right">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+          <span className="block text-[9px] font-medium tracking-wide text-white/45 uppercase sm:text-[10px]">
             Next word
           </span>
-          <span className="font-mono text-[12px] tracking-tight text-white/90 tabular-nums sm:text-sm">
+          <span className="text-[11px] tracking-tight text-white/90 tabular-nums sm:text-xs">
             {nextPuzzleCountdown}
           </span>
         </div>
@@ -541,7 +523,7 @@ export default function Wordle() {
                       <div
                         key={col}
                         className={cn(
-                          "flex aspect-square max-h-[26px] min-h-0 w-full items-center justify-center rounded-sm border font-mono text-[11px] font-medium tracking-wide uppercase sm:max-h-[28px] sm:text-xs",
+                          "flex aspect-square max-h-[26px] min-h-0 w-full items-center justify-center rounded-sm border text-[11px] font-medium tracking-wide uppercase sm:max-h-[28px] sm:text-xs",
                           tileClasses(result, has)
                         )}
                       >
@@ -569,7 +551,7 @@ export default function Wordle() {
                         disabled={submitting || submitOnCooldown}
                         onClick={() => void submit()}
                         className={cn(
-                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 font-mono text-[8px] font-medium tracking-[0.18em] transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
+                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 text-[8px] font-medium tracking-[0.18em] transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
                           keyCapClasses("")
                         )}
                       >
@@ -605,7 +587,7 @@ export default function Wordle() {
                       disabled={submitting}
                       onClick={() => addLetter(key)}
                       className={cn(
-                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md font-mono text-[10px] font-medium tracking-wide transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
+                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md text-[10px] font-medium tracking-wide transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
                         keyCapClasses(key)
                       )}
                     >
@@ -623,7 +605,7 @@ export default function Wordle() {
 
       {(status === "won" || status === "lost") && (
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1">
-          <p className="font-mono text-7xl font-bold tracking-[0.25em] text-white/32 uppercase sm:text-8xl">
+          <p className="text-7xl font-bold tracking-[0.25em] text-white/32 uppercase sm:text-8xl">
             {status === "won" ? "congrats" : (revealedAnswer ?? "")}
           </p>
         </div>

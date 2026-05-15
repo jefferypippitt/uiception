@@ -112,20 +112,6 @@ export function CursorTerminal() {
         <div className="flex min-w-0 flex-1 items-stretch overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {PANEL_TABS.map((name) => {
             const active = name === activeTab
-            const tabAccent =
-              name === "Trex Runner"
-                ? "border-t border-t-[#d7ba2f]"
-                : name === "Wordle"
-                  ? "border-t border-t-[#16c60c]"
-                  : name === "Reaction Time"
-                    ? "border-t border-t-[#4fc1ff]"
-                  : name === "Color Memory"
-                    ? "border-t border-t-[#c586f8]"
-                  : name === "Sequence Memory"
-                    ? "border-t border-t-[#f97316]"
-                  : name === "Terminal"
-                    ? "border-t border-t-[#007fd4]"
-                    : "border-t border-t-transparent"
             return (
               <button
                 key={name}
@@ -134,11 +120,8 @@ export function CursorTerminal() {
                 className={cn(
                   "shrink-0 px-3 text-[11px] transition-colors",
                   active
-                    ? cn("bg-[#1e1e1e] text-[#e8e8e8]", tabAccent)
-                    : cn(
-                        "text-[#858585] hover:text-[#c0c0c0]",
-                        tabAccent,
-                      ),
+                    ? "bg-[#1e1e1e] text-[#e8e8e8]"
+                    : "text-[#858585] hover:text-[#c0c0c0]",
                 )}
               >
                 {name}

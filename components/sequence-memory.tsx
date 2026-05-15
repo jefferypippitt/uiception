@@ -207,14 +207,14 @@ export default function SequenceMemory() {
     <div className="relative flex h-96 min-h-0 flex-col overflow-hidden bg-black font-sans text-[#d7dadc] antialiased">
       {/* Metric strip – same typography as reaction-time; one centered column */}
       <div
-        className="flex w-full min-w-0 shrink-0 items-baseline justify-center px-2.5 pt-1.5 pb-1.5 text-[11px] leading-snug sm:px-3 sm:text-xs"
+        className="flex w-full min-w-0 shrink-0 items-baseline justify-center px-2.5 pt-1.5 pb-1.5 text-[10px] leading-snug sm:px-3 sm:text-[11px]"
         aria-label="Current level"
       >
         <div className="min-w-0 text-center">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+          <span className="block text-[9px] font-medium tracking-wide text-white/45 uppercase sm:text-[10px]">
             Level
           </span>
-          <span className="text-[12px] font-semibold tabular-nums text-white sm:text-sm">
+          <span className="text-[11px] font-semibold tabular-nums text-white sm:text-xs">
             {String(level)}
           </span>
         </div>
@@ -229,7 +229,7 @@ export default function SequenceMemory() {
             className="group inline-flex items-center gap-2 text-white/90 outline-none transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
             aria-label="Play again"
           >
-            <span className="seq-memory-play-shimmer relative font-mono text-base font-semibold tracking-[0.12em] uppercase">
+            <span className="seq-memory-play-shimmer relative text-base font-semibold tracking-[0.12em] uppercase">
               Play Again
             </span>
             <ArrowRight

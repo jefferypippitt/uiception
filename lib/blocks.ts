@@ -65,6 +65,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Navbar Section v3",
         registryPath: "registry/new-york/blocks/navbar-section-v3",
       },
+      {
+        id: "navbar-section-v4",
+        title: "Navbar Section v4",
+        registryPath: "registry/new-york/blocks/navbar-section-v4",
+      },
     ],
   },
   {
@@ -160,6 +165,11 @@ export const blockCategories: BlockCategory[] = [
         id: "feature-section-v4",
         title: "Feature Section v4",
         registryPath: "registry/new-york/blocks/feature-section-v4",
+      },
+      {
+        id: "feature-section-v5",
+        title: "Feature Section v5",
+        registryPath: "registry/new-york/blocks/feature-section-v5",
       },
     ],
   },
@@ -285,6 +295,11 @@ export const blockCategories: BlockCategory[] = [
         title: "CTA Section v2",
         registryPath: "registry/new-york/blocks/cta-section-v2",
       },
+      {
+        id: "cta-section-v3",
+        title: "CTA Section v3",
+        registryPath: "registry/new-york/blocks/cta-section-v3",
+      },
     ],
   },
   {
@@ -313,6 +328,11 @@ export const blockCategories: BlockCategory[] = [
         id: "footer-section-v2",
         title: "Footer Section v2",
         registryPath: "registry/new-york/blocks/footer-section-v2",
+      },
+      {
+        id: "footer-section-v3",
+        title: "Footer Section v3",
+        registryPath: "registry/new-york/blocks/footer-section-v3",
       },
     ],
   },

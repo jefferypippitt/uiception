@@ -1,0 +1,30 @@
+
+.cta-v3-box {
+  border: 1px solid var(--border);
+  background-color: #000000;
+}
+
+.cta-v3-dither-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Lower = calmer wallpaper, easier to read title / body over the shader */
+  opacity: 0.35;
+}
+
+.cta-v3-dither-frame canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-v3-dither-frame {
+    display: none;
+  }
+
+  .cta-v3-box {
+    background-color: color-mix(in oklab, var(--muted) 78%, var(--background) 22%);
+  }
+}

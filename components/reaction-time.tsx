@@ -187,9 +187,8 @@ export default function ReactionTime() {
   const speedBand = SPEED_BANDS.find((band) => averageMs >= band.minMs) ?? SPEED_BANDS[0]
   const sessionBestMs =
     attempts.length > 0 ? Math.min(...attempts) : null
-  const attemptsLabel = `${attempts.length}/${TOTAL_ATTEMPTS}`
   const bestDisplay =
-    sessionBestMs != null ? `${sessionBestMs}\u00a0ms` : "—"
+    sessionBestMs != null ? `${sessionBestMs}\u00a0ms` : "N/A"
 
   return (
     <div
@@ -197,22 +196,14 @@ export default function ReactionTime() {
       aria-label="Reaction time test game"
     >
       <div
-        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
-        aria-label="Attempts and best time this session"
+        className="flex shrink-0 items-baseline justify-end pb-1.5 text-[10px] leading-tight text-[#d7dadc] sm:text-[11px]"
+        aria-label="Best reaction speed this session"
       >
-        <div className="min-w-0 flex-1 text-left">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Attempts
+        <div className="min-w-0 text-right">
+          <span className="block text-[9px] font-medium tracking-wide text-white/45 uppercase sm:text-[10px]">
+            Best speed
           </span>
-          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
-            {attemptsLabel}
-          </span>
-        </div>
-        <div className="min-w-0 flex-1 text-right">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Best
-          </span>
-          <span className="font-mono text-[12px] tabular-nums tracking-normal text-white/90 sm:text-sm">
+          <span className="text-[11px] tabular-nums tracking-normal text-white/90 sm:text-xs">
             {bestDisplay}
           </span>
         </div>

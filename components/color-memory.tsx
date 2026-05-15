@@ -128,8 +128,8 @@ function SplitSquare({ guess, target }: { guess: ColorMemoryHsb; target: ColorMe
         className="absolute inset-0"
         style={{ backgroundColor: hsbToCss(target), clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
       />
-      <p className={`absolute top-1.5 left-1.5 font-mono text-[10px] font-semibold leading-none ${guessDark ? "text-black/60" : "text-white/80"}`}>you</p>
-      <p className={`absolute right-1.5 bottom-1.5 font-mono text-[10px] font-semibold leading-none ${targetDark ? "text-black/60" : "text-white/80"}`}>original</p>
+      <p className={`absolute top-1.5 left-1.5 text-[10px] font-semibold leading-none ${guessDark ? "text-black/60" : "text-white/80"}`}>you</p>
+      <p className={`absolute right-1.5 bottom-1.5 text-[10px] font-semibold leading-none ${targetDark ? "text-black/60" : "text-white/80"}`}>original</p>
     </div>
   )
 }
@@ -221,8 +221,7 @@ export default function ColorMemory() {
   )
   const initialMeta = useMemo(() => getColorMemoryTodayMeta(browserTimeZone), [browserTimeZone])
   const [phase, setPhase] = useState<Phase>("menu")
-  const [dayKey, setDayKey] = useState(initialMeta.dayKey)
-  const [puzzleNumber, setPuzzleNumber] = useState(initialMeta.puzzleNumber)
+  const lastPuzzleNumberRef = useRef(initialMeta.puzzleNumber)
   const [targets, setTargets] = useState<ColorMemoryHsb[]>(initialMeta.colors)
   const [guess, setGuess] = useState<ColorMemoryHsb>(DEFAULT_GUESS)
   const [guesses, setGuesses] = useState<ColorMemoryHsb[]>([])
@@ -250,8 +249,7 @@ export default function ColorMemory() {
 
   const resetForCurrentDay = useCallback(() => {
     const nextMeta = getColorMemoryTodayMeta(browserTimeZone)
-    setDayKey(nextMeta.dayKey)
-    setPuzzleNumber(nextMeta.puzzleNumber)
+    lastPuzzleNumberRef.current = nextMeta.puzzleNumber
     setTargets(nextMeta.colors)
     setGuess(DEFAULT_GUESS)
     setGuesses([])
@@ -285,22 +283,18 @@ export default function ColorMemory() {
   useEffect(() => {
     const sync = () => {
       const nextMeta = getColorMemoryTodayMeta(browserTimeZone)
-      setPuzzleNumber((prev) => {
-        if (nextMeta.puzzleNumber !== prev) {
-          queueMicrotask(() => {
-            setDayKey(nextMeta.dayKey)
-            setTargets(nextMeta.colors)
-            setGuess(DEFAULT_GUESS)
-            setGuesses([])
-            setCurrentAttempt(1)
-            setRemainingMs(MEMORIZE_TOTAL_MS)
-            setPhase("menu")
-            setReadySetGoStep(0)
-          })
-          return nextMeta.puzzleNumber
-        }
-        return prev
-      })
+      if (nextMeta.puzzleNumber !== lastPuzzleNumberRef.current) {
+        lastPuzzleNumberRef.current = nextMeta.puzzleNumber
+        queueMicrotask(() => {
+          setTargets(nextMeta.colors)
+          setGuess(DEFAULT_GUESS)
+          setGuesses([])
+          setCurrentAttempt(1)
+          setRemainingMs(MEMORIZE_TOTAL_MS)
+          setPhase("menu")
+          setReadySetGoStep(0)
+        })
+      }
     }
 
     const id = window.setInterval(sync, 60_000)
@@ -364,11 +358,6 @@ export default function ColorMemory() {
     playCountdownTick()
   }, [phase, secondsLeftPrecise, countdownDisplay, playCountdownTick])
 
-  const formattedLocalDate = (() => {
-    const [year, month, day] = dayKey.split("-")
-    return month && day && year ? `${month}-${day}-${year}` : dayKey
-  })()
-
   const targetDark = needsDarkText(target)
   const guessDark = needsDarkText(guess)
 
@@ -378,30 +367,16 @@ export default function ColorMemory() {
       aria-label="Color memory game"
     >
       <div
-        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[11px] leading-tight text-[#d7dadc] sm:text-xs"
-        aria-label="Daily puzzle and reset time"
+        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[10px] leading-tight text-[#d7dadc] sm:text-[11px]"
+        aria-label="Time until next daily color"
       >
-        <div className="min-w-0 flex-1 text-left">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Daily
-          </span>
-          <span className="font-mono text-[12px] font-semibold tabular-nums text-white sm:text-sm">
-            #{puzzleNumber}
-          </span>
-        </div>
-        <div className="min-w-0 flex-1 px-1.5 text-center sm:px-2">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
-            Local
-          </span>
-          <span className="font-mono text-[12px] tabular-nums text-white/90 sm:text-sm">
-            {formattedLocalDate}
-          </span>
-        </div>
+        <div className="min-w-0 flex-1" aria-hidden />
+        <div className="min-w-0 flex-1" aria-hidden />
         <div className="min-w-0 flex-1 text-right">
-          <span className="block text-[10px] font-medium tracking-wide text-white/45 uppercase sm:text-[11px]">
+          <span className="block text-[9px] font-medium tracking-wide text-white/45 uppercase sm:text-[10px]">
             Next color
           </span>
-          <span className="font-mono text-[12px] tabular-nums tracking-tight text-white/90 sm:text-sm">
+          <span className="text-[11px] tabular-nums tracking-tight text-white/90 sm:text-xs">
             {nextPuzzleCountdown}
           </span>
         </div>
@@ -429,7 +404,7 @@ export default function ColorMemory() {
                   className="group inline-flex items-center gap-2 text-white/90 outline-none transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
                   aria-label="Start daily color challenge"
                 >
-                  <span className="color-memory-play-shimmer relative font-mono text-base font-semibold tracking-[0.12em] uppercase">
+                  <span className="color-memory-play-shimmer relative text-base font-semibold tracking-[0.12em] uppercase">
                     PLAY
                   </span>
                   <ArrowRight
@@ -446,13 +421,13 @@ export default function ColorMemory() {
           <div className="flex min-h-0 flex-1 items-center justify-center px-4 py-4">
             <div className="relative flex min-h-[300px] w-full max-w-md flex-col overflow-hidden rounded-xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.3)]" style={{ backgroundColor: hsbToCss(target) }}>
               <div className="flex items-start justify-between px-4 pt-4">
-                <p className={`font-mono text-sm font-medium tracking-[0.06em] ${targetDark ? "text-black/60" : "text-white/75"}`}>
+                <p className={`text-sm font-medium tracking-[0.06em] ${targetDark ? "text-black/60" : "text-white/75"}`}>
                   {`${currentAttempt}/${TOTAL_ATTEMPTS}`}
                 </p>
                 <div className="text-right">
                   <p
                     key={countdownDisplay}
-                    className={`font-mono text-[44px] font-semibold leading-none tracking-tight color-memory-countdown color-memory-ticker ${targetDark ? "text-black" : "text-white"}`}
+                    className={`text-[44px] font-semibold leading-none tracking-tight color-memory-countdown color-memory-ticker ${targetDark ? "text-black" : "text-white"}`}
                   >
                     {countdownDisplay.split(".")[0]}
                     <span className="opacity-30 text-[0.6em]">.{countdownDisplay.split(".")[1]}</span>
@@ -471,7 +446,7 @@ export default function ColorMemory() {
             <div className="relative flex min-h-[300px] w-full max-w-md items-start justify-end overflow-hidden rounded-xl border border-white/15 bg-black px-4 pt-4 shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
               <p
                 key={readySetGoLabel}
-                className="text-right font-mono text-5xl font-semibold tracking-[0.08em] text-white sm:text-6xl color-memory-ready-set-go"
+                className="text-right text-5xl font-semibold tracking-[0.08em] text-white sm:text-6xl color-memory-ready-set-go"
               >
                 {readySetGoLabel}
               </p>
@@ -533,10 +508,10 @@ export default function ColorMemory() {
                 style={{ backgroundColor: hsbToCss(guess) }}
                 aria-label="Current guessed color preview"
               >
-                <p className={`absolute top-4 left-4 font-mono text-sm font-medium tracking-[0.06em] ${guessDark ? "text-black/60" : "text-white/70"}`}>{`${currentAttempt}/${TOTAL_ATTEMPTS}`}</p>
+                <p className={`absolute top-4 left-4 text-sm font-medium tracking-[0.06em] ${guessDark ? "text-black/60" : "text-white/70"}`}>{`${currentAttempt}/${TOTAL_ATTEMPTS}`}</p>
 
                 <div className="flex items-end justify-between">
-                  <p className={`font-mono text-sm font-semibold tracking-[0.06em] transition-opacity duration-150 ${guessDark ? "text-black/60" : "text-white/70"}`} style={{ opacity: activeSliderLabel ? 1 : 0 }}>
+                  <p className={`text-sm font-semibold tracking-[0.06em] transition-opacity duration-150 ${guessDark ? "text-black/60" : "text-white/70"}`} style={{ opacity: activeSliderLabel ? 1 : 0 }}>
                     {activeSliderLabel ?? " "}
                   </p>
                   <button
@@ -565,13 +540,13 @@ export default function ColorMemory() {
                   className="relative flex min-h-0 flex-[1.15] items-center justify-between px-4 py-3"
                   style={{ backgroundColor: hsbToCss(guess) }}
                 >
-                  <p className={`absolute top-3 left-3 font-mono text-xs font-medium ${guessDark ? "text-black/60" : "text-white/90"}`}>{`${currentAttempt}/${TOTAL_ATTEMPTS}`}</p>
-                  <div className={`mt-8 text-left font-mono text-lg font-semibold ${guessDark ? "text-black" : "text-white"}`}>
+                  <p className={`absolute top-3 left-3 text-xs font-medium ${guessDark ? "text-black/60" : "text-white/90"}`}>{`${currentAttempt}/${TOTAL_ATTEMPTS}`}</p>
+                  <div className={`mt-8 text-left text-lg font-semibold ${guessDark ? "text-black" : "text-white"}`}>
                     <p>{`H${guess.h} S${guess.s} B${guess.b}`}</p>
                     <p className={`mt-1 text-[11px] tracking-[0.06em] ${guessDark ? "text-black/60" : "text-white/85"}`}>Your Selection</p>
                   </div>
                   <div className={`text-right ${guessDark ? "text-black" : "text-white"}`}>
-                    <p className="font-mono text-7xl font-semibold leading-none">
+                    <p className="text-7xl font-semibold leading-none">
                       {score.toFixed(2)}
                       <span className={`ml-1.5 text-2xl font-medium ${guessDark ? "text-black/50" : "text-white/50"}`}>/ 10</span>
                     </p>
@@ -581,7 +556,7 @@ export default function ColorMemory() {
                   className="flex min-h-0 flex-1 items-end justify-between px-4 py-3"
                   style={{ backgroundColor: hsbToCss(target) }}
                 >
-                  <div className={`font-mono text-lg font-semibold ${targetDark ? "text-black" : "text-white"}`}>
+                  <div className={`text-lg font-semibold ${targetDark ? "text-black" : "text-white"}`}>
                     <p>{`H${target.h} S${target.s} B${target.b}`}</p>
                     <p className={`mt-1 text-[11px] tracking-[0.06em] ${targetDark ? "text-black/60" : "text-white/85"}`}>Original</p>
                   </div>
@@ -629,7 +604,7 @@ export default function ColorMemory() {
                 className="group inline-flex items-center gap-2 text-white/90 outline-none transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
                 aria-label="Play again"
               >
-                <span className="color-memory-play-shimmer relative font-mono text-base font-semibold tracking-[0.12em] uppercase">
+                <span className="color-memory-play-shimmer relative text-base font-semibold tracking-[0.12em] uppercase">
                   Play Again
                 </span>
                 <ArrowRight

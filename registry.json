@@ -934,6 +934,35 @@
       ]
     },
     {
+      "name": "navbar-section-v4",
+      "type": "registry:block",
+      "title": "Navbar Section v4",
+      "description": "Fixed bottom centered dock nav with frosted pill container, hairline active indicator, responsive links, and primary CTA.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v4/navbar-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v4/navbar-section-v4.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v4/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v4/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
       "name": "mac-os-terminal",
       "type": "registry:block",
       "title": "Mac OS Terminal",
@@ -1134,6 +1163,40 @@
       ]
     },
     {
+      "name": "cta-section-v3",
+      "type": "registry:block",
+      "title": "CTA Section v3",
+      "description": "Single-panel CTA with a full-bleed Paper Dithering (warp) shader behind the headline, supporting line, and primary / outline buttons.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cta-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/cta-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v3/cta-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v3/cta-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v3/components/cta-section-v3-dither-bg.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v3/components/cta-section-v3-dither-bg.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v3/styles/cta-section-v3.css",
+          "type": "registry:file",
+          "target": "app/cta-section-v3/styles/cta-section-v3.css"
+        }
+      ]
+    },
+    {
       "name": "footer-section-v1",
       "type": "registry:block",
       "title": "Footer Section v1",
@@ -1187,6 +1250,27 @@
           "path": "registry/new-york/blocks/footer-section-v2/footer-section-v2.tsx",
           "type": "registry:component",
           "target": "app/footer-section-v2/footer-section-v2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-section-v3",
+      "type": "registry:block",
+      "title": "Footer Section v3",
+      "description": "Card-wrapped footer with five link columns and a Privacy / Terms bottom bar. No hover icons on links.",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/footer-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/footer-section-v3/footer-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/footer-section-v3/footer-section-v3.tsx"
         }
       ]
     },
@@ -2005,6 +2089,46 @@
           "path": "registry/new-york/blocks/feature-section-v4/styles/feature-section-v4.css",
           "type": "registry:file",
           "target": "app/feature-section-v4/styles/feature-section-v4.css"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v5",
+      "type": "registry:block",
+      "title": "Feature Section v5",
+      "description": "Centered Geist Pixel headline with a bento grid of four static cards—balanced title and body typography on muted surfaces.",
+      "dependencies": ["geist"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/feature-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v5/feature-section-v5.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/components/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v5/components/feature-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/styles/feature-grid.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v5/styles/feature-grid.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v5/lib/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v5/styles/feature-section-v5.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v5/styles/feature-section-v5.css"
         }
       ]
     },
