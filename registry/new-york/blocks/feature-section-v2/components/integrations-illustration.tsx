@@ -1,14 +1,6 @@
 "use client"
 
-/**
- * Product surface: Command palette — `Connect an integration…` (⌘K).
- * Top bar: search input with `Search` glyph + `⌘K` kbd hint (the palette's input is the top bar).
- * Cursor: walks down rows, lands on the Supabase row (per SKILL § 5 · Cursor canvas).
- * Brand marks from `@/components/ui/svgs/*` (mandatory, per SKILL principle 8).
- * Accent (one element): purple `Connect` chip on the hovered row.
- */
-
-import { ChevronRight, CornerDownLeft, Search } from "lucide-react"
+import { ChevronRight, CornerDownLeft, Loader2, Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { GithubDark } from "@/components/ui/svgs/githubDark"
@@ -60,21 +52,30 @@ function IntegrationBrandMark({ id }: { id: Integration["id"] }) {
   }
 }
 
-/** Cursor x/y (% of body) per hovered row — rows are stacked evenly in the body */
-function cursorForRow(idx: number, total: number) {
-  const rowSpan = 100 / total
-  return { x: 86, y: rowSpan * idx + rowSpan / 2 }
+/**
+ * Cursor y-center for a given row.
+ * Body has py-1 (≈3% of body height) and rows are h-[22%] each —
+ * so row `idx` center sits at 3 + idx*22 + 11 % of the body div.
+ */
+function cursorY(idx: number) {
+  return 3 + idx * 22 + 11
 }
 
 export default function IntegrationsIllustration() {
   const active = useFsv2IllustrationActive()
-  const { hoverIdx, query, pressed, isResult } = useIntegrationsAnimation(active)
+  const { hoverIdx, query, pressed, visibleCount, isResult, cursorOnConnect, isLoading } =
+    useIntegrationsAnimation(active)
 
   const effectiveHover = isResult ? INTEGRATIONS_TARGET_IDX : hoverIdx
+
+  // Cursor position:
+  // - idle (no hover): bottom-left corner of the body (palette just opened)
+  // - hovering rows: x=86 (over the chevron area on the right side)
+  // - on Connect button: x=90 (centered on the purple chip; chip spans ~86–97% at max-w-6xl grid width)
   const cursor =
     effectiveHover < 0
       ? { x: 8, y: 96 }
-      : cursorForRow(effectiveHover, INTEGRATIONS.length)
+      : { x: cursorOnConnect ? 90 : 86, y: cursorY(effectiveHover) }
 
   return (
     <div className="flex size-full flex-col overflow-hidden rounded-lg border border-border bg-card">
@@ -97,7 +98,7 @@ export default function IntegrationsIllustration() {
 
       {/* Body — results list (relative, acts as cursor canvas) */}
       <div className="relative flex min-h-0 flex-1 flex-col py-1">
-        {INTEGRATIONS.map((item, i) => {
+        {INTEGRATIONS.slice(0, visibleCount).map((item, i) => {
           const hovered = effectiveHover === i
           const target = i === INTEGRATIONS_TARGET_IDX && isResult
 
@@ -105,7 +106,7 @@ export default function IntegrationsIllustration() {
             <div
               key={item.id}
               className={cn(
-                "flex h-[22%] items-center gap-2 border-l-2 px-2.5 text-[11px] transition-colors",
+                "flex h-[22%] items-center gap-2 border-l-2 px-2.5 text-[11px] transition-colors fsv2-row-appear",
                 hovered
                   ? "border-foreground/40 bg-muted/60"
                   : "border-transparent",
@@ -120,9 +121,25 @@ export default function IntegrationsIllustration() {
               </span>
 
               {target ? (
-                <span className="ml-auto inline-flex h-4 items-center gap-1 rounded-sm bg-purple-500/10 px-1.5 text-[10px] font-medium text-purple-500">
-                  Connect
-                  <ChevronRight className="size-2.5" aria-hidden />
+                <span
+                  className={cn(
+                    "ml-auto inline-flex h-4 items-center gap-1 rounded-sm px-1.5 text-[10px] font-medium text-purple-500",
+                    "transition-[transform,background-color] duration-75",
+                    pressed
+                      ? "scale-[0.91] bg-purple-500/25"
+                      : isLoading
+                        ? "bg-purple-500/15"
+                        : "bg-purple-500/10",
+                  )}
+                >
+                  {isLoading ? (
+                    <Loader2 className="size-2.5 animate-spin" aria-hidden />
+                  ) : (
+                    <>
+                      Connect
+                      <ChevronRight className="size-2.5" aria-hidden />
+                    </>
+                  )}
                 </span>
               ) : hovered ? (
                 <ChevronRight

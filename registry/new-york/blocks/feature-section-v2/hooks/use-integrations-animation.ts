@@ -6,28 +6,42 @@ import { useEffect, useState } from "react"
  * Integrations animation — drives a `Connect an integration…` command palette for card 04.
  *
  * Story (one loop):
- *   setup     → palette open with all 4 rows pending; cursor idle at left
- *   acting    → cursor moves down through rows (GitHub → Vercel → Supabase),
- *               landing on the Supabase row; typed query ("supa") fills the search;
- *               cursor press at the end highlights the Connect chip
- *   result    → Supabase row shows the purple `Connect` chip + chevron
- *   holding   → resolved state holds
- *   resetting → soft reset
+ *   setup      → palette open, empty list, cursor idle
+ *   typing     → "supa" types into the search bar; no results yet
+ *   appearing  → all 4 rows stagger in (realistic search-result reveal)
+ *   hovering   → cursor walks GitHub → Vercel → Supabase
+ *   connecting → Supabase row shows the purple `Connect` chip; cursor slides to the button and clicks
+ *   holding    → resolved state holds
+ *   resetting  → soft reset
  */
 
 export type IntegrationsPhase =
   | "setup"
-  | "acting"
-  | "result"
-  | "holding"
+  | "typing"
+  | "appearing"
+  | "hovering"
+  | "connecting"
+  | "loading"
   | "resetting"
 
 const TIMING: Record<IntegrationsPhase, number> = {
   setup: 500,
-  acting: 2200,
-  result: 300,
-  holding: 3000,
-  resetting: 320,
+  typing: 1100,
+  appearing: 700,
+  hovering: 1300,
+  connecting: 600,
+  loading: 2200,
+  resetting: 300,
+}
+
+const PHASE_NEXT: Record<IntegrationsPhase, IntegrationsPhase> = {
+  setup: "typing",
+  typing: "appearing",
+  appearing: "hovering",
+  hovering: "connecting",
+  connecting: "loading",
+  loading: "resetting",
+  resetting: "setup",
 }
 
 export type Integration = {
@@ -54,22 +68,19 @@ export function useIntegrationsAnimation(active: boolean) {
   const [hoverIdx, setHoverIdx] = useState(-1)
   const [typed, setTyped] = useState(0)
   const [pressed, setPressed] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(0)
 
+  // Phase timer
   useEffect(() => {
-    if (!active) return
-
-    const next: Record<IntegrationsPhase, IntegrationsPhase> = {
-      setup: "acting",
-      acting: "result",
-      result: "holding",
-      holding: "resetting",
-      resetting: "setup",
+    if (!active) {
+      setPhase("setup")
+      return
     }
-
-    const t = setTimeout(() => setPhase(next[phase]), TIMING[phase])
+    const t = setTimeout(() => setPhase(PHASE_NEXT[phase]), TIMING[phase])
     return () => clearTimeout(t)
   }, [active, phase])
 
+  // Phase → derived state
   useEffect(() => {
     if (!active) return
 
@@ -77,50 +88,61 @@ export function useIntegrationsAnimation(active: boolean) {
       setHoverIdx(-1)
       setTyped(0)
       setPressed(false)
+      setVisibleCount(0)
       return
     }
 
-    if (phase === "result" || phase === "holding") {
-      setHoverIdx(INTEGRATIONS_TARGET_IDX)
+    if (phase === "typing") {
+      setHoverIdx(-1)
+      setVisibleCount(0)
+      setTyped(0)
+      const timers: ReturnType<typeof setTimeout>[] = []
+      for (let i = 1; i <= INTEGRATIONS_QUERY.length; i++) {
+        timers.push(setTimeout(() => setTyped(i), 200 + i * 210))
+      }
+      return () => timers.forEach(clearTimeout)
+    }
+
+    if (phase === "appearing") {
+      setHoverIdx(-1)
       setTyped(INTEGRATIONS_QUERY.length)
+      setVisibleCount(0)
+      const timers: ReturnType<typeof setTimeout>[] = []
+      for (let i = 0; i < INTEGRATIONS.length; i++) {
+        timers.push(setTimeout(() => setVisibleCount(i + 1), 60 + i * 150))
+      }
+      return () => timers.forEach(clearTimeout)
+    }
+
+    if (phase === "hovering") {
+      setVisibleCount(INTEGRATIONS.length)
       setPressed(false)
-      return
+      // Walk GitHub → Vercel → Supabase
+      const stops = [0, 1, INTEGRATIONS_TARGET_IDX]
+      const stepMs = 320
+      const timers: ReturnType<typeof setTimeout>[] = []
+      stops.forEach((s, i) => {
+        timers.push(setTimeout(() => setHoverIdx(s), i * stepMs))
+      })
+      return () => timers.forEach(clearTimeout)
     }
 
-    // acting — 3 hover ticks ending on the target row, then a press
-    const stops = [0, 1, INTEGRATIONS_TARGET_IDX]
-    const stepMs = TIMING.acting / (stops.length + 1)
-    const timers: Array<ReturnType<typeof setTimeout>> = []
-
-    stops.forEach((s, i) => {
-      timers.push(
-        setTimeout(() => setHoverIdx(s), i * stepMs),
-      )
-    })
-    // Press feedback just before phase transitions to result
-    timers.push(
-      setTimeout(() => setPressed(true), TIMING.acting - 200),
-    )
-    timers.push(setTimeout(() => setPressed(false), TIMING.acting - 40))
-
-    return () => {
-      timers.forEach(clearTimeout)
+    if (phase === "connecting") {
+      // Connect chip appears; cursor slides to button and clicks
+      setHoverIdx(INTEGRATIONS_TARGET_IDX)
+      setVisibleCount(INTEGRATIONS.length)
+      const timers: ReturnType<typeof setTimeout>[] = [
+        setTimeout(() => setPressed(true), 350),
+        setTimeout(() => setPressed(false), 500),
+      ]
+      return () => timers.forEach(clearTimeout)
     }
-  }, [active, phase])
 
-  useEffect(() => {
-    if (!active) return
-    if (phase !== "acting") return
-    const total = INTEGRATIONS_QUERY.length
-    const charMs = 110
-    let i = 0
-    setTyped(0)
-    const iv = setInterval(() => {
-      i++
-      setTyped(i)
-      if (i >= total) clearInterval(iv)
-    }, charMs)
-    return () => clearInterval(iv)
+    if (phase === "loading") {
+      setHoverIdx(INTEGRATIONS_TARGET_IDX)
+      setVisibleCount(INTEGRATIONS.length)
+      setPressed(false)
+    }
   }, [active, phase])
 
   return {
@@ -128,9 +150,10 @@ export function useIntegrationsAnimation(active: boolean) {
     hoverIdx,
     typed,
     pressed,
+    visibleCount,
     query: INTEGRATIONS_QUERY.slice(0, typed),
-    isActing: phase === "acting",
-    isResult: phase === "result" || phase === "holding",
-    isHolding: phase === "holding",
+    isResult: phase === "connecting" || phase === "loading",
+    cursorOnConnect: phase === "connecting" || phase === "loading",
+    isLoading: phase === "loading",
   }
 }

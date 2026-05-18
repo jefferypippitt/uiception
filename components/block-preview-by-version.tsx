@@ -20,6 +20,10 @@ import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/hero-secti
 import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/how-it-works-section-v1"
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/how-it-works-section-v2"
 import CodeBlock from "@/registry/new-york/blocks/code-block/code-block"
+import Spreadsheet from "@/registry/new-york/blocks/spreadsheet/spreadsheet"
+import GoogleChrome from "@/registry/new-york/blocks/google-chrome/google-chrome"
+import GoogleChromeWindows from "@/registry/new-york/blocks/google-chrome-windows/google-chrome-windows"
+import MacbookPro from "@/registry/new-york/blocks/macbook-pro/macbook-pro"
 import BrandsSectionV3 from "@/registry/new-york/blocks/brands-section-v3/brands-section-v3"
 import BrandsSectionV4 from "@/registry/new-york/blocks/brands-section-v4/brands-section-v4"
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/feature-section-v1"
@@ -28,15 +32,21 @@ import HeroSectionV5 from "@/registry/new-york/blocks/hero-section-v5/hero-secti
 import FeatureSectionV3 from "@/registry/new-york/blocks/feature-section-v3/feature-section-v3"
 import FeatureSectionV4 from "@/registry/new-york/blocks/feature-section-v4/feature-section-v4"
 import FeatureSectionV5 from "@/registry/new-york/blocks/feature-section-v5/feature-section-v5"
+import FeatureSectionV6 from "@/registry/new-york/blocks/feature-section-v6/feature-section-v6"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/changelog-section-v1"
+import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/faq-section-v1"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/brands-section-v5"
+import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/brands-section-v6"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/hero-section-v6"
+import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/hero-section-v7"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/pricing-section-v1"
 import LoremDemo from "@/components/blocks/navbar-lorem-demo"
 import NavbarSectionV1 from "@/registry/new-york/blocks/navbar-section-v1/navbar-section-v1"
 import NavbarSectionV2 from "@/registry/new-york/blocks/navbar-section-v2/navbar-section-v2"
 import NavbarSectionV3 from "@/registry/new-york/blocks/navbar-section-v3/navbar-section-v3"
 import NavbarSectionV4 from "@/registry/new-york/blocks/navbar-section-v4/navbar-section-v4"
+import NavbarSectionV5 from "@/registry/new-york/blocks/navbar-section-v5/navbar-section-v5"
+import NavbarSectionV6 from "@/registry/new-york/blocks/navbar-section-v6/navbar-section-v6"
 
 function NavbarSectionV1WithLoremDemo() {
   return (
@@ -76,6 +86,24 @@ function NavbarSectionV4WithLoremDemo() {
   )
 }
 
+function NavbarSectionV5WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV5 />
+      <LoremDemo />
+    </>
+  )
+}
+
+function NavbarSectionV6WithLoremDemo() {
+  return (
+    <>
+      <NavbarSectionV6 />
+      <LoremDemo />
+    </>
+  )
+}
+
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
   "brands-section-v2": BrandsSectionV2,
@@ -99,22 +127,32 @@ const blockComponents: Record<string, React.ComponentType> = {
   "how-it-works-section-v1": HowItWorksSectionV1,
   "how-it-works-section-v2": HowItWorksSectionV2,
   "code-block": CodeBlock,
+  spreadsheet: Spreadsheet,
+  "google-chrome": GoogleChrome,
+  "google-chrome-windows": GoogleChromeWindows,
+  "macbook-pro": MacbookPro,
   "brands-section-v3": BrandsSectionV3,
   "brands-section-v4": BrandsSectionV4,
   "brands-section-v5": BrandsSectionV5,
+  "brands-section-v6": BrandsSectionV6,
   "feature-section-v1": FeatureSectionV1,
   "feature-section-v2": FeatureSectionV2,
   "hero-section-v5": HeroSectionV5,
   "hero-section-v6": HeroSectionV6,
+  "hero-section-v7": HeroSectionV7,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
   "feature-section-v5": FeatureSectionV5,
+  "feature-section-v6": FeatureSectionV6,
   "changelog-section-v1": ChangelogSectionV1,
+  "faq-section-v1": FaqSectionV1,
   "pricing-section-v1": PricingSectionV1,
   "navbar-section-v1": NavbarSectionV1WithLoremDemo,
   "navbar-section-v2": NavbarSectionV2WithLoremDemo,
   "navbar-section-v3": NavbarSectionV3WithLoremDemo,
   "navbar-section-v4": NavbarSectionV4WithLoremDemo,
+  "navbar-section-v5": NavbarSectionV5WithLoremDemo,
+  "navbar-section-v6": NavbarSectionV6WithLoremDemo,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

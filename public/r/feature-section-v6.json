@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-section-v6",
+  "title": "Feature Section v6",
+  "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed Paper MeshGradient shader background.",
+  "dependencies": [
+    "@paper-design/shaders-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/page.tsx",
+      "content": "import FeatureSectionV6 from \"./feature-section-v6\"\n\nexport default function Page() {\n  return <FeatureSectionV6 />\n}\n",
+      "type": "registry:page",
+      "target": "app/feature-section-v6/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/feature-section-v6.tsx",
+      "content": "import FeatureGrid from \"./components/feature-grid\"\n\nimport \"./styles/feature-section-v6.css\"\n\nexport default function FeatureSectionV6() {\n  return (\n    <section className=\"fsv6-section pt-16 md:pt-20 lg:pt-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <header className=\"fsv6-intro mb-12 md:mb-14 lg:mb-16\">\n          <p className=\"fsv6-eyebrow\">Capabilities</p>\n          <h2 className=\"fsv6-heading\">Momentum, built in</h2>\n          <p className=\"fsv6-lead\">\n            Four essentials that keep work moving with less overhead, clearer\n            priorities, and room to grow without slowing down.\n          </p>\n        </header>\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v6/feature-section-v6.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/components/feature-grid.tsx",
+      "content": "import { featureSectionItems } from \"../lib/features\"\n\nimport { FeatureSectionV6MeshBg } from \"./feature-section-v6-mesh-bg\"\n\nimport \"../styles/feature-grid.css\"\n\nexport default function FeatureGrid() {\n  return (\n    <ul className=\"fsv6-grid\">\n      {featureSectionItems.map(({ id, title, description, shader }) => (\n        <li key={id} className=\"fsv6-cell\">\n          <div className=\"fsv6-card\">\n            <FeatureSectionV6MeshBg {...shader} />\n            <div className=\"fsv6-card-scrim\" aria-hidden />\n            <div className=\"fsv6-card-content\">\n              <h3 className=\"fsv6-card-title\">{title}</h3>\n              <p className=\"fsv6-card-desc\">{description}</p>\n            </div>\n          </div>\n        </li>\n      ))}\n    </ul>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v6/components/feature-grid.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/components/feature-section-v6-mesh-bg.tsx",
+      "content": "\"use client\"\n\nimport { MeshGradient } from \"@paper-design/shaders-react\"\n\nimport {\n  FSV6_MESH_COLORS,\n  FSV6_MESH_SPEED,\n  type FeatureShaderTheme,\n} from \"../lib/features\"\n\ntype FeatureSectionV6MeshBgProps = FeatureShaderTheme\n\nexport function FeatureSectionV6MeshBg({\n  swirl,\n  rotation,\n  distortion,\n  scale,\n  offsetX,\n  offsetY,\n  frame,\n}: FeatureSectionV6MeshBgProps) {\n  return (\n    <div className=\"fsv6-mesh-frame\" aria-hidden>\n      <MeshGradient\n        className=\"fsv6-mesh-canvas\"\n        colors={[...FSV6_MESH_COLORS]}\n        distortion={distortion}\n        fit=\"cover\"\n        frame={frame}\n        grainMixer={0}\n        grainOverlay={0}\n        offsetX={offsetX}\n        offsetY={offsetY}\n        rotation={rotation}\n        scale={scale}\n        speed={FSV6_MESH_SPEED}\n        swirl={swirl}\n      />\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/feature-section-v6/components/feature-section-v6-mesh-bg.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/styles/feature-grid.css",
+      "content": ".fsv6-grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 0.75rem;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n@media (min-width: 640px) {\n  .fsv6-grid {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 0.75rem;\n  }\n}\n\n.fsv6-cell {\n  display: flex;\n  min-width: 0;\n  margin: 0;\n}\n\n.fsv6-card {\n  position: relative;\n  display: flex;\n  flex: 1;\n  width: 100%;\n  min-height: 13.5rem;\n  overflow: hidden;\n  border-radius: var(--radius-lg);\n  border: 1px solid var(--border);\n  background-color: #0a0a0a;\n  color: var(--foreground);\n}\n\n.fsv6-mesh-frame {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  pointer-events: none;\n  overflow: hidden;\n}\n\n.fsv6-mesh-canvas {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.fsv6-mesh-frame canvas {\n  display: block;\n  width: 100% !important;\n  height: 100% !important;\n}\n\n.fsv6-card-scrim {\n  position: absolute;\n  inset: 0;\n  z-index: 1;\n  pointer-events: none;\n  background: linear-gradient(\n    165deg,\n    color-mix(in oklab, #000000 22%, transparent) 0%,\n    color-mix(in oklab, #000000 42%, transparent) 100%\n  );\n}\n\n.fsv6-card-content {\n  position: relative;\n  z-index: 10;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  flex: 1;\n  padding: 1.35rem 1.4rem 1.4rem;\n}\n\n.fsv6-card-title {\n  margin: 0;\n  font-family: var(--fsv6-body);\n  font-size: 1.0625rem;\n  font-weight: 500;\n  line-height: 1.15;\n  letter-spacing: -0.015em;\n  word-spacing: -0.06em;\n  color: #ffffff;\n}\n\n.fsv6-card-desc {\n  margin: 0;\n  margin-top: auto;\n  max-width: 34ch;\n  font-family: var(--fsv6-body);\n  font-size: 0.8125rem;\n  font-weight: 400;\n  line-height: 1.6;\n  letter-spacing: -0.006em;\n  color: color-mix(in oklab, #ffffff 70%, transparent);\n}\n\n@media (min-width: 768px) {\n  .fsv6-card-content {\n    padding: 1.5rem 1.5rem 1.55rem;\n  }\n\n  .fsv6-card-title {\n    font-size: 1.125rem;\n  }\n\n  .fsv6-card-desc {\n    font-size: 0.875rem;\n    line-height: 1.55;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .fsv6-mesh-frame {\n    display: none;\n  }\n\n  .fsv6-card {\n    background-color: color-mix(in oklab, var(--muted) 78%, var(--background) 22%);\n  }\n\n  .fsv6-card-scrim {\n    display: none;\n  }\n\n  .fsv6-card-title {\n    color: color-mix(in oklab, var(--foreground) 92%, transparent);\n  }\n\n  .fsv6-card-desc {\n    color: var(--muted-foreground);\n  }\n}\n",
+      "type": "registry:file",
+      "target": "app/feature-section-v6/styles/feature-grid.css"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/lib/features.ts",
+      "content": "/** Shared ink palette — colors stay identical on every card. */\nexport const FSV6_MESH_COLORS = [\"#ffffff\", \"#000000\"] as const\n\nexport const FSV6_MESH_SPEED = 0.22\n\nexport type FeatureShaderTheme = {\n  swirl: number\n  rotation: number\n  distortion: number\n  scale: number\n  offsetX: number\n  offsetY: number\n  /** Stagger animation phase so tiles do not mirror each other. */\n  frame: number\n}\n\nexport type FeatureDefinition = {\n  id: string\n  title: string\n  description: string\n  shader: FeatureShaderTheme\n}\n\nexport const featureSectionItems: FeatureDefinition[] = [\n  {\n    id: \"smart-automation\",\n    title: \"Automate the repeatable\",\n    description:\n      \"Let routine tasks run themselves so your team can focus on work that actually changes outcomes.\",\n    shader: {\n      swirl: 0.04,\n      rotation: 0,\n      distortion: 0.5,\n      scale: 0.34,\n      offsetX: 0.35,\n      offsetY: -0.2,\n      frame: 0,\n    },\n  },\n  {\n    id: \"deep-analytics\",\n    title: \"See what matters\",\n    description:\n      \"See what is working, what is slipping, and where to focus next without wading through noise.\",\n    shader: {\n      swirl: 0.92,\n      rotation: 58,\n      distortion: 1.2,\n      scale: 0.19,\n      offsetX: -0.4,\n      offsetY: 0.35,\n      frame: 18_500,\n    },\n  },\n  {\n    id: \"team-collaboration\",\n    title: \"Stay aligned together\",\n    description:\n      \"Share context with live updates and make decisions in one place your whole team can trust.\",\n    shader: {\n      swirl: 0.48,\n      rotation: 165,\n      distortion: 0.72,\n      scale: 0.27,\n      offsetX: 0.15,\n      offsetY: 0.45,\n      frame: 41_000,\n    },\n  },\n  {\n    id: \"instant-performance\",\n    title: \"Stay fast at scale\",\n    description:\n      \"Start with a responsive baseline on day one and keep headroom as traffic and complexity grow.\",\n    shader: {\n      swirl: 1,\n      rotation: 248,\n      distortion: 1.05,\n      scale: 0.16,\n      offsetX: -0.25,\n      offsetY: -0.42,\n      frame: 67_500,\n    },\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/feature-section-v6/lib/features.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/feature-section-v6/styles/feature-section-v6.css",
+      "content": "/* feature-section v6 — sans typography */\n\n.fsv6-section {\n  --fsv6-body: var(--font-sans);\n}\n\n.fsv6-intro {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  gap: 0;\n  max-width: 34rem;\n}\n\n.fsv6-eyebrow {\n  margin: 0 0 0.5rem;\n  font-family: var(--font-mono);\n  font-size: 0.6875rem;\n  font-weight: 500;\n  line-height: 1;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n  color: color-mix(in oklab, var(--foreground) 55%, transparent);\n}\n\n.fsv6-heading {\n  margin: 0 0 0.875rem;\n  font-family: var(--fsv6-body);\n  font-size: clamp(1.875rem, 3.4vw, 2.5rem);\n  font-weight: 500;\n  line-height: 1.08;\n  letter-spacing: -0.02em;\n  word-spacing: -0.08em;\n  text-wrap: balance;\n}\n\n.fsv6-lead {\n  margin: 0;\n  max-width: 30rem;\n  font-family: var(--fsv6-body);\n  font-size: 0.9375rem;\n  font-weight: 400;\n  line-height: 1.65;\n  letter-spacing: -0.01em;\n  color: var(--muted-foreground);\n}\n\n@media (min-width: 768px) {\n  .fsv6-eyebrow {\n    margin-bottom: 0.625rem;\n    font-size: 0.75rem;\n  }\n\n  .fsv6-heading {\n    margin-bottom: 1rem;\n    font-size: clamp(2rem, 3.6vw, 2.625rem);\n  }\n\n  .fsv6-lead {\n    font-size: 1rem;\n    line-height: 1.7;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "app/feature-section-v6/styles/feature-section-v6.css"
+    }
+  ],
+  "type": "registry:block"
+}

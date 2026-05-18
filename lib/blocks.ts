@@ -30,6 +30,7 @@ export type BlockCategoryId =
   | "backgrounds"
   | "sidebar"
   | "banner"
+  | "mockups"
 
 export type BlockVersion = {
   id: string
@@ -70,6 +71,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Navbar Section v4",
         registryPath: "registry/new-york/blocks/navbar-section-v4",
       },
+      {
+        id: "navbar-section-v5",
+        title: "Navbar Section v5",
+        registryPath: "registry/new-york/blocks/navbar-section-v5",
+      },
+      {
+        id: "navbar-section-v6",
+        title: "Navbar Section v6",
+        registryPath: "registry/new-york/blocks/navbar-section-v6",
+      },
     ],
   },
   {
@@ -107,6 +118,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v6",
         registryPath: "registry/new-york/blocks/hero-section-v6",
       },
+      {
+        id: "hero-section-v7",
+        title: "Hero Section v7",
+        registryPath: "registry/new-york/blocks/hero-section-v7",
+      },
     ],
   },
   {
@@ -139,6 +155,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Brands Section v5",
         registryPath: "registry/new-york/blocks/brands-section-v5",
       },
+      {
+        id: "brands-section-v6",
+        title: "Brands Section v6",
+        registryPath: "registry/new-york/blocks/brands-section-v6",
+      },
     ],
   },
   {
@@ -170,6 +191,11 @@ export const blockCategories: BlockCategory[] = [
         id: "feature-section-v5",
         title: "Feature Section v5",
         registryPath: "registry/new-york/blocks/feature-section-v5",
+      },
+      {
+        id: "feature-section-v6",
+        title: "Feature Section v6",
+        registryPath: "registry/new-york/blocks/feature-section-v6",
       },
     ],
   },
@@ -278,7 +304,13 @@ export const blockCategories: BlockCategory[] = [
     id: "faq",
     title: "FAQ",
     description: "Frequently asked questions with accordion layouts.",
-    versions: [],
+    versions: [
+      {
+        id: "faq-section-v1",
+        title: "FAQ Section v1",
+        registryPath: "registry/new-york/blocks/faq-section-v1",
+      },
+    ],
   },
   {
     id: "cta",
@@ -431,6 +463,34 @@ export const blockCategories: BlockCategory[] = [
     title: "Banner",
     description: "Promotional banners, announcement bars, and cookie consent strips.",
     versions: [],
+  },
+  {
+    id: "mockups",
+    title: "Mockups",
+    description:
+      "Wireframe-style UI chrome—browsers, devices, and app shells for product demos.",
+    versions: [
+      {
+        id: "spreadsheet",
+        title: "Spreadsheet",
+        registryPath: "registry/new-york/blocks/spreadsheet",
+      },
+      {
+        id: "google-chrome",
+        title: "Google Chrome (macOS)",
+        registryPath: "registry/new-york/blocks/google-chrome",
+      },
+      {
+        id: "google-chrome-windows",
+        title: "Google Chrome (Windows)",
+        registryPath: "registry/new-york/blocks/google-chrome-windows",
+      },
+      {
+        id: "macbook-pro",
+        title: "MacBook Pro",
+        registryPath: "registry/new-york/blocks/macbook-pro",
+      },
+    ],
   },
 ]
 

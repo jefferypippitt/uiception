@@ -290,7 +290,8 @@
 ::view-transition-group(title-partners),
 ::view-transition-group(title-backgrounds),
 ::view-transition-group(title-sidebar),
-::view-transition-group(title-banner) {
+::view-transition-group(title-banner),
+::view-transition-group(title-mockups) {
   animation-duration: 0.26s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   overflow: visible;
@@ -326,7 +327,8 @@
 ::view-transition-image-pair(title-partners),
 ::view-transition-image-pair(title-backgrounds),
 ::view-transition-image-pair(title-sidebar),
-::view-transition-image-pair(title-banner) {
+::view-transition-image-pair(title-banner),
+::view-transition-image-pair(title-mockups) {
   overflow: visible;
 }
 
@@ -360,7 +362,8 @@
 ::view-transition-old(title-partners),
 ::view-transition-old(title-backgrounds),
 ::view-transition-old(title-sidebar),
-::view-transition-old(title-banner) {
+::view-transition-old(title-banner),
+::view-transition-old(title-mockups) {
   width: auto;
   height: auto;
   animation: vt-title-out 0.12s ease-in forwards;
@@ -396,7 +399,8 @@
 ::view-transition-new(title-partners),
 ::view-transition-new(title-backgrounds),
 ::view-transition-new(title-sidebar),
-::view-transition-new(title-banner) {
+::view-transition-new(title-banner),
+::view-transition-new(title-mockups) {
   width: auto;
   height: auto;
   animation: vt-title-in 0.2s ease-out both;
@@ -446,6 +450,7 @@
   ::view-transition-old(title-backgrounds),
   ::view-transition-old(title-sidebar),
   ::view-transition-old(title-banner),
+  ::view-transition-old(title-mockups),
   ::view-transition-new(title-navbar),
   ::view-transition-new(title-hero-section),
   ::view-transition-new(title-brands),
@@ -476,7 +481,8 @@
   ::view-transition-new(title-partners),
   ::view-transition-new(title-backgrounds),
   ::view-transition-new(title-sidebar),
-  ::view-transition-new(title-banner) {
+  ::view-transition-new(title-banner),
+  ::view-transition-new(title-mockups) {
     animation: none !important;
   }
 }

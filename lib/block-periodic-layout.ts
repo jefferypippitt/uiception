@@ -50,6 +50,7 @@ export const blockPeriodicCells: BlockPeriodicCell[] = [
   { id: "backgrounds",       z: 29, symbol: "Bg", row: 6, col: 1  },
   { id: "sidebar",           z: 30, symbol: "Sb", row: 6, col: 2  },
   { id: "banner",            z: 31, symbol: "Bn", row: 6, col: 3  },
+  { id: "mockups",           z: 32, symbol: "Mk", row: 6, col: 4  },
 ]
 
 /** Top-to-bottom page order (row then column), for DOM / mobile order vs grid placement. */

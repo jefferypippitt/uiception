@@ -845,6 +845,110 @@
       ]
     },
     {
+      "name": "brands-section-v6",
+      "type": "registry:block",
+      "title": "Brands Section v6",
+      "description": "Security trust strip with a centered mono uppercase label above an infinite marquee of authentication brand logos (Clerk, Better Auth, WorkOS, Keycloak, Bitwarden, Auth.js, Auth0, Authy, Twilio, JWT).",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v6/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/brands-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v6/brands-section-v6.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/components/marquee.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v6/components/marquee.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v6/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/lib/brands.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v6/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v6/styles/brands-section-v6.css",
+          "type": "registry:file",
+          "target": "app/brands-section-v6/styles/brands-section-v6.css"
+        },
+        {
+          "path": "components/ui/svgs/clerkWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/clerkWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/clerkWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/clerkWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workos.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/workos.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workosLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/workosLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/keycloak.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/keycloak.tsx"
+        },
+        {
+          "path": "components/ui/svgs/bitwarden.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/bitwarden.tsx"
+        },
+        {
+          "path": "components/ui/svgs/authjs.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/authjs.tsx"
+        },
+        {
+          "path": "components/ui/svgs/auth0.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/auth0.tsx"
+        },
+        {
+          "path": "components/ui/svgs/authy.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/authy.tsx"
+        },
+        {
+          "path": "components/ui/svgs/twilio.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/twilio.tsx"
+        },
+        {
+          "path": "components/ui/svgs/jwt.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/jwt.tsx"
+        }
+      ]
+    },
+    {
       "name": "navbar-section-v1",
       "type": "registry:block",
       "title": "Navbar Section v1",
@@ -959,6 +1063,65 @@
           "path": "registry/new-york/blocks/navbar-section-v4/lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v4/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v5",
+      "type": "registry:block",
+      "title": "Navbar Section v5",
+      "description": "Sticky top centered dock nav that shrinks from max-w-6xl to max-w-5xl on scroll, with frosted pill, two-column desktop layout, and mobile sheet menu.",
+      "registryDependencies": ["button", "sheet"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v5/navbar-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v5/navbar-section-v5.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v5/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v5/lorem-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v6",
+      "type": "registry:block",
+      "title": "Navbar Section v6",
+      "description": "Centered mono uppercase nav with Solutions dropdown, external Docs link, and default-radius CTAs.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "sheet"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v6/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v6/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v6/navbar-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v6/navbar-section-v6.tsx"
+        },
+        {
+          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v6/lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v6/lorem-demo.tsx"
         }
       ]
     },
@@ -1786,6 +1949,171 @@
       ]
     },
     {
+      "name": "hero-section-v7",
+      "type": "registry:block",
+      "title": "Hero Section v7",
+      "description": "Centered hero with serif headline, mono description, Monad-style flip pill CTAs, animated pipeline demo, and authentication brands marquee.",
+      "dependencies": ["gsap", "@phosphor-icons/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v7/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/hero-section-v7.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/hero-section-v7.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/hero-v7-root.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/hero-v7-root.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/hero-content.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/hero-content.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/cta-buttons.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/cta-buttons.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/pipeline-demo.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/pipeline-demo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/brands-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/brands-section-v6.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/marquee.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/marquee.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v7/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/hooks/use-pipeline-demo-animation.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v7/hooks/use-pipeline-demo-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v7/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/lib/pipeline-config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v7/lib/pipeline-config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/lib/brands.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v7/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/styles/hero-section-v7.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v7/styles/hero-section-v7.css"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/styles/brands-section-v6.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v7/styles/brands-section-v6.css"
+        },
+        {
+          "path": "components/ui/svgs/salesforce.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/salesforce.tsx"
+        },
+        {
+          "path": "components/ui/svgs/slack.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/slack.tsx"
+        },
+        {
+          "path": "components/ui/svgs/stripe.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/stripe.tsx"
+        },
+        {
+          "path": "components/ui/svgs/clerkWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/clerkWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/clerkWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/clerkWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workos.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/workos.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workosLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/workosLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/keycloak.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/keycloak.tsx"
+        },
+        {
+          "path": "components/ui/svgs/bitwarden.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/bitwarden.tsx"
+        },
+        {
+          "path": "components/ui/svgs/authjs.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/authjs.tsx"
+        },
+        {
+          "path": "components/ui/svgs/auth0.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/auth0.tsx"
+        },
+        {
+          "path": "components/ui/svgs/authy.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/authy.tsx"
+        },
+        {
+          "path": "components/ui/svgs/twilio.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/twilio.tsx"
+        },
+        {
+          "path": "components/ui/svgs/jwt.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/jwt.tsx"
+        }
+      ]
+    },
+    {
       "name": "stats-section-v1",
       "type": "registry:block",
       "title": "Stats Section v1",
@@ -1930,6 +2258,204 @@
       ]
     },
     {
+      "name": "spreadsheet",
+      "type": "registry:block",
+      "title": "Spreadsheet",
+      "description": "Google Sheets–style SaaS subscription grid—Account, Plan, MRR, Status—with trial upgrade edit and Stripe webhook row sync.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/spreadsheet/page.tsx",
+          "type": "registry:page",
+          "target": "app/spreadsheet/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/spreadsheet/spreadsheet.tsx",
+          "type": "registry:component",
+          "target": "app/spreadsheet/spreadsheet.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/spreadsheet/components/cursor.tsx",
+          "type": "registry:component",
+          "target": "app/spreadsheet/components/cursor.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/spreadsheet/hooks/use-spreadsheet-animation.ts",
+          "type": "registry:hook",
+          "target": "app/spreadsheet/hooks/use-spreadsheet-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/spreadsheet/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/spreadsheet/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/spreadsheet/styles/spreadsheet.css",
+          "type": "registry:file",
+          "target": "app/spreadsheet/styles/spreadsheet.css"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome",
+      "type": "registry:block",
+      "title": "Google Chrome (macOS)",
+      "description": "macOS Google Chrome window mock with tab strip, omnibox, bookmarks bar, and empty viewport—light and dark mode via .dark ancestor.",
+      "registryDependencies": [],
+      "dependencies": ["@phosphor-icons/react"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/google-chrome.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/google-chrome.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/components/browser-viewport.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/components/browser-viewport.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/components/traffic-lights.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/components/traffic-lights.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/components/profile-avatar.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/components/profile-avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/components/apps-icon.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/components/apps-icon.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/components/omnibox-typing-text.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/components/omnibox-typing-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/hooks/use-omnibox-typing.ts",
+          "type": "registry:hook",
+          "target": "app/google-chrome/hooks/use-omnibox-typing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/lib/typing-animation.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome/lib/typing-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/styles/google-chrome.css",
+          "type": "registry:file",
+          "target": "app/google-chrome/styles/google-chrome.css"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome-windows",
+      "type": "registry:block",
+      "title": "Google Chrome (Windows)",
+      "description": "Windows Google Chrome window mock with title-bar tabs, Win32 controls, omnibox with Google G, and empty viewport—light and dark via .dark ancestor.",
+      "dependencies": ["@phosphor-icons/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome-windows/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/google-chrome-windows.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/google-chrome-windows.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/components/browser-viewport.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/components/browser-viewport.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/components/window-controls.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/components/window-controls.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/components/profile-avatar.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/components/profile-avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/components/google-g-icon.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/components/google-g-icon.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/components/omnibox-typing-text.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/components/omnibox-typing-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/hooks/use-omnibox-typing.ts",
+          "type": "registry:hook",
+          "target": "app/google-chrome-windows/hooks/use-omnibox-typing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome-windows/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/lib/typing-animation.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome-windows/lib/typing-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/styles/google-chrome-windows.css",
+          "type": "registry:file",
+          "target": "app/google-chrome-windows/styles/google-chrome-windows.css"
+        }
+      ]
+    },
+    {
+      "name": "macbook-pro",
+      "type": "registry:block",
+      "title": "MacBook Pro",
+      "description": "Front-facing MacBook Pro device frame with display bezels, notch, and base—empty transparent screen by default; optional children slot.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/macbook-pro/page.tsx",
+          "type": "registry:page",
+          "target": "app/macbook-pro/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/macbook-pro/macbook-pro.tsx",
+          "type": "registry:component",
+          "target": "app/macbook-pro/macbook-pro.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/macbook-pro/components/macbook-screen.tsx",
+          "type": "registry:component",
+          "target": "app/macbook-pro/components/macbook-screen.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/macbook-pro/styles/macbook-pro.css",
+          "type": "registry:file",
+          "target": "app/macbook-pro/styles/macbook-pro.css"
+        }
+      ]
+    },
+    {
       "name": "changelog-section-v1",
       "type": "registry:block",
       "title": "Changelog Section v1",
@@ -1950,6 +2476,37 @@
           "path": "registry/new-york/blocks/changelog-section-v1/changelog-section-v1.tsx",
           "type": "registry:component",
           "target": "app/changelog-section-v1/changelog-section-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-section-v1",
+      "type": "registry:block",
+      "title": "FAQ Section v1",
+      "description": "Minimal centered FAQ with a simple headline and clean divider accordion.",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/faq-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/faq-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v1/faq-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v1/faq-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v1/components/faq-accordion.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v1/components/faq-accordion.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v1/lib/faq-content.ts",
+          "type": "registry:lib",
+          "target": "app/faq-section-v1/lib/faq-content.ts"
         }
       ]
     },
@@ -2129,6 +2686,53 @@
           "path": "registry/new-york/blocks/feature-section-v5/styles/feature-section-v5.css",
           "type": "registry:file",
           "target": "app/feature-section-v5/styles/feature-section-v5.css"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v6",
+      "type": "registry:block",
+      "title": "Feature Section v6",
+      "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed Paper MeshGradient shader background.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v6/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/feature-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v6/feature-section-v6.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/components/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v6/components/feature-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/components/feature-section-v6-mesh-bg.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v6/components/feature-section-v6-mesh-bg.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/styles/feature-grid.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v6/styles/feature-grid.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v6/lib/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v6/styles/feature-section-v6.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v6/styles/feature-section-v6.css"
         }
       ]
     },
