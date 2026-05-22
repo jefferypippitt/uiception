@@ -36,6 +36,10 @@ import {
 } from "@/components/ui/tooltip"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import type { BlockVersion } from "@/lib/blocks"
+import {
+  codeViewContentForRegistryFile,
+  shouldStripRegistryFileContent,
+} from "@/lib/registry-code-view"
 import { cn } from "@/lib/utils"
 import { ReactLight } from "@/components/ui/svgs/reactLight"
 import { ReactDark } from "@/components/ui/svgs/reactDark"
@@ -78,18 +82,6 @@ function getLang(path: string): string {
     sh: "bash",
   }
   return map[ext] ?? "text"
-}
-
-const BINARY_EXTS = new Set(["png", "jpg", "jpeg", "webp", "gif", "ico", "avif", "bmp", "tiff"])
-
-function isBinaryFile(path: string): boolean {
-  const ext = path.split(".").pop()?.toLowerCase() ?? ""
-  return BINARY_EXTS.has(ext)
-}
-
-function binaryPlaceholder(path: string): string {
-  const name = path.split("/").pop() ?? path
-  return `// ${name}\n//\n// This image asset is included when you install the block.\n// Replace it with your own file at the same path.`
 }
 
 // ---------------------------------------------------------------------------
@@ -181,8 +173,21 @@ function FileTypeIcon({ name }: { name: string }) {
 type RegistryFileJson = {
   path: string
   target?: string
-  content: string
+  content?: string
   type?: string
+  meta?: { installUrl?: string }
+}
+
+function sanitizeRegistryFiles(files: RegistryFileJson[]): RegistryFileJson[] {
+  return files.map((file) => {
+    const path = file.target ?? file.path
+    if (!shouldStripRegistryFileContent(path, file.content, file.meta)) {
+      return file
+    }
+    const rest = { ...file }
+    delete rest.content
+    return rest
+  })
 }
 
 // ---------------------------------------------------------------------------
@@ -214,7 +219,12 @@ function buildTree(files: RegistryFileJson[]): TreeNode[] {
       const name = parts[i]
       const isLast = i === parts.length - 1
       if (isLast) {
-        cur.children.push({ kind: "file", name, path: file.path, content: file.content })
+        cur.children.push({
+          kind: "file",
+          name,
+          path: file.path,
+          content: codeViewContentForRegistryFile(file.path, file.content, file.meta),
+        })
       } else {
         let folder = cur.children.find(
           (c): c is FolderNode => c.kind === "folder" && c.name === name
@@ -408,13 +418,15 @@ export function BlockPreviewToolbar({
       })
       .then((data) => {
         if (cancelled) return
-        const files = data.files ?? []
+        const files = sanitizeRegistryFiles(data.files ?? [])
         setRegistryFiles(files)
         const first = files[0]
         if (first) {
           const firstPath = first.target ?? first.path
           setSelectedPath(firstPath)
-          setSelectedContent(isBinaryFile(firstPath) ? binaryPlaceholder(firstPath) : (first.content ?? ""))
+          setSelectedContent(
+            codeViewContentForRegistryFile(firstPath, first.content, first.meta)
+          )
         }
       })
       .catch((e: unknown) => {
@@ -486,7 +498,17 @@ export function BlockPreviewToolbar({
   const tree = React.useMemo(
     () =>
       registryFiles
-        ? buildTree(registryFiles.map((f) => ({ ...f, path: f.target ?? f.path })))
+        ? buildTree(
+            registryFiles.map((f) => ({
+              ...f,
+              path: f.target ?? f.path,
+              content: codeViewContentForRegistryFile(
+                f.target ?? f.path,
+                f.content,
+                f.meta
+              ),
+            }))
+          )
         : [],
     [registryFiles]
   )
@@ -677,7 +699,7 @@ export function BlockPreviewToolbar({
                       selectedPath={selectedPath}
                       onSelect={(path, content) => {
                         setSelectedPath(path)
-                        setSelectedContent(isBinaryFile(path) ? binaryPlaceholder(path) : content)
+                        setSelectedContent(content)
                       }}
                     />
                   )}
