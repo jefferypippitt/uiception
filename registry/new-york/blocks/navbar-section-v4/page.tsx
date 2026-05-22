@@ -1,4 +1,6 @@
-import LoremDemo from "./lorem-demo"
+/* inspired by useghost.sh */
+
+import LoremDemo from "./navbar-lorem-demo"
 import NavbarSectionV4 from "./navbar-section-v4"
 
 export default function Page() {

@@ -1,19 +1,24 @@
-import FeatureGrid from "./components/feature-grid"
+import { GeistSans } from "geist/font/sans"
 
-import "./styles/feature-section-v6.css"
+import FeatureGrid from "./feature-grid"
 
 export default function FeatureSectionV6() {
   return (
-    <section className="fsv6-section pt-16 md:pt-20 lg:pt-24">
+    <section className={`${GeistSans.className} py-16 md:py-20 lg:py-24`}>
       <div className="mx-auto max-w-6xl px-4">
-        <header className="fsv6-intro mb-12 md:mb-14 lg:mb-16">
-          <p className="fsv6-eyebrow">Capabilities</p>
-          <h2 className="fsv6-heading">Momentum, built in</h2>
-          <p className="fsv6-lead">
-            Four essentials that keep work moving with less overhead, clearer
-            priorities, and room to grow without slowing down.
+        <div className="flex flex-col items-center gap-6 text-center">
+          <h2 className="max-w-2xl text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]">
+            Stay ahead as things get more complex
+          </h2>
+     
+          <p className="max-w-xl text-base leading-7 tracking-tight text-muted-foreground sm:text-lg sm:leading-8">
+            As demands grow, the platform remains quick, intuitive, and seamlessly integrated.
           </p>
-        </header>
+     
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 pt-8 md:pt-10 lg:pt-12">
         <FeatureGrid />
       </div>
     </section>

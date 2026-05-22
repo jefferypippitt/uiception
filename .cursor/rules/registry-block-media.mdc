@@ -1,0 +1,82 @@
+---
+alwaysApply: true
+---
+# Registry block media (images & video)
+
+Use this when a block needs bundled raster images (PNG, JPG, WebP) or video (MP4, WebM). Most blocks (navbars, SVG-only sections, etc.) do not need this.
+
+## Where assets live
+
+**Images**
+
+```
+public/images/blocks/<block-id>/
+  hero-section-v8-bg.png
+  avatar_1.png
+```
+
+**Video**
+
+```
+public/videos/blocks/<block-id>/
+  screen-demo.mp4
+```
+
+Do not put images or videos inside `registry/new-york/blocks/<block-id>/`.
+
+## Block code
+
+Reference **local public paths** only — no CDN URLs, no URL-mapping helper:
+
+```tsx
+<Image src="/images/blocks/hero-section-v8/hero-section-v8-bg.png" alt="..." />
+```
+
+```tsx
+<video
+  src="/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
+  muted
+  playsInline
+  autoPlay
+  loop
+/>
+```
+
+```ts
+const avatar = (filename: string) =>
+  `/images/blocks/testimonials-section-v1/${filename}`
+```
+
+Prefer each block’s own folder (`public/videos/blocks/<this-block-id>/`). If two blocks share one file, keep a single copy on disk and declare that `registry:file` entry in **every** block that references it.
+
+## registry.json
+
+Declare every image and video so `shadcn add` installs code and assets in one step:
+
+```json
+{
+  "path": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png",
+  "type": "registry:file",
+  "target": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png"
+}
+```
+
+```json
+{
+  "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+  "type": "registry:file",
+  "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
+}
+```
+
+After adding or changing media: `pnpm registry:build`.
+
+## Consumer swap
+
+Installed assets land at the same paths under `public/images/blocks/<block-id>/` and `public/videos/blocks/<block-id>/`. Replace files in place to use custom media — no code changes unless filenames change.
+
+## Do not
+
+- Reference media with `https://uiception.com/images/...` or `https://uiception.com/videos/...` in block code
+- Ship images or video via a post-install download script — bundle in `registry.json` `files`
+- Omit `registry:file` entries when block code references `/images/blocks/<block-id>/` or `/videos/blocks/<block-id>/`

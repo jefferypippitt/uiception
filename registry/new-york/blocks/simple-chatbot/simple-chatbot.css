@@ -1,0 +1,27 @@
+/* simple-chatbot — caret blink */
+
+@keyframes scb-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.scb-caret {
+  animation: scb-caret-blink 0.92s step-start infinite;
+}
+
+.scb-caret--solid {
+  animation: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scb-caret {
+    animation: none;
+  }
+}

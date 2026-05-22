@@ -63,7 +63,9 @@ export default function FooterSectionV2() {
             <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
               {footerColumns.map((column) => (
                 <div key={column.title} className="space-y-3">
-                  <h2 className="text-sm font-medium text-muted-foreground">{column.title}</h2>
+                  <h2 className="text-sm font-medium text-muted-foreground">
+                    {column.title}
+                  </h2>
                   <ul className="space-y-2.5">
                     {column.links.map((link) => (
                       <li key={`${column.title}-${link.label}`}>
@@ -75,7 +77,7 @@ export default function FooterSectionV2() {
                           {link.externalArrow ? (
                             <ArrowUpRight
                               aria-hidden
-                              className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none group-hover:translate-x-px group-hover:-translate-y-px group-hover:opacity-100"
+                              className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-px group-hover:-translate-y-px group-hover:opacity-100 motion-reduce:transition-none"
                             />
                           ) : null}
                         </Link>

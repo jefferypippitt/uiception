@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 
-import { BRANDS } from "./lib/series"
-import { getSeriesData } from "./lib/api"
-import DownloadsPanel from "./components/downloads-panel"
+import { BRANDS } from "./series"
+import { getSeriesData } from "./api"
+import DownloadsPanel from "./downloads-panel"
 
 export default async function StatsSectionV2() {
   const allData = await Promise.all(BRANDS.map(getSeriesData))

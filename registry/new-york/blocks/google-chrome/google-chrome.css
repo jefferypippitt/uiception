@@ -1,0 +1,126 @@
+/* google-chrome — theme tokens, traffic-light hover, caret blink, viewport slot children */
+
+.gc-root {
+  --gc-shell-bg: #dee1e6;
+  --gc-border: rgb(0 0 0 / 0.12);
+  --gc-ring: rgb(0 0 0 / 0.06);
+  --gc-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.14);
+  --gc-tabstrip-bg: #dee1e6;
+  --gc-tab-bg: #ffffff;
+  --gc-tab-fg: #3c4043;
+  --gc-tab-close: #5f6368;
+  --gc-toolbar-bg: #ffffff;
+  --gc-toolbar-border: rgb(0 0 0 / 0.08);
+  --gc-nav-fg: #5f6368;
+  --gc-nav-disabled: rgb(95 99 104 / 0.38);
+  --gc-omnibox-bg: #f1f3f4;
+  --gc-omnibox-fg: #202124;
+  --gc-omnibox-caret: #1a73e8;
+  --gc-omnibox-focus-ring: rgb(26 115 232 / 0.18);
+  --gc-menu-fg: #5f6368;
+  --gc-bookmarks-bg: #ffffff;
+  --gc-bookmarks-fg: #3c4043;
+  --gc-viewport-bg: #ffffff;
+  --gc-new-tab-btn: #5f6368;
+  --gc-profile-letter-fg: oklch(0.995 0.01 195);
+  --gc-profile-letter-shadow: oklch(0.25 0.06 195 / 0.22);
+}
+
+.dark .gc-root {
+  --gc-shell-bg: #202124;
+  --gc-border: rgb(255 255 255 / 0.1);
+  --gc-ring: rgb(0 0 0 / 0.35);
+  --gc-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.5);
+  --gc-tabstrip-bg: #202124;
+  --gc-tab-bg: #323639;
+  --gc-tab-fg: #e8eaed;
+  --gc-tab-close: #9aa0a6;
+  --gc-toolbar-bg: #323639;
+  --gc-toolbar-border: rgb(255 255 255 / 0.06);
+  --gc-nav-fg: #9aa0a6;
+  --gc-nav-disabled: rgb(154 160 166 / 0.35);
+  --gc-omnibox-bg: #202124;
+  --gc-omnibox-fg: #e8eaed;
+  --gc-omnibox-caret: #8ab4f8;
+  --gc-omnibox-focus-ring: rgb(138 180 248 / 0.22);
+  --gc-menu-fg: #9aa0a6;
+  --gc-bookmarks-bg: #323639;
+  --gc-bookmarks-fg: #e8eaed;
+  --gc-viewport-bg: #202124;
+  --gc-new-tab-btn: #9aa0a6;
+  --gc-profile-letter-fg: oklch(0.97 0.028 190);
+  --gc-profile-letter-shadow: oklch(0.15 0.04 250 / 0.45);
+}
+
+.gc-traffic-lights:hover .gc-light {
+  filter: brightness(0.92);
+}
+
+.gc-light-icon {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.gc-traffic-lights:hover .gc-light-icon {
+  opacity: 1;
+}
+
+.dark .gc-light {
+  box-shadow:
+    inset 0 0 0 0.5px rgb(0 0 0 / 0.45),
+    0 0.5px 0 rgb(255 255 255 / 0.08);
+}
+
+.dark .gc-traffic-lights:hover .gc-light {
+  filter: brightness(0.88);
+}
+
+.dark .gc-traffic-lights:hover .gc-light-icon {
+  color: rgb(0 0 0 / 0.62);
+}
+
+.gc-omnibox-caret {
+  animation: gc-omnibox-caret-blink 1s step-end infinite;
+}
+
+.gc-omnibox-caret--solid {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes gc-omnibox-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gc-omnibox-caret {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.gc-viewport-slot > img,
+.gc-viewport-slot > video,
+.gc-viewport-slot > picture,
+.gc-viewport-slot > iframe,
+.gc-viewport-slot :is(img, video, iframe) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gc-viewport-slot > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}

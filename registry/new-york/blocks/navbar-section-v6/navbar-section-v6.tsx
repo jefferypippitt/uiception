@@ -37,7 +37,7 @@ const NAV_LINKS = [
 const DOCS_HREF = "#"
 
 const dropdownSurfaceClass =
-  "animate-dropdown-in absolute top-full z-[60] mt-2 max-h-[min(70vh,24rem)] rounded-xl border border-border bg-background/98 shadow-md shadow-black/4 backdrop-blur-md dark:shadow-black/20"
+  "animate-dropdown-in absolute top-full z-60 mt-2 max-h-[min(70vh,24rem)] rounded-xl border border-border bg-background/98 shadow-md shadow-black/4 backdrop-blur-md dark:shadow-black/20"
 
 const dropdownItemClass =
   "block whitespace-nowrap rounded-lg px-2.5 py-1.5 font-mono text-sm uppercase leading-none text-foreground/90 transition-colors hover:bg-muted hover:text-foreground"
@@ -50,23 +50,23 @@ const sheetSubLinkClass =
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
-    <div className="flex size-4 flex-col items-center justify-center gap-[4px]">
+    <div className="flex size-4 flex-col items-center justify-center gap-1">
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "translate-y-[5px] rotate-45" : "",
+          open ? "translate-y-[5px] rotate-45" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "scale-x-0 opacity-0" : "",
+          open ? "scale-x-0 opacity-0" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "-translate-y-[5px] -rotate-45" : "",
+          open ? "-translate-y-[5px] -rotate-45" : ""
         )}
       />
     </div>
@@ -79,7 +79,9 @@ const linkClass =
 export default function NavbarSectionV6() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [solutionsOpen, setSolutionsOpen] = useState(false)
-  const hoverPanelTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const hoverPanelTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  )
 
   const cancelHoverClose = () => {
     clearTimeout(hoverPanelTimerRef.current)
@@ -116,10 +118,10 @@ export default function NavbarSectionV6() {
           side="right"
           className={cn(
             "z-50 flex h-dvh max-h-dvh min-h-dvh flex-col overflow-y-auto overscroll-none rounded-none border-0 p-0 shadow-none sm:rounded-none",
-            "data-[side=right]:inset-x-0! data-[side=right]:inset-y-0! data-[side=right]:left-0! data-[side=right]:right-0! data-[side=right]:top-0! data-[side=right]:bottom-0!",
+            "data-[side=right]:inset-x-0! data-[side=right]:inset-y-0! data-[side=right]:top-0! data-[side=right]:right-0! data-[side=right]:bottom-0! data-[side=right]:left-0!",
             "data-[side=right]:w-screen! data-[side=right]:max-w-none! data-[side=right]:sm:max-w-none!",
             "border-l-0!",
-            "bg-zinc-950 text-zinc-50",
+            "bg-zinc-950 text-zinc-50"
           )}
           style={{
             width: "100vw",
@@ -188,7 +190,10 @@ export default function NavbarSectionV6() {
 
               <li>
                 <a
-                  className={cn(sheetLinkClass, "inline-flex items-center gap-2")}
+                  className={cn(
+                    sheetLinkClass,
+                    "inline-flex items-center gap-2"
+                  )}
                   href={DOCS_HREF}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -243,12 +248,19 @@ export default function NavbarSectionV6() {
             href="#"
             onClick={(e) => e.preventDefault()}
           >
-            <Image alt="" aria-hidden className="size-6 shrink-0" height={32} src="/icon0.svg" width={32} />
+            <Image
+              alt=""
+              aria-hidden
+              className="size-6 shrink-0"
+              height={32}
+              src="/icon0.svg"
+              width={32}
+            />
             <span className="text-lg tracking-tight">uiception</span>
           </Link>
         </div>
 
-        <nav className="absolute left-1/2 top-1/2 z-10 hidden min-w-0 -translate-x-1/2 -translate-y-1/2 items-center gap-6 md:flex">
+        <nav className="absolute top-1/2 left-1/2 z-10 hidden min-w-0 -translate-x-1/2 -translate-y-1/2 items-center gap-6 md:flex">
           <div
             className="relative w-fit shrink-0"
             onMouseEnter={openSolutions}
@@ -258,7 +270,10 @@ export default function NavbarSectionV6() {
               type="button"
               aria-expanded={solutionsOpen}
               aria-haspopup="menu"
-              className={cn(linkClass, "inline-flex cursor-default items-center gap-1 rounded-md")}
+              className={cn(
+                linkClass,
+                "inline-flex cursor-default items-center gap-1 rounded-md"
+              )}
               onClick={(e) => e.preventDefault()}
             >
               Solutions
@@ -269,7 +284,7 @@ export default function NavbarSectionV6() {
               <div
                 className={cn(
                   dropdownSurfaceClass,
-                  "left-0 max-w-[calc(100vw-2rem)] min-w-38 overflow-auto overflow-x-hidden p-0.5",
+                  "left-0 max-w-[calc(100vw-2rem)] min-w-38 overflow-auto overflow-x-hidden p-0.5"
                 )}
                 onMouseEnter={openSolutions}
                 onMouseLeave={closeSolutions}
@@ -316,12 +331,20 @@ export default function NavbarSectionV6() {
         <div className="flex min-w-0 flex-1 items-center justify-end gap-1 sm:gap-2">
           <div className="hidden items-center gap-1 sm:gap-2 md:flex">
             <Button asChild variant="outline">
-              <Link href="#" className="font-mono uppercase" onClick={(e) => e.preventDefault()}>
+              <Link
+                href="#"
+                className="font-mono uppercase"
+                onClick={(e) => e.preventDefault()}
+              >
                 Sign in
               </Link>
             </Button>
             <Button asChild variant="default">
-              <Link href="#" className="font-mono uppercase" onClick={(e) => e.preventDefault()}>
+              <Link
+                href="#"
+                className="font-mono uppercase"
+                onClick={(e) => e.preventDefault()}
+              >
                 Get started
               </Link>
             </Button>

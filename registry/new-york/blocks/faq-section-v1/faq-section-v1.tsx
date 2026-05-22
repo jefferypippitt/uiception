@@ -1,5 +1,5 @@
-import FaqAccordion from "./components/faq-accordion"
-import { faqSectionMeta } from "./lib/faq-content"
+import FaqAccordion from "./faq-accordion"
+import { faqSectionMeta } from "./faq-content"
 
 export default function FaqSectionV1() {
   return (

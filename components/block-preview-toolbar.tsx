@@ -17,6 +17,11 @@ import {
 import { createHighlighter, type Highlighter } from "shiki"
 import { useTheme } from "next-themes"
 
+import {
+  SHIKI_THEME_VERCEL_DARK,
+  SHIKI_THEME_VERCEL_LIGHT,
+  vercelDocsShikiThemes,
+} from "@/lib/shiki-vercel-docs-themes"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
 import { OpenInV0Button } from "@/components/open-in-v0-button"
@@ -48,14 +53,10 @@ import { BashDark } from "@/components/ui/svgs/bashDark"
 
 let shikiPromise: Promise<Highlighter> | null = null
 
-/** Noir: Shiki “min” themes — mostly grayscale, high-contrast, film-still vibe. */
-const SHIKI_THEME_LIGHT = "min-light"
-const SHIKI_THEME_DARK = "min-dark"
-
 function getHighlighter() {
   if (!shikiPromise) {
     shikiPromise = createHighlighter({
-      themes: [SHIKI_THEME_LIGHT, SHIKI_THEME_DARK],
+      themes: vercelDocsShikiThemes,
       langs: ["tsx", "jsx", "typescript", "javascript", "css", "json", "markdown", "bash", "text"],
     })
   }
@@ -265,7 +266,7 @@ function FolderRow({
         title={node.name}
         onClick={() => setOpen((v) => !v)}
         style={{ paddingLeft: `${depth * INDENT + 6}px` }}
-        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-stone-600 transition-colors hover:bg-stone-200/80 hover:text-stone-950 dark:text-zinc-400 dark:hover:bg-zinc-900/70 dark:hover:text-zinc-100"
+        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-[#525252] transition-colors hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
       >
         <ChevronRight
           className={cn(
@@ -275,12 +276,12 @@ function FolderRow({
         />
         {open ? (
           <FolderOpen
-            className="size-4 shrink-0 fill-stone-400/35 text-stone-600 dark:fill-zinc-600/35 dark:text-zinc-500"
+            className="size-4 shrink-0 fill-[#d4d4d4]/60 text-[#525252] dark:fill-[#3a3a3a]/60 dark:text-[#a0a0a0]"
             aria-hidden
           />
         ) : (
           <Folder
-            className="size-4 shrink-0 fill-stone-400/35 text-stone-600 dark:fill-zinc-600/35 dark:text-zinc-500"
+            className="size-4 shrink-0 fill-[#d4d4d4]/60 text-[#525252] dark:fill-[#3a3a3a]/60 dark:text-[#a0a0a0]"
             aria-hidden
           />
         )}
@@ -291,7 +292,7 @@ function FolderRow({
         <div className="relative">
           {/* vertical guide line */}
           <span
-            className="pointer-events-none absolute inset-y-0 border-l border-stone-300/60 dark:border-zinc-800"
+            className="pointer-events-none absolute inset-y-0 border-l border-[#eaeaea] dark:border-[#1a1a1a]"
             style={{ left: `${depth * INDENT + 13}px` }}
           />
           <TreeRows nodes={node.children} depth={depth + 1} selectedPath={selectedPath} onSelect={onSelect} />
@@ -333,8 +334,8 @@ function TreeRows({
             className={cn(
               "file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] tracking-tight transition-colors",
               active
-                ? "bg-stone-300/90 text-stone-950 dark:bg-zinc-800 dark:text-zinc-50"
-                : "text-stone-600 hover:bg-stone-200/70 hover:text-stone-950 dark:text-zinc-500 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-200"
+                ? "bg-[#d1e5ff] text-[#171717] dark:bg-[#1f3e70] dark:text-[#eeeeee]"
+                : "text-[#525252] hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
             )}
           >
             {/* aligns file icon with folder icon (chevron placeholder) */}
@@ -473,7 +474,7 @@ export function BlockPreviewToolbar({
       return
     }
     const lang = getLang(selectedPath ?? "")
-    const theme = resolvedTheme === "dark" ? SHIKI_THEME_DARK : SHIKI_THEME_LIGHT
+    const theme = resolvedTheme === "dark" ? SHIKI_THEME_VERCEL_DARK : SHIKI_THEME_VERCEL_LIGHT
     let cancelled = false
     void getHighlighter().then((hl) => {
       if (cancelled) return
@@ -659,19 +660,16 @@ export function BlockPreviewToolbar({
         </TabsContent>
 
         <TabsContent value="code" className="m-0 h-full min-h-0 p-0">
-          <div className="code-view-noir flex h-full min-h-0 overflow-hidden bg-stone-200 dark:bg-black">
-            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-stone-400/30 bg-stone-100/95 sm:w-62 dark:border-zinc-800 dark:bg-zinc-950">
-              <p className="min-w-0 truncate px-3 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-zinc-500">
-                Files
-              </p>
+          <div className="code-view-vercel-docs flex h-full min-h-0 overflow-hidden bg-[#fafafa] dark:bg-black">
+            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-[#eaeaea] bg-[#fafafa] sm:w-62 dark:border-[#1a1a1a] dark:bg-black">
               <ScrollArea className="file-tree-scroll-area min-h-0 min-w-0 flex-1 overflow-x-hidden">
-                <div className="min-w-0 w-full max-w-full overflow-hidden pb-3 pr-1 pl-1">
+                <div className="min-w-0 w-full max-w-full overflow-hidden pt-2 pb-3 pr-1 pl-1">
                   {codeError ? (
                     <p className="px-2 text-xs text-destructive">{codeError}</p>
                   ) : registryFiles === null ? (
-                    <p className="px-2 text-xs text-stone-500 dark:text-zinc-500">Loading…</p>
+                    <p className="px-2 text-xs text-[#6b7280] dark:text-[#a0a0a0]">Loading…</p>
                   ) : tree.length === 0 ? (
-                    <p className="px-2 text-xs text-stone-500 dark:text-zinc-500">No files.</p>
+                    <p className="px-2 text-xs text-[#6b7280] dark:text-[#a0a0a0]">No files.</p>
                   ) : (
                     <TreeRows
                       nodes={tree}
@@ -688,10 +686,10 @@ export function BlockPreviewToolbar({
             </div>
 
             <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-white dark:bg-black">
-              <div className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-stone-300/60 px-3 dark:border-zinc-800">
+              <div className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-[#eaeaea] px-3 dark:border-[#1a1a1a]">
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <FileTypeIcon name={selectedPath ?? "file.tsx"} />
-                  <span className="truncate font-mono text-xs text-stone-900 dark:text-zinc-200">
+                  <span className="truncate font-mono text-xs text-[#171717] dark:text-[#eeeeee]">
                     {selectedPath ?? "—"}
                   </span>
                 </div>
@@ -699,7 +697,7 @@ export function BlockPreviewToolbar({
                   type="button"
                   variant="ghost"
                   size="icon-sm"
-                  className="shrink-0 text-stone-500 hover:bg-stone-200 hover:text-stone-900 dark:text-zinc-500 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
+                  className="shrink-0 text-[#6b7280] hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
                   disabled={!selectedContent}
                   aria-label={fileCopied ? "Copied" : "Copy file contents"}
                   onClick={() => selectedContent && copyFileContent(selectedContent)}
@@ -710,11 +708,11 @@ export function BlockPreviewToolbar({
               <ScrollArea className="min-h-0 flex-1">
                 {highlightedHtml ? (
                   <div
-                    className="shiki-panel shiki-panel-noir shiki-panel-editor [&_.shiki]:rounded-none [&_.shiki]:border-0"
+                    className="shiki-panel shiki-panel-vercel-docs shiki-panel-editor [&_.shiki]:rounded-none [&_.shiki]:border-0"
                     dangerouslySetInnerHTML={{ __html: highlightedHtml }}
                   />
                 ) : (
-                  <pre className="p-4 font-mono text-xs leading-relaxed text-stone-500 dark:text-zinc-500">
+                  <pre className="p-4 font-mono text-xs leading-relaxed text-[#6b7280] dark:text-[#a0a0a0]">
                     {selectedContent
                       ? "Highlighting…"
                       : registryFiles === null

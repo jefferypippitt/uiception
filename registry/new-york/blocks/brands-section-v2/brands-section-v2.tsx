@@ -1,7 +1,7 @@
-import Marquee from "./components/marquee"
-import { brands } from "./lib/brands"
+import Marquee from "./marquee"
+import { brands } from "./brands"
 
-import "./styles/brands-section-v2.css"
+import "./brands-section-v2.css"
 
 export default function BrandsSectionV2() {
   return (

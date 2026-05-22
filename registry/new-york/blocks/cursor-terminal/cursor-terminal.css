@@ -1,0 +1,29 @@
+/* cursor-terminal — caret blink, line fade-in */
+
+.crt-cursor {
+  animation: crt-terminal-blink 1.15s step-start infinite;
+}
+
+.crt-line-in {
+  animation: crt-terminal-line-fade 0.12s ease-out both;
+}
+
+@keyframes crt-terminal-blink {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-terminal-line-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,117 @@
+/* macbook-pro — Space Gray theme tokens, lid/base gradients, camera pseudo-elements */
+
+.mbp-root {
+  --mbp-space-light: #3a3a3c;
+  --mbp-space-mid: #2c2c2e;
+  --mbp-space-dark: #1d1d1f;
+  --mbp-space-deep: #141416;
+  --mbp-frame-top: var(--mbp-space-light);
+  --mbp-frame-mid: var(--mbp-space-mid);
+  --mbp-frame-bottom: var(--mbp-space-dark);
+  --mbp-frame-highlight: rgb(255 255 255 / 0.08);
+  --mbp-frame-shadow: rgb(0 0 0 / 0.4);
+  --mbp-bezel: var(--mbp-space-deep);
+  --mbp-notch: var(--mbp-space-deep);
+  --mbp-hinge: var(--mbp-space-dark);
+  --mbp-base-top: var(--mbp-space-mid);
+  --mbp-base-mid: var(--mbp-space-dark);
+  --mbp-base-bottom: var(--mbp-space-deep);
+  --mbp-scoop: var(--mbp-space-deep);
+  --mbp-shell-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.28);
+  --mbp-shell-ring: rgb(0 0 0 / 0.2);
+}
+
+.dark .mbp-root {
+  --mbp-shell-shadow: 0 28px 56px -16px rgb(0 0 0 / 0.55);
+  --mbp-shell-ring: rgb(255 255 255 / 0.08);
+}
+
+.mbp-lid-frame {
+  background: linear-gradient(
+    180deg,
+    var(--mbp-frame-top) 0%,
+    var(--mbp-frame-mid) 42%,
+    var(--mbp-frame-bottom) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 var(--mbp-frame-highlight),
+    inset 0 -1px 0 var(--mbp-frame-shadow),
+    0 0 0 1px var(--mbp-shell-ring);
+}
+
+.mbp-camera {
+  background: radial-gradient(
+    circle at 38% 32%,
+    #4a4a58 0%,
+    #252530 38%,
+    #121218 72%,
+    #08080c 100%
+  );
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.85),
+    0 0 0 1.5px rgb(55 55 62 / 0.9),
+    inset 0 1px 2px rgb(0 0 0 / 0.55),
+    inset 0 -0.5px 0 rgb(255 255 255 / 0.06);
+}
+
+.mbp-camera::before {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    #1e1e28 0%,
+    #0c0c12 100%
+  );
+  box-shadow: inset 0 0 1px rgb(0 0 0 / 0.8);
+}
+
+.mbp-camera::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  left: 30%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(255 255 255 / 0.5) 0%,
+    rgb(255 255 255 / 0.12) 55%,
+    transparent 100%
+  );
+}
+
+.mbp-hinge {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--mbp-hinge) 8%,
+    var(--mbp-hinge) 92%,
+    transparent 100%
+  );
+}
+
+.mbp-base {
+  background: linear-gradient(
+    180deg,
+    var(--mbp-base-top) 0%,
+    var(--mbp-base-mid) 55%,
+    var(--mbp-base-bottom) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 var(--mbp-frame-highlight),
+    inset 0 -2px 4px var(--mbp-frame-shadow);
+}
+
+.mbp-scoop {
+  background: var(--mbp-scoop);
+  box-shadow: inset 0 -1px 2px rgb(0 0 0 / 0.45);
+}
+
+.mbp-screen-slot > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}

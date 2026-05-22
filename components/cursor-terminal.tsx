@@ -20,11 +20,11 @@ import { playSound } from "@/lib/sound-engine"
 import { switchOffSound } from "@/lib/switch-off"
 import { switchOnSound } from "@/lib/switch-on"
 
-import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation"
-import Spinner from "@/registry/new-york/blocks/cursor-terminal/components/spinner"
-import PromptShell from "@/registry/new-york/blocks/cursor-terminal/components/prompt-shell"
-import PanelIconButton from "@/registry/new-york/blocks/cursor-terminal/components/panel-icon-button"
-import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/lib/config"
+import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/use-terminal-animation"
+import Spinner from "@/registry/new-york/blocks/cursor-terminal/spinner"
+import PromptShell from "@/registry/new-york/blocks/cursor-terminal/prompt-shell"
+import PanelIconButton from "@/registry/new-york/blocks/cursor-terminal/panel-icon-button"
+import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/config"
 import dynamic from "next/dynamic"
 import TrexRunner from "./trex-runner"
 const Wordle = dynamic(() => import("./wordle"), { ssr: false })
@@ -32,7 +32,7 @@ import ReactionTime from "./reaction-time"
 import ColorMemory from "./color-memory"
 import SequenceMemory from "./sequence-memory"
 
-import "@/registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css"
+import "@/registry/new-york/blocks/cursor-terminal/cursor-terminal.css"
 
 const PANEL_TABS = [
   "Terminal",
@@ -118,7 +118,7 @@ export function CursorTerminal() {
                 type="button"
                 onClick={() => setActiveTab(name)}
                 className={cn(
-                  "shrink-0 px-3 text-[11px] transition-colors",
+                  "shrink-0 px-3 text-[10px] transition-colors",
                   active
                     ? "bg-[#1e1e1e] text-[#e8e8e8]"
                     : "text-[#858585] hover:text-[#c0c0c0]",
@@ -136,7 +136,7 @@ export function CursorTerminal() {
             type="button"
             aria-hidden
             tabIndex={-1}
-            className="flex h-7 items-center gap-1 rounded px-1.5 text-[12px] text-[#cccccc] transition-colors hover:bg-white/6"
+            className="flex h-7 items-center gap-1 rounded px-1.5 text-[10px] text-[#cccccc] transition-colors hover:bg-white/6"
           >
             <Terminal className={cn(ICON_SM, "text-[#3b8eea]")} aria-hidden />
             <span className="max-w-22 truncate sm:max-w-none">powershell</span>
@@ -175,7 +175,7 @@ export function CursorTerminal() {
         <>
           <div
             ref={scrollRef}
-            className="crt-body h-88 overflow-y-auto bg-[#1e1e1e] px-4 py-2.5 text-left font-mono text-[13px] leading-relaxed text-[#cccccc]"
+            className="crt-body h-88 overflow-y-auto bg-[#1e1e1e] px-3.5 py-2 text-left font-mono text-[11px] leading-[1.45] text-[#cccccc]"
             style={{ scrollbarWidth: "none" }}
           >
             {lines.map((line) => (
@@ -206,7 +206,7 @@ export function CursorTerminal() {
             )}
           </div>
 
-          <div className="border-t border-white/6 bg-[#1e1e1e] py-2 text-center text-[11px] text-[#6e6e6e]">
+          <div className="border-t border-white/6 bg-[#1e1e1e] py-1.5 text-center text-[10px] text-[#6e6e6e]">
             Ctrl+K to generate command
           </div>
         </>

@@ -63,7 +63,7 @@ export default function FooterSectionV3() {
         <Card className="rounded-none">
           <CardHeader className="block px-6 py-7 md:px-8 md:py-8">
             <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-[1fr_1fr_1fr_1fr_1fr]">
-              {/* Logo column */}
+
               <div className="col-span-2 lg:col-span-1">
                 <Link href="#" className="inline-flex w-fit">
                   <Image
@@ -76,10 +76,11 @@ export default function FooterSectionV3() {
                 </Link>
               </div>
 
-              {/* Link columns */}
               {footerColumns.map((column) => (
                 <div key={column.title} className="space-y-3">
-                  <h2 className="text-sm font-medium text-card-foreground">{column.title}</h2>
+                  <h2 className="text-sm font-medium text-card-foreground">
+                    {column.title}
+                  </h2>
                   <ul className="space-y-2.5">
                     {column.links.map((link) => (
                       <li key={`${column.title}-${link.label}`}>
@@ -116,7 +117,6 @@ export default function FooterSectionV3() {
             </div>
           </div>
         </Card>
-
       </div>
     </section>
   )

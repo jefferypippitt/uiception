@@ -1,0 +1,190 @@
+/* chat-bot — theme tokens, reveal grid, keyframes, caret & stagger animations */
+
+.cb-root {
+  --cb-user-bubble-bg: #18181b;
+  --cb-user-bubble-text: #fafafa;
+  --cb-bot-text: #18181b;
+  --cb-think-color: #71717a;
+  --cb-input-bg: #f4f4f5;
+  --cb-input-border: #e4e4e7;
+  --cb-input-text: #18181b;
+  --cb-input-placeholder: #a1a1aa;
+  --cb-input-cursor: #71717a;
+  --cb-input-icon: #a1a1aa;
+  --cb-send-bg: #18181b;
+  --cb-send-text: #ffffff;
+  --cb-action-color: #a1a1aa;
+  --cb-action-hover-bg: #f4f4f5;
+  --cb-action-hover-color: #71717a;
+  --cb-chip-border: #e4e4e7;
+  --cb-chip-text: #71717a;
+  --cb-chip-icon: #a1a1aa;
+}
+
+.dark .cb-root {
+  --cb-user-bubble-bg: #1c1c1f;
+  --cb-user-bubble-text: #f4f4f5;
+  --cb-bot-text: #e4e4e7;
+  --cb-think-color: #71717a;
+  --cb-input-bg: #0d0d0d;
+  --cb-input-border: #2a2a2a;
+  --cb-input-text: #e4e4e7;
+  --cb-input-placeholder: #52525b;
+  --cb-input-cursor: #71717a;
+  --cb-input-icon: #52525b;
+  --cb-send-bg: #ffffff;
+  --cb-send-text: #000000;
+  --cb-action-color: #52525b;
+  --cb-action-hover-bg: #1c1c1f;
+  --cb-action-hover-color: #a1a1aa;
+  --cb-chip-border: #27272a;
+  --cb-chip-text: #a1a1aa;
+  --cb-chip-icon: #52525b;
+}
+
+.cb-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-reveal--open {
+  grid-template-rows: 1fr;
+}
+
+.cb-reveal-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 0;
+  transition: padding-top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-reveal--open .cb-reveal-inner {
+  padding-top: 14px;
+}
+
+.cb-user-bubble {
+  animation: cb-bubble-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cb-think-pulse {
+  animation: cb-think-pulse 2.2s ease-in-out infinite;
+}
+
+.cb-bot-cursor,
+.cb-input-cursor {
+  animation: cb-blink 0.9s step-start infinite;
+}
+
+.cb-action-btn {
+  animation: cb-fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cb-action-btn:nth-child(1) {
+  animation-delay: 40ms;
+}
+.cb-action-btn:nth-child(2) {
+  animation-delay: 110ms;
+}
+.cb-action-btn:nth-child(3) {
+  animation-delay: 180ms;
+}
+.cb-action-btn:nth-child(4) {
+  animation-delay: 250ms;
+}
+.cb-action-btn:nth-child(5) {
+  animation-delay: 320ms;
+}
+
+.cb-chip {
+  animation: cb-chip-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cb-chip:nth-child(1) {
+  animation-delay: 500ms;
+}
+.cb-chip:nth-child(2) {
+  animation-delay: 640ms;
+}
+
+.cb-spinner {
+  animation: cb-spin 0.65s linear infinite;
+}
+
+.cb-send-btn-active {
+  animation: cb-send-pulse 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes cb-bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.91) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cb-chip-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cb-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cb-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cb-think-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes cb-send-pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.76);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,7 +1,7 @@
 import { Instrument_Serif } from "next/font/google"
 
 import { Button } from "@/components/ui/button"
-import SimpleChatbot from "./components/simple-chatbot"
+import SimpleChatbot from "../simple-chatbot/simple-chatbot"
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -9,12 +9,23 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 })
 
+const HOME_SEARCH_PROMPTS = [
+  "Show me 3-bedroom homes under $500k in Austin.",
+  "What neighborhoods have the best schools nearby?",
+  "Find pet-friendly rentals with a backyard.",
+  "Schedule a tour for this listing this weekend.",
+  "Compare mortgage rates for a $400k home.",
+  "What's the average home price in Denver?",
+] as const
+
 export default function HeroSectionV5() {
   return (
-    <section className="py-10 md:py-14 lg:py-16">
+    <section className="pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className={`${instrumentSerif.className} text-3xl font-medium sm:text-4xl lg:text-5xl lg:leading-[1.15]`}>
+          <h1
+            className={`${instrumentSerif.className} text-3xl font-medium sm:text-4xl lg:text-5xl lg:leading-[1.15]`}
+          >
             Find your perfect home
             <br />
             with <span className="italic">confidence</span>
@@ -25,12 +36,14 @@ export default function HeroSectionV5() {
             and make your next move without the stress.
           </p>
 
-          <Button variant="default" className="rounded-full">Get started</Button>
+          <Button variant="default" className="rounded-full">
+            Get started
+          </Button>
         </div>
       </div>
 
       <div className="px-4 pt-4">
-        <SimpleChatbot />
+        <SimpleChatbot prompts={HOME_SEARCH_PROMPTS} />
       </div>
     </section>
   )

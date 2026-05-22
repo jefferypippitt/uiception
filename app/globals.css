@@ -166,9 +166,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Noir code workspace — softer gutters, match min theme contrast */
-.code-view-noir .shiki-panel-noir code .line::before {
-  opacity: 0.22;
+/* Vercel docs code workspace — line numbers match editor gutter tokens */
+.code-view-vercel-docs .shiki-panel-vercel-docs code .line::before {
+  opacity: 1;
+  color: #a0a0a0;
 }
 
 /*

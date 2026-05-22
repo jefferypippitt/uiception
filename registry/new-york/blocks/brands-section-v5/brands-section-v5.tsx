@@ -3,10 +3,10 @@
 import { useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 
-import Marquee from "./components/marquee"
-import { brands } from "./lib/brands"
+import Marquee from "./marquee"
+import { brands } from "./brands"
 
-import "./styles/brands-section-v5.css"
+import "./brands-section-v5.css"
 
 type Props = {
   animated?: boolean
@@ -45,15 +45,35 @@ export default function BrandsSectionV5({ animated = false }: Props) {
         defaults: { ease: "power3.out", duration: 0.36 },
       })
 
-      tl.to(box, { autoAlpha: 1, y: 0, duration: 0.4, force3D: true, clearProps: "transform" })
+      tl.to(box, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.4,
+        force3D: true,
+        clearProps: "transform",
+      })
         .to(
           label,
-          { autoAlpha: 1, y: 0, duration: 0.34, ease: "power2.out", force3D: true, clearProps: "transform" },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.34,
+            ease: "power2.out",
+            force3D: true,
+            clearProps: "transform",
+          },
           ">-0.02"
         )
         .to(
           marquee,
-          { autoAlpha: 1, y: 0, duration: 0.34, ease: "power2.out", force3D: true, clearProps: "transform" },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.34,
+            ease: "power2.out",
+            force3D: true,
+            clearProps: "transform",
+          },
           ">-0.1"
         )
         .to(
@@ -75,10 +95,10 @@ export default function BrandsSectionV5({ animated = false }: Props) {
   }, [animated])
 
   return (
-    <section ref={sectionRef} className="pb-10 pt-0 md:pb-14">
+    <section ref={sectionRef} className="pt-0 pb-16 md:pb-20 lg:pb-24">
       <div className="mx-auto max-w-5xl px-4">
-        <div className="bs5-box">
-          <div className="bs5-label">
+        <div className="bs5-box flex items-stretch overflow-hidden rounded-none border border-border">
+          <div className="bs5-label flex shrink-0 items-center border-r border-border px-5 py-6">
             <p className="text-base leading-snug text-muted-foreground">
               <span className="block">
                 Trusted by <span className="text-foreground">2000+</span>

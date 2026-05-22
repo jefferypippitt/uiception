@@ -1,17 +1,19 @@
-import FeatureGrid from "./components/feature-grid"
+import { GeistSans } from "geist/font/sans"
 
-import "./styles/feature-section-v5.css"
+import FeatureGrid from "./feature-grid"
 
 export default function FeatureSectionV5() {
   return (
-    <section className="fsv5-section pt-16 md:pt-20 lg:pt-24">
+    <section
+      className={`${GeistSans.className} pt-16 text-foreground md:pt-20 lg:pt-24`}
+    >
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto mb-12 flex max-w-3xl flex-col items-center gap-4 text-center md:mb-14 lg:mb-16">
-          <h2 className="fsv5-heading text-4xl tracking-tight lg:text-5xl">
+          <h2 className="text-4xl leading-[1.1] font-medium tracking-[-0.03em] lg:text-5xl">
             Less noise.{" "}
-            <span className="fsv5-heading-accent">More signal.</span>
+            <span className="font-semibold">More signal.</span>
           </h2>
-          <p className="max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+          <p className="max-w-xl text-3.75 leading-relaxed text-muted-foreground">
             Focused tools built around how great teams actually work. Nothing
             unnecessary, everything intentional.
           </p>

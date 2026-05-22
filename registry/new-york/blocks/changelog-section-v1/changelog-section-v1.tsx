@@ -31,11 +31,8 @@ export default function ChangelogSectionV1() {
   return (
     <section className="py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4">
-        <p className={`${GeistMono.className} mb-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase`}>
-          Changelog
-        </p>
         <h2 className="text-4xl font-medium tracking-tighter sm:text-5xl">
-          The Latest
+          Latest Updates
         </h2>
 
         <div className="mt-8 grid grid-cols-1 gap-0 md:grid-cols-3">
@@ -46,14 +43,14 @@ export default function ChangelogSectionV1() {
               className="group py-8 md:px-8 md:first:pl-0 md:last:pr-0"
             >
               <div className="mb-3 flex items-center justify-between border-t pt-4">
-                <p className={`${GeistMono.className} text-xs font-semibold tracking-widest text-muted-foreground`}>
+                <p
+                  className={`${GeistMono.className} text-xs font-semibold tracking-widest text-muted-foreground`}
+                >
                   {entry.date}
                 </p>
                 <ChevronRightIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
-              <h3 className="mb-2 font-semibold leading-snug">
-                {entry.title}
-              </h3>
+              <h3 className="mb-2 leading-snug font-semibold">{entry.title}</h3>
               <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                 {entry.excerpt}
               </p>

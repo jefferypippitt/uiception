@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
-/** Swap these when you install the block. */
 const SITE_NAME = "uiception"
 const LOGO_SRC = "/icon0.svg"
 const LOGO_HREF = "#"
@@ -34,34 +33,34 @@ const LEFT_NAV_ITEMS: NavItem[] = [
 const SIGN_IN_ITEM: NavItem = { label: "Sign in", href: "#" }
 
 const linkClass = cn(
-  "shrink-0 whitespace-nowrap rounded-full px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground sm:px-3 sm:text-sm",
-  "aria-[current=page]:text-foreground",
+  "shrink-0 rounded-full px-2 py-1.5 text-xs whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground sm:px-3 sm:text-sm",
+  "aria-[current=page]:text-foreground"
 )
 
 const mobileSheetLinkClass = cn(
   "block rounded-lg px-3 py-2.5 text-base text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground",
-  "aria-[current=page]:bg-muted/60 aria-[current=page]:text-foreground",
+  "aria-[current=page]:bg-muted/60 aria-[current=page]:text-foreground"
 )
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
-    <div className="flex size-4 flex-col items-center justify-center gap-[4px]">
+    <div className="flex size-4 flex-col items-center justify-center gap-1">
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "translate-y-[5px] rotate-45" : "",
+          open ? "translate-y-[5px] rotate-45" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "scale-x-0 opacity-0" : "",
+          open ? "scale-x-0 opacity-0" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "-translate-y-[5px] -rotate-45" : "",
+          open ? "-translate-y-[5px] -rotate-45" : ""
         )}
       />
     </div>
@@ -187,7 +186,13 @@ export default function NavbarSectionV5() {
 
           <div className="border-t border-border/80 p-4">
             <Button asChild className="h-10 w-full rounded-full">
-              <Link href="#" onClick={(e) => { e.preventDefault(); setMenuOpen(false) }}>
+              <Link
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setMenuOpen(false)
+                }}
+              >
                 Get started
               </Link>
             </Button>
@@ -200,7 +205,7 @@ export default function NavbarSectionV5() {
           "sticky top-0 z-40 flex w-full justify-center",
           "pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-3",
           "transition-[padding,background-color,backdrop-filter] duration-300 ease-out",
-          (scrolled || menuOpen) && "bg-background/60 pb-2 backdrop-blur-md",
+          (scrolled || menuOpen) && "bg-background/60 pb-2 backdrop-blur-md"
         )}
       >
         <nav
@@ -209,15 +214,15 @@ export default function NavbarSectionV5() {
             "flex justify-center px-4 transition-[width,max-width] duration-300 ease-out",
             scrolled
               ? "w-[calc(100%-2rem)] max-w-5xl"
-              : "w-[calc(100%-0.5rem)] max-w-6xl",
+              : "w-[calc(100%-0.5rem)] max-w-6xl"
           )}
         >
           <div
             className={cn(
               "grid w-full max-w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-1 rounded-full border border-foreground/10 bg-background/80 py-1 pr-1 pl-2 shadow-lg shadow-foreground/5 backdrop-blur",
-              "sm:gap-2 sm:p-1 sm:pl-3 sm:pr-1.5",
+              "sm:gap-2 sm:p-1 sm:pr-1.5 sm:pl-3",
               "transition-shadow duration-300 ease-out",
-              scrolled && "shadow-md shadow-foreground/4",
+              scrolled && "shadow-md shadow-foreground/4"
             )}
           >
             <div className="flex min-w-0 items-center gap-1 md:gap-2">

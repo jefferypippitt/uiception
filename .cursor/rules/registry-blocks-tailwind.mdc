@@ -1,0 +1,51 @@
+---
+description: Registry blocks use Tailwind v4 utilities in TSX; block CSS only for motion, pseudo-elements, and mock chrome tokens
+globs: registry/new-york/blocks/**/*
+alwaysApply: true
+---
+
+# Registry blocks — Tailwind-first styling
+
+This project uses **Tailwind CSS v4** via `app/globals.css` (`@import "tailwindcss"`, `@theme inline`). Blocks do not ship their own Tailwind entry.
+
+## Default: utilities on TSX
+
+Put layout, typography, spacing, and colors on `className` in `.tsx`:
+
+```tsx
+<h2 className="text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl">
+  Title{" "}
+  <span className="font-serif italic font-normal tracking-[-0.01em]">accent</span>
+</h2>
+<p className="max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground" />
+```
+
+Use theme utilities: `text-foreground`, `text-muted-foreground`, `bg-background`, `border-border`, `font-mono`, `font-serif`, `rounded-lg`, etc.
+
+Do **not** add block-prefixed classes for simple one-off typography (e.g. `.fsv5-heading { font-weight: 500; }`).
+
+Do **not** use `hsl(var(--foreground))` in CSS — use `var(--foreground)` or Tailwind tokens (`:root` is oklch).
+
+## When block `.css` is allowed
+
+Keep a sibling `*.css` import only for what utilities cannot express cleanly:
+
+- `@keyframes` and `animation`
+- `::before` / `::after` (rules, bullets, device chrome)
+- Complex grids with `nth-child` placement (bento, brand grids)
+- Marquee tracks and infinite scroll
+- GSAP / scroll hooks (`[data-*]`, opacity shells)
+- Mock-UI **scoped variables** (`--gc-*`, `--cb-*`, `--ss-*`) for authentic app chrome colors
+- Descendant overrides (e.g. `.hero-v8 .scb-root { font-family: inherit }`)
+
+Trim each rule block as you migrate; delete the CSS file if nothing remains.
+
+## Do not
+
+- Add `tailwind.config.js` or `@import "tailwindcss"` inside a block folder
+- Use `@apply` in block CSS for new work (prefer TSX utilities)
+- Create `components/`, `hooks/`, `lib/`, or `styles/` subfolders under a block (flat layout per `registry-blocks-flat-structure.mdc`)
+
+## After edits
+
+Run `pnpm registry:build` and declare every file in `registry.json`.

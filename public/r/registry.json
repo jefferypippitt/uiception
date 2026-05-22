@@ -11,7 +11,10 @@
       "dependencies": [
         "gsap"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "event-stream",
+        "brands-section-v2"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v2/page.tsx",
@@ -24,114 +27,14 @@
           "target": "app/hero-section-v2/hero-section-v2.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v2/components/hero-content.tsx",
+          "path": "registry/new-york/blocks/hero-section-v2/hero-content.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v2/components/hero-content.tsx"
+          "target": "app/hero-section-v2/hero-content.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v2/hooks/use-hero-animation.ts",
+          "path": "registry/new-york/blocks/hero-section-v2/use-hero-animation.ts",
           "type": "registry:hook",
-          "target": "app/hero-section-v2/hooks/use-hero-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/components/event-stream.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v2/components/event-stream.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/components/token-text.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v2/components/token-text.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/components/brands-section-v2.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v2/components/brands-section-v2.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/components/marquee.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v2/components/marquee.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/components/brand-logo.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v2/components/brand-logo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/hooks/use-event-animation.ts",
-          "type": "registry:hook",
-          "target": "app/hero-section-v2/hooks/use-event-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/lib/config.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v2/lib/config.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/lib/brands.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v2/lib/brands.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/styles/event-stream.css",
-          "type": "registry:file",
-          "target": "app/hero-section-v2/styles/event-stream.css"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v2/styles/brands-section-v2.css",
-          "type": "registry:file",
-          "target": "app/hero-section-v2/styles/brands-section-v2.css"
-        },
-        {
-          "path": "components/ui/svgs/convex.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/convex.tsx"
-        },
-        {
-          "path": "components/ui/svgs/supabase.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/supabase.tsx"
-        },
-        {
-          "path": "components/ui/svgs/tursoLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/tursoLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/tursoDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/tursoDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/upstash.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/upstash.tsx"
-        },
-        {
-          "path": "components/ui/svgs/neon.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/neon.tsx"
-        },
-        {
-          "path": "components/ui/svgs/planetscale.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/planetscale.tsx"
-        },
-        {
-          "path": "components/ui/svgs/planetscaleDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/planetscaleDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/mongodbIconLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/mongodbIconLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/mongodbIconDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/mongodbIconDark.tsx"
+          "target": "app/hero-section-v2/use-hero-animation.ts"
         }
       ]
     },
@@ -142,7 +45,8 @@
       "description": "Centered hero with badge, headline, CTA, and an embedded animated chat preview (messages, typing, suggestions).",
       "dependencies": [],
       "registryDependencies": [
-        "badge"
+        "badge",
+        "chat-bot"
       ],
       "files": [
         {
@@ -154,41 +58,6 @@
           "path": "registry/new-york/blocks/hero-section-v3/hero-section-v3.tsx",
           "type": "registry:component",
           "target": "app/hero-section-v3/hero-section-v3.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/components/chat-bot.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v3/components/chat-bot.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/components/chat-input.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v3/components/chat-input.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/components/message-bubble.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v3/components/message-bubble.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/components/typing-indicator.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v3/components/typing-indicator.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/hooks/use-chat-animation.ts",
-          "type": "registry:hook",
-          "target": "app/hero-section-v3/hooks/use-chat-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/lib/config.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v3/lib/config.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v3/styles/chat-bot.css",
-          "type": "registry:file",
-          "target": "app/hero-section-v3/styles/chat-bot.css"
         }
       ]
     },
@@ -201,14 +70,11 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "button"
+        "button",
+        "mac-os-terminal",
+        "brands-section-v1"
       ],
       "files": [
-        {
-          "path": "lib/block-image-url.ts",
-          "type": "registry:lib",
-          "target": "lib/block-image-url.ts"
-        },
         {
           "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
           "type": "registry:page",
@@ -220,124 +86,14 @@
           "target": "app/hero-section-v1/hero-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/components/brands-section-v1.tsx",
+          "path": "registry/new-york/blocks/hero-section-v1/hero-v1-image.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v1/components/brands-section-v1.tsx"
+          "target": "app/hero-section-v1/hero-v1-image.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v1/styles/brands-section-v1.css",
+          "path": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png",
           "type": "registry:file",
-          "target": "app/hero-section-v1/styles/brands-section-v1.css"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/mac-os-terminal.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/mac-os-terminal.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/brand-logo.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/brand-logo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/prompt-shell.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/prompt-shell.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/spinner.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/spinner.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/syntax-code.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/syntax-code.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/components/traffic-lights.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v1/components/traffic-lights.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/hooks/use-terminal-animation.ts",
-          "type": "registry:hook",
-          "target": "app/hero-section-v1/hooks/use-terminal-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/lib/brands.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v1/lib/brands.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/lib/terminal-config.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v1/lib/terminal-config.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/lib/mac-os-terminal-code-segments.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v1/lib/mac-os-terminal-code-segments.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v1/styles/mac-os-terminal.css",
-          "type": "registry:file",
-          "target": "app/hero-section-v1/styles/mac-os-terminal.css"
-        },
-        {
-          "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/nvidiaWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/openaiWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/openaiWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/grokWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/grokWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/perplexityWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/perplexityWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/claudeAiWordmarkIconLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/claudeAiWordmarkIconDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/googleWordmark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/googleWordmark.tsx"
+          "target": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png"
         }
       ]
     },
@@ -359,24 +115,24 @@
           "target": "app/brands-section-v2/brands-section-v2.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v2/components/brand-logo.tsx",
+          "path": "registry/new-york/blocks/brands-section-v2/brand-logo.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v2/components/brand-logo.tsx"
+          "target": "app/brands-section-v2/brand-logo.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v2/components/marquee.tsx",
+          "path": "registry/new-york/blocks/brands-section-v2/marquee.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v2/components/marquee.tsx"
+          "target": "app/brands-section-v2/marquee.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v2/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v2/brands.ts",
           "type": "registry:lib",
-          "target": "app/brands-section-v2/lib/brands.ts"
+          "target": "app/brands-section-v2/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v2/styles/brands-section-v2.css",
+          "path": "registry/new-york/blocks/brands-section-v2/brands-section-v2.css",
           "type": "registry:file",
-          "target": "app/brands-section-v2/styles/brands-section-v2.css"
+          "target": "app/brands-section-v2/brands-section-v2.css"
         },
         {
           "path": "components/ui/svgs/convex.tsx",
@@ -448,29 +204,29 @@
           "target": "app/brands-section-v3/brands-section-v3.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v3/components/brand-grid.tsx",
+          "path": "registry/new-york/blocks/brands-section-v3/brand-grid.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v3/components/brand-grid.tsx"
+          "target": "app/brands-section-v3/brand-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v3/components/brand-cell.tsx",
+          "path": "registry/new-york/blocks/brands-section-v3/brand-cell.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v3/components/brand-cell.tsx"
+          "target": "app/brands-section-v3/brand-cell.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v3/components/flickering-grid.tsx",
+          "path": "registry/new-york/blocks/brands-section-v3/flickering-grid.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v3/components/flickering-grid.tsx"
+          "target": "app/brands-section-v3/flickering-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v3/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v3/brands.ts",
           "type": "registry:lib",
-          "target": "app/brands-section-v3/lib/brands.ts"
+          "target": "app/brands-section-v3/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v3/styles/brands-section-v3.css",
+          "path": "registry/new-york/blocks/brands-section-v3/brands-section-v3.css",
           "type": "registry:file",
-          "target": "app/brands-section-v3/styles/brands-section-v3.css"
+          "target": "app/brands-section-v3/brands-section-v3.css"
         },
         {
           "path": "components/ui/svgs/supabase.tsx",
@@ -527,29 +283,29 @@
           "target": "app/brands-section-v4/brands-section-v4.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v4/components/brand-grid.tsx",
+          "path": "registry/new-york/blocks/brands-section-v4/brand-grid.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v4/components/brand-grid.tsx"
+          "target": "app/brands-section-v4/brand-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v4/components/brand-cell.tsx",
+          "path": "registry/new-york/blocks/brands-section-v4/brand-cell.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v4/components/brand-cell.tsx"
+          "target": "app/brands-section-v4/brand-cell.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v4/components/flickering-grid.tsx",
+          "path": "registry/new-york/blocks/brands-section-v4/flickering-grid.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v4/components/flickering-grid.tsx"
+          "target": "app/brands-section-v4/flickering-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v4/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v4/brands.ts",
           "type": "registry:lib",
-          "target": "app/brands-section-v4/lib/brands.ts"
+          "target": "app/brands-section-v4/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v4/styles/brands-section-v4.css",
+          "path": "registry/new-york/blocks/brands-section-v4/brands-section-v4.css",
           "type": "registry:file",
-          "target": "app/brands-section-v4/styles/brands-section-v4.css"
+          "target": "app/brands-section-v4/brands-section-v4.css"
         },
         {
           "path": "components/ui/svgs/tiktokIconLight.tsx",
@@ -641,24 +397,24 @@
           "target": "app/brands-section-v1/brands-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v1/components/marquee.tsx",
+          "path": "registry/new-york/blocks/brands-section-v1/marquee.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v1/components/marquee.tsx"
+          "target": "app/brands-section-v1/marquee.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v1/components/brand-logo.tsx",
+          "path": "registry/new-york/blocks/brands-section-v1/brand-logo.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v1/components/brand-logo.tsx"
+          "target": "app/brands-section-v1/brand-logo.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v1/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v1/brands.ts",
           "type": "registry:file",
-          "target": "app/brands-section-v1/lib/brands.ts"
+          "target": "app/brands-section-v1/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v1/styles/brands-section-v1.css",
+          "path": "registry/new-york/blocks/brands-section-v1/brands-section-v1.css",
           "type": "registry:file",
-          "target": "app/brands-section-v1/styles/brands-section-v1.css"
+          "target": "app/brands-section-v1/brands-section-v1.css"
         },
         {
           "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
@@ -738,24 +494,24 @@
           "target": "app/brands-section-v5/brands-section-v5.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v5/components/marquee.tsx",
+          "path": "registry/new-york/blocks/brands-section-v5/marquee.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v5/components/marquee.tsx"
+          "target": "app/brands-section-v5/marquee.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v5/components/brand-logo.tsx",
+          "path": "registry/new-york/blocks/brands-section-v5/brand-logo.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v5/components/brand-logo.tsx"
+          "target": "app/brands-section-v5/brand-logo.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v5/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v5/brands.ts",
           "type": "registry:file",
-          "target": "app/brands-section-v5/lib/brands.ts"
+          "target": "app/brands-section-v5/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v5/styles/brands-section-v5.css",
+          "path": "registry/new-york/blocks/brands-section-v5/brands-section-v5.css",
           "type": "registry:file",
-          "target": "app/brands-section-v5/styles/brands-section-v5.css"
+          "target": "app/brands-section-v5/brands-section-v5.css"
         },
         {
           "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
@@ -862,24 +618,24 @@
           "target": "app/brands-section-v6/brands-section-v6.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v6/components/marquee.tsx",
+          "path": "registry/new-york/blocks/brands-section-v6/marquee.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v6/components/marquee.tsx"
+          "target": "app/brands-section-v6/marquee.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v6/components/brand-logo.tsx",
+          "path": "registry/new-york/blocks/brands-section-v6/brand-logo.tsx",
           "type": "registry:component",
-          "target": "app/brands-section-v6/components/brand-logo.tsx"
+          "target": "app/brands-section-v6/brand-logo.tsx"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v6/lib/brands.ts",
+          "path": "registry/new-york/blocks/brands-section-v6/brands.ts",
           "type": "registry:file",
-          "target": "app/brands-section-v6/lib/brands.ts"
+          "target": "app/brands-section-v6/brands.ts"
         },
         {
-          "path": "registry/new-york/blocks/brands-section-v6/styles/brands-section-v6.css",
+          "path": "registry/new-york/blocks/brands-section-v6/brands-section-v6.css",
           "type": "registry:file",
-          "target": "app/brands-section-v6/styles/brands-section-v6.css"
+          "target": "app/brands-section-v6/brands-section-v6.css"
         },
         {
           "path": "components/ui/svgs/clerkWordmarkLight.tsx",
@@ -953,7 +709,9 @@
       "type": "registry:block",
       "title": "Navbar Section v1",
       "description": "Sticky blurred header with optional lorem-demo below the install page for scroll testing.",
-      "registryDependencies": ["button"],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v1/page.tsx",
@@ -966,14 +724,9 @@
           "target": "app/navbar-section-v1/navbar-section-v1.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v1/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/navbar-section-v1/lorem-demo.tsx",
-          "type": "registry:component",
-          "target": "app/navbar-section-v1/lorem-demo.tsx"
+          "target": "app/navbar-section-v1/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -982,8 +735,13 @@
       "type": "registry:block",
       "title": "Navbar Section v2",
       "description": "Centered three-column navbar with product dropdown, frosted backdrop, and full-screen mobile sheet navigation.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["button", "sheet"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v2/page.tsx",
@@ -996,14 +754,9 @@
           "target": "app/navbar-section-v2/navbar-section-v2.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v2/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/navbar-section-v2/lorem-demo.tsx",
-          "type": "registry:component",
-          "target": "app/navbar-section-v2/lorem-demo.tsx"
+          "target": "app/navbar-section-v2/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -1012,8 +765,17 @@
       "type": "registry:block",
       "title": "Navbar Section v3",
       "description": "Centered three-column navbar with product dropdown, frosted backdrop, and full-screen mobile sheet navigation.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["button", "dialog", "input", "kbd", "label", "sheet"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "dialog",
+        "input",
+        "kbd",
+        "label",
+        "sheet"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v3/page.tsx",
@@ -1026,14 +788,9 @@
           "target": "app/navbar-section-v3/navbar-section-v3.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v3/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/navbar-section-v3/lorem-demo.tsx",
-          "type": "registry:component",
-          "target": "app/navbar-section-v3/lorem-demo.tsx"
+          "target": "app/navbar-section-v3/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -1042,7 +799,9 @@
       "type": "registry:block",
       "title": "Navbar Section v4",
       "description": "Fixed bottom centered dock nav with frosted pill container, hairline active indicator, responsive links, and primary CTA.",
-      "registryDependencies": ["button"],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v4/page.tsx",
@@ -1055,14 +814,9 @@
           "target": "app/navbar-section-v4/navbar-section-v4.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v4/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/navbar-section-v4/lorem-demo.tsx",
-          "type": "registry:component",
-          "target": "app/navbar-section-v4/lorem-demo.tsx"
+          "target": "app/navbar-section-v4/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -1071,7 +825,10 @@
       "type": "registry:block",
       "title": "Navbar Section v5",
       "description": "Sticky top centered dock nav that shrinks from max-w-6xl to max-w-5xl on scroll, with frosted pill, two-column desktop layout, and mobile sheet menu.",
-      "registryDependencies": ["button", "sheet"],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v5/page.tsx",
@@ -1084,14 +841,9 @@
           "target": "app/navbar-section-v5/navbar-section-v5.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v5/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/navbar-section-v5/lorem-demo.tsx",
-          "type": "registry:component",
-          "target": "app/navbar-section-v5/lorem-demo.tsx"
+          "target": "app/navbar-section-v5/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -1100,8 +852,13 @@
       "type": "registry:block",
       "title": "Navbar Section v6",
       "description": "Centered mono uppercase nav with Solutions dropdown, external Docs link, and default-radius CTAs.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["button", "sheet"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/navbar-section-v6/page.tsx",
@@ -1114,14 +871,39 @@
           "target": "app/navbar-section-v6/navbar-section-v6.tsx"
         },
         {
-          "path": "components/blocks/navbar-lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v6/navbar-lorem-demo.tsx",
           "type": "registry:component",
-          "target": "components/blocks/navbar-lorem-demo.tsx"
+          "target": "app/navbar-section-v6/navbar-lorem-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v7",
+      "type": "registry:block",
+      "title": "Navbar Section v7",
+      "description": "AI SaaS navbar with Product and Developers hover dropdowns, uppercase links, frosted glass, and Get started CTA.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v7/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v7/page.tsx"
         },
         {
-          "path": "registry/new-york/blocks/navbar-section-v6/lorem-demo.tsx",
+          "path": "registry/new-york/blocks/navbar-section-v7/navbar-section-v7.tsx",
           "type": "registry:component",
-          "target": "app/navbar-section-v6/lorem-demo.tsx"
+          "target": "app/navbar-section-v7/navbar-section-v7.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v7/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v7/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -1146,44 +928,44 @@
           "target": "app/mac-os-terminal/mac-os-terminal.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/components/prompt-shell.tsx",
+          "path": "registry/new-york/blocks/mac-os-terminal/prompt-shell.tsx",
           "type": "registry:component",
-          "target": "app/mac-os-terminal/components/prompt-shell.tsx"
+          "target": "app/mac-os-terminal/prompt-shell.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/components/spinner.tsx",
+          "path": "registry/new-york/blocks/mac-os-terminal/spinner.tsx",
           "type": "registry:component",
-          "target": "app/mac-os-terminal/components/spinner.tsx"
+          "target": "app/mac-os-terminal/spinner.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/components/syntax-code.tsx",
+          "path": "registry/new-york/blocks/mac-os-terminal/syntax-code.tsx",
           "type": "registry:component",
-          "target": "app/mac-os-terminal/components/syntax-code.tsx"
+          "target": "app/mac-os-terminal/syntax-code.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/components/traffic-lights.tsx",
+          "path": "registry/new-york/blocks/mac-os-terminal/traffic-lights.tsx",
           "type": "registry:component",
-          "target": "app/mac-os-terminal/components/traffic-lights.tsx"
+          "target": "app/mac-os-terminal/traffic-lights.tsx"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/hooks/use-terminal-animation.ts",
+          "path": "registry/new-york/blocks/mac-os-terminal/use-terminal-animation.ts",
           "type": "registry:hook",
-          "target": "app/mac-os-terminal/hooks/use-terminal-animation.ts"
+          "target": "app/mac-os-terminal/use-terminal-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/lib/config.ts",
+          "path": "registry/new-york/blocks/mac-os-terminal/config.ts",
           "type": "registry:lib",
-          "target": "app/mac-os-terminal/lib/config.ts"
+          "target": "app/mac-os-terminal/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/lib/mac-os-terminal-code-segments.ts",
+          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal-code-segments.ts",
           "type": "registry:lib",
-          "target": "app/mac-os-terminal/lib/mac-os-terminal-code-segments.ts"
+          "target": "app/mac-os-terminal/mac-os-terminal-code-segments.ts"
         },
         {
-          "path": "registry/new-york/blocks/mac-os-terminal/styles/mac-os-terminal.css",
+          "path": "registry/new-york/blocks/mac-os-terminal/mac-os-terminal.css",
           "type": "registry:file",
-          "target": "app/mac-os-terminal/styles/mac-os-terminal.css"
+          "target": "app/mac-os-terminal/mac-os-terminal.css"
         }
       ]
     },
@@ -1205,24 +987,24 @@
           "target": "app/event-stream/event-stream.tsx"
         },
         {
-          "path": "registry/new-york/blocks/event-stream/components/token-text.tsx",
+          "path": "registry/new-york/blocks/event-stream/token-text.tsx",
           "type": "registry:component",
-          "target": "app/event-stream/components/token-text.tsx"
+          "target": "app/event-stream/token-text.tsx"
         },
         {
-          "path": "registry/new-york/blocks/event-stream/hooks/use-event-animation.ts",
+          "path": "registry/new-york/blocks/event-stream/use-event-animation.ts",
           "type": "registry:hook",
-          "target": "app/event-stream/hooks/use-event-animation.ts"
+          "target": "app/event-stream/use-event-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/event-stream/lib/config.ts",
+          "path": "registry/new-york/blocks/event-stream/config.ts",
           "type": "registry:lib",
-          "target": "app/event-stream/lib/config.ts"
+          "target": "app/event-stream/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/event-stream/styles/event-stream.css",
+          "path": "registry/new-york/blocks/event-stream/event-stream.css",
           "type": "registry:file",
-          "target": "app/event-stream/styles/event-stream.css"
+          "target": "app/event-stream/event-stream.css"
         }
       ]
     },
@@ -1244,34 +1026,34 @@
           "target": "app/cursor-terminal/cursor-terminal.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/components/panel-icon-button.tsx",
+          "path": "registry/new-york/blocks/cursor-terminal/panel-icon-button.tsx",
           "type": "registry:component",
-          "target": "app/cursor-terminal/components/panel-icon-button.tsx"
+          "target": "app/cursor-terminal/panel-icon-button.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/components/prompt-shell.tsx",
+          "path": "registry/new-york/blocks/cursor-terminal/prompt-shell.tsx",
           "type": "registry:component",
-          "target": "app/cursor-terminal/components/prompt-shell.tsx"
+          "target": "app/cursor-terminal/prompt-shell.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/components/spinner.tsx",
+          "path": "registry/new-york/blocks/cursor-terminal/spinner.tsx",
           "type": "registry:component",
-          "target": "app/cursor-terminal/components/spinner.tsx"
+          "target": "app/cursor-terminal/spinner.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation.ts",
+          "path": "registry/new-york/blocks/cursor-terminal/use-terminal-animation.ts",
           "type": "registry:hook",
-          "target": "app/cursor-terminal/hooks/use-terminal-animation.ts"
+          "target": "app/cursor-terminal/use-terminal-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/lib/config.ts",
+          "path": "registry/new-york/blocks/cursor-terminal/config.ts",
           "type": "registry:lib",
-          "target": "app/cursor-terminal/lib/config.ts"
+          "target": "app/cursor-terminal/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css",
+          "path": "registry/new-york/blocks/cursor-terminal/cursor-terminal.css",
           "type": "registry:file",
-          "target": "app/cursor-terminal/styles/cursor-terminal.css"
+          "target": "app/cursor-terminal/cursor-terminal.css"
         }
       ]
     },
@@ -1288,11 +1070,6 @@
       ],
       "files": [
         {
-          "path": "lib/block-image-url.ts",
-          "type": "registry:lib",
-          "target": "lib/block-image-url.ts"
-        },
-        {
           "path": "registry/new-york/blocks/cta-section-v1/page.tsx",
           "type": "registry:page",
           "target": "app/cta-section-v1/page.tsx"
@@ -1301,6 +1078,11 @@
           "path": "registry/new-york/blocks/cta-section-v1/cta-section-v1.tsx",
           "type": "registry:component",
           "target": "app/cta-section-v1/cta-section-v1.tsx"
+        },
+        {
+          "path": "public/images/blocks/cta-section-v1/cta-section-v1.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/cta-section-v1/cta-section-v1.png"
         }
       ]
     },
@@ -1348,14 +1130,14 @@
           "target": "app/cta-section-v3/cta-section-v3.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cta-section-v3/components/cta-section-v3-dither-bg.tsx",
+          "path": "registry/new-york/blocks/cta-section-v3/cta-section-v3-dither-bg.tsx",
           "type": "registry:component",
-          "target": "app/cta-section-v3/components/cta-section-v3-dither-bg.tsx"
+          "target": "app/cta-section-v3/cta-section-v3-dither-bg.tsx"
         },
         {
-          "path": "registry/new-york/blocks/cta-section-v3/styles/cta-section-v3.css",
+          "path": "registry/new-york/blocks/cta-section-v3/cta-section-v3.css",
           "type": "registry:file",
-          "target": "app/cta-section-v3/styles/cta-section-v3.css"
+          "target": "app/cta-section-v3/cta-section-v3.css"
         }
       ]
     },
@@ -1455,34 +1237,34 @@
           "target": "app/chat-bot/chat-bot.tsx"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/components/message-bubble.tsx",
+          "path": "registry/new-york/blocks/chat-bot/message-bubble.tsx",
           "type": "registry:component",
-          "target": "app/chat-bot/components/message-bubble.tsx"
+          "target": "app/chat-bot/message-bubble.tsx"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/components/typing-indicator.tsx",
+          "path": "registry/new-york/blocks/chat-bot/typing-indicator.tsx",
           "type": "registry:component",
-          "target": "app/chat-bot/components/typing-indicator.tsx"
+          "target": "app/chat-bot/typing-indicator.tsx"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/components/chat-input.tsx",
+          "path": "registry/new-york/blocks/chat-bot/chat-input.tsx",
           "type": "registry:component",
-          "target": "app/chat-bot/components/chat-input.tsx"
+          "target": "app/chat-bot/chat-input.tsx"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/hooks/use-chat-animation.ts",
+          "path": "registry/new-york/blocks/chat-bot/use-chat-animation.ts",
           "type": "registry:hook",
-          "target": "app/chat-bot/hooks/use-chat-animation.ts"
+          "target": "app/chat-bot/use-chat-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/lib/config.ts",
+          "path": "registry/new-york/blocks/chat-bot/config.ts",
           "type": "registry:lib",
-          "target": "app/chat-bot/lib/config.ts"
+          "target": "app/chat-bot/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/chat-bot/styles/chat-bot.css",
+          "path": "registry/new-york/blocks/chat-bot/chat-bot.css",
           "type": "registry:file",
-          "target": "app/chat-bot/styles/chat-bot.css"
+          "target": "app/chat-bot/chat-bot.css"
         }
       ]
     },
@@ -1506,24 +1288,24 @@
           "target": "app/simple-chatbot/simple-chatbot.tsx"
         },
         {
-          "path": "registry/new-york/blocks/simple-chatbot/components/prompt-input.tsx",
+          "path": "registry/new-york/blocks/simple-chatbot/prompt-input.tsx",
           "type": "registry:component",
-          "target": "app/simple-chatbot/components/prompt-input.tsx"
+          "target": "app/simple-chatbot/prompt-input.tsx"
         },
         {
-          "path": "registry/new-york/blocks/simple-chatbot/hooks/use-placeholder-loop.ts",
+          "path": "registry/new-york/blocks/simple-chatbot/use-placeholder-loop.ts",
           "type": "registry:hook",
-          "target": "app/simple-chatbot/hooks/use-placeholder-loop.ts"
+          "target": "app/simple-chatbot/use-placeholder-loop.ts"
         },
         {
-          "path": "registry/new-york/blocks/simple-chatbot/lib/config.ts",
+          "path": "registry/new-york/blocks/simple-chatbot/config.ts",
           "type": "registry:lib",
-          "target": "app/simple-chatbot/lib/config.ts"
+          "target": "app/simple-chatbot/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/simple-chatbot/styles/simple-chatbot.css",
+          "path": "registry/new-york/blocks/simple-chatbot/simple-chatbot.css",
           "type": "registry:file",
-          "target": "app/simple-chatbot/styles/simple-chatbot.css"
+          "target": "app/simple-chatbot/simple-chatbot.css"
         }
       ]
     },
@@ -1548,24 +1330,24 @@
           "target": "app/how-it-works-section-v1/how-it-works-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v1/components/steps-grid.tsx",
+          "path": "registry/new-york/blocks/how-it-works-section-v1/steps-grid.tsx",
           "type": "registry:component",
-          "target": "app/how-it-works-section-v1/components/steps-grid.tsx"
+          "target": "app/how-it-works-section-v1/steps-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v1/components/step-card.tsx",
+          "path": "registry/new-york/blocks/how-it-works-section-v1/step-card.tsx",
           "type": "registry:component",
-          "target": "app/how-it-works-section-v1/components/step-card.tsx"
+          "target": "app/how-it-works-section-v1/step-card.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v1/lib/steps.ts",
+          "path": "registry/new-york/blocks/how-it-works-section-v1/steps.ts",
           "type": "registry:lib",
-          "target": "app/how-it-works-section-v1/lib/steps.ts"
+          "target": "app/how-it-works-section-v1/steps.ts"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v1/styles/how-it-works-section-v1.css",
+          "path": "registry/new-york/blocks/how-it-works-section-v1/how-it-works-section-v1.css",
           "type": "registry:file",
-          "target": "app/how-it-works-section-v1/styles/how-it-works-section-v1.css"
+          "target": "app/how-it-works-section-v1/how-it-works-section-v1.css"
         }
       ]
     },
@@ -1592,29 +1374,24 @@
           "target": "app/how-it-works-section-v2/how-it-works-section-v2.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v2/components/steps-grid.tsx",
+          "path": "registry/new-york/blocks/how-it-works-section-v2/steps-grid.tsx",
           "type": "registry:component",
-          "target": "app/how-it-works-section-v2/components/steps-grid.tsx"
+          "target": "app/how-it-works-section-v2/steps-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v2/components/step-card.tsx",
+          "path": "registry/new-york/blocks/how-it-works-section-v2/step-card.tsx",
           "type": "registry:component",
-          "target": "app/how-it-works-section-v2/components/step-card.tsx"
+          "target": "app/how-it-works-section-v2/step-card.tsx"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v2/hooks/use-hiw2-v2-animations.ts",
+          "path": "registry/new-york/blocks/how-it-works-section-v2/use-hiw2-v2-animations.ts",
           "type": "registry:hook",
-          "target": "app/how-it-works-section-v2/hooks/use-hiw2-v2-animations.ts"
+          "target": "app/how-it-works-section-v2/use-hiw2-v2-animations.ts"
         },
         {
-          "path": "registry/new-york/blocks/how-it-works-section-v2/lib/steps.ts",
+          "path": "registry/new-york/blocks/how-it-works-section-v2/steps.ts",
           "type": "registry:lib",
-          "target": "app/how-it-works-section-v2/lib/steps.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/how-it-works-section-v2/styles/how-it-works-section-v2.css",
-          "type": "registry:file",
-          "target": "app/how-it-works-section-v2/styles/how-it-works-section-v2.css"
+          "target": "app/how-it-works-section-v2/steps.ts"
         }
       ]
     },
@@ -1623,7 +1400,9 @@
       "type": "registry:block",
       "title": "Feature Section v1",
       "description": "Cream-toned six-cell grid with line-art SVG icons, monospace titles, and NO. indexes below sharp-cornered muted cards.",
-      "dependencies": ["geist"],
+      "dependencies": [
+        "geist"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -1637,29 +1416,24 @@
           "target": "app/feature-section-v1/feature-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/components/feature-grid.tsx",
+          "path": "registry/new-york/blocks/feature-section-v1/feature-grid.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v1/components/feature-grid.tsx"
+          "target": "app/feature-section-v1/feature-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/styles/feature-grid.css",
+          "path": "registry/new-york/blocks/feature-section-v1/feature-grid.css",
           "type": "registry:file",
-          "target": "app/feature-section-v1/styles/feature-grid.css"
+          "target": "app/feature-section-v1/feature-grid.css"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/components/feature-icons.tsx",
+          "path": "registry/new-york/blocks/feature-section-v1/feature-icons.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v1/components/feature-icons.tsx"
+          "target": "app/feature-section-v1/feature-icons.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v1/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v1/features.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v1/lib/features.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v1/styles/feature-section-v1.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v1/styles/feature-section-v1.css"
+          "target": "app/feature-section-v1/features.ts"
         }
       ]
     },
@@ -1667,14 +1441,9 @@
       "name": "feature-section-v2",
       "type": "registry:block",
       "title": "Feature Section v2",
-      "description": "Four-card feature grid — terminal run log, live analytics dashboard with an area chart, invite-teammate form with a walking cursor, and a ⌘K command palette with brand marks. Each card opens with a real top bar and follows the illustrations skill system.",
-      "dependencies": [
-        "recharts"
-      ],
+      "description": "Four-card feature grid with uppercase titles, descriptions, unique x.ai–style SVG illustrations, and scroll-triggered entrance animations per card.",
       "registryDependencies": [
-        "badge",
-        "chart",
-        "skeleton"
+        "card"
       ],
       "files": [
         {
@@ -1688,104 +1457,54 @@
           "target": "app/feature-section-v2/feature-section-v2.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v2/components/feature-showcase.tsx",
+          "path": "registry/new-york/blocks/feature-section-v2/feature-showcase.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v2/components/feature-showcase.tsx"
+          "target": "app/feature-section-v2/feature-showcase.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v2/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v2/feature-card-media.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/feature-card-media.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/feature-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/feature-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/workflow-automation-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/workflow-automation-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/real-time-analytics-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/real-time-analytics-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/access-control-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/access-control-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/integrations-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v2/integrations-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/use-in-view-once.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v2/lib/features.ts"
+          "target": "app/feature-section-v2/use-in-view-once.ts"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v2/styles/feature-section-v2.css",
+          "path": "registry/new-york/blocks/feature-section-v2/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v2/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v2/feature-section-v2.css",
           "type": "registry:file",
-          "target": "app/feature-section-v2/styles/feature-section-v2.css"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/components/cursor.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v2/components/cursor.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/components/workflow-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v2/components/workflow-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/components/analytics-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v2/components/analytics-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/components/access-control-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v2/components/access-control-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/components/integrations-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v2/components/integrations-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-fsv2-illustration-active.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v2/hooks/use-fsv2-illustration-active.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-workflow-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v2/hooks/use-workflow-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-analytics-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v2/hooks/use-analytics-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-access-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v2/hooks/use-access-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v2/hooks/use-integrations-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v2/hooks/use-integrations-animation.ts"
-        },
-        {
-          "path": "components/ui/svgs/githubDark.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/githubDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/githubLight.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/githubLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/openai.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/openai.tsx"
-        },
-        {
-          "path": "components/ui/svgs/openaiDark.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/openaiDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/supabase.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/supabase.tsx"
-        },
-        {
-          "path": "components/ui/svgs/vercel.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/vercel.tsx"
-        },
-        {
-          "path": "components/ui/svgs/vercelDark.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/vercelDark.tsx"
+          "target": "app/feature-section-v2/feature-section-v2.css"
         }
       ]
     },
@@ -1805,11 +1524,6 @@
       ],
       "files": [
         {
-          "path": "lib/block-image-url.ts",
-          "type": "registry:lib",
-          "target": "lib/block-image-url.ts"
-        },
-        {
           "path": "registry/new-york/blocks/hero-section-v4/page.tsx",
           "type": "registry:page",
           "target": "app/hero-section-v4/page.tsx"
@@ -1820,29 +1534,34 @@
           "target": "app/hero-section-v4/hero-section-v4.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v4/components/hero-v4-root.tsx",
+          "path": "registry/new-york/blocks/hero-section-v4/hero-v4-root.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v4/components/hero-v4-root.tsx"
+          "target": "app/hero-section-v4/hero-v4-root.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v4/components/hero-content.tsx",
+          "path": "registry/new-york/blocks/hero-section-v4/hero-content.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v4/components/hero-content.tsx"
+          "target": "app/hero-section-v4/hero-content.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v4/components/cta-buttons.tsx",
+          "path": "registry/new-york/blocks/hero-section-v4/cta-buttons.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v4/components/cta-buttons.tsx"
+          "target": "app/hero-section-v4/cta-buttons.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v4/components/hero-halftone-image.tsx",
+          "path": "registry/new-york/blocks/hero-section-v4/hero-halftone-image.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v4/components/hero-halftone-image.tsx"
+          "target": "app/hero-section-v4/hero-halftone-image.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v4/styles/hero-section-v4.css",
+          "path": "registry/new-york/blocks/hero-section-v4/hero-section-v4.css",
           "type": "registry:file",
-          "target": "app/hero-section-v4/styles/hero-section-v4.css"
+          "target": "app/hero-section-v4/hero-section-v4.css"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png"
         }
       ]
     },
@@ -1852,7 +1571,8 @@
       "title": "Hero Section v5",
       "description": "Centered hero with headline, description, CTA, and an embedded simple chatbot prompt card with animated typing placeholder.",
       "registryDependencies": [
-        "button"
+        "button",
+        "simple-chatbot"
       ],
       "files": [
         {
@@ -1864,31 +1584,6 @@
           "path": "registry/new-york/blocks/hero-section-v5/hero-section-v5.tsx",
           "type": "registry:component",
           "target": "app/hero-section-v5/hero-section-v5.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v5/components/simple-chatbot.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v5/components/simple-chatbot.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v5/components/prompt-input.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v5/components/prompt-input.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v5/hooks/use-placeholder-loop.ts",
-          "type": "registry:hook",
-          "target": "app/hero-section-v5/hooks/use-placeholder-loop.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v5/lib/config.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v5/lib/config.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v5/styles/simple-chatbot.css",
-          "type": "registry:file",
-          "target": "app/hero-section-v5/styles/simple-chatbot.css"
         }
       ]
     },
@@ -1917,34 +1612,39 @@
           "target": "app/hero-section-v6/hero-section-v6.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-root.tsx",
+          "path": "registry/new-york/blocks/hero-section-v6/hero-v6-root.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v6/components/hero-v6-root.tsx"
+          "target": "app/hero-section-v6/hero-v6-root.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/components/hero-content.tsx",
+          "path": "registry/new-york/blocks/hero-section-v6/hero-content.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v6/components/hero-content.tsx"
+          "target": "app/hero-section-v6/hero-content.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/components/cta-buttons.tsx",
+          "path": "registry/new-york/blocks/hero-section-v6/cta-buttons.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v6/components/cta-buttons.tsx"
+          "target": "app/hero-section-v6/cta-buttons.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-image.tsx",
+          "path": "registry/new-york/blocks/hero-section-v6/hero-v6-image.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v6/components/hero-v6-image.tsx"
+          "target": "app/hero-section-v6/hero-v6-image.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/components/shader-image-bg.tsx",
+          "path": "registry/new-york/blocks/hero-section-v6/shader-image-bg.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v6/components/shader-image-bg.tsx"
+          "target": "app/hero-section-v6/shader-image-bg.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v6/styles/hero-section-v6.css",
+          "path": "registry/new-york/blocks/hero-section-v6/hero-section-v6.css",
           "type": "registry:file",
-          "target": "app/hero-section-v6/styles/hero-section-v6.css"
+          "target": "app/hero-section-v6/hero-section-v6.css"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v6/hero-section-v6.jpg",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v6/hero-section-v6.jpg"
         }
       ]
     },
@@ -1952,9 +1652,14 @@
       "name": "hero-section-v7",
       "type": "registry:block",
       "title": "Hero Section v7",
-      "description": "Centered hero with serif headline, mono description, Monad-style flip pill CTAs, animated pipeline demo, and authentication brands marquee.",
-      "dependencies": ["gsap", "@phosphor-icons/react"],
-      "registryDependencies": [],
+      "description": "Centered hero with serif headline, mono description, Monad-style flip pill CTAs, animated food-delivery demo, and authentication brands marquee.",
+      "dependencies": [
+        "gsap",
+        "@phosphor-icons/react"
+      ],
+      "registryDependencies": [
+        "brands-section-v6"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v7/page.tsx",
@@ -1967,149 +1672,120 @@
           "target": "app/hero-section-v7/hero-section-v7.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/components/hero-v7-root.tsx",
+          "path": "registry/new-york/blocks/hero-section-v7/hero-v7-root.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v7/components/hero-v7-root.tsx"
+          "target": "app/hero-section-v7/hero-v7-root.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/components/hero-content.tsx",
+          "path": "registry/new-york/blocks/hero-section-v7/hero-content.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v7/components/hero-content.tsx"
+          "target": "app/hero-section-v7/hero-content.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/components/cta-buttons.tsx",
+          "path": "registry/new-york/blocks/hero-section-v7/cta-buttons.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v7/components/cta-buttons.tsx"
+          "target": "app/hero-section-v7/cta-buttons.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/components/pipeline-demo.tsx",
+          "path": "registry/new-york/blocks/hero-section-v7/pipeline-demo.tsx",
           "type": "registry:component",
-          "target": "app/hero-section-v7/components/pipeline-demo.tsx"
+          "target": "app/hero-section-v7/pipeline-demo.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/components/brands-section-v6.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v7/components/brands-section-v6.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v7/components/marquee.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v7/components/marquee.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v7/components/brand-logo.tsx",
-          "type": "registry:component",
-          "target": "app/hero-section-v7/components/brand-logo.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/hero-section-v7/hooks/use-pipeline-demo-animation.ts",
+          "path": "registry/new-york/blocks/hero-section-v7/use-pipeline-demo-animation.ts",
           "type": "registry:hook",
-          "target": "app/hero-section-v7/hooks/use-pipeline-demo-animation.ts"
+          "target": "app/hero-section-v7/use-pipeline-demo-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/lib/config.ts",
+          "path": "registry/new-york/blocks/hero-section-v7/config.ts",
           "type": "registry:lib",
-          "target": "app/hero-section-v7/lib/config.ts"
+          "target": "app/hero-section-v7/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/lib/pipeline-config.ts",
+          "path": "registry/new-york/blocks/hero-section-v7/pipeline-config.ts",
           "type": "registry:lib",
-          "target": "app/hero-section-v7/lib/pipeline-config.ts"
+          "target": "app/hero-section-v7/pipeline-config.ts"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/lib/brands.ts",
-          "type": "registry:lib",
-          "target": "app/hero-section-v7/lib/brands.ts"
+          "path": "components/ui/svgs/doordash.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/doordash.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/styles/hero-section-v7.css",
+          "path": "components/ui/svgs/ubereats.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/ubereats.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v7/hero-section-v7.css",
           "type": "registry:file",
-          "target": "app/hero-section-v7/styles/hero-section-v7.css"
+          "target": "app/hero-section-v7/hero-section-v7.css"
+        }
+      ]
+    },
+    {
+      "name": "hero-section-v8",
+      "type": "registry:block",
+      "title": "Hero Section v8",
+      "description": "Centered hero with headline, description, CTAs, pixel-art scene preview, brand carousel social proof, and centered Simple Chatbot prompt overlay.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "button",
+        "simple-chatbot",
+        "brands-section-v1"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v8/page.tsx"
         },
         {
-          "path": "registry/new-york/blocks/hero-section-v7/styles/brands-section-v6.css",
+          "path": "registry/new-york/blocks/hero-section-v8/hero-section-v8.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v8/hero-section-v8.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/cta-buttons.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v8/cta-buttons.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/hero-v8-scene.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v8/hero-v8-scene.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/hero-v8-brand-carousel.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v8/hero-v8-brand-carousel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/hero-v8-brand-cell.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v8/hero-v8-brand-cell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/use-brand-carousel-flip.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v8/use-brand-carousel-flip.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/carousel-timing.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v8/carousel-timing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v8/hero-section-v8.css",
           "type": "registry:file",
-          "target": "app/hero-section-v7/styles/brands-section-v6.css"
+          "target": "app/hero-section-v8/hero-section-v8.css"
         },
         {
-          "path": "components/ui/svgs/salesforce.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/salesforce.tsx"
-        },
-        {
-          "path": "components/ui/svgs/slack.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/slack.tsx"
-        },
-        {
-          "path": "components/ui/svgs/stripe.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/stripe.tsx"
-        },
-        {
-          "path": "components/ui/svgs/clerkWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/clerkWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/clerkWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/clerkWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
-        },
-        {
-          "path": "components/ui/svgs/workos.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/workos.tsx"
-        },
-        {
-          "path": "components/ui/svgs/workosLight.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/workosLight.tsx"
-        },
-        {
-          "path": "components/ui/svgs/keycloak.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/keycloak.tsx"
-        },
-        {
-          "path": "components/ui/svgs/bitwarden.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/bitwarden.tsx"
-        },
-        {
-          "path": "components/ui/svgs/authjs.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/authjs.tsx"
-        },
-        {
-          "path": "components/ui/svgs/auth0.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/auth0.tsx"
-        },
-        {
-          "path": "components/ui/svgs/authy.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/authy.tsx"
-        },
-        {
-          "path": "components/ui/svgs/twilio.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/twilio.tsx"
-        },
-        {
-          "path": "components/ui/svgs/jwt.tsx",
-          "type": "registry:component",
-          "target": "components/ui/svgs/jwt.tsx"
+          "path": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png"
         }
       ]
     },
@@ -2156,29 +1832,29 @@
           "target": "app/stats-section-v2/stats-section-v2.tsx"
         },
         {
-          "path": "registry/new-york/blocks/stats-section-v2/components/downloads-panel.tsx",
+          "path": "registry/new-york/blocks/stats-section-v2/downloads-panel.tsx",
           "type": "registry:component",
-          "target": "app/stats-section-v2/components/downloads-panel.tsx"
+          "target": "app/stats-section-v2/downloads-panel.tsx"
         },
         {
-          "path": "registry/new-york/blocks/stats-section-v2/components/stat-cell.tsx",
+          "path": "registry/new-york/blocks/stats-section-v2/stat-cell.tsx",
           "type": "registry:component",
-          "target": "app/stats-section-v2/components/stat-cell.tsx"
+          "target": "app/stats-section-v2/stat-cell.tsx"
         },
         {
-          "path": "registry/new-york/blocks/stats-section-v2/lib/series.ts",
+          "path": "registry/new-york/blocks/stats-section-v2/series.ts",
           "type": "registry:lib",
-          "target": "app/stats-section-v2/lib/series.ts"
+          "target": "app/stats-section-v2/series.ts"
         },
         {
-          "path": "registry/new-york/blocks/stats-section-v2/lib/api.ts",
+          "path": "registry/new-york/blocks/stats-section-v2/api.ts",
           "type": "registry:lib",
-          "target": "app/stats-section-v2/lib/api.ts"
+          "target": "app/stats-section-v2/api.ts"
         },
         {
-          "path": "registry/new-york/blocks/stats-section-v2/hooks/use-count-up.ts",
+          "path": "registry/new-york/blocks/stats-section-v2/use-count-up.ts",
           "type": "registry:hook",
-          "target": "app/stats-section-v2/hooks/use-count-up.ts"
+          "target": "app/stats-section-v2/use-count-up.ts"
         },
         {
           "path": "components/ui/svgs/nextjsIconDark.tsx",
@@ -2236,24 +1912,24 @@
           "target": "app/code-block/code-block.tsx"
         },
         {
-          "path": "registry/new-york/blocks/code-block/components/code-tabs.tsx",
+          "path": "registry/new-york/blocks/code-block/code-tabs.tsx",
           "type": "registry:component",
-          "target": "app/code-block/components/code-tabs.tsx"
+          "target": "app/code-block/code-tabs.tsx"
         },
         {
-          "path": "registry/new-york/blocks/code-block/hooks/use-code-block.ts",
+          "path": "registry/new-york/blocks/code-block/use-code-block.ts",
           "type": "registry:hook",
-          "target": "app/code-block/hooks/use-code-block.ts"
+          "target": "app/code-block/use-code-block.ts"
         },
         {
-          "path": "registry/new-york/blocks/code-block/lib/config.ts",
+          "path": "registry/new-york/blocks/code-block/config.ts",
           "type": "registry:lib",
-          "target": "app/code-block/lib/config.ts"
+          "target": "app/code-block/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/code-block/styles/code-block.css",
+          "path": "registry/new-york/blocks/code-block/code-block.css",
           "type": "registry:file",
-          "target": "app/code-block/styles/code-block.css"
+          "target": "app/code-block/code-block.css"
         }
       ]
     },
@@ -2275,24 +1951,24 @@
           "target": "app/spreadsheet/spreadsheet.tsx"
         },
         {
-          "path": "registry/new-york/blocks/spreadsheet/components/cursor.tsx",
+          "path": "registry/new-york/blocks/spreadsheet/cursor.tsx",
           "type": "registry:component",
-          "target": "app/spreadsheet/components/cursor.tsx"
+          "target": "app/spreadsheet/cursor.tsx"
         },
         {
-          "path": "registry/new-york/blocks/spreadsheet/hooks/use-spreadsheet-animation.ts",
+          "path": "registry/new-york/blocks/spreadsheet/use-spreadsheet-animation.ts",
           "type": "registry:hook",
-          "target": "app/spreadsheet/hooks/use-spreadsheet-animation.ts"
+          "target": "app/spreadsheet/use-spreadsheet-animation.ts"
         },
         {
-          "path": "registry/new-york/blocks/spreadsheet/lib/config.ts",
+          "path": "registry/new-york/blocks/spreadsheet/config.ts",
           "type": "registry:lib",
-          "target": "app/spreadsheet/lib/config.ts"
+          "target": "app/spreadsheet/config.ts"
         },
         {
-          "path": "registry/new-york/blocks/spreadsheet/styles/spreadsheet.css",
+          "path": "registry/new-york/blocks/spreadsheet/spreadsheet.css",
           "type": "registry:file",
-          "target": "app/spreadsheet/styles/spreadsheet.css"
+          "target": "app/spreadsheet/spreadsheet.css"
         }
       ]
     },
@@ -2300,9 +1976,11 @@
       "name": "google-chrome",
       "type": "registry:block",
       "title": "Google Chrome (macOS)",
-      "description": "macOS Google Chrome window mock with tab strip, omnibox, bookmarks bar, and empty viewport—light and dark mode via .dark ancestor.",
+      "description": "macOS Google Chrome window mock with tab strip, omnibox, bookmarks bar, and Google new-tab preview (light/dark) in the viewport.",
       "registryDependencies": [],
-      "dependencies": ["@phosphor-icons/react"],
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/google-chrome/page.tsx",
@@ -2315,49 +1993,74 @@
           "target": "app/google-chrome/google-chrome.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/components/browser-viewport.tsx",
+          "path": "registry/new-york/blocks/google-chrome/browser-viewport.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome/components/browser-viewport.tsx"
+          "target": "app/google-chrome/browser-viewport.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/components/traffic-lights.tsx",
+          "path": "registry/new-york/blocks/google-chrome/chrome-viewport-default.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome/components/traffic-lights.tsx"
+          "target": "app/google-chrome/chrome-viewport-default.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/components/profile-avatar.tsx",
+          "path": "registry/new-york/blocks/google-chrome/page-loading-bar.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome/components/profile-avatar.tsx"
+          "target": "app/google-chrome/page-loading-bar.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/components/apps-icon.tsx",
-          "type": "registry:component",
-          "target": "app/google-chrome/components/apps-icon.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome/components/omnibox-typing-text.tsx",
-          "type": "registry:component",
-          "target": "app/google-chrome/components/omnibox-typing-text.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome/hooks/use-omnibox-typing.ts",
+          "path": "registry/new-york/blocks/google-chrome/use-simulated-page-load.ts",
           "type": "registry:hook",
-          "target": "app/google-chrome/hooks/use-omnibox-typing.ts"
+          "target": "app/google-chrome/use-simulated-page-load.ts"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/lib/config.ts",
-          "type": "registry:lib",
-          "target": "app/google-chrome/lib/config.ts"
+          "path": "registry/new-york/blocks/google-chrome/google-home-preview.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/google-home-preview.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome/lib/typing-animation.ts",
-          "type": "registry:lib",
-          "target": "app/google-chrome/lib/typing-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome/styles/google-chrome.css",
+          "path": "registry/new-york/blocks/google-chrome/google-home-preview.css",
           "type": "registry:file",
-          "target": "app/google-chrome/styles/google-chrome.css"
+          "target": "app/google-chrome/google-home-preview.css"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/traffic-lights.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/traffic-lights.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/profile-avatar.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/profile-avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/apps-icon.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/apps-icon.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/omnibox-typing-text.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome/omnibox-typing-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/use-omnibox-typing.ts",
+          "type": "registry:hook",
+          "target": "app/google-chrome/use-omnibox-typing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/config.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/typing-animation.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome/typing-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome/google-chrome.css",
+          "type": "registry:file",
+          "target": "app/google-chrome/google-chrome.css"
         }
       ]
     },
@@ -2365,8 +2068,10 @@
       "name": "google-chrome-windows",
       "type": "registry:block",
       "title": "Google Chrome (Windows)",
-      "description": "Windows Google Chrome window mock with title-bar tabs, Win32 controls, omnibox with Google G, and empty viewport—light and dark via .dark ancestor.",
-      "dependencies": ["@phosphor-icons/react"],
+      "description": "Windows Google Chrome window mock with title-bar tabs, Win32 controls, omnibox with Google G, and Google new-tab preview (light/dark) in the viewport.",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -2380,49 +2085,100 @@
           "target": "app/google-chrome-windows/google-chrome-windows.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/components/browser-viewport.tsx",
+          "path": "registry/new-york/blocks/google-chrome-windows/browser-viewport.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome-windows/components/browser-viewport.tsx"
+          "target": "app/google-chrome-windows/browser-viewport.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/components/window-controls.tsx",
+          "path": "registry/new-york/blocks/google-chrome-windows/chrome-viewport-default.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome-windows/components/window-controls.tsx"
+          "target": "app/google-chrome-windows/chrome-viewport-default.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/components/profile-avatar.tsx",
+          "path": "registry/new-york/blocks/google-chrome-windows/page-loading-bar.tsx",
           "type": "registry:component",
-          "target": "app/google-chrome-windows/components/profile-avatar.tsx"
+          "target": "app/google-chrome-windows/page-loading-bar.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/components/google-g-icon.tsx",
-          "type": "registry:component",
-          "target": "app/google-chrome-windows/components/google-g-icon.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome-windows/components/omnibox-typing-text.tsx",
-          "type": "registry:component",
-          "target": "app/google-chrome-windows/components/omnibox-typing-text.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome-windows/hooks/use-omnibox-typing.ts",
+          "path": "registry/new-york/blocks/google-chrome-windows/use-simulated-page-load.ts",
           "type": "registry:hook",
-          "target": "app/google-chrome-windows/hooks/use-omnibox-typing.ts"
+          "target": "app/google-chrome-windows/use-simulated-page-load.ts"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/lib/config.ts",
-          "type": "registry:lib",
-          "target": "app/google-chrome-windows/lib/config.ts"
+          "path": "registry/new-york/blocks/google-chrome-windows/google-home-preview.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/google-home-preview.tsx"
         },
         {
-          "path": "registry/new-york/blocks/google-chrome-windows/lib/typing-animation.ts",
-          "type": "registry:lib",
-          "target": "app/google-chrome-windows/lib/typing-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/google-chrome-windows/styles/google-chrome-windows.css",
+          "path": "registry/new-york/blocks/google-chrome-windows/google-home-preview.css",
           "type": "registry:file",
-          "target": "app/google-chrome-windows/styles/google-chrome-windows.css"
+          "target": "app/google-chrome-windows/google-home-preview.css"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/window-controls.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/window-controls.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/profile-avatar.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/profile-avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/google-g-icon.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/google-g-icon.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/omnibox-typing-text.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows/omnibox-typing-text.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/use-omnibox-typing.ts",
+          "type": "registry:hook",
+          "target": "app/google-chrome-windows/use-omnibox-typing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/config.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome-windows/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/typing-animation.ts",
+          "type": "registry:lib",
+          "target": "app/google-chrome-windows/typing-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows/google-chrome-windows.css",
+          "type": "registry:file",
+          "target": "app/google-chrome-windows/google-chrome-windows.css"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome-windows-with-video",
+      "type": "registry:block",
+      "title": "Google Chrome (Windows, w/ video)",
+      "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
+      "registryDependencies": [
+        "google-chrome-windows"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-video/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome-windows-with-video/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-video/google-chrome-windows-with-video.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows-with-video/google-chrome-windows-with-video.tsx"
+        },
+        {
+          "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+          "type": "registry:file",
+          "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
         }
       ]
     },
@@ -2444,14 +2200,66 @@
           "target": "app/macbook-pro/macbook-pro.tsx"
         },
         {
-          "path": "registry/new-york/blocks/macbook-pro/components/macbook-screen.tsx",
+          "path": "registry/new-york/blocks/macbook-pro/macbook-screen.tsx",
           "type": "registry:component",
-          "target": "app/macbook-pro/components/macbook-screen.tsx"
+          "target": "app/macbook-pro/macbook-screen.tsx"
         },
         {
-          "path": "registry/new-york/blocks/macbook-pro/styles/macbook-pro.css",
+          "path": "registry/new-york/blocks/macbook-pro/macbook-pro.css",
           "type": "registry:file",
-          "target": "app/macbook-pro/styles/macbook-pro.css"
+          "target": "app/macbook-pro/macbook-pro.css"
+        }
+      ]
+    },
+    {
+      "name": "macbook-pro-with-image",
+      "type": "registry:block",
+      "title": "MacBook Pro (w/ image)",
+      "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+      "registryDependencies": [
+        "macbook-pro"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/macbook-pro-with-image/page.tsx",
+          "type": "registry:page",
+          "target": "app/macbook-pro-with-image/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/macbook-pro-with-image/macbook-pro-with-image.tsx",
+          "type": "registry:component",
+          "target": "app/macbook-pro-with-image/macbook-pro-with-image.tsx"
+        },
+        {
+          "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png"
+        }
+      ]
+    },
+    {
+      "name": "macbook-pro-with-video",
+      "type": "registry:block",
+      "title": "MacBook Pro (w/ video)",
+      "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+      "registryDependencies": [
+        "macbook-pro"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/macbook-pro-with-video/page.tsx",
+          "type": "registry:page",
+          "target": "app/macbook-pro-with-video/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/macbook-pro-with-video/macbook-pro-with-video.tsx",
+          "type": "registry:component",
+          "target": "app/macbook-pro-with-video/macbook-pro-with-video.tsx"
+        },
+        {
+          "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+          "type": "registry:file",
+          "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
         }
       ]
     },
@@ -2499,14 +2307,171 @@
           "target": "app/faq-section-v1/faq-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/faq-section-v1/components/faq-accordion.tsx",
+          "path": "registry/new-york/blocks/faq-section-v1/faq-accordion.tsx",
           "type": "registry:component",
-          "target": "app/faq-section-v1/components/faq-accordion.tsx"
+          "target": "app/faq-section-v1/faq-accordion.tsx"
         },
         {
-          "path": "registry/new-york/blocks/faq-section-v1/lib/faq-content.ts",
+          "path": "registry/new-york/blocks/faq-section-v1/faq-content.ts",
           "type": "registry:lib",
-          "target": "app/faq-section-v1/lib/faq-content.ts"
+          "target": "app/faq-section-v1/faq-content.ts"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v1",
+      "type": "registry:block",
+      "title": "Testimonials Section v1",
+      "description": "Left-aligned client quotes in a horizontal carousel with accent dividers, initials avatars, and bottom-left chevron navigation.",
+      "registryDependencies": [
+        "carousel",
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/testimonials-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v1/testimonials-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/testimonials-carousel.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v1/testimonials-carousel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/testimonial-card.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v1/testimonial-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v1/testimonials-content.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v1/testimonials-section-v1.css",
+          "type": "registry:style",
+          "target": "app/testimonials-section-v1/testimonials-section-v1.css"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_1.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_1.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_2.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_2.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_3.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_3.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_4.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_4.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_5.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_5.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v1/avatar_6.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v1/avatar_6.png"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v2",
+      "type": "registry:block",
+      "title": "Testimonials Section v2",
+      "description": "Three-column bordered quotes with serif italic text, square avatars, and company wordmarks.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v2/testimonials-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v2/testimonials-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v2/testimonial-column.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v2/testimonial-column.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v2/company-logo.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v2/company-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v2/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v2/testimonials-content.ts"
+        },
+        {
+          "path": "components/ui/svgs/stripeWordmark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/stripeWordmark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/stripeWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/stripeWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/githubWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/githubWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v2/avatar_2.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v2/avatar_2.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v2/avatar_5.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v2/avatar_5.png"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v2/avatar_6.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v2/avatar_6.png"
         }
       ]
     },
@@ -2514,20 +2479,12 @@
       "name": "feature-section-v3",
       "type": "registry:block",
       "title": "Feature Section v3",
-      "description": "Roomy headline with numbered tags on key phrases, plus three looping mini UIs for funnel health, friction, and experiment progress.",
+      "description": "Roomy headline with numbered tags on key phrases, plus three theme-aware SVG feature illustrations for funnel health, friction, and experiment impact.",
       "dependencies": [
-        "geist@^1.7.0",
-        "recharts"
+        "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "badge",
-        "card",
-        "chart",
-        "label",
-        "progress",
-        "separator",
-        "skeleton",
-        "table"
+        "card"
       ],
       "files": [
         {
@@ -2541,69 +2498,49 @@
           "target": "app/feature-section-v3/feature-section-v3.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/components/feature-showcase.tsx",
+          "path": "registry/new-york/blocks/feature-section-v3/feature-showcase.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v3/components/feature-showcase.tsx"
+          "target": "app/feature-section-v3/feature-showcase.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/components/cursor.tsx",
+          "path": "registry/new-york/blocks/feature-section-v3/feature-illustration.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v3/components/cursor.tsx"
+          "target": "app/feature-section-v3/feature-illustration.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/components/funnel-illustration.tsx",
+          "path": "registry/new-york/blocks/feature-section-v3/feature-card-media.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v3/components/funnel-illustration.tsx"
+          "target": "app/feature-section-v3/feature-card-media.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/components/dropoff-illustration.tsx",
+          "path": "registry/new-york/blocks/feature-section-v3/funnel-illustration.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v3/components/dropoff-illustration.tsx"
+          "target": "app/feature-section-v3/funnel-illustration.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/components/experiment-illustration.tsx",
+          "path": "registry/new-york/blocks/feature-section-v3/dropoff-illustration.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v3/components/experiment-illustration.tsx"
+          "target": "app/feature-section-v3/dropoff-illustration.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-fsv3-illustration-active.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v3/hooks/use-fsv3-illustration-active.ts"
+          "path": "registry/new-york/blocks/feature-section-v3/experiment-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/experiment-illustration.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-funnel-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v3/hooks/use-funnel-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-dropoff-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v3/hooks/use-dropoff-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v3/hooks/use-experiment-animation.ts",
-          "type": "registry:hook",
-          "target": "app/feature-section-v3/hooks/use-experiment-animation.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v3/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v3/use-in-view-once.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v3/lib/features.ts"
+          "target": "app/feature-section-v3/use-in-view-once.ts"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v3/styles/feature-section-v3.css",
+          "path": "registry/new-york/blocks/feature-section-v3/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v3/features.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v3/feature-section-v3.css",
           "type": "registry:file",
-          "target": "app/feature-section-v3/styles/feature-section-v3.css"
-        },
-        {
-          "path": "components/ui/svgs/chrome.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/chrome.tsx"
-        },
-        {
-          "path": "components/ui/svgs/safari.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/svgs/safari.tsx"
+          "target": "app/feature-section-v3/feature-section-v3.css"
         }
       ]
     },
@@ -2615,7 +2552,10 @@
       "dependencies": [
         "geist@^1.7.0"
       ],
-      "registryDependencies": ["badge", "card"],
+      "registryDependencies": [
+        "badge",
+        "card"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/feature-section-v4/page.tsx",
@@ -2628,24 +2568,34 @@
           "target": "app/feature-section-v4/feature-section-v4.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v4/components/feature-grid.tsx",
+          "path": "registry/new-york/blocks/feature-section-v4/feature-grid.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v4/components/feature-grid.tsx"
+          "target": "app/feature-section-v4/feature-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v4/styles/feature-grid.css",
+          "path": "registry/new-york/blocks/feature-section-v4/feature-grid.css",
           "type": "registry:file",
-          "target": "app/feature-section-v4/styles/feature-grid.css"
+          "target": "app/feature-section-v4/feature-grid.css"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v4/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v4/features.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v4/lib/features.ts"
+          "target": "app/feature-section-v4/features.ts"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v4/styles/feature-section-v4.css",
+          "path": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png",
           "type": "registry:file",
-          "target": "app/feature-section-v4/styles/feature-section-v4.css"
+          "target": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png"
+        },
+        {
+          "path": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png"
+        },
+        {
+          "path": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png"
         }
       ]
     },
@@ -2653,8 +2603,10 @@
       "name": "feature-section-v5",
       "type": "registry:block",
       "title": "Feature Section v5",
-      "description": "Centered Geist Pixel headline with a bento grid of four static cards—balanced title and body typography on muted surfaces.",
-      "dependencies": ["geist"],
+      "description": "Centered sans headline with a bento grid of four static cards—balanced title and body typography on muted surfaces.",
+      "dependencies": [
+        "geist"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -2668,24 +2620,19 @@
           "target": "app/feature-section-v5/feature-section-v5.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v5/components/feature-grid.tsx",
+          "path": "registry/new-york/blocks/feature-section-v5/feature-grid.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v5/components/feature-grid.tsx"
+          "target": "app/feature-section-v5/feature-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v5/styles/feature-grid.css",
+          "path": "registry/new-york/blocks/feature-section-v5/feature-grid.css",
           "type": "registry:file",
-          "target": "app/feature-section-v5/styles/feature-grid.css"
+          "target": "app/feature-section-v5/feature-grid.css"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v5/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v5/features.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v5/lib/features.ts"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v5/styles/feature-section-v5.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v5/styles/feature-section-v5.css"
+          "target": "app/feature-section-v5/features.ts"
         }
       ]
     },
@@ -2693,9 +2640,10 @@
       "name": "feature-section-v6",
       "type": "registry:block",
       "title": "Feature Section v6",
-      "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed Paper MeshGradient shader background.",
+      "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed black-and-white Paper Warp (checks) shader background.",
       "dependencies": [
-        "@paper-design/shaders-react"
+        "@paper-design/shaders-react",
+        "geist"
       ],
       "registryDependencies": [],
       "files": [
@@ -2710,29 +2658,96 @@
           "target": "app/feature-section-v6/feature-section-v6.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v6/components/feature-grid.tsx",
+          "path": "registry/new-york/blocks/feature-section-v6/feature-grid.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v6/components/feature-grid.tsx"
+          "target": "app/feature-section-v6/feature-grid.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v6/components/feature-section-v6-mesh-bg.tsx",
+          "path": "registry/new-york/blocks/feature-section-v6/feature-section-v6-mesh-bg.tsx",
           "type": "registry:component",
-          "target": "app/feature-section-v6/components/feature-section-v6-mesh-bg.tsx"
+          "target": "app/feature-section-v6/feature-section-v6-mesh-bg.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v6/styles/feature-grid.css",
+          "path": "registry/new-york/blocks/feature-section-v6/feature-grid.css",
           "type": "registry:file",
-          "target": "app/feature-section-v6/styles/feature-grid.css"
+          "target": "app/feature-section-v6/feature-grid.css"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v6/lib/features.ts",
+          "path": "registry/new-york/blocks/feature-section-v6/features.ts",
           "type": "registry:lib",
-          "target": "app/feature-section-v6/lib/features.ts"
+          "target": "app/feature-section-v6/features.ts"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v7",
+      "type": "registry:block",
+      "title": "Feature Section v7",
+      "description": "Three-column travel product section with itinerary, fare, and offline library copy, composed theme-aware SVG illustrations, scroll-triggered entrance animations, and outline pill CTAs.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v7/page.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v6/styles/feature-section-v6.css",
-          "type": "registry:file",
-          "target": "app/feature-section-v6/styles/feature-section-v6.css"
+          "path": "registry/new-york/blocks/feature-section-v7/feature-section-v7.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/feature-section-v7.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/feature-section-v7.css",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/feature-section-v7.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/feature-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/feature-card-corners.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/feature-card-corners.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/feature-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/feature-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/illustration-slot.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/illustration-slot.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/trip-planner-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/trip-planner-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/smart-search-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/smart-search-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/guides-memories-illustration.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v7/guides-memories-illustration.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/use-in-view-once.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v7/use-in-view-once.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v7/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v7/features.ts"
         }
       ]
     },
@@ -2758,14 +2773,14 @@
           "target": "app/pricing-section-v1/pricing-section-v1.tsx"
         },
         {
-          "path": "registry/new-york/blocks/pricing-section-v1/components/pricing-card.tsx",
+          "path": "registry/new-york/blocks/pricing-section-v1/pricing-card.tsx",
           "type": "registry:component",
-          "target": "app/pricing-section-v1/components/pricing-card.tsx"
+          "target": "app/pricing-section-v1/pricing-card.tsx"
         },
         {
-          "path": "registry/new-york/blocks/pricing-section-v1/lib/pricing-plans.ts",
+          "path": "registry/new-york/blocks/pricing-section-v1/pricing-plans.ts",
           "type": "registry:lib",
-          "target": "app/pricing-section-v1/lib/pricing-plans.ts"
+          "target": "app/pricing-section-v1/pricing-plans.ts"
         }
       ]
     }

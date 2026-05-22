@@ -1,11 +1,11 @@
 import { ArrowRight } from "lucide-react"
 
-import ChatBot from "./components/chat-bot"
+import ChatBot from "../chat-bot/chat-bot"
 import { Badge } from "@/components/ui/badge"
 
 export default function HeroSectionV3() {
   return (
-    <section className="py-10 md:py-14 lg:py-16">
+    <section className="pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
           <Badge variant="secondary" className="text-sm italic">
@@ -31,8 +31,8 @@ export default function HeroSectionV3() {
         </div>
       </div>
 
-      <div className="px-4 pt-4">
-        <ChatBot />
+      <div className="mx-auto max-w-6xl px-4 pt-4">
+        <ChatBot className="mx-auto max-w-3xl py-10" />
       </div>
     </section>
   )

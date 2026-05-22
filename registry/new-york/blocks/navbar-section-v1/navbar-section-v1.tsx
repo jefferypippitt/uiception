@@ -22,23 +22,23 @@ function BrandLogo({ className }: { className?: string }) {
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
-    <div className="flex size-4 flex-col items-center justify-center gap-[4px]">
+    <div className="flex size-4 flex-col items-center justify-center gap-1">
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "translate-y-[5px] rotate-45" : "",
+          open ? "translate-y-[5px] rotate-45" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "opacity-0 scale-x-0" : "",
+          open ? "scale-x-0 opacity-0" : ""
         )}
       />
       <span
         className={cn(
           "block h-px w-4 bg-current transition-all duration-300 ease-in-out",
-          open ? "-translate-y-[5px] -rotate-45" : "",
+          open ? "-translate-y-[5px] -rotate-45" : ""
         )}
       />
     </div>
@@ -51,7 +51,8 @@ const NAV_LINKS = [
   { label: "Sign in", href: "#", inPage: true },
 ]
 
-const linkClass = "text-muted-foreground text-sm transition-colors hover:text-foreground"
+const linkClass =
+  "text-muted-foreground text-sm transition-colors hover:text-foreground"
 
 export default function NavbarSectionV1() {
   const [scrolled, setScrolled] = useState(false)
@@ -78,7 +79,7 @@ export default function NavbarSectionV1() {
       ref={headerRef}
       className={cn(
         "sticky top-0 z-40 border-b bg-background/80 backdrop-blur transition-colors duration-300",
-        scrolled || menuOpen ? "border-border" : "border-transparent",
+        scrolled || menuOpen ? "border-border" : "border-transparent"
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
@@ -91,7 +92,6 @@ export default function NavbarSectionV1() {
           <span className="text-lg tracking-tight">uiception</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex">
           {NAV_LINKS.map(({ label, href, external, inPage }) => (
             <a
@@ -104,12 +104,14 @@ export default function NavbarSectionV1() {
               {label}
             </a>
           ))}
-          <Button asChild className="h-8 gap-1 rounded-4xl px-3 active:not-aria-[haspopup]:translate-y-px">
+          <Button
+            asChild
+            className="h-8 gap-1 rounded-4xl px-3 active:not-aria-[haspopup]:translate-y-px"
+          >
             <Link href="#">Get started</Link>
           </Button>
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           className="text-muted-foreground transition-colors hover:text-foreground md:hidden"
@@ -119,11 +121,10 @@ export default function NavbarSectionV1() {
         </button>
       </div>
 
-      {/* Mobile menu — grid-rows trick for smooth height transition */}
       <div
         className={cn(
           "grid transition-all duration-300 ease-in-out md:hidden",
-          menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+          menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         )}
       >
         <div className="overflow-hidden">
@@ -135,11 +136,18 @@ export default function NavbarSectionV1() {
                   className={cn(
                     linkClass,
                     "py-2 transition-all duration-300",
-                    menuOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
+                    menuOpen
+                      ? "translate-y-0 opacity-100"
+                      : "-translate-y-2 opacity-0"
                   )}
                   href={href}
-                  onClick={(e) => { if (inPage) e.preventDefault(); setMenuOpen(false) }}
-                  style={{ transitionDelay: menuOpen ? `${i * 40 + 60}ms` : "0ms" }}
+                  onClick={(e) => {
+                    if (inPage) e.preventDefault()
+                    setMenuOpen(false)
+                  }}
+                  style={{
+                    transitionDelay: menuOpen ? `${i * 40 + 60}ms` : "0ms",
+                  }}
                   {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                 >
                   {label}
@@ -148,11 +156,20 @@ export default function NavbarSectionV1() {
               <div
                 className={cn(
                   "pt-2 transition-all duration-300",
-                  menuOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
+                  menuOpen
+                    ? "translate-y-0 opacity-100"
+                    : "-translate-y-2 opacity-0"
                 )}
-                style={{ transitionDelay: menuOpen ? `${NAV_LINKS.length * 40 + 60}ms` : "0ms" }}
+                style={{
+                  transitionDelay: menuOpen
+                    ? `${NAV_LINKS.length * 40 + 60}ms`
+                    : "0ms",
+                }}
               >
-                <Button asChild className="h-8 rounded-4xl px-3 active:not-aria-[haspopup]:translate-y-px">
+                <Button
+                  asChild
+                  className="h-8 rounded-4xl px-3 active:not-aria-[haspopup]:translate-y-px"
+                >
                   <Link href="#" onClick={() => setMenuOpen(false)}>
                     Get started
                   </Link>

@@ -1,0 +1,107 @@
+/* google-chrome-windows — theme tokens, caret blink, viewport slot children */
+
+.gcw-root {
+  --gcw-chrome-bg: #dee1e6;
+  --gcw-border: rgb(0 0 0 / 0.14);
+  --gcw-ring: rgb(0 0 0 / 0.06);
+  --gcw-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.14);
+  --gcw-tab-bg: #ffffff;
+  --gcw-tab-fg: #202124;
+  --gcw-tab-close: #5f6368;
+  --gcw-new-tab: #5f6368;
+  --gcw-win-fg: #202124;
+  --gcw-win-hover-muted: rgb(0 0 0 / 0.06);
+  --gcw-win-hover-close: #e81123;
+  --gcw-win-hover-close-fg: #ffffff;
+  --gcw-toolbar-bg: #ffffff;
+  --gcw-toolbar-border: rgb(0 0 0 / 0.08);
+  --gcw-nav-fg: #5f6368;
+  --gcw-nav-disabled: rgb(95 99 104 / 0.38);
+  --gcw-omnibox-bg: #f1f3f4;
+  --gcw-omnibox-border: transparent;
+  --gcw-omnibox-typed: #202124;
+  --gcw-omnibox-caret: #1a73e8;
+  --gcw-omnibox-focus-ring: rgb(26 115 232 / 0.18);
+  --gcw-omnibox-icon: #5f6368;
+  --gcw-toolbar-icon: #5f6368;
+  --gcw-toolbar-sep: rgb(0 0 0 / 0.12);
+  --gcw-viewport-bg: #ffffff;
+  --gcw-profile-letter-fg: oklch(0.995 0.01 195);
+  --gcw-profile-letter-shadow: oklch(0.25 0.06 195 / 0.22);
+}
+
+.dark .gcw-root {
+  --gcw-chrome-bg: #202124;
+  --gcw-border: rgb(255 255 255 / 0.1);
+  --gcw-ring: rgb(0 0 0 / 0.35);
+  --gcw-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.5);
+  --gcw-tab-bg: #35363a;
+  --gcw-tab-fg: #e8eaed;
+  --gcw-tab-close: #9aa0a6;
+  --gcw-new-tab: #9aa0a6;
+  --gcw-win-fg: #e8eaed;
+  --gcw-win-hover-muted: rgb(255 255 255 / 0.1);
+  --gcw-win-hover-close: #c42b1c;
+  --gcw-win-hover-close-fg: #ffffff;
+  --gcw-toolbar-bg: #202124;
+  --gcw-toolbar-border: rgb(255 255 255 / 0.06);
+  --gcw-nav-fg: #9aa0a6;
+  --gcw-nav-disabled: rgb(154 160 166 / 0.35);
+  --gcw-omnibox-bg: #35363a;
+  --gcw-omnibox-border: rgb(255 255 255 / 0.1);
+  --gcw-omnibox-typed: #e8eaed;
+  --gcw-omnibox-caret: #8ab4f8;
+  --gcw-omnibox-focus-ring: rgb(138 180 248 / 0.22);
+  --gcw-omnibox-icon: #9aa0a6;
+  --gcw-toolbar-icon: #9aa0a6;
+  --gcw-toolbar-sep: rgb(255 255 255 / 0.12);
+  --gcw-viewport-bg: #202124;
+  --gcw-profile-letter-fg: oklch(0.97 0.028 190);
+  --gcw-profile-letter-shadow: oklch(0.15 0.04 250 / 0.45);
+}
+
+.gcw-omnibox-caret {
+  animation: gcw-omnibox-caret-blink 1s step-end infinite;
+}
+
+.gcw-omnibox-caret--solid {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes gcw-omnibox-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gcw-omnibox-caret {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.gcw-viewport-slot > img,
+.gcw-viewport-slot > video,
+.gcw-viewport-slot > picture,
+.gcw-viewport-slot > iframe,
+.gcw-viewport-slot :is(img, video, iframe) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gcw-viewport-slot > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}

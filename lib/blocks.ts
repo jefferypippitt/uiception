@@ -81,6 +81,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Navbar Section v6",
         registryPath: "registry/new-york/blocks/navbar-section-v6",
       },
+      {
+        id: "navbar-section-v7",
+        title: "Navbar Section v7",
+        registryPath: "registry/new-york/blocks/navbar-section-v7",
+      },
     ],
   },
   {
@@ -122,6 +127,11 @@ export const blockCategories: BlockCategory[] = [
         id: "hero-section-v7",
         title: "Hero Section v7",
         registryPath: "registry/new-york/blocks/hero-section-v7",
+      },
+      {
+        id: "hero-section-v8",
+        title: "Hero Section v8",
+        registryPath: "registry/new-york/blocks/hero-section-v8",
       },
     ],
   },
@@ -197,6 +207,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Feature Section v6",
         registryPath: "registry/new-york/blocks/feature-section-v6",
       },
+      {
+        id: "feature-section-v7",
+        title: "Feature Section v7",
+        registryPath: "registry/new-york/blocks/feature-section-v7",
+      },
     ],
   },
   {
@@ -269,7 +284,18 @@ export const blockCategories: BlockCategory[] = [
     id: "testimonials",
     title: "Testimonials",
     description: "Customer quotes, reviews, and social proof.",
-    versions: [],
+    versions: [
+      {
+        id: "testimonials-section-v1",
+        title: "Testimonials Section v1",
+        registryPath: "registry/new-york/blocks/testimonials-section-v1",
+      },
+      {
+        id: "testimonials-section-v2",
+        title: "Testimonials Section v2",
+        registryPath: "registry/new-york/blocks/testimonials-section-v2",
+      },
+    ],
   },
   {
     id: "stats",
@@ -486,9 +512,24 @@ export const blockCategories: BlockCategory[] = [
         registryPath: "registry/new-york/blocks/google-chrome-windows",
       },
       {
+        id: "google-chrome-windows-with-video",
+        title: "Google Chrome (Windows, w/ video)",
+        registryPath: "registry/new-york/blocks/google-chrome-windows-with-video",
+      },
+      {
         id: "macbook-pro",
         title: "MacBook Pro",
         registryPath: "registry/new-york/blocks/macbook-pro",
+      },
+      {
+        id: "macbook-pro-with-image",
+        title: "MacBook Pro (w/ image)",
+        registryPath: "registry/new-york/blocks/macbook-pro-with-image",
+      },
+      {
+        id: "macbook-pro-with-video",
+        title: "MacBook Pro (w/ video)",
+        registryPath: "registry/new-york/blocks/macbook-pro-with-video",
       },
     ],
   },

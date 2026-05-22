@@ -1,0 +1,39 @@
+/* Google new-tab preview — light/dark via .dark ancestor */
+
+.ghp-root {
+  --ghp-bg: #ffffff;
+  --ghp-logo-g: #4285f4;
+  --ghp-logo-o1: #ea4335;
+  --ghp-logo-o2: #fbbc05;
+  --ghp-logo-g2: #4285f4;
+  --ghp-logo-l: #34a853;
+  --ghp-logo-e: #ea4335;
+  --ghp-logo-mono: #202124;
+  --ghp-bar-bg: #ffffff;
+  --ghp-bar-border: rgb(218 220 224);
+  --ghp-bar-shadow: 0 1px 6px rgb(32 33 36 / 0.18);
+  --ghp-placeholder: #70757a;
+  --ghp-icon: #5f6368;
+  --ghp-ai-bg: #f1f3f4;
+  --ghp-ai-fg: #202124;
+  --ghp-ai-icon: #1a73e8;
+}
+
+.dark .ghp-root {
+  --ghp-bg: #3c4043;
+  --ghp-logo-g: #ffffff;
+  --ghp-logo-o1: #ffffff;
+  --ghp-logo-o2: #ffffff;
+  --ghp-logo-g2: #ffffff;
+  --ghp-logo-l: #ffffff;
+  --ghp-logo-e: #ffffff;
+  --ghp-logo-mono: #ffffff;
+  --ghp-bar-bg: #ffffff;
+  --ghp-bar-border: transparent;
+  --ghp-bar-shadow: none;
+  --ghp-placeholder: #9aa0a6;
+  --ghp-icon: #5f6368;
+  --ghp-ai-bg: #f1f3f4;
+  --ghp-ai-fg: #202124;
+  --ghp-ai-icon: #1a73e8;
+}

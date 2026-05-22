@@ -1,0 +1,39 @@
+/* event-stream — edge fade mask + cursor blink */
+
+.es-root {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 3%,
+    black 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 3%,
+    black 97%,
+    transparent 100%
+  );
+}
+
+@keyframes es-blink {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.es-cursor {
+  animation: es-blink 1.15s step-start infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .es-cursor {
+    animation: none;
+  }
+}

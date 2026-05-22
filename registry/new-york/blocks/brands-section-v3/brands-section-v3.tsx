@@ -1,6 +1,6 @@
-import BrandGrid from "./components/brand-grid"
+import BrandGrid from "./brand-grid"
 
-import "./styles/brands-section-v3.css"
+import "./brands-section-v3.css"
 
 export default function BrandsSectionV3() {
   return (

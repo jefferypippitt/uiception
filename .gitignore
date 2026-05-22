@@ -39,9 +39,14 @@ pnpm-debug.log*
 .claude/skills/illustrations/
 .agents/skills/illustrations/
 
+# svg-ui skill — beta, local iteration only
+.claude/skills/svg-ui/
+.agents/skills/svg-ui/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
 # next-agents-md
 .next-docs/
 

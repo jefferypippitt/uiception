@@ -4,39 +4,36 @@ import { ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { CursorTerminal } from '@/components/cursor-terminal'
+import { siteConfig } from '@/lib/config'
 
 export default function Home() {
     return (
         <div className='pb-8 md:pb-12'>
             <div className='mx-auto flex w-full max-w-6xl flex-col items-center gap-8 px-6 text-center md:gap-9'>
-                <div className='flex w-full max-w-6xl flex-col items-center gap-5 text-center md:gap-6'>
-                    <section>
-                        <Badge asChild variant='secondary'>
-                            <Link href='/changelog' className='inline-flex items-center gap-1'>
-                                What&apos;s New
-                                <ArrowRight
-                                    className='size-4 shrink-0 transition-transform duration-200 ease-out motion-safe:group-hover/badge:translate-x-0.5'
-                                    aria-hidden
-                                />
-                            </Link>
-                        </Badge>
-                    </section>
+                <div className='flex w-full flex-col items-center gap-2 text-center xl:gap-4'>
+                    <Badge asChild variant='secondary'>
+                        <Link href='/changelog' className='inline-flex items-center gap-1'>
+                            What&apos;s New
+                            <ArrowRight
+                                className='size-4 shrink-0 transition-transform duration-200 ease-out motion-safe:group-hover/badge:translate-x-0.5'
+                                aria-hidden
+                            />
+                        </Link>
+                    </Badge>
 
-                    <section className='flex flex-col items-center gap-3'>
-                        <h1 className='max-w-4xl text-4xl font-pixel-circle tracking-tight [word-spacing:-0.13em] md:text-5xl lg:text-6xl'>
-                            Skip to the good part.
-                        </h1>
+                    <h1 className='max-w-4xl text-balance font-pixel-circle text-3xl leading-none tracking-tight text-primary [word-spacing:-0.13em] lg:leading-[1.1] xl:text-5xl xl:tracking-tighter'>
+                        Skip to the good part.
+                    </h1>
 
-                        <p className='max-w-3xl font-light tracking-tight md:text-lg'>
-                            Start from sections that feel complete. Just make it yours.
-                        </p>
-                    </section>
+                    <p className='mx-auto max-w-lg text-pretty font-sans text-sm leading-7 tracking-tight text-muted-foreground sm:text-base sm:leading-8'>
+                        {siteConfig.description}
+                    </p>
 
-                    <section className='flex flex-col gap-4 sm:flex-row'>
-                        <Button asChild>
+                    <div className='flex w-full items-center justify-center gap-2 pt-2'>
+                        <Button asChild size='sm'>
                             <Link href='/blocks'>Browse Blocks</Link>
                         </Button>
-                    </section>
+                    </div>
                 </div>
 
                 <section className='w-full max-w-5xl'>

@@ -1,0 +1,55 @@
+---
+description: Registry blocks use a flat folder layout (no components/hooks/lib/styles subdirs)
+globs: registry/new-york/blocks/**,registry.json
+alwaysApply: true
+---
+
+# Registry block folder structure (flat)
+
+All blocks live under `registry/new-york/blocks/<block-id>/` as a **single flat directory**. Do not add nested `components/`, `hooks/`, `lib/`, or `styles/` folders.
+
+## Target layout
+
+```
+<block-id>/
+  page.tsx                    # preview wrapper (padding)
+  <block-id>.tsx              # default export
+  <block-id>.css              # block styles (if any)
+  *.tsx                       # subcomponents at root
+  use-*.ts                    # hooks at root
+  config.ts                   # data/constants (was lib/config.ts)
+  other-*.ts                  # e.g. code-segments, api.ts
+```
+
+## Imports
+
+Use sibling paths only:
+
+```ts
+import { useFoo } from "./use-foo"
+import Sub from "./sub-component"
+import { ITEMS } from "./config"
+import "./<block-id>.css"
+```
+
+Cross-block composition (heroes embedding integrations/brands):
+
+```ts
+import MacOsTerminal from "../mac-os-terminal/mac-os-terminal"
+```
+
+List composed blocks in `registryDependencies` in `registry.json`. CSS from a dependency block is allowed when that block is in `registryDependencies`.
+
+Blocks with bundled images or video: see `registry-block-media.mdc`.
+
+## registry.json
+
+- `path`: `registry/new-york/blocks/<id>/<file>`
+- `target`: `app/<id>/<file>` (mirror flat layout, not `app/<id>/components/...`)
+- Declare every file on disk in the block's `files` array
+- After edits: `pnpm registry:build`
+
+## Do not
+
+- Create `components/`, `hooks/`, `lib/`, or `styles/` under a block folder
+- Use `../../other-block/` from a file that was only valid inside a nested subfolder (use `../other-block/` from block root)

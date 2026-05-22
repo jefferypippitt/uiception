@@ -1,0 +1,20 @@
+/* code-block — tab switch fade-in */
+
+@keyframes cb-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cblk-cmd {
+  animation: cb-fade-in 0.15s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cblk-cmd {
+    animation: none;
+  }
+}

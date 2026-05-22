@@ -1,4 +1,4 @@
-import LoremDemo from "./lorem-demo"
+import LoremDemo from "./navbar-lorem-demo"
 import NavbarSectionV6 from "./navbar-section-v6"
 
 export default function Page() {

@@ -25,14 +25,13 @@ will get all the right files, dependencies, and assets installed correctly.
 |---|---|
 | File listed in registry doesn't exist on disk | `registry-blocks` |
 | Duplicate install targets | `registry-blocks` |
-| Image in wrong folder / missing from registry | `registry-image-assets` |
+| Image or video in wrong folder / missing from registry | `registry-block-media` |
 | Broken `@/` or relative imports | `registry-imports` |
 | shadcn component not declared in `registryDependencies` | `registry-shadcn-deps` |
 | SVG not declared in `files` | `registry-svg-deps` |
 | npm package missing from `dependencies` | `registry-npm-deps` |
 | Block importing from another block (not self-contained) | `registry-cross-block` |
 | CSS import not declared in `files` | `registry-file-deps` |
-| `block-image-url.ts` missing from `files` | `registry-file-deps` |
 | Wrong `target` path for block files | `registry-target-paths` |
 
 ## What still needs manual verification
@@ -43,9 +42,12 @@ will get all the right files, dependencies, and assets installed correctly.
 
 ## Adding a new block checklist
 
-- [ ] Block files follow the `registry/new-york/blocks/<block-name>/` folder structure
-- [ ] Images go in `public/images/blocks/<block-name>/<image-file>`
-- [ ] Images referenced via `blockImageUrl("https://uiception.com/images/blocks/<block-name>/<image>", "/images/blocks/<block-name>/<image>")`
+- [ ] Block uses **flat** layout: `registry/new-york/blocks/<block-name>/` with all `.tsx`, `.ts`, and `.css` at the block root (no `components/`, `hooks/`, `lib/`, or `styles/` subfolders)
+- [ ] Imports use `./` siblings; cross-block imports use `../<other-block>/` and list the other block in `registryDependencies`
+- [ ] `registry.json` `path` and `target` are flat (e.g. `app/<block-name>/config.ts`, not `app/<block-name>/lib/config.ts`)
+- [ ] Raster images go in `public/images/blocks/<block-name>/`; video in `public/videos/blocks/<block-name>/` (see `registry-block-media.mdc`)
+- [ ] Block code uses `/images/blocks/...` and `/videos/blocks/...` only (no CDN URLs)
+- [ ] Block `files` includes every referenced image/video as `registry:file` with matching `path` and `target`
 - [ ] All files declared in `registry.json` under the block's `files` array
 - [ ] All shadcn components declared in `registryDependencies`
 - [ ] All SVGs declared in `files`
