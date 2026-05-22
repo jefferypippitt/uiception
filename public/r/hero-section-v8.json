@@ -8,8 +8,8 @@
   ],
   "registryDependencies": [
     "button",
-    "simple-chatbot",
-    "brands-section-v1"
+    "https://uiception.com/r/simple-chatbot.json",
+    "https://uiception.com/r/brands-section-v1.json"
   ],
   "files": [
     {

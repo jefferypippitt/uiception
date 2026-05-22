@@ -73,6 +73,7 @@ describe("registry registryDependencies format", () => {
   it("uses full URLs (not @uiception/ aliases) for cross-registry dependencies", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
+    const blockNames = new Set(blocks.map((b) => b.name!))
 
     for (const block of blocks) {
       for (const dep of block.registryDependencies ?? []) {
@@ -80,6 +81,13 @@ describe("registry registryDependencies format", () => {
           dep,
           `${block.name}: registryDependency "${dep}" uses @uiception/ alias — use the full URL "https://uiception.com/r/<name>.json" so consumers without the registry alias can install it`,
         ).not.toMatch(/^@uiception\//)
+
+        if (blockNames.has(dep)) {
+          expect(
+            dep,
+            `${block.name}: registryDependency "${dep}" is a bare uiception block name — use "https://uiception.com/r/${dep}.json" so shadcn does not resolve it from ui.shadcn.com`,
+          ).toMatch(/^https:\/\/uiception\.com\/r\/.+\.json$/)
+        }
       }
     }
   })

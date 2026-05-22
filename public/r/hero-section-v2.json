@@ -7,8 +7,8 @@
     "gsap"
   ],
   "registryDependencies": [
-    "event-stream",
-    "brands-section-v2"
+    "https://uiception.com/r/event-stream.json",
+    "https://uiception.com/r/brands-section-v2.json"
   ],
   "files": [
     {

@@ -12,8 +12,8 @@
         "gsap"
       ],
       "registryDependencies": [
-        "event-stream",
-        "brands-section-v2"
+        "https://uiception.com/r/event-stream.json",
+        "https://uiception.com/r/brands-section-v2.json"
       ],
       "files": [
         {
@@ -46,7 +46,7 @@
       "dependencies": [],
       "registryDependencies": [
         "badge",
-        "chat-bot"
+        "https://uiception.com/r/chat-bot.json"
       ],
       "files": [
         {
@@ -71,8 +71,8 @@
       ],
       "registryDependencies": [
         "button",
-        "mac-os-terminal",
-        "brands-section-v1"
+        "https://uiception.com/r/mac-os-terminal.json",
+        "https://uiception.com/r/brands-section-v1.json"
       ],
       "files": [
         {
@@ -1572,7 +1572,7 @@
       "description": "Centered hero with headline, description, CTA, and an embedded simple chatbot prompt card with animated typing placeholder.",
       "registryDependencies": [
         "button",
-        "simple-chatbot"
+        "https://uiception.com/r/simple-chatbot.json"
       ],
       "files": [
         {
@@ -1658,7 +1658,7 @@
         "@phosphor-icons/react"
       ],
       "registryDependencies": [
-        "brands-section-v6"
+        "https://uiception.com/r/brands-section-v6.json"
       ],
       "files": [
         {
@@ -1733,8 +1733,8 @@
       ],
       "registryDependencies": [
         "button",
-        "simple-chatbot",
-        "brands-section-v1"
+        "https://uiception.com/r/simple-chatbot.json",
+        "https://uiception.com/r/brands-section-v1.json"
       ],
       "files": [
         {
@@ -2162,7 +2162,7 @@
       "title": "Google Chrome (Windows, w/ video)",
       "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
       "registryDependencies": [
-        "google-chrome-windows"
+        "https://uiception.com/r/google-chrome-windows.json"
       ],
       "files": [
         {
@@ -2217,7 +2217,7 @@
       "title": "MacBook Pro (w/ image)",
       "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
       "registryDependencies": [
-        "macbook-pro"
+        "https://uiception.com/r/macbook-pro.json"
       ],
       "files": [
         {
@@ -2243,7 +2243,7 @@
       "title": "MacBook Pro (w/ video)",
       "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
       "registryDependencies": [
-        "macbook-pro"
+        "https://uiception.com/r/macbook-pro.json"
       ],
       "files": [
         {

@@ -8,7 +8,7 @@
     "@phosphor-icons/react"
   ],
   "registryDependencies": [
-    "brands-section-v6"
+    "https://uiception.com/r/brands-section-v6.json"
   ],
   "files": [
     {

@@ -5,7 +5,7 @@
   "description": "Centered hero with headline, description, CTA, and an embedded simple chatbot prompt card with animated typing placeholder.",
   "registryDependencies": [
     "button",
-    "simple-chatbot"
+    "https://uiception.com/r/simple-chatbot.json"
   ],
   "files": [
     {

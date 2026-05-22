@@ -8,8 +8,8 @@
   ],
   "registryDependencies": [
     "button",
-    "mac-os-terminal",
-    "brands-section-v1"
+    "https://uiception.com/r/mac-os-terminal.json",
+    "https://uiception.com/r/brands-section-v1.json"
   ],
   "files": [
     {

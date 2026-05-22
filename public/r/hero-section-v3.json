@@ -6,7 +6,7 @@
   "dependencies": [],
   "registryDependencies": [
     "badge",
-    "chat-bot"
+    "https://uiception.com/r/chat-bot.json"
   ],
   "files": [
     {

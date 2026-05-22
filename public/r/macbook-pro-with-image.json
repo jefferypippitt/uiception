@@ -4,7 +4,7 @@
   "title": "MacBook Pro (w/ image)",
   "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
   "registryDependencies": [
-    "macbook-pro"
+    "https://uiception.com/r/macbook-pro.json"
   ],
   "files": [
     {
