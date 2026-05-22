@@ -44,10 +44,12 @@ Blocks with bundled images or video: see `registry-block-media.mdc`.
 
 ## registry.json
 
+- Block items are declared in root [`registry.json`](../../registry.json) `items[]`.
 - `path`: `registry/new-york/blocks/<id>/<file>`
-- `target`: `app/<id>/<file>` (mirror flat layout, not `app/<id>/components/...`)
+- `target`: `app/<id>/<file>` for block-owned files (mirror flat layout, not `app/<id>/components/...`)
+- Shared SVGs: `path` = `components/ui/svgs/...`, `target` = `@ui/svgs/...`
 - Declare every file on disk in the block's `files` array
-- After edits: `pnpm registry:build`
+- After edits: `pnpm registry:validate` then `pnpm registry:build`
 
 ## Do not
 

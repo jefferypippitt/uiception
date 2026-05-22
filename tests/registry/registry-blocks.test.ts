@@ -1,28 +1,8 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs"
-import { dirname, join } from "node:path"
-import { fileURLToPath } from "node:url"
+import { existsSync, readdirSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "../..")
-const registryPath = join(root, "registry.json")
-
-type RegistryFile = {
-  path: string
-  type: string
-  target: string
-}
-
-type RegistryItem = {
-  name?: string
-  type?: string
-  title?: string
-  files?: RegistryFile[]
-}
-
-function loadRegistry(): { items: RegistryItem[] } {
-  const raw = readFileSync(registryPath, "utf8")
-  return JSON.parse(raw) as { items: RegistryItem[] }
-}
+import { loadRegistry, registryProjectRoot as root } from "./load-registry"
 
 describe("registry.json blocks", () => {
   it("has valid registry:block entries with files and paths on disk", () => {

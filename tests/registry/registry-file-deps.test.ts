@@ -1,25 +1,9 @@
 import { readFileSync } from "node:fs"
 import { join, normalize, resolve, dirname as pathDirname, relative } from "node:path"
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
 
 import { listTsSourcesUnder } from "./list-ts-sources"
-
-const root = join(dirname(fileURLToPath(import.meta.url)), "../..")
-const registryPath = join(root, "registry.json")
-
-type RegistryFile = { path: string }
-type RegistryItem = {
-  name?: string
-  type?: string
-  registryDependencies?: string[]
-  files?: RegistryFile[]
-}
-
-function loadRegistry(): { items: RegistryItem[] } {
-  return JSON.parse(readFileSync(registryPath, "utf8")) as { items: RegistryItem[] }
-}
+import { loadRegistry, registryProjectRoot as root } from "./load-registry"
 
 const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 const CSS_IMPORT_RE = /^import\s+["']([^"']+\.css)["']/gm

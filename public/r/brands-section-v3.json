@@ -51,43 +51,43 @@
       "path": "components/ui/svgs/supabase.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst Supabase = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 109 113\" fill=\"none\">\n    <path\n      d=\"M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z\"\n      fill=\"url(#paint0_linear)\"\n    />\n    <path\n      d=\"M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z\"\n      fill=\"url(#paint1_linear)\"\n      fillOpacity=\"0.2\"\n    />\n    <path\n      d=\"M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z\"\n      fill=\"#3ECF8E\"\n    />\n    <defs>\n      <linearGradient\n        id=\"paint0_linear\"\n        x1=\"53.9738\"\n        y1=\"54.974\"\n        x2=\"94.1635\"\n        y2=\"71.8295\"\n        gradientUnits=\"userSpaceOnUse\"\n      >\n        <stop stopColor=\"#249361\" />\n        <stop offset=\"1\" stopColor=\"#3ECF8E\" />\n      </linearGradient>\n      <linearGradient\n        id=\"paint1_linear\"\n        x1=\"36.1558\"\n        y1=\"30.578\"\n        x2=\"54.4844\"\n        y2=\"65.0806\"\n        gradientUnits=\"userSpaceOnUse\"\n      >\n        <stop />\n        <stop offset=\"1\" stopOpacity=\"0\" />\n      </linearGradient>\n    </defs>\n  </svg>\n);\n\nexport { Supabase };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/supabase.tsx"
+      "target": "@ui/svgs/supabase.tsx"
     },
     {
       "path": "components/ui/svgs/convex.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst Convex = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"28 28 128 132\" fill=\"none\">\n    <path\n      fill=\"#F3B01C\"\n      d=\"M108.092 130.021c18.166-2.018 35.293-11.698 44.723-27.854-4.466 39.961-48.162 65.218-83.83 49.711-3.286-1.425-6.115-3.796-8.056-6.844-8.016-12.586-10.65-28.601-6.865-43.135 10.817 18.668 32.81 30.111 54.028 28.122Z\"\n    />\n    <path\n      fill=\"#8D2676\"\n      d=\"M53.401 90.174c-7.364 17.017-7.682 36.94 1.345 53.336-31.77-23.902-31.423-75.052-.388-98.715 2.87-2.187 6.282-3.485 9.86-3.683 14.713-.776 29.662 4.91 40.146 15.507-21.3.212-42.046 13.857-50.963 33.555Z\"\n    />\n    <path\n      fill=\"#EE342F\"\n      d=\"M114.637 61.855C103.89 46.87 87.069 36.668 68.639 36.358c35.625-16.17 79.446 10.047 84.217 48.807.444 3.598-.139 7.267-1.734 10.512-6.656 13.518-18.998 24.002-33.42 27.882 10.567-19.599 9.263-43.544-3.065-61.704Z\"\n    />\n  </svg>\n);\n\nexport { Convex };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/convex.tsx"
+      "target": "@ui/svgs/convex.tsx"
     },
     {
       "path": "components/ui/svgs/vercel.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst Vercel = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 256 222\" preserveAspectRatio=\"xMidYMid\">\n    <path d=\"m128 0 128 221.705H0z\" />\n  </svg>\n);\n\nexport { Vercel };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/vercel.tsx"
+      "target": "@ui/svgs/vercel.tsx"
     },
     {
       "path": "components/ui/svgs/vercelDark.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst VercelDark = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 256 222\" preserveAspectRatio=\"xMidYMid\">\n    <path fill=\"#fff\" d=\"m128 0 128 221.705H0z\" />\n  </svg>\n);\n\nexport { VercelDark };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/vercelDark.tsx"
+      "target": "@ui/svgs/vercelDark.tsx"
     },
     {
       "path": "components/ui/svgs/neon.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst Neon = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 256 256\" preserveAspectRatio=\"xMidYMid\">\n    <defs>\n      <linearGradient id=\"a\" x1=\"100%\" x2=\"12.069%\" y1=\"100%\" y2=\"0%\">\n        <stop offset=\"0%\" stopColor=\"#62F755\" />\n        <stop offset=\"100%\" stopColor=\"#8FF986\" stopOpacity=\"0\" />\n      </linearGradient>\n      <linearGradient id=\"b\" x1=\"100%\" x2=\"40.603%\" y1=\"100%\" y2=\"76.897%\">\n        <stop offset=\"0%\" stopOpacity=\".9\" />\n        <stop offset=\"100%\" stopColor=\"#1A1A1A\" stopOpacity=\"0\" />\n      </linearGradient>\n    </defs>\n    <path\n      fill=\"#00E0D9\"\n      d=\"M0 44.139C0 19.762 19.762 0 44.139 0H211.86C236.238 0 256 19.762 256 44.139v142.649c0 25.216-31.915 36.16-47.388 16.256l-48.392-62.251v75.484c0 21.939-17.784 39.723-39.722 39.723h-76.36C19.763 256 0 236.238 0 211.861V44.14Zm44.139-8.825c-4.879 0-8.825 3.946-8.825 8.818v167.73c0 4.878 3.946 8.831 8.818 8.831h77.688c2.44 0 3.087-1.977 3.087-4.416v-101.22c0-25.222 31.914-36.166 47.395-16.255l48.391 62.243V44.14c0-4.879.455-8.825-4.416-8.825H44.14Z\"\n    />\n    <path\n      fill=\"url(#a)\"\n      d=\"M0 44.139C0 19.762 19.762 0 44.139 0H211.86C236.238 0 256 19.762 256 44.139v142.649c0 25.216-31.915 36.16-47.388 16.256l-48.392-62.251v75.484c0 21.939-17.784 39.723-39.722 39.723h-76.36C19.763 256 0 236.238 0 211.861V44.14Zm44.139-8.825c-4.879 0-8.825 3.946-8.825 8.818v167.73c0 4.878 3.946 8.831 8.818 8.831h77.688c2.44 0 3.087-1.977 3.087-4.416v-101.22c0-25.222 31.914-36.166 47.395-16.255l48.391 62.243V44.14c0-4.879.455-8.825-4.416-8.825H44.14Z\"\n    />\n    <path\n      fill=\"url(#b)\"\n      fillOpacity=\".4\"\n      d=\"M0 44.139C0 19.762 19.762 0 44.139 0H211.86C236.238 0 256 19.762 256 44.139v142.649c0 25.216-31.915 36.16-47.388 16.256l-48.392-62.251v75.484c0 21.939-17.784 39.723-39.722 39.723h-76.36C19.763 256 0 236.238 0 211.861V44.14Zm44.139-8.825c-4.879 0-8.825 3.946-8.825 8.818v167.73c0 4.878 3.946 8.831 8.818 8.831h77.688c2.44 0 3.087-1.977 3.087-4.416v-101.22c0-25.222 31.914-36.166 47.395-16.255l48.391 62.243V44.14c0-4.879.455-8.825-4.416-8.825H44.14Z\"\n    />\n    <path\n      fill=\"#63F655\"\n      d=\"M211.861 0C236.238 0 256 19.762 256 44.139v142.649c0 25.216-31.915 36.16-47.388 16.256l-48.392-62.251v75.484c0 21.939-17.784 39.723-39.722 39.723a4.409 4.409 0 0 0 4.409-4.409V115.058c0-25.223 31.914-36.167 47.395-16.256l48.391 62.243V8.825c0-4.871-3.953-8.825-8.832-8.825Z\"\n    />\n  </svg>\n);\n\nexport { Neon };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/neon.tsx"
+      "target": "@ui/svgs/neon.tsx"
     },
     {
       "path": "components/ui/svgs/upstash.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst Upstash = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 256 341\" preserveAspectRatio=\"xMidYMid\">\n    <path\n      fill=\"#00C98D\"\n      d=\"M0 298.417c56.554 56.553 148.247 56.553 204.801 0 56.554-56.554 56.554-148.247 0-204.801l-25.6 25.6c42.415 42.416 42.415 111.185 0 153.6-42.416 42.416-111.185 42.416-153.601 0L0 298.416Z\"\n    />\n    <path\n      fill=\"#00C98D\"\n      d=\"M51.2 247.216c28.277 28.277 74.123 28.277 102.4 0 28.277-28.276 28.277-74.123 0-102.4l-25.6 25.6c14.14 14.138 14.14 37.061 0 51.2-14.138 14.139-37.061 14.139-51.2 0l-25.6 25.6ZM256 42.415c-56.554-56.553-148.247-56.553-204.8 0-56.555 56.555-56.555 148.247 0 204.801l25.599-25.6c-42.415-42.415-42.415-111.185 0-153.6 42.416-42.416 111.185-42.416 153.6 0L256 42.416Z\"\n    />\n    <path\n      fill=\"#00C98D\"\n      d=\"M204.8 93.616c-28.276-28.277-74.124-28.277-102.4 0-28.278 28.277-28.278 74.123 0 102.4l25.6-25.6c-14.14-14.138-14.14-37.061 0-51.2 14.138-14.139 37.06-14.139 51.2 0l25.6-25.6Z\"\n    />\n    <path\n      fill=\"#FFF\"\n      fillOpacity=\".4\"\n      d=\"M256 42.415c-56.554-56.553-148.247-56.553-204.8 0-56.555 56.555-56.555 148.247 0 204.801l25.599-25.6c-42.415-42.415-42.415-111.185 0-153.6 42.416-42.416 111.185-42.416 153.6 0L256 42.416Z\"\n    />\n    <path\n      fill=\"#FFF\"\n      fillOpacity=\".4\"\n      d=\"M204.8 93.616c-28.276-28.277-74.124-28.277-102.4 0-28.278 28.277-28.278 74.123 0 102.4l25.6-25.6c-14.14-14.138-14.14-37.061 0-51.2 14.138-14.139 37.06-14.139 51.2 0l25.6-25.6Z\"\n    />\n  </svg>\n);\n\nexport { Upstash };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/upstash.tsx"
+      "target": "@ui/svgs/upstash.tsx"
     },
     {
       "path": "components/ui/svgs/tursoLight.tsx",
       "content": "import type { SVGProps } from \"react\";\n\nconst TursoLight = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} fill=\"none\" viewBox=\"0 0 201 170\">\n    <path\n      d=\"m200.035 48.61c-4.67-27.94-29.16-48.61-29.16-48.61v30.78l-14.54 3.75-9.11-10.97-4.81 9.46c-9.92-2.7-23.58-4.44-42.37-4.44-18.7901 0-32.4501 1.75-42.3701 4.44l-4.81-9.46-9.11 10.97-14.54-3.75v-30.78s-24.48997 20.67-29.1599684 48.61l32.1399684 11.12c1.05 19.43 9.79 71.88 12.29 76.64 2.66 5.07 16.78 19.56 27.83 25.13 0 0 4-4.23 6.44-7.96 3.1 3.65 19.11 16.45 21.3001 16.45 2.19 0 18.2-12.79 21.3-16.45 2.44 3.73 6.44 7.96 6.44 7.96 11.05-5.57 25.17-20.06 27.83-25.13 2.5-4.76 11.24-57.21 12.29-76.64l32.14-11.12zm-46.19 44.74-21.75 1.94 1.91 26.67s-13.23 10.95-33.96 10.95c-20.7301 0-33.9601-10.95-33.9601-10.95l1.91-26.67-21.75-1.94-3.72-30.04 36.05 12.48-2.8 37.39c6.7 1.7 13.75 3.39 24.2801 3.39 10.53 0 17.57-1.69 24.27-3.39l-2.8-37.39 36.05-12.48-3.72 30.04z\"\n      fill=\"#183134\"\n    />\n  </svg>\n);\n\nexport { TursoLight };\n",
       "type": "registry:component",
-      "target": "components/ui/svgs/tursoLight.tsx"
+      "target": "@ui/svgs/tursoLight.tsx"
     }
   ],
   "type": "registry:block"

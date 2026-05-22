@@ -1,27 +1,29 @@
-import { readFileSync } from "node:fs"
-import { join } from "node:path"
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "../..")
-const registryPath = join(root, "registry.json")
+import { loadRegistry } from "./load-registry"
 
-type RegistryFile = { path: string; target: string; type: string }
-type RegistryItem = { name?: string; type?: string; files?: RegistryFile[] }
-
-function loadRegistry(): { items: RegistryItem[] } {
-  return JSON.parse(readFileSync(registryPath, "utf8")) as { items: RegistryItem[] }
-}
-
-/** Paths that are shared across blocks — their targets mirror their path, not app/<block>/ */
+/** Paths that are shared across blocks — not installed under app/<block>/ */
 function isSharedFile(path: string): boolean {
   return (
     path.startsWith("lib/") ||
     path.startsWith("components/ui/svgs/") ||
     path.startsWith("public/images/") ||
+    path.startsWith("public/videos/") ||
     path.startsWith("components/ui/")
   )
+}
+
+function expectedSharedTarget(path: string): string {
+  if (path.startsWith("components/ui/")) {
+    return `@ui/${path.slice("components/ui/".length)}`
+  }
+  if (path.startsWith("lib/")) {
+    return `@lib/${path.slice("lib/".length)}`
+  }
+  if (path.startsWith("hooks/")) {
+    return `@hooks/${path.slice("hooks/".length)}`
+  }
+  return path
 }
 
 describe("registry target paths", () => {
@@ -34,9 +36,7 @@ describe("registry target paths", () => {
       const blockPrefix = `registry/new-york/blocks/${name}/`
 
       for (const f of block.files ?? []) {
-        // Only check files that live inside this block's own folder
         if (!f.path.startsWith(blockPrefix)) continue
-        // Shared files are excluded
         if (isSharedFile(f.path)) continue
 
         expect(
@@ -47,7 +47,7 @@ describe("registry target paths", () => {
     }
   })
 
-  it("shared files (svgs, lib, public) have target matching their path", () => {
+  it("shared files use @ui/@lib/@hooks targets (public media keeps literal path)", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 
@@ -56,8 +56,8 @@ describe("registry target paths", () => {
         if (!isSharedFile(f.path)) continue
         expect(
           f.target,
-          `${block.name}: shared file "${f.path}" target should equal its path`,
-        ).toBe(f.path)
+          `${block.name}: shared file "${f.path}" target should use registry alias`,
+        ).toBe(expectedSharedTarget(f.path))
       }
     }
   })

@@ -1,19 +1,9 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
 
 import { listTsSourcesUnder } from "./list-ts-sources"
-
-const root = join(dirname(fileURLToPath(import.meta.url)), "../..")
-const registryPath = join(root, "registry.json")
-
-type RegistryItem = { name?: string; type?: string; dependencies?: string[] }
-
-function loadRegistry(): { items: RegistryItem[] } {
-  return JSON.parse(readFileSync(registryPath, "utf8")) as { items: RegistryItem[] }
-}
+import { loadRegistry, registryProjectRoot as root } from "./load-registry"
 
 // Packages always present in a Next.js + shadcn project — don't need to be declared per-block
 const ALWAYS_AVAILABLE_EXACT = new Set([

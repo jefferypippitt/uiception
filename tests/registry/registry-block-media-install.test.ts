@@ -1,6 +1,5 @@
 import { existsSync, readFileSync } from "node:fs"
-import { dirname, join } from "node:path"
-import { fileURLToPath } from "node:url"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
 import {
@@ -8,21 +7,12 @@ import {
   extractReferencedMediaPaths,
   type PublicMediaPath,
 } from "./extract-block-media-paths"
-
-const root = join(dirname(fileURLToPath(import.meta.url)), "../..")
-const registryPath = join(root, "registry.json")
-
-type RegistryFile = {
-  path: string
-  target: string
-  type: string
-  content?: string
-}
-type RegistryItem = { name?: string; type?: string; files?: RegistryFile[] }
-
-function loadRegistry(): { items: RegistryItem[] } {
-  return JSON.parse(readFileSync(registryPath, "utf8")) as { items: RegistryItem[] }
-}
+import {
+  loadRegistry,
+  registryProjectRoot as root,
+  type RegistryFile,
+  type RegistryItem,
+} from "./load-registry"
 
 function loadBuiltBlockManifest(blockName: string): RegistryItem | null {
   const manifestPath = join(root, "public/r", `${blockName}.json`)
@@ -164,7 +154,7 @@ describe("registry block media install bundle", () => {
     }
   })
 
-  it("embeds non-empty content for every media file in public/r/<block>.json", () => {
+  it("ships installUrl (not corrupt UTF-8 content) for media in public/r/<block>.json", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 
@@ -182,9 +172,15 @@ describe("registry block media install bundle", () => {
       for (const file of media) {
         const built = manifestByTarget.get(file.target)!
         expect(
-          typeof built.content === "string" && built.content.length > 0,
-          `${block.name}: ${file.target} must ship embedded content in public/r/${block.name}.json so shadcn add writes the file without a CDN fetch`,
-        ).toBe(true)
+          built.content,
+          `${block.name}: ${file.target} must not embed binary as UTF-8 in public/r/${block.name}.json — run pnpm registry:build (post-registry-build strips content)`,
+        ).toBeUndefined()
+        expect(
+          built.meta?.installUrl,
+          `${block.name}: ${file.target} needs meta.installUrl — run pnpm registry:build`,
+        ).toBe(
+          `https://uiception.com/${file.target.replace(/^public\//, "")}`,
+        )
       }
     }
   })

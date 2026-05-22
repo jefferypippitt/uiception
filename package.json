@@ -3,12 +3,19 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "imports": {
+    "#components/*": "./components/*",
+    "#lib/*": "./lib/*",
+    "#hooks/*": "./hooks/*"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "registry:build": "shadcn build",
+    "registry:validate": "shadcn registry validate",
+    "registry:build": "shadcn build && node scripts/post-registry-build.mjs",
+    "sync-media": "node scripts/sync-block-media.mjs",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
@@ -60,7 +67,7 @@
     "postcss": "^8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "shadcn": "^4.1.1",
+    "shadcn": "^4.7.0",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
     "vitest": "^4.1.3"

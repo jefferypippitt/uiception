@@ -137,52 +137,52 @@
         {
           "path": "components/ui/svgs/convex.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/convex.tsx"
+          "target": "@ui/svgs/convex.tsx"
         },
         {
           "path": "components/ui/svgs/supabase.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/supabase.tsx"
+          "target": "@ui/svgs/supabase.tsx"
         },
         {
           "path": "components/ui/svgs/tursoLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tursoLight.tsx"
+          "target": "@ui/svgs/tursoLight.tsx"
         },
         {
           "path": "components/ui/svgs/tursoDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tursoDark.tsx"
+          "target": "@ui/svgs/tursoDark.tsx"
         },
         {
           "path": "components/ui/svgs/upstash.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/upstash.tsx"
+          "target": "@ui/svgs/upstash.tsx"
         },
         {
           "path": "components/ui/svgs/neon.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/neon.tsx"
+          "target": "@ui/svgs/neon.tsx"
         },
         {
           "path": "components/ui/svgs/planetscale.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/planetscale.tsx"
+          "target": "@ui/svgs/planetscale.tsx"
         },
         {
           "path": "components/ui/svgs/planetscaleDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/planetscaleDark.tsx"
+          "target": "@ui/svgs/planetscaleDark.tsx"
         },
         {
           "path": "components/ui/svgs/mongodbIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/mongodbIconLight.tsx"
+          "target": "@ui/svgs/mongodbIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/mongodbIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/mongodbIconDark.tsx"
+          "target": "@ui/svgs/mongodbIconDark.tsx"
         }
       ]
     },
@@ -231,37 +231,37 @@
         {
           "path": "components/ui/svgs/supabase.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/supabase.tsx"
+          "target": "@ui/svgs/supabase.tsx"
         },
         {
           "path": "components/ui/svgs/convex.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/convex.tsx"
+          "target": "@ui/svgs/convex.tsx"
         },
         {
           "path": "components/ui/svgs/vercel.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/vercel.tsx"
+          "target": "@ui/svgs/vercel.tsx"
         },
         {
           "path": "components/ui/svgs/vercelDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/vercelDark.tsx"
+          "target": "@ui/svgs/vercelDark.tsx"
         },
         {
           "path": "components/ui/svgs/neon.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/neon.tsx"
+          "target": "@ui/svgs/neon.tsx"
         },
         {
           "path": "components/ui/svgs/upstash.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/upstash.tsx"
+          "target": "@ui/svgs/upstash.tsx"
         },
         {
           "path": "components/ui/svgs/tursoLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tursoLight.tsx"
+          "target": "@ui/svgs/tursoLight.tsx"
         }
       ]
     },
@@ -310,72 +310,72 @@
         {
           "path": "components/ui/svgs/tiktokIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tiktokIconLight.tsx"
+          "target": "@ui/svgs/tiktokIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/tiktokIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tiktokIconDark.tsx"
+          "target": "@ui/svgs/tiktokIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/bluesky.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/bluesky.tsx"
+          "target": "@ui/svgs/bluesky.tsx"
         },
         {
           "path": "components/ui/svgs/reddit.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/reddit.tsx"
+          "target": "@ui/svgs/reddit.tsx"
         },
         {
           "path": "components/ui/svgs/redditDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/redditDark.tsx"
+          "target": "@ui/svgs/redditDark.tsx"
         },
         {
           "path": "components/ui/svgs/meta.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/meta.tsx"
+          "target": "@ui/svgs/meta.tsx"
         },
         {
           "path": "components/ui/svgs/metaDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/metaDark.tsx"
+          "target": "@ui/svgs/metaDark.tsx"
         },
         {
           "path": "components/ui/svgs/x.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/x.tsx"
+          "target": "@ui/svgs/x.tsx"
         },
         {
           "path": "components/ui/svgs/xDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/xDark.tsx"
+          "target": "@ui/svgs/xDark.tsx"
         },
         {
           "path": "components/ui/svgs/instagramIcon.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/instagramIcon.tsx"
+          "target": "@ui/svgs/instagramIcon.tsx"
         },
         {
           "path": "components/ui/svgs/instagramIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/instagramIconDark.tsx"
+          "target": "@ui/svgs/instagramIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/telegram.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/telegram.tsx"
+          "target": "@ui/svgs/telegram.tsx"
         },
         {
           "path": "components/ui/svgs/telegramDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/telegramDark.tsx"
+          "target": "@ui/svgs/telegramDark.tsx"
         },
         {
           "path": "components/ui/svgs/youtube.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/youtube.tsx"
+          "target": "@ui/svgs/youtube.tsx"
         }
       ]
     },
@@ -419,57 +419,57 @@
         {
           "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkLight.tsx"
+          "target": "@ui/svgs/nvidiaWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/nvidiaWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkDark.tsx"
+          "target": "@ui/svgs/nvidiaWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/openaiWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkLight.tsx"
+          "target": "@ui/svgs/openaiWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/openaiWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkDark.tsx"
+          "target": "@ui/svgs/openaiWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/grokWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkLight.tsx"
+          "target": "@ui/svgs/grokWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/grokWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkDark.tsx"
+          "target": "@ui/svgs/grokWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/perplexityWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkLight.tsx"
+          "target": "@ui/svgs/perplexityWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/perplexityWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkDark.tsx"
+          "target": "@ui/svgs/perplexityWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/claudeAiWordmarkIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconLight.tsx"
+          "target": "@ui/svgs/claudeAiWordmarkIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/claudeAiWordmarkIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconDark.tsx"
+          "target": "@ui/svgs/claudeAiWordmarkIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/googleWordmark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/googleWordmark.tsx"
+          "target": "@ui/svgs/googleWordmark.tsx"
         }
       ]
     },
@@ -516,87 +516,87 @@
         {
           "path": "components/ui/svgs/nvidiaWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkLight.tsx"
+          "target": "@ui/svgs/nvidiaWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/nvidiaWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nvidiaWordmarkDark.tsx"
+          "target": "@ui/svgs/nvidiaWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/openaiWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkLight.tsx"
+          "target": "@ui/svgs/openaiWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/openaiWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/openaiWordmarkDark.tsx"
+          "target": "@ui/svgs/openaiWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/grokWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkLight.tsx"
+          "target": "@ui/svgs/grokWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/grokWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/grokWordmarkDark.tsx"
+          "target": "@ui/svgs/grokWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/perplexityWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkLight.tsx"
+          "target": "@ui/svgs/perplexityWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/perplexityWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/perplexityWordmarkDark.tsx"
+          "target": "@ui/svgs/perplexityWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/claudeAiWordmarkIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconLight.tsx"
+          "target": "@ui/svgs/claudeAiWordmarkIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/claudeAiWordmarkIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/claudeAiWordmarkIconDark.tsx"
+          "target": "@ui/svgs/claudeAiWordmarkIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/googleWordmark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/googleWordmark.tsx"
+          "target": "@ui/svgs/googleWordmark.tsx"
         },
         {
           "path": "components/ui/svgs/railway.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/railway.tsx"
+          "target": "@ui/svgs/railway.tsx"
         },
         {
           "path": "components/ui/svgs/railwayDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/railwayDark.tsx"
+          "target": "@ui/svgs/railwayDark.tsx"
         },
         {
           "path": "components/ui/svgs/cursorWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/cursorWordmarkLight.tsx"
+          "target": "@ui/svgs/cursorWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/cursorWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/cursorWordmarkDark.tsx"
+          "target": "@ui/svgs/cursorWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/githubWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/githubWordmarkLight.tsx"
+          "target": "@ui/svgs/githubWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/githubWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/githubWordmarkDark.tsx"
+          "target": "@ui/svgs/githubWordmarkDark.tsx"
         }
       ]
     },
@@ -640,67 +640,67 @@
         {
           "path": "components/ui/svgs/clerkWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/clerkWordmarkLight.tsx"
+          "target": "@ui/svgs/clerkWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/clerkWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/clerkWordmarkDark.tsx"
+          "target": "@ui/svgs/clerkWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
+          "target": "@ui/svgs/betterAuthWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
+          "target": "@ui/svgs/betterAuthWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/workos.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/workos.tsx"
+          "target": "@ui/svgs/workos.tsx"
         },
         {
           "path": "components/ui/svgs/workosLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/workosLight.tsx"
+          "target": "@ui/svgs/workosLight.tsx"
         },
         {
           "path": "components/ui/svgs/keycloak.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/keycloak.tsx"
+          "target": "@ui/svgs/keycloak.tsx"
         },
         {
           "path": "components/ui/svgs/bitwarden.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/bitwarden.tsx"
+          "target": "@ui/svgs/bitwarden.tsx"
         },
         {
           "path": "components/ui/svgs/authjs.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/authjs.tsx"
+          "target": "@ui/svgs/authjs.tsx"
         },
         {
           "path": "components/ui/svgs/auth0.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/auth0.tsx"
+          "target": "@ui/svgs/auth0.tsx"
         },
         {
           "path": "components/ui/svgs/authy.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/authy.tsx"
+          "target": "@ui/svgs/authy.tsx"
         },
         {
           "path": "components/ui/svgs/twilio.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/twilio.tsx"
+          "target": "@ui/svgs/twilio.tsx"
         },
         {
           "path": "components/ui/svgs/jwt.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/jwt.tsx"
+          "target": "@ui/svgs/jwt.tsx"
         }
       ]
     },
@@ -1163,17 +1163,17 @@
         {
           "path": "components/ui/svgs/instagramIcon.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/instagramIcon.tsx"
+          "target": "@ui/svgs/instagramIcon.tsx"
         },
         {
           "path": "components/ui/svgs/tiktokIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tiktokIconLight.tsx"
+          "target": "@ui/svgs/tiktokIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/tiktokIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/tiktokIconDark.tsx"
+          "target": "@ui/svgs/tiktokIconDark.tsx"
         }
       ]
     },
@@ -1709,12 +1709,12 @@
         {
           "path": "components/ui/svgs/doordash.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/doordash.tsx"
+          "target": "@ui/svgs/doordash.tsx"
         },
         {
           "path": "components/ui/svgs/ubereats.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/ubereats.tsx"
+          "target": "@ui/svgs/ubereats.tsx"
         },
         {
           "path": "registry/new-york/blocks/hero-section-v7/hero-section-v7.css",
@@ -1859,37 +1859,37 @@
         {
           "path": "components/ui/svgs/nextjsIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nextjsIconDark.tsx"
+          "target": "@ui/svgs/nextjsIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/vite.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/vite.tsx"
+          "target": "@ui/svgs/vite.tsx"
         },
         {
           "path": "components/ui/svgs/laravel.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/laravel.tsx"
+          "target": "@ui/svgs/laravel.tsx"
         },
         {
           "path": "components/ui/svgs/astroIconLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/astroIconLight.tsx"
+          "target": "@ui/svgs/astroIconLight.tsx"
         },
         {
           "path": "components/ui/svgs/astroIconDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/astroIconDark.tsx"
+          "target": "@ui/svgs/astroIconDark.tsx"
         },
         {
           "path": "components/ui/svgs/nuxt.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/nuxt.tsx"
+          "target": "@ui/svgs/nuxt.tsx"
         },
         {
           "path": "components/ui/svgs/svelte.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/svelte.tsx"
+          "target": "@ui/svgs/svelte.tsx"
         }
       ]
     },
@@ -2431,32 +2431,32 @@
         {
           "path": "components/ui/svgs/stripeWordmark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/stripeWordmark.tsx"
+          "target": "@ui/svgs/stripeWordmark.tsx"
         },
         {
           "path": "components/ui/svgs/stripeWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/stripeWordmarkDark.tsx"
+          "target": "@ui/svgs/stripeWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/githubWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/githubWordmarkLight.tsx"
+          "target": "@ui/svgs/githubWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/githubWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/githubWordmarkDark.tsx"
+          "target": "@ui/svgs/githubWordmarkDark.tsx"
         },
         {
           "path": "components/ui/svgs/betterAuthWordmarkLight.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkLight.tsx"
+          "target": "@ui/svgs/betterAuthWordmarkLight.tsx"
         },
         {
           "path": "components/ui/svgs/betterAuthWordmarkDark.tsx",
           "type": "registry:component",
-          "target": "components/ui/svgs/betterAuthWordmarkDark.tsx"
+          "target": "@ui/svgs/betterAuthWordmarkDark.tsx"
         },
         {
           "path": "public/images/blocks/testimonials-section-v2/avatar_2.png",
