@@ -69,19 +69,14 @@ Declare every image and video so `shadcn add` installs code and assets in one st
 }
 ```
 
-After adding or changing media: `pnpm registry:build` (runs `post-registry-build.mjs`, which strips corrupt embedded binary and sets `meta.installUrl` on each media file).
+After adding or changing media: `pnpm registry:build` (runs `tests/registry/post-registry-build.mjs`, which strips corrupt embedded binary and sets `meta.installUrl` on each media file).
 
-## Consumer install (required for images/video)
+## Consumer install (images/video)
 
-`shadcn add` cannot install binary files correctly. After adding a block, consumers run:
+`shadcn add` only writes `registry:file` entries that include `content` in the manifest ([registry-item.json](https://ui.shadcn.com/docs/registry/registry-item-json)). Binary PNG/MP4 cannot be embedded (UTF-8 corruption), so `registry:build` strips `content`. Media blocks list `https://uiception.com/r/ensure-uiception-block-media.json` in `registryDependencies` (installs `@lib/ensure-uiception-block-media.ts`).
 
-```bash
-node path/to/uiception/scripts/sync-block-media.mjs <block-id>
-node path/to/uiception/scripts/sync-block-media.mjs macbook-pro-with-video macbook-pro-with-image
-node path/to/uiception/scripts/sync-block-media.mjs --all
-```
+Call `ensureUiceptionBlockMedia("<block-id>")` from `@/lib/ensure-uiception-block-media` in the block’s default export (server components) or in `page.tsx` for `"use client"` blocks. First render downloads missing files into `public/`.
 
-Assets download from `https://uiception.com/images/blocks/...` and `/videos/blocks/...`.
 
 ## Consumer swap
 
@@ -90,5 +85,5 @@ Installed assets land at the same paths under `public/images/blocks/<block-id>/`
 ## Do not
 
 - Reference media with `https://uiception.com/images/...` or `https://uiception.com/videos/...` in block code
-- Ship images or video via a post-install download script — bundle in `registry.json` `files`
+- Omit `ensureUiceptionBlockMedia` on media blocks (server export or `page.tsx` for client blocks)
 - Omit `registry:file` entries when block code references `/images/blocks/<block-id>/` or `/videos/blocks/<block-id>/`

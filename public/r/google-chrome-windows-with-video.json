@@ -4,12 +4,13 @@
   "title": "Google Chrome (Windows, w/ video)",
   "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
   "registryDependencies": [
-    "https://uiception.com/r/google-chrome-windows.json"
+    "https://uiception.com/r/google-chrome-windows.json",
+    "https://uiception.com/r/ensure-uiception-block-media.json"
   ],
   "files": [
     {
       "path": "registry/new-york/blocks/google-chrome-windows-with-video/page.tsx",
-      "content": "import GoogleChromeWindowsWithVideo from \"./google-chrome-windows-with-video\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <GoogleChromeWindowsWithVideo />\n    </div>\n  )\n}\n",
+      "content": "import { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\n\nimport GoogleChromeWindowsWithVideo from \"./google-chrome-windows-with-video\"\n\nexport default async function Page() {\n  await ensureUiceptionBlockMedia(\"google-chrome-windows-with-video\")\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <GoogleChromeWindowsWithVideo />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/google-chrome-windows-with-video/page.tsx"
     },
@@ -28,5 +29,6 @@
       }
     }
   ],
-  "type": "registry:block"
+  "type": "registry:block",
+  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
 }

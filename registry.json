@@ -72,7 +72,8 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/mac-os-terminal.json",
-        "https://uiception.com/r/brands-section-v1.json"
+        "https://uiception.com/r/brands-section-v1.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -1066,7 +1067,8 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "button"
+        "button",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -1520,7 +1522,8 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/stats-section-v1.json"
+        "https://uiception.com/r/stats-section-v1.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -1598,7 +1601,8 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/brands-section-v5.json"
+        "https://uiception.com/r/brands-section-v5.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -1734,7 +1738,8 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/simple-chatbot.json",
-        "https://uiception.com/r/brands-section-v1.json"
+        "https://uiception.com/r/brands-section-v1.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2157,12 +2162,26 @@
       ]
     },
     {
+      "name": "ensure-uiception-block-media",
+      "type": "registry:lib",
+      "title": "Ensure uiception block media",
+      "description": "Downloads bundled images/videos into public/ after shadcn add. Installed automatically with media blocks.",
+      "files": [
+        {
+          "path": "lib/ensure-uiception-block-media.ts",
+          "type": "registry:lib",
+          "target": "@lib/ensure-uiception-block-media.ts"
+        }
+      ]
+    },
+    {
       "name": "google-chrome-windows-with-video",
       "type": "registry:block",
       "title": "Google Chrome (Windows, w/ video)",
       "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
       "registryDependencies": [
-        "https://uiception.com/r/google-chrome-windows.json"
+        "https://uiception.com/r/google-chrome-windows.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2217,7 +2236,8 @@
       "title": "MacBook Pro (w/ image)",
       "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json"
+        "https://uiception.com/r/macbook-pro.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2243,7 +2263,8 @@
       "title": "MacBook Pro (w/ video)",
       "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json"
+        "https://uiception.com/r/macbook-pro.json",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2326,7 +2347,8 @@
       "registryDependencies": [
         "carousel",
         "avatar",
-        "button"
+        "button",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2400,7 +2422,8 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "avatar"
+        "avatar",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {
@@ -2554,7 +2577,8 @@
       ],
       "registryDependencies": [
         "badge",
-        "card"
+        "card",
+        "https://uiception.com/r/ensure-uiception-block-media.json"
       ],
       "files": [
         {

@@ -57,13 +57,7 @@ export function binaryPlaceholder(path: string): string {
   const isVideo = ["mp4", "webm", "mov", "m4v", "ogv"].includes(ext)
 
   if (isVideo) {
-    return [
-      `// ${name}`,
-      "//",
-      "// Bundled video — not shown here (binary).",
-      "// After `shadcn add`, run sync-block-media.mjs for this block to download it.",
-      "// Or place your own file at the same path under public/videos/blocks/...",
-    ].join("\n")
+    return [`// ${name}`, "//", "// Replace with your own video."].join("\n")
   }
 
   return [

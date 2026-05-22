@@ -35,6 +35,7 @@ describe("registry-code-view", () => {
     )
     expect(out.length).toBeLessThan(500)
     expect(out).toContain("screen-demo.mp4")
+    expect(out).toContain("Replace with your own video")
     expect(out).not.toContain("xxxx")
   })
 })

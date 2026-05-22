@@ -7,7 +7,8 @@
     "geist@^1.7.0"
   ],
   "registryDependencies": [
-    "avatar"
+    "avatar",
+    "https://uiception.com/r/ensure-uiception-block-media.json"
   ],
   "files": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v2/testimonials-section-v2.tsx",
-      "content": "import TestimonialColumn from \"./testimonial-column\"\nimport { testimonials } from \"./testimonials-content\"\nexport default function TestimonialsSectionV2() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"grid grid-cols-1 divide-y divide-border border border-border md:grid-cols-3 md:divide-x md:divide-y-0\">\n          {testimonials.map((testimonial) => (\n            <TestimonialColumn key={testimonial.id} testimonial={testimonial} />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport TestimonialColumn from \"./testimonial-column\"\nimport { testimonials } from \"./testimonials-content\"\n\nexport default async function TestimonialsSectionV2() {\n  await ensureUiceptionBlockMedia(\"testimonials-section-v2\")\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"grid grid-cols-1 divide-y divide-border border border-border md:grid-cols-3 md:divide-x md:divide-y-0\">\n          {testimonials.map((testimonial) => (\n            <TestimonialColumn key={testimonial.id} testimonial={testimonial} />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/testimonials-section-v2/testimonials-section-v2.tsx"
     },
@@ -101,5 +102,6 @@
       }
     }
   ],
-  "type": "registry:block"
+  "type": "registry:block",
+  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
 }

@@ -1,7 +1,6 @@
 /**
- * shadcn build embeds binary files as UTF-8 strings, which corrupts PNG/MP4 bytes.
- * Strip embedded content from media registry:file entries and attach installUrl so
- * consumers can run scripts/sync-block-media.mjs after `shadcn add`.
+ * Run after `shadcn build` (via pnpm registry:build / prebuild).
+ * Strips corrupt binary `content` from media registry:file entries in public/r/*.json.
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
@@ -10,7 +9,6 @@ const ORIGIN = process.env.UICEPTION_ORIGIN ?? "https://uiception.com"
 const root = process.cwd()
 const outDir = join(root, "public/r")
 
-/** Next.js serves `public/foo` at `/foo`. */
 function installUrlForTarget(target) {
   const webPath = target.replace(/^public[/\\]/, "").replace(/\\/g, "/")
   return `${ORIGIN}/${webPath}`
@@ -29,12 +27,14 @@ for (const name of readdirSync(outDir)) {
   const filePath = join(outDir, name)
   const item = JSON.parse(readFileSync(filePath, "utf8"))
   let changed = false
+  let hasMedia = false
 
   for (const file of item.files ?? []) {
     if (file.type !== "registry:file" || !isBundledMediaTarget(file.target)) {
       continue
     }
 
+    hasMedia = true
     const installUrl = installUrlForTarget(file.target)
 
     if (file.content !== undefined) {
@@ -45,6 +45,15 @@ for (const name of readdirSync(outDir)) {
     const meta = { ...(file.meta ?? {}), installUrl }
     if (JSON.stringify(meta) !== JSON.stringify(file.meta ?? {})) {
       file.meta = meta
+      changed = true
+    }
+  }
+
+  if (hasMedia) {
+    const docs =
+      "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+    if (item.docs !== docs) {
+      item.docs = docs
       changed = true
     }
   }

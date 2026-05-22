@@ -1,11 +1,13 @@
 import Image from "next/image"
 
+import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import MacbookPro from "../macbook-pro/macbook-pro"
 
 const SCREEN_WALLPAPER =
   "/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png"
 
-export default function MacbookProWithImage() {
+export default async function MacbookProWithImage() {
+  await ensureUiceptionBlockMedia("macbook-pro-with-image")
   return (
     <MacbookPro>
       <div className="relative size-full">

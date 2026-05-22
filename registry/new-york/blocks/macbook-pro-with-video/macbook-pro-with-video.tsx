@@ -1,9 +1,11 @@
+import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import MacbookPro from "../macbook-pro/macbook-pro"
 
 const SCREEN_VIDEO =
   "/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
 
-export default function MacbookProWithVideo() {
+export default async function MacbookProWithVideo() {
+  await ensureUiceptionBlockMedia("macbook-pro-with-video")
   return (
     <MacbookPro>
       <video

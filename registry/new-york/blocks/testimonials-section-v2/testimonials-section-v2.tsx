@@ -1,6 +1,9 @@
+import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import TestimonialColumn from "./testimonial-column"
 import { testimonials } from "./testimonials-content"
-export default function TestimonialsSectionV2() {
+
+export default async function TestimonialsSectionV2() {
+  await ensureUiceptionBlockMedia("testimonials-section-v2")
   return (
     <section className="py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4">

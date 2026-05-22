@@ -3,24 +3,26 @@
 Run these in order before pushing to GitHub / deploying to Vercel.
 
 ```bash
-pnpm registry:validate  # shadcn registry validate (source registry + include)
-pnpm registry:build     # rebuild /r/*.json from registry.json (+ post-registry-build for media)
-pnpm test:run           # catch all registry config issues
-pnpm typecheck          # catch TypeScript errors
-pnpm build              # final sanity check before Vercel
+pnpm check              # registry:validate + test:run + typecheck
+pnpm build              # prebuild runs registry:build, then next build (same as Vercel)
+```
+
+Or step by step:
+
+```bash
+pnpm registry:validate
+pnpm registry:build     # only needed if you skip `pnpm build`
+pnpm test:run
+pnpm typecheck
+pnpm build
 ```
 
 If all five pass, a user running:
 
 ```bash
 npx shadcn@latest add "https://uiception.com/r/<block>.json"
-node path/to/uiception/scripts/sync-block-media.mjs <block>
-node path/to/uiception/scripts/sync-block-media.mjs --all   # every folder under app/
 ```
 
-will get code, dependencies, and **images/videos** installed correctly.
-
-> **Media:** The shadcn CLI writes `registry:file` text as UTF-8, which corrupts PNG/MP4 bytes. Built manifests omit binary `content` and set `meta.installUrl` instead. Consumers must run `sync-block-media.mjs` once after `shadcn add` (assets are served from `https://uiception.com/images/blocks/...` and `/videos/blocks/...`).
 
 ---
 
@@ -34,11 +36,14 @@ will get code, dependencies, and **images/videos** installed correctly.
 
 ## What the tests catch
 
+All registry-related tests live in [`tests/registry/`](tests/registry/) (including `ensure-uiception-block-media`).
+
 | Risk | Test |
 |---|---|
 | File listed in registry doesn't exist on disk | `registry-blocks` |
 | Duplicate install targets | `registry-blocks` |
-| Image or video in wrong folder / missing from registry | `registry-block-media` |
+| Bundled media: wrong path, missing registry entry, missing on disk, bad built manifest, missing ensure helper | `registry-block-media` |
+| `ensureUiceptionBlockMedia` download behavior | `ensure-uiception-block-media` (under `tests/registry/`) |
 | Broken `@/` or relative imports | `registry-imports` |
 | shadcn component not declared in `registryDependencies` | `registry-shadcn-deps` |
 | SVG not declared in `files` | `registry-svg-deps` |
@@ -47,11 +52,6 @@ will get code, dependencies, and **images/videos** installed correctly.
 | CSS import not declared in `files` | `registry-file-deps` |
 | Wrong `target` path for block files | `registry-target-paths` |
 
-## What still needs manual verification
-
-- **Visual/layout** — check the block looks correct in `pnpm dev` before pushing
-- **Runtime errors** — the tests are static analysis, they won't catch render crashes
-- **`NEXT_PUBLIC_UICEPTION_IMAGES`** — must only be set in Vercel env vars, never in local `.env`
 
 ## Adding a new block checklist
 
@@ -63,6 +63,7 @@ will get code, dependencies, and **images/videos** installed correctly.
 - [ ] Raster images go in `public/images/blocks/<block-name>/`; video in `public/videos/blocks/<block-name>/` (see `registry-block-media.mdc`)
 - [ ] Block code uses `/images/blocks/...` and `/videos/blocks/...` only (no CDN URLs)
 - [ ] Block `files` includes every referenced image/video as `registry:file` with matching `path` and `target`
+- [ ] `registryDependencies` includes `https://uiception.com/r/ensure-uiception-block-media.json`; server export or `page.tsx` calls `ensureUiceptionBlockMedia("<block-id>")`
 - [ ] All shadcn components declared in `registryDependencies`
 - [ ] All SVGs declared in `files`
 - [ ] All third-party npm packages declared in `dependencies`

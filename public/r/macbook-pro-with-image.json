@@ -4,7 +4,8 @@
   "title": "MacBook Pro (w/ image)",
   "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
   "registryDependencies": [
-    "https://uiception.com/r/macbook-pro.json"
+    "https://uiception.com/r/macbook-pro.json",
+    "https://uiception.com/r/ensure-uiception-block-media.json"
   ],
   "files": [
     {
@@ -15,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-image/macbook-pro-with-image.tsx",
-      "content": "import Image from \"next/image\"\n\nimport MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_WALLPAPER =\n  \"/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\"\n\nexport default function MacbookProWithImage() {\n  return (\n    <MacbookPro>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS Monterey default dark wallpaper\"\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 896px) 100vw, 896px\"\n          priority\n        />\n      </div>\n    </MacbookPro>\n  )\n}\n",
+      "content": "import Image from \"next/image\"\n\nimport { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_WALLPAPER =\n  \"/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\"\n\nexport default async function MacbookProWithImage() {\n  await ensureUiceptionBlockMedia(\"macbook-pro-with-image\")\n  return (\n    <MacbookPro>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS Monterey default dark wallpaper\"\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 896px) 100vw, 896px\"\n          priority\n        />\n      </div>\n    </MacbookPro>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-image/macbook-pro-with-image.tsx"
     },
@@ -28,5 +29,6 @@
       }
     }
   ],
-  "type": "registry:block"
+  "type": "registry:block",
+  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
 }
