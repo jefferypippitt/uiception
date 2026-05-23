@@ -10,8 +10,7 @@
   ],
   "registryDependencies": [
     "button",
-    "https://uiception.com/r/stats-section-v1.json",
-    "https://uiception.com/r/ensure-uiception-block-media.json"
+    "https://uiception.com/r/stats-section-v1.json"
   ],
   "files": [
     {
@@ -22,7 +21,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v4/hero-section-v4.tsx",
-      "content": "import { StatsSectionV1Content } from \"../stats-section-v1/stats-section-v1\"\n\nimport { HeroV4Root } from \"./hero-v4-root\"\n\nimport { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport \"./hero-section-v4.css\"\n\nexport default async function HeroSectionV4() {\n  await ensureUiceptionBlockMedia(\"hero-section-v4\")\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
+      "content": "import { StatsSectionV1Content } from \"../stats-section-v1/stats-section-v1\"\n\nimport { HeroV4Root } from \"./hero-v4-root\"\n\nimport \"./hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v4/hero-section-v4.tsx"
     },
@@ -65,6 +64,5 @@
       }
     }
   ],
-  "type": "registry:block",
-  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+  "type": "registry:block"
 }

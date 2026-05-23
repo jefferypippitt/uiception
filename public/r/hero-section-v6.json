@@ -9,8 +9,7 @@
   ],
   "registryDependencies": [
     "button",
-    "https://uiception.com/r/brands-section-v5.json",
-    "https://uiception.com/r/ensure-uiception-block-media.json"
+    "https://uiception.com/r/brands-section-v5.json"
   ],
   "files": [
     {
@@ -21,7 +20,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v6/hero-section-v6.tsx",
-      "content": "import BrandsSectionV5 from \"../brands-section-v5/brands-section-v5\"\n\nimport { HeroV6Root } from \"./hero-v6-root\"\n\nimport { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport \"./hero-section-v6.css\"\n\nexport default async function HeroSectionV6() {\n  await ensureUiceptionBlockMedia(\"hero-section-v6\")\n  return (\n    <>\n      <section className=\"pt-10 md:pt-14 lg:pt-16\">\n        <HeroV6Root />\n      </section>\n      <BrandsSectionV5 animated />\n    </>\n  )\n}\n",
+      "content": "import BrandsSectionV5 from \"../brands-section-v5/brands-section-v5\"\n\nimport { HeroV6Root } from \"./hero-v6-root\"\n\nimport \"./hero-section-v6.css\"\n\nexport default function HeroSectionV6() {\n  return (\n    <>\n      <section className=\"pt-10 md:pt-14 lg:pt-16\">\n        <HeroV6Root />\n      </section>\n      <BrandsSectionV5 animated />\n    </>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v6/hero-section-v6.tsx"
     },
@@ -70,6 +69,5 @@
       }
     }
   ],
-  "type": "registry:block",
-  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+  "type": "registry:block"
 }

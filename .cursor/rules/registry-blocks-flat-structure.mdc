@@ -31,27 +31,3 @@ import Sub from "./sub-component"
 import { ITEMS } from "./config"
 import "./<block-id>.css"
 ```
-
-Cross-block composition (heroes embedding integrations/brands):
-
-```ts
-import MacOsTerminal from "../mac-os-terminal/mac-os-terminal"
-```
-
-List composed blocks in `registryDependencies` in `registry.json`. CSS from a dependency block is allowed when that block is in `registryDependencies`.
-
-Blocks with bundled images or video: see `registry-block-media.mdc`.
-
-## registry.json
-
-- Block items are declared in root [`registry.json`](../../registry.json) `items[]`.
-- `path`: `registry/new-york/blocks/<id>/<file>`
-- `target`: `app/<id>/<file>` for block-owned files (mirror flat layout, not `app/<id>/components/...`)
-- Shared SVGs: `path` = `components/ui/svgs/...`, `target` = `@ui/svgs/...`
-- Declare every file on disk in the block's `files` array
-- After edits: `pnpm registry:validate` then `pnpm registry:build`
-
-## Do not
-
-- Create `components/`, `hooks/`, `lib/`, or `styles/` under a block folder
-- Use `../../other-block/` from a file that was only valid inside a nested subfolder (use `../other-block/` from block root)

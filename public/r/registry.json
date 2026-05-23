@@ -72,9 +72,7 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/mac-os-terminal.json",
-        "https://uiception.com/r/brands-section-v1.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/brands-section-v1.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
@@ -1067,9 +1065,7 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "button",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "button"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/cta-section-v1/page.tsx",
@@ -1522,9 +1518,7 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/stats-section-v1.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/stats-section-v1.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v4/page.tsx",
@@ -1601,9 +1595,7 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/brands-section-v5.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/brands-section-v5.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v6/page.tsx",
@@ -1738,9 +1730,7 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/simple-chatbot.json",
-        "https://uiception.com/r/brands-section-v1.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/brands-section-v1.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v8/page.tsx",
@@ -2162,27 +2152,12 @@
       ]
     },
     {
-      "name": "ensure-uiception-block-media",
-      "type": "registry:lib",
-      "title": "Ensure uiception block media",
-      "description": "Downloads bundled images/videos into public/ after shadcn add. Installed automatically with media blocks.",
-      "files": [
-        {
-          "path": "lib/ensure-uiception-block-media.ts",
-          "type": "registry:lib",
-          "target": "@lib/ensure-uiception-block-media.ts"
-        }
-      ]
-    },
-    {
       "name": "google-chrome-windows-with-video",
       "type": "registry:block",
       "title": "Google Chrome (Windows, w/ video)",
       "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
       "registryDependencies": [
-        "https://uiception.com/r/google-chrome-windows.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/google-chrome-windows.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/google-chrome-windows-with-video/page.tsx",
@@ -2236,9 +2211,7 @@
       "title": "MacBook Pro (w/ image)",
       "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/macbook-pro.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/macbook-pro-with-image/page.tsx",
@@ -2263,9 +2236,7 @@
       "title": "MacBook Pro (w/ video)",
       "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "https://uiception.com/r/macbook-pro.json"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/macbook-pro-with-video/page.tsx",
@@ -2347,9 +2318,7 @@
       "registryDependencies": [
         "carousel",
         "avatar",
-        "button",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "button"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/testimonials-section-v1/page.tsx",
@@ -2422,9 +2391,7 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "avatar",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "avatar"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/testimonials-section-v2/page.tsx",
@@ -2577,9 +2544,7 @@
       ],
       "registryDependencies": [
         "badge",
-        "card",
-        "https://uiception.com/r/ensure-uiception-block-media.json"
-      ],
+        "card"      ],
       "files": [
         {
           "path": "registry/new-york/blocks/feature-section-v4/page.tsx",

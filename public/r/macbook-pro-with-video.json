@@ -4,8 +4,7 @@
   "title": "MacBook Pro (w/ video)",
   "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
   "registryDependencies": [
-    "https://uiception.com/r/macbook-pro.json",
-    "https://uiception.com/r/ensure-uiception-block-media.json"
+    "https://uiception.com/r/macbook-pro.json"
   ],
   "files": [
     {
@@ -16,7 +15,7 @@
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-video/macbook-pro-with-video.tsx",
-      "content": "import { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_VIDEO =\n  \"/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n\nexport default async function MacbookProWithVideo() {\n  await ensureUiceptionBlockMedia(\"macbook-pro-with-video\")\n  return (\n    <MacbookPro>\n      <video\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n        src={SCREEN_VIDEO}\n        muted\n        loop\n        playsInline\n        autoPlay\n        aria-label=\"Screen content video demo\"\n      />\n    </MacbookPro>\n  )\n}\n",
+      "content": "import MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_VIDEO =\n  \"/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n\nexport default function MacbookProWithVideo() {\n  return (\n    <MacbookPro>\n      <video\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n        src={SCREEN_VIDEO}\n        muted\n        loop\n        playsInline\n        autoPlay\n        aria-label=\"Screen content video demo\"\n      />\n    </MacbookPro>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-video/macbook-pro-with-video.tsx"
     },
@@ -29,6 +28,5 @@
       }
     }
   ],
-  "type": "registry:block",
-  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+  "type": "registry:block"
 }

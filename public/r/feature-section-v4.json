@@ -8,8 +8,7 @@
   ],
   "registryDependencies": [
     "badge",
-    "card",
-    "https://uiception.com/r/ensure-uiception-block-media.json"
+    "card"
   ],
   "files": [
     {
@@ -20,7 +19,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v4/feature-section-v4.tsx",
-      "content": "import { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport FeatureGrid from \"./feature-grid\"\n\nconst featureImage = (filename: string) =>\n  `/images/blocks/feature-section-v4/${filename}`\n\nexport default async function FeatureSectionV4() {\n  await ensureUiceptionBlockMedia(\"feature-section-v4\")\n  const featureImageById = {\n    \"cognitive-ai\": featureImage(\"feature-section-v4-brain.png\"),\n    \"global-reach\": featureImage(\"feature-section-v4-planet.png\"),\n    \"limitless-growth\": featureImage(\"feature-section-v4-hand.png\"),\n  } as const\n\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"mb-9 grid gap-3 lg:mb-11 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end lg:gap-10\">\n          <h2 className=\"max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[1.06] font-medium tracking-[-0.02em] uppercase\">\n            Built for What&apos;s Possible\n          </h2>\n          <p className=\"max-w-[42ch] text-3.75 leading-[1.72] font-normal text-muted-foreground lg:pb-1\">\n            When you are building what comes next, you need tools that learn\n            from real use, work across regions, and grow with every goal you\n            add.\n          </p>\n        </div>\n        <FeatureGrid imageById={featureImageById} />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import FeatureGrid from \"./feature-grid\"\n\nconst featureImage = (filename: string) =>\n  `/images/blocks/feature-section-v4/${filename}`\n\nexport default function FeatureSectionV4() {\n  const featureImageById = {\n    \"cognitive-ai\": featureImage(\"feature-section-v4-brain.png\"),\n    \"global-reach\": featureImage(\"feature-section-v4-planet.png\"),\n    \"limitless-growth\": featureImage(\"feature-section-v4-hand.png\"),\n  } as const\n\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4 sm:px-6 lg:px-8\">\n        <div className=\"mb-9 grid gap-3 lg:mb-11 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end lg:gap-10\">\n          <h2 className=\"max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[1.06] font-medium tracking-[-0.02em] uppercase\">\n            Built for What&apos;s Possible\n          </h2>\n          <p className=\"max-w-[42ch] text-3.75 leading-[1.72] font-normal text-muted-foreground lg:pb-1\">\n            When you are building what comes next, you need tools that learn\n            from real use, work across regions, and grow with every goal you\n            add.\n          </p>\n        </div>\n        <FeatureGrid imageById={featureImageById} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/feature-section-v4/feature-section-v4.tsx"
     },
@@ -67,6 +66,5 @@
       }
     }
   ],
-  "type": "registry:block",
-  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+  "type": "registry:block"
 }

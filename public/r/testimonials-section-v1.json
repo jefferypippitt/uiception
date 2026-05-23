@@ -6,8 +6,7 @@
   "registryDependencies": [
     "carousel",
     "avatar",
-    "button",
-    "https://uiception.com/r/ensure-uiception-block-media.json"
+    "button"
   ],
   "files": [
     {
@@ -18,7 +17,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v1/testimonials-section-v1.tsx",
-      "content": "import { ensureUiceptionBlockMedia } from \"@/lib/ensure-uiception-block-media\"\nimport TestimonialsCarousel from \"./testimonials-carousel\"\nimport { sectionMeta, testimonials } from \"./testimonials-content\"\nimport \"./testimonials-section-v1.css\"\n\nexport default async function TestimonialsSectionV1() {\n  await ensureUiceptionBlockMedia(\"testimonials-section-v1\")\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"mb-10 text-3xl font-medium tracking-tight md:mb-12\">\n          {sectionMeta.title}\n        </h2>\n        <TestimonialsCarousel testimonials={testimonials} />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import TestimonialsCarousel from \"./testimonials-carousel\"\nimport { sectionMeta, testimonials } from \"./testimonials-content\"\nimport \"./testimonials-section-v1.css\"\n\nexport default function TestimonialsSectionV1() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"mb-10 text-3xl font-medium tracking-tight md:mb-12\">\n          {sectionMeta.title}\n        </h2>\n        <TestimonialsCarousel testimonials={testimonials} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/testimonials-section-v1/testimonials-section-v1.tsx"
     },
@@ -95,6 +94,5 @@
       }
     }
   ],
-  "type": "registry:block",
-  "docs": "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
+  "type": "registry:block"
 }

@@ -13,7 +13,6 @@ import {
   type RegistryItem,
 } from "./load-registry"
 
-const ENSURE_MEDIA_DEP = "ensure-uiception-block-media.json"
 const INSTALL_ORIGIN = "https://uiception.com"
 
 function loadBuiltBlockManifest(blockName: string): RegistryItem | null {
@@ -28,22 +27,6 @@ function mediaFilesForBlock(block: RegistryItem): RegistryFile[] {
       f.type === "registry:file" &&
       (f.target.startsWith("public/images/blocks/") ||
         f.target.startsWith("public/videos/blocks/")),
-  )
-}
-
-function hasEnsureMediaDependency(block: RegistryItem): boolean {
-  return (block.registryDependencies ?? []).some((dep) =>
-    String(dep).includes(ENSURE_MEDIA_DEP),
-  )
-}
-
-function builtManifestCallsEnsure(
-  manifest: RegistryItem,
-  blockName: string,
-): boolean {
-  const needle = `ensureUiceptionBlockMedia("${blockName}")`
-  return (manifest.files ?? []).some(
-    (f) => f.content?.includes(needle) ?? false,
   )
 }
 
@@ -66,7 +49,7 @@ describe("registry block media", () => {
         const entry = declared.get(publicPath)
         expect(
           entry,
-          `${blockName}: add registry:file for ${publicPath} (runtime download via ensureUiceptionBlockMedia)`,
+          `${blockName}: add registry:file for ${publicPath}`,
         ).toBeTruthy()
         expect(
           entry!.path,
@@ -133,20 +116,6 @@ describe("registry block media", () => {
         manifest,
         `${blockName}: run pnpm registry:build — missing public/r/${blockName}.json`,
       ).toBeTruthy()
-
-      expect(
-        hasEnsureMediaDependency(block),
-        `${blockName}: registryDependencies must include ${ENSURE_MEDIA_DEP}`,
-      ).toBe(true)
-      expect(
-        hasEnsureMediaDependency(manifest!),
-        `${blockName}: built manifest must list ensure-uiception-block-media in registryDependencies`,
-      ).toBe(true)
-
-      expect(
-        builtManifestCallsEnsure(manifest!, blockName),
-        `${blockName}: built manifest must call ensureUiceptionBlockMedia("${blockName}") in a server file`,
-      ).toBe(true)
 
       const manifestByTarget = new Map(
         (manifest!.files ?? []).map((f) => [f.target, f] as const),

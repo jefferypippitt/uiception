@@ -4,10 +4,7 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 
-import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
-
-export default async function CtaSectionV1() {
-  await ensureUiceptionBlockMedia("cta-section-v1")
+export default function CtaSectionV1() {
   return (
     <div className="pt-16 md:pt-20 lg:pt-24">
       <div className="mx-auto max-w-6xl px-4">

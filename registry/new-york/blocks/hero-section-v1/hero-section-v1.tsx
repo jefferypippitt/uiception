@@ -6,11 +6,9 @@ import { ArrowUpRightIcon } from "lucide-react"
 
 import BrandsSectionV1 from "../brands-section-v1/brands-section-v1"
 import MacOsTerminal from "../mac-os-terminal/mac-os-terminal"
-import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import { HeroV1Image } from "./hero-v1-image"
 
-export default async function HeroSectionV1() {
-  await ensureUiceptionBlockMedia("hero-section-v1")
+export default function HeroSectionV1() {
   return (
     <>
       <section className="py-10 md:py-14 lg:py-16">

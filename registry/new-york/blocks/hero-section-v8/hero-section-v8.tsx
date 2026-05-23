@@ -5,7 +5,6 @@ import HeroV8BrandCarousel from "./hero-v8-brand-carousel"
 import { HeroV8Scene } from "./hero-v8-scene"
 import { HERO_V8_TRUST_LABEL } from "./carousel-timing"
 
-import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import "./hero-section-v8.css"
 
 const AI_ASSISTANT_PROMPTS = [
@@ -17,8 +16,7 @@ const AI_ASSISTANT_PROMPTS = [
   "Compare spaced repetition vs. active recall for studying.",
 ] as const
 
-export default async function HeroSectionV8() {
-  await ensureUiceptionBlockMedia("hero-section-v8")
+export default function HeroSectionV8() {
   return (
     <section
       className={`${GeistSans.className} pt-10 pb-16 hyphens-none md:pt-14 md:pb-20 lg:pt-16 lg:pb-24 [&_.scb-caret]:font-[inherit] [&_.scb-input]:font-[inherit] [&_.scb-root]:font-[inherit] [&_.scb-text]:font-[inherit]`}

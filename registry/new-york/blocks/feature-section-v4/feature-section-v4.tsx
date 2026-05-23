@@ -1,11 +1,9 @@
-import { ensureUiceptionBlockMedia } from "@/lib/ensure-uiception-block-media"
 import FeatureGrid from "./feature-grid"
 
 const featureImage = (filename: string) =>
   `/images/blocks/feature-section-v4/${filename}`
 
-export default async function FeatureSectionV4() {
-  await ensureUiceptionBlockMedia("feature-section-v4")
+export default function FeatureSectionV4() {
   const featureImageById = {
     "cognitive-ai": featureImage("feature-section-v4-brain.png"),
     "global-reach": featureImage("feature-section-v4-planet.png"),

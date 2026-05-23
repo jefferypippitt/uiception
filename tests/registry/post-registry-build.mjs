@@ -27,14 +27,12 @@ for (const name of readdirSync(outDir)) {
   const filePath = join(outDir, name)
   const item = JSON.parse(readFileSync(filePath, "utf8"))
   let changed = false
-  let hasMedia = false
 
   for (const file of item.files ?? []) {
     if (file.type !== "registry:file" || !isBundledMediaTarget(file.target)) {
       continue
     }
 
-    hasMedia = true
     const installUrl = installUrlForTarget(file.target)
 
     if (file.content !== undefined) {
@@ -49,13 +47,9 @@ for (const name of readdirSync(outDir)) {
     }
   }
 
-  if (hasMedia) {
-    const docs =
-      "Bundled images/videos download on first render (@lib/ensure-uiception-block-media). Import on a server page — shadcn add does not copy binary files into public/."
-    if (item.docs !== docs) {
-      item.docs = docs
-      changed = true
-    }
+  if (item.docs?.includes("ensure-uiception-block-media")) {
+    delete item.docs
+    changed = true
   }
 
   if (changed) {
