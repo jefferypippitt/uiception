@@ -1,19 +1,30 @@
-/* cursor-terminal — caret blink, line fade-in */
+/* cursor-terminal — caret blink, line fade-in, paste-in */
 
 .crt-cursor {
-  animation: crt-terminal-blink 1.15s step-start infinite;
+  animation: crt-terminal-blink 1.05s step-end infinite;
+  margin-left: 1px;
+  display: inline-block;
+  height: 1em;
+  width: 0.5rem;
+  translate: 0 1px;
+  vertical-align: text-bottom;
+  background-color: var(--crt-t-cursor-bg, #cccccc);
 }
 
 .crt-line-in {
-  animation: crt-terminal-line-fade 0.12s ease-out both;
+  animation: crt-terminal-line-fade 0.07s linear both;
+}
+
+.crt-paste-in {
+  animation: crt-terminal-paste-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes crt-terminal-blink {
   0%,
-  49.9% {
+  48% {
     opacity: 1;
   }
-  50%,
+  52%,
   100% {
     opacity: 0;
   }
@@ -21,9 +32,32 @@
 
 @keyframes crt-terminal-line-fade {
   from {
-    opacity: 0;
+    opacity: 0.35;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes crt-terminal-paste-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-cursor {
+    animation: none;
+    opacity: 1;
+  }
+
+  .crt-line-in,
+  .crt-paste-in {
+    animation: none;
   }
 }

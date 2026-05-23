@@ -40,6 +40,7 @@ import {
   codeViewContentForRegistryFile,
   shouldStripRegistryFileContent,
 } from "@/lib/registry-code-view"
+import { installCommandWithMediaFetch } from "@/lib/registry-install-media"
 import { cn } from "@/lib/utils"
 import { ReactLight } from "@/components/ui/svgs/reactLight"
 import { ReactDark } from "@/components/ui/svgs/reactDark"
@@ -409,7 +410,7 @@ export function BlockPreviewToolbar({
   }, [versionId])
 
   React.useEffect(() => {
-    if (mainView !== "code" || registryFiles !== null || codeError) return
+    if (registryFiles !== null || codeError) return
     let cancelled = false
     void fetch(`/r/${versionId}.json`)
       .then((res) => {
@@ -435,10 +436,17 @@ export function BlockPreviewToolbar({
     return () => {
       cancelled = true
     }
-  }, [mainView, versionId, registryFiles, codeError])
+  }, [versionId, registryFiles, codeError])
 
-  const installCommandCopy = `npx shadcn@latest add "https://uiception.com/r/${versionId}.json"`
-  const installCommandDisplay = `npx shadcn add ${versionId}`
+  const installCommandCopy = React.useMemo(
+    () =>
+      installCommandWithMediaFetch(versionId, registryFiles ?? undefined),
+    [versionId, registryFiles],
+  )
+  const installCommandDisplay =
+    registryFiles && installCommandCopy.includes("curl ")
+      ? `npx shadcn add ${versionId} + media`
+      : `npx shadcn add ${versionId}`
   const previewPath = `/view/${versionId}`
 
   // If the iframe navigates to a new preview URL, ensure the loading overlay

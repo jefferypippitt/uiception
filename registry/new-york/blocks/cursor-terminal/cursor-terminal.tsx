@@ -153,7 +153,11 @@ export default function CursorTerminal({ className }: { className?: string }) {
             )}
           >
             <PromptShell dot={prompt.dot} showPath={prompt.showPath} />
-            {prompt.typed && renderFirstStepCommand(prompt.typed)}
+            {prompt.typed && (
+              <span className={cn("min-w-0", prompt.pasteIn && "crt-paste-in")}>
+                {renderFirstStepCommand(prompt.typed)}
+              </span>
+            )}
             {prompt.cursor && (
               <span
                 className="crt-cursor ml-px inline-block h-[1em] w-2 translate-y-px bg-[#cccccc] align-text-bottom"

@@ -9,6 +9,7 @@ export interface PromptState {
   typed: string
   cursor: boolean
   animateIn: boolean
+  pasteIn: boolean
 }
 
 export interface Line {
@@ -26,7 +27,8 @@ export type OutputItem =
 
 export const PROMPT = "PS C:\\projects\\uiception> "
 export const COMMAND = 'npx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"'
-export const TYPE_SPEED = 38
+/** Hold after paste before the command line commits. */
+export const PASTE_SETTLE_MS = 580
 
 export const ICON_SM = "size-3 shrink-0 stroke-[1.75]"
 export const ICON_XS = "size-2.5 shrink-0 stroke-[1.75]"
@@ -36,28 +38,28 @@ export const PANEL_TABS = ["Problems", "Output", "Debug Console", "Terminal", "P
 export const INIT_LINES: Line[] = []
 
 export const OUTPUT_SEQUENCE: OutputItem[] = [
-  { type: "spinner", text: "Checking registry.", delay: 280, duration: 1000 },
+  { type: "spinner", text: "Checking registry.", delay: 420, duration: 1500 },
   {
     type: "spinner",
     text: "Installing dependencies.",
-    delay: 160,
-    duration: 2200,
+    delay: 240,
+    duration: 3000,
     doneText: "Installed dependencies.",
   },
-  { type: "line", text: "✓ Created 21 files:", color: "green", delay: 80 },
-  { type: "line", text: "  - components/ui/button.tsx", color: "cyan", delay: 85 },
-  { type: "line", text: "  - app/hero-section-v1/page.tsx", color: "cyan", delay: 80 },
-  { type: "line", text: "  - app/hero-section-v1/hero-section-v1.tsx", color: "cyan", delay: 80 },
-  { type: "line", text: "  - app/hero-section-v1/brands-section-v1.tsx", color: "cyan", delay: 80 },
-  { type: "line", text: "  - app/hero-section-v1/mac-os-terminal.tsx", color: "cyan", delay: 80 },
-  { type: "line", text: "  - public/images/blocks/hero-section-v1/hero-section-v1-bg.png", color: "cyan", delay: 80 },
+  { type: "line", text: "✓ Created 21 files:", color: "green", delay: 320 },
+  { type: "line", text: "  - components/ui/button.tsx", color: "cyan", delay: 155 },
+  { type: "line", text: "  - app/hero-section-v1/page.tsx", color: "cyan", delay: 145 },
+  { type: "line", text: "  - app/hero-section-v1/hero-section-v1.tsx", color: "cyan", delay: 150 },
+  { type: "line", text: "  - app/hero-section-v1/brands-section-v1.tsx", color: "cyan", delay: 142 },
+  { type: "line", text: "  - app/hero-section-v1/mac-os-terminal.tsx", color: "cyan", delay: 148 },
+  { type: "line", text: "  - public/images/blocks/hero-section-v1/hero-section-v1-bg.png", color: "cyan", delay: 152 },
   {
     type: "line",
     text: "  … +15 files (CSS, terminal TS/CSS, code segments, 12 brand SVGs)",
     color: "dim",
-    delay: 90,
+    delay: 190,
   },
-  { type: "line", text: "", delay: 160 },
-  { type: "line", text: "Success! Component installed successfully.", color: "green", delay: 100 },
-  { type: "line", text: "You may now import and use the component.", color: "dim", delay: 80 },
+  { type: "line", text: "", delay: 260 },
+  { type: "line", text: "Success! Component installed successfully.", color: "green", delay: 300 },
+  { type: "line", text: "You may now import and use the component.", color: "dim", delay: 180 },
 ]

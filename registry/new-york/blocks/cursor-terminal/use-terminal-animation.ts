@@ -1,8 +1,8 @@
-// Phase flow: idle → typing → output → done → idle (loops)
+// Phase flow: idle → typing (paste) → output → done → idle (loops)
 import { useEffect, useMemo, useRef, useState } from "react"
 
 import {
-  COMMAND, INIT_LINES, OUTPUT_SEQUENCE, PROMPT, TYPE_SPEED,
+  COMMAND, INIT_LINES, OUTPUT_SEQUENCE, PASTE_SETTLE_MS,
   type Line, type Phase, type PromptState,
 } from "./config"
 
@@ -24,24 +24,23 @@ export function useTerminalAnimation() {
 
   useEffect(() => {
     if (phase !== "idle") return
-    const t = setTimeout(() => setPhase("typing"), 1600)
+    const t = setTimeout(() => {
+      setTyped(COMMAND)
+      setPhase("typing")
+    }, 1800)
     return () => clearTimeout(t)
   }, [phase])
 
   useEffect(() => {
     if (phase !== "typing") return
-    if (typed.length < COMMAND.length) {
-      const t = setTimeout(() => setTyped(COMMAND.slice(0, typed.length + 1)), TYPE_SPEED)
-      return () => clearTimeout(t)
-    }
     const t = setTimeout(() => {
       setLines((prev) => [...prev, { id: idRef.current++, text: COMMAND, promptLine: true, dot: "grey" }])
       setTyped("")
       setOutIdx(0)
       setPhase("output")
-    }, 360)
+    }, PASTE_SETTLE_MS)
     return () => clearTimeout(t)
-  }, [phase, typed])
+  }, [phase])
 
   useEffect(() => {
     if (phase !== "output") return
@@ -102,11 +101,11 @@ export function useTerminalAnimation() {
   const prompt = useMemo<PromptState>(() => {
     switch (phase) {
       case "idle":
-        return { dot: "grey", showPrompt: true, showPath: true, typed: "", cursor: true, animateIn: false }
+        return { dot: "grey", showPrompt: true, showPath: true, typed: "", cursor: true, animateIn: false, pasteIn: false }
       case "typing":
-        return { dot: "grey", showPrompt: true, showPath: true, typed, cursor: true, animateIn: false }
+        return { dot: "grey", showPrompt: true, showPath: true, typed, cursor: true, animateIn: false, pasteIn: true }
       case "output":
-        return { dot: "grey", showPrompt: false, showPath: false, typed: "", cursor: false, animateIn: false }
+        return { dot: "grey", showPrompt: false, showPath: false, typed: "", cursor: false, animateIn: false, pasteIn: false }
       case "done":
         return {
           dot: "grey",
@@ -115,6 +114,7 @@ export function useTerminalAnimation() {
           typed: "",
           cursor: false,
           animateIn: true,
+          pasteIn: false,
         }
     }
   }, [firstStepBlue, phase, typed])

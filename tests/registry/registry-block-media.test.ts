@@ -102,7 +102,7 @@ describe("registry block media", () => {
     }
   })
 
-  it("built public/r manifests are ready for consumer install", () => {
+  it("built public/r manifests expose installUrl for post-shadcn media fetch", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 

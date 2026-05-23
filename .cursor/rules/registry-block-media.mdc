@@ -5,6 +5,12 @@ alwaysApply: true
 
 Use this when a block needs bundled raster images (PNG, JPG, WebP) or video (MP4, WebM). Most blocks (navbars, SVG-only sections, etc.) do not need this.
 
+## Consumer install (shadcn add)
+
+`shadcn build` + `post-registry-build.mjs` strip binary `content` from `public/r/*.json` and set `meta.installUrl`. **The shadcn CLI skips `registry:file` entries with no `content`**, so images/video are not created by `shadcn add` alone.
+
+After `pnpm registry:build`, consumers must also fetch media — use the copy command from the block toolbar (`shadcn add` plus `curl` lines). Tests in `registry-shadcn-media-install.test.ts` guard this.
+
 ## Where assets live
 
 **Images**

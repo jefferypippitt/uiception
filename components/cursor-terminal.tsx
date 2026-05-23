@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 import {
   ChevronDown,
   ChevronUp,
@@ -23,7 +23,6 @@ import { switchOnSound } from "@/lib/switch-on"
 import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/use-terminal-animation"
 import Spinner from "@/registry/new-york/blocks/cursor-terminal/spinner"
 import PromptShell from "@/registry/new-york/blocks/cursor-terminal/prompt-shell"
-import PanelIconButton from "@/registry/new-york/blocks/cursor-terminal/panel-icon-button"
 import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/config"
 import dynamic from "next/dynamic"
 import TrexRunner from "./trex-runner"
@@ -33,6 +32,7 @@ import ColorMemory from "./color-memory"
 import SequenceMemory from "./sequence-memory"
 
 import "@/registry/new-york/blocks/cursor-terminal/cursor-terminal.css"
+import "./cursor-terminal.css"
 
 const PANEL_TABS = [
   "Terminal",
@@ -44,10 +44,10 @@ const PANEL_TABS = [
 ] as const
 
 function colorCls(c?: LineColor) {
-  if (c === "green") return "text-[#16c60c]"
-  if (c === "cyan") return "text-[#61d6d6]"
-  if (c === "dim") return "text-[#767676]"
-  return "text-[#cccccc]"
+  if (c === "green") return "text-(--crt-t-line-green)"
+  if (c === "cyan") return "text-(--crt-t-line-cyan)"
+  if (c === "dim") return "text-(--crt-t-line-dim)"
+  return "text-(--crt-t-line-default)"
 }
 
 function renderFirstStepCommand(text: string) {
@@ -63,12 +63,48 @@ function renderFirstStepCommand(text: string) {
 
   return (
     <span className="min-w-0">
-      <span className="text-[#dcdcaa]">{npxToken}</span>
+      <span className="text-(--crt-t-syntax-kw)">{npxToken}</span>
       {text.slice(npxEnd, Math.min(text.length, argStart))}
       {text.length > argStart && (
-        <span className="text-[#4fc1ff]">{text.slice(argStart)}</span>
+        <span className="text-(--crt-t-syntax-arg)">{text.slice(argStart)}</span>
       )}
     </span>
+  )
+}
+
+function HomepagePanelIconButton({
+  children,
+  label,
+  hoverDanger,
+  className,
+  onClick,
+  ariaPressed,
+  tabIndex = -1,
+}: {
+  children: ReactNode
+  label: string
+  hoverDanger?: boolean
+  className?: string
+  onClick?: () => void
+  ariaPressed?: boolean | "mixed"
+  tabIndex?: number
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      aria-pressed={ariaPressed}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      className={cn(
+        "flex size-7 items-center justify-center rounded text-(--crt-t-icon-fg) transition-colors hover:bg-(--crt-t-hover-bg)",
+        hoverDanger && "hover:bg-(--crt-t-close-hover-bg) hover:text-white",
+        className,
+      )}
+    >
+      {children}
+    </button>
   )
 }
 
@@ -76,7 +112,7 @@ function TerminalSoundToggle() {
   const { soundEnabled, setSoundEnabled } = useSoundPreference()
 
   return (
-    <PanelIconButton
+    <HomepagePanelIconButton
       label={soundEnabled ? "Mute game sounds" : "Unmute game sounds"}
       ariaPressed={soundEnabled}
       tabIndex={0}
@@ -97,7 +133,7 @@ function TerminalSoundToggle() {
       ) : (
         <VolumeX className={ICON_SM} aria-hidden />
       )}
-    </PanelIconButton>
+    </HomepagePanelIconButton>
   )
 }
 
@@ -107,8 +143,8 @@ export function CursorTerminal() {
 
   return (
     <SoundPreferenceProvider>
-    <div className="crt-terminal w-full overflow-hidden rounded-md border border-white/8 bg-[#1e1e1e] shadow-lg shadow-black/40">
-      <div className="flex h-9 min-h-9 select-none items-stretch border-b border-white/6 bg-[#252526]">
+    <div className="crt-terminal crt-terminal-vercel w-full overflow-hidden rounded-md border border-(--crt-t-border) bg-(--crt-t-shell-bg) shadow-(--crt-t-shadow)">
+      <div className="flex h-9 min-h-9 select-none items-stretch border-b border-(--crt-t-titlebar-border) bg-(--crt-t-titlebar-bg)">
         <div className="flex min-w-0 flex-1 items-stretch overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {PANEL_TABS.map((name) => {
             const active = name === activeTab
@@ -120,8 +156,8 @@ export function CursorTerminal() {
                 className={cn(
                   "shrink-0 px-3 text-[10px] transition-colors",
                   active
-                    ? "bg-[#1e1e1e] text-[#e8e8e8]"
-                    : "text-[#858585] hover:text-[#c0c0c0]",
+                    ? "bg-(--crt-t-tab-active-bg) text-(--crt-t-tab-active-fg)"
+                    : "text-(--crt-t-tab-inactive-fg) hover:text-(--crt-t-tab-hover-fg)",
                 )}
               >
                 {name}
@@ -136,25 +172,25 @@ export function CursorTerminal() {
             type="button"
             aria-hidden
             tabIndex={-1}
-            className="flex h-7 items-center gap-1 rounded px-1.5 text-[10px] text-[#cccccc] transition-colors hover:bg-white/6"
+            className="flex h-7 items-center gap-1 rounded px-1.5 text-[10px] text-(--crt-t-shell-fg) transition-colors hover:bg-(--crt-t-hover-bg)"
           >
-            <Terminal className={cn(ICON_SM, "text-[#3b8eea]")} aria-hidden />
+            <Terminal className={cn(ICON_SM, "text-(--crt-t-terminal-icon)")} aria-hidden />
             <span className="max-w-22 truncate sm:max-w-none">powershell</span>
-            <ChevronDown className={cn(ICON_XS, "text-[#858585]")} aria-hidden />
+            <ChevronDown className={cn(ICON_XS, "text-(--crt-t-icon-muted)")} aria-hidden />
           </button>
-          <PanelIconButton label="New terminal" className="w-auto min-w-7 gap-0.5 px-1">
+          <HomepagePanelIconButton label="New terminal" className="w-auto min-w-7 gap-0.5 px-1">
             <Plus className={ICON_SM} aria-hidden />
-            <ChevronDown className={cn(ICON_XS, "text-[#a0a0a0]")} aria-hidden />
-          </PanelIconButton>
-          <PanelIconButton label="More">
+            <ChevronDown className={cn(ICON_XS, "text-(--crt-t-icon-subtle)")} aria-hidden />
+          </HomepagePanelIconButton>
+          <HomepagePanelIconButton label="More">
             <MoreHorizontal className={ICON_SM} aria-hidden />
-          </PanelIconButton>
-          <PanelIconButton label="Maximize panel">
+          </HomepagePanelIconButton>
+          <HomepagePanelIconButton label="Maximize panel">
             <ChevronUp className={ICON_SM} aria-hidden />
-          </PanelIconButton>
-          <PanelIconButton label="Close panel" hoverDanger>
+          </HomepagePanelIconButton>
+          <HomepagePanelIconButton label="Close panel" hoverDanger>
             <X className={ICON_SM} aria-hidden />
-          </PanelIconButton>
+          </HomepagePanelIconButton>
         </div>
       </div>
 
@@ -175,7 +211,7 @@ export function CursorTerminal() {
         <>
           <div
             ref={scrollRef}
-            className="crt-body h-88 overflow-y-auto bg-[#1e1e1e] px-3.5 py-2 text-left font-mono text-[11px] leading-[1.45] text-[#cccccc]"
+            className="crt-body h-88 overflow-y-auto bg-(--crt-t-body-bg) px-3.5 py-2 text-left font-mono text-[11px] leading-[1.45] text-(--crt-t-body-fg)"
             style={{ scrollbarWidth: "none" }}
           >
             {lines.map((line) => (
@@ -200,13 +236,17 @@ export function CursorTerminal() {
             {prompt.showPrompt && (
               <div className={cn("flex min-w-0 flex-wrap items-center gap-x-1 gap-y-0", prompt.animateIn && "crt-line-in")}>
                 <PromptShell dot={prompt.dot} showPath={prompt.showPath} />
-                {prompt.typed && renderFirstStepCommand(prompt.typed)}
+                {prompt.typed && (
+                  <span className={cn("min-w-0", prompt.pasteIn && "crt-paste-in")}>
+                    {renderFirstStepCommand(prompt.typed)}
+                  </span>
+                )}
                 {prompt.cursor && <span className="crt-cursor" />}
               </div>
             )}
           </div>
 
-          <div className="border-t border-white/6 bg-[#1e1e1e] py-1.5 text-center text-[10px] text-[#6e6e6e]">
+          <div className="border-t border-(--crt-t-titlebar-border) bg-(--crt-t-body-bg) py-1.5 text-center text-[10px] text-(--crt-t-footer-fg)">
             Ctrl+K to generate command
           </div>
         </>
