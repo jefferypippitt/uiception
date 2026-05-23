@@ -16,6 +16,8 @@ export async function ensureUiceptionBlockMedia(cwd = process.cwd()) {
   const pendingDir = join(cwd, "lib/uiception-media/pending")
   if (!existsSync(pendingDir)) return
 
+  let downloaded = 0
+
   for (const name of readdirSync(pendingDir)) {
     if (!name.endsWith(".json")) continue
 
@@ -26,8 +28,16 @@ export async function ensureUiceptionBlockMedia(cwd = process.cwd()) {
       if (typeof entry?.target !== "string" || typeof entry?.url !== "string") {
         continue
       }
-      await downloadFile(cwd, entry.target, entry.url)
+      if (await downloadFile(cwd, entry.target, entry.url)) {
+        downloaded++
+      }
     }
+  }
+
+  if (downloaded > 0) {
+    console.log(
+      `[uiception] fetched ${downloaded} media file${downloaded === 1 ? "" : "s"}`,
+    )
   }
 }
 
@@ -38,7 +48,7 @@ function readJsonFile(filePath) {
 
 async function downloadFile(cwd, target, url) {
   const dest = join(cwd, target.replace(/\\/g, "/"))
-  if (existsSync(dest)) return
+  if (existsSync(dest)) return false
 
   mkdirSync(dirname(dest), { recursive: true })
 
@@ -48,6 +58,7 @@ async function downloadFile(cwd, target, url) {
   }
 
   writeFileSync(dest, Buffer.from(await response.arrayBuffer()))
+  return true
 }
 
 const isMain =

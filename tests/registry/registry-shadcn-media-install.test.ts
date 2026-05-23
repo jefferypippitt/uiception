@@ -68,6 +68,8 @@ describe("shadcn add + bundled media install", () => {
 
     const instrumentation = byTarget.get("instrumentation.ts")?.content ?? ""
     expect(instrumentation).toContain("setupUiceptionMedia")
+    expect(instrumentation).toContain("await import(")
+    expect(instrumentation).not.toMatch(/^import \{ setupUiceptionMedia/m)
     expect(instrumentation).not.toContain("pathToFileURL")
     expect(instrumentation).toContain(
       './lib/uiception-media/setup-uiception-media.mjs"',

@@ -196,15 +196,15 @@ for (const name of readdirSync(outDir)) {
 
     if (
 
-      instrumentation?.content?.includes('from "./setup-uiception-media.mjs"')
+      instrumentation?.content?.includes('"./setup-uiception-media.mjs"')
 
     ) {
 
       instrumentation.content = instrumentation.content.replace(
 
-        'from "./setup-uiception-media.mjs"',
+        '"./setup-uiception-media.mjs"',
 
-        'from "./lib/uiception-media/setup-uiception-media.mjs"',
+        '"./lib/uiception-media/setup-uiception-media.mjs"',
 
       )
 
