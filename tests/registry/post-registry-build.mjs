@@ -186,6 +186,36 @@ for (const name of readdirSync(outDir)) {
 
 
 
+  if (blockName === "uiception-media-fetch") {
+
+    const instrumentation = (item.files ?? []).find(
+
+      (file) => file.target === "instrumentation.ts",
+
+    )
+
+    if (
+
+      instrumentation?.content?.includes('from "./setup-uiception-media.mjs"')
+
+    ) {
+
+      instrumentation.content = instrumentation.content.replace(
+
+        'from "./setup-uiception-media.mjs"',
+
+        'from "./lib/uiception-media/setup-uiception-media.mjs"',
+
+      )
+
+      changed = true
+
+    }
+
+  }
+
+
+
   if (changed) {
 
     writeFileSync(filePath, `${JSON.stringify(item, null, 2)}\n`)

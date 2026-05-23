@@ -20,6 +20,11 @@
           "target": "lib/uiception-media/setup-uiception-media.mjs"
         },
         {
+          "path": "registry/new-york/blocks/uiception-media-fetch/setup-uiception-media.d.ts",
+          "type": "registry:file",
+          "target": "lib/uiception-media/setup-uiception-media.d.ts"
+        },
+        {
           "path": "registry/new-york/blocks/uiception-media-fetch/instrumentation.ts",
           "type": "registry:file",
           "target": "instrumentation.ts"

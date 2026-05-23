@@ -17,8 +17,14 @@
       "target": "lib/uiception-media/setup-uiception-media.mjs"
     },
     {
+      "path": "registry/new-york/blocks/uiception-media-fetch/setup-uiception-media.d.ts",
+      "content": "export function setupUiceptionMedia(cwd?: string): Promise<void>\n",
+      "type": "registry:file",
+      "target": "lib/uiception-media/setup-uiception-media.d.ts"
+    },
+    {
       "path": "registry/new-york/blocks/uiception-media-fetch/instrumentation.ts",
-      "content": "import { join } from \"node:path\"\nimport { pathToFileURL } from \"node:url\"\n\nexport async function register() {\n  if (process.env.NEXT_RUNTIME !== \"nodejs\") return\n\n  const { setupUiceptionMedia } = await import(\n    pathToFileURL(\n      join(process.cwd(), \"lib/uiception-media/setup-uiception-media.mjs\"),\n    ).href\n  )\n\n  await setupUiceptionMedia()\n}\n",
+      "content": "import { setupUiceptionMedia } from \"./lib/uiception-media/setup-uiception-media.mjs\"\n\nexport async function register() {\n  if (process.env.NEXT_RUNTIME !== \"nodejs\") return\n\n  await setupUiceptionMedia()\n}\n",
       "type": "registry:file",
       "target": "instrumentation.ts"
     }
