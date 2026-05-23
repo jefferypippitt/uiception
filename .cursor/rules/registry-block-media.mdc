@@ -7,9 +7,23 @@ Use this when a block needs bundled raster images (PNG, JPG, WebP) or video (MP4
 
 ## Consumer install (shadcn add)
 
-`shadcn build` + `post-registry-build.mjs` strip binary `content` from `public/r/*.json` and set `meta.installUrl`. **The shadcn CLI skips `registry:file` entries with no `content`**, so images/video are not created by `shadcn add` alone.
+One command for consumers:
 
-After `pnpm registry:build`, consumers must also fetch media — use the copy command from the block toolbar (`shadcn add` plus `curl` lines). Tests in `registry-shadcn-media-install.test.ts` guard this.
+```bash
+npx shadcn@latest add "https://uiception.com/r/<block-id>.json"
+npm run dev
+```
+
+`shadcn build` + `post-registry-build.mjs`:
+
+1. Strip binary `content` from `public/r/*.json` media entries (shadcn cannot embed PNG/MP4 as UTF-8).
+2. Set `meta.installUrl` on those entries (metadata only — **the shadcn CLI does not read this**).
+3. Inject a text `registry:file` at `lib/uiception-media/pending/<block-id>.json` listing `{ target, url }` pairs.
+4. Add registry dependency `https://uiception.com/r/uiception-media-fetch.json`, which installs `instrumentation.ts` and `lib/uiception-media/fetch-uiception-media.mjs`.
+
+On first `next dev` or `next build`, instrumentation reads the pending manifests and downloads missing files into `public/images/blocks/<block-id>/` or `public/videos/blocks/<block-id>/`.
+
+Tests in `registry-shadcn-media-install.test.ts` guard this flow.
 
 ## Where assets live
 

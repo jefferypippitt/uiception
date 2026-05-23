@@ -4,6 +4,29 @@
   "homepage": "https://uiception.com/",
   "items": [
     {
+      "name": "uiception-media-fetch",
+      "type": "registry:item",
+      "title": "Uiception media fetch",
+      "description": "Installs instrumentation that downloads bundled block images and videos into public/ on next dev or next build.",
+      "files": [
+        {
+          "path": "registry/new-york/blocks/uiception-media-fetch/fetch-uiception-media.mjs",
+          "type": "registry:file",
+          "target": "lib/uiception-media/fetch-uiception-media.mjs"
+        },
+        {
+          "path": "registry/new-york/blocks/uiception-media-fetch/setup-uiception-media.mjs",
+          "type": "registry:file",
+          "target": "lib/uiception-media/setup-uiception-media.mjs"
+        },
+        {
+          "path": "registry/new-york/blocks/uiception-media-fetch/instrumentation.ts",
+          "type": "registry:file",
+          "target": "instrumentation.ts"
+        }
+      ]
+    },
+    {
       "name": "hero-section-v2",
       "type": "registry:block",
       "title": "Hero Section v2",

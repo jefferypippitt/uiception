@@ -8,7 +8,8 @@
   ],
   "registryDependencies": [
     "badge",
-    "card"
+    "card",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -64,6 +65,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/feature-section-v4/feature-section-v4-hand.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/feature-section-v4.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/feature-section-v4.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/feature-section-v4/feature-section-v4-brain.png\",\n    \"url\": \"https://uiception.com/images/blocks/feature-section-v4/feature-section-v4-brain.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/feature-section-v4/feature-section-v4-planet.png\",\n    \"url\": \"https://uiception.com/images/blocks/feature-section-v4/feature-section-v4-planet.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/feature-section-v4/feature-section-v4-hand.png\",\n    \"url\": \"https://uiception.com/images/blocks/feature-section-v4/feature-section-v4-hand.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"

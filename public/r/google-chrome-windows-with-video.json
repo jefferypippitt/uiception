@@ -4,7 +4,8 @@
   "title": "Google Chrome (Windows, w/ video)",
   "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
   "registryDependencies": [
-    "https://uiception.com/r/google-chrome-windows.json"
+    "https://uiception.com/r/google-chrome-windows.json",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -26,6 +27,12 @@
       "meta": {
         "installUrl": "https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/google-chrome-windows-with-video.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/google-chrome-windows-with-video.json",
+      "content": "[\n  {\n    \"target\": \"public/videos/blocks/macbook-pro-with-video/screen-demo.mp4\",\n    \"url\": \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n  }\n]"
     }
   ],
   "type": "registry:block"

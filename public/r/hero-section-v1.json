@@ -9,7 +9,8 @@
   "registryDependencies": [
     "button",
     "https://uiception.com/r/mac-os-terminal.json",
-    "https://uiception.com/r/brands-section-v1.json"
+    "https://uiception.com/r/brands-section-v1.json",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -37,6 +38,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/hero-section-v1.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/hero-section-v1.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v1/hero-section-v1-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"

@@ -6,7 +6,9 @@ export type RegistryFileWithInstall = {
   meta?: { installUrl?: string }
 }
 
-/** Media entries stripped for the built manifest — shadcn add skips these without a follow-up fetch. */
+const PENDING_PREFIX = "lib/uiception-media/pending/"
+
+/** Media entries stripped for the built manifest — shadcn add skips these without content. */
 export function mediaFilesNeedingInstallFetch(
   files: RegistryFileWithInstall[] | undefined,
 ): RegistryFileWithInstall[] {
@@ -22,23 +24,23 @@ export function mediaFilesNeedingInstallFetch(
   )
 }
 
-/** One shell line per asset (curl is available on macOS, Linux, and modern Windows). */
-export function curlInstallLines(
+export function pendingManifestFiles(
   files: RegistryFileWithInstall[] | undefined,
-): string[] {
-  return mediaFilesNeedingInstallFetch(files).map(
+): RegistryFileWithInstall[] {
+  return (files ?? []).filter(
     (file) =>
-      `curl -fsSL -o "${file.target!.replace(/\\/g, "/")}" "${file.meta!.installUrl}"`,
+      file.type === "registry:file" &&
+      file.target?.startsWith(PENDING_PREFIX) &&
+      typeof file.content === "string" &&
+      file.content.length > 0,
   )
 }
 
+/** shadcn add only — media downloads on next dev/build via instrumentation. */
 export function installCommandWithMediaFetch(
   blockName: string,
-  files: RegistryFileWithInstall[] | undefined,
+  _files: RegistryFileWithInstall[] | undefined,
   origin = "https://uiception.com",
 ): string {
-  const shadcn = `npx shadcn@latest add "${origin}/r/${blockName}.json"`
-  const curls = curlInstallLines(files ?? [])
-  if (curls.length === 0) return shadcn
-  return [shadcn, ...curls].join(" && ")
+  return `npx shadcn@latest add "${origin}/r/${blockName}.json"`
 }

@@ -10,7 +10,8 @@
   ],
   "registryDependencies": [
     "button",
-    "https://uiception.com/r/stats-section-v1.json"
+    "https://uiception.com/r/stats-section-v1.json",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -62,6 +63,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/hero-section-v4.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/hero-section-v4.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v4/hero-section-v4-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"

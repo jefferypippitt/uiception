@@ -6,7 +6,8 @@
   "registryDependencies": [
     "carousel",
     "avatar",
-    "button"
+    "button",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -92,6 +93,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_6.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/testimonials-section-v1.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/testimonials-section-v1.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_1.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_1.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_2.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_2.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_3.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_3.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_4.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_4.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_5.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_5.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_6.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_6.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"

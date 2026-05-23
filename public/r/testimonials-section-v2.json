@@ -7,7 +7,8 @@
     "geist@^1.7.0"
   ],
   "registryDependencies": [
-    "avatar"
+    "avatar",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -99,6 +100,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/testimonials-section-v2/avatar_6.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/testimonials-section-v2.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/testimonials-section-v2.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v2/avatar_2.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v2/avatar_2.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v2/avatar_5.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v2/avatar_5.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v2/avatar_6.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v2/avatar_6.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"

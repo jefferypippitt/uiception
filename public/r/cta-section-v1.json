@@ -7,7 +7,8 @@
     "geist@^1.7.0"
   ],
   "registryDependencies": [
-    "button"
+    "button",
+    "https://uiception.com/r/uiception-media-fetch.json"
   ],
   "files": [
     {
@@ -29,6 +30,12 @@
       "meta": {
         "installUrl": "https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png"
       }
+    },
+    {
+      "path": "lib/uiception-media/pending/cta-section-v1.json",
+      "type": "registry:file",
+      "target": "lib/uiception-media/pending/cta-section-v1.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/cta-section-v1/cta-section-v1.png\",\n    \"url\": \"https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png\"\n  }\n]"
     }
   ],
   "type": "registry:block"
