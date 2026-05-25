@@ -4,8 +4,7 @@
   "title": "Google Chrome (Windows, w/ video)",
   "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
   "registryDependencies": [
-    "https://uiception.com/r/google-chrome-windows.json",
-    "https://uiception.com/r/uiception-media-fetch.json"
+    "https://uiception.com/r/google-chrome-windows.json"
   ],
   "files": [
     {
@@ -16,15 +15,9 @@
     },
     {
       "path": "registry/new-york/blocks/google-chrome-windows-with-video/google-chrome-windows-with-video.tsx",
-      "content": "\"use client\"\n\nimport { useCallback, useState } from \"react\"\n\nimport GoogleChromeWindows from \"../google-chrome-windows/google-chrome-windows\"\nimport GoogleHomePreview from \"../google-chrome-windows/google-home-preview\"\nimport PageLoadingBar from \"../google-chrome-windows/page-loading-bar\"\nimport { useSimulatedPageLoad } from \"../google-chrome-windows/use-simulated-page-load\"\n\nconst SCREEN_VIDEO =\n  \"/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n\nconst OMNIBOX_PROMPTS = [\"vercel.com/home\"] as const\n\nexport default function GoogleChromeWindowsWithVideo() {\n  const [cycleKey, setCycleKey] = useState(0)\n  const { phase, progress, startLoading, reset } = useSimulatedPageLoad()\n\n  const handleTypedComplete = useCallback(() => {\n    startLoading()\n  }, [startLoading])\n\n  const handleVideoEnded = useCallback(() => {\n    reset()\n    setCycleKey((k) => k + 1)\n  }, [reset])\n\n  return (\n    <GoogleChromeWindows\n      key={cycleKey}\n      omniboxTypingPrompts={OMNIBOX_PROMPTS}\n      omniboxTypingLoop={false}\n      onOmniboxTypedComplete={handleTypedComplete}\n    >\n      <div className=\"relative size-full\">\n        <PageLoadingBar progress={progress} visible={phase === \"loading\"} />\n        {phase === \"loaded\" ? (\n          <video\n            className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n            src={SCREEN_VIDEO}\n            muted\n            playsInline\n            autoPlay\n            onEnded={handleVideoEnded}\n            aria-label=\"Screen content video demo\"\n          />\n        ) : (\n          <GoogleHomePreview className=\"absolute inset-0\" />\n        )}\n      </div>\n    </GoogleChromeWindows>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { useCallback, useState } from \"react\"\n\nimport GoogleChromeWindows from \"../google-chrome-windows/google-chrome-windows\"\nimport GoogleHomePreview from \"../google-chrome-windows/google-home-preview\"\nimport PageLoadingBar from \"../google-chrome-windows/page-loading-bar\"\nimport { useSimulatedPageLoad } from \"../google-chrome-windows/use-simulated-page-load\"\n\nconst SCREEN_VIDEO =\n  \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n\nconst OMNIBOX_PROMPTS = [\"vercel.com/home\"] as const\n\nexport default function GoogleChromeWindowsWithVideo() {\n  const [cycleKey, setCycleKey] = useState(0)\n  const { phase, progress, startLoading, reset } = useSimulatedPageLoad()\n\n  const handleTypedComplete = useCallback(() => {\n    startLoading()\n  }, [startLoading])\n\n  const handleVideoEnded = useCallback(() => {\n    reset()\n    setCycleKey((k) => k + 1)\n  }, [reset])\n\n  return (\n    <GoogleChromeWindows\n      key={cycleKey}\n      omniboxTypingPrompts={OMNIBOX_PROMPTS}\n      omniboxTypingLoop={false}\n      onOmniboxTypedComplete={handleTypedComplete}\n    >\n      <div className=\"relative size-full\">\n        <PageLoadingBar progress={progress} visible={phase === \"loading\"} />\n        {phase === \"loaded\" ? (\n          <video\n            className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n            src={SCREEN_VIDEO}\n            muted\n            playsInline\n            autoPlay\n            onEnded={handleVideoEnded}\n            aria-label=\"Screen content video demo\"\n          />\n        ) : (\n          <GoogleHomePreview className=\"absolute inset-0\" />\n        )}\n      </div>\n    </GoogleChromeWindows>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/google-chrome-windows-with-video/google-chrome-windows-with-video.tsx"
-    },
-    {
-      "path": "registry/new-york/blocks/google-chrome-windows-with-video/media-manifest.json",
-      "content": "[\n  {\n    \"target\": \"public/videos/blocks/macbook-pro-with-video/screen-demo.mp4\",\n    \"url\": \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n  }\n]\n",
-      "type": "registry:file",
-      "target": "lib/uiception-media/manifests/google-chrome-windows-with-video.json"
     }
   ],
   "type": "registry:block"

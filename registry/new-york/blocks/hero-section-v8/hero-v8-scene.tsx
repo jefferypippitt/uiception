@@ -4,7 +4,7 @@ import Image from "next/image"
 
 import SimpleChatbot from "../simple-chatbot/simple-chatbot"
 
-const HERO_V8_BG = "/images/blocks/hero-section-v8/hero-section-v8-bg.png"
+const HERO_V8_BG = "https://uiception.com/images/blocks/hero-section-v8/hero-section-v8-bg.png"
 
 type HeroV8SceneProps = {
   prompts?: readonly string[]
@@ -16,6 +16,7 @@ export function HeroV8Scene({ prompts }: HeroV8SceneProps) {
       <Image
         src={HERO_V8_BG}
         alt="Pixel art desert landscape with a winding river"
+        unoptimized
         fill
         className="object-cover"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"

@@ -3,30 +3,26 @@ import { join } from "node:path"
 
 import { listTsSourcesUnder } from "./list-ts-sources"
 
-/** Runtime URL path, e.g. /images/blocks/hero-section-v1/hero-section-v1-bg.png */
-export type MediaUrlPath = `/${"images" | "videos"}/blocks/${string}`
+/** CDN URL, e.g. https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png */
+export type MediaCdnUrl = `https://uiception.com/${"images" | "videos"}/blocks/${string}`
 
 /** Install path under public/, e.g. public/images/blocks/hero-section-v1/hero-section-v1-bg.png */
 export type PublicMediaPath = `public/${string}`
 
 const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 
-/** Resolved runtime paths only — excludes helper templates containing ${...}. */
+/** Resolved CDN URLs only — excludes helper templates containing ${...}. */
 const LITERAL_MEDIA_RE =
-  /["'`]\/(images|videos)\/blocks\/([^"'`\${}\n]+)["'`]/g
+  /["'`]https:\/\/uiception\.com\/(images|videos)\/blocks\/([^"'`\${}\n]+)["'`]/g
 
 const IMAGE_HELPER_RE =
-  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]\/images\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]https:\/\/uiception\.com\/images\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
 
 const VIDEO_HELPER_RE =
-  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]\/videos\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]https:\/\/uiception\.com\/videos\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
 
 function helperCallRe(fnName: string): RegExp {
   return new RegExp(`\\b${fnName}\\s*\\(\\s*["']([^"']+)["']\\s*\\)`, "g")
-}
-
-function toPublicPath(urlPath: MediaUrlPath): PublicMediaPath {
-  return `public${urlPath}` as PublicMediaPath
 }
 
 function extractFromSource(
@@ -38,16 +34,14 @@ function extractFromSource(
 
   LITERAL_MEDIA_RE.lastIndex = 0
   while ((m = LITERAL_MEDIA_RE.exec(content)) !== null) {
-    out.add(toPublicPath(`/${m[1]}/blocks/${m[2]}` as MediaUrlPath))
+    out.add(`public/${m[1]}/blocks/${m[2]}` as PublicMediaPath)
   }
 
   for (const [fnName, { kind, folder }] of helpers) {
     const callRe = helperCallRe(fnName)
     callRe.lastIndex = 0
     while ((m = callRe.exec(content)) !== null) {
-      out.add(
-        toPublicPath(`/${kind}/blocks/${folder}/${m[1]}` as MediaUrlPath),
-      )
+      out.add(`public/${kind}/blocks/${folder}/${m[1]}` as PublicMediaPath)
     }
   }
 }
@@ -69,7 +63,7 @@ function collectHelpers(content: string): Map<string, { kind: "images" | "videos
   return helpers
 }
 
-/** All public/* media paths referenced by a block's TS/TSX sources. */
+/** All public/* media paths referenced by a block's TS/TSX sources (derived from CDN URLs). */
 export function extractReferencedMediaPaths(
   root: string,
   blockName: string,
@@ -98,7 +92,7 @@ export function extractReferencedMediaPaths(
   return [...paths].sort()
 }
 
-/** Blocks whose TS/TSX sources reference bundled /images/blocks/ or /videos/blocks/ URLs. */
+/** Blocks whose TS/TSX sources reference CDN media URLs (https://uiception.com/images|videos/blocks/...). */
 export function blocksReferencingBundledMedia(root: string): string[] {
   const blocksDir = join(root, "registry/new-york/blocks")
   const sources = listTsSourcesUnder(blocksDir, root)

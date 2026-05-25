@@ -8,7 +8,7 @@ import PageLoadingBar from "../google-chrome-windows/page-loading-bar"
 import { useSimulatedPageLoad } from "../google-chrome-windows/use-simulated-page-load"
 
 const SCREEN_VIDEO =
-  "/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
+  "https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
 
 const OMNIBOX_PROMPTS = ["vercel.com/home"] as const
 

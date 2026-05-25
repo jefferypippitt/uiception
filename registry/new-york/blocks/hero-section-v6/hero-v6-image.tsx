@@ -3,7 +3,8 @@ import Image from "next/image"
 export function HeroV6Image() {
   return (
     <Image
-      src="/images/blocks/hero-section-v6/hero-section-v6.jpg"
+      src="https://uiception.com/images/blocks/hero-section-v6/hero-section-v6.jpg"
+      unoptimized
       alt="Payroll operations dashboard preview"
       width={1280}
       height={720}

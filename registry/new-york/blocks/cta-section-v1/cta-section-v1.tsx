@@ -49,7 +49,8 @@ export default function CtaSectionV1() {
 
           <div className="relative mt-6 aspect-16/5 w-full overflow-hidden">
             <Image
-              src="/images/blocks/cta-section-v1/cta-section-v1.png"
+              src="https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png"
+              unoptimized
               alt=""
               aria-hidden
               fill

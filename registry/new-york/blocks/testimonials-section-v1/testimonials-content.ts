@@ -9,7 +9,7 @@ export type Testimonial = {
 }
 
 const avatar = (filename: string) =>
-  `/images/blocks/testimonials-section-v1/${filename}`
+  `https://uiception.com/images/blocks/testimonials-section-v1/${filename}`
 
 export const sectionMeta = {
   title: "Our Clients",

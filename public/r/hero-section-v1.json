@@ -9,8 +9,7 @@
   "registryDependencies": [
     "button",
     "https://uiception.com/r/mac-os-terminal.json",
-    "https://uiception.com/r/brands-section-v1.json",
-    "https://uiception.com/r/uiception-media-fetch.json"
+    "https://uiception.com/r/brands-section-v1.json"
   ],
   "files": [
     {
@@ -27,15 +26,9 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v1/hero-v1-image.tsx",
-      "content": "import Image from \"next/image\"\n\nexport function HeroV1Image() {\n  return (\n    <Image\n      src=\"/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n      alt=\"\"\n      fill\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\n      priority\n      aria-hidden\n    />\n  )\n}\n",
+      "content": "import Image from \"next/image\"\n\nexport function HeroV1Image() {\n  return (\n    <Image\n      src=\"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n      unoptimized\n      alt=\"\"\n      fill\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\n      priority\n      aria-hidden\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v1/hero-v1-image.tsx"
-    },
-    {
-      "path": "registry/new-york/blocks/hero-section-v1/media-manifest.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v1/hero-section-v1-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n  }\n]\n",
-      "type": "registry:file",
-      "target": "lib/uiception-media/manifests/hero-section-v1.json"
     }
   ],
   "type": "registry:block"

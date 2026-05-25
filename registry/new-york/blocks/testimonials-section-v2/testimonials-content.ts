@@ -26,7 +26,7 @@ export type Testimonial = {
 }
 
 const avatar = (filename: string) =>
-  `/images/blocks/testimonials-section-v2/${filename}`
+  `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`
 
 export const testimonials: Testimonial[] = [
   {

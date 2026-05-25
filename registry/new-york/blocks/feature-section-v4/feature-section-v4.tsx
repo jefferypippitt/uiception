@@ -1,7 +1,7 @@
 import FeatureGrid from "./feature-grid"
 
 const featureImage = (filename: string) =>
-  `/images/blocks/feature-section-v4/${filename}`
+  `https://uiception.com/images/blocks/feature-section-v4/${filename}`
 
 export default function FeatureSectionV4() {
   const featureImageById = {
