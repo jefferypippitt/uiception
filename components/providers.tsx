@@ -3,6 +3,8 @@
 import { ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
 
+import { ThemeKeyboardShortcut } from '@/components/theme-toggle'
+
 export default function Providers({ children }: { children: ReactNode }) {
     return (
         <ThemeProvider
@@ -11,6 +13,7 @@ export default function Providers({ children }: { children: ReactNode }) {
             defaultTheme='system'
             disableTransitionOnChange
         >
+            <ThemeKeyboardShortcut />
             {children}
         </ThemeProvider>
     )

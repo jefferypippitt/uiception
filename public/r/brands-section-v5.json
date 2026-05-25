@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "brands-section-v5",
   "title": "Brands Section v5",
-  "description": "Boxed brands strip with a 'Trusted by 5000+ Top companies' header, greyscale logos, and a fast infinite marquee — no blur edges.",
+  "description": "Boxed brands strip with a 'Trusted by 5000+ Top companies' header, greyscale logos, and a fast infinite marquee â€” no blur edges.",
   "dependencies": [
     "gsap"
   ],

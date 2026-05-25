@@ -8,7 +8,7 @@ export const siteConfig = {
   url: "https://uiception.com",
   ogImage: "https://uiception.com/icon_512x512.png",
   description:
-    "Start from complete sections. Just make it yours.",
+    "Launch with everything built. Just make it yours.",
   keywords: [
     "Next.js",
     "React",

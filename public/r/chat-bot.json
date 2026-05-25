@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chat-bot",
   "title": "Chat Bot",
-  "description": "Simulated AI chatbot with animated typing, message bubbles, a three-dot thinking indicator, and a looping Q&A exchange. No avatars — pure bubble UI.",
+  "description": "Simulated AI chatbot with animated typing, message bubbles, a three-dot thinking indicator, and a looping Q&A exchange. No avatars â€” pure bubble UI.",
   "registryDependencies": [],
   "files": [
     {

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "mac-os-terminal",
   "title": "Mac OS Terminal",
-  "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install output—ideal for integrations and developer tooling sections.",
+  "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install outputâ€”ideal for integrations and developer tooling sections.",
   "dependencies": [
     "geist@^1.7.0"
   ],

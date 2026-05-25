@@ -9,11 +9,11 @@ import { dirname, join } from "node:path"
 import { pathToFileURL } from "node:url"
 
 /**
- * Downloads bundled uiception block media listed in lib/uiception-media/pending/*.json.
+ * Downloads bundled uiception block media listed in lib/uiception-media/manifests/*.json.
  * Runs from instrumentation (next dev/start) and next.config (next build).
  */
 export async function ensureUiceptionBlockMedia(cwd = process.cwd()) {
-  const pendingDir = join(cwd, "lib/uiception-media/pending")
+  const pendingDir = join(cwd, "lib/uiception-media/manifests")
   if (!existsSync(pendingDir)) return
 
   let downloaded = 0

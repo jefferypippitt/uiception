@@ -32,18 +32,10 @@
       "target": "app/hero-section-v1/hero-v1-image.tsx"
     },
     {
-      "path": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png",
+      "path": "registry/new-york/blocks/hero-section-v1/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v1/hero-section-v1-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/hero-section-v1.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/hero-section-v1.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v1/hero-section-v1-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/hero-section-v1.json"
     }
   ],
   "type": "registry:block"

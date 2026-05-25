@@ -57,18 +57,10 @@
       "target": "app/hero-section-v4/hero-section-v4.css"
     },
     {
-      "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+      "path": "registry/new-york/blocks/hero-section-v4/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v4/hero-section-v4-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/hero-section-v4.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/hero-section-v4.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/hero-section-v4/hero-section-v4-bg.png\",\n    \"url\": \"https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/hero-section-v4.json"
     }
   ],
   "type": "registry:block"

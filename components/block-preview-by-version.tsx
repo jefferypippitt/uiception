@@ -37,6 +37,7 @@ import FeatureSectionV4 from "@/registry/new-york/blocks/feature-section-v4/feat
 import FeatureSectionV5 from "@/registry/new-york/blocks/feature-section-v5/feature-section-v5"
 import FeatureSectionV6 from "@/registry/new-york/blocks/feature-section-v6/feature-section-v6"
 import FeatureSectionV7 from "@/registry/new-york/blocks/feature-section-v7/feature-section-v7"
+import FeatureSectionV8 from "@/registry/new-york/blocks/feature-section-v8/feature-section-v8"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/changelog-section-v1"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/faq-section-v1"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/testimonials-section-v1"
@@ -46,6 +47,7 @@ import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/brands
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/hero-section-v6"
 import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/hero-section-v7"
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/hero-section-v8"
+import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/hero-section-v9"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/pricing-section-v1"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
 import NavbarSectionV2Page from "@/registry/new-york/blocks/navbar-section-v2/page"
@@ -95,11 +97,13 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v6": HeroSectionV6,
   "hero-section-v7": HeroSectionV7,
   "hero-section-v8": HeroSectionV8,
+  "hero-section-v9": HeroSectionV9,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
   "feature-section-v5": FeatureSectionV5,
   "feature-section-v6": FeatureSectionV6,
   "feature-section-v7": FeatureSectionV7,
+  "feature-section-v8": FeatureSectionV8,
   "changelog-section-v1": ChangelogSectionV1,
   "faq-section-v1": FaqSectionV1,
   "testimonials-section-v1": TestimonialsSectionV1,

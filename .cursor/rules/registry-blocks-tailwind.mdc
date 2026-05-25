@@ -35,7 +35,7 @@ Keep a sibling `*.css` import only for what utilities cannot express cleanly:
 - Complex grids with `nth-child` placement (bento, brand grids)
 - Marquee tracks and infinite scroll
 - GSAP / scroll hooks (`[data-*]`, opacity shells)
-- Mock-UI **scoped variables** (`--gc-*`, `--cb-*`, `--ss-*`) for authentic app chrome colors
+- Mock-UI **scoped variables** (`--gc-*`, `--cb-*`, `--ss-*`, `--crt-t-*`, `--pp-*`, …) for authentic app chrome colors
 - Descendant overrides (e.g. `.hero-v8 .scb-root { font-family: inherit }`)
 
 Trim each rule block as you migrate; delete the CSS file if nothing remains.

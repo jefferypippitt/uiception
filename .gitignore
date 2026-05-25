@@ -43,6 +43,13 @@ pnpm-debug.log*
 .claude/skills/svg-ui/
 .agents/skills/svg-ui/
 
+# product-preview-ui skill — beta, local iteration only
+.claude/skills/product-preview-ui/
+.agents/skills/product-preview-ui/
+
+# firecrawl scrape artifacts (local research only)
+.firecrawl/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

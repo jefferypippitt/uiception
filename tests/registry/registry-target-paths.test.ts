@@ -1,15 +1,21 @@
-import { describe, expect, it } from "vitest"
+﻿import { describe, expect, it } from "vitest"
 
 import { loadRegistry } from "./load-registry"
 
-/** Paths that are shared across blocks — not installed under app/<block>/ */
-function isSharedFile(path: string): boolean {
+/**
+ * Returns true for files that are not block-specific and therefore do not
+ * install under app/<block>/. Checks both the source path and the install
+ * target so that media-manifest.json files (source: registry/.../media-manifest.json,
+ * target: lib/uiception-media/manifests/<block>.json) are correctly excluded.
+ */
+function isSharedFile(path: string, target?: string): boolean {
   return (
     path.startsWith("lib/") ||
     path.startsWith("components/ui/svgs/") ||
     path.startsWith("public/images/") ||
     path.startsWith("public/videos/") ||
-    path.startsWith("components/ui/")
+    path.startsWith("components/ui/") ||
+    (target?.startsWith("lib/uiception-media/") ?? false)
   )
 }
 
@@ -37,11 +43,11 @@ describe("registry target paths", () => {
 
       for (const f of block.files ?? []) {
         if (!f.path.startsWith(blockPrefix)) continue
-        if (isSharedFile(f.path)) continue
+        if (isSharedFile(f.path, f.target)) continue
 
         expect(
           f.target.startsWith(`app/${name}/`),
-          `${name}: file "${f.path}" has target "${f.target}" — expected it to start with "app/${name}/"`,
+          `${name}: file "${f.path}" has target "${f.target}" â€” expected it to start with "app/${name}/"`,
         ).toBe(true)
       }
     }
@@ -62,3 +68,4 @@ describe("registry target paths", () => {
     }
   })
 })
+

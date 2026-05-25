@@ -23,7 +23,7 @@ const illustrationComponents: Record<FeatureIllustrationId, ComponentType> = {
 
 export default function FeatureShowcase() {
   return (
-    <ul className="mx-auto m-0 grid max-w-3xl list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
+    <ul className="m-0 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
       {features.map(({ id, title, description, illustration }) => {
         const Illustration = illustrationComponents[illustration]
 
@@ -31,7 +31,7 @@ export default function FeatureShowcase() {
           <li key={id} className="flex min-w-0">
             <Card
               size="sm"
-              className="group/card flex w-full flex-col gap-0 overflow-hidden rounded-lg py-0 transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+              className="group/card flex w-full flex-col gap-0 overflow-hidden rounded-lg bg-background py-0 ring-1 ring-border transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
             >
               <FeatureCardMedia>
                 <Illustration />

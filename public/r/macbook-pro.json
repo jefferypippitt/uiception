@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "macbook-pro",
   "title": "MacBook Pro",
-  "description": "Front-facing MacBook Pro device frame with display bezels, notch, and base—empty transparent screen by default; optional children slot.",
+  "description": "Front-facing MacBook Pro device frame with display bezels, notch, and baseâ€”empty transparent screen by default; optional children slot.",
   "registryDependencies": [],
   "files": [
     {

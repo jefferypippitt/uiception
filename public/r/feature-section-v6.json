@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "feature-section-v6",
   "title": "Feature Section v6",
-  "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed black-and-white Paper Warp (checks) shader background.",
+  "description": "Centered headline with a uniform 2Ã—2 grid of four feature cardsâ€”title and body on each tile over a full-bleed black-and-white Paper Warp (checks) shader background.",
   "dependencies": [
     "@paper-design/shaders-react",
     "geist"

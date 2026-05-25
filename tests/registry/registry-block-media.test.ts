@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs"
+﻿import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
@@ -9,11 +9,8 @@ import {
 import {
   loadRegistry,
   registryProjectRoot as root,
-  type RegistryFile,
   type RegistryItem,
 } from "./load-registry"
-
-const INSTALL_ORIGIN = "https://uiception.com"
 
 function loadBuiltBlockManifest(blockName: string): RegistryItem | null {
   const manifestPath = join(root, "public/r", `${blockName}.json`)
@@ -21,129 +18,145 @@ function loadBuiltBlockManifest(blockName: string): RegistryItem | null {
   return JSON.parse(readFileSync(manifestPath, "utf8")) as RegistryItem
 }
 
-function mediaFilesForBlock(block: RegistryItem): RegistryFile[] {
-  return (block.files ?? []).filter(
+type PendingEntry = { target: string; url: string }
+
+/** Parse the pending manifest embedded in a built registry item. */
+function pendingEntriesForBlock(manifest: RegistryItem): PendingEntry[] {
+  const pendingFile = (manifest.files ?? []).find(
     (f) =>
       f.type === "registry:file" &&
-      (f.target.startsWith("public/images/blocks/") ||
-        f.target.startsWith("public/videos/blocks/")),
+      f.target?.startsWith("lib/uiception-media/manifests/") &&
+      typeof f.content === "string",
   )
+  if (!pendingFile?.content) return []
+  return JSON.parse(pendingFile.content) as PendingEntry[]
 }
 
 describe("registry block media", () => {
-  it("declares every referenced bundled media in registry.json", () => {
-    const { items } = loadRegistry()
-    const byName = new Map(
-      items.filter((i) => i.type === "registry:block").map((i) => [i.name!, i]),
-    )
-
+  it("every block referencing bundled media has a media-manifest.json source file", () => {
     for (const blockName of blocksReferencingBundledMedia(root)) {
-      const block = byName.get(blockName)
-      expect(block, `missing registry:block ${blockName}`).toBeTruthy()
-
-      const declared = new Map(
-        mediaFilesForBlock(block!).map((f) => [f.target, f] as const),
+      const pendingSourcePath = join(
+        root,
+        "registry/new-york/blocks",
+        blockName,
+        "media-manifest.json",
       )
+      expect(
+        existsSync(pendingSourcePath),
+        `${blockName}: create registry/new-york/blocks/${blockName}/media-manifest.json`,
+      ).toBe(true)
+    }
+  })
+
+  it("media-manifest.json source files list every path referenced in block sources", () => {
+    for (const blockName of blocksReferencingBundledMedia(root)) {
+      const pendingSourcePath = join(
+        root,
+        "registry/new-york/blocks",
+        blockName,
+        "media-manifest.json",
+      )
+      if (!existsSync(pendingSourcePath)) continue
+
+      const entries = JSON.parse(
+        readFileSync(pendingSourcePath, "utf8"),
+      ) as PendingEntry[]
+      const declaredTargets = new Set(entries.map((e) => e.target))
 
       for (const publicPath of extractReferencedMediaPaths(root, blockName)) {
-        const entry = declared.get(publicPath)
         expect(
-          entry,
-          `${blockName}: add registry:file for ${publicPath}`,
-        ).toBeTruthy()
-        expect(
-          entry!.path,
-          `${blockName}: path must match target for ${publicPath}`,
-        ).toBe(publicPath)
-        expect(
-          entry!.type,
-          `${blockName}: ${publicPath} must use type registry:file`,
-        ).toBe("registry:file")
+          declaredTargets.has(publicPath),
+          `${blockName}: media-manifest.json is missing { target: "${publicPath}" }`,
+        ).toBe(true)
       }
     }
   })
 
-  it("enforces media path conventions in registry.json", () => {
+  it("media-manifest.json entries have correct urls and referenced files exist on disk", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 
     for (const block of blocks) {
-      const name = block.name
-      expect(name).toBeTruthy()
-      for (const f of block.files ?? []) {
-        if (f.target.startsWith("public/images/")) {
-          expect(
-            f.target,
-            `${name}: image target must be under blocks/${name}`,
-          ).toMatch(new RegExp(`^public/images/blocks/${name}/`))
-        }
-        if (f.target.startsWith("public/videos/")) {
-          expect(
-            f.target,
-            `${name}: video target must be under public/videos/blocks/`,
-          ).toMatch(/^public\/videos\/blocks\//)
-        }
-      }
-    }
-  })
+      const pendingSourcePath = join(
+        root,
+        "registry/new-york/blocks",
+        block.name!,
+        "media-manifest.json",
+      )
+      if (!existsSync(pendingSourcePath)) continue
 
-  it("declared media files exist on disk in the authoring repo", () => {
-    const { items } = loadRegistry()
-    const blocks = items.filter((i) => i.type === "registry:block")
+      const entries = JSON.parse(
+        readFileSync(pendingSourcePath, "utf8"),
+      ) as PendingEntry[]
 
-    for (const block of blocks) {
-      for (const file of mediaFilesForBlock(block)) {
-        const abs = join(root, file.target)
+      for (const entry of entries) {
+        // Binary asset must exist on the authoring disk
+        const abs = join(root, entry.target)
         expect(
-          readFileSync(abs).byteLength,
-          `missing or empty: ${file.target}`,
-        ).toBeGreaterThan(0)
+          existsSync(abs),
+          `${block.name}: missing binary file ${entry.target}`,
+        ).toBe(true)
+
+        // URL must be the public-facing URL for that asset
+        const expectedUrl = `https://uiception.com/${entry.target.replace(/^public\//, "")}`
+        expect(
+          entry.url,
+          `${block.name}: wrong url for ${entry.target}`,
+        ).toBe(expectedUrl)
       }
     }
   })
 
-  it("built public/r manifests expose installUrl for post-shadcn media fetch", () => {
+  it("built public/r manifests embed the pending manifest with correct entries", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 
     for (const block of blocks) {
-      const media = mediaFilesForBlock(block)
-      if (media.length === 0) continue
+      const pendingSourcePath = join(
+        root,
+        "registry/new-york/blocks",
+        block.name!,
+        "media-manifest.json",
+      )
+      if (!existsSync(pendingSourcePath)) continue
+
+      const sourceEntries = JSON.parse(
+        readFileSync(pendingSourcePath, "utf8"),
+      ) as PendingEntry[]
 
       const blockName = block.name!
       const manifest = loadBuiltBlockManifest(blockName)
       expect(
         manifest,
-        `${blockName}: run pnpm registry:build — missing public/r/${blockName}.json`,
+        `${blockName}: run pnpm registry:build â€” missing public/r/${blockName}.json`,
       ).toBeTruthy()
 
-      const manifestByTarget = new Map(
-        (manifest!.files ?? []).map((f) => [f.target, f] as const),
-      )
+      const builtEntries = pendingEntriesForBlock(manifest!)
+      expect(
+        builtEntries.length,
+        `${blockName}: built manifest pending entry count mismatch`,
+      ).toBe(sourceEntries.length)
 
-      for (const file of media) {
-        const built = manifestByTarget.get(file.target)
+      for (const src of sourceEntries) {
+        const built = builtEntries.find((e) => e.target === src.target)
         expect(
           built,
-          `${blockName}: public/r/${blockName}.json missing ${file.target}`,
+          `${blockName}: built manifest missing pending entry for ${src.target}`,
         ).toBeTruthy()
-        expect(
-          built!.type,
-          `${blockName}: ${file.target} must be registry:file in built manifest`,
-        ).toBe("registry:file")
-        expect(
-          built!.path,
-          `${blockName}: built manifest path must match ${file.target}`,
-        ).toBe(file.target)
-        expect(
-          built!.content,
-          `${blockName}: ${file.target} must not embed binary as UTF-8 — run pnpm registry:build`,
-        ).toBeUndefined()
-        expect(
-          (built!.meta as { installUrl?: string } | undefined)?.installUrl,
-          `${blockName}: ${file.target} needs meta.installUrl`,
-        ).toBe(`${INSTALL_ORIGIN}/${file.target.replace(/^public\//, "")}`)
+        expect(built!.url).toBe(src.url)
       }
+
+      // No binary stubs â€” there should be no file entries targeting public/images/ or public/videos/
+      const binaryStubs = (manifest!.files ?? []).filter(
+        (f) =>
+          f.target?.startsWith("public/images/blocks/") ||
+          f.target?.startsWith("public/videos/blocks/"),
+      )
+      expect(
+        binaryStubs,
+        `${blockName}: remove binary file stubs from registry.json â€” use media-manifest.json instead`,
+      ).toHaveLength(0)
     }
   })
 })
+

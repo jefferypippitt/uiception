@@ -24,18 +24,10 @@
       "target": "app/cta-section-v1/cta-section-v1.tsx"
     },
     {
-      "path": "public/images/blocks/cta-section-v1/cta-section-v1.png",
+      "path": "registry/new-york/blocks/cta-section-v1/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/cta-section-v1/cta-section-v1.png\",\n    \"url\": \"https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/images/blocks/cta-section-v1/cta-section-v1.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/cta-section-v1.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/cta-section-v1.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/cta-section-v1/cta-section-v1.png\",\n    \"url\": \"https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/cta-section-v1.json"
     }
   ],
   "type": "registry:block"

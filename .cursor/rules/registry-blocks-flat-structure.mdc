@@ -19,6 +19,7 @@ All blocks live under `registry/new-york/blocks/<block-id>/` as a **single flat 
   use-*.ts                    # hooks at root
   config.ts                   # data/constants (was lib/config.ts)
   other-*.ts                  # e.g. code-segments, api.ts
+  media-manifest.json         # only for blocks with bundled images/video (see registry-block-media.mdc)
 ```
 
 ## Imports

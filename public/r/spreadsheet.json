@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "spreadsheet",
   "title": "Spreadsheet",
-  "description": "Google Sheets–style SaaS subscription grid—Account, Plan, MRR, Status—with trial upgrade edit and Stripe webhook row sync.",
+  "description": "Google Sheetsâ€“style SaaS subscription gridâ€”Account, Plan, MRR, Statusâ€”with trial upgrade edit and Stripe webhook row sync.",
   "registryDependencies": [],
   "files": [
     {

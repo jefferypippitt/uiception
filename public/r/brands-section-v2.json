@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "brands-section-v2",
   "title": "Brands Section v2",
-  "description": "Infinite marquee of brand logos rendered as a seamless row of borderless-radius cards—full border container, no gaps, shared dividers between slots.",
+  "description": "Infinite marquee of brand logos rendered as a seamless row of borderless-radius cardsâ€”full border container, no gaps, shared dividers between slots.",
   "registryDependencies": [],
   "files": [
     {

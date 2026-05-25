@@ -2,9 +2,9 @@ import { Link } from 'next-view-transitions'
 import { ArrowRight } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { CursorTerminal } from '@/components/cursor-terminal'
 import { siteConfig } from '@/lib/config'
+import { StartBuildingButton } from './start-building-button'
 
 export default function Home() {
     return (
@@ -30,9 +30,7 @@ export default function Home() {
                     </p>
 
                     <div className='flex w-full items-center justify-center gap-2 pt-2'>
-                        <Button asChild size='sm'>
-                            <Link href='/blocks'>Browse Blocks</Link>
-                        </Button>
+                        <StartBuildingButton />
                     </div>
                 </div>
 

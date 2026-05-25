@@ -488,6 +488,15 @@
   }
 }
 
+/* Start Building button — hammer nailing animation */
+@keyframes hammer-nail {
+  0%   { transform: rotate(-40deg) scale(1.4); }
+  20%  { transform: rotate(18deg) scale(1.4) translateY(3px); }
+  32%  { transform: rotate(6deg) scale(1.4) translateY(1px); }
+  50%  { transform: rotate(-40deg) scale(1.4); }
+  100% { transform: rotate(-40deg) scale(1.4); }
+}
+
 /* Logo cloud — infinite horizontal marquee + soft edge composite */
 @keyframes logo-marquee {
     from {

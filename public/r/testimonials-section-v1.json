@@ -47,58 +47,10 @@
       "target": "app/testimonials-section-v1/testimonials-section-v1.css"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_1.png",
+      "path": "registry/new-york/blocks/testimonials-section-v1/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_1.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_1.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_2.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_2.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_3.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_3.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_4.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_4.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_5.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_5.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_6.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_6.png\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_1.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_1.png"
-      }
-    },
-    {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_2.png",
-      "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_2.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_2.png"
-      }
-    },
-    {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_3.png",
-      "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_3.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_3.png"
-      }
-    },
-    {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_4.png",
-      "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_4.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_4.png"
-      }
-    },
-    {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_5.png",
-      "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_5.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_5.png"
-      }
-    },
-    {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_6.png",
-      "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_6.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/testimonials-section-v1/avatar_6.png"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/testimonials-section-v1.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/testimonials-section-v1.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_1.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_1.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_2.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_2.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_3.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_3.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_4.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_4.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_5.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_5.png\"\n  },\n  {\n    \"target\": \"public/images/blocks/testimonials-section-v1/avatar_6.png\",\n    \"url\": \"https://uiception.com/images/blocks/testimonials-section-v1/avatar_6.png\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/testimonials-section-v1.json"
     }
   ],
   "type": "registry:block"

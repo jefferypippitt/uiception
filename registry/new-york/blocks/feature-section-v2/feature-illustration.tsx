@@ -20,7 +20,7 @@ export function FeatureIllustration({
   return (
     <div
       className={cn(
-        "flex size-full min-h-0 items-center justify-center opacity-40 motion-safe:transition-opacity duration-200 ease-out group-hover/card:opacity-70",
+        "size-full min-h-0 opacity-40 motion-safe:transition-opacity duration-200 ease-out group-hover/card:opacity-70",
         className
       )}
     >
@@ -28,7 +28,7 @@ export function FeatureIllustration({
         aria-hidden
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
-        className={cn("text-foreground h-full w-full max-h-full max-w-full", svgClassName)}
+        className={cn("text-foreground block size-full", svgClassName)}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

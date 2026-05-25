@@ -6,24 +6,13 @@ export type RegistryFileWithInstall = {
   meta?: { installUrl?: string }
 }
 
-const PENDING_PREFIX = "lib/uiception-media/pending/"
+const PENDING_PREFIX = "lib/uiception-media/manifests/"
 
-/** Media entries stripped for the built manifest — shadcn add skips these without content. */
-export function mediaFilesNeedingInstallFetch(
-  files: RegistryFileWithInstall[] | undefined,
-): RegistryFileWithInstall[] {
-  return (files ?? []).filter(
-    (file) =>
-      file.type === "registry:file" &&
-      file.target &&
-      (file.target.startsWith("public/images/blocks/") ||
-        file.target.startsWith("public/videos/blocks/")) &&
-      file.content === undefined &&
-      typeof file.meta?.installUrl === "string" &&
-      file.meta.installUrl.length > 0,
-  )
-}
-
+/**
+ * Files that carry a pending download manifest — written to the user's project
+ * by shadcn add and consumed by the uiception-media-fetch instrumentation on
+ * next dev/build to download the actual binary assets.
+ */
 export function pendingManifestFiles(
   files: RegistryFileWithInstall[] | undefined,
 ): RegistryFileWithInstall[] {
@@ -36,7 +25,7 @@ export function pendingManifestFiles(
   )
 }
 
-/** shadcn add only — media downloads on next dev/build via instrumentation. */
+/** Returns the shadcn add command for a block. */
 export function installCommandWithMediaFetch(
   blockName: string,
   _files: RegistryFileWithInstall[] | undefined,

@@ -100,7 +100,9 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/mac-os-terminal.json",
-        "https://uiception.com/r/brands-section-v1.json"      ],
+        "https://uiception.com/r/brands-section-v1.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v1/page.tsx",
@@ -118,9 +120,9 @@
           "target": "app/hero-section-v1/hero-v1-image.tsx"
         },
         {
-          "path": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png",
+          "path": "registry/new-york/blocks/hero-section-v1/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png"
+          "target": "lib/uiception-media/manifests/hero-section-v1.json"
         }
       ]
     },
@@ -128,7 +130,7 @@
       "name": "brands-section-v2",
       "type": "registry:block",
       "title": "Brands Section v2",
-      "description": "Infinite marquee of brand logos rendered as a seamless row of borderless-radius cards—full border container, no gaps, shared dividers between slots.",
+      "description": "Infinite marquee of brand logos rendered as a seamless row of borderless-radius cardsâ€”full border container, no gaps, shared dividers between slots.",
       "registryDependencies": [],
       "files": [
         {
@@ -504,7 +506,7 @@
       "name": "brands-section-v5",
       "type": "registry:block",
       "title": "Brands Section v5",
-      "description": "Boxed brands strip with a 'Trusted by 5000+ Top companies' header, greyscale logos, and a fast infinite marquee — no blur edges.",
+      "description": "Boxed brands strip with a 'Trusted by 5000+ Top companies' header, greyscale logos, and a fast infinite marquee â€” no blur edges.",
       "dependencies": [
         "gsap"
       ],
@@ -938,7 +940,7 @@
       "name": "mac-os-terminal",
       "type": "registry:block",
       "title": "Mac OS Terminal",
-      "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install output—ideal for integrations and developer tooling sections.",
+      "description": "macOS Terminal window mock with zsh prompt, typed CLI demo, and shadcn install outputâ€”ideal for integrations and developer tooling sections.",
       "dependencies": [
         "geist@^1.7.0"
       ],
@@ -1000,7 +1002,7 @@
       "name": "event-stream",
       "type": "registry:block",
       "title": "Event Stream",
-      "description": "Frameless cycling JSON animation—three webhook events type out in sequence with edge fade, no borders, no syntax colors, designed to embed in any section.",
+      "description": "Frameless cycling JSON animationâ€”three webhook events type out in sequence with edge fade, no borders, no syntax colors, designed to embed in any section.",
       "registryDependencies": [],
       "files": [
         {
@@ -1093,7 +1095,9 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "button"      ],
+        "button",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/cta-section-v1/page.tsx",
@@ -1106,9 +1110,9 @@
           "target": "app/cta-section-v1/cta-section-v1.tsx"
         },
         {
-          "path": "public/images/blocks/cta-section-v1/cta-section-v1.png",
+          "path": "registry/new-york/blocks/cta-section-v1/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/cta-section-v1/cta-section-v1.png"
+          "target": "lib/uiception-media/manifests/cta-section-v1.json"
         }
       ]
     },
@@ -1249,7 +1253,7 @@
       "name": "chat-bot",
       "type": "registry:block",
       "title": "Chat Bot",
-      "description": "Simulated AI chatbot with animated typing, message bubbles, a three-dot thinking indicator, and a looping Q&A exchange. No avatars — pure bubble UI.",
+      "description": "Simulated AI chatbot with animated typing, message bubbles, a three-dot thinking indicator, and a looping Q&A exchange. No avatars â€” pure bubble UI.",
       "registryDependencies": [],
       "files": [
         {
@@ -1467,7 +1471,7 @@
       "name": "feature-section-v2",
       "type": "registry:block",
       "title": "Feature Section v2",
-      "description": "Four-card feature grid with uppercase titles, descriptions, unique x.ai–style SVG illustrations, and scroll-triggered entrance animations per card.",
+      "description": "Four-card feature grid with uppercase titles, descriptions, unique x.aiâ€“style SVG illustrations, and scroll-triggered entrance animations per card.",
       "registryDependencies": [
         "card"
       ],
@@ -1546,7 +1550,9 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/stats-section-v1.json"      ],
+        "https://uiception.com/r/stats-section-v1.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v4/page.tsx",
@@ -1584,9 +1590,9 @@
           "target": "app/hero-section-v4/hero-section-v4.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png",
+          "path": "registry/new-york/blocks/hero-section-v4/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png"
+          "target": "lib/uiception-media/manifests/hero-section-v4.json"
         }
       ]
     },
@@ -1623,7 +1629,9 @@
       ],
       "registryDependencies": [
         "button",
-        "https://uiception.com/r/brands-section-v5.json"      ],
+        "https://uiception.com/r/brands-section-v5.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v6/page.tsx",
@@ -1666,9 +1674,9 @@
           "target": "app/hero-section-v6/hero-section-v6.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v6/hero-section-v6.jpg",
+          "path": "registry/new-york/blocks/hero-section-v6/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v6/hero-section-v6.jpg"
+          "target": "lib/uiception-media/manifests/hero-section-v6.json"
         }
       ]
     },
@@ -1758,7 +1766,9 @@
       "registryDependencies": [
         "button",
         "https://uiception.com/r/simple-chatbot.json",
-        "https://uiception.com/r/brands-section-v1.json"      ],
+        "https://uiception.com/r/brands-section-v1.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/hero-section-v8/page.tsx",
@@ -1806,9 +1816,85 @@
           "target": "app/hero-section-v8/hero-section-v8.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png",
+          "path": "registry/new-york/blocks/hero-section-v8/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png"
+          "target": "lib/uiception-media/manifests/hero-section-v8.json"
+        }
+      ]
+    },
+    {
+      "name": "hero-section-v9",
+      "type": "registry:block",
+      "title": "Hero Section v9",
+      "description": "Centered hero with headline, description, dual CTAs, and a simulated live product preview dashboard with ticking metrics, streaming activity chart, and workflow task updates.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v9/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/hero-section-v9.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/hero-section-v9.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/hero-content.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/hero-content.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/cta-buttons.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/cta-buttons.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/product-preview-shell.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/product-preview-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/metrics-row.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/metrics-row.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/metric-card.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/metric-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/activity-panel.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/activity-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/tasks-panel.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/tasks-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/status-chip.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v9/status-chip.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/use-live-dashboard-preview.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v9/use-live-dashboard-preview.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v9/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v9/hero-section-v9.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v9/hero-section-v9.css"
         }
       ]
     },
@@ -1835,7 +1921,7 @@
       "name": "stats-section-v2",
       "type": "registry:block",
       "title": "Stats Section v2",
-      "description": "Live npm download stats for 6 infra brands — Supabase, Convex, Vercel, Neon, Upstash, Turso — with a combobox-driven trend chart and brand colors.",
+      "description": "Live npm download stats for 6 infra brands â€” Supabase, Convex, Vercel, Neon, Upstash, Turso â€” with a combobox-driven trend chart and brand colors.",
       "dependencies": [
         "recharts"
       ],
@@ -1960,7 +2046,7 @@
       "name": "spreadsheet",
       "type": "registry:block",
       "title": "Spreadsheet",
-      "description": "Google Sheets–style SaaS subscription grid—Account, Plan, MRR, Status—with trial upgrade edit and Stripe webhook row sync.",
+      "description": "Google Sheetsâ€“style SaaS subscription gridâ€”Account, Plan, MRR, Statusâ€”with trial upgrade edit and Stripe webhook row sync.",
       "registryDependencies": [],
       "files": [
         {
@@ -2185,7 +2271,9 @@
       "title": "Google Chrome (Windows, w/ video)",
       "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
       "registryDependencies": [
-        "https://uiception.com/r/google-chrome-windows.json"      ],
+        "https://uiception.com/r/google-chrome-windows.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/google-chrome-windows-with-video/page.tsx",
@@ -2198,9 +2286,9 @@
           "target": "app/google-chrome-windows-with-video/google-chrome-windows-with-video.tsx"
         },
         {
-          "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+          "path": "registry/new-york/blocks/google-chrome-windows-with-video/media-manifest.json",
           "type": "registry:file",
-          "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
+          "target": "lib/uiception-media/manifests/google-chrome-windows-with-video.json"
         }
       ]
     },
@@ -2208,7 +2296,7 @@
       "name": "macbook-pro",
       "type": "registry:block",
       "title": "MacBook Pro",
-      "description": "Front-facing MacBook Pro device frame with display bezels, notch, and base—empty transparent screen by default; optional children slot.",
+      "description": "Front-facing MacBook Pro device frame with display bezels, notch, and baseâ€”empty transparent screen by default; optional children slot.",
       "registryDependencies": [],
       "files": [
         {
@@ -2239,7 +2327,9 @@
       "title": "MacBook Pro (w/ image)",
       "description": "Example MacBook Pro mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json"      ],
+        "https://uiception.com/r/macbook-pro.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/macbook-pro-with-image/page.tsx",
@@ -2252,9 +2342,9 @@
           "target": "app/macbook-pro-with-image/macbook-pro-with-image.tsx"
         },
         {
-          "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png",
+          "path": "registry/new-york/blocks/macbook-pro-with-image/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png"
+          "target": "lib/uiception-media/manifests/macbook-pro-with-image.json"
         }
       ]
     },
@@ -2264,7 +2354,9 @@
       "title": "MacBook Pro (w/ video)",
       "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
       "registryDependencies": [
-        "https://uiception.com/r/macbook-pro.json"      ],
+        "https://uiception.com/r/macbook-pro.json",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/macbook-pro-with-video/page.tsx",
@@ -2277,9 +2369,9 @@
           "target": "app/macbook-pro-with-video/macbook-pro-with-video.tsx"
         },
         {
-          "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+          "path": "registry/new-york/blocks/macbook-pro-with-video/media-manifest.json",
           "type": "registry:file",
-          "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
+          "target": "lib/uiception-media/manifests/macbook-pro-with-video.json"
         }
       ]
     },
@@ -2346,7 +2438,9 @@
       "registryDependencies": [
         "carousel",
         "avatar",
-        "button"      ],
+        "button",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/testimonials-section-v1/page.tsx",
@@ -2379,34 +2473,9 @@
           "target": "app/testimonials-section-v1/testimonials-section-v1.css"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_1.png",
+          "path": "registry/new-york/blocks/testimonials-section-v1/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_1.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_2.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_2.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_3.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_3.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_4.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_4.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_5.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_5.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_6.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_6.png"
+          "target": "lib/uiception-media/manifests/testimonials-section-v1.json"
         }
       ]
     },
@@ -2419,7 +2488,9 @@
         "geist@^1.7.0"
       ],
       "registryDependencies": [
-        "avatar"      ],
+        "avatar",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/testimonials-section-v2/page.tsx",
@@ -2477,19 +2548,9 @@
           "target": "@ui/svgs/betterAuthWordmarkDark.tsx"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_2.png",
+          "path": "registry/new-york/blocks/testimonials-section-v2/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_2.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_5.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_5.png"
-        },
-        {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_6.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_6.png"
+          "target": "lib/uiception-media/manifests/testimonials-section-v2.json"
         }
       ]
     },
@@ -2572,7 +2633,9 @@
       ],
       "registryDependencies": [
         "badge",
-        "card"      ],
+        "card",
+        "https://uiception.com/r/uiception-media-fetch.json"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/feature-section-v4/page.tsx",
@@ -2600,19 +2663,9 @@
           "target": "app/feature-section-v4/features.ts"
         },
         {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png",
+          "path": "registry/new-york/blocks/feature-section-v4/media-manifest.json",
           "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png"
-        },
-        {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png"
-        },
-        {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png",
-          "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png"
+          "target": "lib/uiception-media/manifests/feature-section-v4.json"
         }
       ]
     },
@@ -2620,7 +2673,7 @@
       "name": "feature-section-v5",
       "type": "registry:block",
       "title": "Feature Section v5",
-      "description": "Centered sans headline with a bento grid of four static cards—balanced title and body typography on muted surfaces.",
+      "description": "Centered sans headline with a bento grid of four static cardsâ€”balanced title and body typography on muted surfaces.",
       "dependencies": [
         "geist"
       ],
@@ -2657,7 +2710,7 @@
       "name": "feature-section-v6",
       "type": "registry:block",
       "title": "Feature Section v6",
-      "description": "Centered headline with a uniform 2×2 grid of four feature cards—title and body on each tile over a full-bleed black-and-white Paper Warp (checks) shader background.",
+      "description": "Centered headline with a uniform 2Ã—2 grid of four feature cardsâ€”title and body on each tile over a full-bleed black-and-white Paper Warp (checks) shader background.",
       "dependencies": [
         "@paper-design/shaders-react",
         "geist"
@@ -2769,6 +2822,80 @@
       ]
     },
     {
+      "name": "feature-section-v8",
+      "type": "registry:block",
+      "title": "Feature Section v8",
+      "description": "Centered automation headline with an Incharge-style bordered feature gridâ€”four cards with dot-pattern slots and copy-driven product mocks in square frames.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v8/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/feature-section-v8.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/feature-section-v8.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/feature-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/feature-card.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/feature-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/feature-preview-slot.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/feature-preview-slot.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/product-preview-feature.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/product-preview-feature.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/build-feature-preview.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v8/build-feature-preview.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/metric-card.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v8/metric-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/use-in-view-once.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v8/use-in-view-once.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/use-live-feature-preview.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v8/use-live-feature-preview.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/feature-section-v8.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v8/feature-section-v8.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/animation-timing.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v8/animation-timing.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v8/config.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v8/config.ts"
+        }
+      ]
+    },
+    {
       "name": "pricing-section-v1",
       "type": "registry:block",
       "title": "Pricing Section v1",
@@ -2803,3 +2930,4 @@
     }
   ]
 }
+

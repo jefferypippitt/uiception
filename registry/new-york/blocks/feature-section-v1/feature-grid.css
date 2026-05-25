@@ -26,13 +26,12 @@
 .fsv1-card::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 0.6rem 0.6rem;
-  border-color: transparent transparent color-mix(in oklab, var(--foreground) 20%, transparent) transparent;
+  bottom: 0.35rem;
+  right: 0.35rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 1px dashed color-mix(in oklab, var(--foreground) 25%, transparent);
+  border-bottom: 1px dashed color-mix(in oklab, var(--foreground) 25%, transparent);
   pointer-events: none;
   z-index: 10;
 }

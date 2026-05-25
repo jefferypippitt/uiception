@@ -13,15 +13,13 @@ export function FeatureCardMedia({ children, className }: FeatureCardMediaProps)
   return (
     <div
       className={cn(
-        "flex w-full shrink-0 items-center justify-center border-b border-border/60 bg-muted/20 p-4",
+        "relative w-full shrink-0 overflow-hidden bg-background",
         FEATURE_CARD_MEDIA_HEIGHT,
         className
       )}
       aria-hidden
     >
-      <div className="aspect-square h-full max-h-full w-full max-w-full min-h-0 overflow-hidden rounded-2xl">
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

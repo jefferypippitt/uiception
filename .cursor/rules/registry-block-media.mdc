@@ -14,16 +14,50 @@ npx shadcn@latest add "https://uiception.com/r/<block-id>.json"
 npm run dev
 ```
 
-`shadcn build` + `post-registry-build.mjs`:
+On first `next dev` or `next build`, `instrumentation.ts` dynamic-imports `setup-uiception-media.mjs`, which:
 
-1. Strip binary `content` from `public/r/*.json` media entries (shadcn cannot embed PNG/MP4 as UTF-8).
-2. Set `meta.installUrl` on those entries (metadata only — **the shadcn CLI does not read this**).
-3. Inject a text `registry:file` at `lib/uiception-media/pending/<block-id>.json` listing `{ target, url }` pairs.
-4. Add registry dependency `https://uiception.com/r/uiception-media-fetch.json`, which installs `instrumentation.ts` and `lib/uiception-media/fetch-uiception-media.mjs`.
+1. Patches `next.config.mjs` to call `ensureUiceptionBlockMedia()` at build time (once).
+2. Patches `package.json` to add a `prebuild` script: `node lib/uiception-media/fetch-uiception-media.mjs`.
+3. Reads every `lib/uiception-media/manifests/*.json` manifest and downloads any missing binaries into `public/`.
 
-On first `next dev` or `next build`, instrumentation reads the pending manifests and downloads missing files into `public/images/blocks/<block-id>/` or `public/videos/blocks/<block-id>/`.
+Tests in `registry-shadcn-media-install.test.ts` and `registry-block-media.test.ts` guard this flow.
 
-Tests in `registry-shadcn-media-install.test.ts` guard this flow.
+## Authoring: adding media to a block
+
+### 1. Add a `media-manifest.json` source file
+
+Create `registry/new-york/blocks/<block-id>/media-manifest.json` — a JSON array of `{ target, url }` pairs:
+
+```json
+[
+  {
+    "target": "public/images/blocks/<block-id>/<block-id>-bg.png",
+    "url": "https://uiception.com/images/blocks/<block-id>/<block-id>-bg.png"
+  }
+]
+```
+
+- `target` — path relative to the consumer's project root (under `public/images/blocks/` or `public/videos/blocks/`)
+- `url` — public URL shadcn will record for deferred download (always `https://uiception.com/<target minus "public/">`)
+- The binary asset **must exist on the authoring disk** at `target` or the tests will fail.
+
+### 2. Declare the registry dependency
+
+In `registry.json`, add to the block's `registryDependencies`:
+
+```json
+"https://uiception.com/r/uiception-media-fetch.json"
+```
+
+This installs `instrumentation.ts`, `fetch-uiception-media.mjs`, and `setup-uiception-media.mjs` into the consumer's project.
+
+### 3. Do NOT add binary file stubs
+
+Do **not** list `public/images/…` or `public/videos/…` entries in `registry.json` — `shadcn build` cannot embed binaries as UTF-8. The `media-manifest.json` source file is the only artefact needed; `shadcn build` embeds it as text at `lib/uiception-media/manifests/<block-id>.json` inside the built `public/r/<block-id>.json`.
+
+### 4. `post-registry-build.mjs` is a no-op
+
+The post-build script no longer patches anything. All four concerns it previously handled (stripping binary stubs, generating pending manifests, setting `installUrl`, injecting the registry dep) are now handled in source. Do not add new logic there.
 
 ## Where assets live
 
@@ -31,7 +65,7 @@ Tests in `registry-shadcn-media-install.test.ts` guard this flow.
 
 ```
 public/images/blocks/<block-id>/
-  hero-section-v8-bg.png
+  <block-id>-bg.png
   avatar_1.png
 ```
 
@@ -41,3 +75,14 @@ public/images/blocks/<block-id>/
 public/videos/blocks/<block-id>/
   screen-demo.mp4
 ```
+
+## Key files
+
+| File | Role |
+|------|------|
+| `registry/new-york/blocks/<block-id>/media-manifest.json` | Source manifest — authored, committed, embedded by shadcn build |
+| `registry/new-york/blocks/uiception-media-fetch/instrumentation.ts` | Entry point — dynamic-imports `setup-uiception-media.mjs` on first boot |
+| `registry/new-york/blocks/uiception-media-fetch/setup-uiception-media.mjs` | Patches `next.config.mjs` + `package.json`, then calls `ensureUiceptionBlockMedia` |
+| `registry/new-york/blocks/uiception-media-fetch/fetch-uiception-media.mjs` | Reads `lib/uiception-media/manifests/*.json` and downloads missing binaries |
+| `lib/registry-install-media.ts` | Helpers: `pendingManifestFiles()`, `installCommandWithMediaFetch()` |
+| `tests/registry/post-registry-build.mjs` | No-op — kept so package.json prebuild script entry doesn't need changing |

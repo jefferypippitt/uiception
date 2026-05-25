@@ -196,7 +196,7 @@ export function CursorTerminal() {
 
       {/* Wordle stays mounted to avoid re-firing the submit-gate server action on every tab switch */}
       <div className={activeTab !== "Wordle" ? "hidden" : ""}>
-        <Wordle />
+        <Wordle isActive={activeTab === "Wordle"} />
       </div>
 
       {activeTab === "Trex Runner" ? (

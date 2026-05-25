@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "event-stream",
   "title": "Event Stream",
-  "description": "Frameless cycling JSON animation—three webhook events type out in sequence with edge fade, no borders, no syntax colors, designed to embed in any section.",
+  "description": "Frameless cycling JSON animationâ€”three webhook events type out in sequence with edge fade, no borders, no syntax colors, designed to embed in any section.",
   "registryDependencies": [],
   "files": [
     {

@@ -21,18 +21,10 @@
       "target": "app/macbook-pro-with-image/macbook-pro-with-image.tsx"
     },
     {
-      "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png",
+      "path": "registry/new-york/blocks/macbook-pro-with-image/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\",\n    \"url\": \"https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png",
-      "meta": {
-        "installUrl": "https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/macbook-pro-with-image.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/macbook-pro-with-image.json",
-      "content": "[\n  {\n    \"target\": \"public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\",\n    \"url\": \"https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/macbook-pro-with-image.json"
     }
   ],
   "type": "registry:block"

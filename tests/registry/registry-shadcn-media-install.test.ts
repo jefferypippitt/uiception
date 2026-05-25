@@ -1,10 +1,9 @@
-import { existsSync, readFileSync } from "node:fs"
+﻿import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
 import {
   installCommandWithMediaFetch,
-  mediaFilesNeedingInstallFetch,
   pendingManifestFiles,
 } from "@/lib/registry-install-media"
 import {
@@ -37,7 +36,7 @@ describe("shadcn add + bundled media install", () => {
 
     const pending = pendingManifestFiles(manifest!.files)
     expect(pending).toHaveLength(1)
-    expect(pending[0]?.target).toBe("lib/uiception-media/pending/hero-section-v1.json")
+    expect(pending[0]?.target).toBe("lib/uiception-media/manifests/hero-section-v1.json")
 
     const entries = JSON.parse(pending[0]!.content!) as Array<{
       target: string
@@ -82,36 +81,49 @@ describe("shadcn add + bundled media install", () => {
     )
   })
 
-  it("binary media entries stay contentless while pending manifest carries URLs", () => {
+  it("media blocks have no binary file stubs â€” only the pending manifest", () => {
     const manifest = loadBuiltBlockManifest("macbook-pro-with-video")
     expect(manifest).toBeTruthy()
 
     const pending = pendingManifestFiles(manifest!.files)
-    const stripped = mediaFilesNeedingInstallFetch(manifest!.files)
     expect(pending).toHaveLength(1)
-    expect(stripped).toHaveLength(1)
-    expect(stripped[0]?.content).toBeUndefined()
     expect(pending[0]?.content).toContain("screen-demo.mp4")
+
+    // No binary stubs â€” files with public/images or public/videos targets are gone
+    const binaryStubs = (manifest!.files ?? []).filter(
+      (f) =>
+        f.target?.startsWith("public/images/blocks/") ||
+        f.target?.startsWith("public/videos/blocks/"),
+    )
+    expect(binaryStubs).toHaveLength(0)
   })
 
-  it("every block with stripped media has fetchable installUrl on the authoring disk", () => {
+  it("every pending manifest references files that exist on the authoring disk", () => {
     const { items } = loadRegistry()
     const blocks = items.filter((i) => i.type === "registry:block")
 
     for (const block of blocks) {
       const built = loadBuiltBlockManifest(block.name!)
       if (!built) continue
-      const pending = mediaFilesNeedingInstallFetch(built.files)
-      for (const file of pending) {
-        const abs = join(root, file.target!)
-        expect(
-          existsSync(abs),
-          `${block.name}: missing source file ${file.target} (installUrl would 404 for consumers)`,
-        ).toBe(true)
-        expect(file.meta?.installUrl).toMatch(
-          new RegExp(`/${file.target!.replace(/^public\//, "")}$`),
-        )
+
+      const pending = pendingManifestFiles(built.files)
+      for (const manifestFile of pending) {
+        const entries = JSON.parse(manifestFile.content!) as Array<{
+          target: string
+          url: string
+        }>
+        for (const entry of entries) {
+          const abs = join(root, entry.target)
+          expect(
+            existsSync(abs),
+            `${block.name}: missing source file ${entry.target} (would 404 for consumers)`,
+          ).toBe(true)
+          expect(entry.url).toContain(
+            entry.target.replace(/^public\//, ""),
+          )
+        }
       }
     }
   })
 })
+

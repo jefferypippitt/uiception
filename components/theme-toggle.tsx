@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback, useEffect } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
@@ -30,10 +31,19 @@ function restoreBlocksCategoryTitleVt(prev: Map<HTMLElement, string>) {
     prev.clear()
 }
 
-export function ThemeToggle() {
+function isEditableTarget(target: EventTarget | null) {
+    return (
+        (target instanceof HTMLElement && target.isContentEditable) ||
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement
+    )
+}
+
+function useThemeToggleActions() {
     const { resolvedTheme, setTheme } = useTheme()
 
-    const toggleTheme = () => {
+    const toggleTheme = useCallback(() => {
         const flip = () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
         const doc = document as VtDocument
         if (!doc.startViewTransition) return flip()
@@ -44,7 +54,38 @@ export function ThemeToggle() {
             document.documentElement.classList.remove('theme-transitioning')
             restoreBlocksCategoryTitleVt(prevVt)
         })
-    }
+    }, [resolvedTheme, setTheme])
+
+    return { toggleTheme }
+}
+
+export function ThemeKeyboardShortcut() {
+    const { toggleTheme } = useThemeToggleActions()
+
+    useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (
+                (e.key === 'd' || e.key === 'D') &&
+                !e.metaKey &&
+                !e.ctrlKey &&
+                !e.altKey
+            ) {
+                if (isEditableTarget(e.target)) return
+
+                e.preventDefault()
+                toggleTheme()
+            }
+        }
+
+        document.addEventListener('keydown', down)
+        return () => document.removeEventListener('keydown', down)
+    }, [toggleTheme])
+
+    return null
+}
+
+export function ThemeToggle() {
+    const { toggleTheme } = useThemeToggleActions()
 
     return (
         <Button onClick={toggleTheme} variant='ghost' size='icon'>

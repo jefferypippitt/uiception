@@ -222,7 +222,7 @@ function mergeKeyStates(
   return next
 }
 
-export default function Wordle() {
+export default function Wordle({ isActive = true }: { isActive?: boolean }) {
   const soundEnabled = useOptionalSoundPreference()
   const [playLetterInput] = useSound(switch005Sound, {
     volume: 0.35,
@@ -422,26 +422,30 @@ export default function Wordle() {
   ])
 
   useEffect(() => {
+    if (!isActive) return
     function onKeyDown(e: KeyboardEvent) {
       if (e.metaKey || e.ctrlKey || e.altKey) return
       if (e.key === "Enter") {
         e.preventDefault()
+        e.stopPropagation()
         void submit()
         return
       }
       if (e.key === "Backspace") {
         e.preventDefault()
+        e.stopPropagation()
         backspace()
         return
       }
       if (/^[a-zA-Z]$/.test(e.key)) {
         e.preventDefault()
+        e.stopPropagation()
         addLetter(e.key)
       }
     }
-    window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
-  }, [addLetter, backspace, submit])
+    window.addEventListener("keydown", onKeyDown, { capture: true })
+    return () => window.removeEventListener("keydown", onKeyDown, { capture: true })
+  }, [isActive, addLetter, backspace, submit])
 
   function tileClasses(
     result: WordleTileResult | undefined,

@@ -21,18 +21,10 @@
       "target": "app/macbook-pro-with-video/macbook-pro-with-video.tsx"
     },
     {
-      "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
+      "path": "registry/new-york/blocks/macbook-pro-with-video/media-manifest.json",
+      "content": "[\n  {\n    \"target\": \"public/videos/blocks/macbook-pro-with-video/screen-demo.mp4\",\n    \"url\": \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n  }\n]\n",
       "type": "registry:file",
-      "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4",
-      "meta": {
-        "installUrl": "https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4"
-      }
-    },
-    {
-      "path": "lib/uiception-media/pending/macbook-pro-with-video.json",
-      "type": "registry:file",
-      "target": "lib/uiception-media/pending/macbook-pro-with-video.json",
-      "content": "[\n  {\n    \"target\": \"public/videos/blocks/macbook-pro-with-video/screen-demo.mp4\",\n    \"url\": \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n  }\n]"
+      "target": "lib/uiception-media/manifests/macbook-pro-with-video.json"
     }
   ],
   "type": "registry:block"
