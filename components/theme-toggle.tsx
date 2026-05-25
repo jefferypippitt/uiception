@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
@@ -12,6 +12,21 @@ type VtDocument = Document & {
 type VtStyle = CSSStyleDeclaration & { viewTransitionName: string }
 
 const BLOCK_CATEGORY_TITLE_VT_PREFIX = 'title-'
+/**
+ * Minimum gap (ms) between theme toggles.
+ * Prevents strobing if the user rapidly presses the keyboard shortcut.
+ * Set to slightly longer than the view-transition duration (350 ms) to ensure
+ * one transition fully settles before the next can start.
+ */
+const TOGGLE_COOLDOWN_MS = 650
+
+/** Returns true when the OS/browser has requested reduced motion. */
+function prefersReducedMotion() {
+    return (
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+}
 
 function stashBlocksCategoryTitleVt(): Map<HTMLElement, string> {
     const prev = new Map<HTMLElement, string>()
@@ -42,11 +57,20 @@ function isEditableTarget(target: EventTarget | null) {
 
 function useThemeToggleActions() {
     const { resolvedTheme, setTheme } = useTheme()
+    const lastToggleAt = useRef<number>(0)
 
     const toggleTheme = useCallback(() => {
+        // Anti-epilepsy: ignore rapid re-triggers until the previous transition settles.
+        const now = Date.now()
+        if (now - lastToggleAt.current < TOGGLE_COOLDOWN_MS) return
+        lastToggleAt.current = now
+
         const flip = () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
         const doc = document as VtDocument
-        if (!doc.startViewTransition) return flip()
+
+        // Skip the view-transition entirely when the browser/OS requests reduced motion
+        // (CSS sets animation:none but the VT snapshot+commit itself can still flash).
+        if (!doc.startViewTransition || prefersReducedMotion()) return flip()
 
         const prevVt = stashBlocksCategoryTitleVt()
         document.documentElement.classList.add('theme-transitioning')
