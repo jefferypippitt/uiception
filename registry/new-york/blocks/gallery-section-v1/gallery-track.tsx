@@ -21,17 +21,13 @@ type VLineStyle = {
 function GalleryVLines({ style }: { style: VLineStyle | null }) {
   if (!style) return null
 
-  const shared = {
-    left: `${style.centerX}px`,
-  }
-
   return (
     <>
       <div
         aria-hidden
         className="gsv1-vline gsv1-vline--top"
         style={{
-          ...shared,
+          transform: `translateX(${style.centerX}px)`,
           top: `${style.top}px`,
           height: `${style.topHeight}px`,
         }}
@@ -40,7 +36,7 @@ function GalleryVLines({ style }: { style: VLineStyle | null }) {
         aria-hidden
         className="gsv1-vline gsv1-vline--bottom"
         style={{
-          ...shared,
+          transform: `translateX(${style.centerX}px)`,
           top: `${style.bottomTop}px`,
           height: `${style.bottomHeight}px`,
         }}
@@ -109,7 +105,6 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
     }
 
     let rafId = 0
-    let syncRafId = 0
 
     const commitLines = () => {
       const currentTrack = trackRef.current
@@ -136,27 +131,14 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
       rafId = requestAnimationFrame(commitLines)
     }
 
-    const syncLinesDuringTransition = () => {
-      cancelAnimationFrame(syncRafId)
-      const start = performance.now()
-      const duration = 720
-
-      const tick = (now: number) => {
-        commitLines()
-        if (now - start < duration) {
-          syncRafId = requestAnimationFrame(tick)
-        }
-      }
-
-      syncRafId = requestAnimationFrame(tick)
-    }
-
+    // Initial position
     commitLines()
-    syncLinesDuringTransition()
 
-    const panel = panelRefs.current[activeIndex]
-    const observer = panel ? new ResizeObserver(scheduleLines) : null
-    if (panel && observer) observer.observe(panel)
+    // ResizeObserver fires natively during CSS flex transitions — no manual polling loop needed
+    const observer = new ResizeObserver(scheduleLines)
+    panelRefs.current.forEach((panel) => {
+      if (panel) observer.observe(panel)
+    })
 
     window.addEventListener("resize", scheduleLines, { passive: true })
     window.addEventListener("scroll", scheduleLines, { capture: true, passive: true })
@@ -164,8 +146,7 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
 
     return () => {
       cancelAnimationFrame(rafId)
-      cancelAnimationFrame(syncRafId)
-      observer?.disconnect()
+      observer.disconnect()
       window.removeEventListener("resize", scheduleLines)
       window.removeEventListener("scroll", scheduleLines, true)
       track.removeEventListener("scroll", scheduleLines)
