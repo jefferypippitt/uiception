@@ -28,9 +28,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# env files
-.env*.local
+# env files 
 .env
+.env.local
 
 # claude / cursor — local permission overrides (machine-specific)
 .claude/settings.local.json
@@ -57,7 +57,3 @@ next-env.d.ts
 # next-agents-md
 .next-docs/
 
-# binary image assets (replace with your own)
-/public/images/*
-!/public/images/blocks/
-!/public/images/blocks/**/*

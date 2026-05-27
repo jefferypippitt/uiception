@@ -4,7 +4,12 @@ import Image from "next/image"
 
 import SimpleChatbot from "../simple-chatbot/simple-chatbot"
 
-const HERO_V8_BG = "https://uiception.com/images/blocks/hero-section-v8/hero-section-v8-bg.png"
+const mediaOrigin =
+  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
+    ? ""
+    : "https://uiception.com"
+
+const HERO_V8_BG = `${mediaOrigin}/images/blocks/hero-section-v8/hero-section-v8-bg.png`
 
 type HeroV8SceneProps = {
   prompts?: readonly string[]

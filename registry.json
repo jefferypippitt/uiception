@@ -2833,6 +2833,46 @@
           "target": "app/pricing-section-v1/pricing-plans.ts"
         }
       ]
+    },
+    {
+      "name": "gallery-section-v1",
+      "type": "registry:block",
+      "title": "Gallery Section v1",
+      "description": "Ten side-by-side gallery panels with hover expansion, focus framing, and vertical indicator lines within a dedicated canvas area.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/gallery-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/gallery-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v1/gallery-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/gallery-track.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v1/gallery-track.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/gallery-panel.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v1/gallery-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/config.ts",
+          "type": "registry:lib",
+          "target": "app/gallery-section-v1/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v1/gallery-track.css",
+          "type": "registry:file",
+          "target": "app/gallery-section-v1/gallery-track.css"
+        }
+      ]
     }
   ]
 }

@@ -44,7 +44,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v6/hero-v6-image.tsx",
-      "content": "import Image from \"next/image\"\n\nexport function HeroV6Image() {\n  return (\n    <Image\n      src=\"https://uiception.com/images/blocks/hero-section-v6/hero-section-v6.jpg\"\n      unoptimized\n      alt=\"Payroll operations dashboard preview\"\n      width={1280}\n      height={720}\n      className=\"size-full object-contain object-center\"\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\n      priority\n    />\n  )\n}\n",
+      "content": "import Image from \"next/image\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/hero-section-v6.jpg`\n\nexport function HeroV6Image() {\n  return (\n    <Image\n      src={HERO_V6_IMAGE}\n      unoptimized\n      alt=\"Payroll operations dashboard preview\"\n      width={1280}\n      height={720}\n      className=\"size-full object-contain object-center\"\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\n      priority\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v6/hero-v6-image.tsx"
     },

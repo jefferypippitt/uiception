@@ -15,7 +15,7 @@
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-video/macbook-pro-with-video.tsx",
-      "content": "import MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_VIDEO =\n  \"https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4\"\n\nexport default function MacbookProWithVideo() {\n  return (\n    <MacbookPro>\n      <video\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n        src={SCREEN_VIDEO}\n        muted\n        loop\n        playsInline\n        autoPlay\n        aria-label=\"Screen content video demo\"\n      />\n    </MacbookPro>\n  )\n}\n",
+      "content": "import MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/macbook-pro-with-video/screen-demo.mp4`\n\nexport default function MacbookProWithVideo() {\n  return (\n    <MacbookPro>\n      <video\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n        src={SCREEN_VIDEO}\n        muted\n        loop\n        playsInline\n        autoPlay\n        aria-label=\"Screen content video demo\"\n      />\n    </MacbookPro>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-video/macbook-pro-with-video.tsx"
     }

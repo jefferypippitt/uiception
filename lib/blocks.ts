@@ -438,7 +438,13 @@ export const blockCategories: BlockCategory[] = [
     id: "gallery",
     title: "Gallery",
     description: "Image and media grids with lightbox and masonry layouts.",
-    versions: [],
+    versions: [
+      {
+        id: "gallery-section-v1",
+        title: "Gallery Section v1",
+        registryPath: "registry/new-york/blocks/gallery-section-v1",
+      },
+    ],
   },
   {
     id: "video",

@@ -15,7 +15,7 @@
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-image/macbook-pro-with-image.tsx",
-      "content": "import Image from \"next/image\"\n\nimport MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst SCREEN_WALLPAPER =\n  \"https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png\"\n\nexport default function MacbookProWithImage() {\n  return (\n    <MacbookPro>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS Monterey default dark wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 896px) 100vw, 896px\"\n          priority\n        />\n      </div>\n    </MacbookPro>\n  )\n}\n",
+      "content": "import Image from \"next/image\"\n\nimport MacbookPro from \"../macbook-pro/macbook-pro\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst SCREEN_WALLPAPER = `${mediaOrigin}/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png`\n\nexport default function MacbookProWithImage() {\n  return (\n    <MacbookPro>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS Monterey default dark wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 896px) 100vw, 896px\"\n          priority\n        />\n      </div>\n    </MacbookPro>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-image/macbook-pro-with-image.tsx"
     }

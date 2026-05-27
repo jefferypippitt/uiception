@@ -19,52 +19,72 @@ That's it. No extra setup required.
 
 ## Authoring: adding media to a block
 
-### 1. Reference the CDN URL directly in the component
+### 1. Reference media in the entry file using `mediaOrigin`
 
-Use `https://uiception.com/images/blocks/<block-id>/` or `https://uiception.com/videos/blocks/<block-id>/` directly in the component file.
+Always declare `mediaOrigin` in the block's entry file (`<block-id>.tsx`) and build all media URLs through it. This makes the block work in **local dev** (before images are deployed) AND in **production / post-install**.
+
+```tsx
+// <block-id>.tsx — entry file
+
+const mediaOrigin =
+  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
+    ? ""
+    : "https://uiception.com"
+
+const blockImage = (filename: string) =>
+  `${mediaOrigin}/images/blocks/<block-id>/${filename}`
+
+// video variant
+const blockVideo = (filename: string) =>
+  `${mediaOrigin}/videos/blocks/<block-id>/${filename}`
+```
 
 **`next/image`** — add `unoptimized` so consumers don't need `remotePatterns` in their `next.config`:
 
 ```tsx
 import Image from "next/image"
 
-export function MyBlockImage() {
-  return (
-    <Image
-      src="https://uiception.com/images/blocks/my-block/my-block-bg.png"
-      unoptimized
-      alt=""
-      fill
-    />
-  )
-}
+<Image
+  src={blockImage("bg.png")}
+  unoptimized
+  alt=""
+  fill
+/>
 ```
 
 **Plain string constant** (shader props, video `src`, template helpers):
 
 ```tsx
-// shader or other non-next/image usage
-const BG = "https://uiception.com/images/blocks/my-block/my-block-bg.png"
-
-// video
-const VIDEO = "https://uiception.com/videos/blocks/my-block/screen-demo.mp4"
-
-// template helper for multiple files
-const avatar = (filename: string) =>
-  `https://uiception.com/images/blocks/my-block/${filename}`
+const VIDEO_SRC = blockVideo("screen-demo.mp4")
 ```
 
-### 2. No manifest, no registryDependency
+### 2. Keep media URLs in the entry file — not in `config.ts`
+
+`config.ts` holds pure data (types, labels, item arrays). Image/video URL construction belongs in the entry file alongside `mediaOrigin`.
+
+```ts
+// config.ts — pure data only
+export const imageFiles = [
+  { file: "photo-1.jpg", alt: "Description" },
+  { file: "photo-2.jpg", alt: "Description" },
+] as const
+```
+
+```tsx
+// <block-id>.tsx — URL construction here
+const items = imageFiles.map(({ file, alt }) => ({
+  ...
+  src: blockImage(file),
+}))
+```
+
+### 3. No manifest, no registryDependency
 
 - Do **not** create a `media-manifest.json` file.
 - Do **not** add `https://uiception.com/r/uiception-media-fetch.json` to `registryDependencies`.
 - Do **not** list binary files (`public/images/…`, `public/videos/…`) in `registry.json`.
 
-### 3. Ensure the asset is hosted
-
-The binary must exist at `https://uiception.com/images/blocks/<block-id>/…` (or `/videos/…`) before going live. Place the file in `public/images/blocks/<block-id>/` on the authoring repo — Vercel serves it from there.
-
-## Where assets live in this repo
+### 4. Place assets in `public/` — Vercel serves them as the CDN
 
 ```
 public/images/blocks/<block-id>/
@@ -74,11 +94,22 @@ public/videos/blocks/<block-id>/
   screen-demo.mp4
 ```
 
+The `.env.local` in this repo already has `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA=true`, so local dev serves from `public/` automatically. Once deployed to Vercel, `https://uiception.com/images/blocks/…` resolves correctly for everyone.
+
+## How local dev vs production resolves
+
+| Environment | `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA` | `mediaOrigin` | Media served from |
+|---|---|---|---|
+| Local dev (`.env.local`) | `"true"` | `""` | `public/images/blocks/…` |
+| Production / post-install | unset | `"https://uiception.com"` | `https://uiception.com/images/blocks/…` |
+
 ## What NOT to do
 
-| ❌ Old pattern (removed) | ✅ New pattern |
+| ❌ Don't | ✅ Do |
 |---|---|
-| `media-manifest.json` in block folder | Hardcode `https://uiception.com/…` in component |
+| Hardcode `https://uiception.com/…` directly | Use `mediaOrigin` helper in the entry file |
+| Put `mediaOrigin` or image URLs in `config.ts` | Keep `config.ts` as pure data; URLs in entry file |
+| `media-manifest.json` in block folder | No manifest needed |
 | `registryDependencies: ["…/uiception-media-fetch.json"]` | No dependency needed |
-| Local path `/images/blocks/…` in component | Absolute CDN URL `https://uiception.com/images/blocks/…` |
 | `next/image` without `unoptimized` on external URL | Add `unoptimized` prop |
+| List binary files in `registry.json` | Only list `.tsx`, `.ts`, `.css` source files |

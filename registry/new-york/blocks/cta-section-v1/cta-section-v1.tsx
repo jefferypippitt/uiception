@@ -4,6 +4,13 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 
+const mediaOrigin =
+  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
+    ? ""
+    : "https://uiception.com"
+
+const CTA_IMAGE = `${mediaOrigin}/images/blocks/cta-section-v1/cta-section-v1.png`
+
 export default function CtaSectionV1() {
   return (
     <div className="pt-16 md:pt-20 lg:pt-24">
@@ -49,7 +56,7 @@ export default function CtaSectionV1() {
 
           <div className="relative mt-6 aspect-16/5 w-full overflow-hidden">
             <Image
-              src="https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png"
+              src={CTA_IMAGE}
               unoptimized
               alt=""
               aria-hidden

@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest"
 import {
   blocksReferencingBundledMedia,
   extractReferencedMediaPaths,
+  sourceReferencesMedia,
 } from "./extract-block-media-paths"
 import { listTsSourcesUnder } from "./list-ts-sources"
 import { registryProjectRoot as root } from "./load-registry"
@@ -45,7 +46,7 @@ describe("registry block media", () => {
       const content = readFileSync(join(root, rel), "utf8")
       if (
         content.includes('from "next/image"') &&
-        content.includes("https://uiception.com/")
+        sourceReferencesMedia(content)
       ) {
         expect(
           content,

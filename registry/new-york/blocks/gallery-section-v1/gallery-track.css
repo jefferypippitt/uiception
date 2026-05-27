@@ -1,0 +1,122 @@
+.gsv1-root {
+  --gsv1-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gsv1-duration: 680ms;
+}
+
+.gsv1-canvas {
+  --gsv1-stub: clamp(4rem, 12vw, 9rem);
+  position: relative;
+  padding-top: var(--gsv1-stub);
+  padding-bottom: var(--gsv1-stub);
+}
+
+.gsv1-track {
+  scrollbar-width: none;
+}
+
+.gsv1-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Panel ── */
+
+.gsv1-panel {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 100%;
+  transition: flex var(--gsv1-duration) var(--gsv1-ease);
+  contain: layout paint;
+}
+
+.gsv1-panel--active {
+  flex: 5 1 0;
+  z-index: 2;
+}
+
+/* Dark scrim on inactive panels */
+.gsv1-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgb(0 0 0 / 0.32);
+  opacity: 1;
+  transition: opacity var(--gsv1-duration) var(--gsv1-ease);
+}
+
+.gsv1-panel--active::before {
+  opacity: 0;
+}
+
+/* Inset ring on active panel */
+.gsv1-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow calc(var(--gsv1-duration) * 0.45) var(--gsv1-ease);
+}
+
+.gsv1-panel--active::after {
+  box-shadow: inset 0 0 0 1px var(--foreground);
+  transition-delay: 80ms;
+}
+
+/* ── Caption ── */
+
+.gsv1-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 4;
+  padding: 2.5rem 0.875rem 0.75rem;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.52) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity calc(var(--gsv1-duration) * 0.5) var(--gsv1-ease),
+    transform calc(var(--gsv1-duration) * 0.5) var(--gsv1-ease);
+  pointer-events: none;
+}
+
+.gsv1-panel--active .gsv1-caption {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(var(--gsv1-duration) * 0.3);
+}
+
+/* ── Vlines ── */
+
+.gsv1-vline {
+  position: fixed;
+  z-index: 50;
+  width: 1px;
+  margin-left: -0.5px;
+  pointer-events: none;
+  background: var(--foreground);
+  opacity: 1;
+  transform: scaleY(1);
+  will-change: left;
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .gsv1-panel,
+  .gsv1-panel::before,
+  .gsv1-panel::after,
+  .gsv1-caption {
+    transition: none;
+  }
+}

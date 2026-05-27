@@ -25,8 +25,13 @@ export type Testimonial = {
   logo: CompanyLogo
 }
 
+const mediaOrigin =
+  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
+    ? ""
+    : "https://uiception.com"
+
 const avatar = (filename: string) =>
-  `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`
+  `${mediaOrigin}/images/blocks/testimonials-section-v2/${filename}`
 
 export const testimonials: Testimonial[] = [
   {

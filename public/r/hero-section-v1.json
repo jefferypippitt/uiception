@@ -26,7 +26,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v1/hero-v1-image.tsx",
-      "content": "import Image from \"next/image\"\n\nexport function HeroV1Image() {\n  return (\n    <Image\n      src=\"https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png\"\n      unoptimized\n      alt=\"\"\n      fill\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\n      priority\n      aria-hidden\n    />\n  )\n}\n",
+      "content": "import Image from \"next/image\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst HERO_V1_BG = `${mediaOrigin}/images/blocks/hero-section-v1/hero-section-v1-bg.png`\n\nexport function HeroV1Image() {\n  return (\n    <Image\n      src={HERO_V1_BG}\n      unoptimized\n      alt=\"\"\n      fill\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\n      priority\n      aria-hidden\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v1/hero-v1-image.tsx"
     }

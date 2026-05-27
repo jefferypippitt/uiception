@@ -11,18 +11,103 @@ export type PublicMediaPath = `public/${string}`
 
 const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 
-/** Resolved CDN URLs only — excludes helper templates containing ${...}. */
-const LITERAL_MEDIA_RE =
-  /["'`]https:\/\/uiception\.com\/(images|videos)\/blocks\/([^"'`\${}\n]+)["'`]/g
+// ─── mediaOrigin pattern (current standard) ───────────────────────────────────
 
-const IMAGE_HELPER_RE =
+/**
+ * Matches a single-file constant using the mediaOrigin helper, e.g.:
+ *   const HERO_BG = `${mediaOrigin}/images/blocks/hero-section-v1/hero-section-v1-bg.png`
+ *
+ * Groups: 1 = "images"|"videos", 2 = block folder, 3 = filename
+ */
+const MEDIAORIGIN_LITERAL_RE =
+  /\$\{mediaOrigin\}\/(images|videos)\/blocks\/([^`/\n${}]+)\/([^`\n${}]+)/g
+
+/**
+ * Matches an image helper function using the mediaOrigin helper, e.g.:
+ *   const blockImage = (filename: string) => `${mediaOrigin}/images/blocks/block-id/${filename}`
+ *
+ * Groups: 1 = fn name, 2 = block folder
+ */
+const MEDIAORIGIN_IMAGE_HELPER_RE =
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*`\$\{mediaOrigin\}\/images\/blocks\/([^`/\n]+)\/\$\{[^}]+\}`/g
+
+/**
+ * Matches a video helper function using the mediaOrigin helper, e.g.:
+ *   const blockVideo = (filename: string) => `${mediaOrigin}/videos/blocks/block-id/${filename}`
+ *
+ * Groups: 1 = fn name, 2 = block folder
+ */
+const MEDIAORIGIN_VIDEO_HELPER_RE =
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*`\$\{mediaOrigin\}\/videos\/blocks\/([^`/\n]+)\/\$\{[^}]+\}`/g
+
+// ─── Legacy: hardcoded https://uiception.com (kept for backward compat) ────────
+
+/** Matches a literal hardcoded CDN URL (old pattern — should not appear in new blocks). */
+const LITERAL_MEDIA_RE =
+  /["'`]https:\/\/uiception\.com\/(images|videos)\/blocks\/([^"'`${}\n]+)["'`]/g
+
+const LEGACY_IMAGE_HELPER_RE =
   /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]https:\/\/uiception\.com\/images\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
 
-const VIDEO_HELPER_RE =
+const LEGACY_VIDEO_HELPER_RE =
   /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]https:\/\/uiception\.com\/videos\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
+
+// ─── Has-media detection ───────────────────────────────────────────────────────
+
+/** Returns true if the source file references any block media (either pattern). */
+export function sourceReferencesMedia(content: string): boolean {
+  MEDIAORIGIN_LITERAL_RE.lastIndex = 0
+  MEDIAORIGIN_IMAGE_HELPER_RE.lastIndex = 0
+  MEDIAORIGIN_VIDEO_HELPER_RE.lastIndex = 0
+  LITERAL_MEDIA_RE.lastIndex = 0
+  LEGACY_IMAGE_HELPER_RE.lastIndex = 0
+  LEGACY_VIDEO_HELPER_RE.lastIndex = 0
+
+  return (
+    MEDIAORIGIN_LITERAL_RE.test(content) ||
+    MEDIAORIGIN_IMAGE_HELPER_RE.test(content) ||
+    MEDIAORIGIN_VIDEO_HELPER_RE.test(content) ||
+    LITERAL_MEDIA_RE.test(content) ||
+    LEGACY_IMAGE_HELPER_RE.test(content) ||
+    LEGACY_VIDEO_HELPER_RE.test(content)
+  )
+}
+
+// ─── Helper call resolution ────────────────────────────────────────────────────
 
 function helperCallRe(fnName: string): RegExp {
   return new RegExp(`\\b${fnName}\\s*\\(\\s*["']([^"']+)["']\\s*\\)`, "g")
+}
+
+function collectHelpers(
+  content: string,
+): Map<string, { kind: "images" | "videos"; folder: string }> {
+  const helpers = new Map<string, { kind: "images" | "videos"; folder: string }>()
+  let m: RegExpExecArray | null
+
+  // mediaOrigin helpers (current standard)
+  MEDIAORIGIN_IMAGE_HELPER_RE.lastIndex = 0
+  while ((m = MEDIAORIGIN_IMAGE_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "images", folder: m[2] })
+  }
+
+  MEDIAORIGIN_VIDEO_HELPER_RE.lastIndex = 0
+  while ((m = MEDIAORIGIN_VIDEO_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "videos", folder: m[2] })
+  }
+
+  // Legacy hardcoded helpers
+  LEGACY_IMAGE_HELPER_RE.lastIndex = 0
+  while ((m = LEGACY_IMAGE_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "images", folder: m[2] })
+  }
+
+  LEGACY_VIDEO_HELPER_RE.lastIndex = 0
+  while ((m = LEGACY_VIDEO_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "videos", folder: m[2] })
+  }
+
+  return helpers
 }
 
 function extractFromSource(
@@ -32,11 +117,19 @@ function extractFromSource(
 ): void {
   let m: RegExpExecArray | null
 
+  // mediaOrigin single-file literals
+  MEDIAORIGIN_LITERAL_RE.lastIndex = 0
+  while ((m = MEDIAORIGIN_LITERAL_RE.exec(content)) !== null) {
+    out.add(`public/${m[1]}/blocks/${m[2]}/${m[3]}` as PublicMediaPath)
+  }
+
+  // Legacy literal CDN URLs
   LITERAL_MEDIA_RE.lastIndex = 0
   while ((m = LITERAL_MEDIA_RE.exec(content)) !== null) {
     out.add(`public/${m[1]}/blocks/${m[2]}` as PublicMediaPath)
   }
 
+  // Helper call sites: fn("filename.ext")
   for (const [fnName, { kind, folder }] of helpers) {
     const callRe = helperCallRe(fnName)
     callRe.lastIndex = 0
@@ -46,24 +139,9 @@ function extractFromSource(
   }
 }
 
-function collectHelpers(content: string): Map<string, { kind: "images" | "videos"; folder: string }> {
-  const helpers = new Map<string, { kind: "images" | "videos"; folder: string }>()
-  let m: RegExpExecArray | null
+// ─── Public API ───────────────────────────────────────────────────────────────
 
-  IMAGE_HELPER_RE.lastIndex = 0
-  while ((m = IMAGE_HELPER_RE.exec(content)) !== null) {
-    helpers.set(m[1], { kind: "images", folder: m[2] })
-  }
-
-  VIDEO_HELPER_RE.lastIndex = 0
-  while ((m = VIDEO_HELPER_RE.exec(content)) !== null) {
-    helpers.set(m[1], { kind: "videos", folder: m[2] })
-  }
-
-  return helpers
-}
-
-/** All public/* media paths referenced by a block's TS/TSX sources (derived from CDN URLs). */
+/** All public/* media paths referenced by a block's TS/TSX sources. */
 export function extractReferencedMediaPaths(
   root: string,
   blockName: string,
@@ -92,7 +170,7 @@ export function extractReferencedMediaPaths(
   return [...paths].sort()
 }
 
-/** Blocks whose TS/TSX sources reference CDN media URLs (https://uiception.com/images|videos/blocks/...). */
+/** Blocks whose TS/TSX sources reference block media (either mediaOrigin or legacy CDN pattern). */
 export function blocksReferencingBundledMedia(root: string): string[] {
   const blocksDir = join(root, "registry/new-york/blocks")
   const sources = listTsSourcesUnder(blocksDir, root)
@@ -100,14 +178,7 @@ export function blocksReferencingBundledMedia(root: string): string[] {
 
   for (const rel of sources) {
     const content = readFileSync(join(root, rel), "utf8")
-    LITERAL_MEDIA_RE.lastIndex = 0
-    IMAGE_HELPER_RE.lastIndex = 0
-    VIDEO_HELPER_RE.lastIndex = 0
-    if (
-      LITERAL_MEDIA_RE.test(content) ||
-      IMAGE_HELPER_RE.test(content) ||
-      VIDEO_HELPER_RE.test(content)
-    ) {
+    if (sourceReferencesMedia(content)) {
       const match = rel.match(BLOCK_DIR_RE)
       if (match) blocks.add(match[1])
     }

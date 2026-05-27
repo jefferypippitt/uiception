@@ -45,7 +45,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v4/hero-halftone-image.tsx",
-      "content": "\"use client\"\n\nimport { HalftoneDots } from \"@paper-design/shaders-react\"\n\nconst HERO_V4_BG = \"https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png\"\n\nexport function HeroHalftoneImage() {\n  return (\n    <HalftoneDots\n      aria-hidden={true}\n      className=\"absolute inset-0 h-full w-full\"\n      colorBack=\"#f2f1e8\"\n      colorFront=\"#2b2b2b\"\n      contrast={0.5}\n      fit=\"cover\"\n      grainMixer={0.4}\n      grainOverlay={0.2}\n      grainSize={0.5}\n      grid=\"hex\"\n      image={HERO_V4_BG}\n      inverted={false}\n      originalColors={false}\n      radius={1.5}\n      size={0.2}\n      type=\"gooey\"\n    />\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { HalftoneDots } from \"@paper-design/shaders-react\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst HERO_V4_BG = `${mediaOrigin}/images/blocks/hero-section-v4/hero-section-v4-bg.png`\n\nexport function HeroHalftoneImage() {\n  return (\n    <HalftoneDots\n      aria-hidden={true}\n      className=\"absolute inset-0 h-full w-full\"\n      colorBack=\"#f2f1e8\"\n      colorFront=\"#2b2b2b\"\n      contrast={0.5}\n      fit=\"cover\"\n      grainMixer={0.4}\n      grainOverlay={0.2}\n      grainSize={0.5}\n      grid=\"hex\"\n      image={HERO_V4_BG}\n      inverted={false}\n      originalColors={false}\n      radius={1.5}\n      size={0.2}\n      type=\"gooey\"\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v4/hero-halftone-image.tsx"
     },

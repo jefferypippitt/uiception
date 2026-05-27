@@ -2,8 +2,12 @@ import Image from "next/image"
 
 import MacbookPro from "../macbook-pro/macbook-pro"
 
-const SCREEN_WALLPAPER =
-  "https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png"
+const mediaOrigin =
+  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
+    ? ""
+    : "https://uiception.com"
+
+const SCREEN_WALLPAPER = `${mediaOrigin}/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png`
 
 export default function MacbookProWithImage() {
   return (
