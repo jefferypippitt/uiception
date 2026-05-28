@@ -2,10 +2,9 @@
 
 import { usePathname } from 'next/navigation'
 import { Link } from 'next-view-transitions'
-
 import { siteConfig } from '@/lib/config'
-import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
+import { cn } from '@/lib/utils'
 
 function navActive(href: string, pathname: string | null) {
     if (!pathname) return false
@@ -15,7 +14,6 @@ function navActive(href: string, pathname: string | null) {
 
 export default function Header() {
     const pathname = usePathname()
-
     return (
         <header className='bg-background sticky top-0 z-50 backdrop-blur-none'>
             <div className='mx-auto w-full max-w-6xl px-6'>

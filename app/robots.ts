@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/config"
 import { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/view/",
     },
-    sitemap: "https://uiception.com/sitemap.xml",
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   }
 }

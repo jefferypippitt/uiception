@@ -8,24 +8,18 @@ import {
   Copy,
   ExternalLink,
   Folder,
+  FolderCog,
   FolderOpen,
   Monitor,
   RefreshCw,
   Smartphone,
   Tablet,
 } from "lucide-react"
-import { createHighlighter, type Highlighter } from "shiki"
 import { useTheme } from "next-themes"
 
-import {
-  SHIKI_THEME_VERCEL_DARK,
-  SHIKI_THEME_VERCEL_LIGHT,
-  vercelDocsShikiThemes,
-} from "@/lib/shiki-vercel-docs-themes"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
 import { OpenInV0Button } from "@/components/open-in-v0-button"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
@@ -36,11 +30,7 @@ import {
 } from "@/components/ui/tooltip"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import type { BlockVersion } from "@/lib/blocks"
-import {
-  codeViewContentForRegistryFile,
-  shouldStripRegistryFileContent,
-} from "@/lib/registry-code-view"
-import { installCommandWithMediaFetch } from "@/lib/registry-install-media"
+import type { BlockRegistryData } from "@/lib/registry-server"
 import { cn } from "@/lib/utils"
 import { ReactLight } from "@/components/ui/svgs/reactLight"
 import { ReactDark } from "@/components/ui/svgs/reactDark"
@@ -51,39 +41,6 @@ import { MarkdownLight } from "@/components/ui/svgs/markdownLight"
 import { MarkdownDark } from "@/components/ui/svgs/markdownDark"
 import { Bash } from "@/components/ui/svgs/bash"
 import { BashDark } from "@/components/ui/svgs/bashDark"
-
-// ---------------------------------------------------------------------------
-// Shiki — singleton highlighter (lazy, shared across all instances)
-// ---------------------------------------------------------------------------
-
-let shikiPromise: Promise<Highlighter> | null = null
-
-function getHighlighter() {
-  if (!shikiPromise) {
-    shikiPromise = createHighlighter({
-      themes: vercelDocsShikiThemes,
-      langs: ["tsx", "jsx", "typescript", "javascript", "css", "json", "markdown", "bash", "text"],
-    })
-  }
-  return shikiPromise
-}
-
-function getLang(path: string): string {
-  const ext = path.split(".").pop()?.toLowerCase() ?? ""
-  const map: Record<string, string> = {
-    tsx: "tsx",
-    jsx: "jsx",
-    ts: "typescript",
-    js: "javascript",
-    mjs: "javascript",
-    css: "css",
-    json: "json",
-    md: "markdown",
-    mdx: "markdown",
-    sh: "bash",
-  }
-  return map[ext] ?? "text"
-}
 
 // ---------------------------------------------------------------------------
 // File-type icons
@@ -100,37 +57,9 @@ function FileTypeIcon({ name }: { name: string }) {
       </>
     )
   }
-
-  if (ext === "ts") {
-    return <Typescript className="size-4 shrink-0" aria-hidden />
-  }
-
-  if (ext === "css") {
-    return <CssOld className="size-4 shrink-0" aria-hidden />
-  }
-
-  if (ext === "json") {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
-        <rect width="16" height="16" rx="2.5" fill="#CBCB41" />
-        <text
-          x="0.5"
-          y="12"
-          fontSize="6"
-          fontWeight="700"
-          fontFamily="ui-monospace,monospace"
-          fill="#1a1a1a"
-        >
-          JSON
-        </text>
-      </svg>
-    )
-  }
-
-  if (ext === "js" || ext === "mjs") {
-    return <Javascript className="size-4 shrink-0" aria-hidden />
-  }
-
+  if (ext === "ts") return <Typescript className="size-4 shrink-0" aria-hidden />
+  if (ext === "js" || ext === "mjs") return <Javascript className="size-4 shrink-0" aria-hidden />
+  if (ext === "css") return <CssOld className="size-4 shrink-0" aria-hidden />
   if (ext === "md" || ext === "mdx") {
     return (
       <>
@@ -139,8 +68,7 @@ function FileTypeIcon({ name }: { name: string }) {
       </>
     )
   }
-
-  if (ext === "sh") {
+  if (ext === "sh" || ext === "bash") {
     return (
       <>
         <Bash className="size-4 shrink-0 dark:hidden" aria-hidden />
@@ -149,13 +77,21 @@ function FileTypeIcon({ name }: { name: string }) {
     )
   }
 
-  // generic
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
+    <svg
+      viewBox="0 0 15 15"
+      className="size-4 shrink-0"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
       <path
-        d="M3 2a1 1 0 011-1h5.586a1 1 0 01.707.293l3.414 3.414A1 1 0 0114 5.414V14a1 1 0 01-1 1H4a1 1 0 01-1-1V2z"
+        d="M3 2.5C3 2.22386 3.22386 2 3.5 2H9.08579C9.21839 2 9.34557 2.05268 9.43934 2.14645L11.8536 4.56066C11.9473 4.65443 12 4.78161 12 4.91421V12.5C12 12.7761 11.7761 13 11.5 13H3.5C3.22386 13 3 12.7761 3 12.5V2.5Z"
         fill="currentColor"
-        fillOpacity="0.15"
+        fillOpacity="0.1"
+        stroke="currentColor"
+        strokeOpacity="0.4"
+        strokeWidth="1"
       />
       <path
         d="M9 1.5V5a1 1 0 001 1h3.5"
@@ -168,30 +104,6 @@ function FileTypeIcon({ name }: { name: string }) {
 }
 
 // ---------------------------------------------------------------------------
-// Registry types
-// ---------------------------------------------------------------------------
-
-type RegistryFileJson = {
-  path: string
-  target?: string
-  content?: string
-  type?: string
-  meta?: { installUrl?: string }
-}
-
-function sanitizeRegistryFiles(files: RegistryFileJson[]): RegistryFileJson[] {
-  return files.map((file) => {
-    const path = file.target ?? file.path
-    if (!shouldStripRegistryFileContent(path, file.content, file.meta)) {
-      return file
-    }
-    const rest = { ...file }
-    delete rest.content
-    return rest
-  })
-}
-
-// ---------------------------------------------------------------------------
 // File tree
 // ---------------------------------------------------------------------------
 
@@ -199,7 +111,6 @@ type FileNode = {
   kind: "file"
   name: string
   path: string
-  content: string
 }
 
 type FolderNode = {
@@ -210,7 +121,7 @@ type FolderNode = {
 
 type TreeNode = FileNode | FolderNode
 
-function buildTree(files: RegistryFileJson[]): TreeNode[] {
+function buildTree(files: { path: string }[]): TreeNode[] {
   const root: FolderNode = { kind: "folder", name: "", children: [] }
 
   for (const file of files) {
@@ -220,12 +131,7 @@ function buildTree(files: RegistryFileJson[]): TreeNode[] {
       const name = parts[i]
       const isLast = i === parts.length - 1
       if (isLast) {
-        cur.children.push({
-          kind: "file",
-          name,
-          path: file.path,
-          content: codeViewContentForRegistryFile(file.path, file.content, file.meta),
-        })
+        cur.children.push({ kind: "file", name, path: file.path })
       } else {
         let folder = cur.children.find(
           (c): c is FolderNode => c.kind === "folder" && c.name === name
@@ -253,12 +159,36 @@ function sortTree(nodes: TreeNode[]): TreeNode[] {
   return sorted
 }
 
-// px indented per depth level
 const INDENT = 14
 
 type TreeCallbacks = {
   selectedPath: string | null
-  onSelect: (path: string, content: string) => void
+  onSelect: (path: string) => void
+}
+
+function FolderTypeIcon({ name, open }: { name: string; open: boolean }) {
+  const lower = name.toLowerCase()
+
+  if (lower === "app") {
+    return <FolderCog className="size-4 shrink-0 text-emerald-500" aria-hidden />
+  }
+
+  const Icon = open ? FolderOpen : Folder
+
+  if (lower === "@ui" || lower === "ui" || lower === "components") {
+    return <Icon className="size-4 shrink-0 fill-violet-500/80 text-violet-500" aria-hidden />
+  }
+  if (lower === "hooks") {
+    return <Icon className="size-4 shrink-0 fill-cyan-500/80 text-cyan-500" aria-hidden />
+  }
+  if (lower === "lib" || lower === "utils") {
+    return <Icon className="size-4 shrink-0 fill-amber-500/80 text-amber-500" aria-hidden />
+  }
+  if (lower === "styles" || lower === "css") {
+    return <Icon className="size-4 shrink-0 fill-pink-500/80 text-pink-500" aria-hidden />
+  }
+
+  return <Icon className="size-4 shrink-0 fill-blue-500/80 text-blue-500" aria-hidden />
 }
 
 function FolderRow({
@@ -277,7 +207,7 @@ function FolderRow({
         title={node.name}
         onClick={() => setOpen((v) => !v)}
         style={{ paddingLeft: `${depth * INDENT + 6}px` }}
-        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-[#525252] transition-colors hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
+        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
       >
         <ChevronRight
           className={cn(
@@ -285,25 +215,14 @@ function FolderRow({
             open && "rotate-90"
           )}
         />
-        {open ? (
-          <FolderOpen
-            className="size-4 shrink-0 fill-[#d4d4d4]/60 text-[#525252] dark:fill-[#3a3a3a]/60 dark:text-[#a0a0a0]"
-            aria-hidden
-          />
-        ) : (
-          <Folder
-            className="size-4 shrink-0 fill-[#d4d4d4]/60 text-[#525252] dark:fill-[#3a3a3a]/60 dark:text-[#a0a0a0]"
-            aria-hidden
-          />
-        )}
-        <span className="file-tree-label font-mono text-[12px] tracking-tight text-left">{node.name}</span>
+        <FolderTypeIcon name={node.name} open={open} />
+        <span className="file-tree-label truncate font-mono text-[12px] tracking-tight text-left">{node.name}</span>
       </button>
 
       {open && (
         <div className="relative">
-          {/* vertical guide line */}
           <span
-            className="pointer-events-none absolute inset-y-0 border-l border-[#eaeaea] dark:border-[#1a1a1a]"
+            className="pointer-events-none absolute inset-y-0 border-l border-border"
             style={{ left: `${depth * INDENT + 13}px` }}
           />
           <TreeRows nodes={node.children} depth={depth + 1} selectedPath={selectedPath} onSelect={onSelect} />
@@ -340,21 +259,20 @@ function TreeRows({
             key={node.path}
             type="button"
             title={node.path}
-            onClick={() => onSelect(node.path, node.content)}
+            onClick={() => onSelect(node.path)}
             style={{ paddingLeft: `${depth * INDENT + 6}px` }}
             className={cn(
               "file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] tracking-tight transition-colors",
               active
-                ? "bg-[#d1e5ff] text-[#171717] dark:bg-[#1f3e70] dark:text-[#eeeeee]"
-                : "text-[#525252] hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
+                ? "bg-muted text-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
             )}
           >
-            {/* aligns file icon with folder icon (chevron placeholder) */}
             <span className="size-3 shrink-0" />
             <span className="inline-flex shrink-0">
               <FileTypeIcon name={node.name} />
             </span>
-            <span className="file-tree-label text-left">{node.name}</span>
+            <span className="file-tree-label truncate text-left">{node.name}</span>
           </button>
         )
       })}
@@ -367,18 +285,17 @@ function TreeRows({
 // ---------------------------------------------------------------------------
 
 const PREVIEW_SHELL = "h-[min(44rem,72vh)]"
-
-/** Shared height for toolbar controls (icon groups, copy row, primary actions). */
 const TOOLBAR_CTRL_H = "h-8"
 
 type MainView = "preview" | "code"
-
 type Viewport = "desktop" | "tablet" | "mobile"
 
 export function BlockPreviewToolbar({
   version,
+  registryData,
 }: {
   version: BlockVersion
+  registryData: BlockRegistryData | null
 }) {
   const versionId = version.id
 
@@ -388,11 +305,9 @@ export function BlockPreviewToolbar({
   const [loadedKey, setLoadedKey] = React.useState<number | null>(null)
   const iframeLoaded = loadedKey === iframeKey
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null)
-  const [registryFiles, setRegistryFiles] = React.useState<RegistryFileJson[] | null>(null)
-  const [codeError, setCodeError] = React.useState<string | null>(null)
-  const [selectedPath, setSelectedPath] = React.useState<string | null>(null)
-  const [selectedContent, setSelectedContent] = React.useState("")
-  const [highlightedHtml, setHighlightedHtml] = React.useState<string | null>(null)
+  const [selectedPath, setSelectedPath] = React.useState<string | null>(
+    registryData?.files[0]?.path ?? null
+  )
   const {
     copyToClipboard: copyInstallCommand,
     isCopied: installCopied,
@@ -401,59 +316,23 @@ export function BlockPreviewToolbar({
   const { copyToClipboard: copyFileContent, isCopied: fileCopied } = useCopyToClipboard()
   const { resolvedTheme } = useTheme()
 
-  React.useEffect(() => {
-    setRegistryFiles(null)
-    setCodeError(null)
-    setSelectedPath(null)
-    setSelectedContent("")
-    setHighlightedHtml(null)
-  }, [versionId])
-
-  React.useEffect(() => {
-    if (registryFiles !== null || codeError) return
-    let cancelled = false
-    void fetch(`/r/${versionId}.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Failed to load registry item (${res.status})`)
-        return res.json() as Promise<{ files: RegistryFileJson[] }>
-      })
-      .then((data) => {
-        if (cancelled) return
-        const files = sanitizeRegistryFiles(data.files ?? [])
-        setRegistryFiles(files)
-        const first = files[0]
-        if (first) {
-          const firstPath = first.target ?? first.path
-          setSelectedPath(firstPath)
-          setSelectedContent(
-            codeViewContentForRegistryFile(firstPath, first.content, first.meta)
-          )
-        }
-      })
-      .catch((e: unknown) => {
-        if (!cancelled) setCodeError(e instanceof Error ? e.message : "Failed to load files")
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [versionId, registryFiles, codeError])
-
-  const installCommandCopy = React.useMemo(
-    () =>
-      installCommandWithMediaFetch(versionId, registryFiles ?? undefined),
-    [versionId, registryFiles],
-  )
-  const installCommandDisplay =
-    registryFiles && installCommandCopy.includes("curl ")
-      ? `npx shadcn add ${versionId} + media`
-      : `npx shadcn add ${versionId}`
   const previewPath = `/view/${versionId}`
 
-  // If the iframe navigates to a new preview URL, ensure the loading overlay
-  // can't get stuck due to a stale `loadedKey`.
-  React.useEffect(() => {
-    setLoadedKey(null)
-  }, [previewPath])
+  const selectedFile = registryData?.files.find((f) => f.path === selectedPath) ?? null
+  const selectedContent = selectedFile?.content ?? ""
+  const highlightedHtml = selectedFile
+    ? resolvedTheme === "dark"
+      ? selectedFile.htmlDark
+      : selectedFile.htmlLight
+    : null
+
+  const tree = React.useMemo(
+    () => (registryData ? buildTree(registryData.files) : []),
+    [registryData]
+  )
+
+  const installCommand = registryData?.installCommand ?? `npx shadcn@latest add "${versionId}"`
+  const installCommandDisplay = `npx shadcn add ${versionId}`
 
   // Hard-refresh can complete the iframe load before React hydration attaches
   // event handlers. This effect covers that case by checking readyState.
@@ -468,8 +347,6 @@ export function BlockPreviewToolbar({
       setLoadedKey(iframeKey)
     }
 
-    // If the iframe already finished loading (common on hard refresh),
-    // `readyState` will be `complete` and we can clear the spinner.
     try {
       const doc = iframe.contentDocument
       if (doc?.readyState === "complete") {
@@ -487,40 +364,6 @@ export function BlockPreviewToolbar({
     }
   }, [iframeKey, previewPath])
 
-  // Re-highlight whenever content, selected file, or theme changes
-  React.useEffect(() => {
-    if (!selectedContent) {
-      setHighlightedHtml(null)
-      return
-    }
-    const lang = getLang(selectedPath ?? "")
-    const theme = resolvedTheme === "dark" ? SHIKI_THEME_VERCEL_DARK : SHIKI_THEME_VERCEL_LIGHT
-    let cancelled = false
-    void getHighlighter().then((hl) => {
-      if (cancelled) return
-      setHighlightedHtml(hl.codeToHtml(selectedContent, { lang, theme }))
-    })
-    return () => { cancelled = true }
-  }, [selectedContent, selectedPath, resolvedTheme])
-
-  const tree = React.useMemo(
-    () =>
-      registryFiles
-        ? buildTree(
-            registryFiles.map((f) => ({
-              ...f,
-              path: f.target ?? f.path,
-              content: codeViewContentForRegistryFile(
-                f.target ?? f.path,
-                f.content,
-                f.meta
-              ),
-            }))
-          )
-        : [],
-    [registryFiles]
-  )
-
   const displayTitle = version.title
 
   return (
@@ -531,15 +374,9 @@ export function BlockPreviewToolbar({
     >
       <div className="mb-3 flex flex-wrap items-center gap-2 sm:gap-3">
         <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 sm:gap-3">
-          <TabsList
-            aria-label="View mode"
-          >
-            <TabsTrigger value="preview">
-              Preview
-            </TabsTrigger>
-            <TabsTrigger value="code">
-              Code
-            </TabsTrigger>
+          <TabsList aria-label="View mode">
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="code">Code</TabsTrigger>
           </TabsList>
 
           <div className="hidden h-4 w-px shrink-0 bg-border sm:block" aria-hidden />
@@ -570,9 +407,7 @@ export function BlockPreviewToolbar({
                       <Monitor className="size-3.5" />
                     </ToggleGroupItem>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" sideOffset={6}>
-                    Desktop
-                  </TooltipContent>
+                  <TooltipContent side="bottom" sideOffset={6}>Desktop</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -580,9 +415,7 @@ export function BlockPreviewToolbar({
                       <Tablet className="size-3.5" />
                     </ToggleGroupItem>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" sideOffset={6}>
-                    Tablet
-                  </TooltipContent>
+                  <TooltipContent side="bottom" sideOffset={6}>Tablet</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -590,9 +423,7 @@ export function BlockPreviewToolbar({
                       <Smartphone className="size-3.5" />
                     </ToggleGroupItem>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" sideOffset={6}>
-                    Mobile
-                  </TooltipContent>
+                  <TooltipContent side="bottom" sideOffset={6}>Mobile</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -602,9 +433,7 @@ export function BlockPreviewToolbar({
                       </a>
                     </ToggleGroupItem>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" sideOffset={6}>
-                    Open preview in new tab
-                  </TooltipContent>
+                  <TooltipContent side="bottom" sideOffset={6}>Open preview in new tab</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -616,9 +445,7 @@ export function BlockPreviewToolbar({
                       <RefreshCw className="size-3.5" />
                     </ToggleGroupItem>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" sideOffset={6}>
-                    Refresh
-                  </TooltipContent>
+                  <TooltipContent side="bottom" sideOffset={6}>Refresh</TooltipContent>
                 </Tooltip>
               </ToggleGroup>
             </TooltipProvider>
@@ -629,7 +456,7 @@ export function BlockPreviewToolbar({
             variant="outline"
             size="default"
             disabled={installCopying}
-            onClick={() => copyInstallCommand(installCommandCopy)}
+            onClick={() => copyInstallCommand(installCommand)}
             aria-label={
               installCopying
                 ? "Copying install command"
@@ -637,7 +464,7 @@ export function BlockPreviewToolbar({
                   ? "Install command copied"
                   : "Copy install command"
             }
-            title={installCommandCopy}
+            title={installCommand}
             className={cn(
               "hidden max-w-[min(100vw-2rem,26rem)] min-w-0 font-normal tracking-tight sm:inline-flex",
               TOOLBAR_CTRL_H
@@ -690,36 +517,31 @@ export function BlockPreviewToolbar({
         </TabsContent>
 
         <TabsContent value="code" className="m-0 h-full min-h-0 p-0">
-          <div className="code-view-vercel-docs flex h-full min-h-0 overflow-hidden bg-[#fafafa] dark:bg-black">
-            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-[#eaeaea] bg-[#fafafa] sm:w-62 dark:border-[#1a1a1a] dark:bg-black">
-              <ScrollArea className="file-tree-scroll-area min-h-0 min-w-0 flex-1 overflow-x-hidden">
+          <div className="code-view-vercel-docs flex h-full min-h-0 overflow-hidden bg-sidebar">
+            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-border bg-sidebar sm:w-62">
+              <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
                 <div className="min-w-0 w-full max-w-full overflow-hidden pt-2 pb-3 pr-1 pl-1">
-                  {codeError ? (
-                    <p className="px-2 text-xs text-destructive">{codeError}</p>
-                  ) : registryFiles === null ? (
-                    <p className="px-2 text-xs text-[#6b7280] dark:text-[#a0a0a0]">Loading…</p>
+                  {!registryData ? (
+                    <p className="px-2 text-xs text-destructive">Failed to load files.</p>
                   ) : tree.length === 0 ? (
-                    <p className="px-2 text-xs text-[#6b7280] dark:text-[#a0a0a0]">No files.</p>
+                    <p className="px-2 text-xs text-muted-foreground">No files.</p>
                   ) : (
                     <TreeRows
                       nodes={tree}
                       depth={0}
                       selectedPath={selectedPath}
-                      onSelect={(path, content) => {
-                        setSelectedPath(path)
-                        setSelectedContent(content)
-                      }}
+                      onSelect={setSelectedPath}
                     />
                   )}
                 </div>
-              </ScrollArea>
+              </div>
             </div>
 
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-white dark:bg-black">
-              <div className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-[#eaeaea] px-3 dark:border-[#1a1a1a]">
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-background">
+              <div className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-border px-3">
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <FileTypeIcon name={selectedPath ?? "file.tsx"} />
-                  <span className="truncate font-mono text-xs text-[#171717] dark:text-[#eeeeee]">
+                  <span className="truncate font-mono text-xs text-foreground">
                     {selectedPath ?? "—"}
                   </span>
                 </div>
@@ -727,7 +549,7 @@ export function BlockPreviewToolbar({
                   type="button"
                   variant="ghost"
                   size="icon-sm"
-                  className="shrink-0 text-[#6b7280] hover:bg-[#f0f0f0] hover:text-[#171717] dark:text-[#a0a0a0] dark:hover:bg-[#1a1a1a] dark:hover:text-[#eeeeee]"
+                  className="shrink-0 text-muted-foreground hover:bg-muted hover:text-foreground"
                   disabled={!selectedContent}
                   aria-label={fileCopied ? "Copied" : "Copy file contents"}
                   onClick={() => selectedContent && copyFileContent(selectedContent)}
@@ -735,7 +557,7 @@ export function BlockPreviewToolbar({
                   {fileCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
                 </Button>
               </div>
-              <ScrollArea className="min-h-0 flex-1">
+              <div className="min-h-0 flex-1 overflow-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
                 {highlightedHtml ? (
                   <div
                     className="shiki-panel shiki-panel-vercel-docs shiki-panel-editor [&_.shiki]:rounded-none [&_.shiki]:border-0"
@@ -743,14 +565,10 @@ export function BlockPreviewToolbar({
                   />
                 ) : (
                   <pre className="p-4 font-mono text-xs leading-relaxed text-[#6b7280] dark:text-[#a0a0a0]">
-                    {selectedContent
-                      ? "Highlighting…"
-                      : registryFiles === null
-                        ? ""
-                        : "Select a file"}
+                    {selectedContent ? "—" : "Select a file"}
                   </pre>
                 )}
-              </ScrollArea>
+              </div>
             </div>
           </div>
         </TabsContent>

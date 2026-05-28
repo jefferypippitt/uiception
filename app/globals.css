@@ -14,8 +14,6 @@
     --font-pixel-square: var(--font-geist-pixel-square);
     --font-pixel-grid: var(--font-geist-pixel-grid);
     --font-pixel-circle: var(--font-geist-pixel-circle);
-    --font-pixel-triangle: var(--font-geist-pixel-triangle);
-    --font-pixel-line: var(--font-geist-pixel-line);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

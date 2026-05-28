@@ -5,8 +5,6 @@ import {
   GeistPixelSquare,
   GeistPixelGrid,
   GeistPixelCircle,
-  GeistPixelTriangle,
-  GeistPixelLine,
 } from "geist/font/pixel"
 import { IBM_Plex_Serif, Instrument_Serif } from "next/font/google"
 import "./globals.css"
@@ -120,8 +118,6 @@ export default function RootLayout({
           GeistPixelSquare.variable,
           GeistPixelGrid.variable,
           GeistPixelCircle.variable,
-          GeistPixelTriangle.variable,
-          GeistPixelLine.variable,
           ibmPlexSerif.variable,
           instrumentSerif.variable,
           "font-sans",
@@ -141,14 +137,6 @@ export default function RootLayout({
                   "@type": "Person",
                   name: siteConfig.author.name,
                   url: siteConfig.author.url,
-                },
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: {
-                    "@type": "EntryPoint",
-                    urlTemplate: `${siteConfig.url}/blocks/{search_term_string}`,
-                  },
-                  "query-input": "required name=search_term_string",
                 },
               }),
             }}

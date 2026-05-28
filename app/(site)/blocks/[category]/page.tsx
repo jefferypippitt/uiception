@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import { BlockPreviewToolbar } from "@/components/block-preview-toolbar"
 import { Button } from "@/components/ui/button"
 import { blockCategories } from "@/lib/blocks"
+import { getBlockRegistryData } from "@/lib/registry-server"
 
 import { BlocksCategoryHashScroll } from "./blocks-category-hash-scroll"
 
@@ -35,6 +36,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound()
   }
 
+  const registryDataMap = Object.fromEntries(
+    await Promise.all(
+      categoryData.versions.map(async (version) => [
+        version.id,
+        await getBlockRegistryData(version.id),
+      ])
+    )
+  )
+
   return (
     <div className="pb-14 md:pb-20">
       <BlocksCategoryHashScroll />
@@ -63,7 +73,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 id={version.id}
                 className="scroll-mt-24"
               >
-                <BlockPreviewToolbar version={version} />
+                <BlockPreviewToolbar
+                  version={version}
+                  registryData={registryDataMap[version.id] ?? null}
+                />
               </section>
             ))}
           </div>
