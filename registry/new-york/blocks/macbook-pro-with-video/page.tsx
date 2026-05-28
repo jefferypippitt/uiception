@@ -1,4 +1,4 @@
-import MacbookProWithVideo from "./macbook-pro-with-video"
+import MacbookProWithVideo from "./components/macbook-pro-with-video"
 
 export default function Page() {
   return (

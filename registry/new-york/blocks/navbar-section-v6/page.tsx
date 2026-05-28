@@ -1,5 +1,5 @@
-import LoremDemo from "./navbar-lorem-demo"
-import NavbarSectionV6 from "./navbar-section-v6"
+import LoremDemo from "./components/navbar-lorem-demo"
+import NavbarSectionV6 from "./components/navbar-section-v6"
 
 export default function Page() {
   return (

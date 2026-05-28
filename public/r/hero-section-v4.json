@@ -15,45 +15,45 @@
   "files": [
     {
       "path": "registry/new-york/blocks/hero-section-v4/page.tsx",
-      "content": "import HeroSectionV4 from \"./hero-section-v4\"\n\nexport default function Page() {\n  return <HeroSectionV4 />\n}\n",
+      "content": "import HeroSectionV4 from \"./components/hero-section-v4\"\n\nexport default function Page() {\n  return <HeroSectionV4 />\n}\n",
       "type": "registry:page",
       "target": "app/hero-section-v4/page.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/hero-section-v4.tsx",
-      "content": "import { StatsSectionV1Content } from \"../stats-section-v1/stats-section-v1\"\n\nimport { HeroV4Root } from \"./hero-v4-root\"\n\nimport \"./hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v4/components/hero-section-v4.tsx",
+      "content": "import { StatsSectionV1Content } from \"../../stats-section-v1/components/stats-section-v1\"\n\nimport { HeroV4Root } from \"./hero-v4-root\"\n\nimport \"../styles/hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v4/hero-section-v4.tsx"
+      "target": "app/hero-section-v4/components/hero-section-v4.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/hero-v4-root.tsx",
+      "path": "registry/new-york/blocks/hero-section-v4/components/hero-v4-root.tsx",
       "content": "\"use client\"\n\nimport type { ReactNode } from \"react\"\nimport { useLayoutEffect, useRef } from \"react\"\nimport gsap from \"gsap\"\nimport { MotionConfig, motion } from \"motion/react\"\n\nimport HeroContent from \"./hero-content\"\nimport { HeroHalftoneImage } from \"./hero-halftone-image\"\n\nconst MEDIA_DELAY_S = 1.1\n\nexport function HeroV4Root({ children }: { children?: ReactNode }) {\n  const copyRootRef = useRef<HTMLDivElement>(null)\n\n  useLayoutEffect(() => {\n    const root = copyRootRef.current\n    if (!root) return\n\n    if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) {\n      gsap.set(\n        root.querySelectorAll(\"[data-hero-v4-reveal], [data-hero-v4-word]\"),\n        {\n          clearProps: \"all\",\n        }\n      )\n      return\n    }\n\n    const ctx = gsap.context(() => {\n      const reveals = gsap.utils.toArray<HTMLElement>(\"[data-hero-v4-reveal]\")\n      const words = gsap.utils.toArray<HTMLElement>(\"[data-hero-v4-word]\")\n\n      const tl = gsap.timeline()\n\n      tl.fromTo(\n        words,\n        { opacity: 0, filter: \"blur(9px)\", x: 20 },\n        {\n          opacity: 1,\n          filter: \"blur(0px)\",\n          x: 0,\n          duration: 0.54,\n          stagger: { each: 0.08, from: \"start\" },\n          ease: \"power3.out\",\n          clearProps: \"transform,filter\",\n        }\n      )\n\n      tl.fromTo(\n        reveals[0],\n        { opacity: 0, y: 16 },\n        {\n          opacity: 1,\n          y: 0,\n          duration: 0.55,\n          ease: \"power2.out\",\n          clearProps: \"transform\",\n        },\n        \"-=0.22\"\n      )\n\n      tl.fromTo(\n        reveals[1],\n        { opacity: 0, y: 10, scale: 0.96 },\n        {\n          opacity: 1,\n          y: 0,\n          scale: 1,\n          duration: 0.48,\n          ease: \"power2.out\",\n          clearProps: \"transform\",\n        },\n        \"-=0.28\"\n      )\n    }, root)\n\n    return () => ctx.revert()\n  }, [])\n\n  return (\n    <MotionConfig reducedMotion=\"user\">\n      <div ref={copyRootRef} className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          {children}\n          <HeroContent />\n        </div>\n      </div>\n\n      <div className=\"mx-auto max-w-4xl px-4 pt-4\">\n        <motion.div\n          className=\"hero-v4__media relative aspect-video w-full overflow-hidden rounded-xl\"\n          initial={{ opacity: 0, y: 28, scale: 0.98 }}\n          animate={{ opacity: 1, y: 0, scale: 1 }}\n          transition={{\n            delay: MEDIA_DELAY_S,\n            duration: 0.72,\n            ease: [0.22, 1, 0.36, 1],\n          }}\n        >\n          <HeroHalftoneImage />\n        </motion.div>\n      </div>\n    </MotionConfig>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v4/hero-v4-root.tsx"
+      "target": "app/hero-section-v4/components/hero-v4-root.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/hero-content.tsx",
+      "path": "registry/new-york/blocks/hero-section-v4/components/hero-content.tsx",
       "content": "import { IBM_Plex_Serif } from \"next/font/google\"\n\nimport CtaButtons from \"./cta-buttons\"\n\nconst ibmPlexSerif = IBM_Plex_Serif({\n  subsets: [\"latin\"],\n  weight: [\"400\", \"500\", \"600\"],\n})\n\nconst TITLE_WORDS = [\"Turn\", \"AI\", \"from\", \"noise\", \"into\", \"results.\"]\n\nexport default function HeroContent() {\n  return (\n    <div className=\"flex flex-col items-center gap-6 text-center\">\n      <h1\n        className={`${ibmPlexSerif.className} text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]`}\n      >\n        {TITLE_WORDS.map((word, i) => (\n          <span key={i} data-hero-v4-word className=\"inline-block\">\n            {i < TITLE_WORDS.length - 1 ? word + \"\\u00A0\" : word}\n          </span>\n        ))}\n      </h1>\n\n      <div data-hero-v4-reveal>\n        <p className=\"max-w-xl text-base leading-7 tracking-tight text-muted-foreground sm:text-lg sm:leading-8\">\n          We find where AI can save you time and money, then build the systems\n          that make it happen.\n        </p>\n      </div>\n\n      <div data-hero-v4-reveal>\n        <CtaButtons />\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v4/hero-content.tsx"
+      "target": "app/hero-section-v4/components/hero-content.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/cta-buttons.tsx",
+      "path": "registry/new-york/blocks/hero-section-v4/components/cta-buttons.tsx",
       "content": "\"use client\"\n\nimport Link from \"next/link\"\nimport { useState } from \"react\"\nimport { CirclePlay } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst PRIMARY_HREF = \"#\"\nconst SECONDARY_HREF = \"#\"\n\nconst LABEL = \"How we work\"\nconst CHAR_DELAY_MS = 7\nconst TOTAL_MS = LABEL.length * CHAR_DELAY_MS\n\nexport default function CtaButtons() {\n  const [hovered, setHovered] = useState(false)\n\n  return (\n    <div className=\"flex flex-row flex-wrap justify-center gap-3\">\n\n      <Button size=\"lg\" className=\"group relative overflow-hidden\" asChild>\n        <Link href={PRIMARY_HREF}>\n\n          <span className=\"absolute inset-0 flex items-center justify-center transition-transform duration-300 ease-in-out group-hover:translate-y-full\">\n            Book a free call\n          </span>\n\n          <span className=\"absolute inset-0 flex -translate-y-full items-center justify-center transition-transform duration-300 ease-in-out group-hover:translate-y-0\">\n            Book a free call\n          </span>\n\n          <span className=\"invisible\">Book a free call</span>\n        </Link>\n      </Button>\n\n      <Button\n        variant=\"outline\"\n        size=\"lg\"\n        className=\"relative overflow-hidden\"\n        asChild\n      >\n        <Link\n          href={SECONDARY_HREF}\n          onMouseEnter={() => setHovered(true)}\n          onMouseLeave={() => setHovered(false)}\n        >\n\n          <span className=\"flex items-center gap-2\">\n            <span className=\"flex\">\n              {LABEL.split(\"\").map((char, i) => (\n                <span\n                  key={i}\n                  className=\"inline-block transition-opacity duration-75\"\n                  style={{\n                    opacity: hovered ? 0 : 1,\n                    transitionDelay: hovered\n                      ? `${(LABEL.length - 1 - i) * CHAR_DELAY_MS}ms`\n                      : \"0ms\",\n                  }}\n                >\n                  {char === \" \" ? \"\\u00A0\" : char}\n                </span>\n              ))}\n            </span>\n            <CirclePlay\n              size={16}\n              className=\"shrink-0 transition-opacity duration-75\"\n              style={{ opacity: hovered ? 0 : 1 }}\n            />\n          </span>\n\n          <CirclePlay\n            size={18}\n            className=\"absolute inset-0 m-auto transition-all duration-260\"\n            style={{\n              opacity: hovered ? 1 : 0,\n              transform: hovered\n                ? \"translateX(0px) scale(1.4)\"\n                : \"translateX(14px) scale(0.55)\",\n              transitionDelay: hovered ? `${TOTAL_MS}ms` : \"0ms\",\n              transitionTimingFunction: \"cubic-bezier(0.34, 1.56, 0.64, 1)\",\n            }}\n          />\n        </Link>\n      </Button>\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v4/cta-buttons.tsx"
+      "target": "app/hero-section-v4/components/cta-buttons.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/hero-halftone-image.tsx",
+      "path": "registry/new-york/blocks/hero-section-v4/components/hero-halftone-image.tsx",
       "content": "\"use client\"\n\nimport { HalftoneDots } from \"@paper-design/shaders-react\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst HERO_V4_BG = `${mediaOrigin}/images/blocks/hero-section-v4/hero-section-v4-bg.png`\n\nexport function HeroHalftoneImage() {\n  return (\n    <HalftoneDots\n      aria-hidden={true}\n      className=\"absolute inset-0 h-full w-full\"\n      colorBack=\"#f2f1e8\"\n      colorFront=\"#2b2b2b\"\n      contrast={0.5}\n      fit=\"cover\"\n      grainMixer={0.4}\n      grainOverlay={0.2}\n      grainSize={0.5}\n      grid=\"hex\"\n      image={HERO_V4_BG}\n      inverted={false}\n      originalColors={false}\n      radius={1.5}\n      size={0.2}\n      type=\"gooey\"\n    />\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v4/hero-halftone-image.tsx"
+      "target": "app/hero-section-v4/components/hero-halftone-image.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v4/hero-section-v4.css",
-      "content": "\n\n@media (prefers-reduced-motion: no-preference) {\n  [data-hero-v4-reveal],\n  [data-hero-v4-word] {\n    opacity: 0;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  [data-hero-v4-reveal],\n  [data-hero-v4-word] {\n    opacity: 1;\n    transform: none;\n    filter: none;\n  }\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v4/styles/hero-section-v4.css",
+      "content": "@media (prefers-reduced-motion: no-preference) {\n  [data-hero-v4-reveal],\n  [data-hero-v4-word] {\n    opacity: 0;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  [data-hero-v4-reveal],\n  [data-hero-v4-word] {\n    opacity: 1;\n    transform: none;\n    filter: none;\n  }\n}\n",
       "type": "registry:file",
-      "target": "app/hero-section-v4/hero-section-v4.css"
+      "target": "app/hero-section-v4/styles/hero-section-v4.css"
     }
   ],
   "type": "registry:block"

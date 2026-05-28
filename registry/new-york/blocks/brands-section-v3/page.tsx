@@ -1,4 +1,4 @@
-import BrandsSectionV3 from "./brands-section-v3"
+import BrandsSectionV3 from "./components/brands-section-v3"
 
 export default function Page() {
   return <BrandsSectionV3 />

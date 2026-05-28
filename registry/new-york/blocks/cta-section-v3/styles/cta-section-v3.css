@@ -1,0 +1,21 @@
+.cta-v3-dither-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  opacity: 0.35;
+}
+
+.cta-v3-dither-frame canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-v3-dither-frame {
+    display: none;
+  }
+
+}

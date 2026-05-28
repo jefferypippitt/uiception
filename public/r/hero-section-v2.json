@@ -13,27 +13,27 @@
   "files": [
     {
       "path": "registry/new-york/blocks/hero-section-v2/page.tsx",
-      "content": "import HeroSectionV2 from \"./hero-section-v2\"\n\nexport default function Page() {\n  return <HeroSectionV2 />\n}\n",
+      "content": "import HeroSectionV2 from \"./components/hero-section-v2\"\n\nexport default function Page() {\n  return <HeroSectionV2 />\n}\n",
       "type": "registry:page",
       "target": "app/hero-section-v2/page.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v2/hero-section-v2.tsx",
+      "path": "registry/new-york/blocks/hero-section-v2/components/hero-section-v2.tsx",
       "content": "import HeroContent from \"./hero-content\"\n\nexport default function HeroSectionV2() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <HeroContent />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v2/hero-section-v2.tsx"
+      "target": "app/hero-section-v2/components/hero-section-v2.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v2/hero-content.tsx",
-      "content": "\"use client\"\n\nimport { useHeroAnimation } from \"./use-hero-animation\"\nimport EventStream from \"../event-stream/event-stream\"\nimport BrandsSectionV2 from \"../brands-section-v2/brands-section-v2\"\n\nconst WORD_INITIAL: React.CSSProperties = {\n  opacity: 0,\n  transform: \"translateY(24px)\",\n  display: \"inline-block\",\n}\n\nfunction Word({\n  children,\n  className,\n}: {\n  children: string\n  className?: string\n}) {\n  return (\n    <span\n      style={WORD_INITIAL}\n      className={`word${className ? ` ${className}` : \"\"}`}\n    >\n      {children}\n    </span>\n  )\n}\n\nexport default function HeroContent() {\n  const { titleRef, descRef, streamRef, brandsRef } = useHeroAnimation()\n\n  return (\n    <>\n      <div className=\"grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16\">\n        <div className=\"flex flex-col gap-6\">\n          <h1\n            ref={titleRef}\n            className=\"text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl\"\n          >\n            <Word>Every</Word> <Word>event,</Word>{\" \"}\n            <Word className=\"font-normal italic\">delivered</Word>{\" \"}\n            <Word className=\"font-normal italic\">instantly</Word>\n          </h1>\n          <p\n            ref={descRef}\n            style={{ opacity: 0 }}\n            className=\"text-lg leading-relaxed font-light\"\n          >\n            Connect your services with a reliable event pipeline. Orders,\n            payments, and shipments stream in real time, exactly when you need\n            them.\n          </p>\n\n        </div>\n\n        <div ref={streamRef} style={{ opacity: 0 }}>\n          <EventStream />\n        </div>\n      </div>\n\n      <section ref={brandsRef} style={{ opacity: 0 }}>\n        <BrandsSectionV2 />\n      </section>\n    </>\n  )\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v2/components/hero-content.tsx",
+      "content": "\"use client\"\n\nimport { useHeroAnimation } from \"../hooks/use-hero-animation\"\nimport EventStream from \"../../event-stream/components/event-stream\"\nimport BrandsSectionV2 from \"../../brands-section-v2/components/brands-section-v2\"\n\nconst WORD_INITIAL: React.CSSProperties = {\n  opacity: 0,\n  transform: \"translateY(24px)\",\n  display: \"inline-block\",\n}\n\nfunction Word({\n  children,\n  className,\n}: {\n  children: string\n  className?: string\n}) {\n  return (\n    <span\n      style={WORD_INITIAL}\n      className={`word${className ? ` ${className}` : \"\"}`}\n    >\n      {children}\n    </span>\n  )\n}\n\nexport default function HeroContent() {\n  const { titleRef, descRef, streamRef, brandsRef } = useHeroAnimation()\n\n  return (\n    <>\n      <div className=\"grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16\">\n        <div className=\"flex flex-col gap-6\">\n          <h1\n            ref={titleRef}\n            className=\"text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl\"\n          >\n            <Word>Every</Word> <Word>event,</Word>{\" \"}\n            <Word className=\"font-normal italic\">delivered</Word>{\" \"}\n            <Word className=\"font-normal italic\">instantly</Word>\n          </h1>\n          <p\n            ref={descRef}\n            style={{ opacity: 0 }}\n            className=\"text-lg leading-relaxed font-light\"\n          >\n            Connect your services with a reliable event pipeline. Orders,\n            payments, and shipments stream in real time, exactly when you need\n            them.\n          </p>\n\n        </div>\n\n        <div ref={streamRef} style={{ opacity: 0 }}>\n          <EventStream />\n        </div>\n      </div>\n\n      <section ref={brandsRef} style={{ opacity: 0 }}>\n        <BrandsSectionV2 />\n      </section>\n    </>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v2/hero-content.tsx"
+      "target": "app/hero-section-v2/components/hero-content.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v2/use-hero-animation.ts",
+      "path": "registry/new-york/blocks/hero-section-v2/hooks/use-hero-animation.ts",
       "content": "import { useEffect, useRef } from \"react\"\nimport gsap from \"gsap\"\n\nexport function useHeroAnimation() {\n  const titleRef  = useRef<HTMLHeadingElement>(null)\n  const descRef   = useRef<HTMLParagraphElement>(null)\n  const streamRef = useRef<HTMLDivElement>(null)\n  const brandsRef = useRef<HTMLElement>(null)\n\n  useEffect(() => {\n    const ctx = gsap.context(() => {\n      const tl = gsap.timeline({ defaults: { ease: \"power4.out\" } })\n\n      tl.to(titleRef.current!.querySelectorAll(\".word\"), {\n        opacity: 1,\n        y: 0,\n        duration: 0.8,\n        stagger: 0.07,\n      })\n\n      .to(descRef.current, {\n        opacity: 1,\n        filter: \"blur(0px)\",\n        y: 0,\n        duration: 0.9,\n        ease: \"power3.out\",\n      }, \"-=0.45\")\n\n      .to(streamRef.current, {\n        opacity: 1,\n        scale: 1,\n        y: 0,\n        rotationX: 0,\n        transformPerspective: 1000,\n        transformOrigin: \"50% 0%\",\n        duration: 1.1,\n        ease: \"expo.out\",\n      }, \"<0.1\")\n\n      .to(brandsRef.current, {\n        opacity: 1,\n        y: 0,\n        duration: 0.6,\n        ease: \"power3.out\",\n      }, \"-=0.5\")\n    })\n\n    return () => ctx.revert()\n  }, [])\n\n  return { titleRef, descRef, streamRef, brandsRef }\n}\n",
       "type": "registry:hook",
-      "target": "app/hero-section-v2/use-hero-animation.ts"
+      "target": "app/hero-section-v2/hooks/use-hero-animation.ts"
     }
   ],
   "type": "registry:block"

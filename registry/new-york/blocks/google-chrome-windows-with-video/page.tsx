@@ -1,4 +1,4 @@
-import GoogleChromeWindowsWithVideo from "./google-chrome-windows-with-video"
+import GoogleChromeWindowsWithVideo from "./components/google-chrome-windows-with-video"
 
 export default function Page() {
   return (

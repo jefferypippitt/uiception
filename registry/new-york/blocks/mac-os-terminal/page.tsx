@@ -1,4 +1,4 @@
-import MacOsTerminal from "./mac-os-terminal"
+import MacOsTerminal from "./components/mac-os-terminal"
 
 export default function Page() {
   return (

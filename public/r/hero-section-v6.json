@@ -14,51 +14,51 @@
   "files": [
     {
       "path": "registry/new-york/blocks/hero-section-v6/page.tsx",
-      "content": "import HeroSectionV6 from \"./hero-section-v6\"\n\nexport default function Page() {\n  return <HeroSectionV6 />\n}\n",
+      "content": "import HeroSectionV6 from \"./components/hero-section-v6\"\n\nexport default function Page() {\n  return <HeroSectionV6 />\n}\n",
       "type": "registry:page",
       "target": "app/hero-section-v6/page.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/hero-section-v6.tsx",
-      "content": "import BrandsSectionV5 from \"../brands-section-v5/brands-section-v5\"\n\nimport { HeroV6Root } from \"./hero-v6-root\"\n\nimport \"./hero-section-v6.css\"\n\nexport default function HeroSectionV6() {\n  return (\n    <>\n      <section className=\"pt-10 md:pt-14 lg:pt-16\">\n        <HeroV6Root />\n      </section>\n      <BrandsSectionV5 animated />\n    </>\n  )\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v6/components/hero-section-v6.tsx",
+      "content": "import BrandsSectionV5 from \"../../brands-section-v5/components/brands-section-v5\"\n\nimport { HeroV6Root } from \"./hero-v6-root\"\n\nimport \"../styles/hero-section-v6.css\"\n\nexport default function HeroSectionV6() {\n  return (\n    <>\n      <section className=\"pt-10 md:pt-14 lg:pt-16\">\n        <HeroV6Root />\n      </section>\n      <BrandsSectionV5 animated />\n    </>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/hero-section-v6.tsx"
+      "target": "app/hero-section-v6/components/hero-section-v6.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/hero-v6-root.tsx",
+      "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-root.tsx",
       "content": "\"use client\"\n\nimport { useLayoutEffect, useRef } from \"react\"\nimport gsap from \"gsap\"\n\nimport HeroContent from \"./hero-content\"\nimport { HeroV6Image } from \"./hero-v6-image\"\nimport ShaderImageBg from \"./shader-image-bg\"\n\nexport function HeroV6Root() {\n  const rootRef = useRef<HTMLDivElement>(null)\n  const mediaRef = useRef<HTMLDivElement>(null)\n  const frameRef = useRef<HTMLDivElement>(null)\n\n  useLayoutEffect(() => {\n    const root = rootRef.current\n    const media = mediaRef.current\n    const frame = frameRef.current\n    if (!root || !media || !frame) return\n\n    const isDesktop = window.matchMedia(\"(min-width: 1024px)\").matches\n    const reduceMotion = window.matchMedia(\n      \"(prefers-reduced-motion: reduce)\"\n    ).matches\n\n    const reveals = gsap.utils.toArray<HTMLElement>(\n      \"[data-hero-v6-reveal]\",\n      root\n    )\n    const words = gsap.utils.toArray<HTMLElement>(\"[data-hero-v6-word]\", root)\n\n    if (reduceMotion) {\n      gsap.set([...words, ...reveals, media, frame], {\n        clearProps: \"all\",\n        autoAlpha: 1,\n      })\n      return\n    }\n\n    const ctx = gsap.context(() => {\n      gsap.set(words, { autoAlpha: 0, y: 26, force3D: true })\n      gsap.set(reveals, { autoAlpha: 0, y: 20, force3D: true })\n      gsap.set(media, {\n        autoAlpha: 0,\n        y: 42,\n        scale: isDesktop ? 0.985 : 0.995,\n        transformOrigin: \"50% 50%\",\n        force3D: true,\n      })\n      gsap.set(frame, {\n        autoAlpha: 0,\n        scale: 0.97,\n        force3D: true,\n      })\n\n      const allEls = [...words, ...reveals, media, frame]\n\n      const tl = gsap.timeline({\n        defaults: { ease: \"power3.out\", duration: 0.48 },\n        onComplete: () => {\n          gsap.set(allEls, { clearProps: \"willChange\" })\n        },\n      })\n\n      tl.to(words, {\n        autoAlpha: 1,\n        y: 0,\n        ease: \"power2.out\",\n        stagger: { each: 0.04, from: \"start\" },\n        force3D: true,\n        clearProps: \"transform\",\n      })\n        .to(\n          reveals[0],\n          {\n            autoAlpha: 1,\n            y: 0,\n            duration: 0.42,\n            ease: \"power2.out\",\n            force3D: true,\n            clearProps: \"transform\",\n          },\n          \">-0.06\"\n        )\n        .to(\n          reveals[1],\n          {\n            autoAlpha: 1,\n            y: 0,\n            duration: 0.4,\n            ease: \"power2.out\",\n            force3D: true,\n            clearProps: \"transform\",\n          },\n          \">-0.04\"\n        )\n        .to(\n          media,\n          {\n            autoAlpha: 1,\n            y: 0,\n            scale: 1,\n            duration: 0.62,\n            ease: \"power3.out\",\n            force3D: true,\n            clearProps: \"transform\",\n          },\n          \">-0.02\"\n        )\n        .to(\n          frame,\n          {\n            autoAlpha: 1,\n            scale: 1,\n            duration: 0.56,\n            ease: \"power2.out\",\n            force3D: true,\n            clearProps: \"transform\",\n          },\n          \"<\"\n        )\n    }, root)\n\n    return () => ctx.revert()\n  }, [])\n\n  return (\n    <div ref={rootRef}>\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <HeroContent />\n        </div>\n      </div>\n\n      <div className=\"mx-auto max-w-5xl px-4 pt-4\">\n        <div\n          ref={mediaRef}\n          className=\"hero-v6-media-shell relative mt-4 aspect-video w-full max-sm:mt-3.5 sm:mt-6\"\n        >\n          <ShaderImageBg ref={frameRef} />\n          <div className=\"hero-v6-media-image absolute inset-4 sm:inset-5 md:inset-7\">\n            <div className=\"relative size-full overflow-hidden rounded-sm border border-slate-900/22 bg-[#f5f5f5]\">\n              <HeroV6Image />\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/hero-v6-root.tsx"
+      "target": "app/hero-section-v6/components/hero-v6-root.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/hero-content.tsx",
+      "path": "registry/new-york/blocks/hero-section-v6/components/hero-content.tsx",
       "content": "import CtaButtons from \"./cta-buttons\"\n\nconst TITLE_WORDS = [\"Run\", \"payroll\", \"faster\", \"with\", \"fewer\", \"errors.\"]\n\nexport default function HeroContent() {\n  return (\n    <div className=\"flex flex-col items-center gap-6 text-center\">\n      <h1 className=\"max-w-[18ch] text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]\">\n        {TITLE_WORDS.map((word, i) => (\n          <span key={i} data-hero-v6-word className=\"inline-block\">\n            {i < TITLE_WORDS.length - 1 ? word + \" \" : word}\n          </span>\n        ))}\n      </h1>\n\n      <div data-hero-v6-reveal>\n        <p className=\"max-w-xl text-base leading-7 tracking-tight text-muted-foreground sm:text-lg sm:leading-8\">\n          Automate approvals, sync time tracking, and catch anomalies before\n          payday with a payroll workspace built for finance teams.\n        </p>\n      </div>\n\n      <div data-hero-v6-reveal>\n        <CtaButtons />\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/hero-content.tsx"
+      "target": "app/hero-section-v6/components/hero-content.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/cta-buttons.tsx",
+      "path": "registry/new-york/blocks/hero-section-v6/components/cta-buttons.tsx",
       "content": "import Link from \"next/link\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst PRIMARY_HREF = \"#\"\nconst SECONDARY_HREF = \"#\"\n\nexport default function CtaButtons() {\n  return (\n    <div className=\"flex flex-row flex-wrap justify-center gap-3\">\n      <Button size=\"lg\" className=\"w-full sm:w-auto\" asChild>\n        <Link href={PRIMARY_HREF} className=\"text-center font-mono uppercase\">\n          Start payroll audit\n        </Link>\n      </Button>\n      <Button\n        variant=\"secondary\"\n        size=\"lg\"\n        className=\"w-full sm:w-auto\"\n        asChild\n      >\n        <Link href={SECONDARY_HREF} className=\"text-center font-mono uppercase\">\n          View platform tour\n        </Link>\n      </Button>\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/cta-buttons.tsx"
+      "target": "app/hero-section-v6/components/cta-buttons.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/hero-v6-image.tsx",
+      "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-image.tsx",
       "content": "import Image from \"next/image\"\n\nconst mediaOrigin =\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\n    ? \"\"\n    : \"https://uiception.com\"\n\nconst HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/hero-section-v6.jpg`\n\nexport function HeroV6Image() {\n  return (\n    <Image\n      src={HERO_V6_IMAGE}\n      unoptimized\n      alt=\"Payroll operations dashboard preview\"\n      width={1280}\n      height={720}\n      className=\"size-full object-contain object-center\"\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\n      priority\n    />\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/hero-v6-image.tsx"
+      "target": "app/hero-section-v6/components/hero-v6-image.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/shader-image-bg.tsx",
+      "path": "registry/new-york/blocks/hero-section-v6/components/shader-image-bg.tsx",
       "content": "import { forwardRef } from \"react\"\nimport { PerlinNoise } from \"@paper-design/shaders-react\"\n\nconst ShaderImageBg = forwardRef<HTMLDivElement>(\n  function ShaderImageBg(_, ref) {\n    return (\n      <div ref={ref} className=\"hero-v6-noise-frame\" aria-hidden>\n        <PerlinNoise\n          width={1280}\n          height={720}\n          colorBack=\"#ffffff\"\n          colorFront=\"#262626\"\n          proportion={0.65}\n          softness={0.35}\n          octaveCount={6}\n          persistence={1}\n          lacunarity={2.55}\n          speed={0.02}\n          scale={4}\n        />\n      </div>\n    )\n  }\n)\n\nexport default ShaderImageBg\n",
       "type": "registry:component",
-      "target": "app/hero-section-v6/shader-image-bg.tsx"
+      "target": "app/hero-section-v6/components/shader-image-bg.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v6/hero-section-v6.css",
-      "content": "\n\n.hero-v6-noise-frame {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  overflow: hidden;\n  opacity: 0.9;\n}\n\n.hero-v6-media-image {\n  position: absolute;\n  z-index: 1;\n}\n\n.hero-v6-noise-frame canvas {\n  width: 100% !important;\n  height: 100% !important;\n  display: block;\n}\n\n.hero-v6-noise-frame::before {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background-image:\n    repeating-linear-gradient(\n      45deg,\n      rgba(255, 255, 255, 0.07) 0 1px,\n      transparent 1px 4px\n    ),\n    repeating-linear-gradient(\n      -45deg,\n      rgba(0, 0, 0, 0.12) 0 1px,\n      transparent 1px 5px\n    );\n  pointer-events: none;\n}\n\n.hero-v6-noise-frame::after {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.12),\n    transparent 42%,\n    rgba(15, 23, 42, 0.22)\n  );\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 0;\n    will-change: transform, opacity;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 1;\n    transform: none;\n    filter: none;\n  }\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v6/styles/hero-section-v6.css",
+      "content": ".hero-v6-noise-frame {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  overflow: hidden;\n  opacity: 0.9;\n}\n\n.hero-v6-media-image {\n  position: absolute;\n  z-index: 1;\n}\n\n.hero-v6-noise-frame canvas {\n  width: 100% !important;\n  height: 100% !important;\n  display: block;\n}\n\n.hero-v6-noise-frame::before {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background-image:\n    repeating-linear-gradient(\n      45deg,\n      rgba(255, 255, 255, 0.07) 0 1px,\n      transparent 1px 4px\n    ),\n    repeating-linear-gradient(\n      -45deg,\n      rgba(0, 0, 0, 0.12) 0 1px,\n      transparent 1px 5px\n    );\n  pointer-events: none;\n}\n\n.hero-v6-noise-frame::after {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.12),\n    transparent 42%,\n    rgba(15, 23, 42, 0.22)\n  );\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 0;\n    will-change: transform, opacity;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 1;\n    transform: none;\n    filter: none;\n  }\n}\n",
       "type": "registry:file",
-      "target": "app/hero-section-v6/hero-section-v6.css"
+      "target": "app/hero-section-v6/styles/hero-section-v6.css"
     }
   ],
   "type": "registry:block"

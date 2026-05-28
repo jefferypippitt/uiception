@@ -1,0 +1,12 @@
+.fsv4-points li {
+  position: relative;
+  padding-left: 0.92rem;
+}
+
+.fsv4-points li::before {
+  content: "✶";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #cfd3d3;
+}

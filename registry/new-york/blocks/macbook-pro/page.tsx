@@ -1,4 +1,4 @@
-import MacbookPro from "./macbook-pro"
+import MacbookPro from "./components/macbook-pro"
 
 export default function Page() {
   return (

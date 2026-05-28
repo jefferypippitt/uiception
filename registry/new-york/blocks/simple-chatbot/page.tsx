@@ -1,4 +1,4 @@
-import SimpleChatbot from "./simple-chatbot"
+import SimpleChatbot from "./components/simple-chatbot"
 
 export default function Page() {
   return (

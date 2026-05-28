@@ -1,4 +1,4 @@
-import Spreadsheet from "./spreadsheet"
+import Spreadsheet from "./components/spreadsheet"
 
 export default function Page() {
   return (

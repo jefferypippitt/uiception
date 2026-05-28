@@ -1,4 +1,4 @@
-import CursorTerminal from "./cursor-terminal"
+import CursorTerminal from "./components/cursor-terminal"
 
 export default function Page() {
   return (

@@ -12,27 +12,27 @@
   "files": [
     {
       "path": "registry/new-york/blocks/cta-section-v4/page.tsx",
-      "content": "import CtaSectionV4 from \"./cta-section-v4\"\n\nexport default function Page() {\n  return <CtaSectionV4 />\n}\n",
+      "content": "import CtaSectionV4 from \"./components/cta-section-v4\"\n\nexport default function Page() {\n  return <CtaSectionV4 />\n}\n",
       "type": "registry:page",
       "target": "app/cta-section-v4/page.tsx"
     },
     {
-      "path": "registry/new-york/blocks/cta-section-v4/cta-section-v4.tsx",
-      "content": "import { Button } from \"@/components/ui/button\"\n\nimport { CtaSectionV4ShaderBg } from \"./cta-section-v4-shader-bg\"\n\nimport \"./cta-section-v4.css\"\n\nexport default function CtaSectionV4() {\n  return (\n    <section className=\"relative overflow-hidden bg-[#000a0f] py-16 motion-reduce:bg-[color-mix(in_oklab,var(--muted)_78%,var(--background)_22%)] md:py-20 lg:py-24\">\n      <CtaSectionV4ShaderBg />\n      <div className=\"relative z-10 mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <h2 className=\"m-0 font-serif text-[2.625rem] font-medium leading-[1.08] tracking-[-0.03em] text-balance text-white motion-reduce:text-foreground sm:text-5xl lg:text-[3.5rem]\">\n            Your next product starts here.\n          </h2>\n          <div className=\"flex flex-row items-center gap-2\"> \n          <Button variant=\"default\" size=\"lg\">Get Started</Button>\n          <Button variant=\"secondary\" size=\"lg\">Sign In</Button>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "path": "registry/new-york/blocks/cta-section-v4/components/cta-section-v4.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\n\nimport { CtaSectionV4ShaderBg } from \"./cta-section-v4-shader-bg\"\n\nimport \"../styles/cta-section-v4.css\"\n\nexport default function CtaSectionV4() {\n  return (\n    <section className=\"relative overflow-hidden bg-[#000a0f] py-16 motion-reduce:bg-[color-mix(in_oklab,var(--muted)_78%,var(--background)_22%)] md:py-20 lg:py-24\">\n      <CtaSectionV4ShaderBg />\n      <div className=\"relative z-10 mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <h2 className=\"m-0 font-serif text-[2.625rem] font-medium leading-[1.08] tracking-[-0.03em] text-balance text-white motion-reduce:text-foreground sm:text-5xl lg:text-[3.5rem]\">\n            Your next product starts here.\n          </h2>\n          <div className=\"flex flex-row items-center gap-2\"> \n          <Button variant=\"default\" size=\"lg\">Get Started</Button>\n          <Button variant=\"secondary\" size=\"lg\">Sign In</Button>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/cta-section-v4/cta-section-v4.tsx"
+      "target": "app/cta-section-v4/components/cta-section-v4.tsx"
     },
     {
-      "path": "registry/new-york/blocks/cta-section-v4/cta-section-v4-shader-bg.tsx",
+      "path": "registry/new-york/blocks/cta-section-v4/components/cta-section-v4-shader-bg.tsx",
       "content": "\"use client\"\n\nimport { useLayoutEffect, useRef, useState } from \"react\"\nimport { GrainGradient } from \"@paper-design/shaders-react\"\n\ntype ShaderViewport = {\n  width: number\n  height: number\n  dpr: number\n  ready: boolean\n}\n\nconst initialViewport: ShaderViewport = { width: 0, height: 0, dpr: 1, ready: false }\n\nconst CTA_V4_SHADER = {\n  colors: [\"#c6750c\", \"#beae60\", \"#d7cbc6\"] as const,\n  colorBack: \"#000a0f\",\n  softness: 0.7,\n  intensity: 0.15,\n  noise: 0.5,\n  shape: \"sphere\" as const,\n  speed: 4,\n  offsetY: 0.45\n} as const\n\nfunction adaptShader(viewport: ShaderViewport) {\n  const width = Math.max(1, Math.round(viewport.width * viewport.dpr))\n  const height = Math.max(1, Math.round(viewport.height * viewport.dpr))\n  return { width, height }\n}\n\nexport function CtaSectionV4ShaderBg() {\n  const ref = useRef<HTMLDivElement>(null)\n  const [viewport, setViewport] = useState<ShaderViewport>(initialViewport)\n\n  useLayoutEffect(() => {\n    const el = ref.current\n    if (!el) return\n\n    const update = () => {\n      const { width, height } = el.getBoundingClientRect()\n      if (width < 1 || height < 1) return\n      setViewport({\n        width,\n        height,\n        dpr: Math.min(window.devicePixelRatio || 1, 2),\n        ready: true,\n      })\n    }\n\n    update()\n    const observer = new ResizeObserver(update)\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [])\n\n  const render = viewport.ready ? adaptShader(viewport) : null\n\n  return (\n    <div\n      ref={ref}\n      className=\"cta-v4-shader-frame\"\n      style={{ backgroundColor: CTA_V4_SHADER.colorBack }}\n      aria-hidden\n    >\n      {render ? (\n        <GrainGradient\n          className=\"cta-v4-shader-canvas\"\n          width={render.width}\n          height={render.height}\n          colors={[...CTA_V4_SHADER.colors]}\n          colorBack={CTA_V4_SHADER.colorBack}\n          softness={CTA_V4_SHADER.softness}\n          intensity={CTA_V4_SHADER.intensity}\n          noise={CTA_V4_SHADER.noise}\n          shape={CTA_V4_SHADER.shape}\n          speed={CTA_V4_SHADER.speed}\n          offsetY={CTA_V4_SHADER.offsetY}\n          fit=\"cover\"\n        />\n      ) : null}\n    </div>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/cta-section-v4/cta-section-v4-shader-bg.tsx"
+      "target": "app/cta-section-v4/components/cta-section-v4-shader-bg.tsx"
     },
     {
-      "path": "registry/new-york/blocks/cta-section-v4/cta-section-v4.css",
+      "path": "registry/new-york/blocks/cta-section-v4/styles/cta-section-v4.css",
       "content": ".cta-v4-shader-frame {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  pointer-events: none;\n  overflow: hidden;\n}\n\n.cta-v4-shader-canvas {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.cta-v4-shader-frame canvas {\n  display: block;\n  width: 100% !important;\n  height: 100% !important;\n  object-fit: cover;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .cta-v4-shader-frame {\n    display: none;\n  }\n}\n",
       "type": "registry:file",
-      "target": "app/cta-section-v4/cta-section-v4.css"
+      "target": "app/cta-section-v4/styles/cta-section-v4.css"
     }
   ],
   "type": "registry:block"

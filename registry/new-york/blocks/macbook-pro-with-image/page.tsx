@@ -1,4 +1,4 @@
-import MacbookProWithImage from "./macbook-pro-with-image"
+import MacbookProWithImage from "./components/macbook-pro-with-image"
 
 export default function Page() {
   return (

@@ -1,4 +1,4 @@
-import FeatureSectionV9 from "./feature-section-v9"
+import FeatureSectionV9 from "./components/feature-section-v9"
 
 export default function Page() {
   return (

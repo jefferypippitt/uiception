@@ -1,4 +1,4 @@
-import GoogleChromeWindows from "./google-chrome-windows"
+import GoogleChromeWindows from "./components/google-chrome-windows"
 
 export default function Page() {
   return (

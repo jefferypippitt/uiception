@@ -1,0 +1,64 @@
+---
+description: Registry blocks use shadcn-style sub-folder layout (components / hooks / lib / styles)
+globs: registry/new-york/blocks/**,registry.json
+alwaysApply: true
+---
+
+# Registry block folder structure (shadcn-style)
+
+All blocks live under `registry/new-york/blocks/<block-id>/` with sub-folders matching shadcn's conventions.
+
+## Source layout
+
+```
+<block-id>/
+  page.tsx                      # preview wrapper — stays at root (registry:page)
+  components/
+    <block-id>.tsx              # default export (registry:component)
+    <sub-component>.tsx         # additional components (registry:component)
+  hooks/
+    use-*.ts                    # hooks (registry:hook)
+  lib/
+    config.ts                   # constants / config (registry:lib)
+    <data>.ts                   # other data files (registry:lib)
+  styles/
+    <block-id>.css              # block-specific styles (registry:file)
+```
+
+## Target layout (installs in user's project)
+
+```
+app/<block-id>/page.tsx
+app/<block-id>/components/<block-id>.tsx
+app/<block-id>/components/<sub-component>.tsx
+app/<block-id>/hooks/use-*.ts
+app/<block-id>/lib/config.ts
+app/<block-id>/styles/<block-id>.css
+```
+
+## Imports inside a component
+
+```ts
+import Sub from "./sub-component"           // sibling in components/
+import { useFoo } from "../hooks/use-foo"   // hook
+import { ITEMS } from "../lib/config"       // lib data
+import "../styles/<block-id>.css"           // styles
+```
+
+## Imports in page.tsx (root)
+
+```ts
+import BlockName from "./components/block-name"
+```
+
+## Cross-block imports (from inside components/)
+
+```ts
+import BrandsV1 from "../../brands-section-v1/components/brands-section-v1"
+```
+
+## Do not
+
+- Place components at the block root (except page.tsx)
+- Mix sub-folder files with root files
+- Add `tailwind.config.js` or `@import "tailwindcss"` inside a block folder

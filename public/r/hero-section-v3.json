@@ -11,15 +11,15 @@
   "files": [
     {
       "path": "registry/new-york/blocks/hero-section-v3/page.tsx",
-      "content": "import HeroSectionV3 from \"./hero-section-v3\"\n\nexport default function Page() {\n  return <HeroSectionV3 />\n}\n",
+      "content": "import HeroSectionV3 from \"./components/hero-section-v3\"\n\nexport default function Page() {\n  return <HeroSectionV3 />\n}\n",
       "type": "registry:page",
       "target": "app/hero-section-v3/page.tsx"
     },
     {
-      "path": "registry/new-york/blocks/hero-section-v3/hero-section-v3.tsx",
-      "content": "import { ArrowRight } from \"lucide-react\"\n\nimport ChatBot from \"../chat-bot/chat-bot\"\nimport { Badge } from \"@/components/ui/badge\"\n\nexport default function HeroSectionV3() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <Badge variant=\"secondary\" className=\"text-sm italic\">\n            Always open, always ready\n          </Badge>\n\n          <h1 className=\"text-3xl font-medium tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]\">\n            Hospitality that never keeps\n            <br />\n            your guests waiting\n          </h1>\n\n          <p className=\"max-w-lg text-sm leading-relaxed text-muted-foreground\">\n            From taking reservations to answering menu questions and handling\n            special dietary requests, your guests get instant answers any time\n            of day.\n          </p>\n\n          <button className=\"inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700\">\n            Sign up for free\n            <ArrowRight data-icon=\"inline-end\" size={16} />\n          </button>\n        </div>\n      </div>\n\n      <div className=\"mx-auto max-w-6xl px-4 pt-4\">\n        <ChatBot className=\"mx-auto max-w-3xl py-10\" />\n      </div>\n    </section>\n  )\n}\n",
+      "path": "registry/new-york/blocks/hero-section-v3/components/hero-section-v3.tsx",
+      "content": "import { ArrowRight } from \"lucide-react\"\n\nimport ChatBot from \"../../chat-bot/components/chat-bot\"\nimport { Badge } from \"@/components/ui/badge\"\n\nexport default function HeroSectionV3() {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <Badge variant=\"secondary\" className=\"text-sm italic\">\n            Always open, always ready\n          </Badge>\n\n          <h1 className=\"text-3xl font-medium tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]\">\n            Hospitality that never keeps\n            <br />\n            your guests waiting\n          </h1>\n\n          <p className=\"max-w-lg text-sm leading-relaxed text-muted-foreground\">\n            From taking reservations to answering menu questions and handling\n            special dietary requests, your guests get instant answers any time\n            of day.\n          </p>\n\n          <button className=\"inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700\">\n            Sign up for free\n            <ArrowRight data-icon=\"inline-end\" size={16} />\n          </button>\n        </div>\n      </div>\n\n      <div className=\"mx-auto max-w-6xl px-4 pt-4\">\n        <ChatBot className=\"mx-auto max-w-3xl py-10\" />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
-      "target": "app/hero-section-v3/hero-section-v3.tsx"
+      "target": "app/hero-section-v3/components/hero-section-v3.tsx"
     }
   ],
   "type": "registry:block"

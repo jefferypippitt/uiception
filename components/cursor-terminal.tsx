@@ -20,10 +20,10 @@ import { playSound } from "@/lib/sound-engine"
 import { switchOffSound } from "@/lib/switch-off"
 import { switchOnSound } from "@/lib/switch-on"
 
-import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/use-terminal-animation"
-import Spinner from "@/registry/new-york/blocks/cursor-terminal/spinner"
-import PromptShell from "@/registry/new-york/blocks/cursor-terminal/prompt-shell"
-import { ICON_SM, ICON_XS, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/config"
+import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation"
+import Spinner from "@/registry/new-york/blocks/cursor-terminal/components/spinner"
+import PromptShell from "@/registry/new-york/blocks/cursor-terminal/components/prompt-shell"
+import { ICON_SM, ICON_XS, type Line, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/lib/config"
 import dynamic from "next/dynamic"
 import TrexRunner from "./trex-runner"
 const Wordle = dynamic(() => import("./wordle"), { ssr: false })
@@ -31,7 +31,7 @@ import ReactionTime from "./reaction-time"
 import ColorMemory from "./color-memory"
 import SequenceMemory from "./sequence-memory"
 
-import "@/registry/new-york/blocks/cursor-terminal/cursor-terminal.css"
+import "@/registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css"
 import "./cursor-terminal.css"
 
 const PANEL_TABS = [
@@ -214,7 +214,7 @@ export function CursorTerminal() {
             className="crt-body h-88 overflow-y-auto bg-(--crt-t-body-bg) px-3.5 py-2 text-left font-mono text-[11px] leading-[1.45] text-(--crt-t-body-fg)"
             style={{ scrollbarWidth: "none" }}
           >
-            {lines.map((line) => (
+            {lines.map((line: Line) => (
               line.promptLine ? (
                 <div key={line.id}>
                   <div className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-0">

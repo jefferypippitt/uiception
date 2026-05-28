@@ -1,4 +1,4 @@
-import EventStream from "./event-stream"
+import EventStream from "./components/event-stream"
 
 export default function Page() {
   return (

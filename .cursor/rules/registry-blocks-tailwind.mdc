@@ -44,7 +44,7 @@ Trim each rule block as you migrate; delete the CSS file if nothing remains.
 
 - Add `tailwind.config.js` or `@import "tailwindcss"` inside a block folder
 - Use `@apply` in block CSS for new work (prefer TSX utilities)
-- Create `components/`, `hooks/`, `lib/`, or `styles/` subfolders under a block (flat layout per `registry-blocks-flat-structure.mdc`)
+- Create `components/`, `hooks/`, `lib/`, or `styles/` subfolders under a block (flat layout per `registry-blocks-source-layout.mdc`)
 
 ## After edits
 

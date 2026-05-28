@@ -1,4 +1,4 @@
-import GoogleChrome from "./google-chrome"
+import GoogleChrome from "./components/google-chrome"
 
 export default function Page() {
   return (

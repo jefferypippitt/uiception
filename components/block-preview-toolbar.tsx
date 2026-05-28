@@ -167,28 +167,13 @@ type TreeCallbacks = {
 }
 
 function FolderTypeIcon({ name, open }: { name: string; open: boolean }) {
-  const lower = name.toLowerCase()
-
-  if (lower === "app") {
-    return <FolderCog className="size-4 shrink-0 text-emerald-500" aria-hidden />
-  }
-
   const Icon = open ? FolderOpen : Folder
 
-  if (lower === "@ui" || lower === "ui" || lower === "components") {
-    return <Icon className="size-4 shrink-0 fill-violet-500/80 text-violet-500" aria-hidden />
-  }
-  if (lower === "hooks") {
-    return <Icon className="size-4 shrink-0 fill-cyan-500/80 text-cyan-500" aria-hidden />
-  }
-  if (lower === "lib" || lower === "utils") {
-    return <Icon className="size-4 shrink-0 fill-amber-500/80 text-amber-500" aria-hidden />
-  }
-  if (lower === "styles" || lower === "css") {
-    return <Icon className="size-4 shrink-0 fill-pink-500/80 text-pink-500" aria-hidden />
+  if (name.toLowerCase() === "app") {
+    return <FolderCog className="size-4 shrink-0 fill-emerald-500 text-emerald-700" aria-hidden />
   }
 
-  return <Icon className="size-4 shrink-0 fill-blue-500/80 text-blue-500" aria-hidden />
+  return <Icon className="size-4 shrink-0 fill-amber-500/80 text-amber-500" aria-hidden />
 }
 
 function FolderRow({
