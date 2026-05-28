@@ -17,7 +17,6 @@ import { Toaster } from "@/components/ui/sonner"
 import { ViewTransitions } from "next-view-transitions"
 import { Analytics } from "@vercel/analytics/next"
 
-const ogImagePath = new URL(siteConfig.ogImage).pathname
 
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
@@ -37,8 +36,8 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
-  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  description: siteConfig.metaDescription,
   keywords: siteConfig.keywords,
   authors: [
     {
@@ -48,18 +47,33 @@ export const metadata: Metadata = {
   ],
   creator: siteConfig.author.name,
   applicationName: siteConfig.name,
+  category: "technology",
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_APP_URL!,
+    url: siteConfig.url,
     title: siteConfig.name,
-    description: siteConfig.description,
+    description: siteConfig.metaDescription,
     siteName: siteConfig.name,
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_APP_URL}${ogImagePath}`,
-        width: 512,
-        height: 512,
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 1064,
         alt: siteConfig.name,
       },
     ],
@@ -67,8 +81,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${process.env.NEXT_PUBLIC_APP_URL}${ogImagePath}`],
+    description: siteConfig.metaDescription,
+    images: [siteConfig.ogImage],
     creator: "@jefferypippitt",
   },
   icons: {
@@ -114,6 +128,31 @@ export default function RootLayout({
         )}
       >
         <body>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: siteConfig.name,
+                url: siteConfig.url,
+                description: siteConfig.metaDescription,
+                author: {
+                  "@type": "Person",
+                  name: siteConfig.author.name,
+                  url: siteConfig.author.url,
+                },
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: `${siteConfig.url}/blocks/{search_term_string}`,
+                  },
+                  "query-input": "required name=search_term_string",
+                },
+              }),
+            }}
+          />
           <Providers>{children}</Providers>
           <Toaster position="bottom-right" />
           <Analytics />
