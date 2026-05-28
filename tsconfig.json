@@ -32,7 +32,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "registry/new-york/blocks/uiception-media-fetch/instrumentation.ts"
+    "node_modules"
   ]
 }

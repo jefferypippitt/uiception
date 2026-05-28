@@ -222,6 +222,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Feature Section v8",
         registryPath: "registry/new-york/blocks/feature-section-v8",
       },
+      {
+        id: "feature-section-v9",
+        title: "Feature Section v9",
+        registryPath: "registry/new-york/blocks/feature-section-v9",
+      },
     ],
   },
   {
@@ -367,6 +372,11 @@ export const blockCategories: BlockCategory[] = [
         id: "cta-section-v3",
         title: "CTA Section v3",
         registryPath: "registry/new-york/blocks/cta-section-v3",
+      },
+      {
+        id: "cta-section-v4",
+        title: "CTA Section v4",
+        registryPath: "registry/new-york/blocks/cta-section-v4",
       },
     ],
   },

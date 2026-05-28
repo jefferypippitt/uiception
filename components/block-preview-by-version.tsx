@@ -9,6 +9,7 @@ import HeroSectionV3 from "@/registry/new-york/blocks/hero-section-v3/hero-secti
 import CtaSectionV1 from "@/registry/new-york/blocks/cta-section-v1/cta-section-v1"
 import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/cta-section-v2"
 import CtaSectionV3 from "@/registry/new-york/blocks/cta-section-v3/cta-section-v3"
+import CtaSectionV4 from "@/registry/new-york/blocks/cta-section-v4/cta-section-v4"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/footer-section-v1"
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/footer-section-v2"
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/footer-section-v3"
@@ -38,6 +39,7 @@ import FeatureSectionV5 from "@/registry/new-york/blocks/feature-section-v5/feat
 import FeatureSectionV6 from "@/registry/new-york/blocks/feature-section-v6/feature-section-v6"
 import FeatureSectionV7 from "@/registry/new-york/blocks/feature-section-v7/feature-section-v7"
 import FeatureSectionV8 from "@/registry/new-york/blocks/feature-section-v8/feature-section-v8"
+import FeatureSectionV9 from "@/registry/new-york/blocks/feature-section-v9/feature-section-v9"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/changelog-section-v1"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/faq-section-v1"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/testimonials-section-v1"
@@ -70,6 +72,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cta-section-v1": CtaSectionV1,
   "cta-section-v2": CtaSectionV2,
   "cta-section-v3": CtaSectionV3,
+  "cta-section-v4": CtaSectionV4,
   "footer-section-v1": FooterSectionV1,
   "footer-section-v2": FooterSectionV2,
   "footer-section-v3": FooterSectionV3,
@@ -105,6 +108,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v6": FeatureSectionV6,
   "feature-section-v7": FeatureSectionV7,
   "feature-section-v8": FeatureSectionV8,
+  "feature-section-v9": FeatureSectionV9,
   "changelog-section-v1": ChangelogSectionV1,
   "faq-section-v1": FaqSectionV1,
   "testimonials-section-v1": TestimonialsSectionV1,
