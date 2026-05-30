@@ -21,7 +21,7 @@
     },
     {
       "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep"
     }

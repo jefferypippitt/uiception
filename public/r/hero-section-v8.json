@@ -68,7 +68,7 @@
     },
     {
       "path": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png.gitkeep"
     }

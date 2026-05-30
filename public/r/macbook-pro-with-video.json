@@ -21,7 +21,7 @@
     },
     {
       "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep"
     }

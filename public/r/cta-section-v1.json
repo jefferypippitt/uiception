@@ -24,7 +24,7 @@
     },
     {
       "path": "public/images/blocks/cta-section-v1/cta-section-v1.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/cta-section-v1/cta-section-v1.png.gitkeep"
     }

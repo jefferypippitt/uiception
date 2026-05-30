@@ -78,19 +78,19 @@
     },
     {
       "path": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep"
     }

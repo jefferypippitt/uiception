@@ -47,37 +47,37 @@
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep"
     },
     {
       "path": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep"
     }

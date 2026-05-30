@@ -43,19 +43,19 @@
     },
     {
       "path": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep"
     },
     {
       "path": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep"
     },
     {
       "path": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep",
-      "content": "",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep"
     }
