@@ -1,11 +1,6 @@
 import Image from "next/image"
 
-const mediaOrigin =
-  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
-    ? ""
-    : "https://uiception.com"
-
-const HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/hero-section-v6.jpg`
+const HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/hero-section-v6.jpg`
 
 export function HeroV6Image() {
   return (

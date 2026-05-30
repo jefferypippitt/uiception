@@ -19,7 +19,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v4/components/feature-section-v4.tsx",
-      "content": "import FeatureGrid from \"./feature-grid\"\r\n\r\nconst mediaOrigin =\r\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\r\n    ? \"\"\r\n    : \"https://uiception.com\"\r\n\r\nconst featureImage = (filename: string) =>\r\n  `${mediaOrigin}/images/blocks/feature-section-v4/${filename}`\r\n\r\nexport default function FeatureSectionV4() {\r\n  const featureImageById = {\r\n    \"cognitive-ai\": featureImage(\"feature-section-v4-brain.png\"),\r\n    \"global-reach\": featureImage(\"feature-section-v4-planet.png\"),\r\n    \"limitless-growth\": featureImage(\"feature-section-v4-hand.png\"),\r\n  } as const\r\n\r\n  return (\r\n    <section className=\"py-16 md:py-20 lg:py-24\">\r\n      <div className=\"mx-auto max-w-6xl px-4 sm:px-6 lg:px-8\">\r\n        <div className=\"mb-9 grid gap-3 lg:mb-11 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end lg:gap-10\">\r\n          <h2 className=\"max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[1.06] font-medium tracking-[-0.02em] uppercase\">\r\n            Built for What&apos;s Possible\r\n          </h2>\r\n          <p className=\"max-w-[42ch] text-3.75 leading-[1.72] font-normal text-muted-foreground lg:pb-1\">\r\n            When you are building what comes next, you need tools that learn\r\n            from real use, work across regions, and grow with every goal you\r\n            add.\r\n          </p>\r\n        </div>\r\n        <FeatureGrid imageById={featureImageById} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import FeatureGrid from \"./feature-grid\"\r\n\r\nconst featureImage = (filename: string) =>\r\n  `https://uiception.com/images/blocks/feature-section-v4/${filename}`\r\n\r\nexport default function FeatureSectionV4() {\r\n  const featureImageById = {\r\n    \"cognitive-ai\": featureImage(\"feature-section-v4-brain.png\"),\r\n    \"global-reach\": featureImage(\"feature-section-v4-planet.png\"),\r\n    \"limitless-growth\": featureImage(\"feature-section-v4-hand.png\"),\r\n  } as const\r\n\r\n  return (\r\n    <section className=\"py-16 md:py-20 lg:py-24\">\r\n      <div className=\"mx-auto max-w-6xl px-4 sm:px-6 lg:px-8\">\r\n        <div className=\"mb-9 grid gap-3 lg:mb-11 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end lg:gap-10\">\r\n          <h2 className=\"max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] leading-[1.06] font-medium tracking-[-0.02em] uppercase\">\r\n            Built for What&apos;s Possible\r\n          </h2>\r\n          <p className=\"max-w-[42ch] text-3.75 leading-[1.72] font-normal text-muted-foreground lg:pb-1\">\r\n            When you are building what comes next, you need tools that learn\r\n            from real use, work across regions, and grow with every goal you\r\n            add.\r\n          </p>\r\n        </div>\r\n        <FeatureGrid imageById={featureImageById} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/feature-section-v4/components/feature-section-v4.tsx"
     },
@@ -40,6 +40,24 @@
       "content": "export type FeatureDefinition = {\n  id: \"cognitive-ai\" | \"global-reach\" | \"limitless-growth\"\n  labelPrimary: string\n  labelSecondary: string\n  title: string\n  points: [string, string]\n}\n\nexport const featureSectionItems: FeatureDefinition[] = [\n  {\n    id: \"cognitive-ai\",\n    labelPrimary: \"AI\",\n    labelSecondary: \"Intelligence\",\n    title: \"Cognitive AI Engine\",\n    points: [\"Learns from every interaction\", \"Surfaces insights instantly\"],\n  },\n  {\n    id: \"global-reach\",\n    labelPrimary: \"Global\",\n    labelSecondary: \"Scale\",\n    title: \"Planetary-Scale Reach\",\n    points: [\"Deploys across every region\", \"Connects teams worldwide\"],\n  },\n  {\n    id: \"limitless-growth\",\n    labelPrimary: \"Growth\",\n    labelSecondary: \"Ambition\",\n    title: \"Reach Beyond Limits\",\n    points: [\"Built for what's next\", \"Grows with your vision\"],\n  },\n]\n",
       "type": "registry:lib",
       "target": "app/feature-section-v4/lib/features.ts"
+    },
+    {
+      "path": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep"
     }
   ],
   "type": "registry:block"

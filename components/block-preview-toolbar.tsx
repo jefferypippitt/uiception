@@ -41,6 +41,7 @@ import { MarkdownLight } from "@/components/ui/svgs/markdownLight"
 import { MarkdownDark } from "@/components/ui/svgs/markdownDark"
 import { Bash } from "@/components/ui/svgs/bash"
 import { BashDark } from "@/components/ui/svgs/bashDark"
+import { Git } from "@/components/ui/svgs/git"
 
 // ---------------------------------------------------------------------------
 // File-type icons
@@ -75,6 +76,9 @@ function FileTypeIcon({ name }: { name: string }) {
         <BashDark className="size-4 shrink-0 hidden dark:block" aria-hidden />
       </>
     )
+  }
+  if (ext === "gitkeep") {
+    return <Git className="size-4 shrink-0" aria-hidden />
   }
 
   return (
@@ -548,6 +552,15 @@ export function BlockPreviewToolbar({
                     className="shiki-panel shiki-panel-vercel-docs shiki-panel-editor [&_.shiki]:rounded-none [&_.shiki]:border-0"
                     dangerouslySetInnerHTML={{ __html: highlightedHtml }}
                   />
+                ) : selectedPath?.endsWith(".gitkeep") ? (
+                  <div className="flex h-full flex-col items-center justify-center gap-2 p-8 text-center">
+                    <p className="font-mono text-xs text-[#6b7280] dark:text-[#a0a0a0]">
+                      Replace with your own asset using the same filename.
+                    </p>
+                    <p className="font-mono text-xs text-[#9ca3af] dark:text-[#6b7280]">
+                      {selectedPath.split("/").pop()?.replace(".gitkeep", "")}
+                    </p>
+                  </div>
                 ) : (
                   <pre className="p-4 font-mono text-xs leading-relaxed text-[#6b7280] dark:text-[#a0a0a0]">
                     {selectedContent ? "—" : "Select a file"}

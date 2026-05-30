@@ -7,12 +7,7 @@ import GoogleHomePreview from "../../google-chrome-windows/components/google-hom
 import PageLoadingBar from "../../google-chrome-windows/components/page-loading-bar"
 import { useSimulatedPageLoad } from "../../google-chrome-windows/hooks/use-simulated-page-load"
 
-const mediaOrigin =
-  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
-    ? ""
-    : "https://uiception.com"
-
-const SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/macbook-pro-with-video/screen-demo.mp4`
+const SCREEN_VIDEO = `https://uiception.com/videos/blocks/google-chrome-windows-with-video/screen-demo.mp4`
 
 const OMNIBOX_PROMPTS = ["vercel.com/home"] as const
 

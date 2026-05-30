@@ -44,7 +44,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-image.tsx",
-      "content": "import Image from \"next/image\"\r\n\r\nconst mediaOrigin =\r\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\r\n    ? \"\"\r\n    : \"https://uiception.com\"\r\n\r\nconst HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/hero-section-v6.jpg`\r\n\r\nexport function HeroV6Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V6_IMAGE}\r\n      unoptimized\r\n      alt=\"Payroll operations dashboard preview\"\r\n      width={1280}\r\n      height={720}\r\n      className=\"size-full object-contain object-center\"\r\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\r\n      priority\r\n    />\r\n  )\r\n}\r\n",
+      "content": "import Image from \"next/image\"\r\n\r\nconst HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/hero-section-v6.jpg`\r\n\r\nexport function HeroV6Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V6_IMAGE}\r\n      unoptimized\r\n      alt=\"Payroll operations dashboard preview\"\r\n      width={1280}\r\n      height={720}\r\n      className=\"size-full object-contain object-center\"\r\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\r\n      priority\r\n    />\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/hero-section-v6/components/hero-v6-image.tsx"
     },
@@ -59,6 +59,12 @@
       "content": ".hero-v6-noise-frame {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  overflow: hidden;\n  opacity: 0.9;\n}\n\n.hero-v6-media-image {\n  position: absolute;\n  z-index: 1;\n}\n\n.hero-v6-noise-frame canvas {\n  width: 100% !important;\n  height: 100% !important;\n  display: block;\n}\n\n.hero-v6-noise-frame::before {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background-image:\n    repeating-linear-gradient(\n      45deg,\n      rgba(255, 255, 255, 0.07) 0 1px,\n      transparent 1px 4px\n    ),\n    repeating-linear-gradient(\n      -45deg,\n      rgba(0, 0, 0, 0.12) 0 1px,\n      transparent 1px 5px\n    );\n  pointer-events: none;\n}\n\n.hero-v6-noise-frame::after {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.12),\n    transparent 42%,\n    rgba(15, 23, 42, 0.22)\n  );\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 0;\n    will-change: transform, opacity;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  [data-hero-v6-reveal],\n  [data-hero-v6-word],\n  .hero-v6-media-shell,\n  .hero-v6-noise-frame {\n    opacity: 1;\n    transform: none;\n    filter: none;\n  }\n}\n",
       "type": "registry:file",
       "target": "app/hero-section-v6/styles/hero-section-v6.css"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v6/hero-section-v6.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v6/hero-section-v6.jpg.gitkeep"
     }
   ],
   "type": "registry:block"

@@ -7,7 +7,9 @@ Use this when a block needs raster images (PNG, JPG, WebP) or video (MP4, WebM).
 
 ## How it works
 
-Media is served directly from `https://uiception.com`. There is no download step, no manifest file, and no `instrumentation.ts`. Consumers install a block and media works immediately with zero configuration.
+Block code hardcodes CDN URLs directly. Consumers install the block and media works immediately — no config, no env vars, no `next.config` changes.
+
+The `mediaOrigin` / `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA` pattern exists only in this repo for contributors who need to develop against local assets. It is **never** shipped in installed block code.
 
 ## Consumer install
 
@@ -15,44 +17,32 @@ Media is served directly from `https://uiception.com`. There is no download step
 npx shadcn@latest add "https://uiception.com/r/<block-id>.json"
 ```
 
-That's it. No extra setup required.
+That's it. CDN images render immediately, zero setup.
+
+**To swap an asset:** the block code is installed in their project — they own it. They change the URL in their copy of the file and drop their file in the pre-created `public/images/blocks/<block-id>/` folder (created by the `.gitkeep` files included in the registry item).
 
 ## Authoring: adding media to a block
 
-### 1. Reference media in the entry file using `mediaOrigin`
-
-Always declare `mediaOrigin` in the block's entry file (`<block-id>.tsx`) and build all media URLs through it. This makes the block work in **local dev** (before images are deployed) AND in **production / post-install**.
+### 1. Hardcode the CDN URL in the entry file
 
 ```tsx
-// <block-id>.tsx — entry file
+const HERO_BG = "https://uiception.com/images/blocks/hero-section-v1/hero-section-v1-bg.png"
 
-const mediaOrigin =
-  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === "true"
-    ? ""
-    : "https://uiception.com"
-
+// helper variant (multiple files)
 const blockImage = (filename: string) =>
-  `${mediaOrigin}/images/blocks/<block-id>/${filename}`
+  `https://uiception.com/images/blocks/<block-id>/${filename}`
 
-// video variant
 const blockVideo = (filename: string) =>
-  `${mediaOrigin}/videos/blocks/<block-id>/${filename}`
+  `https://uiception.com/videos/blocks/<block-id>/${filename}`
 ```
 
-**`next/image`** — add `unoptimized` so consumers don't need `remotePatterns` in their `next.config`:
+**`next/image`** — always add `unoptimized` so consumers don't need `remotePatterns` in their own `next.config`:
 
 ```tsx
-import Image from "next/image"
-
-<Image
-  src={blockImage("bg.png")}
-  unoptimized
-  alt=""
-  fill
-/>
+<Image src={HERO_BG} unoptimized alt="" fill />
 ```
 
-**Plain string constant** (shader props, video `src`, template helpers):
+**Plain string constant** (shader props, video `src`):
 
 ```tsx
 const VIDEO_SRC = blockVideo("screen-demo.mp4")
@@ -60,56 +50,53 @@ const VIDEO_SRC = blockVideo("screen-demo.mp4")
 
 ### 2. Keep media URLs in the entry file — not in `config.ts`
 
-`config.ts` holds pure data (types, labels, item arrays). Image/video URL construction belongs in the entry file alongside `mediaOrigin`.
+`config.ts` holds pure data (types, labels, item arrays). URL construction belongs in the entry file.
 
 ```ts
 // config.ts — pure data only
 export const imageFiles = [
   { file: "photo-1.jpg", alt: "Description" },
-  { file: "photo-2.jpg", alt: "Description" },
 ] as const
 ```
 
 ```tsx
-// <block-id>.tsx — URL construction here
+// entry file — URL construction here
 const items = imageFiles.map(({ file, alt }) => ({
-  ...
   src: blockImage(file),
+  alt,
 }))
 ```
 
-### 3. No manifest, no registryDependency
+### 3. Add a `.gitkeep` per asset in `registry.json`
 
-- Do **not** create a `media-manifest.json` file.
-- Do **not** add `https://uiception.com/r/uiception-media-fetch.json` to `registryDependencies`.
-- Do **not** list binary files (`public/images/…`, `public/videos/…`) in `registry.json`.
+Include one empty `.gitkeep` file per expected asset so the consumer's `public/` folder is pre-created on install. They see exactly which files to replace.
 
-### 4. Place assets in `public/` — Vercel serves them as the CDN
-
-```
-public/images/blocks/<block-id>/
-  <block-id>-bg.png
-
-public/videos/blocks/<block-id>/
-  screen-demo.mp4
+```json
+{
+  "path": "public/images/blocks/<block-id>/hero-bg.png.gitkeep",
+  "type": "registry:file",
+  "target": "public/images/blocks/<block-id>/hero-bg.png.gitkeep"
+}
 ```
 
-The `.env.local` in this repo already has `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA=true`, so local dev serves from `public/` automatically. Once deployed to Vercel, `https://uiception.com/images/blocks/…` resolves correctly for everyone.
+Create the matching empty file in this repo under `public/images/blocks/<block-id>/`.
 
-## How local dev vs production resolves
+### 4. No binary files, no env vars, no extra dependencies
 
-| Environment | `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA` | `mediaOrigin` | Media served from |
-|---|---|---|---|
-| Local dev (`.env.local`) | `"true"` | `""` | `public/images/blocks/…` |
-| Production / post-install | unset | `"https://uiception.com"` | `https://uiception.com/images/blocks/…` |
+### 5. Place assets in `public/`
+
+```
+public/images/blocks/<block-id>/   ← images + .gitkeep files
+public/videos/blocks/<block-id>/   ← videos + .gitkeep files
+```
 
 ## What NOT to do
 
 | ❌ Don't | ✅ Do |
 |---|---|
-| Hardcode `https://uiception.com/…` directly | Use `mediaOrigin` helper in the entry file |
-| Put `mediaOrigin` or image URLs in `config.ts` | Keep `config.ts` as pure data; URLs in entry file |
-| `media-manifest.json` in block folder | No manifest needed |
-| `registryDependencies: ["…/uiception-media-fetch.json"]` | No dependency needed |
-| `next/image` without `unoptimized` on external URL | Add `unoptimized` prop |
-| List binary files in `registry.json` | Only list `.tsx`, `.ts`, `.css` source files |
+| `mediaOrigin` or env var logic in block code | Hardcode CDN URL — it's the consumer's code to edit |
+| `NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA` in installed files | Contributor-only — stays in `.env`, never shipped |
+| Single `.gitkeep` for the whole folder | One `<asset>.gitkeep` per expected file |
+| Put URLs in `config.ts` | Filenames in config; URLs in entry file |
+| `next/image` without `unoptimized` on CDN src | Add `unoptimized` — consumers need no `remotePatterns` |
+| List binary files in `registry.json` | Only `.tsx`, `.ts`, `.css`, `.gitkeep` source files |

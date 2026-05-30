@@ -14,7 +14,7 @@
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1.tsx",
-      "content": "import GalleryTrack from \"./gallery-track\"\r\nimport { imageFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\r\n\r\nconst mediaOrigin =\r\n  process.env.NEXT_PUBLIC_USE_LOCAL_BLOCK_MEDIA === \"true\"\r\n    ? \"\"\r\n    : \"https://uiception.com\"\r\n\r\nconst galleryImage = (filename: string) =>\r\n  `${mediaOrigin}/images/blocks/gallery-section-v1/${filename}`\r\n\r\nconst galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({\r\n  id: `panel-${index + 1}`,\r\n  label: `Panel ${index + 1}`,\r\n  alt,\r\n  imageSrc: galleryImage(file),\r\n}))\r\n\r\nexport type GallerySectionV1Props = {\r\n  /** Pass `false` to render only the gallery canvas (no title or description). */\r\n  header?: { title: string; description?: string } | false\r\n  items?: GalleryItem[]\r\n}\r\n\r\nexport default function GallerySectionV1({\r\n  header = sectionMeta,\r\n  items = galleryItems,\r\n}: GallerySectionV1Props = {}) {\r\n  return (\r\n    <section className=\"py-20 md:py-24 lg:py-28\">\r\n      <div className=\"mx-auto max-w-7xl px-4\">\r\n        {header !== false ? (\r\n          <div className=\"mb-10 md:mb-12\">\r\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\r\n              {header.title}\r\n            </h2>\r\n            {header.description ? (\r\n              <p className=\"mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground\">\r\n                {header.description}\r\n              </p>\r\n            ) : null}\r\n          </div>\r\n        ) : null}\r\n        <GalleryTrack items={items} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import GalleryTrack from \"./gallery-track\"\r\nimport { imageFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\r\n\r\nconst galleryImage = (filename: string) =>\r\n  `https://uiception.com/images/blocks/gallery-section-v1/${filename}`\r\n\r\nconst galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({\r\n  id: `panel-${index + 1}`,\r\n  label: `Panel ${index + 1}`,\r\n  alt,\r\n  imageSrc: galleryImage(file),\r\n}))\r\n\r\nexport type GallerySectionV1Props = {\r\n  /** Pass `false` to render only the gallery canvas (no title or description). */\r\n  header?: { title: string; description?: string } | false\r\n  items?: GalleryItem[]\r\n}\r\n\r\nexport default function GallerySectionV1({\r\n  header = sectionMeta,\r\n  items = galleryItems,\r\n}: GallerySectionV1Props = {}) {\r\n  return (\r\n    <section className=\"py-20 md:py-24 lg:py-28\">\r\n      <div className=\"mx-auto max-w-7xl px-4\">\r\n        {header !== false ? (\r\n          <div className=\"mb-10 md:mb-12\">\r\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\r\n              {header.title}\r\n            </h2>\r\n            {header.description ? (\r\n              <p className=\"mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground\">\r\n                {header.description}\r\n              </p>\r\n            ) : null}\r\n          </div>\r\n        ) : null}\r\n        <GalleryTrack items={items} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/gallery-section-v1/components/gallery-section-v1.tsx"
     },
@@ -41,6 +41,66 @@
       "content": ".gsv1-root {\n  --gsv1-ease: cubic-bezier(0.16, 1, 0.3, 1);\n  --gsv1-duration: 680ms;\n}\n\n.gsv1-canvas {\n  --gsv1-stub: clamp(4rem, 12vw, 9rem);\n  position: relative;\n  padding-top: var(--gsv1-stub);\n  padding-bottom: var(--gsv1-stub);\n}\n\n.gsv1-track {\n  scrollbar-width: none;\n}\n\n.gsv1-track::-webkit-scrollbar {\n  display: none;\n}\n\n/* ── Panel ── */\n\n.gsv1-panel {\n  flex: 1 1 0;\n  min-width: 0;\n  min-height: 100%;\n  transition: flex var(--gsv1-duration) var(--gsv1-ease);\n  contain: layout paint;\n}\n\n.gsv1-panel--active {\n  flex: 5 1 0;\n  z-index: 2;\n}\n\n/* Dark scrim on inactive panels */\n.gsv1-panel::before {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  z-index: 1;\n  pointer-events: none;\n  background: rgb(0 0 0 / 0.32);\n  opacity: 1;\n  transition: opacity var(--gsv1-duration) var(--gsv1-ease);\n}\n\n.gsv1-panel--active::before {\n  opacity: 0;\n}\n\n/* Inset ring on active panel */\n.gsv1-panel::after {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  pointer-events: none;\n  z-index: 3;\n  box-shadow: inset 0 0 0 1px transparent;\n  transition: box-shadow calc(var(--gsv1-duration) * 0.45) var(--gsv1-ease);\n}\n\n.gsv1-panel--active::after {\n  box-shadow: inset 0 0 0 1px var(--foreground);\n  transition-delay: 80ms;\n}\n\n/* ── Caption ── */\n\n.gsv1-caption {\n  position: absolute;\n  inset-inline: 0;\n  bottom: 0;\n  z-index: 4;\n  padding: 2.5rem 0.875rem 0.75rem;\n  background: linear-gradient(to top, rgb(0 0 0 / 0.52) 0%, transparent 100%);\n  color: #fff;\n  font-size: 0.6875rem;\n  font-weight: 500;\n  letter-spacing: 0.07em;\n  text-transform: uppercase;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  opacity: 0;\n  transform: translateY(5px);\n  transition:\n    opacity calc(var(--gsv1-duration) * 0.5) var(--gsv1-ease),\n    transform calc(var(--gsv1-duration) * 0.5) var(--gsv1-ease);\n  pointer-events: none;\n}\n\n.gsv1-panel--active .gsv1-caption {\n  opacity: 1;\n  transform: translateY(0);\n  transition-delay: calc(var(--gsv1-duration) * 0.3);\n}\n\n/* ── Vlines ── */\n\n.gsv1-vline {\n  position: fixed;\n  left: 0;\n  z-index: 50;\n  width: 1px;\n  margin-left: -0.5px;\n  pointer-events: none;\n  background: var(--foreground);\n  opacity: 1;\n  will-change: transform;\n}\n\n/* ── Reduced motion ── */\n\n@media (prefers-reduced-motion: reduce) {\n  .gsv1-panel,\n  .gsv1-panel::before,\n  .gsv1-panel::after,\n  .gsv1-caption {\n    transition: none;\n  }\n}\n",
       "type": "registry:file",
       "target": "app/gallery-section-v1/styles/gallery-track.css"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep"
     }
   ],
   "type": "registry:block"
