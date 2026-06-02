@@ -48,7 +48,7 @@ export function BlockPeriodicTile({
         "group relative flex flex-col overflow-hidden bg-card text-left transition",
         "hover:bg-muted/40",
         periodic
-          ? "border border-border/60 min-h-28"
+          ? "border-r border-b border-border/60 min-h-28"
           : "rounded-lg border border-border shadow-sm min-h-24",
         className
       )}
@@ -62,8 +62,8 @@ export function BlockPeriodicTile({
       <div className="flex flex-1 items-center justify-center px-1 pt-4">
         <span
           className={cn(
-            "font-pixel-square uppercase text-foreground/75 transition group-hover:text-foreground",
-            periodic ? "text-2xl leading-none" : "text-4xl"
+            "font-ibm-plex-serif italic text-foreground/75 transition group-hover:text-foreground",
+            periodic ? "text-3xl leading-none" : "text-5xl"
           )}
         >
           {cell.symbol}
@@ -77,7 +77,7 @@ export function BlockPeriodicTile({
           title={category.title}
           className={cn(
             "text-center font-medium leading-snug text-muted-foreground",
-            periodic ? "text-[9px]" : "text-xs sm:text-sm"
+            periodic ? "text-[10px]" : "text-xs sm:text-sm"
           )}
         />
         {!periodic && (

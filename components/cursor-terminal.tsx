@@ -154,7 +154,7 @@ export function CursorTerminal() {
                 type="button"
                 onClick={() => setActiveTab(name)}
                 className={cn(
-                  "shrink-0 px-3 text-[10px] transition-colors",
+                  "shrink-0 px-3 text-[11px] transition-colors",
                   active
                     ? "bg-(--crt-t-tab-active-bg) text-(--crt-t-tab-active-fg)"
                     : "text-(--crt-t-tab-inactive-fg) hover:text-(--crt-t-tab-hover-fg)",
@@ -172,7 +172,7 @@ export function CursorTerminal() {
             type="button"
             aria-hidden
             tabIndex={-1}
-            className="flex h-7 items-center gap-1 rounded px-1.5 text-[10px] text-(--crt-t-shell-fg) transition-colors hover:bg-(--crt-t-hover-bg)"
+            className="flex h-7 items-center gap-1 rounded px-1.5 text-[11px] text-(--crt-t-shell-fg) transition-colors hover:bg-(--crt-t-hover-bg)"
           >
             <Terminal className={cn(ICON_SM, "text-(--crt-t-terminal-icon)")} aria-hidden />
             <span className="max-w-22 truncate sm:max-w-none">powershell</span>
@@ -211,7 +211,7 @@ export function CursorTerminal() {
         <>
           <div
             ref={scrollRef}
-            className="crt-body h-88 overflow-y-auto bg-(--crt-t-body-bg) px-3.5 py-2 text-left font-mono text-[11px] leading-[1.45] text-(--crt-t-body-fg)"
+            className="crt-body h-88 overflow-y-auto bg-(--crt-t-body-bg) px-3.5 py-2 text-left font-mono text-xs leading-[1.45] text-(--crt-t-body-fg)"
             style={{ scrollbarWidth: "none" }}
           >
             {lines.map((line: Line) => (
@@ -246,7 +246,7 @@ export function CursorTerminal() {
             )}
           </div>
 
-          <div className="border-t border-(--crt-t-titlebar-border) bg-(--crt-t-body-bg) py-1.5 text-center text-[10px] text-(--crt-t-footer-fg)">
+          <div className="border-t border-(--crt-t-titlebar-border) bg-(--crt-t-body-bg) py-1.5 text-center text-[11px] text-(--crt-t-footer-fg)">
             Ctrl+K to generate command
           </div>
         </>

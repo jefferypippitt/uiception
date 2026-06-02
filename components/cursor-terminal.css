@@ -7,7 +7,7 @@
   --crt-t-body-fg: #171717;
   --crt-t-border: #eaeaea;
   --crt-t-titlebar-border: #eaeaea;
-  --crt-t-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.12);
+  --crt-t-shadow: none;
   --crt-t-tab-active-bg: #ffffff;
   --crt-t-tab-active-fg: #171717;
   --crt-t-tab-active-accent: #0070f3;
@@ -40,7 +40,7 @@
   --crt-t-body-fg: #eeeeee;
   --crt-t-border: #1a1a1a;
   --crt-t-titlebar-border: #1a1a1a;
-  --crt-t-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.5);
+  --crt-t-shadow: none;
   --crt-t-tab-active-bg: #000000;
   --crt-t-tab-active-fg: #eeeeee;
   --crt-t-tab-active-accent: #0070f3;

@@ -47,6 +47,15 @@ const allCategories = withCategory(blockPeriodicCellsByPlacement)
 const mainCategories = allCategories.filter(({ cell }) => cell.row < EXTENDED_ROW_START)
 const extendedCategories = allCategories.filter(({ cell }) => cell.row >= EXTENDED_ROW_START)
 
+function periodicBorderClass(cell: BlockPeriodicCell, siblings: BlockPeriodicCell[]): string {
+  const hasTop = siblings.some((c) => c.col === cell.col && c.row === cell.row - 1)
+  const hasLeft = siblings.some((c) => c.row === cell.row && c.col === cell.col - 1)
+  return [!hasTop && "border-t", !hasLeft && "border-l"].filter(Boolean).join(" ")
+}
+
+const mainCells = mainCategories.map(({ cell }) => cell)
+const extendedCells = extendedCategories.map(({ cell }) => cell)
+
 export default async function BlocksPage({
   searchParams,
 }: {
@@ -79,7 +88,7 @@ export default async function BlocksPage({
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
           {filteredCategories.length > 0 ? (
             <section
-              className="grid grid-cols-2 gap-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+              className="grid grid-cols-2 gap-0 overflow-hidden sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
               aria-label="Block category search results"
             >
               {filteredCategories.map(({ category, cell }) => (
@@ -88,6 +97,7 @@ export default async function BlocksPage({
                   periodic
                   category={category}
                   cell={cell}
+                  className="-ml-px -mt-px border-t border-l"
                 />
               ))}
             </section>
@@ -109,6 +119,7 @@ export default async function BlocksPage({
                   category={category}
                   cell={cell}
                   style={periodicPlacement(cell)}
+                  className={periodicBorderClass(cell, mainCells)}
                 />
               ))}
             </div>
@@ -121,6 +132,7 @@ export default async function BlocksPage({
                   category={category}
                   cell={cell}
                   style={extendedPlacement(cell)}
+                  className={periodicBorderClass(cell, extendedCells)}
                 />
               ))}
             </div>
