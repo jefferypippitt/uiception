@@ -130,10 +130,6 @@
   html {
     scrollbar-width: none;
     -ms-overflow-style: none;
-    color-scheme: light;
-  }
-  html.dark {
-    color-scheme: dark;
   }
   html::-webkit-scrollbar {
     display: none;

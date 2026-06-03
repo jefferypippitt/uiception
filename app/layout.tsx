@@ -14,7 +14,6 @@ import Providers from "@/components/providers"
 import { Toaster } from "@/components/ui/sonner"
 import { ViewTransitions } from "next-view-transitions"
 import { Analytics } from "@vercel/analytics/next"
-import { cookies } from "next/headers"
 
 
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -102,20 +101,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookieStore = await cookies()
-  const themeCookie = cookieStore.get("theme")?.value
   return (
     <ViewTransitions>
       <html
         lang="en"
         suppressHydrationWarning
         className={cn(
-          themeCookie === "dark" && "dark",
           "antialiased",
           GeistSans.variable,
           GeistMono.variable,
