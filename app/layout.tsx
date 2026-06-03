@@ -12,7 +12,6 @@ import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import Providers from "@/components/providers"
 import { Toaster } from "@/components/ui/sonner"
-import { ViewTransitions } from "next-view-transitions"
 import { Analytics } from "@vercel/analytics/next"
 
 
@@ -107,8 +106,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ViewTransitions>
-      <html
+    <html
         lang="en"
         suppressHydrationWarning
         className={cn(
@@ -146,6 +144,5 @@ export default function RootLayout({
           <Analytics />
         </body>
       </html>
-    </ViewTransitions>
   )
 }

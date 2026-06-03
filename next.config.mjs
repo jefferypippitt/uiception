@@ -2,7 +2,6 @@
 const nextConfig = {
   poweredByHeader: false,
   experimental: {
-    viewTransition: true,
     optimizePackageImports: ["@phosphor-icons/react", "motion", "radix-ui", "@base-ui/react"],
   },
   images: {

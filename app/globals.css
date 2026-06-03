@@ -196,18 +196,7 @@
   padding-inline: 2rem;
 }
 
-/* View Transitions — navigation */
-:not(.theme-transitioning)::view-transition-old(root) {
-  animation: vt-out 0.2s cubic-bezier(0.4, 0, 1, 1) both;
-  will-change: transform, opacity;
-}
-
-:not(.theme-transitioning)::view-transition-new(root) {
-  animation: vt-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: transform, opacity;
-}
-
-/* View Transitions — theme toggle */
+/* ── Theme toggle transition ──────────────────────────────────────────── */
 .theme-transitioning::view-transition-group(root) {
   animation-duration: 0.35s;
 }
@@ -222,269 +211,21 @@
   z-index: -1;
 }
 
-/* Blocks category `title-*` names are cleared for the duration of theme VT in components/theme-toggle.tsx so headings stay in the root snapshot—no extra title-* rules here. */
-
 @keyframes vt-theme-reveal {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes vt-out {
-  from {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.985) translateY(-8px);
-  }
-}
-
-@keyframes vt-in {
-  0% {
-    opacity: 0;
-    transform: scale(1.015) translateY(10px);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Category title jump — group moves between positions, images stay natural size (no zoom) */
-::view-transition-group(title-navbar),
-::view-transition-group(title-hero-section),
-::view-transition-group(title-brands),
-::view-transition-group(title-how-it-works),
-::view-transition-group(title-case-study),
-::view-transition-group(title-about-us),
-::view-transition-group(title-resources),
-::view-transition-group(title-value-proposition),
-::view-transition-group(title-features),
-::view-transition-group(title-integrations),
-::view-transition-group(title-pricing),
-::view-transition-group(title-testimonials),
-::view-transition-group(title-cta),
-::view-transition-group(title-faq),
-::view-transition-group(title-stats),
-::view-transition-group(title-footer),
-::view-transition-group(title-changelog),
-::view-transition-group(title-team),
-::view-transition-group(title-contact),
-::view-transition-group(title-blog),
-::view-transition-group(title-gallery),
-::view-transition-group(title-video),
-::view-transition-group(title-timeline),
-::view-transition-group(title-comparison),
-::view-transition-group(title-newsletter),
-::view-transition-group(title-waitlist),
-::view-transition-group(title-social-proof),
-::view-transition-group(title-partners),
-::view-transition-group(title-backgrounds),
-::view-transition-group(title-sidebar),
-::view-transition-group(title-banner),
-::view-transition-group(title-mockups) {
-  animation-duration: 0.26s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  overflow: visible;
-}
-
-::view-transition-image-pair(title-navbar),
-::view-transition-image-pair(title-hero-section),
-::view-transition-image-pair(title-brands),
-::view-transition-image-pair(title-how-it-works),
-::view-transition-image-pair(title-case-study),
-::view-transition-image-pair(title-about-us),
-::view-transition-image-pair(title-resources),
-::view-transition-image-pair(title-value-proposition),
-::view-transition-image-pair(title-features),
-::view-transition-image-pair(title-integrations),
-::view-transition-image-pair(title-pricing),
-::view-transition-image-pair(title-testimonials),
-::view-transition-image-pair(title-cta),
-::view-transition-image-pair(title-faq),
-::view-transition-image-pair(title-stats),
-::view-transition-image-pair(title-footer),
-::view-transition-image-pair(title-changelog),
-::view-transition-image-pair(title-team),
-::view-transition-image-pair(title-contact),
-::view-transition-image-pair(title-blog),
-::view-transition-image-pair(title-gallery),
-::view-transition-image-pair(title-video),
-::view-transition-image-pair(title-timeline),
-::view-transition-image-pair(title-comparison),
-::view-transition-image-pair(title-newsletter),
-::view-transition-image-pair(title-waitlist),
-::view-transition-image-pair(title-social-proof),
-::view-transition-image-pair(title-partners),
-::view-transition-image-pair(title-backgrounds),
-::view-transition-image-pair(title-sidebar),
-::view-transition-image-pair(title-banner),
-::view-transition-image-pair(title-mockups) {
-  overflow: visible;
-}
-
-::view-transition-old(title-navbar),
-::view-transition-old(title-hero-section),
-::view-transition-old(title-brands),
-::view-transition-old(title-how-it-works),
-::view-transition-old(title-case-study),
-::view-transition-old(title-about-us),
-::view-transition-old(title-resources),
-::view-transition-old(title-value-proposition),
-::view-transition-old(title-features),
-::view-transition-old(title-integrations),
-::view-transition-old(title-pricing),
-::view-transition-old(title-testimonials),
-::view-transition-old(title-cta),
-::view-transition-old(title-faq),
-::view-transition-old(title-stats),
-::view-transition-old(title-footer),
-::view-transition-old(title-changelog),
-::view-transition-old(title-team),
-::view-transition-old(title-contact),
-::view-transition-old(title-blog),
-::view-transition-old(title-gallery),
-::view-transition-old(title-video),
-::view-transition-old(title-timeline),
-::view-transition-old(title-comparison),
-::view-transition-old(title-newsletter),
-::view-transition-old(title-waitlist),
-::view-transition-old(title-social-proof),
-::view-transition-old(title-partners),
-::view-transition-old(title-backgrounds),
-::view-transition-old(title-sidebar),
-::view-transition-old(title-banner),
-::view-transition-old(title-mockups) {
-  width: auto;
-  height: auto;
-  animation: vt-title-out 0.12s ease-in forwards;
-}
-
-::view-transition-new(title-navbar),
-::view-transition-new(title-hero-section),
-::view-transition-new(title-brands),
-::view-transition-new(title-how-it-works),
-::view-transition-new(title-case-study),
-::view-transition-new(title-about-us),
-::view-transition-new(title-resources),
-::view-transition-new(title-value-proposition),
-::view-transition-new(title-features),
-::view-transition-new(title-integrations),
-::view-transition-new(title-pricing),
-::view-transition-new(title-testimonials),
-::view-transition-new(title-cta),
-::view-transition-new(title-faq),
-::view-transition-new(title-stats),
-::view-transition-new(title-footer),
-::view-transition-new(title-changelog),
-::view-transition-new(title-team),
-::view-transition-new(title-contact),
-::view-transition-new(title-blog),
-::view-transition-new(title-gallery),
-::view-transition-new(title-video),
-::view-transition-new(title-timeline),
-::view-transition-new(title-comparison),
-::view-transition-new(title-newsletter),
-::view-transition-new(title-waitlist),
-::view-transition-new(title-social-proof),
-::view-transition-new(title-partners),
-::view-transition-new(title-backgrounds),
-::view-transition-new(title-sidebar),
-::view-transition-new(title-banner),
-::view-transition-new(title-mockups) {
-  width: auto;
-  height: auto;
-  animation: vt-title-in 0.2s ease-out both;
-}
-
-@keyframes vt-title-out {
-  to { opacity: 0; }
-}
-
-@keyframes vt-title-in {
   from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
+/* ── Reduced motion ───────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  :not(.theme-transitioning)::view-transition-old(root),
-  :not(.theme-transitioning)::view-transition-new(root),
-  .theme-transitioning::view-transition-group(root),
-  .theme-transitioning::view-transition-new(root),
-  ::view-transition-old(title-navbar),
-  ::view-transition-old(title-hero-section),
-  ::view-transition-old(title-brands),
-  ::view-transition-old(title-how-it-works),
-  ::view-transition-old(title-case-study),
-  ::view-transition-old(title-about-us),
-  ::view-transition-old(title-resources),
-  ::view-transition-old(title-value-proposition),
-  ::view-transition-old(title-features),
-  ::view-transition-old(title-integrations),
-  ::view-transition-old(title-pricing),
-  ::view-transition-old(title-testimonials),
-  ::view-transition-old(title-cta),
-  ::view-transition-old(title-faq),
-  ::view-transition-old(title-stats),
-  ::view-transition-old(title-footer),
-  ::view-transition-old(title-changelog),
-  ::view-transition-old(title-team),
-  ::view-transition-old(title-contact),
-  ::view-transition-old(title-blog),
-  ::view-transition-old(title-gallery),
-  ::view-transition-old(title-video),
-  ::view-transition-old(title-timeline),
-  ::view-transition-old(title-comparison),
-  ::view-transition-old(title-newsletter),
-  ::view-transition-old(title-waitlist),
-  ::view-transition-old(title-social-proof),
-  ::view-transition-old(title-partners),
-  ::view-transition-old(title-backgrounds),
-  ::view-transition-old(title-sidebar),
-  ::view-transition-old(title-banner),
-  ::view-transition-old(title-mockups),
-  ::view-transition-new(title-navbar),
-  ::view-transition-new(title-hero-section),
-  ::view-transition-new(title-brands),
-  ::view-transition-new(title-how-it-works),
-  ::view-transition-new(title-case-study),
-  ::view-transition-new(title-about-us),
-  ::view-transition-new(title-resources),
-  ::view-transition-new(title-value-proposition),
-  ::view-transition-new(title-features),
-  ::view-transition-new(title-integrations),
-  ::view-transition-new(title-pricing),
-  ::view-transition-new(title-testimonials),
-  ::view-transition-new(title-cta),
-  ::view-transition-new(title-faq),
-  ::view-transition-new(title-stats),
-  ::view-transition-new(title-footer),
-  ::view-transition-new(title-changelog),
-  ::view-transition-new(title-team),
-  ::view-transition-new(title-contact),
-  ::view-transition-new(title-blog),
-  ::view-transition-new(title-gallery),
-  ::view-transition-new(title-video),
-  ::view-transition-new(title-timeline),
-  ::view-transition-new(title-comparison),
-  ::view-transition-new(title-newsletter),
-  ::view-transition-new(title-waitlist),
-  ::view-transition-new(title-social-proof),
-  ::view-transition-new(title-partners),
-  ::view-transition-new(title-backgrounds),
-  ::view-transition-new(title-sidebar),
-  ::view-transition-new(title-banner),
-  ::view-transition-new(title-mockups) {
-    animation: none !important;
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }
+
 
 /* Start Building button — hammer nailing animation */
 @keyframes hammer-nail {

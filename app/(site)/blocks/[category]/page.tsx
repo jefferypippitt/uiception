@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { IconChevronLeft } from "@tabler/icons-react"
-import { Link } from "next-view-transitions"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { BlockPreviewToolbar } from "@/components/block-preview-toolbar"
@@ -56,10 +56,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </Link>
         </Button>
 
-        <h1
-          className="mt-4 text-3xl tracking-tighter md:text-4xl"
-          style={{ viewTransitionName: `title-${categoryData.id}` } as React.CSSProperties}
-        >
+        <h1 className="mt-4 text-3xl tracking-tighter md:text-4xl">
           {categoryData.title}
         </h1>
 

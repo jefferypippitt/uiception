@@ -11,7 +11,6 @@ export function useTerminalAnimation() {
   const [typed, setTyped] = useState("")
   const [phase, setPhase] = useState<Phase>("idle")
   const [outIdx, setOutIdx] = useState(0)
-  const [firstStepBlue, setFirstStepBlue] = useState(false)
   const idRef = useRef(10)
   const spinTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -78,24 +77,10 @@ export function useTerminalAnimation() {
 
   useEffect(() => {
     if (phase !== "done") return
-    setLines((prev) => prev.map((line) => (line.promptLine ? { ...line, dot: "grey" } : line)))
-    setFirstStepBlue(false)
     const blueTimer = setTimeout(() => {
-      setFirstStepBlue(true)
       setLines((prev) => prev.map((line) => (line.promptLine ? { ...line, dot: "blue" } : line)))
     }, 700)
-    const resetTimer = setTimeout(() => {
-      idRef.current = 10
-      setTyped("")
-      setOutIdx(0)
-      setFirstStepBlue(false)
-      setLines(INIT_LINES)
-      setPhase("idle")
-    }, 5500)
-    return () => {
-      clearTimeout(blueTimer)
-      clearTimeout(resetTimer)
-    }
+    return () => clearTimeout(blueTimer)
   }, [phase])
 
   const prompt = useMemo<PromptState>(() => {
@@ -117,7 +102,7 @@ export function useTerminalAnimation() {
           pasteIn: false,
         }
     }
-  }, [firstStepBlue, phase, typed])
+  }, [phase, typed])
 
   return { lines, prompt, scrollRef }
 }

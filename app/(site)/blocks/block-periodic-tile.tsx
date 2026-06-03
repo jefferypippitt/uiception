@@ -1,7 +1,5 @@
-"use client"
-
 import type { CSSProperties } from "react"
-import { Link } from "next-view-transitions"
+import Link from "next/link"
 
 import type { BlockCategory } from "@/lib/blocks"
 import type { BlockPeriodicCell } from "@/lib/block-periodic-layout"
@@ -26,24 +24,10 @@ export function BlockPeriodicTile({
 }: BlockPeriodicTileProps) {
   const count = category.versions.length
 
-  function clearOtherTitles() {
-    document.querySelectorAll<HTMLElement>("[data-vt-category-title]").forEach((el) => {
-      const name = el.dataset.vtCategoryTitle === category.id ? `title-${category.id}` : "none"
-      el.style.setProperty("view-transition-name", name)
-    })
-  }
-
   return (
     <Link
       href={`/blocks/${category.id}`}
       style={style}
-      onPointerDown={clearOtherTitles}
-      onClick={clearOtherTitles}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          clearOtherTitles()
-        }
-      }}
       className={cn(
         "group relative flex flex-col overflow-hidden bg-card text-left transition",
         "hover:bg-muted/40",

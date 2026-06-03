@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 import { siteConfig } from '@/lib/config'
 import { ThemeToggle } from './theme-toggle'
 import { cn } from '@/lib/utils'

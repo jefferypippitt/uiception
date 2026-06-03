@@ -1,9 +1,7 @@
-"use client"
-
 import { cn } from "@/lib/utils"
 
 export function BlockCategoryTitle({
-  id,
+  id: _id,
   title,
   className,
 }: {
@@ -12,11 +10,7 @@ export function BlockCategoryTitle({
   className?: string
 }) {
   return (
-    <p
-      data-vt-category-title={id}
-      className={cn("text-sm font-medium", className)}
-      style={{ viewTransitionName: `title-${id}` } as React.CSSProperties}
-    >
+    <p className={cn("text-sm font-medium", className)}>
       {title}
     </p>
   )
