@@ -54,10 +54,12 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
   const canvasRef = useRef<HTMLDivElement>(null)
   const panelRefs = useRef<(HTMLDivElement | null)[]>([])
   const activeIndexRef = useRef(activeIndex)
+  const scheduleLinesRef = useRef<() => void>(() => {})
 
-  activeIndexRef.current = activeIndex
+  useLayoutEffect(() => {
+    activeIndexRef.current = activeIndex
+  })
 
-  // Detect touch / coarse-pointer devices
   useEffect(() => {
     const mq = window.matchMedia("(hover: none)")
     const update = () => setCoarsePointer(mq.matches)
@@ -80,7 +82,6 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
     setActiveIndex(0)
   }
 
-  // Arrow-key navigation while any panel is focused
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowRight") {
       event.preventDefault()
@@ -95,14 +96,10 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
     }
   }
 
-  // Vline position sync during accordion transitions
   useLayoutEffect(() => {
     const track = trackRef.current
     const canvas = canvasRef.current
-    if (!track || !canvas) {
-      setVLineStyle(null)
-      return
-    }
+    if (!track || !canvas) return
 
     let rafId = 0
 
@@ -131,10 +128,10 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
       rafId = requestAnimationFrame(commitLines)
     }
 
-    // Initial position
+    scheduleLinesRef.current = scheduleLines
+
     commitLines()
 
-    // ResizeObserver fires natively during CSS flex transitions — no manual polling loop needed
     const observer = new ResizeObserver(scheduleLines)
     panelRefs.current.forEach((panel) => {
       if (panel) observer.observe(panel)
@@ -151,6 +148,10 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
       window.removeEventListener("scroll", scheduleLines, true)
       track.removeEventListener("scroll", scheduleLines)
     }
+  }, [])
+
+  useLayoutEffect(() => {
+    scheduleLinesRef.current()
   }, [activeIndex])
 
   return (
@@ -160,7 +161,7 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
         <div
           ref={trackRef}
           aria-label="Photo gallery — use arrow keys to navigate"
-          className="gsv1-track flex h-96 w-full gap-px overflow-x-auto overflow-y-visible md:h-104 md:overflow-x-hidden"
+          className="gsv1-track flex h-96 w-full overflow-x-auto overflow-y-visible md:h-104 md:overflow-x-hidden"
           role="list"
           onBlurCapture={handleFocusOut}
           onKeyDown={handleKeyDown}

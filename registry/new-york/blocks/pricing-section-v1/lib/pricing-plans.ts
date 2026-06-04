@@ -9,7 +9,6 @@ export type PricingPlan = {
   features: string[]
   ctaLabel: string
   ctaVariant?: "default" | "outline"
-  popular?: boolean
 }
 
 export const pricingPlans: PricingPlan[] = [
@@ -49,7 +48,6 @@ export const pricingPlans: PricingPlan[] = [
     ],
     ctaLabel: "Get Started",
     ctaVariant: "default",
-    popular: true,
   },
   {
     id: "ultra",

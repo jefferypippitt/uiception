@@ -42,6 +42,7 @@ import FeatureSectionV8 from "@/registry/new-york/blocks/feature-section-v8/comp
 import FeatureSectionV9 from "@/registry/new-york/blocks/feature-section-v9/components/feature-section-v9"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/components/changelog-section-v1"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
+import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
@@ -51,6 +52,7 @@ import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/components
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components/hero-section-v8"
 import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/components/hero-section-v9"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
+import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
 import NavbarSectionV2Page from "@/registry/new-york/blocks/navbar-section-v2/page"
@@ -111,9 +113,11 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v9": FeatureSectionV9,
   "changelog-section-v1": ChangelogSectionV1,
   "faq-section-v1": FaqSectionV1,
+  "faq-section-v2": FaqSectionV2,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
   "pricing-section-v1": PricingSectionV1,
+  "pricing-section-v2": PricingSectionV2,
   "gallery-section-v1": GallerySectionV1,
   "navbar-section-v1": NavbarSectionV1Page,
   "navbar-section-v2": NavbarSectionV2Page,

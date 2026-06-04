@@ -2429,6 +2429,37 @@
       ]
     },
     {
+      "name": "faq-section-v2",
+      "type": "registry:block",
+      "title": "FAQ Section v2",
+      "description": "Minimal centered FAQ with a simple headline and clean divider accordion.",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/faq-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/faq-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v2/components/faq-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v2/components/faq-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v2/components/faq-accordion.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v2/components/faq-accordion.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v2/lib/faq-content.ts",
+          "type": "registry:lib",
+          "target": "app/faq-section-v2/lib/faq-content.ts"
+        }
+      ]
+    },
+    {
       "name": "testimonials-section-v1",
       "type": "registry:block",
       "title": "Testimonials Section v1",
@@ -3018,6 +3049,39 @@
           "path": "registry/new-york/blocks/pricing-section-v1/lib/pricing-plans.ts",
           "type": "registry:lib",
           "target": "app/pricing-section-v1/lib/pricing-plans.ts"
+        }
+      ]
+    },
+    {
+      "name": "pricing-section-v2",
+      "type": "registry:block",
+      "title": "Pricing Section v2",
+      "description": "Four-tier pricing grid with a monthly/yearly billing toggle, per-tier feature lists, and card-based layout.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/pricing-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/pricing-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/pricing-section-v2/components/pricing-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v2/components/pricing-card.tsx",
+          "type": "registry:component",
+          "target": "app/pricing-section-v2/components/pricing-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v2/lib/pricing-plans.ts",
+          "type": "registry:lib",
+          "target": "app/pricing-section-v2/lib/pricing-plans.ts"
         }
       ]
     },

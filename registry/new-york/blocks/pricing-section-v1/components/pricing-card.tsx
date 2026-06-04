@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 import type { PricingPlan } from "../lib/pricing-plans"
 
 type PricingCardProps = {
@@ -20,17 +19,9 @@ export default function PricingCard({ plan }: PricingCardProps) {
   return (
     <li className="min-w-0">
       <Card
-        className={cn(
-          "relative h-full gap-0 border border-border/80 py-0 shadow-none",
-          plan.popular && "ring-1 ring-primary/30"
-        )}
+        className="relative h-full gap-0 border border-border/80 py-0 shadow-none"
       >
         <CardHeader className="gap-3 border-b px-5 pt-5 pb-4">
-          {plan.popular ? (
-            <span className="absolute top-4 right-4 rounded-full border border-border bg-muted px-2.5 py-0.5 text-2.75 font-medium tracking-[0.06em] text-muted-foreground uppercase">
-              Most popular
-            </span>
-          ) : null}
           <div className="flex flex-col gap-1">
             <CardTitle className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
               {plan.name}

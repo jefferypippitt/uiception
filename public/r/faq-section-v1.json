@@ -15,7 +15,7 @@
     },
     {
       "path": "registry/new-york/blocks/faq-section-v1/components/faq-section-v1.tsx",
-      "content": "import FaqAccordion from \"./faq-accordion\"\nimport { faqSectionMeta } from \"../lib/faq-content\"\n\nexport default function FaqSectionV1() {\n  return (\n    <section className=\"py-20 md:py-28\">\n      <div className=\"mx-auto max-w-2xl px-4\">\n        <div className=\"mb-10 text-center md:mb-12\">\n          <h2 className=\"text-3xl font-medium tracking-tight sm:text-4xl\">\n            {faqSectionMeta.title}\n          </h2>\n          <p className=\"mt-2 text-base text-muted-foreground\">\n            {faqSectionMeta.description}\n          </p>\n        </div>\n\n        <FaqAccordion />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import FaqAccordion from \"./faq-accordion\"\nimport { faqSectionMeta } from \"../lib/faq-content\"\n\nexport default function FaqSectionV1() {\n  return (\n    <section className=\"py-20 md:py-28\">\n      <div className=\"mx-auto max-w-4xl px-4\">\n        <div className=\"mb-10 text-center md:mb-12\">\n          <h2 className=\"text-3xl font-medium tracking-tight sm:text-4xl\">\n            {faqSectionMeta.title}\n          </h2>\n          <p className=\"mt-2 text-base text-muted-foreground\">\n            {faqSectionMeta.description}\n          </p>\n        </div>\n\n        <FaqAccordion />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/faq-section-v1/components/faq-section-v1.tsx"
     },
