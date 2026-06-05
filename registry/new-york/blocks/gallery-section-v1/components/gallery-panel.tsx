@@ -29,11 +29,11 @@ const GalleryPanel = memo(
       >
         <Image
           alt={item.alt}
-          className={`object-cover will-change-transform transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}`}
+          className={`object-cover transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}`}
           fill
-          loading={index === 0 ? "eager" : "lazy"}
+          loading="lazy"
+          sizes="(max-width: 1023px) 100vw, 33vw"
           unoptimized
-          sizes="(max-width: 768px) 50vw, 40vw"
           src={item.imageSrc}
         />
 

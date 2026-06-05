@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync, readFileSync, statSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
@@ -8,7 +8,7 @@ import {
   sourceReferencesMedia,
 } from "./extract-block-media-paths"
 import { listTsSourcesUnder } from "./list-ts-sources"
-import { registryProjectRoot as root } from "./load-registry"
+import { loadRegistry, registryProjectRoot as root } from "./load-registry"
 
 describe("registry block media", () => {
   it("CDN-referenced media files exist on the authoring disk", () => {
@@ -34,6 +34,22 @@ describe("registry block media", () => {
         localPathRe.test(content),
         `${rel}: use https://uiception.com/... instead of a local /(images|videos)/blocks/ path`,
       ).toBe(false)
+    }
+  })
+
+  it("all .gitkeep registry files are non-empty so shadcn installs them", () => {
+    const { items } = loadRegistry()
+    for (const item of items) {
+      for (const f of item.files ?? []) {
+        if (!f.path.endsWith(".gitkeep")) continue
+        const abs = join(root, f.path)
+        expect(existsSync(abs), `${item.name}: missing gitkeep file ${f.path}`).toBe(true)
+        const size = statSync(abs).size
+        expect(
+          size,
+          `${item.name}: ${f.path} is empty — shadcn skips empty files, add placeholder text`,
+        ).toBeGreaterThan(0)
+      }
     }
   })
 
