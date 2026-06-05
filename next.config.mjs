@@ -5,8 +5,9 @@ const nextConfig = {
     optimizePackageImports: ["@phosphor-icons/react", "motion", "radix-ui", "@base-ui/react"],
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    formats: ["image/webp", "image/avif"],
     qualities: [75],
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: "https",

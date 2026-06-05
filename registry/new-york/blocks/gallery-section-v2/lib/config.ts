@@ -7,6 +7,7 @@ export type GalleryItem = {
   description: string
   imageSrc: string
   alt: string
+  blurDataURL?: string
 }
 
 export const galleryItems: GalleryItem[] = [

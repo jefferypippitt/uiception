@@ -56,7 +56,8 @@ export default function CtaSectionV1() {
               alt=""
               aria-hidden
               fill
-              priority
+              loading="eager"
+              sizes="(max-width: 1280px) 100vw, 1152px"
               className="object-cover object-top"
             />
           </div>

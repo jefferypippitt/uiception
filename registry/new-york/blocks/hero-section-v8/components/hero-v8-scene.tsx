@@ -20,7 +20,7 @@ export function HeroV8Scene({ prompts }: HeroV8SceneProps) {
         fill
         className="object-cover"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"
-        priority
+        preload={true}
       />
       <div className="pointer-events-none absolute inset-0 z-1 flex items-center justify-center p-4 sm:p-8 [&_.scb-page]:p-0 [&_.scb-root]:pointer-events-auto [&_.scb-root]:w-full [&_.scb-root]:max-w-xl">
         <SimpleChatbot prompts={prompts} />

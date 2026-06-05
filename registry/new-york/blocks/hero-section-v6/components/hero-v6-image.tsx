@@ -12,7 +12,7 @@ export function HeroV6Image() {
       height={720}
       className="size-full object-contain object-center"
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"
-      priority
+      preload={true}
     />
   )
 }

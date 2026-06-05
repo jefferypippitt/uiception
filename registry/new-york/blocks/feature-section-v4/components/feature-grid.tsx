@@ -24,7 +24,7 @@ export default function FeatureGrid({ imageById }: FeatureGridProps) {
                 aria-hidden={true}
                 className="z-0 object-cover object-center grayscale"
                 fill
-                loading="lazy"
+                loading="eager"
                 sizes="(max-width: 1023px) 100vw, 33vw"
                 src={imageById[id]}
                 unoptimized

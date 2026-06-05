@@ -11,7 +11,7 @@ export function HeroV1Image() {
       fill
       className="pointer-events-none absolute inset-0 z-0 object-cover object-center"
       sizes="(max-width: 1024px) 100vw, 1152px"
-      priority
+      preload={true}
       aria-hidden
     />
   )

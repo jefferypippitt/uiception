@@ -44,7 +44,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v6/components/hero-v6-image.tsx",
-      "content": "import Image from \"next/image\"\r\n\r\nconst HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/image.jpg`\r\n\r\nexport function HeroV6Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V6_IMAGE}\r\n      unoptimized\r\n      alt=\"Payroll operations dashboard preview\"\r\n      width={1280}\r\n      height={720}\r\n      className=\"size-full object-contain object-center\"\r\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\r\n      priority\r\n    />\r\n  )\r\n}\r\n",
+      "content": "import Image from \"next/image\"\r\n\r\nconst HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/image.jpg`\r\n\r\nexport function HeroV6Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V6_IMAGE}\r\n      unoptimized\r\n      alt=\"Payroll operations dashboard preview\"\r\n      width={1280}\r\n      height={720}\r\n      className=\"size-full object-contain object-center\"\r\n      sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\"\r\n      preload={true}\r\n    />\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/hero-section-v6/components/hero-v6-image.tsx"
     },

@@ -15,7 +15,7 @@ export default function MacbookProWithImage() {
           fill
           className="object-cover object-center"
           sizes="(max-width: 896px) 100vw, 896px"
-          priority
+          loading="eager"
         />
       </div>
     </MacbookPro>
