@@ -18,7 +18,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2.tsx",
-      "content": "import TestimonialColumn from \"./testimonial-column\"\r\nimport { testimonials } from \"../lib/testimonials-content\"\r\n\r\nexport default function TestimonialsSectionV2() {\r\n  return (\r\n    <section className=\"py-16 md:py-20 lg:py-24\">\r\n      <div className=\"mx-auto max-w-6xl px-4\">\r\n        <div className=\"grid grid-cols-1 divide-y divide-border border border-border md:grid-cols-3 md:divide-x md:divide-y-0\">\r\n          {testimonials.map((testimonial) => (\r\n            <TestimonialColumn key={testimonial.id} testimonial={testimonial} />\r\n          ))}\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import TestimonialColumn from \"./testimonial-column\"\nimport { testimonials } from \"../lib/testimonials-content\"\n\nexport default function TestimonialsSectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"grid grid-cols-1 divide-y divide-border border border-border md:grid-cols-3 md:divide-x md:divide-y-0\">\n          {testimonials.map((testimonial) => (\n            <TestimonialColumn key={testimonial.id} testimonial={testimonial} />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/testimonials-section-v2/components/testimonials-section-v2.tsx"
     },
@@ -36,7 +36,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v2/lib/testimonials-content.ts",
-      "content": "import type { ComponentType, SVGProps } from \"react\"\r\n\r\nimport { StripeWordmark } from \"@/components/ui/svgs/stripeWordmark\"\r\nimport { StripeWordmarkDark } from \"@/components/ui/svgs/stripeWordmarkDark\"\r\nimport { GithubWordmarkLight } from \"@/components/ui/svgs/githubWordmarkLight\"\r\nimport { GithubWordmarkDark } from \"@/components/ui/svgs/githubWordmarkDark\"\r\nimport { betterAuthWordmarkLight } from \"@/components/ui/svgs/betterAuthWordmarkLight\"\r\nimport { betterAuthWordmarkDark } from \"@/components/ui/svgs/betterAuthWordmarkDark\"\r\n\r\nexport type SvgComponent = ComponentType<SVGProps<SVGSVGElement>>\r\n\r\nexport type CompanyLogo = {\r\n  name: string\r\n  light: SvgComponent\r\n  dark?: SvgComponent\r\n}\r\n\r\nexport type Testimonial = {\r\n  id: string\r\n  quote: string\r\n  name: string\r\n  title: string\r\n  avatarSrc: string\r\n  initials: string\r\n  logo: CompanyLogo\r\n}\r\n\r\nconst avatar = (filename: string) =>\r\n  `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`\r\n\r\nexport const testimonials: Testimonial[] = [\r\n  {\r\n    id: \"marcus-chen\",\r\n    quote:\r\n      \"We cut onboarding time in half. The API was straightforward and our team shipped the integration in a single sprint.\",\r\n    name: \"Marcus Chen\",\r\n    title: \"Stripe\",\r\n    initials: \"MC\",\r\n    avatarSrc: avatar(\"avatar_2.png\"),\r\n    logo: {\r\n      name: \"Stripe\",\r\n      light: StripeWordmark,\r\n      dark: StripeWordmarkDark,\r\n    },\r\n  },\r\n  {\r\n    id: \"david-park\",\r\n    quote:\r\n      \"Migration was painless. We moved our entire workflow over without downtime and the team picked it up immediately.\",\r\n    name: \"David Park\",\r\n    title: \"GitHub\",\r\n    initials: \"DP\",\r\n    avatarSrc: avatar(\"avatar_6.png\"),\r\n    logo: {\r\n      name: \"GitHub\",\r\n      light: GithubWordmarkLight,\r\n      dark: GithubWordmarkDark,\r\n    },\r\n  },\r\n  {\r\n    id: \"sarah-mitchell\",\r\n    quote:\r\n      \"Real-time sync across our stack changed how we build. Our agents finally have one source of truth they can trust.\",\r\n    name: \"Sarah Mitchell\",\r\n    title: \"Better Auth\",\r\n    initials: \"SM\",\r\n    avatarSrc: avatar(\"avatar_5.png\"),\r\n    logo: {\r\n      name: \"Better Auth\",\r\n      light: betterAuthWordmarkLight,\r\n      dark: betterAuthWordmarkDark,\r\n    },\r\n  },\r\n]\r\n",
+      "content": "import type { ComponentType, SVGProps } from \"react\"\r\n\r\nimport { StripeWordmark } from \"@/components/ui/svgs/stripeWordmark\"\r\nimport { StripeWordmarkDark } from \"@/components/ui/svgs/stripeWordmarkDark\"\r\nimport { GithubWordmarkLight } from \"@/components/ui/svgs/githubWordmarkLight\"\r\nimport { GithubWordmarkDark } from \"@/components/ui/svgs/githubWordmarkDark\"\r\nimport { betterAuthWordmarkLight } from \"@/components/ui/svgs/betterAuthWordmarkLight\"\r\nimport { betterAuthWordmarkDark } from \"@/components/ui/svgs/betterAuthWordmarkDark\"\r\n\r\nexport type SvgComponent = ComponentType<SVGProps<SVGSVGElement>>\r\n\r\nexport type CompanyLogo = {\r\n  name: string\r\n  light: SvgComponent\r\n  dark?: SvgComponent\r\n}\r\n\r\nexport type Testimonial = {\r\n  id: string\r\n  quote: string\r\n  name: string\r\n  title: string\r\n  avatarSrc: string\r\n  initials: string\r\n  logo: CompanyLogo\r\n}\r\n\r\nconst blockAvatar = (filename: string) =>\r\n  `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`\r\n\r\nexport const testimonials: Testimonial[] = [\r\n  {\r\n    id: \"marcus-chen\",\r\n    quote:\r\n      \"We cut onboarding time in half. The API was straightforward and our team shipped the integration in a single sprint.\",\r\n    name: \"Marcus Chen\",\r\n    title: \"Stripe\",\r\n    initials: \"MC\",\r\n    avatarSrc: blockAvatar(\"avatar-1.png\"),\r\n    logo: {\r\n      name: \"Stripe\",\r\n      light: StripeWordmark,\r\n      dark: StripeWordmarkDark,\r\n    },\r\n  },\r\n  {\r\n    id: \"david-park\",\r\n    quote:\r\n      \"Migration was painless. We moved our entire workflow over without downtime and the team picked it up immediately.\",\r\n    name: \"David Park\",\r\n    title: \"GitHub\",\r\n    initials: \"DP\",\r\n    avatarSrc: blockAvatar(\"avatar-2.png\"),\r\n    logo: {\r\n      name: \"GitHub\",\r\n      light: GithubWordmarkLight,\r\n      dark: GithubWordmarkDark,\r\n    },\r\n  },\r\n  {\r\n    id: \"sarah-mitchell\",\r\n    quote:\r\n      \"Real-time sync across our stack changed how we build. Our agents finally have one source of truth they can trust.\",\r\n    name: \"Sarah Mitchell\",\r\n    title: \"Better Auth\",\r\n    initials: \"SM\",\r\n    avatarSrc: blockAvatar(\"avatar-3.png\"),\r\n    logo: {\r\n      name: \"Better Auth\",\r\n      light: betterAuthWordmarkLight,\r\n      dark: betterAuthWordmarkDark,\r\n    },\r\n  },\r\n]\r\n",
       "type": "registry:lib",
       "target": "app/testimonials-section-v2/lib/testimonials-content.ts"
     },
@@ -77,22 +77,22 @@
       "target": "@ui/svgs/betterAuthWordmarkDark.tsx"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v2/avatar-1.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v2/avatar-1.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v2/avatar-3.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v2/avatar-3.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep"
     }
   ],
   "type": "registry:block"

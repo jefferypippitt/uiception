@@ -6,7 +6,7 @@ import "../styles/cta-section-v4.css"
 
 export default function CtaSectionV4() {
   return (
-    <section className="relative overflow-hidden bg-[#000a0f] py-16 motion-reduce:bg-[color-mix(in_oklab,var(--muted)_78%,var(--background)_22%)] md:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-[#000a0f] py-4 motion-reduce:bg-[color-mix(in_oklab,var(--muted)_78%,var(--background)_22%)] md:py-6">
       <CtaSectionV4ShaderBg />
       <div className="relative z-10 mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">

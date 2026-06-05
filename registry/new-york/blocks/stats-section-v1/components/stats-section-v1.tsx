@@ -17,7 +17,7 @@ export function StatsSectionV1Content() {
 
 export default function StatsSectionV1() {
   return (
-    <section className="py-10 md:py-14">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <StatsSectionV1Content />
       </div>

@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "registry/new-york/blocks/google-chrome/page.tsx",
-      "content": "import GoogleChrome from \"./components/google-chrome\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <GoogleChrome />\n    </div>\n  )\n}\n",
+      "content": "import GoogleChrome from \"./components/google-chrome\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <GoogleChrome />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/google-chrome/page.tsx"
     },

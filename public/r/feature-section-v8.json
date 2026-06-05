@@ -13,7 +13,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v8/components/feature-section-v8.tsx",
-      "content": "﻿import FeatureGrid from \"./feature-grid\"\nimport { featureSectionContent } from \"../lib/config\"\n\nimport \"../styles/feature-section-v8.css\"\n\nexport default function FeatureSectionV8() {\n  return (\n    <section className=\"py-12 text-foreground md:py-16 lg:py-20\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mx-auto mb-8 max-w-3xl text-center md:mb-10 lg:mb-12\">\n          <h2 className=\"text-4xl leading-[1.1] font-medium tracking-[-0.03em] lg:text-5xl\">\n            {featureSectionContent.title}\n          </h2>\n        </div>\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "﻿import FeatureGrid from \"./feature-grid\"\nimport { featureSectionContent } from \"../lib/config\"\n\nimport \"../styles/feature-section-v8.css\"\n\nexport default function FeatureSectionV8() {\n  return (\n    <section className=\"py-4 text-foreground md:py-6\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mx-auto mb-8 max-w-3xl text-center md:mb-10 lg:mb-12\">\n          <h2 className=\"text-4xl leading-[1.1] font-medium tracking-[-0.03em] lg:text-5xl\">\n            {featureSectionContent.title}\n          </h2>\n        </div>\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/feature-section-v8/components/feature-section-v8.tsx"
     },

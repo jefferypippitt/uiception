@@ -91,9 +91,9 @@
           "target": "app/hero-section-v1/components/hero-v1-image.tsx"
         },
         {
-          "path": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png.gitkeep",
+          "path": "public/images/blocks/hero-section-v1/image.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v1/hero-section-v1-bg.png.gitkeep"
+          "target": "public/images/blocks/hero-section-v1/image.png.gitkeep"
         }
       ]
     },
@@ -1080,9 +1080,9 @@
           "target": "app/cta-section-v1/components/cta-section-v1.tsx"
         },
         {
-          "path": "public/images/blocks/cta-section-v1/cta-section-v1.png.gitkeep",
+          "path": "public/images/blocks/cta-section-v1/image.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/cta-section-v1/cta-section-v1.png.gitkeep"
+          "target": "public/images/blocks/cta-section-v1/image.png.gitkeep"
         }
       ]
     },
@@ -1593,9 +1593,9 @@
           "target": "app/hero-section-v4/styles/hero-section-v4.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png.gitkeep",
+          "path": "public/images/blocks/hero-section-v4/image.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png.gitkeep"
+          "target": "public/images/blocks/hero-section-v4/image.png.gitkeep"
         }
       ]
     },
@@ -1676,9 +1676,9 @@
           "target": "app/hero-section-v6/styles/hero-section-v6.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v6/hero-section-v6.jpg.gitkeep",
+          "path": "public/images/blocks/hero-section-v6/image.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v6/hero-section-v6.jpg.gitkeep"
+          "target": "public/images/blocks/hero-section-v6/image.jpg.gitkeep"
         }
       ]
     },
@@ -1817,9 +1817,9 @@
           "target": "app/hero-section-v8/styles/hero-section-v8.css"
         },
         {
-          "path": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png.gitkeep",
+          "path": "public/images/blocks/hero-section-v8/image.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/hero-section-v8/hero-section-v8-bg.png.gitkeep"
+          "target": "public/images/blocks/hero-section-v8/image.png.gitkeep"
         }
       ]
     },
@@ -2286,9 +2286,9 @@
           "target": "app/google-chrome-windows-with-video/components/google-chrome-windows-with-video.tsx"
         },
         {
-          "path": "public/videos/blocks/google-chrome-windows-with-video/screen-demo.mp4.gitkeep",
+          "path": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep",
           "type": "registry:file",
-          "target": "public/videos/blocks/google-chrome-windows-with-video/screen-demo.mp4.gitkeep"
+          "target": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep"
         }
       ]
     },
@@ -2341,9 +2341,9 @@
           "target": "app/macbook-pro-with-image/components/macbook-pro-with-image.tsx"
         },
         {
-          "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep",
+          "path": "public/images/blocks/macbook-pro-with-image/image.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep"
+          "target": "public/images/blocks/macbook-pro-with-image/image.png.gitkeep"
         }
       ]
     },
@@ -2367,9 +2367,9 @@
           "target": "app/macbook-pro-with-video/components/macbook-pro-with-video.tsx"
         },
         {
-          "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep",
+          "path": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep",
           "type": "registry:file",
-          "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep"
+          "target": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep"
         }
       ]
     },
@@ -2501,34 +2501,34 @@
           "target": "app/testimonials-section-v1/styles/testimonials-section-v1.css"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-1.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-1.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-2.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-2.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-3.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-3.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-4.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-4.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-5.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-5.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v1/avatar-6.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v1/avatar-6.png.gitkeep"
         }
       ]
     },
@@ -2600,19 +2600,19 @@
           "target": "@ui/svgs/betterAuthWordmarkDark.tsx"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v2/avatar-1.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_2.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v2/avatar-1.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v2/avatar-3.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_5.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v2/avatar-3.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep",
+          "path": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/testimonials-section-v2/avatar_6.png.gitkeep"
+          "target": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep"
         }
       ]
     },
@@ -2724,19 +2724,19 @@
           "target": "app/feature-section-v4/lib/features.ts"
         },
         {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep",
+          "path": "public/images/blocks/feature-section-v4/image-1.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-brain.png.gitkeep"
+          "target": "public/images/blocks/feature-section-v4/image-1.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep",
+          "path": "public/images/blocks/feature-section-v4/image-3.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-hand.png.gitkeep"
+          "target": "public/images/blocks/feature-section-v4/image-3.png.gitkeep"
         },
         {
-          "path": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep",
+          "path": "public/images/blocks/feature-section-v4/image-2.png.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/feature-section-v4/feature-section-v4-planet.png.gitkeep"
+          "target": "public/images/blocks/feature-section-v4/image-2.png.gitkeep"
         }
       ]
     },
@@ -3124,54 +3124,129 @@
           "target": "app/gallery-section-v1/styles/gallery-track.css"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-1.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-1.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-2.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-2.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-3.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-3.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-4.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-4.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-5.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-5.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-6.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-6.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-7.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-7.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-8.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-8.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-9.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-9.jpg.gitkeep"
         },
         {
-          "path": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep",
+          "path": "public/images/blocks/gallery-section-v1/image-10.jpg.gitkeep",
           "type": "registry:file",
-          "target": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep"
+          "target": "public/images/blocks/gallery-section-v1/image-10.jpg.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "gallery-section-v2",
+      "type": "registry:block",
+      "title": "Gallery Section v2",
+      "description": "A 3×3 image grid with grayscale-to-color hover transitions, uniform aspect ratios, and mono font captions below each card.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/gallery-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/gallery-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v2/components/gallery-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v2/components/gallery-card.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v2/components/gallery-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v2/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/gallery-section-v2/lib/config.ts"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep"
         }
       ]
     }

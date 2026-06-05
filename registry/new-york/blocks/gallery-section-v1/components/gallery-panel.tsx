@@ -32,7 +32,7 @@ const GalleryPanel = memo(
           className={`object-cover will-change-transform transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}`}
           fill
           loading={index === 0 ? "eager" : "lazy"}
-          placeholder="blur"
+          unoptimized
           sizes="(max-width: 768px) 50vw, 40vw"
           src={item.imageSrc}
         />

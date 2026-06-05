@@ -6,7 +6,7 @@ import "../styles/cta-section-v3.css"
 
 export default function CtaSectionV3() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <div className="relative overflow-hidden rounded-none border border-border bg-black motion-reduce:bg-[color-mix(in_oklab,var(--muted)_78%,var(--background)_22%)]">
           <CtaSectionV3DitherBg />

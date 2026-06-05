@@ -1,3 +1,6 @@
+const blockAvatar = (filename: string) =>
+  `https://uiception.com/images/blocks/testimonials-section-v1/${filename}`
+
 export type Testimonial = {
   id: string
   quote: string
@@ -7,9 +10,6 @@ export type Testimonial = {
   initials: string
   avatarSrc: string
 }
-
-const avatar = (filename: string) =>
-  `https://uiception.com/images/blocks/testimonials-section-v1/${filename}`
 
 export const sectionMeta = {
   title: "Our Clients",
@@ -24,7 +24,7 @@ export const testimonials: Testimonial[] = [
     role: "CEO",
     company: "Veldt Analytics",
     initials: "EM",
-    avatarSrc: avatar("avatar_2.png"),
+    avatarSrc: blockAvatar("avatar-2.png"),
   },
   {
     id: "claire-donovan",
@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
     role: "VP Engineering",
     company: "Brindle Field Co.",
     initials: "CD",
-    avatarSrc: avatar("avatar_1.png"),
+    avatarSrc: blockAvatar("avatar-1.png"),
   },
   {
     id: "jordan-ellis",
@@ -44,7 +44,7 @@ export const testimonials: Testimonial[] = [
     role: "Staff Engineer",
     company: "Patchwork Fleet",
     initials: "JE",
-    avatarSrc: avatar("avatar_4.png"),
+    avatarSrc: blockAvatar("avatar-4.png"),
   },
   {
     id: "mei-lin-chen",
@@ -54,7 +54,7 @@ export const testimonials: Testimonial[] = [
     role: "Head of Platform",
     company: "Omniform Studio",
     initials: "MC",
-    avatarSrc: avatar("avatar_3.png"),
+    avatarSrc: blockAvatar("avatar-3.png"),
   },
   {
     id: "ryan-park",
@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
     role: "Founding Engineer",
     company: "Grainline Ops",
     initials: "RP",
-    avatarSrc: avatar("avatar_6.png"),
+    avatarSrc: blockAvatar("avatar-6.png"),
   },
   {
     id: "hannah-bergstrom",
@@ -74,6 +74,6 @@ export const testimonials: Testimonial[] = [
     role: "Director of Product",
     company: "Westward Ledger",
     initials: "HB",
-    avatarSrc: avatar("avatar_5.png"),
+    avatarSrc: blockAvatar("avatar-5.png"),
   },
 ]

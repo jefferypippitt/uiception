@@ -25,7 +25,7 @@ export type Testimonial = {
   logo: CompanyLogo
 }
 
-const avatar = (filename: string) =>
+const blockAvatar = (filename: string) =>
   `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`
 
 export const testimonials: Testimonial[] = [
@@ -36,7 +36,7 @@ export const testimonials: Testimonial[] = [
     name: "Marcus Chen",
     title: "Stripe",
     initials: "MC",
-    avatarSrc: avatar("avatar_2.png"),
+    avatarSrc: blockAvatar("avatar-1.png"),
     logo: {
       name: "Stripe",
       light: StripeWordmark,
@@ -50,7 +50,7 @@ export const testimonials: Testimonial[] = [
     name: "David Park",
     title: "GitHub",
     initials: "DP",
-    avatarSrc: avatar("avatar_6.png"),
+    avatarSrc: blockAvatar("avatar-2.png"),
     logo: {
       name: "GitHub",
       light: GithubWordmarkLight,
@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
     name: "Sarah Mitchell",
     title: "Better Auth",
     initials: "SM",
-    avatarSrc: avatar("avatar_5.png"),
+    avatarSrc: blockAvatar("avatar-3.png"),
     logo: {
       name: "Better Auth",
       light: betterAuthWordmarkLight,

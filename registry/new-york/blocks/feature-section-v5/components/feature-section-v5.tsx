@@ -5,7 +5,7 @@ import FeatureGrid from "./feature-grid"
 export default function FeatureSectionV5() {
   return (
     <section
-      className={`${GeistSans.className} pt-16 text-foreground md:pt-20 lg:pt-24`}
+      className={`${GeistSans.className} py-4 text-foreground md:py-6`}
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto mb-12 flex max-w-3xl flex-col items-center gap-4 text-center md:mb-14 lg:mb-16">

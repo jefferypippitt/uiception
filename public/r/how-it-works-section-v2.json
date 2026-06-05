@@ -18,7 +18,7 @@
     },
     {
       "path": "registry/new-york/blocks/how-it-works-section-v2/components/how-it-works-section-v2.tsx",
-      "content": "\"use client\"\n\nimport StepsGrid from \"./steps-grid\"\n\nexport default function HowItWorksSectionV2() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <StepsGrid\n        title={\n          <h2 className=\"text-4xl leading-tight font-light tracking-tight sm:text-5xl lg:text-6xl\">\n            How It Works\n          </h2>\n        }\n      />\n    </section>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport StepsGrid from \"./steps-grid\"\n\nexport default function HowItWorksSectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <StepsGrid\n        title={\n          <h2 className=\"text-4xl leading-tight font-light tracking-tight sm:text-5xl lg:text-6xl\">\n            How It Works\n          </h2>\n        }\n      />\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/how-it-works-section-v2/components/how-it-works-section-v2.tsx"
     },

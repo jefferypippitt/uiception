@@ -19,7 +19,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v7/components/hero-section-v7.tsx",
-      "content": "import { HeroV7Root } from \"./hero-v7-root\"\n\nimport type { HeroV7Props } from \"../lib/config\"\n\nimport \"../styles/hero-section-v7.css\"\n\nexport default function HeroSectionV7(props: HeroV7Props) {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <HeroV7Root {...props} />\n    </section>\n  )\n}\n",
+      "content": "import { HeroV7Root } from \"./hero-v7-root\"\n\nimport type { HeroV7Props } from \"../lib/config\"\n\nimport \"../styles/hero-section-v7.css\"\n\nexport default function HeroSectionV7(props: HeroV7Props) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <HeroV7Root {...props} />\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v7/components/hero-section-v7.tsx"
     },

@@ -11,7 +11,7 @@ import { HeroV1Image } from "./hero-v1-image"
 export default function HeroSectionV1() {
   return (
     <>
-      <section className="py-10 md:py-14 lg:py-16">
+      <section className="py-4 md:py-6 lg:py-8">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
             <h1
@@ -64,7 +64,7 @@ export default function HeroSectionV1() {
 
       <BrandsSectionV1 />
 
-      <section className="px-4 pb-16 md:pb-20 lg:pb-24">
+      <section className="px-4 py-4 md:py-6 lg:py-8">
         <div className="relative isolate mx-auto max-w-6xl overflow-hidden rounded-2xl px-4 py-10 md:px-8 md:py-14">
           <HeroV1Image />
           <MacOsTerminal className="relative z-1 mx-auto w-full max-w-2xl min-w-0" />

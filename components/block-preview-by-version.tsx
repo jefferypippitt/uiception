@@ -54,6 +54,7 @@ import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/components
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
+import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
 import NavbarSectionV2Page from "@/registry/new-york/blocks/navbar-section-v2/page"
 import NavbarSectionV3Page from "@/registry/new-york/blocks/navbar-section-v3/page"
@@ -119,6 +120,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "gallery-section-v1": GallerySectionV1,
+  "gallery-section-v2": GallerySectionV2,
   "navbar-section-v1": NavbarSectionV1Page,
   "navbar-section-v2": NavbarSectionV2Page,
   "navbar-section-v3": NavbarSectionV3Page,

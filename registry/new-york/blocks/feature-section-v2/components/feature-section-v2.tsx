@@ -4,7 +4,7 @@ import "../styles/feature-section-v2.css"
 
 export default function FeatureSectionV2() {
   return (
-    <section className="py-10 md:py-14 lg:py-16">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-4xl px-4">
         <div className="mb-6 flex flex-col items-center gap-2.5 text-center md:mb-8">
           <h2 className="text-4xl tracking-tighter lg:text-5xl">

@@ -15,7 +15,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v9/components/hero-section-v9.tsx",
-      "content": "import HeroContent from \"./hero-content\"\n\nimport type { HeroV9Props } from \"../lib/config\"\n\nimport \"../styles/hero-section-v9.css\"\n\nexport default function HeroSectionV9(props: HeroV9Props) {\n  return (\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <HeroContent {...props} />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import HeroContent from \"./hero-content\"\n\nimport type { HeroV9Props } from \"../lib/config\"\n\nimport \"../styles/hero-section-v9.css\"\n\nexport default function HeroSectionV9(props: HeroV9Props) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <HeroContent {...props} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v9/components/hero-section-v9.tsx"
     },

@@ -27,7 +27,7 @@ const footerColumns = [
 
 export default function FooterSectionV1() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4">
         <Card className="rounded-sm">
           <CardHeader className="block px-6 pt-7 pb-0 md:px-8 md:pt-8">

@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/hero-section-v6.jpg`
+const HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/image.jpg`
 
 export function HeroV6Image() {
   return (

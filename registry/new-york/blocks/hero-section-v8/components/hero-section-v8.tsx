@@ -19,7 +19,7 @@ const AI_ASSISTANT_PROMPTS = [
 export default function HeroSectionV8() {
   return (
     <section
-      className={`${GeistSans.className} pt-10 pb-16 hyphens-none md:pt-14 md:pb-20 lg:pt-16 lg:pb-24 [&_.scb-caret]:font-[inherit] [&_.scb-input]:font-[inherit] [&_.scb-root]:font-[inherit] [&_.scb-text]:font-[inherit]`}
+      className={`${GeistSans.className} py-4 hyphens-none md:py-6 [&_.scb-caret]:font-[inherit] [&_.scb-input]:font-[inherit] [&_.scb-root]:font-[inherit] [&_.scb-text]:font-[inherit]`}
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">

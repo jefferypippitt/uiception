@@ -11,7 +11,7 @@ import {
 
 export default function FeatureSectionV9() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <header className="flex max-w-3xl flex-col items-start gap-3 text-left">
           <p className="m-0 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">

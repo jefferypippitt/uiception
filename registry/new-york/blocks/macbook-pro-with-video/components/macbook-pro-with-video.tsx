@@ -1,6 +1,6 @@
 import MacbookPro from "../../macbook-pro/components/macbook-pro"
 
-const SCREEN_VIDEO = `https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4`
+const SCREEN_VIDEO = `https://uiception.com/videos/blocks/macbook-pro-with-video/video.mp4`
 
 export default function MacbookProWithVideo() {
   return (

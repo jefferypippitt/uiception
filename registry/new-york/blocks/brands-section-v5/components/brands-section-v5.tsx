@@ -95,7 +95,7 @@ export default function BrandsSectionV5({ animated = false }: Props) {
   }, [animated])
 
   return (
-    <section ref={sectionRef} className="pt-0 pb-16 md:pb-20 lg:pb-24">
+    <section ref={sectionRef} className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-5xl px-4">
         <div className="bs5-box flex items-stretch overflow-hidden rounded-none border border-border">
           <div className="bs5-label flex shrink-0 items-center border-r border-border px-5 py-6">

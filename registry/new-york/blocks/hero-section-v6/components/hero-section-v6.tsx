@@ -7,7 +7,7 @@ import "../styles/hero-section-v6.css"
 export default function HeroSectionV6() {
   return (
     <>
-      <section className="pt-10 md:pt-14 lg:pt-16">
+      <section className="py-4 md:py-6 lg:py-8">
         <HeroV6Root />
       </section>
       <BrandsSectionV5 animated />

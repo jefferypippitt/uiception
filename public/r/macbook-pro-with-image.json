@@ -9,21 +9,21 @@
   "files": [
     {
       "path": "registry/new-york/blocks/macbook-pro-with-image/page.tsx",
-      "content": "import MacbookProWithImage from \"./components/macbook-pro-with-image\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\r\n      <MacbookProWithImage />\r\n    </div>\r\n  )\r\n}\r\n",
+      "content": "import MacbookProWithImage from \"./components/macbook-pro-with-image\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\r\n      <MacbookProWithImage />\r\n    </div>\r\n  )\r\n}\r\n",
       "type": "registry:page",
       "target": "app/macbook-pro-with-image/page.tsx"
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-image/components/macbook-pro-with-image.tsx",
-      "content": "import Image from \"next/image\"\r\n\r\nimport MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\n\r\nconst SCREEN_WALLPAPER = `https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png`\r\n\r\nexport default function MacbookProWithImage() {\r\n  return (\r\n    <MacbookPro>\r\n      <div className=\"relative size-full\">\r\n        <Image\r\n          src={SCREEN_WALLPAPER}\r\n          alt=\"macOS Monterey default dark wallpaper\"\r\n          unoptimized\r\n          fill\r\n          className=\"object-cover object-center\"\r\n          sizes=\"(max-width: 896px) 100vw, 896px\"\r\n          priority\r\n        />\r\n      </div>\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
+      "content": "import Image from \"next/image\"\r\n\r\nimport MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\n\r\nconst SCREEN_WALLPAPER = `https://uiception.com/images/blocks/macbook-pro-with-image/image.png`\r\n\r\nexport default function MacbookProWithImage() {\r\n  return (\r\n    <MacbookPro>\r\n      <div className=\"relative size-full\">\r\n        <Image\r\n          src={SCREEN_WALLPAPER}\r\n          alt=\"macOS Monterey default dark wallpaper\"\r\n          unoptimized\r\n          fill\r\n          className=\"object-cover object-center\"\r\n          sizes=\"(max-width: 896px) 100vw, 896px\"\r\n          priority\r\n        />\r\n      </div>\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-image/components/macbook-pro-with-image.tsx"
     },
     {
-      "path": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep",
+      "path": "public/images/blocks/macbook-pro-with-image/image.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png.gitkeep"
+      "target": "public/images/blocks/macbook-pro-with-image/image.png.gitkeep"
     }
   ],
   "type": "registry:block"

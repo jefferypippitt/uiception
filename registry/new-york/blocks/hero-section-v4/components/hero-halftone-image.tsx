@@ -2,7 +2,7 @@
 
 import { HalftoneDots } from "@paper-design/shaders-react"
 
-const HERO_V4_BG = `https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png`
+const HERO_V4_BG = `https://uiception.com/images/blocks/hero-section-v4/image.png`
 
 export function HeroHalftoneImage() {
   return (

@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/new-york/blocks/spreadsheet/page.tsx",
-      "content": "import Spreadsheet from \"./components/spreadsheet\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14 lg:py-16\">\n      <Spreadsheet />\n    </div>\n  )\n}\n",
+      "content": "import Spreadsheet from \"./components/spreadsheet\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <Spreadsheet />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/spreadsheet/page.tsx"
     },

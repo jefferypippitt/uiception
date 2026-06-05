@@ -19,7 +19,7 @@
     },
     {
       "path": "registry/new-york/blocks/stats-section-v2/components/stats-section-v2.tsx",
-      "content": "import { Suspense } from \"react\"\n\nimport { BRANDS } from \"../lib/series\"\nimport { getSeriesData } from \"../lib/api\"\nimport DownloadsPanel from \"./downloads-panel\"\n\nexport default async function StatsSectionV2() {\n  const allData = await Promise.all(BRANDS.map(getSeriesData))\n\n  return (\n    <section className=\"py-10 md:py-16 lg:py-20\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"text-xl font-medium tracking-tight md:text-2xl\">\n          Trusted by millions of <br />\n          developers around the world\n        </h2>\n\n        <Suspense>\n          <DownloadsPanel seriesData={allData} />\n        </Suspense>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { Suspense } from \"react\"\n\nimport { BRANDS } from \"../lib/series\"\nimport { getSeriesData } from \"../lib/api\"\nimport DownloadsPanel from \"./downloads-panel\"\n\nexport default async function StatsSectionV2() {\n  const allData = await Promise.all(BRANDS.map(getSeriesData))\n\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"text-xl font-medium tracking-tight md:text-2xl\">\n          Trusted by millions of <br />\n          developers around the world\n        </h2>\n\n        <Suspense>\n          <DownloadsPanel seriesData={allData} />\n        </Suspense>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/stats-section-v2/components/stats-section-v2.tsx"
     },

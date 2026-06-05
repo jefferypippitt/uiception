@@ -5,7 +5,7 @@ import "../styles/feature-section-v3.css"
 
 export default function FeatureSectionV3() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="max-w-3xl text-3xl leading-tight font-medium tracking-tighter sm:text-4xl lg:text-5xl">
           Acme{" "}

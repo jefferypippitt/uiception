@@ -1,0 +1,89 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gallery-section-v2",
+  "title": "Gallery Section v2",
+  "description": "A 3×3 image grid with grayscale-to-color hover transitions, uniform aspect ratios, and mono font captions below each card.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/gallery-section-v2/page.tsx",
+      "content": "import GallerySectionV2 from \"./components/gallery-section-v2\"\n\nexport default function Page() {\n  return <GallerySectionV2 />\n}\n",
+      "type": "registry:page",
+      "target": "app/gallery-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2.tsx",
+      "content": "import { GalleryCard } from \"./gallery-card\"\nimport { galleryItems } from \"../lib/config\"\n\nexport default function GallerySectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        <h2 className=\"mb-6 text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\n          Gallery\n        </h2>\n        <div className=\"grid grid-cols-3 gap-x-6 gap-y-10\">\n          {galleryItems.map((item, index) => (\n            <GalleryCard\n              key={item.id}\n              item={item}\n              priority={index < 3}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v2/components/gallery-section-v2.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v2/components/gallery-card.tsx",
+      "content": "import Image from \"next/image\"\n\nimport type { GalleryItem } from \"../lib/config\"\n\ntype GalleryCardProps = {\n  item: GalleryItem\n  priority?: boolean\n}\n\nexport function GalleryCard({ item, priority = false }: GalleryCardProps) {\n  return (\n    <div className=\"group\">\n      <div className=\"aspect-4/3 overflow-hidden\">\n        <Image\n          src={item.imageSrc}\n          alt={item.alt}\n          className=\"h-full w-full rounded-none object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0\"\n          width={600}\n          height={450}\n          priority={priority}\n          unoptimized\n        />\n      </div>\n      <div className=\"mt-3 font-mono\">\n        <p className=\"text-sm font-medium leading-tight\">{item.title}</p>\n        <p className=\"mt-1 text-xs text-muted-foreground\">{item.description}</p>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v2/components/gallery-card.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v2/lib/config.ts",
+      "content": "const blockImage = (filename: string) =>\n  `https://uiception.com/images/blocks/gallery-section-v2/${filename}`\n\nexport type GalleryItem = {\n  id: string\n  title: string\n  description: string\n  imageSrc: string\n  alt: string\n}\n\nexport const galleryItems: GalleryItem[] = [\n  {\n    id: \"1\",\n    title: \"Aron Visuals\",\n    description: \"Mountain landscape at golden hour\",\n    imageSrc: blockImage(\"image-1.jpg\"),\n    alt: \"Mountain landscape at golden hour\",\n  },\n  {\n    id: \"2\",\n    title: \"Boudhayan Bardhan\",\n    description: \"Coastal cliffs and ocean waves\",\n    imageSrc: blockImage(\"image-2.jpg\"),\n    alt: \"Coastal cliffs and ocean waves\",\n  },\n  {\n    id: \"3\",\n    title: \"Etienne Bosiger\",\n    description: \"Forest trail through tall trees\",\n    imageSrc: blockImage(\"image-3.jpg\"),\n    alt: \"Forest trail through tall trees\",\n  },\n  {\n    id: \"4\",\n    title: \"Filip Zrnzevic\",\n    description: \"City skyline at dusk\",\n    imageSrc: blockImage(\"image-4.jpg\"),\n    alt: \"City skyline at dusk\",\n  },\n  {\n    id: \"5\",\n    title: \"Ivana Cajina\",\n    description: \"Desert dunes under a clear sky\",\n    imageSrc: blockImage(\"image-5.jpg\"),\n    alt: \"Desert dunes under a clear sky\",\n  },\n  {\n    id: \"6\",\n    title: \"Justin Clark\",\n    description: \"Snow-capped peaks above a valley\",\n    imageSrc: blockImage(\"image-6.jpg\"),\n    alt: \"Snow-capped peaks above a valley\",\n  },\n  {\n    id: \"7\",\n    title: \"Meghan Schiereck\",\n    description: \"Lush green hills and farmland\",\n    imageSrc: blockImage(\"image-7.jpg\"),\n    alt: \"Lush green hills and farmland\",\n  },\n  {\n    id: \"8\",\n    title: \"Michael Baccin\",\n    description: \"Rocky shoreline at sunset\",\n    imageSrc: blockImage(\"image-8.jpg\"),\n    alt: \"Rocky shoreline at sunset\",\n  },\n  {\n    id: \"9\",\n    title: \"Quentin\",\n    description: \"Misty lake surrounded by mountains\",\n    imageSrc: blockImage(\"image-9.jpg\"),\n    alt: \"Misty lake surrounded by mountains\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/gallery-section-v2/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep",
+      "content": "",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

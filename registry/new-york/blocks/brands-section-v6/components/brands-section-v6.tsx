@@ -14,7 +14,7 @@ export default function BrandsSectionV6({ embedded = false }: Props) {
     <section
       className={cn(
         "w-full self-stretch",
-        embedded ? "pt-8 md:pt-10" : "py-10 md:py-14"
+        embedded ? "pt-4 md:pt-6" : "py-4 md:py-6 lg:py-8"
       )}
     >
       <div

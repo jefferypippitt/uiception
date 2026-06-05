@@ -4,7 +4,7 @@ import Image from "next/image"
 
 import SimpleChatbot from "../../simple-chatbot/components/simple-chatbot"
 
-const HERO_V8_BG = `https://uiception.com/images/blocks/hero-section-v8/hero-section-v8-bg.png`
+const HERO_V8_BG = `https://uiception.com/images/blocks/hero-section-v8/image.png`
 
 type HeroV8SceneProps = {
   prompts?: readonly string[]

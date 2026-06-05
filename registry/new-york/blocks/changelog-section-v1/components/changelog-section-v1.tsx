@@ -29,7 +29,7 @@ const entries = [
 
 export default function ChangelogSectionV1() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-4xl font-medium tracking-tighter sm:text-5xl">
           Latest Updates

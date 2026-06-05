@@ -4,7 +4,7 @@ import "../styles/feature-section-v7.css"
 
 export default function FeatureSectionV7() {
   return (
-    <section className="w-full bg-background py-20 text-foreground md:py-24 lg:py-28">
+    <section className="w-full bg-background py-4 text-foreground md:py-6">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10">
         <h2 className="max-w-[22ch] text-4xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground lg:text-5xl">
           Plan travel without spreadsheet chaos

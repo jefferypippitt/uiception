@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 
 export default function HeroSectionV3() {
   return (
-    <section className="pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
           <Badge variant="secondary" className="text-sm italic">

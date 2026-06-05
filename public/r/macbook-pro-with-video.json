@@ -9,21 +9,21 @@
   "files": [
     {
       "path": "registry/new-york/blocks/macbook-pro-with-video/page.tsx",
-      "content": "import MacbookProWithVideo from \"./components/macbook-pro-with-video\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\r\n      <MacbookProWithVideo />\r\n    </div>\r\n  )\r\n}\r\n",
+      "content": "import MacbookProWithVideo from \"./components/macbook-pro-with-video\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\r\n      <MacbookProWithVideo />\r\n    </div>\r\n  )\r\n}\r\n",
       "type": "registry:page",
       "target": "app/macbook-pro-with-video/page.tsx"
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-video/components/macbook-pro-with-video.tsx",
-      "content": "import MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\n\r\nconst SCREEN_VIDEO = `https://uiception.com/videos/blocks/macbook-pro-with-video/screen-demo.mp4`\r\n\r\nexport default function MacbookProWithVideo() {\r\n  return (\r\n    <MacbookPro>\r\n      <video\r\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\r\n        src={SCREEN_VIDEO}\r\n        muted\r\n        loop\r\n        playsInline\r\n        autoPlay\r\n        aria-label=\"Screen content video demo\"\r\n      />\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
+      "content": "import MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\n\r\nconst SCREEN_VIDEO = `https://uiception.com/videos/blocks/macbook-pro-with-video/video.mp4`\r\n\r\nexport default function MacbookProWithVideo() {\r\n  return (\r\n    <MacbookPro>\r\n      <video\r\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\r\n        src={SCREEN_VIDEO}\r\n        muted\r\n        loop\r\n        playsInline\r\n        autoPlay\r\n        aria-label=\"Screen content video demo\"\r\n      />\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-video/components/macbook-pro-with-video.tsx"
     },
     {
-      "path": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep",
+      "path": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/videos/blocks/macbook-pro-with-video/screen-demo.mp4.gitkeep"
+      "target": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep"
     }
   ],
   "type": "registry:block"

@@ -4,11 +4,11 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 
-const CTA_IMAGE = `https://uiception.com/images/blocks/cta-section-v1/cta-section-v1.png`
+const CTA_IMAGE = `https://uiception.com/images/blocks/cta-section-v1/image.png`
 
 export default function CtaSectionV1() {
   return (
-    <div className="pt-16 md:pt-20 lg:pt-24">
+    <div className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <div className="overflow-hidden px-6 pb-6 md:px-8 md:pb-8 lg:px-10 lg:pb-10">
           <div className="flex flex-col gap-6">
@@ -56,6 +56,7 @@ export default function CtaSectionV1() {
               alt=""
               aria-hidden
               fill
+              priority
               className="object-cover object-top"
             />
           </div>

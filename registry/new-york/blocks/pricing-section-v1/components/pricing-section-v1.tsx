@@ -3,7 +3,7 @@ import { pricingPlans } from "../lib/pricing-plans"
 
 export default function PricingSectionV1() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <h2 className="text-4xl font-medium tracking-tight text-balance md:text-5xl">

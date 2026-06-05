@@ -21,7 +21,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v4/components/hero-section-v4.tsx",
-      "content": "import { StatsSectionV1Content } from \"../../stats-section-v1/components/stats-section-v1\"\r\n\r\nimport { HeroV4Root } from \"./hero-v4-root\"\r\n\r\nimport \"../styles/hero-section-v4.css\"\r\n\r\nexport default function HeroSectionV4() {\r\n  return (\r\n    <section className=\"pt-10 pb-16 md:pt-14 md:pb-20 lg:pt-16 lg:pb-24\">\r\n      <HeroV4Root>\r\n        <StatsSectionV1Content />\r\n      </HeroV4Root>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import { StatsSectionV1Content } from \"../../stats-section-v1/components/stats-section-v1\"\n\nimport { HeroV4Root } from \"./hero-v4-root\"\n\nimport \"../styles/hero-section-v4.css\"\n\nexport default function HeroSectionV4() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <HeroV4Root>\n        <StatsSectionV1Content />\n      </HeroV4Root>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/hero-section-v4/components/hero-section-v4.tsx"
     },
@@ -45,7 +45,7 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v4/components/hero-halftone-image.tsx",
-      "content": "\"use client\"\r\n\r\nimport { HalftoneDots } from \"@paper-design/shaders-react\"\r\n\r\nconst HERO_V4_BG = `https://uiception.com/images/blocks/hero-section-v4/hero-section-v4-bg.png`\r\n\r\nexport function HeroHalftoneImage() {\r\n  return (\r\n    <HalftoneDots\r\n      aria-hidden={true}\r\n      className=\"absolute inset-0 h-full w-full\"\r\n      colorBack=\"#f2f1e8\"\r\n      colorFront=\"#2b2b2b\"\r\n      contrast={0.5}\r\n      fit=\"cover\"\r\n      grainMixer={0.4}\r\n      grainOverlay={0.2}\r\n      grainSize={0.5}\r\n      grid=\"hex\"\r\n      image={HERO_V4_BG}\r\n      inverted={false}\r\n      originalColors={false}\r\n      radius={1.5}\r\n      size={0.2}\r\n      type=\"gooey\"\r\n    />\r\n  )\r\n}\r\n",
+      "content": "\"use client\"\r\n\r\nimport { HalftoneDots } from \"@paper-design/shaders-react\"\r\n\r\nconst HERO_V4_BG = `https://uiception.com/images/blocks/hero-section-v4/image.png`\r\n\r\nexport function HeroHalftoneImage() {\r\n  return (\r\n    <HalftoneDots\r\n      aria-hidden={true}\r\n      className=\"absolute inset-0 h-full w-full\"\r\n      colorBack=\"#f2f1e8\"\r\n      colorFront=\"#2b2b2b\"\r\n      contrast={0.5}\r\n      fit=\"cover\"\r\n      grainMixer={0.4}\r\n      grainOverlay={0.2}\r\n      grainSize={0.5}\r\n      grid=\"hex\"\r\n      image={HERO_V4_BG}\r\n      inverted={false}\r\n      originalColors={false}\r\n      radius={1.5}\r\n      size={0.2}\r\n      type=\"gooey\"\r\n    />\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/hero-section-v4/components/hero-halftone-image.tsx"
     },
@@ -56,10 +56,10 @@
       "target": "app/hero-section-v4/styles/hero-section-v4.css"
     },
     {
-      "path": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png.gitkeep",
+      "path": "public/images/blocks/hero-section-v4/image.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/hero-section-v4/hero-section-v4-bg.png.gitkeep"
+      "target": "public/images/blocks/hero-section-v4/image.png.gitkeep"
     }
   ],
   "type": "registry:block"

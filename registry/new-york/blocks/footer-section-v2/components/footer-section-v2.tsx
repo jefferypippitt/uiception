@@ -56,7 +56,7 @@ const copyrightYear = new Date().getFullYear()
 
 export default function FooterSectionV2() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4">
         <Card className="rounded-none">
           <CardHeader className="block px-6 py-7 md:px-8 md:py-8">

@@ -464,6 +464,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Gallery Section v1",
         registryPath: "registry/new-york/blocks/gallery-section-v1",
       },
+      {
+        id: "gallery-section-v2",
+        title: "Gallery Section v2",
+        registryPath: "registry/new-york/blocks/gallery-section-v2",
+      },
     ],
   },
   {

@@ -3,7 +3,7 @@ import { faqSectionMeta } from "../lib/faq-content"
 
 export default function FaqSectionV2() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-4xl px-4">
         <div className="mb-10 md:mb-12">
           <p className="text-base text-muted-foreground">Learn More</p>

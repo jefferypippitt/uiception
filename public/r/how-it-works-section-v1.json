@@ -16,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/how-it-works-section-v1/components/how-it-works-section-v1.tsx",
-      "content": "import StepsGrid from \"./steps-grid\"\nimport \"../styles/how-it-works-section-v1.css\"\n\nexport default function HowItWorksSectionV1() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mb-12 flex flex-col items-center text-center md:mb-16\">\n          <h2 className=\"max-w-2xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl\">\n            <span className=\"text-green-600 dark:text-green-400\">3 Steps</span>{\" \"}\n            To Ship\n            <br />\n            Faster Than Ever\n          </h2>\n        </div>\n        <StepsGrid />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import StepsGrid from \"./steps-grid\"\nimport \"../styles/how-it-works-section-v1.css\"\n\nexport default function HowItWorksSectionV1() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mb-12 flex flex-col items-center text-center md:mb-16\">\n          <h2 className=\"max-w-2xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl\">\n            <span className=\"text-green-600 dark:text-green-400\">3 Steps</span>{\" \"}\n            To Ship\n            <br />\n            Faster Than Ever\n          </h2>\n        </div>\n        <StepsGrid />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/how-it-works-section-v1/components/how-it-works-section-v1.tsx"
     },

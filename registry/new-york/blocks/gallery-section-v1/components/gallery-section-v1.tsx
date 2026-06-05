@@ -19,7 +19,7 @@ export default function GallerySectionV1({
   items = galleryItems,
 }: GallerySectionV1Props = {}) {
   return (
-    <section className="py-20 md:py-24 lg:py-28">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4">
         {header !== false ? (
           <div className="mb-10 md:mb-12">

@@ -13,7 +13,7 @@
     },
     {
       "path": "registry/new-york/blocks/brands-section-v2/components/brands-section-v2.tsx",
-      "content": "import Marquee from \"./marquee\"\nimport { brands } from \"../lib/brands\"\n\nimport \"../styles/brands-section-v2.css\"\n\nexport default function BrandsSectionV2() {\n  return (\n    <section className=\"py-10 md:py-14\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <Marquee brands={brands} />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import Marquee from \"./marquee\"\nimport { brands } from \"../lib/brands\"\n\nimport \"../styles/brands-section-v2.css\"\n\nexport default function BrandsSectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <Marquee brands={brands} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/brands-section-v2/components/brands-section-v2.tsx"
     },

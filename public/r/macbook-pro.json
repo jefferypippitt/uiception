@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/new-york/blocks/macbook-pro/page.tsx",
-      "content": "import MacbookPro from \"./components/macbook-pro\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-10 md:px-6 md:py-14\">\n      <MacbookPro />\n    </div>\n  )\n}\n",
+      "content": "import MacbookPro from \"./components/macbook-pro\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <MacbookPro />\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/macbook-pro/page.tsx"
     },

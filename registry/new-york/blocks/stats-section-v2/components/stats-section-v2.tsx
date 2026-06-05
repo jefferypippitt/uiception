@@ -8,7 +8,7 @@ export default async function StatsSectionV2() {
   const allData = await Promise.all(BRANDS.map(getSeriesData))
 
   return (
-    <section className="py-10 md:py-16 lg:py-20">
+    <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-xl font-medium tracking-tight md:text-2xl">
           Trusted by millions of <br />

@@ -15,7 +15,7 @@ function Block({ rows = 1 }: { rows?: number }) {
 
 export default function NavbarLoremDemo() {
   return (
-    <main className="px-4 py-10">
+    <main className="px-4 py-4 md:py-6 lg:py-8">
       <article
         aria-label="Sample document preview"
         className="mx-auto w-full max-w-2xl rounded-none border border-border bg-card text-card-foreground shadow-sm"

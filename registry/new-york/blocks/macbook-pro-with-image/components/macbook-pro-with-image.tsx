@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import MacbookPro from "../../macbook-pro/components/macbook-pro"
 
-const SCREEN_WALLPAPER = `https://uiception.com/images/blocks/macbook-pro-with-image/macos-monterey-wallpaper.png`
+const SCREEN_WALLPAPER = `https://uiception.com/images/blocks/macbook-pro-with-image/image.png`
 
 export default function MacbookProWithImage() {
   return (

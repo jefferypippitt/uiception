@@ -17,7 +17,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1.tsx",
-      "content": "import TestimonialsCarousel from \"./testimonials-carousel\"\r\nimport { sectionMeta, testimonials } from \"../lib/testimonials-content\"\r\nimport \"../styles/testimonials-section-v1.css\"\r\n\r\nexport default function TestimonialsSectionV1() {\r\n  return (\r\n    <section className=\"py-16 md:py-20 lg:py-24\">\r\n      <div className=\"mx-auto max-w-6xl px-4\">\r\n        <h2 className=\"mb-10 text-3xl font-medium tracking-tight md:mb-12\">\r\n          {sectionMeta.title}\r\n        </h2>\r\n        <TestimonialsCarousel testimonials={testimonials} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import TestimonialsCarousel from \"./testimonials-carousel\"\nimport { sectionMeta, testimonials } from \"../lib/testimonials-content\"\nimport \"../styles/testimonials-section-v1.css\"\n\nexport default function TestimonialsSectionV1() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"mb-10 text-3xl font-medium tracking-tight md:mb-12\">\n          {sectionMeta.title}\n        </h2>\n        <TestimonialsCarousel testimonials={testimonials} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/testimonials-section-v1/components/testimonials-section-v1.tsx"
     },
@@ -35,7 +35,7 @@
     },
     {
       "path": "registry/new-york/blocks/testimonials-section-v1/lib/testimonials-content.ts",
-      "content": "export type Testimonial = {\r\n  id: string\r\n  quote: string\r\n  name: string\r\n  role: string\r\n  company: string\r\n  initials: string\r\n  avatarSrc: string\r\n}\r\n\r\nconst avatar = (filename: string) =>\r\n  `https://uiception.com/images/blocks/testimonials-section-v1/${filename}`\r\n\r\nexport const sectionMeta = {\r\n  title: \"Our Clients\",\r\n}\r\n\r\nexport const testimonials: Testimonial[] = [\r\n  {\r\n    id: \"ethan-morrison\",\r\n    quote:\r\n      \"We rolled out the platform in three weeks. Setup was simple and our team was productive from day one.\",\r\n    name: \"Ethan Morrison\",\r\n    role: \"CEO\",\r\n    company: \"Veldt Analytics\",\r\n    initials: \"EM\",\r\n    avatarSrc: avatar(\"avatar_2.png\"),\r\n  },\r\n  {\r\n    id: \"claire-donovan\",\r\n    quote:\r\n      \"Security review went smoothly. Permissions, audit logs, and data controls were exactly what our team needed.\",\r\n    name: \"Claire Donovan\",\r\n    role: \"VP Engineering\",\r\n    company: \"Brindle Field Co.\",\r\n    initials: \"CD\",\r\n    avatarSrc: avatar(\"avatar_1.png\"),\r\n  },\r\n  {\r\n    id: \"jordan-ellis\",\r\n    quote:\r\n      \"Everything stays in sync across our tools. We finally have one place the whole team trusts for daily work.\",\r\n    name: \"Jordan Ellis\",\r\n    role: \"Staff Engineer\",\r\n    company: \"Patchwork Fleet\",\r\n    initials: \"JE\",\r\n    avatarSrc: avatar(\"avatar_4.png\"),\r\n  },\r\n  {\r\n    id: \"mei-lin-chen\",\r\n    quote:\r\n      \"We cut weekly reporting time in half. The product is intuitive enough that new hires picked it up without extra training.\",\r\n    name: \"Mei Lin Chen\",\r\n    role: \"Head of Platform\",\r\n    company: \"Omniform Studio\",\r\n    initials: \"MC\",\r\n    avatarSrc: avatar(\"avatar_3.png\"),\r\n  },\r\n  {\r\n    id: \"ryan-park\",\r\n    quote:\r\n      \"We went live in one sprint. The trial let us validate our workflow before committing the whole company.\",\r\n    name: \"Ryan Park\",\r\n    role: \"Founding Engineer\",\r\n    company: \"Grainline Ops\",\r\n    initials: \"RP\",\r\n    avatarSrc: avatar(\"avatar_6.png\"),\r\n  },\r\n  {\r\n    id: \"hannah-bergstrom\",\r\n    quote:\r\n      \"Our support queue cleared faster once we centralized replies and history in one inbox. Escalations dropped within the first month.\",\r\n    name: \"Hannah Bergstrom\",\r\n    role: \"Director of Product\",\r\n    company: \"Westward Ledger\",\r\n    initials: \"HB\",\r\n    avatarSrc: avatar(\"avatar_5.png\"),\r\n  },\r\n]\r\n",
+      "content": "const blockAvatar = (filename: string) =>\r\n  `https://uiception.com/images/blocks/testimonials-section-v1/${filename}`\r\n\r\nexport type Testimonial = {\r\n  id: string\r\n  quote: string\r\n  name: string\r\n  role: string\r\n  company: string\r\n  initials: string\r\n  avatarSrc: string\r\n}\r\n\r\nexport const sectionMeta = {\r\n  title: \"Our Clients\",\r\n}\r\n\r\nexport const testimonials: Testimonial[] = [\r\n  {\r\n    id: \"ethan-morrison\",\r\n    quote:\r\n      \"We rolled out the platform in three weeks. Setup was simple and our team was productive from day one.\",\r\n    name: \"Ethan Morrison\",\r\n    role: \"CEO\",\r\n    company: \"Veldt Analytics\",\r\n    initials: \"EM\",\r\n    avatarSrc: blockAvatar(\"avatar-2.png\"),\r\n  },\r\n  {\r\n    id: \"claire-donovan\",\r\n    quote:\r\n      \"Security review went smoothly. Permissions, audit logs, and data controls were exactly what our team needed.\",\r\n    name: \"Claire Donovan\",\r\n    role: \"VP Engineering\",\r\n    company: \"Brindle Field Co.\",\r\n    initials: \"CD\",\r\n    avatarSrc: blockAvatar(\"avatar-1.png\"),\r\n  },\r\n  {\r\n    id: \"jordan-ellis\",\r\n    quote:\r\n      \"Everything stays in sync across our tools. We finally have one place the whole team trusts for daily work.\",\r\n    name: \"Jordan Ellis\",\r\n    role: \"Staff Engineer\",\r\n    company: \"Patchwork Fleet\",\r\n    initials: \"JE\",\r\n    avatarSrc: blockAvatar(\"avatar-4.png\"),\r\n  },\r\n  {\r\n    id: \"mei-lin-chen\",\r\n    quote:\r\n      \"We cut weekly reporting time in half. The product is intuitive enough that new hires picked it up without extra training.\",\r\n    name: \"Mei Lin Chen\",\r\n    role: \"Head of Platform\",\r\n    company: \"Omniform Studio\",\r\n    initials: \"MC\",\r\n    avatarSrc: blockAvatar(\"avatar-3.png\"),\r\n  },\r\n  {\r\n    id: \"ryan-park\",\r\n    quote:\r\n      \"We went live in one sprint. The trial let us validate our workflow before committing the whole company.\",\r\n    name: \"Ryan Park\",\r\n    role: \"Founding Engineer\",\r\n    company: \"Grainline Ops\",\r\n    initials: \"RP\",\r\n    avatarSrc: blockAvatar(\"avatar-6.png\"),\r\n  },\r\n  {\r\n    id: \"hannah-bergstrom\",\r\n    quote:\r\n      \"Our support queue cleared faster once we centralized replies and history in one inbox. Escalations dropped within the first month.\",\r\n    name: \"Hannah Bergstrom\",\r\n    role: \"Director of Product\",\r\n    company: \"Westward Ledger\",\r\n    initials: \"HB\",\r\n    avatarSrc: blockAvatar(\"avatar-5.png\"),\r\n  },\r\n]\r\n",
       "type": "registry:lib",
       "target": "app/testimonials-section-v1/lib/testimonials-content.ts"
     },
@@ -46,40 +46,40 @@
       "target": "app/testimonials-section-v1/styles/testimonials-section-v1.css"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-1.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_1.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-1.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-2.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_2.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-2.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-3.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_3.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-3.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-4.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_4.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-4.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-5.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_5.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-5.png.gitkeep"
     },
     {
-      "path": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep",
+      "path": "public/images/blocks/testimonials-section-v1/avatar-6.png.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/testimonials-section-v1/avatar_6.png.gitkeep"
+      "target": "public/images/blocks/testimonials-section-v1/avatar-6.png.gitkeep"
     }
   ],
   "type": "registry:block"

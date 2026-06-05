@@ -14,7 +14,7 @@
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1.tsx",
-      "content": "import GalleryTrack from \"./gallery-track\"\r\nimport { imageFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\r\n\r\nconst galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({\r\n  id: `panel-${index + 1}`,\r\n  label: `Panel ${index + 1}`,\r\n  alt,\r\n  imageSrc: file,\r\n}))\r\n\r\nexport type GallerySectionV1Props = {\r\n  /** Pass `false` to render only the gallery canvas (no title or description). */\r\n  header?: { title: string; description?: string } | false\r\n  items?: GalleryItem[]\r\n}\r\n\r\nexport default function GallerySectionV1({\r\n  header = sectionMeta,\r\n  items = galleryItems,\r\n}: GallerySectionV1Props = {}) {\r\n  return (\r\n    <section className=\"py-20 md:py-24 lg:py-28\">\r\n      <div className=\"mx-auto max-w-7xl px-4\">\r\n        {header !== false ? (\r\n          <div className=\"mb-10 md:mb-12\">\r\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\r\n              {header.title}\r\n            </h2>\r\n            {header.description ? (\r\n              <p className=\"mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground\">\r\n                {header.description}\r\n              </p>\r\n            ) : null}\r\n          </div>\r\n        ) : null}\r\n        <GalleryTrack items={items} />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "content": "import GalleryTrack from \"./gallery-track\"\nimport { imageFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\n\nconst galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({\n  id: `panel-${index + 1}`,\n  label: `Panel ${index + 1}`,\n  alt,\n  imageSrc: file,\n}))\n\nexport type GallerySectionV1Props = {\n  /** Pass `false` to render only the gallery canvas (no title or description). */\n  header?: { title: string; description?: string } | false\n  items?: GalleryItem[]\n}\n\nexport default function GallerySectionV1({\n  header = sectionMeta,\n  items = galleryItems,\n}: GallerySectionV1Props = {}) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        {header !== false ? (\n          <div className=\"mb-10 md:mb-12\">\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\n              {header.title}\n            </h2>\n            {header.description ? (\n              <p className=\"mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground\">\n                {header.description}\n              </p>\n            ) : null}\n          </div>\n        ) : null}\n        <GalleryTrack items={items} />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/gallery-section-v1/components/gallery-section-v1.tsx"
     },
@@ -26,13 +26,13 @@
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v1/components/gallery-panel.tsx",
-      "content": "\"use client\"\r\n\r\nimport Image from \"next/image\"\r\nimport { forwardRef, memo } from \"react\"\r\n\r\nimport type { GalleryItem } from \"../lib/config\"\r\n\r\ntype GalleryPanelProps = {\r\n  item: GalleryItem\r\n  index: number\r\n  isActive: boolean\r\n  onActivate: (index: number) => void\r\n}\r\n\r\nconst GalleryPanel = memo(\r\n  forwardRef<HTMLDivElement, GalleryPanelProps>(function GalleryPanel(\r\n    { item, index, isActive, onActivate },\r\n    ref,\r\n  ) {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        aria-label={item.label}\r\n        className={`gsv1-panel group relative min-w-12 shrink-0 overflow-hidden outline-none md:min-w-0${isActive ? \" gsv1-panel--active\" : \"\"}`}\r\n        role=\"listitem\"\r\n        tabIndex={0}\r\n        onFocus={() => onActivate(index)}\r\n        onMouseEnter={() => onActivate(index)}\r\n      >\r\n        <Image\r\n          alt={item.alt}\r\n          className={`object-cover will-change-transform transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? \" scale-105\" : \" scale-100\"}`}\r\n          fill\r\n          loading={index === 0 ? \"eager\" : \"lazy\"}\r\n          placeholder=\"blur\"\r\n          sizes=\"(max-width: 768px) 50vw, 40vw\"\r\n          src={item.imageSrc}\r\n        />\r\n\r\n        {/* Caption — fades up when the panel is active */}\r\n        <div aria-hidden className=\"gsv1-caption\">\r\n          {item.alt}\r\n        </div>\r\n      </div>\r\n    )\r\n  }),\r\n)\r\n\r\nexport default GalleryPanel\r\n",
+      "content": "\"use client\"\r\n\r\nimport Image from \"next/image\"\r\nimport { forwardRef, memo } from \"react\"\r\n\r\nimport type { GalleryItem } from \"../lib/config\"\r\n\r\ntype GalleryPanelProps = {\r\n  item: GalleryItem\r\n  index: number\r\n  isActive: boolean\r\n  onActivate: (index: number) => void\r\n}\r\n\r\nconst GalleryPanel = memo(\r\n  forwardRef<HTMLDivElement, GalleryPanelProps>(function GalleryPanel(\r\n    { item, index, isActive, onActivate },\r\n    ref,\r\n  ) {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        aria-label={item.label}\r\n        className={`gsv1-panel group relative min-w-12 shrink-0 overflow-hidden outline-none md:min-w-0${isActive ? \" gsv1-panel--active\" : \"\"}`}\r\n        role=\"listitem\"\r\n        tabIndex={0}\r\n        onFocus={() => onActivate(index)}\r\n        onMouseEnter={() => onActivate(index)}\r\n      >\r\n        <Image\r\n          alt={item.alt}\r\n          className={`object-cover will-change-transform transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? \" scale-105\" : \" scale-100\"}`}\r\n          fill\r\n          loading={index === 0 ? \"eager\" : \"lazy\"}\r\n          unoptimized\r\n          sizes=\"(max-width: 768px) 50vw, 40vw\"\r\n          src={item.imageSrc}\r\n        />\r\n\r\n        {/* Caption — fades up when the panel is active */}\r\n        <div aria-hidden className=\"gsv1-caption\">\r\n          {item.alt}\r\n        </div>\r\n      </div>\r\n    )\r\n  }),\r\n)\r\n\r\nexport default GalleryPanel\r\n",
       "type": "registry:component",
       "target": "app/gallery-section-v1/components/gallery-panel.tsx"
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v1/lib/config.ts",
-      "content": "import type { ImageProps } from \"next/image\"\n\nimport aron from \"@/public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg\"\nimport boudhayan from \"@/public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg\"\nimport etienne from \"@/public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg\"\nimport filip from \"@/public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg\"\nimport ivana from \"@/public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg\"\nimport justin from \"@/public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg\"\nimport meghan from \"@/public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg\"\nimport michael from \"@/public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg\"\nimport quentin from \"@/public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg\"\nimport yoshi from \"@/public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg\"\n\nexport type GalleryItem = {\n  id: string\n  label: string\n  alt: string\n  imageSrc: ImageProps[\"src\"]\n}\n\nexport const sectionMeta = {\n  title: \"Moments In Focus\",\n}\n\nexport const imageFiles = [\n  { file: aron,      alt: \"Mountain landscape at golden hour\" },\n  { file: boudhayan, alt: \"Coastal cliffs and ocean waves\" },\n  { file: etienne,   alt: \"Forest trail through tall trees\" },\n  { file: filip,     alt: \"City skyline at dusk\" },\n  { file: ivana,     alt: \"Desert dunes under a clear sky\" },\n  { file: justin,    alt: \"Snow-capped peaks above a valley\" },\n  { file: meghan,    alt: \"Lush green hills and farmland\" },\n  { file: michael,   alt: \"Rocky shoreline at sunset\" },\n  { file: quentin,   alt: \"Misty lake surrounded by mountains\" },\n  { file: yoshi,     alt: \"Cherry blossoms in spring light\" },\n] as const\n",
+      "content": "const blockImage = (filename: string) =>\n  `https://uiception.com/images/blocks/gallery-section-v1/${filename}`\n\nexport type GalleryItem = {\n  id: string\n  label: string\n  alt: string\n  imageSrc: string\n}\n\nexport const sectionMeta = {\n  title: \"Moments In Focus\",\n}\n\nexport const imageFiles = [\n  { file: blockImage(\"image-1.jpg\"),  alt: \"Mountain landscape at golden hour\" },\n  { file: blockImage(\"image-2.jpg\"),  alt: \"Coastal cliffs and ocean waves\" },\n  { file: blockImage(\"image-3.jpg\"),  alt: \"Forest trail through tall trees\" },\n  { file: blockImage(\"image-4.jpg\"),  alt: \"City skyline at dusk\" },\n  { file: blockImage(\"image-5.jpg\"),  alt: \"Desert dunes under a clear sky\" },\n  { file: blockImage(\"image-6.jpg\"),  alt: \"Snow-capped peaks above a valley\" },\n  { file: blockImage(\"image-7.jpg\"),  alt: \"Lush green hills and farmland\" },\n  { file: blockImage(\"image-8.jpg\"),  alt: \"Rocky shoreline at sunset\" },\n  { file: blockImage(\"image-9.jpg\"),  alt: \"Misty lake surrounded by mountains\" },\n  { file: blockImage(\"image-10.jpg\"), alt: \"Cherry blossoms in spring light\" },\n]\n",
       "type": "registry:lib",
       "target": "app/gallery-section-v1/lib/config.ts"
     },
@@ -43,64 +43,64 @@
       "target": "app/gallery-section-v1/styles/gallery-track.css"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-1.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/aron-visuals-LSFuPFE9vKE-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-1.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-2.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/boudhayan-bardhan-60tataLkJ0U-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-2.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-3.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/etienne-bosiger-OWsdJ-MllYA-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-3.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-4.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/filip-zrnzevic-_EMkxLdko9k-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-4.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-5.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/ivana-cajina-9LwCEYH1oW4-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-5.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-6.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/justin-clark-H7JiEU8Slnw-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-6.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-7.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/meghan-schiereck-E_j8FgQxo88-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-7.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-8.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/michael-baccin-Cv5ooHwI2DQ-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-8.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-9.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/quentin-zwzeorQPepo-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-9.jpg.gitkeep"
     },
     {
-      "path": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep",
+      "path": "public/images/blocks/gallery-section-v1/image-10.jpg.gitkeep",
       "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
-      "target": "public/images/blocks/gallery-section-v1/yoshi-takekawa-7wk0ja-DP_c-unsplash.jpg.gitkeep"
+      "target": "public/images/blocks/gallery-section-v1/image-10.jpg.gitkeep"
     }
   ],
   "type": "registry:block"
