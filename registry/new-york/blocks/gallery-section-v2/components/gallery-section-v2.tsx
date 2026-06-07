@@ -9,10 +9,11 @@ export default function GallerySectionV2() {
           Gallery
         </h2>
         <div className="grid grid-cols-3 gap-x-6 gap-y-10">
-          {galleryItems.map((item) => (
+          {galleryItems.map((item, index) => (
             <GalleryCard
               key={item.id}
               item={item}
+              index={index}
             />
           ))}
         </div>

@@ -4,9 +4,10 @@ import type { GalleryItem } from "../lib/config"
 
 type GalleryCardProps = {
   item: GalleryItem
+  index: number
 }
 
-export function GalleryCard({ item }: GalleryCardProps) {
+export function GalleryCard({ item, index }: GalleryCardProps) {
   return (
     <div className="group">
       <div className="relative aspect-4/3 overflow-hidden">
@@ -15,7 +16,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
           alt={item.alt}
           className="rounded-none object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
           fill
-          loading="lazy"
+          loading={index < 3 ? "eager" : "lazy"}
           sizes="(max-width: 1023px) 100vw, 33vw"
           unoptimized
         />

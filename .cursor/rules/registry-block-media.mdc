@@ -42,6 +42,8 @@ const blockVideo = (filename: string) =>
 <Image src={HERO_BG} unoptimized alt="" fill />
 ```
 
+> **Why `unoptimized` is required (do not remove):** Without it, `next/image` rewrites `src` to `/_next/image?url=...`, which hits the consumer's own image optimization API. Without `remotePatterns` for `uiception.com` in their config that request returns a 400 — broken image, nothing shown. `unoptimized` bypasses that entirely and fetches directly from the CDN, zero config required. The tradeoff is that previews on uiception.com itself don't benefit from Next.js image optimization (WebP conversion, resizing, caching) — but consumer experience is the priority.
+
 **Plain string constant** (shader props, video `src`):
 
 ```tsx

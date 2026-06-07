@@ -727,6 +727,11 @@
           "path": "registry/new-york/blocks/navbar-section-v1/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v1/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep"
         }
       ]
     },
@@ -757,6 +762,11 @@
           "path": "registry/new-york/blocks/navbar-section-v2/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v2/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v2/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v2/logo.svg.gitkeep"
         }
       ]
     },
@@ -791,6 +801,11 @@
           "path": "registry/new-york/blocks/navbar-section-v3/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v3/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v3/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v3/logo.svg.gitkeep"
         }
       ]
     },
@@ -844,6 +859,11 @@
           "path": "registry/new-york/blocks/navbar-section-v5/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v5/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep"
         }
       ]
     },
@@ -874,6 +894,11 @@
           "path": "registry/new-york/blocks/navbar-section-v6/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v6/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v6/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v6/logo.svg.gitkeep"
         }
       ]
     },
@@ -904,6 +929,11 @@
           "path": "registry/new-york/blocks/navbar-section-v7/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v7/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v7/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v7/logo.svg.gitkeep"
         }
       ]
     },
@@ -1250,6 +1280,11 @@
           "path": "registry/new-york/blocks/footer-section-v3/components/footer-section-v3.tsx",
           "type": "registry:component",
           "target": "app/footer-section-v3/components/footer-section-v3.tsx"
+        },
+        {
+          "path": "public/images/blocks/footer-section-v3/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/footer-section-v3/logo.svg.gitkeep"
         }
       ]
     },

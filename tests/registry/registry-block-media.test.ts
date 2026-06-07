@@ -37,22 +37,6 @@ describe("registry block media", () => {
     }
   })
 
-  it("all .gitkeep registry files are non-empty so shadcn installs them", () => {
-    const { items } = loadRegistry()
-    for (const item of items) {
-      for (const f of item.files ?? []) {
-        if (!f.path.endsWith(".gitkeep")) continue
-        const abs = join(root, f.path)
-        expect(existsSync(abs), `${item.name}: missing gitkeep file ${f.path}`).toBe(true)
-        const size = statSync(abs).size
-        expect(
-          size,
-          `${item.name}: ${f.path} is empty — shadcn skips empty files, add placeholder text`,
-        ).toBeGreaterThan(0)
-      }
-    }
-  })
-
   it("next/image components with CDN URLs declare unoptimized", () => {
     const sources = listTsSourcesUnder(
       join(root, "registry/new-york/blocks"),
@@ -68,6 +52,22 @@ describe("registry block media", () => {
           content,
           `${rel}: next/image with a CDN src must include the unoptimized prop (no remotePatterns required for consumers)`,
         ).toContain("unoptimized")
+      }
+    }
+  })
+
+  it("all .gitkeep registry files are non-empty so shadcn installs them", () => {
+    const { items } = loadRegistry()
+    for (const item of items) {
+      for (const f of item.files ?? []) {
+        if (!f.path.endsWith(".gitkeep")) continue
+        const abs = join(root, f.path)
+        expect(existsSync(abs), `${item.name}: missing gitkeep file ${f.path}`).toBe(true)
+        const size = statSync(abs).size
+        expect(
+          size,
+          `${item.name}: ${f.path} is empty — shadcn skips empty files, add placeholder text`,
+        ).toBeGreaterThan(0)
       }
     }
   })
