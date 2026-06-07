@@ -14,7 +14,8 @@ function BrandLogo({ className }: { className?: string }) {
       aria-hidden
       className={cn("size-6 shrink-0", className)}
       height={32}
-      src="/icon0.svg"
+      src="https://uiception.com/images/blocks/navbar-section-v1/logo.svg"
+      unoptimized
       width={32}
     />
   )

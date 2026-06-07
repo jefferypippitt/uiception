@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils"
 
 const SITE_NAME = "uiception"
-const LOGO_SRC = "/icon0.svg"
+const LOGO_SRC = "https://uiception.com/images/blocks/navbar-section-v5/logo.svg"
 const LOGO_HREF = "#"
 
 type NavItem = {
@@ -158,6 +158,7 @@ export default function NavbarSectionV5() {
                 className="size-5 shrink-0"
                 height={32}
                 src={LOGO_SRC}
+                unoptimized
                 width={32}
               />
               {SITE_NAME}

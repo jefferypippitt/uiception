@@ -6,7 +6,6 @@ export type GalleryItem = {
   label: string
   alt: string
   imageSrc: string
-  blurDataURL?: string
 }
 
 export const sectionMeta = {

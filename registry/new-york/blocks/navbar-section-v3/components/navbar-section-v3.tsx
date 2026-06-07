@@ -272,7 +272,8 @@ export default function NavbarSectionV3() {
                 aria-hidden
                 className="size-6 shrink-0"
                 height={32}
-                src="/icon0.svg"
+                src="https://uiception.com/images/blocks/navbar-section-v3/logo.svg"
+                unoptimized
                 width={32}
               />
               <span className="text-lg tracking-tight">uiception</span>

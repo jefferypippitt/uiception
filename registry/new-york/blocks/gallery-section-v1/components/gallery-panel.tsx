@@ -3,8 +3,6 @@
 import Image from "next/image"
 import { forwardRef, memo } from "react"
 
-const BLUR_PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-
 import type { GalleryItem } from "../lib/config"
 
 type GalleryPanelProps = {
@@ -34,10 +32,9 @@ const GalleryPanel = memo(
           className={`object-cover transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}`}
           fill
           loading="lazy"
-          placeholder="blur"
-          blurDataURL={item.blurDataURL ?? BLUR_PLACEHOLDER}
           sizes="(max-width: 1023px) 100vw, 75vw"
           src={item.imageSrc}
+          unoptimized
         />
 
         {/* Caption — fades up when the panel is active */}

@@ -53,7 +53,7 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
 
 export default function FooterSectionV3() {
   const logoImage = {
-    src: "/icon0.svg",
+    src: "https://uiception.com/images/blocks/footer-section-v3/logo.svg",
     alt: "Logo",
   } as const
 
@@ -72,6 +72,7 @@ export default function FooterSectionV3() {
                     width={32}
                     height={32}
                     className="size-8 shrink-0"
+                    unoptimized
                   />
                 </Link>
               </div>

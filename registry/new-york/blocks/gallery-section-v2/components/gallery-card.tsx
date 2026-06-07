@@ -2,8 +2,6 @@ import Image from "next/image"
 
 import type { GalleryItem } from "../lib/config"
 
-const BLUR_PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-
 type GalleryCardProps = {
   item: GalleryItem
 }
@@ -18,9 +16,8 @@ export function GalleryCard({ item }: GalleryCardProps) {
           className="rounded-none object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
           fill
           loading="lazy"
-          placeholder="blur"
-          blurDataURL={item.blurDataURL ?? BLUR_PLACEHOLDER}
           sizes="(max-width: 1023px) 100vw, 33vw"
+          unoptimized
         />
       </div>
       <div className="mt-3 font-mono">

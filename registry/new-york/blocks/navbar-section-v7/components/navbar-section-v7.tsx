@@ -17,7 +17,7 @@ import {
 import { cn } from "@/lib/utils"
 
 const SITE_NAME = "uiception"
-const LOGO_SRC = "/icon0.svg"
+const LOGO_SRC = "https://uiception.com/images/blocks/navbar-section-v7/logo.svg"
 const LOGO_HREF = "#"
 
 type DropdownItem = {
@@ -402,6 +402,7 @@ export default function NavbarSectionV7() {
                 className="size-5 shrink-0"
                 height={32}
                 src={LOGO_SRC}
+                unoptimized
                 width={32}
               />
               {SITE_NAME}
@@ -494,6 +495,7 @@ export default function NavbarSectionV7() {
                 className="size-6 shrink-0"
                 height={32}
                 src={LOGO_SRC}
+                unoptimized
                 width={32}
               />
             </Link>
