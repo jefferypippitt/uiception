@@ -1,25 +1,35 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 
 import type { GalleryItem } from "../lib/config"
 
-type GalleryCardProps = {
-  item: GalleryItem
-  index: number
-}
+type GalleryCardProps = { item: GalleryItem; priority?: boolean }
 
-export function GalleryCard({ item, index }: GalleryCardProps) {
+export function GalleryCard({ item, priority = false }: GalleryCardProps) {
+  const [loaded, setLoaded] = useState(false)
+
   return (
     <div className="group">
-      <div className="relative aspect-4/3 overflow-hidden">
+      <div className="relative isolate aspect-4/3 overflow-hidden">
         <Image
           src={item.imageSrc}
           alt={item.alt}
-          className="rounded-none object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
           fill
-          loading={index < 3 ? "eager" : "lazy"}
-          sizes="(max-width: 1023px) 100vw, 33vw"
           unoptimized
+          priority={priority}
+          sizes="(max-width: 768px) 50vw, 33vw"
+          className={`object-cover transition-opacity duration-500${loaded ? " opacity-100" : " opacity-0"}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
         />
+        {loaded && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[#808080] mix-blend-color transition-opacity duration-500 group-hover:opacity-0"
+          />
+        )}
       </div>
       <div className="mt-3 font-mono">
         <p className="text-sm font-medium leading-tight">{item.title}</p>

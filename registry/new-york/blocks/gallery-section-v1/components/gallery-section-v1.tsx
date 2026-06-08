@@ -1,11 +1,14 @@
 import GalleryTrack from "./gallery-track"
 import { imageFiles, sectionMeta, type GalleryItem } from "../lib/config"
 
+const blockImage = (filename: string) =>
+  `https://uiception.com/images/blocks/gallery-section-v1/${filename}`
+
 const galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({
   id: `panel-${index + 1}`,
   label: `Panel ${index + 1}`,
   alt,
-  imageSrc: file,
+  imageSrc: blockImage(file),
 }))
 
 export type GallerySectionV1Props = {

@@ -1,7 +1,7 @@
 "use client"
 
+import { forwardRef, memo, useState } from "react"
 import Image from "next/image"
-import { forwardRef, memo } from "react"
 
 import type { GalleryItem } from "../lib/config"
 
@@ -9,14 +9,17 @@ type GalleryPanelProps = {
   item: GalleryItem
   index: number
   isActive: boolean
+  priority?: boolean
   onActivate: (index: number) => void
 }
 
 const GalleryPanel = memo(
   forwardRef<HTMLDivElement, GalleryPanelProps>(function GalleryPanel(
-    { item, index, isActive, onActivate },
+    { item, index, isActive, priority = false, onActivate },
     ref,
   ) {
+    const [loaded, setLoaded] = useState(false)
+
     return (
       <div
         ref={ref}
@@ -28,16 +31,17 @@ const GalleryPanel = memo(
         onMouseEnter={() => onActivate(index)}
       >
         <Image
-          alt={item.alt}
-          className={`object-cover transition-[transform,scale] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}`}
-          fill
-          loading={index === 0 ? "eager" : "lazy"}
-          sizes="(max-width: 1023px) 100vw, 75vw"
           src={item.imageSrc}
+          alt={item.alt}
+          fill
           unoptimized
+          priority={priority}
+          sizes="(max-width: 768px) 20vw, 15vw"
+          className={`object-cover transition-[transform,scale,opacity] duration-680 ease-[var(--gsv1-ease)]${isActive ? " scale-105" : " scale-100"}${loaded ? " opacity-100" : " opacity-0"}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
         />
 
-        {/* Caption — fades up when the panel is active */}
         <div aria-hidden className="gsv1-caption">
           {item.alt}
         </div>

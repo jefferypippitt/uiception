@@ -1,6 +1,3 @@
-const blockImage = (filename: string) =>
-  `https://uiception.com/images/blocks/gallery-section-v2/${filename}`
-
 export type GalleryItem = {
   id: string
   title: string
@@ -9,68 +6,14 @@ export type GalleryItem = {
   alt: string
 }
 
-export const galleryItems: GalleryItem[] = [
-  {
-    id: "1",
-    title: "Aron Visuals",
-    description: "Mountain landscape at golden hour",
-    imageSrc: blockImage("image-1.jpg"),
-    alt: "Mountain landscape at golden hour",
-  },
-  {
-    id: "2",
-    title: "Boudhayan Bardhan",
-    description: "Coastal cliffs and ocean waves",
-    imageSrc: blockImage("image-2.jpg"),
-    alt: "Coastal cliffs and ocean waves",
-  },
-  {
-    id: "3",
-    title: "Etienne Bosiger",
-    description: "Forest trail through tall trees",
-    imageSrc: blockImage("image-3.jpg"),
-    alt: "Forest trail through tall trees",
-  },
-  {
-    id: "4",
-    title: "Filip Zrnzevic",
-    description: "City skyline at dusk",
-    imageSrc: blockImage("image-4.jpg"),
-    alt: "City skyline at dusk",
-  },
-  {
-    id: "5",
-    title: "Ivana Cajina",
-    description: "Desert dunes under a clear sky",
-    imageSrc: blockImage("image-5.jpg"),
-    alt: "Desert dunes under a clear sky",
-  },
-  {
-    id: "6",
-    title: "Justin Clark",
-    description: "Snow-capped peaks above a valley",
-    imageSrc: blockImage("image-6.jpg"),
-    alt: "Snow-capped peaks above a valley",
-  },
-  {
-    id: "7",
-    title: "Meghan Schiereck",
-    description: "Lush green hills and farmland",
-    imageSrc: blockImage("image-7.jpg"),
-    alt: "Lush green hills and farmland",
-  },
-  {
-    id: "8",
-    title: "Michael Baccin",
-    description: "Rocky shoreline at sunset",
-    imageSrc: blockImage("image-8.jpg"),
-    alt: "Rocky shoreline at sunset",
-  },
-  {
-    id: "9",
-    title: "Quentin",
-    description: "Misty lake surrounded by mountains",
-    imageSrc: blockImage("image-9.jpg"),
-    alt: "Misty lake surrounded by mountains",
-  },
+export const galleryFiles = [
+  { file: "image-1.jpg", title: "Aron Visuals",      description: "Mountain landscape at golden hour",  alt: "Mountain landscape at golden hour" },
+  { file: "image-2.jpg", title: "Boudhayan Bardhan", description: "Coastal cliffs and ocean waves",      alt: "Coastal cliffs and ocean waves" },
+  { file: "image-3.jpg", title: "Etienne Bosiger",   description: "Forest trail through tall trees",     alt: "Forest trail through tall trees" },
+  { file: "image-4.jpg", title: "Filip Zrnzevic",    description: "City skyline at dusk",                alt: "City skyline at dusk" },
+  { file: "image-5.jpg", title: "Ivana Cajina",      description: "Desert dunes under a clear sky",      alt: "Desert dunes under a clear sky" },
+  { file: "image-6.jpg", title: "Justin Clark",      description: "Snow-capped peaks above a valley",    alt: "Snow-capped peaks above a valley" },
+  { file: "image-7.jpg", title: "Meghan Schiereck",  description: "Lush green hills and farmland",       alt: "Lush green hills and farmland" },
+  { file: "image-8.jpg", title: "Michael Baccin",    description: "Rocky shoreline at sunset",           alt: "Rocky shoreline at sunset" },
+  { file: "image-9.jpg", title: "Quentin",           description: "Misty lake surrounded by mountains",  alt: "Misty lake surrounded by mountains" },
 ]

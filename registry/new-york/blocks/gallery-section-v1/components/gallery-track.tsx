@@ -11,8 +11,7 @@ type GalleryTrackProps = {
 }
 
 type VLineStyle = {
-  centerX: number
-  top: number
+  left: number
   topHeight: number
   bottomTop: number
   bottomHeight: number
@@ -27,8 +26,8 @@ function GalleryVLines({ style }: { style: VLineStyle | null }) {
         aria-hidden
         className="gsv1-vline gsv1-vline--top"
         style={{
-          transform: `translateX(${style.centerX}px)`,
-          top: `${style.top}px`,
+          transform: `translateX(${style.left}px)`,
+          top: 0,
           height: `${style.topHeight}px`,
         }}
       />
@@ -36,7 +35,7 @@ function GalleryVLines({ style }: { style: VLineStyle | null }) {
         aria-hidden
         className="gsv1-vline gsv1-vline--bottom"
         style={{
-          transform: `translateX(${style.centerX}px)`,
+          transform: `translateX(${style.left}px)`,
           top: `${style.bottomTop}px`,
           height: `${style.bottomHeight}px`,
         }}
@@ -112,13 +111,12 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
       const panelRect = currentPanel.getBoundingClientRect()
       const trackRect = currentTrack.getBoundingClientRect()
       const canvasRect = currentCanvas.getBoundingClientRect()
-      const centerX = panelRect.left + panelRect.width / 2
+      const left = panelRect.left + panelRect.width / 2 - canvasRect.left
 
       setVLineStyle({
-        centerX,
-        top: canvasRect.top,
+        left,
         topHeight: trackRect.top - canvasRect.top,
-        bottomTop: trackRect.bottom,
+        bottomTop: trackRect.bottom - canvasRect.top,
         bottomHeight: canvasRect.bottom - trackRect.bottom,
       })
     }
@@ -138,15 +136,11 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
     })
 
     window.addEventListener("resize", scheduleLines, { passive: true })
-    window.addEventListener("scroll", scheduleLines, { capture: true, passive: true })
-    track.addEventListener("scroll", scheduleLines, { passive: true })
 
     return () => {
       cancelAnimationFrame(rafId)
       observer.disconnect()
       window.removeEventListener("resize", scheduleLines)
-      window.removeEventListener("scroll", scheduleLines, true)
-      track.removeEventListener("scroll", scheduleLines)
     }
   }, [])
 
@@ -176,6 +170,7 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
               index={index}
               isActive={activeIndex === index}
               item={item}
+              priority={index === 0}
               onActivate={handleActivate}
             />
           ))}
