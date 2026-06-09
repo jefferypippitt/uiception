@@ -17,6 +17,7 @@ import ChatBotPage from "@/registry/new-york/blocks/chat-bot/page"
 import SimpleChatbotPage from "@/registry/new-york/blocks/simple-chatbot/page"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/components/stats-section-v1"
 import StatsSectionV2 from "@/registry/new-york/blocks/stats-section-v2/components/stats-section-v2"
+import StatsSectionV3 from "@/registry/new-york/blocks/stats-section-v3/components/stats-section-v3"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/components/hero-section-v4"
 import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/components/how-it-works-section-v1"
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/components/how-it-works-section-v2"
@@ -43,6 +44,7 @@ import FeatureSectionV9 from "@/registry/new-york/blocks/feature-section-v9/comp
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/components/changelog-section-v1"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
 import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
+import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
@@ -51,6 +53,7 @@ import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/components
 import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/components/hero-section-v7"
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components/hero-section-v8"
 import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/components/hero-section-v9"
+import HeroSectionV10 from "@/registry/new-york/blocks/hero-section-v10/components/hero-section-v10"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
@@ -62,6 +65,7 @@ import NavbarSectionV4Page from "@/registry/new-york/blocks/navbar-section-v4/pa
 import NavbarSectionV5Page from "@/registry/new-york/blocks/navbar-section-v5/page"
 import NavbarSectionV6Page from "@/registry/new-york/blocks/navbar-section-v6/page"
 import NavbarSectionV7Page from "@/registry/new-york/blocks/navbar-section-v7/page"
+import NavbarSectionV8Page from "@/registry/new-york/blocks/navbar-section-v8/page"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -83,6 +87,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "simple-chatbot": SimpleChatbotPage,
   "stats-section-v1": StatsSectionV1,
   "stats-section-v2": StatsSectionV2,
+  "stats-section-v3": StatsSectionV3,
   "hero-section-v4": HeroSectionV4,
   "how-it-works-section-v1": HowItWorksSectionV1,
   "how-it-works-section-v2": HowItWorksSectionV2,
@@ -105,6 +110,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v7": HeroSectionV7,
   "hero-section-v8": HeroSectionV8,
   "hero-section-v9": HeroSectionV9,
+  "hero-section-v10": HeroSectionV10,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
   "feature-section-v5": FeatureSectionV5,
@@ -115,6 +121,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "changelog-section-v1": ChangelogSectionV1,
   "faq-section-v1": FaqSectionV1,
   "faq-section-v2": FaqSectionV2,
+  "faq-section-v3": FaqSectionV3,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
   "pricing-section-v1": PricingSectionV1,
@@ -128,6 +135,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v5": NavbarSectionV5Page,
   "navbar-section-v6": NavbarSectionV6Page,
   "navbar-section-v7": NavbarSectionV7Page,
+  "navbar-section-v8": NavbarSectionV8Page,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

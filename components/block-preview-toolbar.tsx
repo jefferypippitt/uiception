@@ -563,7 +563,7 @@ export function BlockPreviewToolbar({
                   </div>
                 ) : (
                   <pre className="p-4 font-mono text-xs leading-relaxed text-[#6b7280] dark:text-[#a0a0a0]">
-                    {selectedContent ? "—" : "Select a file"}
+                    {selectedContent || "Select a file"}
                   </pre>
                 )}
               </div>

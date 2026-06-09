@@ -86,6 +86,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Navbar Section v7",
         registryPath: "registry/new-york/blocks/navbar-section-v7",
       },
+      {
+        id: "navbar-section-v8",
+        title: "Navbar Section v8",
+        registryPath: "registry/new-york/blocks/navbar-section-v8",
+      },
     ],
   },
   {
@@ -137,6 +142,11 @@ export const blockCategories: BlockCategory[] = [
         id: "hero-section-v9",
         title: "Hero Section v9",
         registryPath: "registry/new-york/blocks/hero-section-v9",
+      },
+      {
+        id: "hero-section-v10",
+        title: "Hero Section v10",
+        registryPath: "registry/new-york/blocks/hero-section-v10",
       },
     ],
   },
@@ -327,6 +337,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Stats Section v2",
         registryPath: "registry/new-york/blocks/stats-section-v2",
       },
+      {
+        id: "stats-section-v3",
+        title: "Stats Section v3",
+        registryPath: "registry/new-york/blocks/stats-section-v3",
+      },
     ],
   },
   {
@@ -360,6 +375,11 @@ export const blockCategories: BlockCategory[] = [
         id: "faq-section-v2",
         title: "FAQ Section v2",
         registryPath: "registry/new-york/blocks/faq-section-v2",
+      },
+      {
+        id: "faq-section-v3",
+        title: "FAQ Section v3",
+        registryPath: "registry/new-york/blocks/faq-section-v3",
       },
     ],
   },

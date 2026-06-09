@@ -7,6 +7,9 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? ""
+const LOGO_SRC = `${mediaOrigin}/images/blocks/navbar-section-v1/logo.svg`
+
 function BrandLogo({ className }: { className?: string }) {
   return (
     <Image
@@ -14,7 +17,7 @@ function BrandLogo({ className }: { className?: string }) {
       aria-hidden
       className={cn("size-6 shrink-0", className)}
       height={32}
-      src="https://uiception.com/images/blocks/navbar-section-v1/logo.svg"
+      src={LOGO_SRC}
       unoptimized
       width={32}
     />

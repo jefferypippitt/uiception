@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-section-v3",
+  "title": "FAQ Section v3",
+  "description": "Dark-background FAQ with a serif headline, italic subtitle, numbered rows, and chevron accordion.",
+  "registryDependencies": [
+    "accordion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/faq-section-v3/page.tsx",
+      "content": "import FaqSectionV3 from \"./components/faq-section-v3\"\n\nexport default function Page() {\n  return <FaqSectionV3 />\n}\n",
+      "type": "registry:page",
+      "target": "app/faq-section-v3/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v3/components/faq-section-v3.tsx",
+      "content": "\"use client\"\n\nimport FaqAccordion from \"./faq-accordion\"\nimport { faqSectionMeta } from \"../lib/faq-content\"\n\nexport default function FaqSectionV3() {\n  return (\n    <section className=\"bg-background py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-3xl px-4\">\n        <div className=\"mb-14 text-center\">\n          <h2 className=\"font-serif text-5xl font-normal tracking-tight text-foreground sm:text-6xl\">\n            {faqSectionMeta.title}\n          </h2>\n          <p className=\"mt-3 font-serif text-2xl italic text-muted-foreground sm:text-3xl\">\n            {faqSectionMeta.subtitle}\n          </p>\n        </div>\n        <FaqAccordion />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/faq-section-v3/components/faq-section-v3.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v3/components/faq-accordion.tsx",
+      "content": "\"use client\"\n\nimport { ChevronDownIcon } from \"lucide-react\"\n\nimport {\n  Accordion,\n  AccordionContent,\n  AccordionItem,\n  AccordionTrigger,\n} from \"@/components/ui/accordion\"\n\nimport { faqItems } from \"../lib/faq-content\"\n\nexport default function FaqAccordion() {\n  return (\n    <Accordion type=\"single\" collapsible className=\"w-full\">\n      {faqItems.map((item, index) => (\n        <AccordionItem key={item.id} value={item.id} className=\"border-border\">\n          <AccordionTrigger className=\"py-5 text-base hover:no-underline **:data-[slot=accordion-trigger-icon]:hidden\">\n            <span className=\"flex w-full items-center gap-6\">\n              <span className=\"w-7 shrink-0 font-mono text-sm text-muted-foreground/60\">\n                {String(index + 1).padStart(2, \"0\")}.\n              </span>\n              <span className=\"flex-1 text-left font-normal text-foreground\">\n                {item.question}\n              </span>\n              <ChevronDownIcon className=\"size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-aria-expanded/accordion-trigger:rotate-180\" />\n            </span>\n          </AccordionTrigger>\n          <AccordionContent className=\"pb-5 pl-13 text-base leading-relaxed text-muted-foreground\">\n            {item.answer}\n          </AccordionContent>\n        </AccordionItem>\n      ))}\n    </Accordion>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/faq-section-v3/components/faq-accordion.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v3/lib/faq-content.ts",
+      "content": "export type FaqItem = {\n  id: string\n  question: string\n  answer: string\n}\n\nexport const faqSectionMeta = {\n  title: \"Got Questions?\",\n  subtitle: \"We've got answers\",\n}\n\nexport const faqItems: FaqItem[] = [\n  {\n    id: \"free-trial\",\n    question: \"Is there a free trial?\",\n    answer:\n      \"Yes. Every plan includes a 14-day free trial with no credit card required. You can upgrade, downgrade, or cancel at any time during or after the trial.\",\n  },\n  {\n    id: \"billing\",\n    question: \"How does billing work?\",\n    answer:\n      \"Plans are billed monthly or annually. Annual plans include a 20% discount. You'll receive an invoice by email at the start of each billing cycle.\",\n  },\n  {\n    id: \"change-plan\",\n    question: \"Can I change my plan later?\",\n    answer:\n      \"Yes. You can upgrade or downgrade at any time from your account settings. Upgrades take effect immediately; downgrades apply at the next billing cycle.\",\n  },\n  {\n    id: \"team-seats\",\n    question: \"How do team seats work?\",\n    answer:\n      \"Each seat covers one user. You can add or remove seats at any time and only pay for what you use, prorated to the day.\",\n  },\n  {\n    id: \"data-security\",\n    question: \"Is my data secure?\",\n    answer:\n      \"Yes. All data is encrypted in transit and at rest using AES-256. We are SOC 2 Type II certified and conduct regular third-party security audits.\",\n  },\n  {\n    id: \"integrations\",\n    question: \"What integrations do you support?\",\n    answer:\n      \"We integrate with Slack, Notion, GitHub, Jira, Zapier, and dozens more. You can also connect any tool via our REST API or webhooks.\",\n  },\n  {\n    id: \"support\",\n    question: \"What kind of support is available?\",\n    answer:\n      \"All plans include email and chat support with a 24-hour response time. Pro and Enterprise plans include priority support and a dedicated success manager.\",\n  },\n  {\n    id: \"cancel\",\n    question: \"Can I cancel at any time?\",\n    answer:\n      \"Yes. You can cancel your subscription at any time from your account settings with no cancellation fees. Your access continues until the end of the current billing period.\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/faq-section-v3/lib/faq-content.ts"
+    }
+  ],
+  "type": "registry:block"
+}

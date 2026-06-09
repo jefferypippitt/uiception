@@ -732,6 +732,11 @@
           "path": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v1/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v1/logo.svg"
         }
       ]
     },
@@ -767,6 +772,11 @@
           "path": "public/images/blocks/navbar-section-v2/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v2/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v2/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v2/logo.svg"
         }
       ]
     },
@@ -806,6 +816,11 @@
           "path": "public/images/blocks/navbar-section-v3/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v3/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v3/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v3/logo.svg"
         }
       ]
     },
@@ -864,6 +879,11 @@
           "path": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v5/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v5/logo.svg"
         }
       ]
     },
@@ -899,6 +919,11 @@
           "path": "public/images/blocks/navbar-section-v6/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v6/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v6/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v6/logo.svg"
         }
       ]
     },
@@ -934,6 +959,48 @@
           "path": "public/images/blocks/navbar-section-v7/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v7/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v7/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v7/logo.svg"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v8",
+      "type": "registry:block",
+      "title": "Navbar Section v8",
+      "description": "Altitude-inspired 3-column navbar with logo left, animated underline nav links center, and CTA button right.",
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v8/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v8/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v8/components/navbar-section-v8.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v8/components/navbar-section-v8.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v8/components/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v8/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v8/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v8/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v8/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v8/logo.svg"
         }
       ]
     },
@@ -1935,6 +2002,51 @@
       ]
     },
     {
+      "name": "hero-section-v10",
+      "type": "registry:block",
+      "title": "Hero Section v10",
+      "description": "Centered hero with finance-focused headline, description, and a single request demo CTA.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "geist@^1.7.0",
+        "gsap@^3.14.2"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v10/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/components/hero-section-v10.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v10/components/hero-section-v10.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/components/cta-button.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v10/components/cta-button.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/components/stock-chart.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v10/components/stock-chart.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/hooks/use-stock-chart-animation.ts",
+          "type": "registry:hook",
+          "target": "app/hero-section-v10/hooks/use-stock-chart-animation.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v10/styles/hero-section-v10.css",
+          "type": "registry:file",
+          "target": "app/hero-section-v10/styles/hero-section-v10.css"
+        }
+      ]
+    },
+    {
       "name": "stats-section-v1",
       "type": "registry:block",
       "title": "Stats Section v1",
@@ -2035,6 +2147,33 @@
           "path": "components/ui/svgs/svelte.tsx",
           "type": "registry:component",
           "target": "@ui/svgs/svelte.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-section-v3",
+      "type": "registry:block",
+      "title": "Stats Section v3",
+      "description": "Left-aligned stats section with an eyebrow label, large heading, and full-width stat rows showing a description with info icon on the left and an oversized value on the right, separated by horizontal dividers.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/stats-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/stats-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v3/components/stats-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/stats-section-v3/components/stats-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/stats-section-v3/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/stats-section-v3/lib/config.ts"
         }
       ]
     },
@@ -2491,6 +2630,37 @@
           "path": "registry/new-york/blocks/faq-section-v2/lib/faq-content.ts",
           "type": "registry:lib",
           "target": "app/faq-section-v2/lib/faq-content.ts"
+        }
+      ]
+    },
+    {
+      "name": "faq-section-v3",
+      "type": "registry:block",
+      "title": "FAQ Section v3",
+      "description": "Dark-background FAQ with a serif headline, italic subtitle, numbered rows, and chevron accordion.",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/faq-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/faq-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v3/components/faq-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v3/components/faq-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v3/components/faq-accordion.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v3/components/faq-accordion.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v3/lib/faq-content.ts",
+          "type": "registry:lib",
+          "target": "app/faq-section-v3/lib/faq-content.ts"
         }
       ]
     },

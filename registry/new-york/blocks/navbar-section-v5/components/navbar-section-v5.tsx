@@ -13,8 +13,9 @@ import {
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? ""
 const SITE_NAME = "uiception"
-const LOGO_SRC = "https://uiception.com/images/blocks/navbar-section-v5/logo.svg"
+const LOGO_SRC = `${mediaOrigin}/images/blocks/navbar-section-v5/logo.svg`
 const LOGO_HREF = "#"
 
 type NavItem = {

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-section-v3",
+  "title": "Stats Section v3",
+  "description": "Left-aligned stats section with an eyebrow label, large heading, and full-width stat rows showing a description with info icon on the left and an oversized value on the right, separated by horizontal dividers.",
+  "dependencies": [
+    "geist@^1.7.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/stats-section-v3/page.tsx",
+      "content": "import StatsSectionV3 from \"./components/stats-section-v3\"\n\nexport default function Page() {\n  return <StatsSectionV3 />\n}\n",
+      "type": "registry:page",
+      "target": "app/stats-section-v3/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/stats-section-v3/components/stats-section-v3.tsx",
+      "content": "import { GeistSans } from \"geist/font/sans\"\n\nimport { formatStat, HEADING, LABEL, STATS } from \"../lib/config\"\n\nexport default function StatsSectionV3() {\n  return (\n    <section className={`${GeistSans.className} py-16 md:py-24`}>\n      <div className=\"mx-auto max-w-5xl px-4\">\n        <p className=\"mb-3 text-sm tracking-wide text-muted-foreground\">\n          {LABEL}\n        </p>\n        <h2 className=\"max-w-xl text-3xl tracking-tight sm:text-4xl\">\n          {HEADING}\n        </h2>\n\n        <div className=\"mt-12 border-t border-border\">\n          {STATS.map((stat) => (\n            <div\n              key={stat.id}\n              className=\"flex flex-col gap-4 border-b border-border py-8 sm:flex-row sm:items-center sm:justify-between sm:gap-12\"\n            >\n              <span className=\"text-sm text-muted-foreground sm:text-base\">\n                {stat.description}\n              </span>\n              <span className=\"text-5xl tracking-tight text-foreground lg:text-6xl\">\n                {formatStat(stat)}\n              </span>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/stats-section-v3/components/stats-section-v3.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/stats-section-v3/lib/config.ts",
+      "content": "export type Stat = {\n  id: string\n  description: string\n  numeric: number\n  prefix: string\n  suffix: string\n  decimals?: number\n  useLocale?: boolean\n}\n\nexport const LABEL = \"By the numbers\"\n\nexport const HEADING = \"The platform serious investors trust.\"\n\nexport const STATS: Stat[] = [\n  {\n    id: \"instruments\",\n    description: \"Stocks, ETFs, and options monitored in real time\",\n    numeric: 12000,\n    prefix: \"\",\n    suffix: \"+\",\n    useLocale: true,\n  },\n  {\n    id: \"speed\",\n    description: \"Average signal detection speed across global markets\",\n    numeric: 47,\n    prefix: \"\",\n    suffix: \"ms\",\n  },\n  {\n    id: \"users\",\n    description: \"Portfolio managers who made the switch last year\",\n    numeric: 8400,\n    prefix: \"\",\n    suffix: \"+\",\n    useLocale: true,\n  },\n  {\n    id: \"assets\",\n    description: \"Assets under analysis across all connected accounts\",\n    numeric: 2.1,\n    prefix: \"$\",\n    suffix: \"T+\",\n    decimals: 1,\n  },\n]\n\nexport function formatStat(stat: Stat): string {\n  const n = stat.decimals\n    ? stat.numeric.toFixed(stat.decimals)\n    : stat.useLocale\n      ? stat.numeric.toLocaleString()\n      : String(stat.numeric)\n  return `${stat.prefix}${n}${stat.suffix}`\n}\n",
+      "type": "registry:lib",
+      "target": "app/stats-section-v3/lib/config.ts"
+    }
+  ],
+  "type": "registry:block"
+}

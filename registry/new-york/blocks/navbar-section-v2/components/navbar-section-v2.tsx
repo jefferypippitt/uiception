@@ -16,6 +16,9 @@ import {
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? ""
+const LOGO_SRC = `${mediaOrigin}/images/blocks/navbar-section-v2/logo.svg`
+
 type ProductItem = {
   label: string
   href: string
@@ -244,7 +247,7 @@ export default function NavbarSectionV2() {
               aria-hidden
               className="size-6 shrink-0"
               height={32}
-              src="https://uiception.com/images/blocks/navbar-section-v2/logo.svg"
+              src={LOGO_SRC}
               unoptimized
               width={32}
             />

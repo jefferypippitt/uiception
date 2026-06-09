@@ -1,0 +1,52 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-section-v10",
+  "title": "Hero Section v10",
+  "description": "Centered hero with finance-focused headline, description, and a single request demo CTA.",
+  "dependencies": [
+    "geist@^1.7.0",
+    "gsap@^3.14.2"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/page.tsx",
+      "content": "import HeroSectionV10 from \"./components/hero-section-v10\"\n\nexport default function Page() {\n  return <HeroSectionV10 />\n}\n",
+      "type": "registry:page",
+      "target": "app/hero-section-v10/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/components/hero-section-v10.tsx",
+      "content": "import { GeistSans } from \"geist/font/sans\"\n\nimport CtaButton from \"./cta-button\"\nimport StockChart from \"./stock-chart\"\n\nimport \"../styles/hero-section-v10.css\"\n\nexport default function HeroSectionV10() {\n  return (\n    <section\n      className={`${GeistSans.className} py-4 hyphens-none md:py-6`}\n    >\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <h1 className=\"max-w-[18ch] text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]\">\n            The Stock Platform for<br />Serious Investors.\n          </h1>\n\n          <p className=\"max-w-xl text-base leading-7 tracking-tight text-muted-foreground sm:text-lg sm:leading-8\">\n            AI-powered research and real-time signals so you never miss a move.\n          </p>\n\n          <CtaButton />\n        </div>\n      </div>\n\n      <div className=\"mx-auto max-w-5xl px-4 pt-8\">\n        <StockChart />\n      </div>\n\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v10/components/hero-section-v10.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/components/cta-button.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst HREF = \"#\"\n\nexport default function CtaButton() {\n  return (\n    <Button size=\"lg\" className=\"w-full text-[16px] sm:w-auto\" asChild>\n      <Link href={HREF}>Get Started Free</Link>\n    </Button>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v10/components/cta-button.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/components/stock-chart.tsx",
+      "content": "\"use client\"\n\nimport { useStockChartAnimation } from \"../hooks/use-stock-chart-animation\"\n\nconst LINE_PATH = [\n  \"M 0,155\",\n  \"C 18,148 28,128 40,130\",\n  \"C 52,132 62,147 75,145\",\n  \"C 88,143 98,88 115,92\",\n  \"C 130,96 142,152 155,150\",\n  \"C 168,148 180,133 195,135\",\n  \"C 208,137 222,112 235,115\",\n  \"C 248,118 258,163 270,160\",\n  \"C 282,157 292,138 305,140\",\n  \"C 318,142 330,80 345,84\",\n  \"C 358,88 372,108 385,105\",\n  \"C 398,102 408,86 420,88\",\n  \"C 432,90 442,143 455,140\",\n  \"C 466,137 478,70 490,73\",\n  \"C 500,76 518,170 535,175\",\n  \"C 550,180 562,152 575,150\",\n  \"C 588,148 602,96 615,98\",\n  \"C 628,100 638,66 650,68\",\n  \"C 662,70 678,88 690,86\",\n  \"C 702,84 718,45 730,48\",\n  \"C 742,51 760,65 775,62\",\n  \"C 788,59 808,40 820,43\",\n  \"C 832,46 848,34 860,36\",\n].join(\" \")\n\nexport default function StockChart() {\n  const { lineRef } = useStockChartAnimation()\n\n  return (\n    <svg\n      viewBox=\"0 0 860 220\"\n      fill=\"none\"\n      xmlns=\"http://www.w3.org/2000/svg\"\n      className=\"w-full text-primary\"\n      aria-label=\"Animated stock performance chart\"\n      role=\"img\"\n    >\n      <path\n        ref={lineRef}\n        d={LINE_PATH}\n        stroke=\"currentColor\"\n        strokeWidth=\"3\"\n        strokeLinecap=\"round\"\n        strokeLinejoin=\"round\"\n      />\n    </svg>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v10/components/stock-chart.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/hooks/use-stock-chart-animation.ts",
+      "content": "\"use client\"\n\nimport { useLayoutEffect, useRef } from \"react\"\nimport gsap from \"gsap\"\nimport { DrawSVGPlugin } from \"gsap/DrawSVGPlugin\"\n\ngsap.registerPlugin(DrawSVGPlugin)\n\nexport function useStockChartAnimation() {\n  const lineRef = useRef<SVGPathElement>(null)\n\n  useLayoutEffect(() => {\n    const line = lineRef.current\n    if (!line) return\n\n    const mm = gsap.matchMedia()\n\n    mm.add(\"(prefers-reduced-motion: reduce)\", () => {\n      gsap.set(line, { drawSVG: \"100%\" })\n    })\n\n    mm.add(\"(prefers-reduced-motion: no-preference)\", () => {\n      gsap.set(line, { drawSVG: \"0% 0%\" })\n\n      const tl = gsap.timeline({ delay: 0.4 })\n      tl.to(line, {\n        drawSVG: \"0% 100%\",\n        duration: 2,\n        ease: \"power2.out\",\n      })\n\n      return () => tl.kill()\n    })\n\n    return () => mm.revert()\n  }, [])\n\n  return { lineRef }\n}\n",
+      "type": "registry:hook",
+      "target": "app/hero-section-v10/hooks/use-stock-chart-animation.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v10/styles/hero-section-v10.css",
+      "content": "",
+      "type": "registry:file",
+      "target": "app/hero-section-v10/styles/hero-section-v10.css"
+    }
+  ],
+  "type": "registry:block"
+}
