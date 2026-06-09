@@ -1,8 +1,9 @@
 import GalleryTrack from "./gallery-track"
 import { imageFiles, sectionMeta, type GalleryItem } from "../lib/config"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
 const blockImage = (filename: string) =>
-  `https://uiception.com/images/blocks/gallery-section-v1/${filename}`
+  `${mediaOrigin}/images/blocks/gallery-section-v1/${filename}`
 
 const galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({
   id: `panel-${index + 1}`,

@@ -1,7 +1,8 @@
 import FeatureGrid from "./feature-grid"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
 const featureImage = (filename: string) =>
-  `https://uiception.com/images/blocks/feature-section-v4/${filename}`
+  `${mediaOrigin}/images/blocks/feature-section-v4/${filename}`
 
 export default function FeatureSectionV4() {
   const featureImageById = {

@@ -25,8 +25,9 @@ export type Testimonial = {
   logo: CompanyLogo
 }
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
 const blockAvatar = (filename: string) =>
-  `https://uiception.com/images/blocks/testimonials-section-v2/${filename}`
+  `${mediaOrigin}/images/blocks/testimonials-section-v2/${filename}`
 
 export const testimonials: Testimonial[] = [
   {

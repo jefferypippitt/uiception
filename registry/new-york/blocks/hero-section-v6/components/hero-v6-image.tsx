@@ -1,6 +1,7 @@
 import Image from "next/image"
 
-const HERO_V6_IMAGE = `https://uiception.com/images/blocks/hero-section-v6/image.jpg`
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
+const HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/image.jpg`
 
 export function HeroV6Image() {
   return (

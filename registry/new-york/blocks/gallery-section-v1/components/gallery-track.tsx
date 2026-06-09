@@ -10,49 +10,16 @@ type GalleryTrackProps = {
   items: GalleryItem[]
 }
 
-type VLineStyle = {
-  left: number
-  topHeight: number
-  bottomTop: number
-  bottomHeight: number
-}
-
-function GalleryVLines({ style }: { style: VLineStyle | null }) {
-  if (!style) return null
-
-  return (
-    <>
-      <div
-        aria-hidden
-        className="gsv1-vline gsv1-vline--top"
-        style={{
-          transform: `translateX(${style.left}px)`,
-          top: 0,
-          height: `${style.topHeight}px`,
-        }}
-      />
-      <div
-        aria-hidden
-        className="gsv1-vline gsv1-vline--bottom"
-        style={{
-          transform: `translateX(${style.left}px)`,
-          top: `${style.bottomTop}px`,
-          height: `${style.bottomHeight}px`,
-        }}
-      />
-    </>
-  )
-}
-
 export default function GalleryTrack({ items }: GalleryTrackProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [coarsePointer, setCoarsePointer] = useState(false)
-  const [vLineStyle, setVLineStyle] = useState<VLineStyle | null>(null)
 
   const trackRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLDivElement>(null)
   const panelRefs = useRef<(HTMLDivElement | null)[]>([])
   const activeIndexRef = useRef(activeIndex)
+  const topLineRef = useRef<HTMLDivElement>(null)
+  const bottomLineRef = useRef<HTMLDivElement>(null)
   const scheduleLinesRef = useRef<() => void>(() => {})
 
   useLayoutEffect(() => {
@@ -107,18 +74,18 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
       const currentCanvas = canvasRef.current
       const currentPanel = panelRefs.current[activeIndexRef.current]
       if (!currentTrack || !currentCanvas || !currentPanel) return
+      if (!topLineRef.current || !bottomLineRef.current) return
 
       const panelRect = currentPanel.getBoundingClientRect()
       const trackRect = currentTrack.getBoundingClientRect()
       const canvasRect = currentCanvas.getBoundingClientRect()
       const left = panelRect.left + panelRect.width / 2 - canvasRect.left
 
-      setVLineStyle({
-        left,
-        topHeight: trackRect.top - canvasRect.top,
-        bottomTop: trackRect.bottom - canvasRect.top,
-        bottomHeight: canvasRect.bottom - trackRect.bottom,
-      })
+      topLineRef.current.style.transform = `translateX(${left}px)`
+      topLineRef.current.style.height = `${trackRect.top - canvasRect.top}px`
+      bottomLineRef.current.style.transform = `translateX(${left}px)`
+      bottomLineRef.current.style.top = `${trackRect.bottom - canvasRect.top}px`
+      bottomLineRef.current.style.height = `${canvasRect.bottom - trackRect.bottom}px`
     }
 
     const scheduleLines = () => {
@@ -144,14 +111,24 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
     }
   }, [])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     scheduleLinesRef.current()
   }, [activeIndex])
 
   return (
     <div className="gsv1-root relative w-full">
       <div ref={canvasRef} className="gsv1-canvas">
-        <GalleryVLines style={vLineStyle} />
+        <div
+          ref={topLineRef}
+          aria-hidden
+          className="gsv1-vline gsv1-vline--top"
+          style={{ top: 0 }}
+        />
+        <div
+          ref={bottomLineRef}
+          aria-hidden
+          className="gsv1-vline gsv1-vline--bottom"
+        />
         <div
           ref={trackRef}
           aria-label="Photo gallery — use arrow keys to navigate"
@@ -176,7 +153,6 @@ export default function GalleryTrack({ items }: GalleryTrackProps) {
           ))}
         </div>
       </div>
-
     </div>
   )
 }

@@ -4,7 +4,8 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 
-const CTA_IMAGE = `https://uiception.com/images/blocks/cta-section-v1/image.png`
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
+const CTA_IMAGE = `${mediaOrigin}/images/blocks/cta-section-v1/image.png`
 
 export default function CtaSectionV1() {
   return (

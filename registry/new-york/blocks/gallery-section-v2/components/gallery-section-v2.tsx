@@ -1,8 +1,9 @@
 import { GalleryCard } from "./gallery-card"
 import { galleryFiles, type GalleryItem } from "../lib/config"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
 const blockImage = (filename: string) =>
-  `https://uiception.com/images/blocks/gallery-section-v2/${filename}`
+  `${mediaOrigin}/images/blocks/gallery-section-v2/${filename}`
 
 const galleryItems: GalleryItem[] = galleryFiles.map(
   ({ file, ...rest }, index) => ({

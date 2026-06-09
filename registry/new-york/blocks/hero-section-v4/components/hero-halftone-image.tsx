@@ -2,7 +2,8 @@
 
 import { HalftoneDots } from "@paper-design/shaders-react"
 
-const HERO_V4_BG = `https://uiception.com/images/blocks/hero-section-v4/image.png`
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
+const HERO_V4_BG = `${mediaOrigin}/images/blocks/hero-section-v4/image.png`
 
 export function HeroHalftoneImage() {
   return (

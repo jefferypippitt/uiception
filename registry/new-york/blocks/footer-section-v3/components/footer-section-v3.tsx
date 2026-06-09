@@ -3,6 +3,9 @@ import Link from "next/link"
 
 import { Card, CardHeader } from "@/components/ui/card"
 
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
+const LOGO_SRC = `${mediaOrigin}/images/blocks/footer-section-v3/logo.svg`
+
 type FooterLink = {
   label: string
   href: string
@@ -52,11 +55,6 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
 ]
 
 export default function FooterSectionV3() {
-  const logoImage = {
-    src: "https://uiception.com/images/blocks/footer-section-v3/logo.svg",
-    alt: "Logo",
-  } as const
-
   return (
     <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4">
@@ -67,8 +65,8 @@ export default function FooterSectionV3() {
               <div className="col-span-2 lg:col-span-1">
                 <Link href="#" className="inline-flex w-fit">
                   <Image
-                    alt={logoImage.alt}
-                    src={logoImage.src}
+                    alt="Logo"
+                    src={LOGO_SRC}
                     width={32}
                     height={32}
                     className="size-8 shrink-0"

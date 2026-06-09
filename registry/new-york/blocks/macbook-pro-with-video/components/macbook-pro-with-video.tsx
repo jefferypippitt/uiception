@@ -1,6 +1,7 @@
 import MacbookPro from "../../macbook-pro/components/macbook-pro"
 
-const SCREEN_VIDEO = `https://uiception.com/videos/blocks/macbook-pro-with-video/video.mp4`
+const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
+const SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/macbook-pro-with-video/video.mp4`
 
 export default function MacbookProWithVideo() {
   return (
