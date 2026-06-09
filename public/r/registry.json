@@ -94,6 +94,11 @@
           "path": "public/images/blocks/hero-section-v1/image.png.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/hero-section-v1/image.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v1/image.png",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v1/image.png"
         }
       ]
     },
