@@ -57,8 +57,8 @@ export const DATA_COLUMN_COUNT = 5 as const
 export type RowData = {
   id: string
   account: string
-  arr: string
-  growth: string
+  price: string
+  qty: string
   marketValue: string
   gainLoss: string
 }
@@ -78,24 +78,24 @@ export const INITIAL_ROWS: readonly RowData[] = [
   {
     id: "r1",
     account: "NVDA",
-    arr: "225.32",
-    growth: "38",
+    price: "225.32",
+    qty: "38",
     marketValue: "8,562.16",
     gainLoss: "+245.3%",
   },
   {
     id: "r2",
     account: "AMD",
-    arr: "424.10",
-    growth: "12",
+    price: "424.10",
+    qty: "12",
     marketValue: "5,089.20",
     gainLoss: "-7.8%",
   },
   {
     id: "r3",
     account: "INTC",
-    arr: EDIT_FROM,
-    growth: "85",
+    price: EDIT_FROM,
+    qty: "85",
     marketValue: "9,175.75",
     gainLoss: "+52.1%",
   },
@@ -105,8 +105,8 @@ export const INITIAL_ROWS: readonly RowData[] = [
 export const SYNC_ROW: RowData = {
   id: "r4",
   account: "TSM",
-  arr: "404.35",
-  growth: "9",
+  price: "404.35",
+  qty: "9",
   marketValue: "3,639.15",
   gainLoss: "+6.4%",
 }
@@ -133,9 +133,9 @@ export const TIMING: Record<SpreadsheetPhase, number> = {
   tsmMove0: 660,
   tsmType0: tsmValueTypeMs(SYNC_ROW.account.length),
   tsmMove1: 640,
-  tsmType1: tsmValueTypeMs(SYNC_ROW.arr.length),
+  tsmType1: tsmValueTypeMs(SYNC_ROW.price.length),
   tsmMove2: 620,
-  tsmType2: tsmValueTypeMs(SYNC_ROW.growth.length),
+  tsmType2: tsmValueTypeMs(SYNC_ROW.qty.length),
   tsmMove3: 620,
   tsmType3: tsmFormulaTypeMs(TSM_MKT_FORMULA),
   tsmMove4: 620,
@@ -189,14 +189,14 @@ export const TSM_DATA_ROW_INDEX = 3
 export const EMPTY_TSM_ROW: RowData = {
   id: "r4",
   account: "",
-  arr: "",
-  growth: "",
+  price: "",
+  qty: "",
   marketValue: "",
   gainLoss: "",
 }
 
-/** `max-w-6xl` sheet width — keeps cursor anchors aligned at default block size. */
-const GRID_REF_WIDTH_REM = 72
+/** `max-w-4xl` sheet width — keeps cursor anchors aligned at default block size. */
+const GRID_REF_WIDTH_REM = 56
 
 /** Horizontal center of a 0-based data column as % of the grid overlay width. */
 export function gridColumnCenterPercent(

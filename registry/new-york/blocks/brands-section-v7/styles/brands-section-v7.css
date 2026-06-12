@@ -1,0 +1,33 @@
+.bs7-track-left {
+  animation: bs7-marquee-left 40s linear infinite;
+}
+
+.bs7-track-right {
+  animation: bs7-marquee-right 44s linear infinite;
+}
+
+@keyframes bs7-marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes bs7-marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs7-track-left,
+  .bs7-track-right {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

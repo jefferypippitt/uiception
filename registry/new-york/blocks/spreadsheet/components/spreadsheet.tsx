@@ -34,8 +34,8 @@ function cellValue(
 
   const values = [
     row.account,
-    row.arr,
-    row.growth,
+    row.price,
+    row.qty,
     row.marketValue,
     row.gainLoss,
   ] as const
@@ -77,7 +77,7 @@ export default function Spreadsheet({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "ss-root mx-auto w-full min-w-0 max-w-3xl overflow-hidden rounded-md border border-(--ss-border) bg-(--ss-shell-bg) font-[Arial,Roboto,'Helvetica_Neue',sans-serif] shadow-(--ss-shadow) md:max-w-6xl",
+        "ss-root mx-auto w-full min-w-0 max-w-3xl overflow-hidden rounded-md border border-(--ss-border) bg-(--ss-shell-bg) font-[Arial,Roboto,'Helvetica_Neue',sans-serif] shadow-(--ss-shadow) md:max-w-4xl",
         isMobile && "ss-root--compact",
         className
       )}

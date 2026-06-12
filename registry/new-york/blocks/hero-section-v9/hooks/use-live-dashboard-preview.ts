@@ -48,7 +48,7 @@ export type LiveDashboardPreview = {
   pulseKey: number
 }
 
-const TICK_MS = 2400
+const TICK_MS = 3200
 
 function detectMetricKind(value: string): MetricKind {
   if (value.includes("%")) return "percent"

@@ -20,8 +20,12 @@ export type OmniboxTypingOptions = {
   holdMs?: number
   betweenMs?: number
   startDelayMs?: number
+  /** When false, stops after the first phrase is typed (no delete/retype cycle). */
+  loop?: boolean
   /** Fired when a phrase finishes typing (entering hold). */
   onTypedComplete?: () => void
+  /** Fired when the omnibox is cleared (entering between). */
+  onTypedCleared?: () => void
 }
 
 type Phase = "idle" | "typingIn" | "hold" | "typingOut" | "between"
@@ -79,7 +83,9 @@ export function useOmniboxTyping({
   holdMs = HOLD_MS,
   betweenMs = BETWEEN_MS,
   startDelayMs = START_DELAY_MS,
+  loop = true,
   onTypedComplete,
+  onTypedCleared,
 }: OmniboxTypingOptions) {
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -98,7 +104,7 @@ export function useOmniboxTyping({
   const len = text.length
 
   const displayText = reducedMotion ? (prompts[0] ?? "") : text.slice(0, charIdx)
-  const showCursor = !reducedMotion
+  const showCursor = !reducedMotion && !(loop === false && phase === "hold")
   const caretSolid = phase === "typingIn" || phase === "typingOut"
   const isActive =
     !reducedMotion &&
@@ -112,7 +118,8 @@ export function useOmniboxTyping({
 
     if (reducedMotion) return
     if (phase === "hold" && prev !== "hold") onTypedComplete?.()
-  }, [phase, reducedMotion, onTypedComplete])
+    if (phase === "between" && prev !== "between") onTypedCleared?.()
+  }, [phase, reducedMotion, onTypedComplete, onTypedCleared])
 
   useLayoutEffect(() => {
     if (reducedMotion || prompts.length === 0) return
@@ -136,7 +143,9 @@ export function useOmniboxTyping({
         break
 
       case "hold":
-        t = setTimeout(() => dispatch({ type: "SET_PHASE", phase: "typingOut" }), holdMs)
+        if (loop) {
+          t = setTimeout(() => dispatch({ type: "SET_PHASE", phase: "typingOut" }), holdMs)
+        }
         break
 
       case "typingOut":
@@ -178,6 +187,7 @@ export function useOmniboxTyping({
     holdMs,
     betweenMs,
     startDelayMs,
+    loop,
   ])
 
   return { displayText, showCursor, caretSolid, isActive }

@@ -18,19 +18,8 @@ export default function ActivityPanel({
 
   return (
     <div className="hero-v9-activity-panel relative z-1 flex min-h-0 flex-1 flex-col">
-      <h3 className="hero-v9-panel-heading flex shrink-0 items-center justify-between gap-2 px-4 py-2.5 text-sm font-medium text-foreground">
-        <span>{activity.title}</span>
-        {live ? (
-          <span
-            className="hero-v9-live-signal"
-            aria-hidden
-            title="Simulated live data"
-          >
-            <span className="hero-v9-live-signal-bar" />
-            <span className="hero-v9-live-signal-bar" />
-            <span className="hero-v9-live-signal-bar" />
-          </span>
-        ) : null}
+      <h3 className="hero-v9-panel-heading shrink-0 px-4 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
+        {activity.title}
       </h3>
 
       <div
@@ -52,7 +41,8 @@ export default function ActivityPanel({
             )}
             style={{
               height: `${height}%`,
-              animationDelay: live ? `${Math.min(index * 14, 560)}ms` : undefined,
+              animationDelay: live ? `${Math.min(index * 5, 150)}ms` : undefined,
+              transitionDelay: live ? `${index * 4}ms` : undefined,
             }}
           />
         ))}

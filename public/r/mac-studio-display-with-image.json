@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mac-studio-display-with-image",
+  "title": "Mac Studio Display (w/ image)",
+  "description": "Example Mac Studio Display mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+  "registryDependencies": [
+    "https://uiception.com/r/mac-studio-display.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/mac-studio-display-with-image/page.tsx",
+      "content": "import MacStudioDisplayWithImage from \"./components/mac-studio-display-with-image\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <MacStudioDisplayWithImage />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/mac-studio-display-with-image/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx",
+      "content": "import Image from \"next/image\"\n\nimport MacStudioDisplay from \"../../mac-studio-display/components/mac-studio-display\"\n\nconst mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? \"https://uiception.com\"\nconst SCREEN_WALLPAPER = `${mediaOrigin}/images/blocks/mac-studio-display-with-image/image.png`\n\nexport default function MacStudioDisplayWithImage() {\n  return (\n    <MacStudioDisplay>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS default wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 768px) 100vw, 768px\"\n          loading=\"eager\"\n        />\n      </div>\n    </MacStudioDisplay>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx"
+    },
+    {
+      "path": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep",
+      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

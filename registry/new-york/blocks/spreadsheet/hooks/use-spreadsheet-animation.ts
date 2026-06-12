@@ -28,7 +28,7 @@ import {
   type SpreadsheetPhase,
 } from "../lib/config"
 
-const TSM_VALUE_KEYS = ["account", "arr", "growth"] as const
+const TSM_VALUE_KEYS = ["account", "price", "qty"] as const
 
 /** Matches TIMING field cadence in config (`TSM_CHAR_MS`). */
 const TSM_CHAR_MS = 132
@@ -243,11 +243,11 @@ export function useSpreadsheetAnimation(active = true, compact = false) {
     if (!editCommitted) return row
     const impliedCost =
       parseUsd(row.marketValue) / (1 + parsePctSigned(row.gainLoss))
-    const newMvNum = Number.parseFloat(EDIT_TO) * Number.parseInt(row.growth, 10)
+    const newMvNum = Number.parseFloat(EDIT_TO) * Number.parseInt(row.qty, 10)
     return {
       ...row,
-      arr: EDIT_TO,
-      marketValue: formatUsdMv(EDIT_TO, row.growth),
+      price: EDIT_TO,
+      marketValue: formatUsdMv(EDIT_TO, row.qty),
       gainLoss: formatGainLossPct((newMvNum - impliedCost) / impliedCost),
     }
   })
@@ -284,8 +284,8 @@ export function useSpreadsheetAnimation(active = true, compact = false) {
     } else {
       const draftVals = [
         tsmDraft.account,
-        tsmDraft.arr,
-        tsmDraft.growth,
+        tsmDraft.price,
+        tsmDraft.qty,
         tsmDraft.marketValue,
         tsmDraft.gainLoss,
       ] as const

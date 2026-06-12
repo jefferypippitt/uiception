@@ -32,11 +32,20 @@ const tabIconClass = "size-3.5 shrink-0 stroke-[2]"
 type GoogleChromeProps = {
   className?: string
   omniboxTypingPrompts?: readonly string[]
+  /** When false, omnibox stops after typing the first prompt once. */
+  omniboxTypingLoop?: boolean
+  /** Fired when omnibox typing completes (entering hold). */
+  onOmniboxTypedComplete?: () => void
+  /** Fired when omnibox text is cleared (entering between). */
+  onOmniboxTypedCleared?: () => void
 } & Omit<BrowserViewportProps, "className">
 
 export default function GoogleChrome({
   className,
   omniboxTypingPrompts = chromeConfig.omniboxTypingPrompts,
+  omniboxTypingLoop = true,
+  onOmniboxTypedComplete,
+  onOmniboxTypedCleared,
   minHeight,
   aspectRatio,
   src,
@@ -46,15 +55,19 @@ export default function GoogleChrome({
   autoPlay,
   children,
 }: GoogleChromeProps) {
+  const hasCustomViewport = children != null
   const { phase, progress, startLoading } = useSimulatedPageLoad()
 
   const handleTypedComplete = useCallback(() => {
-    startLoading()
-  }, [startLoading])
+    if (!hasCustomViewport) startLoading()
+    onOmniboxTypedComplete?.()
+  }, [hasCustomViewport, startLoading, onOmniboxTypedComplete])
 
   const { displayText, showCursor, caretSolid, isActive } = useOmniboxTyping({
     prompts: omniboxTypingPrompts,
+    loop: omniboxTypingLoop,
     onTypedComplete: handleTypedComplete,
+    onTypedCleared: onOmniboxTypedCleared,
   })
 
   return (

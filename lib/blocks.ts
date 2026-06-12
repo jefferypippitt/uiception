@@ -185,6 +185,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Brands Section v6",
         registryPath: "registry/new-york/blocks/brands-section-v6",
       },
+      {
+        id: "brands-section-v7",
+        title: "Brands Section v7",
+        registryPath: "registry/new-york/blocks/brands-section-v7",
+      },
     ],
   },
   {
@@ -319,6 +324,11 @@ export const blockCategories: BlockCategory[] = [
         id: "testimonials-section-v2",
         title: "Testimonials Section v2",
         registryPath: "registry/new-york/blocks/testimonials-section-v2",
+      },
+      {
+        id: "testimonials-section-v3",
+        title: "Testimonials Section v3",
+        registryPath: "registry/new-york/blocks/testimonials-section-v3",
       },
     ],
   },
@@ -563,24 +573,24 @@ export const blockCategories: BlockCategory[] = [
         registryPath: "registry/new-york/blocks/spreadsheet",
       },
       {
-        id: "google-chrome",
-        title: "Google Chrome (macOS)",
-        registryPath: "registry/new-york/blocks/google-chrome",
+        id: "google-chrome-with-image",
+        title: "Google Chrome (macOS, w/ image)",
+        registryPath: "registry/new-york/blocks/google-chrome-with-image",
       },
       {
-        id: "google-chrome-windows",
-        title: "Google Chrome (Windows)",
-        registryPath: "registry/new-york/blocks/google-chrome-windows",
+        id: "google-chrome-with-video",
+        title: "Google Chrome (macOS, w/ video)",
+        registryPath: "registry/new-york/blocks/google-chrome-with-video",
+      },
+      {
+        id: "google-chrome-windows-with-image",
+        title: "Google Chrome (Windows, w/ image)",
+        registryPath: "registry/new-york/blocks/google-chrome-windows-with-image",
       },
       {
         id: "google-chrome-windows-with-video",
         title: "Google Chrome (Windows, w/ video)",
         registryPath: "registry/new-york/blocks/google-chrome-windows-with-video",
-      },
-      {
-        id: "macbook-pro",
-        title: "MacBook Pro",
-        registryPath: "registry/new-york/blocks/macbook-pro",
       },
       {
         id: "macbook-pro-with-image",
@@ -591,6 +601,16 @@ export const blockCategories: BlockCategory[] = [
         id: "macbook-pro-with-video",
         title: "MacBook Pro (w/ video)",
         registryPath: "registry/new-york/blocks/macbook-pro-with-video",
+      },
+      {
+        id: "mac-studio-display-with-image",
+        title: "Mac Studio Display (w/ image)",
+        registryPath: "registry/new-york/blocks/mac-studio-display-with-image",
+      },
+      {
+        id: "mac-studio-display-with-video",
+        title: "Mac Studio Display (w/ video)",
+        registryPath: "registry/new-york/blocks/mac-studio-display-with-video",
       },
     ],
   },

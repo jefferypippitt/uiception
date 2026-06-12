@@ -705,6 +705,230 @@
       ]
     },
     {
+      "name": "brands-section-v7",
+      "type": "registry:block",
+      "title": "Brands Section v7",
+      "description": "Serif headline with dual row infinite pill marquees of dev and infra logos scrolling in opposite directions, with edge fades and a footer link.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v7/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/components/brands-section-v7.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v7/components/brands-section-v7.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/components/marquee-row.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v7/components/marquee-row.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/components/brand-pill.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v7/components/brand-pill.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/lib/brands.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v7/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/lib/config.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v7/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v7/styles/brands-section-v7.css",
+          "type": "registry:file",
+          "target": "app/brands-section-v7/styles/brands-section-v7.css"
+        },
+        {
+          "path": "components/ui/svgs/stripe.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/stripe.tsx"
+        },
+        {
+          "path": "components/ui/svgs/cursorLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/cursorLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/cursorDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/cursorDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/claudeAiIcon.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/claudeAiIcon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/perplexity.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/perplexity.tsx"
+        },
+        {
+          "path": "components/ui/svgs/slack.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/slack.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercel.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercel.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercelDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convex.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/convex.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabase.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/supabase.tsx"
+        },
+        {
+          "path": "components/ui/svgs/google.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/google.tsx"
+        },
+        {
+          "path": "components/ui/svgs/openai.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/openai.tsx"
+        },
+        {
+          "path": "components/ui/svgs/openaiDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/openaiDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/railway.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/railway.tsx"
+        },
+        {
+          "path": "components/ui/svgs/railwayDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/railwayDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/salesforce.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/salesforce.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/mongodbIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/mongodbIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/neon.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/neon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscale.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/planetscale.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscaleDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/planetscaleDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/upstash.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/upstash.tsx"
+        },
+        {
+          "path": "components/ui/svgs/auth0.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/auth0.tsx"
+        },
+        {
+          "path": "components/ui/svgs/twilio.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/twilio.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workos.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/workos.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workosLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/workosLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/meta.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/meta.tsx"
+        },
+        {
+          "path": "components/ui/svgs/metaDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/metaDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/nvidiaIconLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/nvidiaIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/nvidiaIconDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/nvidiaIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/astroIconLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/astroIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/astroIconDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/astroIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/sanityLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/sanityLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/sanityDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/sanityDark.tsx"
+        }
+      ]
+    },
+    {
       "name": "navbar-section-v1",
       "type": "registry:block",
       "title": "Navbar Section v1",
@@ -2548,6 +2772,170 @@
       ]
     },
     {
+      "name": "mac-studio-display",
+      "type": "registry:block",
+      "title": "Mac Studio Display",
+      "description": "Front-facing Apple Studio Display device frame with slim black bezel, aluminum stand, and foot - empty transparent screen by default; optional children slot.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/mac-studio-display/page.tsx",
+          "type": "registry:page",
+          "target": "app/mac-studio-display/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display/components/mac-studio-display.tsx",
+          "type": "registry:component",
+          "target": "app/mac-studio-display/components/mac-studio-display.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display/components/studio-display-screen.tsx",
+          "type": "registry:component",
+          "target": "app/mac-studio-display/components/studio-display-screen.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display/components/mac-studio-display-stand.tsx",
+          "type": "registry:component",
+          "target": "app/mac-studio-display/components/mac-studio-display-stand.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display/styles/mac-studio-display.css",
+          "type": "registry:file",
+          "target": "app/mac-studio-display/styles/mac-studio-display.css"
+        }
+      ]
+    },
+    {
+      "name": "mac-studio-display-with-image",
+      "type": "registry:block",
+      "title": "Mac Studio Display (w/ image)",
+      "description": "Example Mac Studio Display mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/mac-studio-display.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/mac-studio-display-with-image/page.tsx",
+          "type": "registry:page",
+          "target": "app/mac-studio-display-with-image/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx",
+          "type": "registry:component",
+          "target": "app/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx"
+        },
+        {
+          "path": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "mac-studio-display-with-video",
+      "type": "registry:block",
+      "title": "Mac Studio Display (w/ video)",
+      "description": "Example Mac Studio Display mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/mac-studio-display.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/mac-studio-display-with-video/page.tsx",
+          "type": "registry:page",
+          "target": "app/mac-studio-display-with-video/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/mac-studio-display-with-video/components/mac-studio-display-with-video.tsx",
+          "type": "registry:component",
+          "target": "app/mac-studio-display-with-video/components/mac-studio-display-with-video.tsx"
+        },
+        {
+          "path": "public/videos/blocks/mac-studio-display-with-video/video.mp4.gitkeep",
+          "type": "registry:file",
+          "target": "public/videos/blocks/mac-studio-display-with-video/video.mp4.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome-with-image",
+      "type": "registry:block",
+      "title": "Google Chrome (macOS, w/ image)",
+      "description": "macOS Google Chrome mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/google-chrome.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome-with-image/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome-with-image/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-with-image/components/google-chrome-with-image.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-with-image/components/google-chrome-with-image.tsx"
+        },
+        {
+          "path": "public/images/blocks/google-chrome-with-image/image.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/google-chrome-with-image/image.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome-with-video",
+      "type": "registry:block",
+      "title": "Google Chrome (macOS, w/ video)",
+      "description": "macOS Google Chrome mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/google-chrome.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome-with-video/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome-with-video/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-with-video/components/google-chrome-with-video.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-with-video/components/google-chrome-with-video.tsx"
+        },
+        {
+          "path": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep",
+          "type": "registry:file",
+          "target": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "google-chrome-windows-with-image",
+      "type": "registry:block",
+      "title": "Google Chrome (Windows, w/ image)",
+      "description": "Windows Google Chrome mock with bundled screen image under the omnibox; swap /images/blocks/... or pass children on the base component.",
+      "registryDependencies": [
+        "https://uiception.com/r/google-chrome-windows.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-image/page.tsx",
+          "type": "registry:page",
+          "target": "app/google-chrome-windows-with-image/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx"
+        },
+        {
+          "path": "public/images/blocks/google-chrome-windows-with-image/image.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/google-chrome-windows-with-image/image.png.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "changelog-section-v1",
       "type": "registry:block",
       "title": "Changelog Section v1",
@@ -2818,6 +3206,87 @@
           "path": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/testimonials-section-v2/avatar-2.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v3",
+      "type": "registry:block",
+      "title": "Testimonials Section v3",
+      "description": "Four-card bento grid of success stories with company wordmarks, quotes, name and role, and Read story links.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v3/components/testimonials-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/components/testimonial-grid.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v3/components/testimonial-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/components/testimonial-card.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v3/components/testimonial-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/components/company-logo.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v3/components/company-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v3/lib/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v3/lib/testimonials-content.ts"
+        },
+        {
+          "path": "components/ui/svgs/stripeWordmark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/stripeWordmark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/stripeWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/stripeWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelWordmark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercelWordmark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercelWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convexWordmarkLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/convexWordmarkLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convexWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/convexWordmarkDark.tsx"
         }
       ]
     },

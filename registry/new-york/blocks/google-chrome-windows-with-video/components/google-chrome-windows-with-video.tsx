@@ -31,6 +31,9 @@ export default function GoogleChromeWindowsWithVideo() {
       omniboxTypingPrompts={OMNIBOX_PROMPTS}
       omniboxTypingLoop={false}
       onOmniboxTypedComplete={handleTypedComplete}
+      aspectRatio="16/9"
+      minHeight={0}
+      className="max-w-4xl"
     >
       <div className="relative size-full">
         <PageLoadingBar progress={progress} visible={phase === "loading"} />

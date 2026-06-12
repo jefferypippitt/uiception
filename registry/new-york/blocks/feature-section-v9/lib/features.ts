@@ -32,8 +32,6 @@ export const FSV9_SHADER_DESIGN_SCALE = 8 as const
 /** Shared grain animation speed (lower = slower drift). */
 export const FSV9_SHADER_SPEED = 0 as const
 
-export const featureSectionEyebrow = "Capabilities"
-
 export const featureSectionTitle = "One platform for every workflow"
 
 export const featureSectionDescription =

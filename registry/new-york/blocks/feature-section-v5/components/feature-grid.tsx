@@ -18,7 +18,7 @@ export default function FeatureGrid() {
         <li key={id} className={cn("flex min-w-0", cellClassNames[index])}>
           <div
             className={cn(
-              "fsv5-card group relative flex min-h-0 w-full flex-1 flex-col items-start gap-2.5 overflow-hidden rounded-none bg-background p-5 pr-5.4 pb-5.4 text-foreground",
+              "fsv5-card group relative flex min-h-0 w-full flex-1 flex-col items-start gap-2.5 overflow-hidden rounded-none bg-muted dark:bg-background p-5 pr-5.4 pb-5.4 text-foreground",
               index === 1 &&
                 "grid grid-cols-[minmax(0,min(38ch,100%))] content-center justify-center justify-items-stretch gap-2.5 text-left lg:grid-cols-[minmax(0,min(54ch,94%))] lg:px-[clamp(1.25rem,2.5vw,1.85rem)] lg:py-5.4",
               index === 0 &&

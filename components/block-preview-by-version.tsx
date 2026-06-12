@@ -23,12 +23,14 @@ import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/components/how-it-works-section-v2"
 import CodeBlockPage from "@/registry/new-york/blocks/code-block/page"
 import Spreadsheet from "@/registry/new-york/blocks/spreadsheet/components/spreadsheet"
-import GoogleChrome from "@/registry/new-york/blocks/google-chrome/components/google-chrome"
-import GoogleChromeWindows from "@/registry/new-york/blocks/google-chrome-windows/components/google-chrome-windows"
+import GoogleChromeWithImage from "@/registry/new-york/blocks/google-chrome-with-image/components/google-chrome-with-image"
+import GoogleChromeWithVideo from "@/registry/new-york/blocks/google-chrome-with-video/components/google-chrome-with-video"
+import GoogleChromeWindowsWithImage from "@/registry/new-york/blocks/google-chrome-windows-with-image/components/google-chrome-windows-with-image"
 import GoogleChromeWindowsWithVideo from "@/registry/new-york/blocks/google-chrome-windows-with-video/components/google-chrome-windows-with-video"
-import MacbookPro from "@/registry/new-york/blocks/macbook-pro/components/macbook-pro"
 import MacbookProWithImage from "@/registry/new-york/blocks/macbook-pro-with-image/components/macbook-pro-with-image"
 import MacbookProWithVideo from "@/registry/new-york/blocks/macbook-pro-with-video/components/macbook-pro-with-video"
+import MacStudioDisplayWithImage from "@/registry/new-york/blocks/mac-studio-display-with-image/components/mac-studio-display-with-image"
+import MacStudioDisplayWithVideo from "@/registry/new-york/blocks/mac-studio-display-with-video/components/mac-studio-display-with-video"
 import BrandsSectionV3 from "@/registry/new-york/blocks/brands-section-v3/components/brands-section-v3"
 import BrandsSectionV4 from "@/registry/new-york/blocks/brands-section-v4/components/brands-section-v4"
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/components/feature-section-v1"
@@ -47,8 +49,10 @@ import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/f
 import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
+import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
+import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/components/hero-section-v6"
 import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/components/hero-section-v7"
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components/hero-section-v8"
@@ -93,16 +97,19 @@ const blockComponents: Record<string, React.ComponentType> = {
   "how-it-works-section-v2": HowItWorksSectionV2,
   "code-block": CodeBlockPage,
   spreadsheet: Spreadsheet,
-  "google-chrome": GoogleChrome,
-  "google-chrome-windows": GoogleChromeWindows,
+  "google-chrome-with-image": GoogleChromeWithImage,
+  "google-chrome-with-video": GoogleChromeWithVideo,
+  "google-chrome-windows-with-image": GoogleChromeWindowsWithImage,
   "google-chrome-windows-with-video": GoogleChromeWindowsWithVideo,
-  "macbook-pro": MacbookPro,
   "macbook-pro-with-image": MacbookProWithImage,
   "macbook-pro-with-video": MacbookProWithVideo,
+  "mac-studio-display-with-image": MacStudioDisplayWithImage,
+  "mac-studio-display-with-video": MacStudioDisplayWithVideo,
   "brands-section-v3": BrandsSectionV3,
   "brands-section-v4": BrandsSectionV4,
   "brands-section-v5": BrandsSectionV5,
   "brands-section-v6": BrandsSectionV6,
+  "brands-section-v7": BrandsSectionV7,
   "feature-section-v1": FeatureSectionV1,
   "feature-section-v2": FeatureSectionV2,
   "hero-section-v5": HeroSectionV5,
@@ -124,6 +131,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "faq-section-v3": FaqSectionV3,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
+  "testimonials-section-v3": TestimonialsSectionV3,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "gallery-section-v1": GallerySectionV1,

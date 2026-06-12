@@ -21,7 +21,7 @@ export default function StatusChip({
       />
       <span
         className={cn(
-          "text-sm transition-colors duration-500",
+          "text-xs font-medium transition-colors duration-500",
           state === "waiting" ? "text-muted-foreground" : "text-foreground/80",
           state === "running" && "text-foreground"
         )}

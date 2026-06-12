@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "google-chrome-with-video",
+  "title": "Google Chrome (macOS, w/ video)",
+  "description": "macOS Google Chrome mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+  "registryDependencies": [
+    "https://uiception.com/r/google-chrome.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/google-chrome-with-video/page.tsx",
+      "content": "import GoogleChromeWithVideo from \"./components/google-chrome-with-video\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <GoogleChromeWithVideo />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/google-chrome-with-video/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/google-chrome-with-video/components/google-chrome-with-video.tsx",
+      "content": "\"use client\"\n\nimport { useCallback } from \"react\"\n\nimport GoogleChrome from \"../../google-chrome/components/google-chrome\"\nimport GoogleHomePreview from \"../../google-chrome/components/google-home-preview\"\nimport PageLoadingBar from \"../../google-chrome/components/page-loading-bar\"\nimport { useSimulatedPageLoad } from \"../../google-chrome/hooks/use-simulated-page-load\"\n\nconst mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? \"https://uiception.com\"\nconst SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/google-chrome-with-video/video.mp4`\n\nexport default function GoogleChromeWithVideo() {\n  const { phase, progress, startLoading } = useSimulatedPageLoad()\n\n  const handleTypedComplete = useCallback(() => {\n    startLoading()\n  }, [startLoading])\n\n  return (\n    <GoogleChrome\n      omniboxTypingLoop={false}\n      onOmniboxTypedComplete={handleTypedComplete}\n      aspectRatio=\"16/9\"\n      minHeight={0}\n      className=\"max-w-4xl\"\n    >\n      <div className=\"relative size-full\">\n        <PageLoadingBar progress={progress} visible={phase === \"loading\"} />\n        {phase === \"loaded\" ? (\n          <video\n            className=\"absolute inset-0 block size-full border-none object-cover object-center\"\n            src={SCREEN_VIDEO}\n            muted\n            loop\n            playsInline\n            autoPlay\n            aria-label=\"Screen content video demo\"\n          />\n        ) : (\n          <GoogleHomePreview className=\"absolute inset-0\" />\n        )}\n      </div>\n    </GoogleChrome>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/google-chrome-with-video/components/google-chrome-with-video.tsx"
+    },
+    {
+      "path": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep",
+      "content": "﻿Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

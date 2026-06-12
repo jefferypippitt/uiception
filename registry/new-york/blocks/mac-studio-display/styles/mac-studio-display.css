@@ -1,0 +1,137 @@
+/* mac-studio-display — silver aluminum theme tokens, frame/stand gradients, camera pseudo-elements */
+
+.msd-root {
+  --msd-silver-light: #e9e9eb;
+  --msd-silver-mid: #d4d4d7;
+  --msd-silver-dark: #b9b9be;
+  --msd-silver-deep: #97979d;
+  --msd-bezel: #060608;
+  --msd-screen: #141416;
+  --msd-frame-highlight: rgb(255 255 255 / 0.7);
+  --msd-frame-shadow: rgb(0 0 0 / 0.18);
+  --msd-shell-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.28);
+  --msd-shell-ring: rgb(0 0 0 / 0.14);
+}
+
+.dark .msd-root {
+  --msd-shell-shadow: 0 28px 56px -16px rgb(0 0 0 / 0.55);
+  --msd-shell-ring: rgb(255 255 255 / 0.1);
+}
+
+.msd-frame {
+  background: linear-gradient(
+    180deg,
+    var(--msd-silver-light) 0%,
+    var(--msd-silver-mid) 55%,
+    var(--msd-silver-dark) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 var(--msd-frame-highlight),
+    inset 0 -1px 0 var(--msd-frame-shadow),
+    0 0 0 1px var(--msd-shell-ring);
+}
+
+.msd-camera {
+  background: radial-gradient(
+    circle at 38% 32%,
+    #2e2e38 0%,
+    #17171e 42%,
+    #0a0a0e 78%,
+    #050507 100%
+  );
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.7),
+    inset 0 1px 1.5px rgb(0 0 0 / 0.6),
+    inset 0 -0.5px 0 rgb(255 255 255 / 0.05);
+}
+
+.msd-camera::before {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #181820 0%, #08080c 100%);
+  box-shadow: inset 0 0 1px rgb(0 0 0 / 0.8);
+}
+
+.msd-camera::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  left: 30%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(255 255 255 / 0.35) 0%,
+    rgb(255 255 255 / 0.08) 55%,
+    transparent 100%
+  );
+}
+
+.msd-stand-arm {
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.08) 0%, rgb(0 0 0 / 0) 35%),
+    linear-gradient(
+      90deg,
+      var(--msd-silver-deep) 0%,
+      var(--msd-silver-mid) 4%,
+      var(--msd-silver-light) 16%,
+      var(--msd-silver-light) 84%,
+      var(--msd-silver-mid) 96%,
+      var(--msd-silver-deep) 100%
+    );
+  box-shadow: inset 0 10px 10px -6px rgb(0 0 0 / 0.32);
+}
+
+/* Bottom bezel depth — front face of the arm's thickness */
+.msd-stand-arm-bezel {
+  position: absolute;
+  right: -2%;
+  bottom: 0;
+  left: -2%;
+  z-index: 1;
+  height: 14%;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.28) 0%,
+    rgb(0 0 0 / 0.14) 1px,
+    var(--msd-silver-light) 2px,
+    var(--msd-silver-mid) 50%,
+    var(--msd-silver-dark) 100%
+  );
+  box-shadow:
+    inset 0 1.5px 0 rgb(255 255 255 / 0.55),
+    inset 0 -1.5px 2px rgb(0 0 0 / 0.14);
+  pointer-events: none;
+}
+
+.msd-stand-foot {
+  margin-top: -1px;
+  border-radius: 0 0 3px 3px;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0.16) 0%,
+      rgb(0 0 0 / 0) 5%,
+      rgb(0 0 0 / 0) 95%,
+      rgb(0 0 0 / 0.16) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--msd-silver-light) 0%,
+      var(--msd-silver-mid) 55%,
+      var(--msd-silver-deep) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    inset 0 -1.5px 1px rgb(0 0 0 / 0.24),
+    0 1px 2px rgb(0 0 0 / 0.18);
+}
+
+.msd-screen-slot > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
