@@ -929,6 +929,205 @@
       ]
     },
     {
+      "name": "brands-section-v8",
+      "type": "registry:block",
+      "title": "Brands Section v8",
+      "description": "Two-column layout with headline, description, and CTA on the left, and four vertical infinite-scrolling logo marquee columns on the right with alternating up/down directions.",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/page.tsx",
+          "type": "registry:page",
+          "target": "app/brands-section-v8/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/components/brands-section-v8.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v8/components/brands-section-v8.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/components/marquee-column.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v8/components/marquee-column.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/components/brand-logo.tsx",
+          "type": "registry:component",
+          "target": "app/brands-section-v8/components/brand-logo.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/lib/brands.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v8/lib/brands.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/lib/config.ts",
+          "type": "registry:file",
+          "target": "app/brands-section-v8/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/brands-section-v8/styles/brands-section-v8.css",
+          "type": "registry:file",
+          "target": "app/brands-section-v8/styles/brands-section-v8.css"
+        },
+        {
+          "path": "components/ui/svgs/stripe.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/stripe.tsx"
+        },
+        {
+          "path": "components/ui/svgs/slack.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/slack.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/google.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/google.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercel.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercel.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercelDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/salesforce.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/salesforce.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/mongodbIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/mongodbIconDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/mongodbIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/neon.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/neon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscale.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/planetscale.tsx"
+        },
+        {
+          "path": "components/ui/svgs/planetscaleDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/planetscaleDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/auth0.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/auth0.tsx"
+        },
+        {
+          "path": "components/ui/svgs/cursorLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/cursorLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/cursorDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/cursorDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/claudeAiIcon.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/claudeAiIcon.tsx"
+        },
+        {
+          "path": "components/ui/svgs/openai.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/openai.tsx"
+        },
+        {
+          "path": "components/ui/svgs/openaiDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/openaiDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/railway.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/railway.tsx"
+        },
+        {
+          "path": "components/ui/svgs/railwayDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/railwayDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convex.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/convex.tsx"
+        },
+        {
+          "path": "components/ui/svgs/twilio.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/twilio.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workos.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/workos.tsx"
+        },
+        {
+          "path": "components/ui/svgs/workosLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/workosLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/meta.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/meta.tsx"
+        },
+        {
+          "path": "components/ui/svgs/metaDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/metaDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/nvidiaIconLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/nvidiaIconLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/nvidiaIconDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/nvidiaIconDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/sanityLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/sanityLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/sanityDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/sanityDark.tsx"
+        }
+      ]
+    },
+    {
       "name": "navbar-section-v1",
       "type": "registry:block",
       "title": "Navbar Section v1",
@@ -1493,6 +1692,27 @@
           "path": "registry/new-york/blocks/cta-section-v4/styles/cta-section-v4.css",
           "type": "registry:file",
           "target": "app/cta-section-v4/styles/cta-section-v4.css"
+        }
+      ]
+    },
+    {
+      "name": "cta-section-v5",
+      "type": "registry:block",
+      "title": "CTA Section v5",
+      "description": "Centered muted-background CTA with a headline, supporting description, and a rounded pill button.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cta-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/cta-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v5/components/cta-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v5/components/cta-section-v5.tsx"
         }
       ]
     },

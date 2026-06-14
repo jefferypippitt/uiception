@@ -10,6 +10,7 @@ import CtaSectionV1 from "@/registry/new-york/blocks/cta-section-v1/components/c
 import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/components/cta-section-v2"
 import CtaSectionV3 from "@/registry/new-york/blocks/cta-section-v3/components/cta-section-v3"
 import CtaSectionV4 from "@/registry/new-york/blocks/cta-section-v4/components/cta-section-v4"
+import CtaSectionV5 from "@/registry/new-york/blocks/cta-section-v5/components/cta-section-v5"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/components/footer-section-v1"
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/components/footer-section-v2"
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/components/footer-section-v3"
@@ -53,6 +54,7 @@ import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-secti
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
+import BrandsSectionV8 from "@/registry/new-york/blocks/brands-section-v8/components/brands-section-v8"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/components/hero-section-v6"
 import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/components/hero-section-v7"
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components/hero-section-v8"
@@ -84,6 +86,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cta-section-v2": CtaSectionV2,
   "cta-section-v3": CtaSectionV3,
   "cta-section-v4": CtaSectionV4,
+  "cta-section-v5": CtaSectionV5,
   "footer-section-v1": FooterSectionV1,
   "footer-section-v2": FooterSectionV2,
   "footer-section-v3": FooterSectionV3,
@@ -110,6 +113,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v5": BrandsSectionV5,
   "brands-section-v6": BrandsSectionV6,
   "brands-section-v7": BrandsSectionV7,
+  "brands-section-v8": BrandsSectionV8,
   "feature-section-v1": FeatureSectionV1,
   "feature-section-v2": FeatureSectionV2,
   "hero-section-v5": HeroSectionV5,

@@ -15,7 +15,7 @@ export default function CtaSectionV1() {
           <div className="flex flex-col gap-6">
 
             <div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl">
+              <h2 className="tracking-tighter text-4xl sm:text-5xl lg:text-6xl">
                 Get started in{" "}
                 <span
                   className={`${GeistPixelCircle.className} text-4xl text-lime-400 sm:text-5xl lg:text-6xl`}

@@ -1,0 +1,35 @@
+.bs8-col-up {
+  animation: bs8-marquee-up 22s linear infinite;
+  backface-visibility: hidden;
+}
+
+.bs8-col-down {
+  animation: bs8-marquee-down 26s linear infinite;
+  backface-visibility: hidden;
+}
+
+@keyframes bs8-marquee-up {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes bs8-marquee-down {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs8-col-up,
+  .bs8-col-down {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

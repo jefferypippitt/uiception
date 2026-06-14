@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-section-v5",
+  "title": "CTA Section v5",
+  "description": "Centered muted-background CTA with a headline, supporting description, and a rounded pill button.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/cta-section-v5/page.tsx",
+      "content": "import CtaSectionV5 from \"./components/cta-section-v5\"\n\nexport default function Page() {\n  return <CtaSectionV5 />\n}\n",
+      "type": "registry:page",
+      "target": "app/cta-section-v5/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/cta-section-v5/components/cta-section-v5.tsx",
+      "content": "import { ChevronRight } from \"lucide-react\"\nimport Link from \"next/link\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst HREF = \"#\"\n\nexport default function CtaSectionV5() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"bg-muted rounded-2xl px-6 py-16 flex flex-col items-center gap-6 text-center md:py-20 lg:py-24\">\n          <h2 className=\"text-4xl tracking-tight sm:text-5xl lg:text-6xl\">\n            Let&apos;s talk\n          </h2>\n          <p className=\"max-w-sm text-base text-muted-foreground sm:text-lg\">\n            Book a free meeting and we will show how we can simplify your life\n          </p>\n          <Button size=\"lg\" className=\"rounded-full px-6 text-base\" asChild>\n            <Link href={HREF}>\n              Book a meeting\n              <ChevronRight className=\"size-4\" />\n            </Link>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/cta-section-v5/components/cta-section-v5.tsx"
+    }
+  ],
+  "type": "registry:block"
+}
