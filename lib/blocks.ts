@@ -91,6 +91,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Navbar Section v8",
         registryPath: "registry/new-york/blocks/navbar-section-v8",
       },
+      {
+        id: "navbar-section-v9",
+        title: "Navbar Section v9",
+        registryPath: "registry/new-york/blocks/navbar-section-v9",
+      },
     ],
   },
   {
@@ -246,6 +251,11 @@ export const blockCategories: BlockCategory[] = [
         id: "feature-section-v9",
         title: "Feature Section v9",
         registryPath: "registry/new-york/blocks/feature-section-v9",
+      },
+      {
+        id: "feature-section-v10",
+        title: "Feature Section v10",
+        registryPath: "registry/new-york/blocks/feature-section-v10",
       },
     ],
   },

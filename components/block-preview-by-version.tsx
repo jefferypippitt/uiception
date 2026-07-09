@@ -44,6 +44,7 @@ import FeatureSectionV6 from "@/registry/new-york/blocks/feature-section-v6/comp
 import FeatureSectionV7 from "@/registry/new-york/blocks/feature-section-v7/components/feature-section-v7"
 import FeatureSectionV8 from "@/registry/new-york/blocks/feature-section-v8/components/feature-section-v8"
 import FeatureSectionV9 from "@/registry/new-york/blocks/feature-section-v9/components/feature-section-v9"
+import FeatureSectionV10 from "@/registry/new-york/blocks/feature-section-v10/components/feature-section-v10"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/components/changelog-section-v1"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
 import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
@@ -72,6 +73,7 @@ import NavbarSectionV5Page from "@/registry/new-york/blocks/navbar-section-v5/pa
 import NavbarSectionV6Page from "@/registry/new-york/blocks/navbar-section-v6/page"
 import NavbarSectionV7Page from "@/registry/new-york/blocks/navbar-section-v7/page"
 import NavbarSectionV8Page from "@/registry/new-york/blocks/navbar-section-v8/page"
+import NavbarSectionV9Page from "@/registry/new-york/blocks/navbar-section-v9/page"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -129,6 +131,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v7": FeatureSectionV7,
   "feature-section-v8": FeatureSectionV8,
   "feature-section-v9": FeatureSectionV9,
+  "feature-section-v10": FeatureSectionV10,
   "changelog-section-v1": ChangelogSectionV1,
   "faq-section-v1": FaqSectionV1,
   "faq-section-v2": FaqSectionV2,
@@ -148,6 +151,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v6": NavbarSectionV6Page,
   "navbar-section-v7": NavbarSectionV7Page,
   "navbar-section-v8": NavbarSectionV8Page,
+  "navbar-section-v9": NavbarSectionV9Page,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

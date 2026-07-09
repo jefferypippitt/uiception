@@ -47,6 +47,10 @@ pnpm-debug.log*
 .claude/skills/product-preview-ui/
 .agents/skills/product-preview-ui/
 
+# geo-wireframe skill — beta, local iteration only
+.claude/skills/geo-wireframe/
+.agents/skills/geo-wireframe/
+
 # firecrawl scrape artifacts (local research only)
 .firecrawl/
 

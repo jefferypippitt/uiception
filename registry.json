@@ -1354,7 +1354,7 @@
       "name": "navbar-section-v7",
       "type": "registry:block",
       "title": "Navbar Section v7",
-      "description": "AI SaaS navbar with Product and Developers hover dropdowns, uppercase links, frosted glass, and Get started CTA.",
+      "description": "AI SaaS navbar with Product and Developers hover dropdowns, uppercase links, and Get started CTA.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1424,6 +1424,33 @@
           "path": "public/images/blocks/navbar-section-v8/logo.svg",
           "type": "registry:file",
           "target": "public/images/blocks/navbar-section-v8/logo.svg"
+        }
+      ]
+    },
+    {
+      "name": "navbar-section-v9",
+      "type": "registry:block",
+      "title": "Navbar Section v9",
+      "description": "Two-column navbar with text-only brand left, nav links and outline Sign in CTA right, and a full-width Resources mega menu with 3-column labeled links.",
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v9/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v9/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v9/components/navbar-section-v9.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v9/components/navbar-section-v9.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v9/components/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v9/components/navbar-lorem-demo.tsx"
         }
       ]
     },
@@ -3910,6 +3937,84 @@
           "path": "registry/new-york/blocks/feature-section-v9/lib/features.ts",
           "type": "registry:lib",
           "target": "app/feature-section-v9/lib/features.ts"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v10",
+      "type": "registry:block",
+      "title": "Feature Section v10",
+      "description": "Two-column SaaS feature section with dashed corner-accent cards and a morphing wireframe preview that updates on card hover.",
+      "dependencies": [
+        "motion",
+        "gsap"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v10/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-section-v10.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-section-v10.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-showcase.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-showcase.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-card.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-card-corners.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-card-corners.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-panel.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/geo-wireframe.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/geo-wireframe.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/components/feature-illustrations.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v10/components/feature-illustrations.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/hooks/use-geo-morph.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v10/hooks/use-geo-morph.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/hooks/use-hover-intent.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v10/hooks/use-hover-intent.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/lib/geo-mesh.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v10/lib/geo-mesh.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/styles/feature-section-v10.css",
+          "type": "registry:file",
+          "target": "app/feature-section-v10/styles/feature-section-v10.css"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v10/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v10/lib/features.ts"
         }
       ]
     },

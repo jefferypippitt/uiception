@@ -62,9 +62,6 @@ const PLAIN_NAV_LINKS = [
 
 const CTA = { label: "Start free", href: "#" }
 
-const navGlassClass =
-  "bg-background/35 backdrop-blur-3xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/20"
-
 const linkClass = cn(
   "text-sm text-muted-foreground transition-colors hover:text-foreground",
   "aria-[current=page]:text-foreground"
@@ -116,10 +113,7 @@ function PlatformPanel({
     <div
       role="region"
       aria-label={`${DROPDOWN_LABEL} menu`}
-      className={cn(
-        "animate-platform-panel-in w-full border-b border-border/80",
-        navGlassClass
-      )}
+      className="animate-platform-panel-in w-full border-b border-border/80 bg-background"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -184,7 +178,7 @@ export default function NavbarSectionV8() {
       {/* Backdrop overlay */}
       {platformOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/60 backdrop-blur-[2px]"
+          className="fixed inset-0 z-40 bg-background/60"
           onMouseEnter={schedulePlatformClose}
           onClick={() => setPlatformOpen(false)}
           aria-hidden
@@ -296,7 +290,7 @@ export default function NavbarSectionV8() {
         </SheetContent>
       </Sheet>
 
-      <header className={cn("sticky top-0 z-50", navGlassClass)}>
+      <header className="sticky top-0 z-50 bg-background">
         <div className="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           {/* Logo — left */}
           <div className="flex min-w-0 flex-1 items-center">

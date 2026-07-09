@@ -1,0 +1,32 @@
+@keyframes fsv10-geo-node-pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.15);
+  }
+}
+
+.fsv10-geo__node {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.fsv10-geo--active .fsv10-geo__node {
+  animation: fsv10-geo-node-pulse 2.8s ease-in-out infinite;
+}
+
+/* Pause node pulse while morphing — CSS opacity fights the JS depth pass. */
+.fsv10-geo--morphing .fsv10-geo__node {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fsv10-geo__node {
+    animation: none;
+    transform: none;
+  }
+}
