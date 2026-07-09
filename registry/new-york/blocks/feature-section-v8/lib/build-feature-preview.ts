@@ -353,107 +353,94 @@ function pickMiniVariant(id: string, intent: PreviewIntent): MiniVariant {
   return options[hashString(id) % options.length]
 }
 
-function shortLabel(clause: string, wordCount = 2): string {
-  const words = clause.trim().split(/\s+/).filter(Boolean)
-  if (words.length <= wordCount) return clause.trim()
-  return words.slice(0, wordCount).join(" ")
+/** Fan-out activity — density increases left → right under the hop path. */
+function buildFanOutDotGrid(
+  id: string,
+  rows = 8,
+  cols = 14
+): ReadonlyArray<ReadonlyArray<boolean>> {
+  return Array.from({ length: rows }, (_, row) =>
+    Array.from({ length: cols }, (_, col) => {
+      const band = Math.floor((col / cols) * 3)
+      const chance = band === 0 ? 2 : band === 1 ? 3 : 4
+      return hashString(`${id}-fan-${row}-${col}`) % 5 < chance
+    })
+  )
 }
 
-function orchestrationNodeLabel(clause: string, index: number): string {
-  const fallbacks = ["Across services", "Downstream handlers", "Throughput canvas"] as const
-  const words = clause.trim().split(/\s+/).filter(Boolean)
-  if (words.length === 0) return fallbacks[index]
-
-  if (index === 0) return words.slice(1, 2).join(" ") || fallbacks[0]
-  if (index === 1) return words.slice(0, 2).join(" ") || fallbacks[1]
-  return words.slice(2, 4).join(" ") || fallbacks[2]
-}
-
-function executionStatLabel(clause: string, index: number): string {
-  const fallbacks = ["Runs firing", "Stage delay"] as const
-  const words = clause.trim().split(/\s+/).filter(Boolean)
-  if (words.length === 0) return fallbacks[index]
-
-  if (index === 0) return words.slice(1, 3).join(" ") || fallbacks[0]
-  return words.slice(1, 3).join(" ") || fallbacks[1]
+/** Delivery curve with a mid-span choke dip. */
+function seededDeliveryCurve(id: string, count = 10): number[] {
+  return Array.from({ length: count }, (_, index) => {
+    const base = seededValue(`${id}-del-${index}`, 58, 94)
+    const choke = index === 4 || index === 5
+    return choke ? Math.max(26, base - 38) : base
+  })
 }
 
 /** Live run monitor — header stat strip + full-width latency histogram. */
 function buildRealtimeExecutionZone(
   id: string,
   _title: string,
-  description: string
+  _description: string
 ): MiniAppScreenZone {
-  const clauses = splitClauses(description)
-  const panelTitle = shortLabel(clauses[0] ?? "Watch runs as they fire", 4)
-
   return {
     type: "live-stream",
-    panelTitle,
+    panelTitle: "Live runs",
     stats: [
       {
         value: `${seededValue(`${id}-r0`, 120, 890)}`,
-        label: executionStatLabel(clauses[0] ?? "Live runs", 0),
+        label: "Runs Firing",
       },
       {
         value: `${seededValue(`${id}-r1`, 1, 8)}.${seededValue(`${id}-r1d`, 1, 9)}s`,
-        label: executionStatLabel(clauses[1] ?? "Stage latency", 1),
+        label: "Stage Delay",
       },
     ],
     bars: seededFloats(`${id}-bars`, 28),
   }
 }
 
-/** Orchestration — service signal route chain + activity volume grid. */
+/** Orchestration — hop path across services + fan-out activity grid. */
 function buildWorkflowOrchestrationZone(
   id: string,
   _title: string,
-  description: string
+  _description: string
 ): MiniAppScreenZone {
-  const clauses = splitClauses(description)
-  const panelTitle = shortLabel(clauses[0] ?? "Chain steps across services", 4)
-
-  const nodeLabels = [
-    orchestrationNodeLabel(clauses[0] ?? "", 0),
-    orchestrationNodeLabel(clauses[1] ?? "", 1),
-    orchestrationNodeLabel(clauses[2] ?? "", 2),
-  ]
+  const nodes = [
+    { label: "Trigger", volume: seededValue(`${id}-node-0`, 86, 148) },
+    { label: "Fan Out", volume: seededValue(`${id}-node-1`, 42, 96) },
+    { label: "Handlers", volume: seededValue(`${id}-node-2`, 18, 64) },
+  ] as const
 
   return {
     type: "signal-flow",
-    panelTitle,
-    nodes: nodeLabels.map((label, index) => ({
-      label,
-      volume: seededValue(`${id}-node-${index}`, 12, 148),
-    })),
-    dotGrid: buildDotGrid(`${id}-volume`, 8, 14),
+    panelTitle: "Service chain",
+    nodes,
+    dotGrid: buildFanOutDotGrid(`${id}-volume`),
   }
 }
 
-/** Pipeline health — queue depth KPIs beside uptime trend chart. */
+/** Pipeline health — backlog + reliability beside delivery curve with choke. */
 function buildPipelineHealthZone(
   id: string,
   _title: string,
-  description: string
+  _description: string
 ): MiniAppScreenZone {
-  const clauses = splitClauses(description)
-  const panelTitle = shortLabel(clauses[0] ?? "Inspect backlog size", 3)
-
   return {
     type: "health-split",
-    panelTitle,
+    panelTitle: "Pipeline health",
     metrics: [
       {
-        value: `${seededValue(`${id}-m1`, 12, 148)}`,
-        label: shortLabel(clauses[0] ?? "Queue depth", 2),
+        value: `${seededValue(`${id}-m1`, 24, 148)}`,
+        label: "Backlog",
       },
       {
-        value: `${seededValue(`${id}-m0`, 89, 99)}.${seededValue(`${id}-m0d`, 1, 9)}%`,
-        label: shortLabel(clauses[1] ?? "Uptime trend", 2),
+        value: `${seededValue(`${id}-m0`, 96, 99)}.${seededValue(`${id}-m0d`, 1, 9)}%`,
+        label: "Reliability",
       },
     ],
-    chartLabel: shortLabel(clauses[1] ?? "Uptime trend", 2),
-    areaPoints: seededFloats(`${id}-uptime`, 10),
+    chartLabel: "Delivery",
+    areaPoints: seededDeliveryCurve(`${id}-uptime`),
   }
 }
 
@@ -461,23 +448,22 @@ function buildPipelineHealthZone(
 function buildTaskAutomationZone(
   id: string,
   _title: string,
-  description: string
+  _description: string
 ): MiniAppScreenZone {
-  const clauses = splitClauses(description)
   const jobNames = [
-    "Daily sync",
-    "Weekly digest",
-    "Invoice export",
-    "Backup cron",
-    "Report batch",
-    "Webhook retry",
+    "Daily Sync",
+    "Weekly Digest",
+    "Invoice Export",
+    "Backup Cron",
+    "Report Batch",
+    "Webhook Retry",
   ]
-  const owners = ["ops", "finance", "analytics", "infra", "platform", "data"]
+  const owners = ["Ops", "Finance", "Analytics", "Infra", "Platform", "Data"]
 
   const rows: MiniTableRow[] = Array.from({ length: 4 }, (_, index) => {
     const job =
       jobNames[hashString(`${id}-job-${index}`) % jobNames.length] ?? `Job ${index + 1}`
-    const owner = owners[hashString(`${id}-owner-${index}`) % owners.length] ?? "team"
+    const owner = owners[hashString(`${id}-owner-${index}`) % owners.length] ?? "Team"
     const nextRun = `${seededValue(`${id}-t-${index}`, 8, 23)}:${seededValue(`${id}-m-${index}`, 0, 59).toString().padStart(2, "0")}`
 
     return { cells: [job, owner, nextRun] }
@@ -489,9 +475,9 @@ function buildTaskAutomationZone(
   return {
     type: "data-table",
     variant: "table-mono",
-    panelTitle: shortLabel(clauses[0] ?? "Set cron-style schedules", 3),
+    panelTitle: "Scheduled jobs",
     queueSummary: `${rows.length} jobs · next run ${nextHour}:${nextMinute}`,
-    columns: [{ header: "Job" }, { header: "Owner" }, { header: "Next run" }],
+    columns: [{ header: "Job" }, { header: "Owner" }, { header: "Next Run" }],
     rows,
   }
 }

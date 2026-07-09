@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "feature-section-v5",
   "title": "Feature Section v5",
-  "description": "Centered sans headline with a bento grid of four static cardsâ€”balanced title and body typography on muted surfaces.",
+  "description": "Centered sans headline with a storytelling bento grid of four static cards, balanced title and body typography on muted surfaces.",
   "dependencies": [
     "geist"
   ],
@@ -16,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v5/components/feature-section-v5.tsx",
-      "content": "import { GeistSans } from \"geist/font/sans\"\n\nimport FeatureGrid from \"./feature-grid\"\n\nexport default function FeatureSectionV5() {\n  return (\n    <section\n      className={`${GeistSans.className} py-4 text-foreground md:py-6`}\n    >\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mx-auto mb-12 flex max-w-3xl flex-col items-center gap-4 text-center md:mb-14 lg:mb-16\">\n          <h2 className=\"text-4xl leading-[1.1] font-medium tracking-[-0.03em] lg:text-5xl\">\n            Less noise. More signal.\n          </h2>\n          <p className=\"max-w-xl text-3.75 leading-relaxed text-muted-foreground\">\n            Focused tools built around how great teams actually work. Nothing\n            unnecessary, everything intentional.\n          </p>\n        </div>\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { GeistSans } from \"geist/font/sans\"\n\nimport FeatureGrid from \"./feature-grid\"\n\nexport default function FeatureSectionV5() {\n  return (\n    <section\n      className={`${GeistSans.className} py-4 text-foreground md:py-6`}\n    >\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"mx-auto mb-12 flex max-w-3xl flex-col items-center gap-4 text-center md:mb-14 lg:mb-16\">\n          <h2 className=\"text-4xl leading-[1.1] font-medium tracking-[-0.03em] lg:text-5xl\">\n            Less noise. More signal.\n          </h2>\n          <p className=\"max-w-xl text-3.75 leading-relaxed text-muted-foreground\">\n            Tools that help your team focus on the work that matters.\n          </p>\n        </div>\n        <FeatureGrid />\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/feature-section-v5/components/feature-section-v5.tsx"
     },
@@ -34,7 +34,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v5/lib/features.ts",
-      "content": "export type FeatureDefinition = {\r\n  id: string\r\n  title: string\r\n  description: string\r\n}\r\n\r\nexport const featureSectionItems: FeatureDefinition[] = [\r\n  {\r\n    id: \"signal-over-noise\",\r\n    title: \"Surface the signal\",\r\n    description:\r\n      \"Stay on top of what matters without drowning in noise. The right updates reach the right people automatically.\",\r\n  },\r\n  {\r\n    id: \"defaults-that-hold\",\r\n    title: \"Guardrails that scale\",\r\n    description:\r\n      \"Sensible defaults ship on day one. Your team moves fast while the product stays consistent as you grow.\",\r\n  },\r\n  {\r\n    id: \"one-thread-per-outcome\",\r\n    title: \"Context travels with it\",\r\n    description:\r\n      \"Every task carries its own history. Decisions, files, and feedback stay attached to the work so nothing falls through the cracks.\",\r\n  },\r\n  {\r\n    id: \"quiet-reliability\",\r\n    title: \"Reliable by default\",\r\n    description:\r\n      \"Consistent behavior under pressure. When something needs attention you get a clear signal and a straight path to resolve it.\",\r\n  },\r\n]\r\n",
+      "content": "export type FeatureDefinition = {\r\n  id: string\r\n  title: string\r\n  description: string\r\n}\r\n\r\nexport const featureSectionItems: FeatureDefinition[] = [\r\n  {\r\n    id: \"signal-over-noise\",\r\n    title: \"Clear priorities\",\r\n    description: \"The right updates reach the right people. Nothing else gets in the way.\",\r\n  },\r\n  {\r\n    id: \"defaults-that-hold\",\r\n    title: \"Smart defaults\",\r\n    description: \"Sensible choices from day one so your team can move without second guessing.\",\r\n  },\r\n  {\r\n    id: \"one-thread-per-outcome\",\r\n    title: \"Shared context\",\r\n    description: \"Decisions, files, and feedback stay with the work. No hunting across tools.\",\r\n  },\r\n  {\r\n    id: \"quiet-reliability\",\r\n    title: \"Quiet reliability\",\r\n    description: \"When something needs attention, you get a clear signal and a path to fix it.\",\r\n  },\r\n]\r\n",
       "type": "registry:lib",
       "target": "app/feature-section-v5/lib/features.ts"
     }

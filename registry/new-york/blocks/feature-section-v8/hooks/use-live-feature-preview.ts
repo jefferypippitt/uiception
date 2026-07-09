@@ -81,14 +81,37 @@ function tickLiveStream(
 function tickSignalFlow(
   zone: Extract<MiniAppScreenZone, { type: "signal-flow" }>
 ): Extract<MiniAppScreenZone, { type: "signal-flow" }> {
+  const nodes = zone.nodes.map((node, index) => {
+    const floor = index === 0 ? 70 : index === 1 ? 30 : 12
+    const ceiling = index === 0 ? 160 : index === 1 ? 110 : 70
+    const next = Math.min(
+      ceiling,
+      Math.max(floor, node.volume + Math.floor(Math.random() * 11) - 4)
+    )
+    return { ...node, volume: next }
+  })
+
+  // Keep the hop path reading as fan-out: volumes stay descending.
+  for (let index = 1; index < nodes.length; index += 1) {
+    const prev = nodes[index - 1]
+    const current = nodes[index]
+    if (current.volume >= prev.volume) {
+      nodes[index] = {
+        ...current,
+        volume: Math.max(6, prev.volume - (4 + Math.floor(Math.random() * 10))),
+      }
+    }
+  }
+
   return {
     ...zone,
-    nodes: zone.nodes.map((node) => ({
-      ...node,
-      volume: Math.max(6, node.volume + Math.floor(Math.random() * 11) - 4),
-    })),
+    nodes,
     dotGrid: zone.dotGrid.map((row) =>
-      row.map((active) => (Math.random() > 0.78 ? !active : active))
+      row.map((active, colIndex) => {
+        const band = Math.floor((colIndex / row.length) * 3)
+        const flipChance = band === 0 ? 0.88 : band === 1 ? 0.8 : 0.72
+        return Math.random() > flipChance ? !active : active
+      })
     ),
   }
 }
@@ -105,6 +128,10 @@ function tickHealthSplit(
     Math.max(95.0, uptime + (Math.random() > 0.55 ? -0.1 : 0.06))
   )
 
+  const areaPoints = tickBars(zone.areaPoints).map((point, index) =>
+    index === 4 || index === 5 ? Math.min(point, 42) : Math.max(point, 52)
+  )
+
   return {
     ...zone,
     metrics: [
@@ -117,7 +144,7 @@ function tickHealthSplit(
         value: `${nextUptime.toFixed(1)}%`,
       },
     ],
-    areaPoints: tickBars(zone.areaPoints),
+    areaPoints,
   }
 }
 

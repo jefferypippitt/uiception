@@ -2,132 +2,89 @@
 
 import { cn } from "@/lib/utils"
 
-import { FeatureIllustration } from "./feature-illustration"
-import { featureIllustrationViewBoxes } from "../lib/features"
+import { MockScreen } from "./mock-screen"
 import { useInViewOnce } from "../lib/use-in-view-once"
+
+const STOPS: ReadonlyArray<{
+  label: string
+  stuck?: boolean
+}> = [
+  { label: "Land" },
+  { label: "Price" },
+  { label: "Pay", stuck: true },
+  { label: "Buy" },
+]
 
 export default function DropoffIllustration() {
   const { ref, active } = useInViewOnce()
 
   return (
-    <div ref={ref} className="size-full min-h-0">
-      <FeatureIllustration
-        viewBox={featureIllustrationViewBoxes["dropoff-diagnosis"]}
-        svgClassName={cn("fsv3-do-chart", active && "fsv3-do-chart--active")}
+    <div ref={ref} className="size-full min-h-0 p-1">
+      <MockScreen
+        label="People leave at checkout because the form feels hard"
+        className={cn("fsv3-do-mock", active && "fsv3-do-mock--active")}
       >
-        <rect
-          x="32"
-          y="24"
-          width="424"
-          height="334"
-          rx="2"
-          fill="var(--card)"
-          stroke="url(#fsv3_do_frame)"
-        />
-        <line x1="32" y1="64" x2="456" y2="64" stroke="currentColor" strokeOpacity="0.3" />
-        <line x1="72" y1="44" x2="120" y2="44" stroke="currentColor" strokeOpacity="0.45" />
+        <div className="flex min-h-0 flex-1 flex-col justify-between px-3 py-3">
+          <div className="fsv3-do-path relative flex items-start justify-between gap-1 pt-1">
+            <div
+              className="absolute top-[0.7rem] right-4 left-4 h-px bg-border"
+              aria-hidden
+            />
+            {STOPS.map((stop, index) => (
+              <div
+                key={stop.label}
+                className={cn(
+                  "fsv3-do-stop relative z-10 flex flex-1 flex-col items-center gap-1.5",
+                  `fsv3-do-stop--${index + 1}`
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex size-5 items-center justify-center rounded-full border border-border bg-card",
+                    stop.stuck &&
+                      "size-6 border-foreground/50 bg-foreground text-background motion-safe:transition-transform duration-200 ease-out group-hover/card:scale-110"
+                  )}
+                >
+                  {stop.stuck ? (
+                    <span className="font-mono text-[0.5rem] font-semibold">!</span>
+                  ) : (
+                    <span className="size-1.5 rounded-full bg-foreground/35" />
+                  )}
+                </span>
+                <span
+                  className={cn(
+                    "font-mono text-[0.5rem] text-muted-foreground",
+                    stop.stuck && "font-medium text-foreground/85"
+                  )}
+                >
+                  {stop.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-        <path
-          className="fsv3-do-path"
-          pathLength={1}
-          d="M168 88 L168 320"
-          stroke="url(#fsv3_do_path)"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <circle className="fsv3-do-node fsv3-do-node--1" cx="168" cy="108" r="6" stroke="currentColor" strokeOpacity="0.35" />
-        <circle
-          className="fsv3-do-node fsv3-do-node--2"
-          cx="168"
-          cy="168"
-          r="8"
-          fill="var(--card)"
-          stroke="currentColor"
-          strokeOpacity="0.55"
-        />
-        <circle className="fsv3-do-node fsv3-do-node--3" cx="168" cy="228" r="6" stroke="currentColor" strokeOpacity="0.25" />
-        <circle className="fsv3-do-node fsv3-do-node--4" cx="168" cy="288" r="5" stroke="currentColor" strokeOpacity="0.15" />
-
-        <g className="fsv3-do-callout motion-safe:transition-transform duration-200 ease-out group-hover/card:-translate-y-0.5">
-          <rect
-            x="208"
-            y="148"
-            width="168"
-            height="72"
-            rx="4"
-            fill="var(--card)"
-            stroke="url(#fsv3_do_callout)"
-          />
-          <line x1="224" y1="168" x2="280" y2="168" stroke="currentColor" strokeOpacity="0.5" />
-          <line x1="224" y1="184" x2="340" y2="184" stroke="currentColor" strokeOpacity="0.35" />
-          <rect
-            x="224"
-            y="196"
-            width="136"
-            height="6"
-            rx="3"
-            fill="currentColor"
-            fillOpacity="0.1"
-          />
-          <rect
-            x="224"
-            y="196"
-            width="112"
-            height="6"
-            rx="3"
-            fill="currentColor"
-            fillOpacity="0.45"
-          />
-          <line
-            x1="200"
-            y1="168"
-            x2="208"
-            y2="168"
-            stroke="currentColor"
-            strokeOpacity="0.4"
-            strokeDasharray="3 2"
-          />
-        </g>
-
-        <line x1="56" y1="320" x2="120" y2="320" stroke="currentColor" strokeOpacity="0.2" />
-        <line x1="360" y1="320" x2="420" y2="320" stroke="currentColor" strokeOpacity="0.15" />
-
-        <defs>
-          <linearGradient
-            id="fsv3_do_frame"
-            x1="244"
-            y1="24"
-            x2="244"
-            y2="358"
-            gradientUnits="userSpaceOnUse"
+          <div
+            className={cn(
+              "fsv3-do-pin relative mx-auto w-full max-w-[11.5rem] rounded-lg border border-foreground/30 bg-muted/50 px-2.5 py-2",
+              "motion-safe:transition-transform duration-200 ease-out group-hover/card:-translate-y-0.5"
+            )}
           >
-            <stop stopColor="var(--foreground)" />
-            <stop offset="0.8" stopColor="var(--background)" />
-          </linearGradient>
-          <linearGradient
-            id="fsv3_do_path"
-            x1="168"
-            y1="88"
-            x2="168"
-            y2="320"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="var(--foreground)" stopOpacity="0.5" />
-            <stop offset="1" stopColor="var(--foreground)" stopOpacity="0.1" />
-          </linearGradient>
-          <linearGradient
-            id="fsv3_do_callout"
-            x1="292"
-            y1="148"
-            x2="292"
-            y2="220"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="var(--foreground)" />
-            <stop offset="1" stopColor="var(--foreground)" stopOpacity="0.2" />
-          </linearGradient>
-        </defs>
-      </FeatureIllustration>
+            <span
+              className="absolute -top-1.5 left-1/2 size-2.5 -translate-x-1/2 rotate-45 border-t border-l border-foreground/30 bg-muted/50"
+              aria-hidden
+            />
+            <p className="font-mono text-[0.5rem] tracking-[0.1em] text-muted-foreground uppercase">
+              Why they leave
+            </p>
+            <p className="mt-0.5 text-[0.6875rem] leading-snug font-medium tracking-tight text-foreground">
+              Checkout form feels too long
+            </p>
+            <p className="mt-1 font-mono text-[0.5625rem] text-foreground/70">
+              7 of 10 exits
+            </p>
+          </div>
+        </div>
+      </MockScreen>
     </div>
   )
 }

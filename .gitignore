@@ -51,6 +51,10 @@ pnpm-debug.log*
 .claude/skills/geo-wireframe/
 .agents/skills/geo-wireframe/
 
+# narrative-mini-mocks skill — beta, local iteration only
+.claude/skills/narrative-mini-mocks/
+.agents/skills/narrative-mini-mocks/
+
 # firecrawl scrape artifacts (local research only)
 .firecrawl/
 

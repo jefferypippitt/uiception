@@ -1455,6 +1455,46 @@
       ]
     },
     {
+      "name": "navbar-section-v10",
+      "type": "registry:block",
+      "title": "Navbar Section v10",
+      "description": "Edra-inspired two-column navbar with logo chip and hamburger that expands in-place into a dialog card with primary and footer links, plus a Sign up CTA.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/navbar-section-v10/page.tsx",
+          "type": "registry:page",
+          "target": "app/navbar-section-v10/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-section-v10.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v10/components/navbar-section-v10.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-lorem-demo.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v10/components/navbar-lorem-demo.tsx"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v10/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v10/logo.svg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/navbar-section-v10/logo.svg",
+          "type": "registry:file",
+          "target": "public/images/blocks/navbar-section-v10/logo.svg"
+        }
+      ]
+    },
+    {
       "name": "mac-os-terminal",
       "type": "registry:block",
       "title": "Mac OS Terminal",
@@ -3590,6 +3630,11 @@
           "target": "app/feature-section-v3/components/experiment-illustration.tsx"
         },
         {
+          "path": "registry/new-york/blocks/feature-section-v3/components/mock-screen.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v3/components/mock-screen.tsx"
+        },
+        {
           "path": "registry/new-york/blocks/feature-section-v3/lib/use-in-view-once.ts",
           "type": "registry:lib",
           "target": "app/feature-section-v3/lib/use-in-view-once.ts"
@@ -3665,7 +3710,7 @@
       "name": "feature-section-v5",
       "type": "registry:block",
       "title": "Feature Section v5",
-      "description": "Centered sans headline with a bento grid of four static cardsâ€”balanced title and body typography on muted surfaces.",
+      "description": "Centered sans headline with a storytelling bento grid of four static cards, balanced title and body typography on muted surfaces.",
       "dependencies": [
         "geist"
       ],
@@ -3745,7 +3790,7 @@
       "name": "feature-section-v7",
       "type": "registry:block",
       "title": "Feature Section v7",
-      "description": "Three-column travel product section with itinerary, fare, and offline library copy, composed theme-aware SVG illustrations, scroll-triggered entrance animations, and outline pill CTAs.",
+      "description": "Three-column AI platform section with agent workflows, grounded knowledge, and production deploy copy, bordered cards with corner marks, and outline pill CTAs.",
       "dependencies": [
         "lucide-react"
       ],
@@ -3762,11 +3807,6 @@
           "target": "app/feature-section-v7/components/feature-section-v7.tsx"
         },
         {
-          "path": "registry/new-york/blocks/feature-section-v7/styles/feature-section-v7.css",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/styles/feature-section-v7.css"
-        },
-        {
           "path": "registry/new-york/blocks/feature-section-v7/components/feature-grid.tsx",
           "type": "registry:component",
           "target": "app/feature-section-v7/components/feature-grid.tsx"
@@ -3775,36 +3815,6 @@
           "path": "registry/new-york/blocks/feature-section-v7/components/feature-card-corners.tsx",
           "type": "registry:component",
           "target": "app/feature-section-v7/components/feature-card-corners.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/components/feature-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/components/feature-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/components/illustration-slot.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/components/illustration-slot.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/components/trip-planner-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/components/trip-planner-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/components/smart-search-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/components/smart-search-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/components/guides-memories-illustration.tsx",
-          "type": "registry:component",
-          "target": "app/feature-section-v7/components/guides-memories-illustration.tsx"
-        },
-        {
-          "path": "registry/new-york/blocks/feature-section-v7/lib/use-in-view-once.ts",
-          "type": "registry:lib",
-          "target": "app/feature-section-v7/lib/use-in-view-once.ts"
         },
         {
           "path": "registry/new-york/blocks/feature-section-v7/lib/features.ts",

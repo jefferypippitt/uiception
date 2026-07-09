@@ -8,7 +8,8 @@ export default function FeatureSectionV6() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="max-w-2xl text-3xl tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]">
-            Stay ahead as things get more complex
+            Stay ahead as things get more{" "}
+            <span className="text-muted-foreground">complex</span>
           </h2>
      
           <p className="max-w-xl text-base leading-7 tracking-tight text-muted-foreground sm:text-lg sm:leading-8">

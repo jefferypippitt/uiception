@@ -2,220 +2,115 @@
 
 import { cn } from "@/lib/utils"
 
-import { FeatureIllustration } from "./feature-illustration"
-import { featureIllustrationViewBoxes } from "../lib/features"
+import { MockScreen } from "./mock-screen"
 import { useInViewOnce } from "../lib/use-in-view-once"
+
+function CheckoutDraft({
+  fields,
+  winner,
+}: {
+  fields: number
+  winner?: boolean
+}) {
+  return (
+    <div
+      className={cn(
+        "flex min-h-0 flex-1 flex-col overflow-hidden rounded-md border",
+        winner
+          ? "border-foreground/45 bg-card"
+          : "border-border/50 bg-muted/15 opacity-60"
+      )}
+    >
+      <div className="flex h-3 shrink-0 items-center gap-0.5 border-b border-border/45 px-1.5">
+        <span className="size-1 rounded-full bg-foreground/25" />
+        <span className="size-1 rounded-full bg-foreground/25" />
+        <span className="size-1 rounded-full bg-foreground/25" />
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col justify-end gap-1 p-1.5">
+        {Array.from({ length: fields }, (_, i) => (
+          <div
+            key={i}
+            className="h-1.5 w-full rounded-[2px] border border-border/50 bg-muted/40"
+          />
+        ))}
+        <div
+          className={cn(
+            "mt-0.5 flex h-3.5 items-center justify-center rounded-[2px]",
+            winner ? "bg-foreground" : "bg-foreground/20"
+          )}
+        >
+          <span
+            className={cn(
+              "font-mono text-[0.4375rem] tracking-wide uppercase",
+              winner ? "text-background" : "text-foreground/40"
+            )}
+          >
+            Pay
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function ExperimentIllustration() {
   const { ref, active } = useInViewOnce()
 
   return (
-    <div ref={ref} className="size-full min-h-0">
-      <FeatureIllustration
-        viewBox={featureIllustrationViewBoxes["experiment-impact"]}
-        svgClassName={cn("fsv3-ex-chart", active && "fsv3-ex-chart--active")}
+    <div ref={ref} className="size-full min-h-0 p-1">
+      <MockScreen
+        label="New short checkout beats the old long one"
+        className={cn("fsv3-ex-mock", active && "fsv3-ex-mock--active")}
       >
-        <rect
-          x="28"
-          y="32"
-          width="432"
-          height="318"
-          rx="2"
-          fill="var(--card)"
-          stroke="url(#fsv3_ex_frame)"
-        />
-        <line x1="28" y1="72" x2="460" y2="72" stroke="currentColor" strokeOpacity="0.3" />
-        <rect
-          x="48"
-          y="48"
-          width="48"
-          height="16"
-          rx="8"
-          stroke="currentColor"
-          strokeOpacity="0.4"
-        />
-        <circle cx="60" cy="56" r="3" fill="#22c55e" fillOpacity="0.9" />
-        <line x1="68" y1="56" x2="84" y2="56" stroke="currentColor" strokeOpacity="0.5" />
+        <div className="flex min-h-0 flex-1 flex-col gap-2 px-2.5 py-2.5">
+          <div className="grid min-h-0 flex-1 grid-cols-[1fr_auto_1fr] items-stretch gap-1.5">
+            <div className="fsv3-ex-side fsv3-ex-side--a flex min-h-0 flex-col gap-1">
+              <p className="shrink-0 font-mono text-[0.5rem] tracking-[0.1em] text-muted-foreground uppercase">
+                A · Old
+              </p>
+              <CheckoutDraft fields={4} />
+            </div>
 
-        <path
-          d="M56 108H404M56 148H404M56 188H404M56 228H404"
-          stroke="currentColor"
-          strokeOpacity="0.07"
-        />
+            <div
+              className="fsv3-ex-vs flex shrink-0 items-center self-center font-mono text-[0.5rem] text-muted-foreground"
+              aria-hidden
+            >
+              vs
+            </div>
 
-        <g className="fsv3-ex-launch">
-          <line
-            x1="196"
-            y1="96"
-            x2="196"
-            y2="248"
-            stroke="currentColor"
-            strokeOpacity="0.25"
-            strokeDasharray="4 4"
-          />
-          <rect
-            x="184"
-            y="252"
-            width="24"
-            height="14"
-            rx="3"
-            stroke="currentColor"
-            strokeOpacity="0.35"
-          />
-          <line x1="188" y1="259" x2="204" y2="259" stroke="currentColor" strokeOpacity="0.4" />
-        </g>
+            <div className="fsv3-ex-side fsv3-ex-side--b flex min-h-0 flex-col gap-1">
+              <div className="flex shrink-0 items-center justify-between gap-1">
+                <p className="font-mono text-[0.5rem] tracking-[0.1em] text-foreground/80 uppercase">
+                  B · New
+                </p>
+                <span className="rounded-[2px] bg-foreground px-1 py-px font-mono text-[0.4375rem] font-semibold tracking-wide text-background uppercase">
+                  Win
+                </span>
+              </div>
+              <CheckoutDraft fields={1} winner />
+            </div>
+          </div>
 
-        <path
-          className="fsv3-ex-control"
-          pathLength={1}
-          d="M56 208 L120 206 L156 207 L196 208"
-          stroke="currentColor"
-          strokeOpacity="0.25"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          className="fsv3-ex-control fsv3-ex-control--variant"
-          pathLength={1}
-          d="M196 208 L232 205 L268 196 L304 178 L340 158 L376 132 L412 108"
-          stroke="currentColor"
-          strokeOpacity="0.2"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-
-        <g className="fsv3-ex-lift motion-safe:transition-[opacity,transform] duration-200 ease-out group-hover/card:-translate-y-0.5 group-hover/card:opacity-100 opacity-90">
-          <path
-            className="fsv3-ex-lift__area"
-            d="M196 208 L232 200 L268 182 L304 158 L340 128 L376 98 L412 72 L412 208 L196 208 Z"
-            fill="url(#fsv3_ex_area)"
-            fillOpacity="0.12"
-          />
-          <path
-            className="fsv3-ex-lift__line"
-            pathLength={1}
-            d="M196 208 L232 200 L268 182 L304 158 L340 128 L376 98 L412 72"
-            stroke="url(#fsv3_ex_lift)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <g className="fsv3-ex-lift__endpoint">
-            <circle cx="412" cy="72" r="4" fill="currentColor" fillOpacity="0.75" />
-            <line
-              x1="376"
-              y1="72"
-              x2="412"
-              y2="72"
-              stroke="currentColor"
-              strokeOpacity="0.5"
-              strokeDasharray="3 2"
-            />
-          </g>
-        </g>
-
-        <line x1="56" y1="268" x2="404" y2="268" stroke="currentColor" strokeOpacity="0.12" />
-
-        <g className="fsv3-ex-pipeline">
-          <circle
-            className="fsv3-ex-pipeline__node"
-            cx="88"
-            cy="296"
-            r="5"
-            fill="var(--card)"
-            stroke="currentColor"
-            strokeOpacity="0.35"
-          />
-          <line
-            className="fsv3-ex-pipeline__link"
-            x1="96"
-            y1="296"
-            x2="168"
-            y2="296"
-            stroke="currentColor"
-            strokeOpacity="0.2"
-          />
-
-          <circle
-            className="fsv3-ex-pipeline__node"
-            cx="196"
-            cy="296"
-            r="6"
-            fill="var(--card)"
-            stroke="currentColor"
-            strokeOpacity="0.55"
-          />
-          <line
-            className="fsv3-ex-pipeline__link"
-            x1="204"
-            y1="296"
-            x2="276"
-            y2="296"
-            stroke="currentColor"
-            strokeOpacity="0.3"
-          />
-
-          <circle
-            className="fsv3-ex-pipeline__node fsv3-ex-pipeline__node--impact"
-            cx="340"
-            cy="296"
-            r="7"
-            fill="currentColor"
-            fillOpacity="0.15"
-            stroke="currentColor"
-            strokeOpacity="0.75"
-          />
-          <circle
-            className="fsv3-ex-pipeline__node fsv3-ex-pipeline__node--impact"
-            cx="340"
-            cy="296"
-            r="3"
-            fill="currentColor"
-            fillOpacity="0.7"
-          />
-        </g>
-
-        <defs>
-          <linearGradient
-            id="fsv3_ex_frame"
-            x1="244"
-            y1="32"
-            x2="244"
-            y2="350"
-            gradientUnits="userSpaceOnUse"
+          <div
+            className={cn(
+              "fsv3-ex-result flex shrink-0 items-baseline justify-between gap-2 rounded-md border border-foreground/30 bg-muted/55 px-2.5 py-2",
+              "motion-safe:transition-transform duration-200 ease-out group-hover/card:-translate-y-0.5"
+            )}
           >
-            <stop stopColor="var(--foreground)" />
-            <stop offset="0.8" stopColor="var(--background)" />
-          </linearGradient>
-          <linearGradient
-            id="fsv3_ex_lift"
-            x1="196"
-            y1="208"
-            x2="412"
-            y2="72"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="var(--foreground)" stopOpacity="0.35" />
-            <stop offset="1" stopColor="var(--foreground)" />
-          </linearGradient>
-          <linearGradient
-            id="fsv3_ex_area"
-            x1="196"
-            y1="208"
-            x2="412"
-            y2="72"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="var(--foreground)" stopOpacity="0" />
-            <stop offset="1" stopColor="var(--foreground)" stopOpacity="0.35" />
-          </linearGradient>
-        </defs>
-      </FeatureIllustration>
+            <div>
+              <p className="font-mono text-[0.5rem] tracking-[0.1em] text-muted-foreground uppercase">
+                Result
+              </p>
+              <p className="mt-0.5 text-[0.75rem] leading-none font-medium tracking-tight text-foreground">
+                +18% more sales
+              </p>
+            </div>
+            <p className="font-mono text-[0.5rem] tracking-[0.08em] text-foreground/70 uppercase">
+              Shipped
+            </p>
+          </div>
+        </div>
+      </MockScreen>
     </div>
   )
 }

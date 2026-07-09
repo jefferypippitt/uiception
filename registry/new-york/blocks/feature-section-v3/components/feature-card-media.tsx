@@ -19,7 +19,7 @@ export function FeatureCardMedia({ children, className }: FeatureCardMediaProps)
       )}
       aria-hidden
     >
-      <div className="aspect-square h-full max-h-full w-full max-w-full min-h-0 overflow-hidden rounded-2xl">
+      <div className="h-full max-h-full w-full max-w-full min-h-0 overflow-hidden">
         {children}
       </div>
     </div>

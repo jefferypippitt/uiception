@@ -7,26 +7,22 @@ export type FeatureDefinition = {
 export const featureSectionItems: FeatureDefinition[] = [
   {
     id: "signal-over-noise",
-    title: "Surface the signal",
-    description:
-      "Stay on top of what matters without drowning in noise. The right updates reach the right people automatically.",
+    title: "Clear priorities",
+    description: "The right updates reach the right people. Nothing else gets in the way.",
   },
   {
     id: "defaults-that-hold",
-    title: "Guardrails that scale",
-    description:
-      "Sensible defaults ship on day one. Your team moves fast while the product stays consistent as you grow.",
+    title: "Smart defaults",
+    description: "Sensible choices from day one so your team can move without second guessing.",
   },
   {
     id: "one-thread-per-outcome",
-    title: "Context travels with it",
-    description:
-      "Every task carries its own history. Decisions, files, and feedback stay attached to the work so nothing falls through the cracks.",
+    title: "Shared context",
+    description: "Decisions, files, and feedback stay with the work. No hunting across tools.",
   },
   {
     id: "quiet-reliability",
-    title: "Reliable by default",
-    description:
-      "Consistent behavior under pressure. When something needs attention you get a clear signal and a straight path to resolve it.",
+    title: "Quiet reliability",
+    description: "When something needs attention, you get a clear signal and a path to fix it.",
   },
 ]

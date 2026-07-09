@@ -1,49 +1,34 @@
-export type FeatureIllustrationId =
-  | "trip-planner"
-  | "smart-search"
-  | "guides-memories"
-
-export const featureIllustrationViewBoxes = {
-  "trip-planner": "24 28 440 326",
-  "smart-search": "24 28 440 326",
-  "guides-memories": "40 24 368 296",
-} as const satisfies Record<FeatureIllustrationId, string>
-
 export type FeatureColumn = {
   id: string
   title: string
   description: string
   ctaLabel: string
   ctaHref: string
-  illustration: FeatureIllustrationId
 }
 
 export const featureColumns: FeatureColumn[] = [
   {
-    id: "trip-planner",
-    title: "Itinerary board",
+    id: "agents",
+    title: "Give it a job to do",
     description:
-      "Combine destinations, dates, and notes for each day on one shared timeline everyone can follow.",
-    ctaLabel: "Build itinerary",
+      "You describe the outcome. The agent plans the work, reaches into your tools, and shows you every choice it made along the way.",
+    ctaLabel: "See how agents work",
     ctaHref: "#",
-    illustration: "trip-planner",
   },
   {
-    id: "smart-search",
-    title: "Fare workspace",
+    id: "knowledge",
+    title: "Teach it what you know",
     description:
-      "Reserve flights, lodging, and ground connections in one window instead of many browser tabs.",
-    ctaLabel: "View fares",
+      "Point it at your docs, code, and data. Answers start sounding like your product, not like a model guessing in the dark.",
+    ctaLabel: "Bring your sources",
     ctaHref: "#",
-    illustration: "smart-search",
   },
   {
-    id: "guides-memories",
-    title: "Offline library",
+    id: "deploy",
+    title: "Put it in front of people",
     description:
-      "Store maps, photos, and reference files once, then open them anywhere without connectivity.",
-    ctaLabel: "View downloads",
+      "When it is ready, you ship behind one API. Latency, cost, and safety stay visible so the launch feels calm, not reckless.",
+    ctaLabel: "Explore the platform",
     ctaHref: "#",
-    illustration: "guides-memories",
   },
 ]

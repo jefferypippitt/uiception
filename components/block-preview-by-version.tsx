@@ -74,6 +74,7 @@ import NavbarSectionV6Page from "@/registry/new-york/blocks/navbar-section-v6/pa
 import NavbarSectionV7Page from "@/registry/new-york/blocks/navbar-section-v7/page"
 import NavbarSectionV8Page from "@/registry/new-york/blocks/navbar-section-v8/page"
 import NavbarSectionV9Page from "@/registry/new-york/blocks/navbar-section-v9/page"
+import NavbarSectionV10Page from "@/registry/new-york/blocks/navbar-section-v10/page"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -152,6 +153,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v7": NavbarSectionV7Page,
   "navbar-section-v8": NavbarSectionV8Page,
   "navbar-section-v9": NavbarSectionV9Page,
+  "navbar-section-v10": NavbarSectionV10Page,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

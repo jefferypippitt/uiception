@@ -205,7 +205,6 @@ function DotGridPanel({
 function LiveStreamZone({
   zone,
   live,
-  pulseKey,
   instanceId,
 }: {
   zone: Extract<MiniAppScreenZone, { type: "live-stream" }>
@@ -216,26 +215,12 @@ function LiveStreamZone({
   return (
     <MockScreen>
       <div className="fsv8-stat-strip flex shrink-0 border-b border-(--pp-border)">
-        {zone.stats.map((stat, index) => (
+        {zone.stats.map((stat) => (
           <div
             key={stat.label}
             className="fsv8-stat-strip-item flex flex-1 flex-col gap-0.5 px-2.5 py-2"
           >
-            <span
-              key={`${stat.label}-${pulseKey}`}
-              className={cn(
-                "text-base font-medium tracking-tight text-foreground tabular-nums",
-                live && "fsv8-stat-live"
-              )}
-              style={
-                live
-                  ? ({
-                      "--fsv8-stat-delay": `${elementDelay(`${instanceId}-stat-${index}`, 0, 420)}ms`,
-                      "--fsv8-stat-duration": `${elementDuration(`${instanceId}-stat-d-${index}`, 420, 920)}ms`,
-                    } as CSSProperties)
-                  : undefined
-              }
-            >
+            <span className="text-base font-medium tracking-tight text-foreground tabular-nums">
               {stat.value}
             </span>
             <span className="font-mono text-[0.625rem] uppercase tracking-wider text-muted-foreground">
@@ -252,7 +237,6 @@ function LiveStreamZone({
 function SignalFlowZone({
   zone,
   live,
-  pulseKey,
   activeNodeIndex,
   instanceId,
 }: {
@@ -266,45 +250,58 @@ function SignalFlowZone({
     <MockScreen>
       <div
         className={cn(
-          "fsv8-signal-route shrink-0 border-b border-(--pp-border) px-2.5 py-2",
+          "fsv8-signal-route shrink-0 border-b border-(--pp-border) px-3 py-3",
           live && "fsv8-signal-route-live"
         )}
       >
-        <div className="flex items-start justify-between gap-1">
-          {zone.nodes.map((node, index) => (
-            <div key={node.label} className="flex min-w-0 flex-1 items-start">
-              <div className="flex min-w-0 flex-1 flex-col items-center gap-1 text-center">
-                <span
-                  className={cn(
-                    "fsv8-signal-node w-full rounded border border-(--pp-border) bg-background px-1 py-1.5 font-mono text-[0.5625rem] leading-tight text-foreground/80",
-                    live && index === activeNodeIndex && "fsv8-signal-node--active"
-                  )}
-                >
-                  {node.label}
-                </span>
-                <span
-                  key={`${node.label}-${pulseKey}`}
-                  className={cn(
-                    "font-mono text-[0.625rem] tabular-nums text-muted-foreground",
-                    live && index === activeNodeIndex && "fsv8-stat-live text-foreground"
-                  )}
-                >
-                  {node.volume}
-                </span>
+        <div className="flex items-end">
+          {zone.nodes.map((node, index) => {
+            const isActive = live && index === activeNodeIndex
+            const isPast = live && index < activeNodeIndex
+
+            return (
+              <div key={node.label} className="flex min-w-0 flex-1 items-end">
+                <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                  <div className="flex min-w-0 items-baseline justify-between gap-2">
+                    <span
+                      className={cn(
+                        "truncate font-mono text-[0.625rem] leading-none",
+                        isActive ? "text-foreground" : "text-muted-foreground"
+                      )}
+                    >
+                      {node.label}
+                    </span>
+                    <span
+                      className={cn(
+                        "shrink-0 font-mono text-[0.5625rem] tabular-nums leading-none",
+                        isActive ? "text-foreground/70" : "text-muted-foreground/55"
+                      )}
+                    >
+                      {node.volume}
+                    </span>
+                  </div>
+                  <div
+                    className={cn(
+                      "fsv8-signal-hop h-1 w-full",
+                      isActive && "fsv8-signal-hop--active",
+                      isPast && "fsv8-signal-hop--past"
+                    )}
+                  />
+                </div>
+                {index < zone.nodes.length - 1 ? (
+                  <span
+                    className={cn(
+                      "fsv8-signal-gap mb-0.5 h-px w-2 shrink-0",
+                      isPast || isActive
+                        ? "bg-(--pp-accent-muted)"
+                        : "bg-(--pp-border)"
+                    )}
+                    aria-hidden
+                  />
+                ) : null}
               </div>
-              {index < zone.nodes.length - 1 ? (
-                <span
-                  className={cn(
-                    "fsv8-signal-arrow mt-2 shrink-0 px-0.5 text-muted-foreground/50",
-                    live && index === activeNodeIndex && "fsv8-signal-arrow--active"
-                  )}
-                  aria-hidden
-                >
-                  →
-                </span>
-              ) : null}
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
       <DotGridPanel dotGrid={zone.dotGrid} compact live={live} seed={`${instanceId}-signal`} />
@@ -320,6 +317,16 @@ function HealthSplitZone({
   live: boolean
   pulseKey: number
 }) {
+  const chokeIndex = zone.areaPoints.reduce(
+    (lowest, point, index) =>
+      point < zone.areaPoints[lowest]! ? index : lowest,
+    0
+  )
+  const chokeLeft =
+    zone.areaPoints.length > 1
+      ? `${(chokeIndex / (zone.areaPoints.length - 1)) * 100}%`
+      : "50%"
+
   return (
     <MockScreen>
       <div className="flex min-h-0 flex-1">
@@ -334,11 +341,21 @@ function HealthSplitZone({
           ))}
         </div>
         <div className="flex min-h-0 flex-1 flex-col px-2.5 py-2">
-          <span className="mb-2 shrink-0 font-mono text-[0.5625rem] uppercase tracking-wider text-muted-foreground">
-            {zone.chartLabel}
-          </span>
-          <div className="fsv8-area-chart-wrap min-h-0 flex-1">
+          <div className="mb-2 flex shrink-0 items-center justify-between gap-2">
+            <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-muted-foreground">
+              {zone.chartLabel}
+            </span>
+            <span className="font-mono text-[0.5625rem] text-muted-foreground/80">
+              Choke
+            </span>
+          </div>
+          <div className="fsv8-area-chart-wrap relative min-h-0 flex-1">
             <MiniAreaChart points={zone.areaPoints} />
+            <span
+              className="fsv8-choke-mark pointer-events-none absolute bottom-1 top-1 w-px bg-(--pp-accent)/35"
+              style={{ left: chokeLeft }}
+              aria-hidden
+            />
           </div>
         </div>
       </div>
@@ -346,10 +363,17 @@ function HealthSplitZone({
   )
 }
 
+function titleCase(value: string) {
+  return value
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
+
 function DataTableZone({
   zone,
   live,
-  pulseKey,
   activeRowIndex,
 }: {
   zone: Extract<MiniAppScreenZone, { type: "data-table" }>
@@ -359,45 +383,51 @@ function DataTableZone({
 }) {
   return (
     <MockScreen>
-      <div
-        key={live ? `summary-${pulseKey}` : "summary"}
-        className={cn(
-          "fsv8-queue-summary shrink-0 border-b border-(--pp-border) px-2.5 py-1.5 font-mono text-[0.625rem] text-muted-foreground",
-          live && "fsv8-stat-live"
-        )}
-      >
-        {zone.queueSummary}
-      </div>
-      <div className="fsv8-table-body flex w-full shrink-0 flex-col font-mono text-[0.625rem]">
-        <div className="fsv8-table-head grid shrink-0 grid-cols-3 px-2.5 py-1 text-muted-foreground">
+      <div className="fsv8-table flex min-h-0 w-full flex-1 flex-col font-mono text-[0.625rem]">
+        <div className="fsv8-table-head grid shrink-0 grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-(--pp-border) px-3 py-2 text-muted-foreground">
           {zone.columns.map((column) => (
-            <span key={column.header}>{column.header}</span>
+            <span key={column.header} className="truncate">
+              {titleCase(column.header)}
+            </span>
           ))}
         </div>
-        <div className="flex w-full shrink-0 flex-col">
-          {zone.rows.map((row, rowIndex) => (
-            <div
-              key={rowIndex}
-              className={cn(
-                "fsv8-table-row grid shrink-0 grid-cols-3 items-center px-2.5 py-1.5 text-foreground/80",
-                live && rowIndex === activeRowIndex && "fsv8-table-row-live"
-              )}
-            >
-              {row.cells.map((cell, cellIndex) => (
+
+        <div className="fsv8-table-rows flex min-h-0 flex-1 flex-col">
+          {zone.rows.map((row, rowIndex) => {
+            const isActive = live && rowIndex === activeRowIndex
+
+            return (
+              <div
+                key={rowIndex}
+                className={cn(
+                  "fsv8-table-row grid min-h-0 flex-1 grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-(--pp-border) px-3 text-foreground/80 last:border-b-0",
+                  isActive && "fsv8-table-row-live"
+                )}
+              >
+                <span className="truncate text-foreground/90">
+                  {titleCase(row.cells[0] ?? "")}
+                </span>
+                <span className="truncate text-muted-foreground">
+                  {titleCase(row.cells[1] ?? "")}
+                </span>
                 <span
-                  key={cellIndex}
                   className={cn(
-                    live &&
-                      rowIndex === activeRowIndex &&
-                      cellIndex === 2 &&
-                      "fsv8-stat-live"
+                    "truncate tabular-nums",
+                    isActive ? "text-foreground" : "text-foreground/70"
                   )}
                 >
-                  {cell}
+                  {row.cells[2]}
                 </span>
-              ))}
-            </div>
-          ))}
+              </div>
+            )
+          })}
+        </div>
+
+        <div
+          className="fsv8-table-foot shrink-0 border-t border-(--pp-border) px-3 py-2"
+          aria-hidden
+        >
+          {"\u00A0"}
         </div>
       </div>
     </MockScreen>

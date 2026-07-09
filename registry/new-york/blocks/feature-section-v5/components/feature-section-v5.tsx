@@ -13,8 +13,7 @@ export default function FeatureSectionV5() {
             Less noise. More signal.
           </h2>
           <p className="max-w-xl text-3.75 leading-relaxed text-muted-foreground">
-            Focused tools built around how great teams actually work. Nothing
-            unnecessary, everything intentional.
+            Tools that help your team focus on the work that matters.
           </p>
         </div>
         <FeatureGrid />

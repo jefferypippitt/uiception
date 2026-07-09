@@ -62,11 +62,6 @@
   background: var(--pp-accent);
 }
 
-.fsv8-table-head,
-.fsv8-table-row {
-  border-bottom: 1px solid var(--pp-border);
-}
-
 .fsv8-mock-screen {
   height: 100%;
   min-height: 0;
@@ -77,20 +72,15 @@
   min-height: 0;
 }
 
-/* Table mocks need intrinsic height — flex-1 + min-h-0 was clipping the last row */
-.fsv8-mock-frame:has(.fsv8-table-body) {
-  height: auto;
+.fsv8-mock-frame:has(.fsv8-table) {
+  height: 100%;
   min-height: 100%;
 }
 
-.fsv8-mock-frame:has(.fsv8-table-body) .fsv8-mock-screen {
-  flex: none;
-  height: auto;
+.fsv8-mock-frame:has(.fsv8-table) .fsv8-mock-screen {
+  flex: 1;
+  height: 100%;
   min-height: 10.25rem;
-}
-
-.fsv8-table-row:last-child {
-  border-bottom: none;
 }
 
 .fsv8-metric {
@@ -119,8 +109,16 @@
   height: 2.75rem;
 }
 
-.fsv8-signal-node {
-  min-height: 2rem;
+.fsv8-signal-hop {
+  background: var(--pp-border);
+}
+
+.fsv8-signal-hop--past {
+  background: var(--pp-accent-muted);
+}
+
+.fsv8-signal-hop--active {
+  background: var(--pp-accent);
 }
 
 .fsv8-bar-chart {
@@ -191,15 +189,6 @@
 .fsv8-stat-live {
   animation: fsv8-stat-tick var(--fsv8-stat-duration, 650ms) ease
     var(--fsv8-stat-delay, 0ms);
-}
-
-.fsv8-signal-node--active {
-  border-color: var(--pp-accent);
-  background: var(--pp-accent-soft);
-}
-
-.fsv8-signal-arrow--active {
-  color: var(--pp-accent);
 }
 
 .fsv8-table-row-live {

@@ -1,20 +1,20 @@
 
 export const FSV6_WARP_COLORS = [
-  "#000000",
-  "#ffffff",
-  "#000000",
-  "#ffffff",
+  "#0a0a0a",
+  "#3d3d3d",
+  "#141414",
+  "#707070",
 ] as const
 
 export const FSV6_WARP = {
-  proportion: 0.5,
+  proportion: 0.42,
   softness: 1,
-  distortion: 0.09,
-  swirl: 0.9,
-  swirlIterations: 6,
-  shape: "checks" as const,
-  shapeScale: 0.25,
-  speed: 3,
+  distortion: 0.2,
+  swirl: 0.22,
+  swirlIterations: 4,
+  shape: "stripes" as const,
+  shapeScale: 0.65,
+  speed: 0.28,
   scale: 2.5,
   rotation: 1.35,
 }

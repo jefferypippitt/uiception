@@ -15,11 +15,11 @@ export default function FeatureGrid() {
               className="fsv6-card-scrim pointer-events-none absolute inset-0 z-1 motion-reduce:hidden"
               aria-hidden
             />
-            <div className="relative z-10 flex flex-col gap-2 p-[1.35rem] md:p-6 lg:min-h-0 lg:flex-1">
-              <h3 className="m-0 text-lg leading-[1.15] font-medium tracking-[-0.015em] text-white [-webkit-word-spacing:-0.06em] [word-spacing:-0.06em] motion-reduce:text-foreground/90 md:text-xl">
+            <div className="relative z-10 flex flex-col gap-3 p-[1.35rem] md:gap-3.5 md:p-6 lg:min-h-0 lg:flex-1">
+              <h3 className="m-0 text-xl leading-[1.1] font-semibold tracking-[-0.03em] text-white motion-reduce:text-foreground/90 sm:text-[1.375rem]">
                 {title}
               </h3>
-              <p className="m-0 max-w-[34ch] text-sm leading-[1.6] tracking-[-0.006em] text-white motion-reduce:text-foreground md:text-base md:leading-[1.55] lg:mt-auto">
+              <p className="m-0 max-w-[32ch] text-pretty text-[0.9375rem] leading-[1.65] tracking-[-0.012em] text-white/68 motion-reduce:text-muted-foreground md:text-base md:leading-[1.6] lg:mt-auto">
                 {description}
               </p>
             </div>

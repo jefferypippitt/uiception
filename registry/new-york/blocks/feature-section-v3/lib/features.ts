@@ -3,12 +3,6 @@ export type FeatureIllustrationId =
   | "dropoff-diagnosis"
   | "experiment-impact"
 
-export const featureIllustrationViewBoxes = {
-  "funnel-opportunities": "24 28 440 326",
-  "dropoff-diagnosis": "32 24 424 334",
-  "experiment-impact": "28 32 432 318",
-} as const satisfies Record<FeatureIllustrationId, string>
-
 export type Feature = {
   id: FeatureIllustrationId
   step: string

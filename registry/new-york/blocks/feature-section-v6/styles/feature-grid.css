@@ -4,6 +4,7 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  opacity: 0.27;
 }
 
 .fsv6-mesh-canvas {
@@ -24,8 +25,8 @@
 .fsv6-card-scrim {
   background: linear-gradient(
     165deg,
-    color-mix(in oklab, #000000 14%, transparent) 0%,
-    color-mix(in oklab, #000000 28%, transparent) 100%
+    color-mix(in oklab, #000000 16%, transparent) 0%,
+    color-mix(in oklab, #000000 32%, transparent) 100%
   );
 }
 
