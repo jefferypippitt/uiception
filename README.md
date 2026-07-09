@@ -4,6 +4,8 @@ Start from complete sections. Just make it yours.
 
 A shadcn-compatible block registry — browse sections on the site, install any block with the CLI, and customize from there.
 
+![uiception — 3D metallic geometric logo on a dark fluid background](./public/opengraph-image.png)
+
 ## Tech stack
 
 | Layer | Tools |
