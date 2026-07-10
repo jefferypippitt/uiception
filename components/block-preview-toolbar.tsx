@@ -495,6 +495,7 @@ export function BlockPreviewToolbar({
                   src={previewPath}
                   title={displayTitle}
                   ref={iframeRef}
+                  loading="lazy"
                   className={cn(
                     "block h-full w-full rounded-lg border border-border/80 bg-background shadow-sm",
                     !iframeLoaded && "invisible"
