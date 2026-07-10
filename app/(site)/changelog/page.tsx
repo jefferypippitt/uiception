@@ -9,6 +9,11 @@ import { ChangelogList } from "./changelog-list"
 export const metadata: Metadata = {
   title: "Changelog",
   description: "Latest updates and announcements.",
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
 }
 
 const badgeColorClasses = [
