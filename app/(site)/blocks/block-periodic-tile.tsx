@@ -23,6 +23,7 @@ export function BlockPeriodicTile({
   style,
 }: BlockPeriodicTileProps) {
   const count = category.versions.length
+  const isEmpty = count === 0
 
   return (
     <Link
@@ -30,16 +31,16 @@ export function BlockPeriodicTile({
       style={style}
       className={cn(
         "group relative flex flex-col overflow-hidden bg-card text-left transition",
-        "hover:bg-muted/40",
+        isEmpty ? "opacity-50 hover:opacity-75" : "hover:bg-muted/40",
         periodic
           ? "border-r border-b border-border/60 min-h-28"
           : "rounded-lg border border-border shadow-sm min-h-24",
         className
       )}
     >
-     
+
       <span className="pointer-events-none absolute left-1.5 top-1 font-mono text-[9px] tabular-nums">
-        {count}
+        {isEmpty ? "—" : count}
       </span>
 
     
@@ -66,7 +67,7 @@ export function BlockPeriodicTile({
         />
         {!periodic && (
           <p className="mt-0.5 text-center font-mono text-[10px] text-muted-foreground/60 tabular-nums">
-            {count} {count === 1 ? "block" : "blocks"}
+            {isEmpty ? "Coming soon" : `${count} ${count === 1 ? "block" : "blocks"}`}
           </p>
         )}
       </div>
