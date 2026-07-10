@@ -25,6 +25,17 @@ export function useHiw2V2Animations(refs: Hiw2V2Refs) {
     const cardEls = (r().cards.current ?? []).filter(Boolean) as HTMLElement[]
     if (!cardEls.length) return
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const titleEl = r().title.current
+      const allFeatures = cardEls.flatMap((card) =>
+        Array.from(card.querySelectorAll<HTMLElement>("[data-hiw2-feature]"))
+      )
+      gsap.set([titleEl, ...cardEls, ...allFeatures].filter(Boolean), {
+        clearProps: "all",
+      })
+      return
+    }
+
     ctx = gsap.context(() => {
       const titleEl = r().title.current
 
