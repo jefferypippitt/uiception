@@ -8,10 +8,22 @@ export function useHeroAnimation() {
   const brandsRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const targets = [
+      titleRef.current?.querySelectorAll(".word"),
+      descRef.current,
+      streamRef.current,
+      brandsRef.current,
+    ].filter(Boolean)
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(targets, { clearProps: "all" })
+      return
+    }
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } })
 
-      tl.to(titleRef.current!.querySelectorAll(".word"), {
+      tl.to(titleRef.current?.querySelectorAll(".word") ?? [], {
         opacity: 1,
         y: 0,
         duration: 0.8,
