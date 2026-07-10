@@ -39,9 +39,11 @@ export function BlockPeriodicTile({
       )}
     >
 
-      <span className="pointer-events-none absolute left-1.5 top-1 font-mono text-[9px] tabular-nums">
-        {isEmpty ? "—" : count}
-      </span>
+      {!isEmpty && (
+        <span className="pointer-events-none absolute left-1.5 top-1 font-mono text-[9px] tabular-nums">
+          {count}
+        </span>
+      )}
 
     
       <div className="flex flex-1 items-center justify-center px-1 pt-4">
