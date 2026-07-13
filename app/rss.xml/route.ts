@@ -30,13 +30,16 @@ export async function GET() {
     })
     .join("")
 
+  const self = `${siteConfig.url}/rss.xml`
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(siteConfig.name)} Changelog</title>
     <link>${escapeXml(siteConfig.url)}/changelog</link>
     <description>${escapeXml(siteConfig.metaDescription)}</description>
-    <language>en-us</language>${items}
+    <language>en-us</language>
+    <atom:link href="${escapeXml(self)}" rel="self" type="application/rss+xml"/>${items}
   </channel>
 </rss>`
 

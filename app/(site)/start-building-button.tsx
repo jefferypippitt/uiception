@@ -14,7 +14,7 @@ export function StartBuildingButton() {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <Button size="sm" className="relative overflow-hidden" asChild>
+    <Button className="relative overflow-hidden" asChild>
       <Link
         href="/blocks"
         onMouseEnter={() => setHovered(true)}

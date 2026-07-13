@@ -20,39 +20,28 @@ export function ChangelogList({ children }: Props) {
     const mm = gsap.matchMedia()
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
-      for (const row of root.querySelectorAll<HTMLElement>(".cl-row")) {
-        const dateEl = row.querySelector<HTMLElement>(".cl-date")
-        const cardEl = row.querySelector<HTMLElement>(".cl-card")
-        if (dateEl) gsap.set(dateEl, { autoAlpha: 1, y: 0 })
-        if (cardEl) gsap.set(cardEl, { autoAlpha: 1, y: 0 })
+      for (const entry of root.querySelectorAll<HTMLElement>(".cl-entry")) {
+        gsap.set(entry, { autoAlpha: 1, y: 0 })
       }
     })
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      for (const row of root.querySelectorAll<HTMLElement>(".cl-row")) {
-        const dateEl = row.querySelector<HTMLElement>(".cl-date")
-        const cardEl = row.querySelector<HTMLElement>(".cl-card")
-        if (!dateEl || !cardEl) continue
-
-        gsap
-          .timeline({
+      for (const entry of root.querySelectorAll<HTMLElement>(".cl-entry")) {
+        gsap.fromTo(
+          entry,
+          { autoAlpha: 0, y: 18 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: row,
-              start: "top 85%",
+              trigger: entry,
+              start: "top 88%",
               toggleActions: "play none none reverse",
             },
-          })
-          .fromTo(
-            dateEl,
-            { autoAlpha: 0, y: 16 },
-            { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" }
-          )
-          .fromTo(
-            cardEl,
-            { autoAlpha: 0, y: 20 },
-            { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" },
-            "<0.08"
-          )
+          }
+        )
       }
     }, root)
 

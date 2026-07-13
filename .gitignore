@@ -55,6 +55,10 @@ pnpm-debug.log*
 .claude/skills/narrative-mini-mocks/
 .agents/skills/narrative-mini-mocks/
 
+# changelog-mdx skill — beta, local iteration only
+.claude/skills/changelog-mdx/
+.agents/skills/changelog-mdx/
+
 # firecrawl scrape artifacts (local research only)
 .firecrawl/
 
