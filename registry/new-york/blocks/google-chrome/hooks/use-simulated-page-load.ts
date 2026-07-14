@@ -78,6 +78,10 @@ export function useSimulatedPageLoad() {
   useEffect(() => () => cancelAnimationFrame(rafRef.current), [])
 
   useEffect(() => {
+    // Intentional: reacts to the reducedMotion media query changing after
+    // mount by synchronously finishing the load animation. startLoading is
+    // also a public event-handler API, so this can't be moved to render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (reducedMotion) startLoading()
   }, [reducedMotion, startLoading])
 

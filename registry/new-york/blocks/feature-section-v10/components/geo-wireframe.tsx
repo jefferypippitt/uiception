@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, type RefObject } from "react"
+import { useEffect, useRef, useSyncExternalStore, type RefObject } from "react"
 import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -180,10 +180,11 @@ export default function GeoWireframe({ icon, active = false, className }: GeoWir
 
   const { verticesRef, morphingRef } = useGeoMorph(icon, { onMorphingChange })
 
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 
   return (
     <div

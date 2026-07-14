@@ -317,7 +317,9 @@ export default function TrexRunner() {
   const [playJumpSound] = useSound(select008Sound, { volume: 0.35, interrupt: true, soundEnabled })
   const [playCrashSound] = useSound(uEscapeScreenOpenSound, { volume: 0.5, interrupt: true, soundEnabled })
   const playCrashRef = useRef(playCrashSound)
-  playCrashRef.current = playCrashSound
+  useEffect(() => {
+    playCrashRef.current = playCrashSound
+  }, [playCrashSound])
 
   const jump = useCallback(() => {
     const s = stateRef.current
