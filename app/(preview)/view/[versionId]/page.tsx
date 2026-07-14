@@ -11,7 +11,7 @@ export function generateStaticParams() {
   return registryBlockNames.map((versionId) => ({ versionId }))
 }
 
-export default async function BlockViewPage({ params }: PageProps) {
+export default async function PreviewViewPage({ params }: PageProps) {
   const { versionId } = await params
 
   if (!isKnownBlockVersion(versionId)) {

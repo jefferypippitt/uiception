@@ -34,6 +34,10 @@ export const siteConfig = {
   links,
   navItems: [
     {
+      href: "/",
+      label: "Home",
+    },
+    {
       href: "/blocks",
       label: "Blocks",
     },

@@ -1,56 +1,33 @@
-import Link from 'next/link'
-import { Suspense } from 'react'
+import Link from "next/link"
 
-import { Button } from '@/components/ui/button'
-import { CopyrightYear } from '@/components/copyright-year'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { siteConfig } from "@/lib/config"
 
 export default function Footer() {
-    return (
-        <footer className='py-4'>
-            <div className='text-muted-foreground mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-x-3 gap-y-1 px-6 text-center text-sm sm:flex-row'>
-                <p className='flex items-center justify-center gap-2'>
-                    &copy;
-                    <Suspense fallback={<span>----</span>}>
-                        <CopyrightYear />
-                    </Suspense>
-                    <Button variant='link' size='icon-xs' className='p-0' asChild>
-                        <Link
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            href='https://github.com/jefferypippitt/uiception'
-                            aria-label='uiception on GitHub'
-                        >
-                            <Avatar size='sm' className='size-4'>
-                                <AvatarImage
-                                    alt='uiception'
-                                    src='/icon0.svg'
-                                />
-                                <AvatarFallback>UI</AvatarFallback>
-                            </Avatar>
-                        </Link>
-                    </Button>
-                </p>
-                <p className='flex items-center justify-center gap-2'>
-                    Developed by
-                    <Button variant='link' size='icon-xs' className='p-0' asChild>
-                        <Link
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            href='https://github.com/jefferypippitt'
-                            aria-label='jefferypippitt on GitHub'
-                        >
-                            <Avatar size='sm' className='size-4'>
-                                <AvatarImage
-                                    alt='jefferypippitt on GitHub'
-                                    src='https://github.com/jefferypippitt.png?size=128'
-                                />
-                                <AvatarFallback>JP</AvatarFallback>
-                            </Avatar>
-                        </Link>
-                    </Button>
-                </p>
-            </div>
-        </footer>
-    )
+  return (
+    <footer className="py-6">
+      <div className="mx-auto w-full max-w-6xl px-6">
+        <p className="text-balance text-center text-sm text-muted-foreground">
+          Built by{" "}
+          <Link
+            href={siteConfig.author.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            {siteConfig.author.name}
+          </Link>
+          . The source code is available on{" "}
+          <Link
+            href={`${siteConfig.links.github}/uiception`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            GitHub
+          </Link>
+          .
+        </p>
+      </div>
+    </footer>
+  )
 }

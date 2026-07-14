@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const categoryRoutes: MetadataRoute.Sitemap = blockCategories
+  const blockCategoryRoutes: MetadataRoute.Sitemap = blockCategories
     .filter((category) => category.versions.length > 0)
     .map((category) => ({
       url: `${siteConfig.url}/blocks/${category.id}`,
@@ -33,5 +33,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }))
 
-  return [...staticRoutes, ...categoryRoutes]
+  return [...staticRoutes, ...blockCategoryRoutes]
 }

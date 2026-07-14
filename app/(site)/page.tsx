@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { CursorTerminal } from '@/components/cursor-terminal'
 import { siteConfig } from '@/lib/config'
-import { StartBuildingButton } from './start-building-button'
 
 export default function Home() {
     return (
@@ -12,16 +12,13 @@ export default function Home() {
             <div className='mx-auto flex w-full max-w-6xl flex-col items-center gap-8 px-6 text-center md:gap-9'>
                 <div className='flex w-full flex-col items-center gap-2 text-center xl:gap-4'>
                     <Badge asChild variant='secondary'>
-                        <Link href='/changelog' className='inline-flex items-center gap-1'>
+                        <Link href='/changelog'>
                             What&apos;s New
-                            <ArrowRight
-                                className='size-4 shrink-0 transition-transform duration-200 ease-out motion-safe:group-hover/badge:translate-x-0.5'
-                                aria-hidden
-                            />
+                            <ArrowRight data-icon='inline-end' aria-hidden />
                         </Link>
                     </Badge>
 
-                    <h1 className='max-w-4xl text-balance font-pixel-circle text-3xl leading-none tracking-tight text-primary [word-spacing:-0.13em] lg:leading-[1.1] xl:text-5xl xl:tracking-tighter'>
+                    <h1 className='max-w-4xl text-balance text-3xl font-medium leading-none tracking-tight text-primary lg:leading-[1.1] xl:text-5xl xl:tracking-tighter'>
                         Skip to the good part.
                     </h1>
 
@@ -30,7 +27,9 @@ export default function Home() {
                     </p>
 
                     <div className='flex w-full items-center justify-center gap-2 pt-2'>
-                        <StartBuildingButton />
+                        <Button className='rounded-full' asChild>
+                            <Link href='/blocks'>Get Started</Link>
+                        </Button>
                     </div>
                 </div>
 
