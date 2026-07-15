@@ -2,10 +2,11 @@
 
 import { HalftoneDots } from "@paper-design/shaders-react"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const HERO_V4_BG = `${mediaOrigin}/images/blocks/hero-section-v4/image.png`
+type HeroHalftoneImageProps = {
+  src: string
+}
 
-export function HeroHalftoneImage() {
+export function HeroHalftoneImage({ src }: HeroHalftoneImageProps) {
   return (
     <HalftoneDots
       aria-hidden={true}
@@ -18,7 +19,7 @@ export function HeroHalftoneImage() {
       grainOverlay={0.2}
       grainSize={0.5}
       grid="hex"
-      image={HERO_V4_BG}
+      image={src}
       inverted={false}
       originalColors={false}
       radius={1.5}

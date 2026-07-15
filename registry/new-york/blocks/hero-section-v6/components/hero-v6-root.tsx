@@ -7,7 +7,11 @@ import HeroContent from "./hero-content"
 import { HeroV6Image } from "./hero-v6-image"
 import ShaderImageBg from "./shader-image-bg"
 
-export function HeroV6Root() {
+type HeroV6RootProps = {
+  imageSrc: string
+}
+
+export function HeroV6Root({ imageSrc }: HeroV6RootProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
@@ -140,7 +144,7 @@ export function HeroV6Root() {
           <ShaderImageBg ref={frameRef} />
           <div className="hero-v6-media-image absolute inset-4 sm:inset-5 md:inset-7">
             <div className="relative size-full overflow-hidden rounded-sm border border-slate-900/22 bg-[#f5f5f5]">
-              <HeroV6Image />
+              <HeroV6Image src={imageSrc} />
             </div>
           </div>
         </div>

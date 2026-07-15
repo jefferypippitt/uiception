@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import type { ComponentType, SVGProps } from "react"
 
 import { StripeWordmark } from "@/components/ui/svgs/stripeWordmark"
@@ -25,9 +28,11 @@ export type Testimonial = {
   logo: CompanyLogo
 }
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const blockAvatar = (filename: string) =>
-  `${mediaOrigin}/images/blocks/testimonials-section-v2/${filename}`
+const blockAvatar = (filename: string) => {
+  const relPath = `images/blocks/testimonials-section-v2/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 export const testimonials: Testimonial[] = [
   {

@@ -7,32 +7,64 @@ Use this when a block needs raster images (PNG, JPG, WebP) or video (MP4, WebM).
 
 ## How it works
 
-**New blocks (rolling out — currently gallery-section-v3):**
-
-1. **Authoring source** uses same-origin paths (no env, no `mediaOrigin`):
-
-```tsx
-const blockImage = (filename: string) =>
-  `/images/blocks/gallery-section-v3/${filename}`
-```
-
-- Local `next dev`: loads from `public/images/blocks/...`
-- Deployed site: loads from the same paths on `uiception.com`
-
-2. **Shipped registry** (`public/r/*.json`) for blocks in `REWRITE_MEDIA_BLOCKS`
-   (`scripts/rewrite-registry-media.mjs`) rewrites those paths to absolute CDN URLs
-   after `pnpm registry:build`:
+Every block resolves media **local-first with a baked-in CDN fallback**. The
+entry file (or, for client-interactive blocks, a thin Server Component
+wrapper — see below) checks the consumer's own filesystem at render time. If
+they've dropped a real asset at the expected path, it wins — no code edit
+required. Otherwise it falls back to the CDN so a fresh install still renders
+working images:
 
 ```tsx
-const blockImage = (filename: string) =>
-  `https://uiception.com/images/blocks/gallery-section-v3/${filename}`
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/gallery-section-v3/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal
+    ? `/${relPath}`
+    : `https://uiception.com/${relPath}`
+}
 ```
 
-Consumers install and media works immediately. Add a block name to
-`REWRITE_MEDIA_BLOCKS` when you opt it into this system.
+- Fresh install, no local asset yet: `existsSync` is false → CDN URL, image
+  renders immediately.
+- Consumer drops a file at `public/images/blocks/<block-id>/<same-filename>`:
+  `existsSync` is true on the next request → their file wins automatically.
+- This requires whatever calls `blockImage`/`blockVideo` to run on the
+  **server** (Node.js runtime, not Edge) — `existsSync` cannot run in a
+  browser bundle.
 
-**Legacy blocks** may still use `mediaOrigin` + `NEXT_PUBLIC_BASE_URL`. Prefer
-the same-origin + rewrite pattern for new work.
+**If the block's UI is client-interactive** (mobile menu state, GSAP/Motion
+animation, simulated page-load, etc.), the media constant cannot live in that
+`"use client"` file — `node:fs` in a client bundle fails at build/dev time
+with "the chunking context does not support external modules". Split it:
+
+- Keep the block's public entry file (the one `page.tsx` imports, still a
+  zero-prop `<BlockName />`) as a **Server Component** — no `"use client"`.
+  It computes the URL via `blockImage`/`blockVideo` and renders the client
+  piece, passing the resolved URL down as a prop (e.g. `logoSrc`, `bgSrc`,
+  `screenSrc`).
+- Move the interactive JSX into a sibling `<block-id>-root.tsx` (`"use
+  client"`), which accepts that URL as a prop instead of computing it.
+- If the media is used inside a further-nested helper component (e.g. a
+  `BrandLogo` rendered from inside the root), thread the prop through — don't
+  reach for a module-level constant from a nested scope.
+- Register the new `-root.tsx` file in `registry.json` alongside the
+  existing entry (`registry:component`, same `target` convention).
+
+This is exactly the `hero-section-v6.tsx` / `hero-v6-root.tsx` and
+`navbar-section-v1.tsx` / `navbar-section-v1-root.tsx` split — look at either
+for a concrete example.
+
+There used to be a build-time-rewrite alternative (same-origin path in
+source, rewritten to a hardcoded CDN URL in the shipped JSON after
+`shadcn build`). It was removed: once rewritten, the shipped source never
+reads the consumer's `public/` folder again, so replacing a same-named local
+asset did nothing — the consumer had to hand-edit the installed file to point
+back to a local path. That defeated the actual product promise (swap the
+asset, it just works). Every block in this repo is on the local-first
+pattern now; don't reintroduce the rewrite approach.
 
 ## Consumer install
 
@@ -42,25 +74,32 @@ npx shadcn@latest add "https://uiception.com/r/<block-id>.json"
 
 That's it. CDN images render immediately, zero setup.
 
-**To swap an asset:** the block code is installed in their project — they own it. They change the URL in their copy of the file to a local path (e.g. `/images/blocks/<block-id>/image.png`) and drop their file in the pre-created `public/images/blocks/<block-id>/` folder (created by the `.gitkeep` files included in the registry item).
+**To swap an asset:** just drop a file with the matching filename into the
+pre-created `public/images/blocks/<block-id>/` folder (created by the
+`.gitkeep` files included in the registry item) and reload. No code edit.
 
 ## Authoring: adding media to a block
 
-### 1. Use same-origin paths in the entry file (opted-in blocks)
+### 1. Use the local-first + CDN-fallback helper in the entry file
 
 ```tsx
-const HERO_BG = "/images/blocks/<block-id>/image.png"
+import { existsSync } from "node:fs"
+import { join } from "node:path"
 
-const blockImage = (filename: string) =>
-  `/images/blocks/<block-id>/${filename}`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/<block-id>/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
-const blockVideo = (filename: string) =>
-  `/videos/blocks/<block-id>/${filename}`
+const blockVideo = (filename: string) => {
+  const relPath = `videos/blocks/<block-id>/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 ```
 
-Add the block id to `REWRITE_MEDIA_BLOCKS` so shipped JSON uses the CDN.
-
-**`next/image`** — always add `unoptimized` so consumers don't need `remotePatterns` in their own `next.config` after the CDN rewrite:
+**`next/image`** — always add `unoptimized` so consumers don't need `remotePatterns` in their own `next.config` for the CDN fallback:
 
 ```tsx
 <Image src={HERO_BG} unoptimized alt="" fill />
@@ -120,9 +159,10 @@ public/videos/blocks/<block-id>/   ← videos + .gitkeep files
 
 | ❌ Don't | ✅ Do |
 |---|---|
-| `mediaOrigin` / env in new block source | Same-origin `/images/blocks/...` + `REWRITE_MEDIA_BLOCKS` |
-| Leave opted-in source as hardcoded CDN only | Same-origin in source so local WIP works before deploy |
-| Hand-edit `public/r/*.json` media URLs | Change authoring source; run `pnpm registry:build` |
+| `mediaOrigin` / env vars in block source | `existsSync` local-first + baked-in CDN fallback |
+| Build-time rewrite to a hardcoded CDN-only URL | Local-first check so a swapped asset needs no code edit |
+| `"use client"` on the file that calls `blockImage` | Keep it a Server Component; only leaf UI needs client |
+| Module-level media constant read from a nested client helper | Thread the resolved URL down as a prop instead |
 | Single `.gitkeep` for the whole folder | One `<asset>.gitkeep` per expected file |
 | Put URLs in `config.ts` | Filenames in config; URL construction in entry file |
 | `next/image` without `unoptimized` on media src | Add `unoptimized` — consumers need no `remotePatterns` |

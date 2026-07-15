@@ -1,8 +1,13 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import FeatureGrid from "./feature-grid"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const featureImage = (filename: string) =>
-  `${mediaOrigin}/images/blocks/feature-section-v4/${filename}`
+const featureImage = (filename: string) => {
+  const relPath = `images/blocks/feature-section-v4/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 export default function FeatureSectionV4() {
   const featureImageById = {

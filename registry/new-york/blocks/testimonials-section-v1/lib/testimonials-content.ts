@@ -1,6 +1,11 @@
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const blockAvatar = (filename: string) =>
-  `${mediaOrigin}/images/blocks/testimonials-section-v1/${filename}`
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
+const blockAvatar = (filename: string) => {
+  const relPath = `images/blocks/testimonials-section-v1/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 export type Testimonial = {
   id: string

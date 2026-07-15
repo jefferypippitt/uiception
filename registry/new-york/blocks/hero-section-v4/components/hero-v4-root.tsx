@@ -10,7 +10,12 @@ import { HeroHalftoneImage } from "./hero-halftone-image"
 
 const MEDIA_DELAY_S = 1.1
 
-export function HeroV4Root({ children }: { children?: ReactNode }) {
+type HeroV4RootProps = {
+  children?: ReactNode
+  bgSrc: string
+}
+
+export function HeroV4Root({ children, bgSrc }: HeroV4RootProps) {
   const copyRootRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
@@ -98,7 +103,7 @@ export function HeroV4Root({ children }: { children?: ReactNode }) {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <HeroHalftoneImage />
+          <HeroHalftoneImage src={bgSrc} />
         </motion.div>
       </div>
     </MotionConfig>

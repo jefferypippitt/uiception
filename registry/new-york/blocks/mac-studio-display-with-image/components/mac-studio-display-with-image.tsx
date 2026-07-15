@@ -1,9 +1,16 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import Image from "next/image"
 
 import MacStudioDisplay from "../../mac-studio-display/components/mac-studio-display"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const SCREEN_WALLPAPER = `${mediaOrigin}/images/blocks/mac-studio-display-with-image/image.png`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/mac-studio-display-with-image/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const SCREEN_WALLPAPER = blockImage("image.png")
 
 export default function MacStudioDisplayWithImage() {
   return (

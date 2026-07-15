@@ -4,18 +4,16 @@ import Image from "next/image"
 
 import SimpleChatbot from "../../simple-chatbot/components/simple-chatbot"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const HERO_V8_BG = `${mediaOrigin}/images/blocks/hero-section-v8/image.png`
-
 type HeroV8SceneProps = {
   prompts?: readonly string[]
+  bgSrc: string
 }
 
-export function HeroV8Scene({ prompts }: HeroV8SceneProps) {
+export function HeroV8Scene({ prompts, bgSrc }: HeroV8SceneProps) {
   return (
     <div className="relative mt-4 aspect-video w-full overflow-hidden rounded-lg max-sm:mt-3.5 sm:mt-[clamp(1rem,1.5vw,1.5rem)]">
       <Image
-        src={HERO_V8_BG}
+        src={bgSrc}
         alt="Pixel art desert landscape with a winding river"
         unoptimized
         fill

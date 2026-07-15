@@ -1,9 +1,14 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import GalleryTrack from "./gallery-track"
 import { imageFiles, sectionMeta, type GalleryItem } from "../lib/config"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const blockImage = (filename: string) =>
-  `${mediaOrigin}/images/blocks/gallery-section-v1/${filename}`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/gallery-section-v1/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 const galleryItems: GalleryItem[] = imageFiles.map(({ file, alt }, index) => ({
   id: `panel-${index + 1}`,

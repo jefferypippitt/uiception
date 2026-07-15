@@ -12,11 +12,12 @@ enforced by `pnpm registry:validate` and reviewed in every PR:
   keyframes, pseudo-elements, complex grids, GSAP/scroll hooks, and mock-UI
   scoped CSS variables only.
 - **`.cursor/rules/registry-block-media.mdc`** — how block images/video work:
-  new opted-in blocks use same-origin `/images|videos/blocks/...` in source
-  (local + deployed); `pnpm registry:build` rewrites shipped JSON to
-  `https://uiception.com/...` for consumers. No `mediaOrigin` / env.
-  `next/image` always gets `unoptimized`, and every expected asset gets a
-  `.gitkeep` placeholder declared in `registry.json`.
+  blocks resolve media locally-first via `existsSync` against
+  the consumer's own `public/` folder, falling back to
+  `https://uiception.com/...` when no local file exists — so a fresh install
+  works immediately and swapping an asset never requires a code edit. No
+  `mediaOrigin` / env. `next/image` always gets `unoptimized`, and every
+  expected asset gets a `.gitkeep` placeholder declared in `registry.json`.
 
 After adding or editing a block, also see `README.md` ("Block structure") and
 `WORKFLOW.md` (pre-push commands: `pnpm check` then `pnpm build`).

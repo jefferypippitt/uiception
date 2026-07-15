@@ -1,12 +1,13 @@
 import Image from "next/image"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const HERO_V6_IMAGE = `${mediaOrigin}/images/blocks/hero-section-v6/image.jpg`
+type HeroV6ImageProps = {
+  src: string
+}
 
-export function HeroV6Image() {
+export function HeroV6Image({ src }: HeroV6ImageProps) {
   return (
     <Image
-      src={HERO_V6_IMAGE}
+      src={src}
       unoptimized
       alt="Payroll operations dashboard preview"
       width={1280}

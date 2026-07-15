@@ -1,9 +1,16 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import Image from "next/image"
 
 import MacbookPro from "../../macbook-pro/components/macbook-pro"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const SCREEN_WALLPAPER = `${mediaOrigin}/images/blocks/macbook-pro-with-image/image.png`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/macbook-pro-with-image/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const SCREEN_WALLPAPER = blockImage("image.png")
 
 export default function MacbookProWithImage() {
   return (

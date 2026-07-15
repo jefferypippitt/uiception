@@ -1,9 +1,22 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import { GalleryBentoCard } from "./gallery-bento-card"
 import { galleryFiles, sectionMeta, type GalleryItem } from "../lib/config"
 import "../styles/gallery-section-v3.css"
 
-const blockImage = (filename: string) =>
-  `/images/blocks/gallery-section-v3/${filename}`
+/**
+ * Local file wins if the consumer has dropped one in at this path (swap
+ * in place, no code edit needed); otherwise falls back to the CDN so a
+ * fresh install still renders working images.
+ */
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/gallery-section-v3/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal
+    ? `/${relPath}`
+    : `https://uiception.com/${relPath}`
+}
 
 const galleryItems: GalleryItem[] = galleryFiles.map(
   ({ file, ...rest }, index) => ({

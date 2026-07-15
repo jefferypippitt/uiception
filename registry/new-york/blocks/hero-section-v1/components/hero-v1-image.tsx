@@ -1,7 +1,14 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import Image from "next/image"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const HERO_V1_BG = `${mediaOrigin}/images/blocks/hero-section-v1/image.png`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/hero-section-v1/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const HERO_V1_BG = blockImage("image.png")
 
 export function HeroV1Image() {
   return (

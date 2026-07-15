@@ -1,56 +1,16 @@
-"use client"
+import { existsSync } from "node:fs"
+import { join } from "node:path"
 
-import { useCallback, useState } from "react"
+import { GoogleChromeWindowsWithVideoRoot } from "./google-chrome-windows-with-video-root"
 
-import GoogleChromeWindows from "../../google-chrome-windows/components/google-chrome-windows"
-import GoogleHomePreview from "../../google-chrome-windows/components/google-home-preview"
-import PageLoadingBar from "../../google-chrome-windows/components/page-loading-bar"
-import { useSimulatedPageLoad } from "../../google-chrome-windows/hooks/use-simulated-page-load"
-
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/google-chrome-windows-with-video/video.mp4`
-
-const OMNIBOX_PROMPTS = ["vercel.com/home"] as const
+const blockVideo = (filename: string) => {
+  const relPath = `videos/blocks/google-chrome-windows-with-video/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 export default function GoogleChromeWindowsWithVideo() {
-  const [cycleKey, setCycleKey] = useState(0)
-  const { phase, progress, startLoading, reset } = useSimulatedPageLoad()
-
-  const handleTypedComplete = useCallback(() => {
-    startLoading()
-  }, [startLoading])
-
-  const handleVideoEnded = useCallback(() => {
-    reset()
-    setCycleKey((k) => k + 1)
-  }, [reset])
-
   return (
-    <GoogleChromeWindows
-      key={cycleKey}
-      omniboxTypingPrompts={OMNIBOX_PROMPTS}
-      omniboxTypingLoop={false}
-      onOmniboxTypedComplete={handleTypedComplete}
-      aspectRatio="16/9"
-      minHeight={0}
-      className="max-w-4xl"
-    >
-      <div className="relative size-full">
-        <PageLoadingBar progress={progress} visible={phase === "loading"} />
-        {phase === "loaded" ? (
-          <video
-            className="absolute inset-0 block size-full border-none object-cover object-center"
-            src={SCREEN_VIDEO}
-            muted
-            playsInline
-            autoPlay
-            onEnded={handleVideoEnded}
-            aria-label="Screen content video demo"
-          />
-        ) : (
-          <GoogleHomePreview className="absolute inset-0" />
-        )}
-      </div>
-    </GoogleChromeWindows>
+    <GoogleChromeWindowsWithVideoRoot screenSrc={blockVideo("video.mp4")} />
   )
 }

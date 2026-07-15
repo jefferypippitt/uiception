@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import { GeistSans } from "geist/font/sans"
 
 import CtaButtons from "./cta-buttons"
@@ -6,6 +9,12 @@ import { HeroV8Scene } from "./hero-v8-scene"
 import { HERO_V8_TRUST_LABEL } from "../lib/carousel-timing"
 
 import "../styles/hero-section-v8.css"
+
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/hero-section-v8/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
 
 const AI_ASSISTANT_PROMPTS = [
   "Explain how large language models actually work.",
@@ -38,7 +47,10 @@ export default function HeroSectionV8() {
       </div>
 
       <div className="mx-auto max-w-5xl px-4 pt-4">
-        <HeroV8Scene prompts={AI_ASSISTANT_PROMPTS} />
+        <HeroV8Scene
+          prompts={AI_ASSISTANT_PROMPTS}
+          bgSrc={blockImage("image.png")}
+        />
       </div>
 
       <div className="mx-auto max-w-5xl px-4 pt-6">

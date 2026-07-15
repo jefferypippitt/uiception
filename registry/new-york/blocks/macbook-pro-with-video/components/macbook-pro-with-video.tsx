@@ -1,7 +1,14 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import MacbookPro from "../../macbook-pro/components/macbook-pro"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/macbook-pro-with-video/video.mp4`
+const blockVideo = (filename: string) => {
+  const relPath = `videos/blocks/macbook-pro-with-video/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const SCREEN_VIDEO = blockVideo("video.mp4")
 
 export default function MacbookProWithVideo() {
   return (

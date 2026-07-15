@@ -933,7 +933,9 @@
       "type": "registry:block",
       "title": "Brands Section v8",
       "description": "Two-column layout with headline, description, and CTA on the left, and four vertical infinite-scrolling logo marquee columns on the right with alternating up/down directions.",
-      "registryDependencies": ["button"],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "registry/new-york/blocks/brands-section-v8/page.tsx",
@@ -1147,6 +1149,11 @@
           "target": "app/navbar-section-v1/components/navbar-section-v1.tsx"
         },
         {
+          "path": "registry/new-york/blocks/navbar-section-v1/components/navbar-section-v1-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v1/components/navbar-section-v1-root.tsx"
+        },
+        {
           "path": "registry/new-york/blocks/navbar-section-v1/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v1/components/navbar-lorem-demo.tsx"
@@ -1185,6 +1192,11 @@
           "path": "registry/new-york/blocks/navbar-section-v2/components/navbar-section-v2.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v2/components/navbar-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v2/components/navbar-section-v2-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v2/components/navbar-section-v2-root.tsx"
         },
         {
           "path": "registry/new-york/blocks/navbar-section-v2/components/navbar-lorem-demo.tsx",
@@ -1229,6 +1241,11 @@
           "path": "registry/new-york/blocks/navbar-section-v3/components/navbar-section-v3.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v3/components/navbar-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v3/components/navbar-section-v3-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v3/components/navbar-section-v3-root.tsx"
         },
         {
           "path": "registry/new-york/blocks/navbar-section-v3/components/navbar-lorem-demo.tsx",
@@ -1294,6 +1311,11 @@
           "target": "app/navbar-section-v5/components/navbar-section-v5.tsx"
         },
         {
+          "path": "registry/new-york/blocks/navbar-section-v5/components/navbar-section-v5-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v5/components/navbar-section-v5-root.tsx"
+        },
+        {
           "path": "registry/new-york/blocks/navbar-section-v5/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v5/components/navbar-lorem-demo.tsx"
@@ -1332,6 +1354,11 @@
           "path": "registry/new-york/blocks/navbar-section-v6/components/navbar-section-v6.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v6/components/navbar-section-v6.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v6/components/navbar-section-v6-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v6/components/navbar-section-v6-root.tsx"
         },
         {
           "path": "registry/new-york/blocks/navbar-section-v6/components/navbar-lorem-demo.tsx",
@@ -1374,6 +1401,11 @@
           "target": "app/navbar-section-v7/components/navbar-section-v7.tsx"
         },
         {
+          "path": "registry/new-york/blocks/navbar-section-v7/components/navbar-section-v7-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v7/components/navbar-section-v7-root.tsx"
+        },
+        {
           "path": "registry/new-york/blocks/navbar-section-v7/components/navbar-lorem-demo.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v7/components/navbar-lorem-demo.tsx"
@@ -1409,6 +1441,11 @@
           "path": "registry/new-york/blocks/navbar-section-v8/components/navbar-section-v8.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v8/components/navbar-section-v8.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v8/components/navbar-section-v8-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v8/components/navbar-section-v8-root.tsx"
         },
         {
           "path": "registry/new-york/blocks/navbar-section-v8/components/navbar-lorem-demo.tsx",
@@ -1476,6 +1513,11 @@
           "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-section-v10.tsx",
           "type": "registry:component",
           "target": "app/navbar-section-v10/components/navbar-section-v10.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-section-v10-root.tsx",
+          "type": "registry:component",
+          "target": "app/navbar-section-v10/components/navbar-section-v10-root.tsx"
         },
         {
           "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-lorem-demo.tsx",
@@ -2971,6 +3013,11 @@
           "target": "app/google-chrome-windows-with-video/components/google-chrome-windows-with-video.tsx"
         },
         {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-video/components/google-chrome-windows-with-video-root.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows-with-video/components/google-chrome-windows-with-video-root.tsx"
+        },
+        {
           "path": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep",
           "type": "registry:file",
           "target": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep"
@@ -3164,6 +3211,11 @@
           "target": "app/google-chrome-with-image/components/google-chrome-with-image.tsx"
         },
         {
+          "path": "registry/new-york/blocks/google-chrome-with-image/components/google-chrome-with-image-root.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-with-image/components/google-chrome-with-image-root.tsx"
+        },
+        {
           "path": "public/images/blocks/google-chrome-with-image/image.png.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/google-chrome-with-image/image.png.gitkeep"
@@ -3190,6 +3242,11 @@
           "target": "app/google-chrome-with-video/components/google-chrome-with-video.tsx"
         },
         {
+          "path": "registry/new-york/blocks/google-chrome-with-video/components/google-chrome-with-video-root.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-with-video/components/google-chrome-with-video-root.tsx"
+        },
+        {
           "path": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep",
           "type": "registry:file",
           "target": "public/videos/blocks/google-chrome-with-video/video.mp4.gitkeep"
@@ -3214,6 +3271,11 @@
           "path": "registry/new-york/blocks/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx",
           "type": "registry:component",
           "target": "app/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/google-chrome-windows-with-image/components/google-chrome-windows-with-image-root.tsx",
+          "type": "registry:component",
+          "target": "app/google-chrome-windows-with-image/components/google-chrome-windows-with-image-root.tsx"
         },
         {
           "path": "public/images/blocks/google-chrome-windows-with-image/image.png.gitkeep",

@@ -1,10 +1,17 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import Image from "next/image"
 import Link from "next/link"
 
 import { Card, CardHeader } from "@/components/ui/card"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const LOGO_SRC = `${mediaOrigin}/images/blocks/footer-section-v3/logo.svg`
+const blockImage = (filename: string) => {
+  const relPath = `images/blocks/footer-section-v3/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const LOGO_SRC = blockImage("logo.svg")
 
 type FooterLink = {
   label: string

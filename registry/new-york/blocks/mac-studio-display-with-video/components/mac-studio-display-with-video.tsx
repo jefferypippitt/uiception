@@ -1,7 +1,14 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+
 import MacStudioDisplay from "../../mac-studio-display/components/mac-studio-display"
 
-const mediaOrigin = process.env.NEXT_PUBLIC_BASE_URL ?? "https://uiception.com"
-const SCREEN_VIDEO = `${mediaOrigin}/videos/blocks/mac-studio-display-with-video/video.mp4`
+const blockVideo = (filename: string) => {
+  const relPath = `videos/blocks/mac-studio-display-with-video/${filename}`
+  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
+  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
+}
+const SCREEN_VIDEO = blockVideo("video.mp4")
 
 export default function MacStudioDisplayWithVideo() {
   return (
