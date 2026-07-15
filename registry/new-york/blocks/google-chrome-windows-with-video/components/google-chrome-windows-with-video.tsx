@@ -1,14 +1,7 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import { GoogleChromeWindowsWithVideoRoot } from "./google-chrome-windows-with-video-root"
+import { createBlockVideo } from "@/lib/block-media"
 
-const blockVideo = (filename: string) => {
-  const relPath = `videos/blocks/google-chrome-windows-with-video/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
-
+const blockVideo = createBlockVideo("google-chrome-windows-with-video")
 export default function GoogleChromeWindowsWithVideo() {
   return (
     <GoogleChromeWindowsWithVideoRoot screenSrc={blockVideo("video.mp4")} />

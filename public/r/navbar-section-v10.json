@@ -8,6 +8,7 @@
     "motion"
   ],
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "button"
   ],
   "files": [
@@ -19,7 +20,7 @@
     },
     {
       "path": "registry/new-york/blocks/navbar-section-v10/components/navbar-section-v10.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { NavbarSectionV10Root } from \"./navbar-section-v10-root\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/navbar-section-v10/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function NavbarSectionV10() {\n  return <NavbarSectionV10Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
+      "content": "import { NavbarSectionV10Root } from \"./navbar-section-v10-root\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"navbar-section-v10\")\nexport default function NavbarSectionV10() {\n  return <NavbarSectionV10Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
       "type": "registry:component",
       "target": "app/navbar-section-v10/components/navbar-section-v10.tsx"
     },
@@ -37,7 +38,7 @@
     },
     {
       "path": "public/images/blocks/navbar-section-v10/logo.svg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/navbar-section-v10/logo.svg.gitkeep"
     },

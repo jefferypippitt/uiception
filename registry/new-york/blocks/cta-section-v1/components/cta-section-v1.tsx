@@ -1,17 +1,11 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import { GeistPixelCircle } from "geist/font/pixel"
+import { createBlockImage } from "@/lib/block-media"
 import { ArrowUpRightIcon } from "lucide-react"
 import Image from "next/image"
 
+const blockImage = createBlockImage("cta-section-v1")
 import { Button } from "@/components/ui/button"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/cta-section-v1/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
 const CTA_IMAGE = blockImage("image.png")
 
 export default function CtaSectionV1() {

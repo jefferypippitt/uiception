@@ -4,6 +4,7 @@
   "title": "Google Chrome (macOS, w/ image)",
   "description": "macOS Google Chrome mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/google-chrome.json"
   ],
   "files": [
@@ -15,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/google-chrome-with-image/components/google-chrome-with-image.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { GoogleChromeWithImageRoot } from \"./google-chrome-with-image-root\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/google-chrome-with-image/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function GoogleChromeWithImage() {\n  return <GoogleChromeWithImageRoot screenSrc={blockImage(\"image.png\")} />\n}\n",
+      "content": "import { GoogleChromeWithImageRoot } from \"./google-chrome-with-image-root\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"google-chrome-with-image\")\nexport default function GoogleChromeWithImage() {\n  return <GoogleChromeWithImageRoot screenSrc={blockImage(\"image.png\")} />\n}\n",
       "type": "registry:component",
       "target": "app/google-chrome-with-image/components/google-chrome-with-image.tsx"
     },
@@ -27,7 +28,7 @@
     },
     {
       "path": "public/images/blocks/google-chrome-with-image/image.png.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/google-chrome-with-image/image.png.gitkeep"
     }

@@ -1,7 +1,7 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import { GeistSans } from "geist/font/sans"
+import { createBlockImage } from "@/lib/block-media"
+
+const blockImage = createBlockImage("hero-section-v8")
 
 import CtaButtons from "./cta-buttons"
 import HeroV8BrandCarousel from "./hero-v8-brand-carousel"
@@ -10,11 +10,6 @@ import { HERO_V8_TRUST_LABEL } from "../lib/carousel-timing"
 
 import "../styles/hero-section-v8.css"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/hero-section-v8/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
 
 const AI_ASSISTANT_PROMPTS = [
   "Explain how large language models actually work.",

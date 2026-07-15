@@ -1,13 +1,8 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import Image from "next/image"
+import { createBlockImage } from "@/lib/block-media"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/hero-section-v1/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
+const blockImage = createBlockImage("hero-section-v1")
+
 const HERO_V1_BG = blockImage("image.png")
 
 export function HeroV1Image() {

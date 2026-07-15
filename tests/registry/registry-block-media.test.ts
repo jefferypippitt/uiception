@@ -56,6 +56,25 @@ describe("registry block media", () => {
     }
   })
 
+  it("media blocks use shared block-media resolver (no inline existsSync helpers)", () => {
+    const sources = listTsSourcesUnder(
+      join(root, "registry/new-york/blocks"),
+      root,
+    )
+    for (const rel of sources) {
+      const content = readFileSync(join(root, rel), "utf8")
+      if (!sourceReferencesMedia(content)) continue
+      expect(
+        content,
+        `${rel}: media blocks must import createBlockImage/createBlockVideo from @/lib/block-media`,
+      ).toContain("@/lib/block-media")
+      expect(
+        content.includes("existsSync"),
+        `${rel}: inline existsSync media helpers are replaced by @/lib/block-media`,
+      ).toBe(false)
+    }
+  })
+
   it("all .gitkeep registry files are non-empty so shadcn installs them", () => {
     const { items } = loadRegistry()
     for (const item of items) {

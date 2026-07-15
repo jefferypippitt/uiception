@@ -4,6 +4,7 @@
   "title": "Navbar Section v1",
   "description": "Sticky blurred header with optional lorem-demo below the install page for scroll testing.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "button"
   ],
   "files": [
@@ -15,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/navbar-section-v1/components/navbar-section-v1.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { NavbarSectionV1Root } from \"./navbar-section-v1-root\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/navbar-section-v1/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function NavbarSectionV1() {\n  return <NavbarSectionV1Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
+      "content": "import { NavbarSectionV1Root } from \"./navbar-section-v1-root\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"navbar-section-v1\")\nexport default function NavbarSectionV1() {\n  return <NavbarSectionV1Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
       "type": "registry:component",
       "target": "app/navbar-section-v1/components/navbar-section-v1.tsx"
     },
@@ -33,7 +34,7 @@
     },
     {
       "path": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep",
-      "content": "﻿Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/navbar-section-v1/logo.svg.gitkeep"
     },

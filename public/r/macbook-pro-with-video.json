@@ -4,6 +4,7 @@
   "title": "MacBook Pro (w/ video)",
   "description": "Example MacBook Pro mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/macbook-pro.json"
   ],
   "files": [
@@ -15,13 +16,13 @@
     },
     {
       "path": "registry/new-york/blocks/macbook-pro-with-video/components/macbook-pro-with-video.tsx",
-      "content": "import { existsSync } from \"node:fs\"\r\nimport { join } from \"node:path\"\r\n\r\nimport MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\n\r\nconst blockVideo = (filename: string) => {\r\n  const relPath = `videos/blocks/macbook-pro-with-video/${filename}`\r\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\r\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\r\n}\r\nconst SCREEN_VIDEO = blockVideo(\"video.mp4\")\r\n\r\nexport default function MacbookProWithVideo() {\r\n  return (\r\n    <MacbookPro>\r\n      <video\r\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\r\n        src={SCREEN_VIDEO}\r\n        muted\r\n        loop\r\n        playsInline\r\n        autoPlay\r\n        aria-label=\"Screen content video demo\"\r\n      />\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
+      "content": "import MacbookPro from \"../../macbook-pro/components/macbook-pro\"\r\nimport { createBlockVideo } from \"@/lib/block-media\"\n\nconst blockVideo = createBlockVideo(\"macbook-pro-with-video\")\n\r\nconst SCREEN_VIDEO = blockVideo(\"video.mp4\")\r\n\r\nexport default function MacbookProWithVideo() {\r\n  return (\r\n    <MacbookPro>\r\n      <video\r\n        className=\"absolute inset-0 block size-full border-none object-cover object-center\"\r\n        src={SCREEN_VIDEO}\r\n        muted\r\n        loop\r\n        playsInline\r\n        autoPlay\r\n        aria-label=\"Screen content video demo\"\r\n      />\r\n    </MacbookPro>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/macbook-pro-with-video/components/macbook-pro-with-video.tsx"
     },
     {
       "path": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: mp4, webm, mov, or m4v. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/videos/blocks/macbook-pro-with-video/video.mp4.gitkeep"
     }

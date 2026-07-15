@@ -4,6 +4,7 @@
   "title": "Navbar Section v5",
   "description": "Sticky top centered dock nav that shrinks from max-w-6xl to max-w-5xl on scroll, with frosted pill, two-column desktop layout, and mobile sheet menu.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "button",
     "sheet"
   ],
@@ -16,7 +17,7 @@
     },
     {
       "path": "registry/new-york/blocks/navbar-section-v5/components/navbar-section-v5.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { NavbarSectionV5Root } from \"./navbar-section-v5-root\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/navbar-section-v5/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function NavbarSectionV5() {\n  return <NavbarSectionV5Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
+      "content": "import { NavbarSectionV5Root } from \"./navbar-section-v5-root\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"navbar-section-v5\")\nexport default function NavbarSectionV5() {\n  return <NavbarSectionV5Root logoSrc={blockImage(\"logo.svg\")} />\n}\n",
       "type": "registry:component",
       "target": "app/navbar-section-v5/components/navbar-section-v5.tsx"
     },
@@ -34,7 +35,7 @@
     },
     {
       "path": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep",
-      "content": "﻿Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/navbar-section-v5/logo.svg.gitkeep"
     },

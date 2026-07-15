@@ -1,13 +1,8 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
+import { createBlockImage } from "@/lib/block-media"
 
 import FeatureGrid from "./feature-grid"
 
-const featureImage = (filename: string) => {
-  const relPath = `images/blocks/feature-section-v4/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
+const featureImage = createBlockImage("feature-section-v4")
 
 export default function FeatureSectionV4() {
   const featureImageById = {

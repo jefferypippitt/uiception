@@ -4,7 +4,9 @@
   "title": "Gallery Section v3",
   "description": "A centered painting-gallery intro with a five-tile asymmetric bento grid and hover overlays for title, notes, and price.",
   "dependencies": [],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
   "files": [
     {
       "path": "registry/new-york/blocks/gallery-section-v3/page.tsx",
@@ -14,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { GalleryBentoCard } from \"./gallery-bento-card\"\nimport { galleryFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\nimport \"../styles/gallery-section-v3.css\"\n\n/**\n * Local file wins if the consumer has dropped one in at this path (swap\n * in place, no code edit needed); otherwise falls back to the CDN so a\n * fresh install still renders working images.\n */\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/gallery-section-v3/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal\n    ? `/${relPath}`\n    : `https://uiception.com/${relPath}`\n}\n\nconst galleryItems: GalleryItem[] = galleryFiles.map(\n  ({ file, ...rest }, index) => ({\n    id: String(index + 1),\n    ...rest,\n    imageSrc: blockImage(file),\n  }),\n)\n\nexport type GallerySectionV3Props = {\n  header?: { title: string; description?: string } | false\n  items?: GalleryItem[]\n}\n\nexport default function GallerySectionV3({\n  header = sectionMeta,\n  items = galleryItems,\n}: GallerySectionV3Props = {}) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        {header !== false ? (\n          <div className=\"mx-auto mb-10 max-w-2xl text-center md:mb-12\">\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\n              {header.title}\n            </h2>\n            {header.description ? (\n              <p className=\"mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground\">\n                {header.description}\n              </p>\n            ) : null}\n          </div>\n        ) : null}\n        <div className=\"gsv3-bento\">\n          {items.map((item, index) => (\n            <GalleryBentoCard\n              key={item.id}\n              item={item}\n              priority={index === 0}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { GalleryBentoCard } from \"./gallery-bento-card\"\nimport { createBlockImage } from \"@/lib/block-media\"\nimport { galleryFiles, sectionMeta, type GalleryItem } from \"../lib/config\"\nimport \"../styles/gallery-section-v3.css\"\n\nconst blockImage = createBlockImage(\"gallery-section-v3\")\nconst galleryItems: GalleryItem[] = galleryFiles.map(\n  ({ file, ...rest }, index) => ({\n    id: String(index + 1),\n    ...rest,\n    imageSrc: blockImage(file),\n  }),\n)\n\nexport type GallerySectionV3Props = {\n  header?: { title: string; description?: string } | false\n  items?: GalleryItem[]\n}\n\nexport default function GallerySectionV3({\n  header = sectionMeta,\n  items = galleryItems,\n}: GallerySectionV3Props = {}) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        {header !== false ? (\n          <div className=\"mx-auto mb-10 max-w-2xl text-center md:mb-12\">\n            <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\n              {header.title}\n            </h2>\n            {header.description ? (\n              <p className=\"mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground\">\n                {header.description}\n              </p>\n            ) : null}\n          </div>\n        ) : null}\n        <div className=\"gsv3-bento\">\n          {items.map((item, index) => (\n            <GalleryBentoCard\n              key={item.id}\n              item={item}\n              priority={index === 0}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/gallery-section-v3/components/gallery-section-v3.tsx"
     },
@@ -38,31 +40,31 @@
     },
     {
       "path": "public/images/blocks/gallery-section-v3/image-1.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v3/image-1.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v3/image-2.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v3/image-2.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v3/image-3.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v3/image-3.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v3/image-4.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v3/image-4.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep"
     }

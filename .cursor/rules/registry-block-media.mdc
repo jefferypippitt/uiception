@@ -7,33 +7,27 @@ Use this when a block needs raster images (PNG, JPG, WebP) or video (MP4, WebM).
 
 ## How it works
 
-Every block resolves media **local-first with a baked-in CDN fallback**. The
-entry file (or, for client-interactive blocks, a thin Server Component
-wrapper — see below) checks the consumer's own filesystem at render time. If
-they've dropped a real asset at the expected path, it wins — no code edit
-required. Otherwise it falls back to the CDN so a fresh install still renders
-working images:
+Every block resolves media **local-first with a baked-in CDN fallback** via
+[`lib/block-media.ts`](../../lib/block-media.ts). The entry file (or, for
+client-interactive blocks, a thin Server Component wrapper — see below)
+checks the consumer's own filesystem at render time. If they've dropped a real
+asset for that slot, it wins — no code edit required. Otherwise it falls back
+to the CDN so a fresh install still renders working images:
 
 ```tsx
-import { existsSync } from "node:fs"
-import { join } from "node:path"
+import { createBlockImage } from "@/lib/block-media"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/gallery-section-v3/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal
-    ? `/${relPath}`
-    : `https://uiception.com/${relPath}`
-}
+const blockImage = createBlockImage("gallery-section-v3")
+const src = blockImage("image-1.jpg") // also finds image-1.png, .webp, etc.
 ```
 
-- Fresh install, no local asset yet: `existsSync` is false → CDN URL, image
-  renders immediately.
-- Consumer drops a file at `public/images/blocks/<block-id>/<same-filename>`:
-  `existsSync` is true on the next request → their file wins automatically.
+- Fresh install, no local asset yet → CDN URL, image renders immediately.
+- Consumer drops a file with the **same base name** and any supported extension
+  (e.g. `image.jpeg` when the block references `image.png`) → local file wins.
+- Exact canonical filename always wins when present (overwrite-in-place).
 - This requires whatever calls `blockImage`/`blockVideo` to run on the
-  **server** (Node.js runtime, not Edge) — `existsSync` cannot run in a
-  browser bundle.
+  **server** (Node.js runtime, not Edge) — `node:fs` cannot run in a browser
+  bundle.
 
 **If the block's UI is client-interactive** (mobile menu state, GSAP/Motion
 animation, simulated page-load, etc.), the media constant cannot live in that
@@ -74,29 +68,24 @@ npx shadcn@latest add "https://uiception.com/r/<block-id>.json"
 
 That's it. CDN images render immediately, zero setup.
 
-**To swap an asset:** just drop a file with the matching filename into the
+**To swap an asset:** drop a file with the same base name into the
 pre-created `public/images/blocks/<block-id>/` folder (created by the
-`.gitkeep` files included in the registry item) and reload. No code edit.
+`.gitkeep` files included in the registry item) and reload. Supported image
+formats: jpg, jpeg, png, webp, avif, gif, svg. Supported video formats: mp4,
+webm, mov, m4v. No code edit required.
 
 ## Authoring: adding media to a block
 
-### 1. Use the local-first + CDN-fallback helper in the entry file
+### 1. Use `createBlockImage` / `createBlockVideo` from `@/lib/block-media`
+
+Add `https://uiception.com/r/block-media.json` to the block's
+`registryDependencies`. In the entry file:
 
 ```tsx
-import { existsSync } from "node:fs"
-import { join } from "node:path"
+import { createBlockImage, createBlockVideo } from "@/lib/block-media"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/<block-id>/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
-
-const blockVideo = (filename: string) => {
-  const relPath = `videos/blocks/<block-id>/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
+const blockImage = createBlockImage("<block-id>")
+const blockVideo = createBlockVideo("<block-id>")
 ```
 
 **`next/image`** — always add `unoptimized` so consumers don't need `remotePatterns` in their own `next.config` for the CDN fallback:
@@ -159,8 +148,9 @@ public/videos/blocks/<block-id>/   ← videos + .gitkeep files
 
 | ❌ Don't | ✅ Do |
 |---|---|
-| `mediaOrigin` / env vars in block source | `existsSync` local-first + baked-in CDN fallback |
+| `mediaOrigin` / env vars in block source | `createBlockImage` / `createBlockVideo` local-first + CDN fallback |
 | Build-time rewrite to a hardcoded CDN-only URL | Local-first check so a swapped asset needs no code edit |
+| Inline `existsSync` helpers in block source | Import from `@/lib/block-media` (registry dependency) |
 | `"use client"` on the file that calls `blockImage` | Keep it a Server Component; only leaf UI needs client |
 | Module-level media constant read from a nested client helper | Thread the resolved URL down as a prop instead |
 | Single `.gitkeep` for the whole folder | One `<asset>.gitkeep` per expected file |

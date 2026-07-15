@@ -4,6 +4,7 @@
   "title": "Mac Studio Display (w/ video)",
   "description": "Example Mac Studio Display mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/mac-studio-display.json"
   ],
   "files": [
@@ -15,13 +16,13 @@
     },
     {
       "path": "registry/new-york/blocks/mac-studio-display-with-video/components/mac-studio-display-with-video.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport MacStudioDisplay from \"../../mac-studio-display/components/mac-studio-display\"\n\nconst blockVideo = (filename: string) => {\n  const relPath = `videos/blocks/mac-studio-display-with-video/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\nconst SCREEN_VIDEO = blockVideo(\"video.mp4\")\n\nexport default function MacStudioDisplayWithVideo() {\n  return (\n    <MacStudioDisplay>\n      <div className=\"relative size-full overflow-hidden\">\n        <video\n          className=\"absolute top-1/2 left-1/2 h-[125%] w-full max-w-none -translate-x-1/2 -translate-y-1/2 border-none object-cover object-center\"\n          src={SCREEN_VIDEO}\n          muted\n          loop\n          playsInline\n          autoPlay\n          aria-label=\"Screen content video demo\"\n        />\n      </div>\n    </MacStudioDisplay>\n  )\n}\n",
+      "content": "import MacStudioDisplay from \"../../mac-studio-display/components/mac-studio-display\"\nimport { createBlockVideo } from \"@/lib/block-media\"\n\nconst blockVideo = createBlockVideo(\"mac-studio-display-with-video\")\nconst SCREEN_VIDEO = blockVideo(\"video.mp4\")\n\nexport default function MacStudioDisplayWithVideo() {\n  return (\n    <MacStudioDisplay>\n      <div className=\"relative size-full overflow-hidden\">\n        <video\n          className=\"absolute top-1/2 left-1/2 h-[125%] w-full max-w-none -translate-x-1/2 -translate-y-1/2 border-none object-cover object-center\"\n          src={SCREEN_VIDEO}\n          muted\n          loop\n          playsInline\n          autoPlay\n          aria-label=\"Screen content video demo\"\n        />\n      </div>\n    </MacStudioDisplay>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/mac-studio-display-with-video/components/mac-studio-display-with-video.tsx"
     },
     {
       "path": "public/videos/blocks/mac-studio-display-with-video/video.mp4.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\r\n",
+      "content": "Place your asset here. Same base name, any supported format: mp4, webm, mov, or m4v. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/videos/blocks/mac-studio-display-with-video/video.mp4.gitkeep"
     }

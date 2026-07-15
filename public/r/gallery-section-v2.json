@@ -4,7 +4,9 @@
   "title": "Gallery Section v2",
   "description": "A 3×3 image grid with grayscale-to-color hover transitions, uniform aspect ratios, and mono font captions below each card.",
   "dependencies": [],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
   "files": [
     {
       "path": "registry/new-york/blocks/gallery-section-v2/page.tsx",
@@ -14,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { GalleryCard } from \"./gallery-card\"\nimport { galleryFiles, type GalleryItem } from \"../lib/config\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/gallery-section-v2/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nconst galleryItems: GalleryItem[] = galleryFiles.map(\n  ({ file, ...rest }, index) => ({\n    id: String(index + 1),\n    ...rest,\n    imageSrc: blockImage(file),\n  }),\n)\n\nexport default function GallerySectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        <h2 className=\"mb-6 font-mono text-4xl lg:text-5xl\">\n          Gallery\n        </h2>\n        <div className=\"grid grid-cols-3 gap-x-6 gap-y-10\">\n          {galleryItems.map((item, index) => (\n            <GalleryCard\n              key={item.id}\n              item={item}\n              priority={index < 3}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { GalleryCard } from \"./gallery-card\"\nimport { createBlockImage } from \"@/lib/block-media\"\nimport { galleryFiles, type GalleryItem } from \"../lib/config\"\n\nconst blockImage = createBlockImage(\"gallery-section-v2\")\nconst galleryItems: GalleryItem[] = galleryFiles.map(\n  ({ file, ...rest }, index) => ({\n    id: String(index + 1),\n    ...rest,\n    imageSrc: blockImage(file),\n  }),\n)\n\nexport default function GallerySectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        <h2 className=\"mb-6 font-mono text-4xl lg:text-5xl\">\n          Gallery\n        </h2>\n        <div className=\"grid grid-cols-3 gap-x-6 gap-y-10\">\n          {galleryItems.map((item, index) => (\n            <GalleryCard\n              key={item.id}\n              item={item}\n              priority={index < 3}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/gallery-section-v2/components/gallery-section-v2.tsx"
     },
@@ -32,55 +34,55 @@
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-1.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-2.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-3.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-4.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-5.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-6.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-7.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-8.jpg.gitkeep"
     },
     {
       "path": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep"
     }

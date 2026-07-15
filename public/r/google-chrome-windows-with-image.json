@@ -4,6 +4,7 @@
   "title": "Google Chrome (Windows, w/ image)",
   "description": "Windows Google Chrome mock with bundled screen image under the omnibox; swap /images/blocks/... or pass children on the base component.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/google-chrome-windows.json"
   ],
   "files": [
@@ -15,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { GoogleChromeWindowsWithImageRoot } from \"./google-chrome-windows-with-image-root\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/google-chrome-windows-with-image/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function GoogleChromeWindowsWithImage() {\n  return (\n    <GoogleChromeWindowsWithImageRoot screenSrc={blockImage(\"image.png\")} />\n  )\n}\n",
+      "content": "import { GoogleChromeWindowsWithImageRoot } from \"./google-chrome-windows-with-image-root\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"google-chrome-windows-with-image\")\nexport default function GoogleChromeWindowsWithImage() {\n  return (\n    <GoogleChromeWindowsWithImageRoot screenSrc={blockImage(\"image.png\")} />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/google-chrome-windows-with-image/components/google-chrome-windows-with-image.tsx"
     },
@@ -27,7 +28,7 @@
     },
     {
       "path": "public/images/blocks/google-chrome-windows-with-image/image.png.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/google-chrome-windows-with-image/image.png.gitkeep"
     }

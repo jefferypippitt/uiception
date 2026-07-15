@@ -4,6 +4,7 @@
   "title": "Mac Studio Display (w/ image)",
   "description": "Example Mac Studio Display mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/mac-studio-display.json"
   ],
   "files": [
@@ -15,13 +16,13 @@
     },
     {
       "path": "registry/new-york/blocks/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport Image from \"next/image\"\n\nimport MacStudioDisplay from \"../../mac-studio-display/components/mac-studio-display\"\n\nconst blockImage = (filename: string) => {\n  const relPath = `images/blocks/mac-studio-display-with-image/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\nconst SCREEN_WALLPAPER = blockImage(\"image.png\")\n\nexport default function MacStudioDisplayWithImage() {\n  return (\n    <MacStudioDisplay>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS default wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 768px) 100vw, 768px\"\n          loading=\"eager\"\n        />\n      </div>\n    </MacStudioDisplay>\n  )\n}\n",
+      "content": "import Image from \"next/image\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"mac-studio-display-with-image\")\nimport MacStudioDisplay from \"../../mac-studio-display/components/mac-studio-display\"\n\nconst SCREEN_WALLPAPER = blockImage(\"image.png\")\n\nexport default function MacStudioDisplayWithImage() {\n  return (\n    <MacStudioDisplay>\n      <div className=\"relative size-full\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"macOS default wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 768px) 100vw, 768px\"\n          loading=\"eager\"\n        />\n      </div>\n    </MacStudioDisplay>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/mac-studio-display-with-image/components/mac-studio-display-with-image.tsx"
     },
     {
       "path": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.\r\n",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/mac-studio-display-with-image/image.png.gitkeep"
     }

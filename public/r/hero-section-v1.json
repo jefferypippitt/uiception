@@ -7,6 +7,7 @@
     "geist@^1.7.0"
   ],
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "button",
     "https://uiception.com/r/mac-os-terminal.json",
     "https://uiception.com/r/brands-section-v1.json"
@@ -26,13 +27,13 @@
     },
     {
       "path": "registry/new-york/blocks/hero-section-v1/components/hero-v1-image.tsx",
-      "content": "import { existsSync } from \"node:fs\"\r\nimport { join } from \"node:path\"\r\n\r\nimport Image from \"next/image\"\r\n\r\nconst blockImage = (filename: string) => {\r\n  const relPath = `images/blocks/hero-section-v1/${filename}`\r\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\r\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\r\n}\r\nconst HERO_V1_BG = blockImage(\"image.png\")\r\n\r\nexport function HeroV1Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V1_BG}\r\n      unoptimized\r\n      alt=\"\"\r\n      fill\r\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\r\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\r\n      preload={true}\r\n      aria-hidden\r\n    />\r\n  )\r\n}\r\n",
+      "content": "import Image from \"next/image\"\r\nimport { createBlockImage } from \"@/lib/block-media\"\n\nconst blockImage = createBlockImage(\"hero-section-v1\")\n\r\nconst HERO_V1_BG = blockImage(\"image.png\")\r\n\r\nexport function HeroV1Image() {\r\n  return (\r\n    <Image\r\n      src={HERO_V1_BG}\r\n      unoptimized\r\n      alt=\"\"\r\n      fill\r\n      className=\"pointer-events-none absolute inset-0 z-0 object-cover object-center\"\r\n      sizes=\"(max-width: 1024px) 100vw, 1152px\"\r\n      preload={true}\r\n      aria-hidden\r\n    />\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/hero-section-v1/components/hero-v1-image.tsx"
     },
     {
       "path": "public/images/blocks/hero-section-v1/image.png.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/images/blocks/hero-section-v1/image.png.gitkeep"
     }

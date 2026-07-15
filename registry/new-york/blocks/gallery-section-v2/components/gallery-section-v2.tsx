@@ -1,15 +1,8 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import { GalleryCard } from "./gallery-card"
+import { createBlockImage } from "@/lib/block-media"
 import { galleryFiles, type GalleryItem } from "../lib/config"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/gallery-section-v2/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
-
+const blockImage = createBlockImage("gallery-section-v2")
 const galleryItems: GalleryItem[] = galleryFiles.map(
   ({ file, ...rest }, index) => ({
     id: String(index + 1),

@@ -11,25 +11,33 @@ export type PublicMediaPath = `public/${string}`
 
 const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 
-/**
- * Matches a helper function that checks the consumer's own filesystem for a
- * local override before falling back to the CDN, e.g.:
- *   const blockImage = (filename: string) => {
- *     const relPath = `images/blocks/gallery-section-v3/${filename}`
- *     ...
- *   }
- *
- * Groups: 1 = fn name, 2 = "images"|"videos", 3 = block folder
- */
+/** Legacy inline helper (pre block-media lib). */
 const AUTO_FALLBACK_HELPER_RE =
   /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*\{[\s\S]*?const\s+relPath\s*=\s*`(images|videos)\/blocks\/([^`/\n]+)\/\$\{[^}]+\}`[\s\S]*?\n\}/g
+
+/** Shared lib: const blockImage = createBlockImage("block-id") */
+const CREATE_BLOCK_IMAGE_RE =
+  /const\s+(\w+)\s*=\s*createBlockImage\s*\(\s*["']([^"']+)["']\s*\)/g
+
+/** Shared lib: const blockVideo = createBlockVideo("block-id") */
+const CREATE_BLOCK_VIDEO_RE =
+  /const\s+(\w+)\s*=\s*createBlockVideo\s*\(\s*["']([^"']+)["']\s*\)/g
+
+type HelperMeta = { kind: "images" | "videos"; folder: string }
 
 // ─── Has-media detection ───────────────────────────────────────────────────────
 
 /** Returns true if the source file references any block media. */
 export function sourceReferencesMedia(content: string): boolean {
   AUTO_FALLBACK_HELPER_RE.lastIndex = 0
-  return AUTO_FALLBACK_HELPER_RE.test(content)
+  CREATE_BLOCK_IMAGE_RE.lastIndex = 0
+  CREATE_BLOCK_VIDEO_RE.lastIndex = 0
+  return (
+    AUTO_FALLBACK_HELPER_RE.test(content) ||
+    CREATE_BLOCK_IMAGE_RE.test(content) ||
+    CREATE_BLOCK_VIDEO_RE.test(content) ||
+    content.includes("@/lib/block-media")
+  )
 }
 
 // ─── Helper call resolution ────────────────────────────────────────────────────
@@ -38,10 +46,8 @@ function helperCallRe(fnName: string): RegExp {
   return new RegExp(`\\b${fnName}\\s*\\(\\s*["']([^"']+)["']\\s*\\)`, "g")
 }
 
-function collectHelpers(
-  content: string,
-): Map<string, { kind: "images" | "videos"; folder: string }> {
-  const helpers = new Map<string, { kind: "images" | "videos"; folder: string }>()
+function collectHelpers(content: string): Map<string, HelperMeta> {
+  const helpers = new Map<string, HelperMeta>()
   let m: RegExpExecArray | null
 
   AUTO_FALLBACK_HELPER_RE.lastIndex = 0
@@ -49,17 +55,26 @@ function collectHelpers(
     helpers.set(m[1], { kind: m[2] as "images" | "videos", folder: m[3] })
   }
 
+  CREATE_BLOCK_IMAGE_RE.lastIndex = 0
+  while ((m = CREATE_BLOCK_IMAGE_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "images", folder: m[2] })
+  }
+
+  CREATE_BLOCK_VIDEO_RE.lastIndex = 0
+  while ((m = CREATE_BLOCK_VIDEO_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "videos", folder: m[2] })
+  }
+
   return helpers
 }
 
 function extractFromSource(
   content: string,
-  helpers: Map<string, { kind: "images" | "videos"; folder: string }>,
+  helpers: Map<string, HelperMeta>,
   out: Set<PublicMediaPath>,
 ): void {
   let m: RegExpExecArray | null
 
-  // Helper call sites: fn("filename.ext")
   for (const [fnName, { kind, folder }] of helpers) {
     const callRe = helperCallRe(fnName)
     callRe.lastIndex = 0
@@ -81,7 +96,7 @@ export function extractReferencedMediaPaths(
     BLOCK_DIR_RE.test(rel),
   )
 
-  const helpers = new Map<string, { kind: "images" | "videos"; folder: string }>()
+  const helpers = new Map<string, HelperMeta>()
   const contents: string[] = []
 
   for (const rel of sources) {

@@ -1,5 +1,4 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
+import { createBlockImage } from "@/lib/block-media"
 
 import type { ComponentType, SVGProps } from "react"
 
@@ -28,11 +27,7 @@ export type Testimonial = {
   logo: CompanyLogo
 }
 
-const blockAvatar = (filename: string) => {
-  const relPath = `images/blocks/testimonials-section-v2/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
+const blockAvatar = createBlockImage("testimonials-section-v2")
 
 export const testimonials: Testimonial[] = [
   {

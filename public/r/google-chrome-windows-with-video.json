@@ -4,6 +4,7 @@
   "title": "Google Chrome (Windows, w/ video)",
   "description": "Windows Google Chrome mock with bundled screen video under the omnibox; swap /videos/blocks/... or pass videoSrc on the base component.",
   "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
     "https://uiception.com/r/google-chrome-windows.json"
   ],
   "files": [
@@ -15,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/google-chrome-windows-with-video/components/google-chrome-windows-with-video.tsx",
-      "content": "import { existsSync } from \"node:fs\"\nimport { join } from \"node:path\"\n\nimport { GoogleChromeWindowsWithVideoRoot } from \"./google-chrome-windows-with-video-root\"\n\nconst blockVideo = (filename: string) => {\n  const relPath = `videos/blocks/google-chrome-windows-with-video/${filename}`\n  const hasLocal = existsSync(join(process.cwd(), \"public\", relPath))\n  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`\n}\n\nexport default function GoogleChromeWindowsWithVideo() {\n  return (\n    <GoogleChromeWindowsWithVideoRoot screenSrc={blockVideo(\"video.mp4\")} />\n  )\n}\n",
+      "content": "import { GoogleChromeWindowsWithVideoRoot } from \"./google-chrome-windows-with-video-root\"\nimport { createBlockVideo } from \"@/lib/block-media\"\n\nconst blockVideo = createBlockVideo(\"google-chrome-windows-with-video\")\nexport default function GoogleChromeWindowsWithVideo() {\n  return (\n    <GoogleChromeWindowsWithVideoRoot screenSrc={blockVideo(\"video.mp4\")} />\n  )\n}\n",
       "type": "registry:component",
       "target": "app/google-chrome-windows-with-video/components/google-chrome-windows-with-video.tsx"
     },
@@ -27,7 +28,7 @@
     },
     {
       "path": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep",
-      "content": "Place your asset file here. Remove the .gitkeep extension from the filename.",
+      "content": "Place your asset here. Same base name, any supported format: mp4, webm, mov, or m4v. Remove the .gitkeep extension from the filename.",
       "type": "registry:file",
       "target": "public/videos/blocks/google-chrome-windows-with-video/video.mp4.gitkeep"
     }

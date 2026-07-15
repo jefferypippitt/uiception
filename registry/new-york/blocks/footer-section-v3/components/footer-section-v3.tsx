@@ -1,16 +1,10 @@
-import { existsSync } from "node:fs"
-import { join } from "node:path"
-
 import Image from "next/image"
+import { createBlockImage } from "@/lib/block-media"
 import Link from "next/link"
 
+const blockImage = createBlockImage("footer-section-v3")
 import { Card, CardHeader } from "@/components/ui/card"
 
-const blockImage = (filename: string) => {
-  const relPath = `images/blocks/footer-section-v3/${filename}`
-  const hasLocal = existsSync(join(process.cwd(), "public", relPath))
-  return hasLocal ? `/${relPath}` : `https://uiception.com/${relPath}`
-}
 const LOGO_SRC = blockImage("logo.svg")
 
 type FooterLink = {
