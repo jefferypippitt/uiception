@@ -4258,6 +4258,66 @@
           "target": "public/images/blocks/gallery-section-v2/image-9.jpg.gitkeep"
         }
       ]
+    },
+    {
+      "name": "gallery-section-v3",
+      "type": "registry:block",
+      "title": "Gallery Section v3",
+      "description": "A centered painting-gallery intro with a five-tile asymmetric bento grid and hover overlays for title, notes, and price.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/gallery-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/gallery-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v3/components/gallery-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v3/components/gallery-bento-card.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v3/components/gallery-bento-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v3/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/gallery-section-v3/lib/config.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v3/styles/gallery-section-v3.css",
+          "type": "registry:file",
+          "target": "app/gallery-section-v3/styles/gallery-section-v3.css"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v3/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v3/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v3/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v3/image-2.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v3/image-3.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v3/image-3.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v3/image-4.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v3/image-4.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep"
+        }
+      ]
     }
   ]
 }

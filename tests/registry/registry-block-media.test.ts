@@ -22,22 +22,30 @@ describe("registry block media", () => {
     }
   })
 
-  it("no block component references local /images/blocks or /videos/blocks paths", () => {
+  it("legacy blocks do not use same-origin /images|/videos/blocks paths", async () => {
+    const { REWRITE_MEDIA_BLOCKS } = await import(
+      "../../scripts/rewrite-registry-media.mjs"
+    )
     const sources = listTsSourcesUnder(
       join(root, "registry/new-york/blocks"),
       root,
     )
     const localPathRe = /["'`]\/(images|videos)\/blocks\//
     for (const rel of sources) {
+      const blockName = rel.match(
+        /registry\/new-york\/blocks\/([^/]+)\//,
+      )?.[1]
+      if (blockName && REWRITE_MEDIA_BLOCKS.has(blockName)) continue
+
       const content = readFileSync(join(root, rel), "utf8")
       expect(
         localPathRe.test(content),
-        `${rel}: use https://uiception.com/... instead of a local /(images|videos)/blocks/ path`,
+        `${rel}: use https://uiception.com/... or opt the block into REWRITE_MEDIA_BLOCKS`,
       ).toBe(false)
     }
   })
 
-  it("next/image components with CDN URLs declare unoptimized", () => {
+  it("next/image components with media URLs declare unoptimized", () => {
     const sources = listTsSourcesUnder(
       join(root, "registry/new-york/blocks"),
       root,
@@ -50,7 +58,7 @@ describe("registry block media", () => {
       ) {
         expect(
           content,
-          `${rel}: next/image with a CDN src must include the unoptimized prop (no remotePatterns required for consumers)`,
+          `${rel}: next/image with a media src must include the unoptimized prop (no remotePatterns required for consumers)`,
         ).toContain("unoptimized")
       }
     }
@@ -68,6 +76,43 @@ describe("registry block media", () => {
           size,
           `${item.name}: ${f.path} is empty — shadcn skips empty files, add placeholder text`,
         ).toBeGreaterThan(0)
+      }
+    }
+  })
+
+  it("opted-in blocks ship hardcoded CDN URLs (not same-origin or mediaOrigin)", async () => {
+    const { REWRITE_MEDIA_BLOCKS } = await import(
+      "../../scripts/rewrite-registry-media.mjs"
+    )
+    const builtDir = join(root, "public/r")
+    if (!existsSync(builtDir)) return
+
+    for (const blockName of REWRITE_MEDIA_BLOCKS) {
+      const builtPath = join(builtDir, `${blockName}.json`)
+      if (!existsSync(builtPath)) continue
+      const built = JSON.parse(readFileSync(builtPath, "utf8")) as {
+        files?: { content?: string; path?: string }[]
+      }
+      for (const file of built.files ?? []) {
+        if (typeof file.content !== "string") continue
+        expect(
+          file.content.includes("mediaOrigin"),
+          `${blockName} (${file.path}): shipped content still has mediaOrigin — run pnpm registry:build`,
+        ).toBe(false)
+        expect(
+          file.content.includes("NEXT_PUBLIC_BASE_URL"),
+          `${blockName} (${file.path}): shipped content still has NEXT_PUBLIC_BASE_URL — run pnpm registry:build`,
+        ).toBe(false)
+        expect(
+          /["'`]\/(images|videos)\/blocks\//.test(file.content),
+          `${blockName} (${file.path}): shipped content still has same-origin media paths — run pnpm registry:build`,
+        ).toBe(false)
+        if (sourceReferencesMedia(file.content) || file.content.includes("uiception.com/images/blocks") || file.content.includes("uiception.com/videos/blocks")) {
+          expect(
+            file.content.includes("https://uiception.com/"),
+            `${blockName} (${file.path}): shipped media should use https://uiception.com/...`,
+          ).toBe(true)
+        }
       }
     }
   })

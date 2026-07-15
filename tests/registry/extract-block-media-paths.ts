@@ -52,6 +52,21 @@ const LEGACY_IMAGE_HELPER_RE =
 const LEGACY_VIDEO_HELPER_RE =
   /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*[`'"]https:\/\/uiception\.com\/videos\/blocks\/([^/`'"]+)\/\$\{filename\}[`'"]/g
 
+// ─── Same-origin authoring (rewritten to CDN on registry:build) ───────────────
+
+/**
+ * Matches a single-file same-origin path, e.g.:
+ *   const HERO = "/images/blocks/gallery-section-v3/image-1.jpg"
+ */
+const RELATIVE_LITERAL_RE =
+  /["'`]\/(images|videos)\/blocks\/([^"'`${}\n]+)["'`]/g
+
+const RELATIVE_IMAGE_HELPER_RE =
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*`\/images\/blocks\/([^`/\n]+)\/\$\{[^}]+\}`/g
+
+const RELATIVE_VIDEO_HELPER_RE =
+  /const\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*`\/videos\/blocks\/([^`/\n]+)\/\$\{[^}]+\}`/g
+
 // ─── Has-media detection ───────────────────────────────────────────────────────
 
 /** Returns true if the source file references any block media (either pattern). */
@@ -62,6 +77,9 @@ export function sourceReferencesMedia(content: string): boolean {
   LITERAL_MEDIA_RE.lastIndex = 0
   LEGACY_IMAGE_HELPER_RE.lastIndex = 0
   LEGACY_VIDEO_HELPER_RE.lastIndex = 0
+  RELATIVE_LITERAL_RE.lastIndex = 0
+  RELATIVE_IMAGE_HELPER_RE.lastIndex = 0
+  RELATIVE_VIDEO_HELPER_RE.lastIndex = 0
 
   return (
     MEDIAORIGIN_LITERAL_RE.test(content) ||
@@ -69,7 +87,10 @@ export function sourceReferencesMedia(content: string): boolean {
     MEDIAORIGIN_VIDEO_HELPER_RE.test(content) ||
     LITERAL_MEDIA_RE.test(content) ||
     LEGACY_IMAGE_HELPER_RE.test(content) ||
-    LEGACY_VIDEO_HELPER_RE.test(content)
+    LEGACY_VIDEO_HELPER_RE.test(content) ||
+    RELATIVE_LITERAL_RE.test(content) ||
+    RELATIVE_IMAGE_HELPER_RE.test(content) ||
+    RELATIVE_VIDEO_HELPER_RE.test(content)
   )
 }
 
@@ -107,6 +128,17 @@ function collectHelpers(
     helpers.set(m[1], { kind: "videos", folder: m[2] })
   }
 
+  // Same-origin authoring helpers
+  RELATIVE_IMAGE_HELPER_RE.lastIndex = 0
+  while ((m = RELATIVE_IMAGE_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "images", folder: m[2] })
+  }
+
+  RELATIVE_VIDEO_HELPER_RE.lastIndex = 0
+  while ((m = RELATIVE_VIDEO_HELPER_RE.exec(content)) !== null) {
+    helpers.set(m[1], { kind: "videos", folder: m[2] })
+  }
+
   return helpers
 }
 
@@ -126,6 +158,12 @@ function extractFromSource(
   // Legacy literal CDN URLs
   LITERAL_MEDIA_RE.lastIndex = 0
   while ((m = LITERAL_MEDIA_RE.exec(content)) !== null) {
+    out.add(`public/${m[1]}/blocks/${m[2]}` as PublicMediaPath)
+  }
+
+  // Same-origin literals
+  RELATIVE_LITERAL_RE.lastIndex = 0
+  while ((m = RELATIVE_LITERAL_RE.exec(content)) !== null) {
     out.add(`public/${m[1]}/blocks/${m[2]}` as PublicMediaPath)
   }
 

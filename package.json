@@ -20,7 +20,7 @@
     "test:run": "vitest run",
     "check": "pnpm registry:validate && pnpm lint && pnpm test:run && pnpm typecheck",
     "registry:validate": "shadcn registry validate",
-    "registry:build": "shadcn build",
+    "registry:build": "shadcn build && node scripts/rewrite-registry-media.mjs",
     "images:compress": "node scripts/compress-images.mjs",
     "videos:compress": "node scripts/compress-videos.mjs"
   },
