@@ -2027,7 +2027,9 @@
       "type": "registry:block",
       "title": "How It Works Section v1",
       "description": "Three-step process section with accent-colored heading prefix, top-border step numbers, and staggered IntersectionObserver entrance animation.",
-      "dependencies": [],
+      "dependencies": [
+        "geist"
+      ],
       "registryDependencies": [
         "card"
       ],

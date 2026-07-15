@@ -1,3 +1,5 @@
+import { GeistPixelGrid } from "geist/font/pixel"
+
 import {
   Card,
   CardContent,
@@ -20,7 +22,9 @@ export default function StepCard({ step }: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col p-8 pt-6 pb-12">
-        <CardTitle className="font-pixel-grid text-[2.75rem] leading-[1.05] font-medium tracking-tight text-foreground/90">
+        <CardTitle
+          className={`${GeistPixelGrid.className} text-[2.75rem] leading-[1.05] font-medium tracking-tight text-foreground/90`}
+        >
           {step.title}
         </CardTitle>
         <CardDescription className="mt-auto line-clamp-4 min-h-24 pt-4 text-[15px] leading-relaxed text-muted-foreground/80">

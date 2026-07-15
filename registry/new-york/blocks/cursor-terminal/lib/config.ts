@@ -25,7 +25,7 @@ export type OutputItem =
   | { type: "line"; text: string; color?: LineColor; delay: number }
   | { type: "spinner"; text: string; doneText?: string; delay: number; duration: number }
 
-export const PROMPT = "PS C:\\projects\\uiception> "
+export const PROMPT = "PS C:\\projects\\my-app> "
 export const COMMAND = 'npx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"'
 /** Hold after paste before the command line commits. */
 export const PASTE_SETTLE_MS = 580
@@ -46,16 +46,16 @@ export const OUTPUT_SEQUENCE: OutputItem[] = [
     duration: 3000,
     doneText: "Installed dependencies.",
   },
-  { type: "line", text: "✓ Created 21 files:", color: "green", delay: 320 },
+  { type: "line", text: "✓ Created 33 files:", color: "green", delay: 320 },
   { type: "line", text: "  - components/ui/button.tsx", color: "cyan", delay: 155 },
   { type: "line", text: "  - app/hero-section-v1/page.tsx", color: "cyan", delay: 145 },
-  { type: "line", text: "  - app/hero-section-v1/hero-section-v1.tsx", color: "cyan", delay: 150 },
-  { type: "line", text: "  - app/hero-section-v1/brands-section-v1.tsx", color: "cyan", delay: 142 },
-  { type: "line", text: "  - app/hero-section-v1/mac-os-terminal.tsx", color: "cyan", delay: 148 },
-  { type: "line", text: "  - public/images/blocks/hero-section-v1/hero-section-v1-bg.png", color: "cyan", delay: 152 },
+  { type: "line", text: "  - app/hero-section-v1/components/hero-section-v1.tsx", color: "cyan", delay: 150 },
+  { type: "line", text: "  - app/brands-section-v1/components/brands-section-v1.tsx", color: "cyan", delay: 142 },
+  { type: "line", text: "  - app/mac-os-terminal/components/mac-os-terminal.tsx", color: "cyan", delay: 148 },
+  { type: "line", text: "  - public/images/blocks/hero-section-v1/image.png.gitkeep", color: "cyan", delay: 152 },
   {
     type: "line",
-    text: "  … +15 files (CSS, terminal TS/CSS, code segments, 12 brand SVGs)",
+    text: "  … +27 files (block-media, terminal TS/CSS, code segments, 11 brand SVGs)",
     color: "dim",
     delay: 190,
   },

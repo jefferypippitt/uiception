@@ -479,11 +479,11 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
   return (
     <div
       data-wordle-root
-      className="relative flex h-96 min-h-0 flex-col bg-black px-1.5 py-1 text-[#d7dadc]"
+      className="relative flex h-96 min-h-0 flex-col bg-black px-2 py-1.5 text-[#d7dadc]"
       aria-label="Word guessing game"
     >
       <div
-        className="flex shrink-0 items-baseline gap-x-1 pb-1.5 text-[10px] leading-tight text-[#d7dadc] sm:text-[11px]"
+        className="flex shrink-0 items-baseline gap-x-1 pb-1 text-[10px] leading-tight text-[#d7dadc] sm:text-[11px]"
         aria-label="Time until next daily word"
       >
         <div className="min-w-0 flex-1" aria-hidden />
@@ -498,11 +498,11 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
         </div>
       </div>
 
-      <div className="flex min-h-0 flex-1 items-center justify-center">
-        <div className="flex w-full max-w-[320px] flex-col items-center gap-3">
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center pb-1 pt-0.5">
+        <div className="flex w-full max-w-[352px] flex-col items-center gap-4">
           <div
             className={cn(
-              "flex w-full max-w-[220px] flex-col gap-1",
+              "flex w-full max-w-[232px] flex-col gap-[3px]",
               shake && "wordle-shake"
             )}
           >
@@ -511,7 +511,7 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
               const scores = committed?.scores
               const isCurrent = row === rows.length && playing
               return (
-                <div key={row} className="grid w-full grid-cols-5 gap-1">
+                <div key={row} className="grid w-full grid-cols-5 gap-[3px]">
                   {Array.from({ length: COLS }, (_, col) => {
                     let letter: string | null = null
                     let result: WordleTileResult | undefined
@@ -527,7 +527,7 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
                       <div
                         key={col}
                         className={cn(
-                          "flex aspect-square max-h-[26px] min-h-0 w-full items-center justify-center rounded-sm border text-[11px] font-medium tracking-wide uppercase sm:max-h-[28px] sm:text-xs",
+                          "flex aspect-square max-h-[28px] min-h-0 w-full items-center justify-center rounded-[2px] border text-[13px] font-semibold tracking-wide uppercase sm:max-h-[30px] sm:text-sm",
                           tileClasses(result, has)
                         )}
                       >
@@ -540,11 +540,14 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
             })}
           </div>
 
-          <div className="flex w-full max-w-[min(100%,320px)] shrink-0 flex-col gap-1">
+          <div className="flex w-full shrink-0 flex-col gap-[5px]">
             {KEYBOARD_ROWS.map((row, ri) => (
               <div
                 key={ri}
-                className={cn("flex justify-center gap-1", ri === 1 && "px-1")}
+                className={cn(
+                  "flex justify-center gap-[5px]",
+                  ri === 1 && "px-2.5"
+                )}
               >
                 {row.map((key) => {
                   if (key === "ENTER") {
@@ -555,7 +558,7 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
                         disabled={submitting || submitOnCooldown}
                         onClick={() => void submit()}
                         className={cn(
-                          "flex h-7 min-w-[40px] shrink-0 items-center justify-center rounded-md px-0.5 text-[8px] font-medium tracking-[0.18em] transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[44px] sm:text-[9px]",
+                          "flex h-8 min-w-[50px] shrink-0 items-center justify-center rounded-[2px] px-1 text-[8px] font-medium tracking-[0.16em] transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-[34px] sm:min-w-[54px] sm:text-[9px]",
                           keyCapClasses("")
                         )}
                       >
@@ -572,12 +575,12 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
                         disabled={submitting}
                         onClick={backspace}
                         className={cn(
-                          "flex h-7 min-w-[32px] shrink-0 items-center justify-center rounded-md px-1 transition-colors outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:min-w-[36px]",
+                          "flex h-8 min-w-[42px] shrink-0 items-center justify-center rounded-[2px] px-1.5 transition-colors outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-[34px] sm:min-w-[46px]",
                           keyCapClasses("")
                         )}
                       >
                         <Delete
-                          className="h-3.5 w-3.5"
+                          className="h-4 w-4"
                           strokeWidth={2.5}
                           aria-hidden
                         />
@@ -591,7 +594,7 @@ export default function Wordle({ isActive = true }: { isActive?: boolean }) {
                       disabled={submitting}
                       onClick={() => addLetter(key)}
                       className={cn(
-                        "flex h-7 min-w-0 flex-1 basis-0 items-center justify-center rounded-md text-[10px] font-medium tracking-wide transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-8 sm:text-[11px]",
+                        "flex h-8 min-w-0 flex-1 basis-0 items-center justify-center rounded-[2px] text-[11px] font-medium tracking-wide transition-colors outline-none select-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-black enabled:cursor-pointer disabled:opacity-40 sm:h-[34px] sm:text-xs",
                         keyCapClasses(key)
                       )}
                     >

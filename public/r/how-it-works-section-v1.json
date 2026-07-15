@@ -3,7 +3,9 @@
   "name": "how-it-works-section-v1",
   "title": "How It Works Section v1",
   "description": "Three-step process section with accent-colored heading prefix, top-border step numbers, and staggered IntersectionObserver entrance animation.",
-  "dependencies": [],
+  "dependencies": [
+    "geist"
+  ],
   "registryDependencies": [
     "card"
   ],
@@ -28,7 +30,7 @@
     },
     {
       "path": "registry/new-york/blocks/how-it-works-section-v1/components/step-card.tsx",
-      "content": "import {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport type { Step } from \"../lib/steps\"\n\ntype Props = {\n  step: Step\n}\n\nexport default function StepCard({ step }: Props) {\n  return (\n    <Card className=\"flex h-full flex-col rounded-[2rem] py-0\">\n      <CardHeader className=\"p-8 pb-0\">\n        <CardTitle className=\"text-base text-green-600 dark:text-green-400\">\n          {step.number}\n        </CardTitle>\n      </CardHeader>\n      <CardContent className=\"flex flex-1 flex-col p-8 pt-6 pb-12\">\n        <CardTitle className=\"font-pixel-grid text-[2.75rem] leading-[1.05] font-medium tracking-tight text-foreground/90\">\n          {step.title}\n        </CardTitle>\n        <CardDescription className=\"mt-auto line-clamp-4 min-h-24 pt-4 text-[15px] leading-relaxed text-muted-foreground/80\">\n          {step.description}\n        </CardDescription>\n      </CardContent>\n    </Card>\n  )\n}\n",
+      "content": "import { GeistPixelGrid } from \"geist/font/pixel\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport type { Step } from \"../lib/steps\"\n\ntype Props = {\n  step: Step\n}\n\nexport default function StepCard({ step }: Props) {\n  return (\n    <Card className=\"flex h-full flex-col rounded-[2rem] py-0\">\n      <CardHeader className=\"p-8 pb-0\">\n        <CardTitle className=\"text-base text-green-600 dark:text-green-400\">\n          {step.number}\n        </CardTitle>\n      </CardHeader>\n      <CardContent className=\"flex flex-1 flex-col p-8 pt-6 pb-12\">\n        <CardTitle\n          className={`${GeistPixelGrid.className} text-[2.75rem] leading-[1.05] font-medium tracking-tight text-foreground/90`}\n        >\n          {step.title}\n        </CardTitle>\n        <CardDescription className=\"mt-auto line-clamp-4 min-h-24 pt-4 text-[15px] leading-relaxed text-muted-foreground/80\">\n          {step.description}\n        </CardDescription>\n      </CardContent>\n    </Card>\n  )\n}\n",
       "type": "registry:component",
       "target": "app/how-it-works-section-v1/components/step-card.tsx"
     },
