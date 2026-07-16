@@ -1,0 +1,25 @@
+---
+title: Installation
+description: Run the site locally, or install a single block into your own project.
+order: 2
+---
+
+## Local development
+
+Requires Node.js 20+ and pnpm.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Installing a block
+
+Every block ships as a shadcn registry item. Install one directly into your own project
+with the shadcn CLI:
+
+```bash
+npx shadcn@latest add "https://uiception.com/r/<block-name>.json"
+```

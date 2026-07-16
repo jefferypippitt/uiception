@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "./typeset.css";
-@plugin "@tailwindcss/typography";
+@import "./vercel-docs-theme.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -11,6 +11,74 @@
   --typeset-size: 15px;
   --typeset-leading: 1.75;
   --typeset-flow: 1.25em;
+}
+
+/*
+ * Site docs typeset — same rhythm as .typeset-docs, but code blocks use the
+ * Vercel docs Shiki themes (lib/shiki-themes/vercel-docs-*.source.json).
+ */
+.typeset-site-docs {
+  --typeset-font-body: var(--font-geist-sans);
+  --typeset-font-heading: var(--font-geist-sans);
+  --typeset-font-mono: var(--font-geist-mono);
+  --typeset-size: 15px;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.25em;
+
+  --typeset-code-bg: var(--vercel-docs-bg);
+  --typeset-code-fg: var(--vercel-docs-fg);
+  --typeset-code-border: var(--vercel-docs-border);
+
+  /* Same accents as homepage terminal (cyan / green / pink / dim) */
+  --ft-folder: var(--vercel-docs-cyan);
+  --ft-tsx: var(--vercel-docs-green);
+  --ft-css: var(--vercel-docs-pink);
+  --ft-comment: var(--vercel-docs-dim);
+}
+
+.typeset-site-docs :where(pre) {
+  background-color: var(--typeset-code-bg);
+  color: var(--typeset-code-fg);
+  border: 1px solid var(--typeset-code-border);
+}
+
+/* Dual-theme Shiki tokens (defaultColor: false) */
+.typeset-site-docs pre.shiki {
+  background-color: var(--shiki-light-bg, var(--typeset-code-bg)) !important;
+}
+
+.typeset-site-docs pre.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .typeset-site-docs pre.shiki {
+  background-color: var(--shiki-dark-bg, var(--typeset-code-bg)) !important;
+}
+
+.dark .typeset-site-docs pre.shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/*
+ * Docs file-tree fences (```file-tree) — folders / .tsx / .css each share one color.
+ */
+.typeset-site-docs pre.file-tree .ft-folder {
+  color: var(--ft-folder);
+}
+
+.typeset-site-docs pre.file-tree .ft-tsx {
+  color: var(--ft-tsx);
+}
+
+.typeset-site-docs pre.file-tree .ft-css {
+  color: var(--ft-css);
+}
+
+.typeset-site-docs pre.file-tree .ft-comment {
+  color: var(--ft-comment);
 }
 
 @custom-variant dark (&:is(.dark *));

@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { getChangelogEntries, type ChangelogEntry } from "@/lib/changelog"
 import { ChangelogBadgeLink } from "./badge-link"
-import { ChangelogList } from "./changelog-list"
 
 export const metadata: Metadata = {
   title: "Changelog",
@@ -53,16 +52,16 @@ export default async function ChangelogPage() {
               No changelog entries yet. Add one in <code>content/changelog</code>.
             </p>
           ) : (
-            <ChangelogList>
+            <div className="space-y-0">
               {entries.map((entry: ChangelogEntry) => (
                 <article
                   key={`${entry.date}-${entry.title}`}
                   id={`entry-${entry.date}`}
-                  className="cl-entry scroll-mt-24 border-b border-border/60 py-10 first:pt-0 last:border-b-0 md:py-12"
+                  className="scroll-mt-24 border-b border-border/60 py-10 first:pt-0 last:border-b-0 md:py-12"
                 >
                   <time
                     dateTime={entry.date}
-                    className="cl-date text-sm text-muted-foreground"
+                    className="text-sm text-muted-foreground"
                   >
                     {formatEntryDate(entry.date)}
                   </time>
@@ -102,7 +101,7 @@ export default async function ChangelogPage() {
                   )}
                 </article>
               ))}
-            </ChangelogList>
+            </div>
           )}
         </div>
       </div>

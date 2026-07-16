@@ -1,0 +1,23 @@
+/*
+ * Shared Vercel docs palette — sourced from lib/shiki-themes/vercel-docs-*.source.json
+ * Keep homepage terminal + docs code/file-tree on the same tokens.
+ */
+:root {
+  --vercel-docs-bg: #ffffff;
+  --vercel-docs-fg: #171717;
+  --vercel-docs-border: #eaeaea;
+  --vercel-docs-green: #067a3d;
+  --vercel-docs-cyan: #0070f3;
+  --vercel-docs-pink: #d6336c;
+  --vercel-docs-dim: #6b7280;
+}
+
+.dark {
+  --vercel-docs-bg: #000000;
+  --vercel-docs-fg: #eeeeee;
+  --vercel-docs-border: #1a1a1a;
+  --vercel-docs-green: #00c45c;
+  --vercel-docs-cyan: #47a8ff;
+  --vercel-docs-pink: #ff4d8d;
+  --vercel-docs-dim: #a0a0a0;
+}

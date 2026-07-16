@@ -1,15 +1,15 @@
-/* Homepage cursor terminal — Vercel docs theme (lib/shiki-themes/vercel-docs-*.source.json) */
+/* Homepage cursor terminal — shared Vercel docs palette (app/vercel-docs-theme.css) */
 
 .crt-terminal-vercel {
-  --crt-t-shell-bg: #ffffff;
+  --crt-t-shell-bg: var(--vercel-docs-bg);
   --crt-t-titlebar-bg: #fafafa;
-  --crt-t-body-bg: #ffffff;
-  --crt-t-body-fg: #171717;
-  --crt-t-border: #eaeaea;
-  --crt-t-titlebar-border: #eaeaea;
+  --crt-t-body-bg: var(--vercel-docs-bg);
+  --crt-t-body-fg: var(--vercel-docs-fg);
+  --crt-t-border: var(--vercel-docs-border);
+  --crt-t-titlebar-border: var(--vercel-docs-border);
   --crt-t-shadow: none;
-  --crt-t-tab-active-bg: #ffffff;
-  --crt-t-tab-active-fg: #171717;
+  --crt-t-tab-active-bg: var(--vercel-docs-bg);
+  --crt-t-tab-active-fg: var(--vercel-docs-fg);
   --crt-t-tab-active-accent: #0070f3;
   --crt-t-tab-inactive-fg: #a0a0a0;
   --crt-t-tab-hover-fg: #666666;
@@ -18,14 +18,14 @@
   --crt-t-icon-muted: #a0a0a0;
   --crt-t-icon-subtle: #a0a0a0;
   --crt-t-terminal-icon: #0070f3;
-  --crt-t-shell-fg: #171717;
-  --crt-t-line-green: #067a3d;
-  --crt-t-line-cyan: #0070f3;
-  --crt-t-line-dim: #6b7280;
-  --crt-t-line-default: #171717;
-  --crt-t-syntax-kw: #d6336c;
-  --crt-t-syntax-arg: #0070f3;
-  --crt-t-cursor-bg: #171717;
+  --crt-t-shell-fg: var(--vercel-docs-fg);
+  --crt-t-line-green: var(--vercel-docs-green);
+  --crt-t-line-cyan: var(--vercel-docs-cyan);
+  --crt-t-line-dim: var(--vercel-docs-dim);
+  --crt-t-line-default: var(--vercel-docs-fg);
+  --crt-t-syntax-kw: var(--vercel-docs-pink);
+  --crt-t-syntax-arg: var(--vercel-docs-cyan);
+  --crt-t-cursor-bg: var(--vercel-docs-fg);
   --crt-t-dot-blue: #0070f3;
   --crt-t-dot-grey: #a0a0a0;
   --crt-t-dot-ring: rgb(0 0 0 / 0.12);
@@ -34,34 +34,14 @@
 }
 
 .dark .crt-terminal-vercel {
-  --crt-t-shell-bg: #000000;
-  --crt-t-titlebar-bg: #000000;
-  --crt-t-body-bg: #000000;
-  --crt-t-body-fg: #eeeeee;
-  --crt-t-border: #1a1a1a;
-  --crt-t-titlebar-border: #1a1a1a;
-  --crt-t-shadow: none;
-  --crt-t-tab-active-bg: #000000;
-  --crt-t-tab-active-fg: #eeeeee;
-  --crt-t-tab-active-accent: #0070f3;
+  --crt-t-titlebar-bg: var(--vercel-docs-bg);
   --crt-t-tab-inactive-fg: #a0a0a0;
-  --crt-t-tab-hover-fg: #eeeeee;
+  --crt-t-tab-hover-fg: var(--vercel-docs-fg);
   --crt-t-footer-fg: #a0a0a0;
   --crt-t-icon-fg: #a0a0a0;
   --crt-t-icon-muted: #a0a0a0;
   --crt-t-icon-subtle: #666666;
-  --crt-t-terminal-icon: #0070f3;
-  --crt-t-shell-fg: #eeeeee;
-  --crt-t-line-green: #00c45c;
-  --crt-t-line-cyan: #47a8ff;
-  --crt-t-line-dim: #a0a0a0;
-  --crt-t-line-default: #eeeeee;
-  --crt-t-syntax-kw: #ff4d8d;
-  --crt-t-syntax-arg: #47a8ff;
-  --crt-t-cursor-bg: #eeeeee;
-  --crt-t-dot-blue: #0070f3;
-  --crt-t-dot-grey: #a0a0a0;
   --crt-t-dot-ring: rgb(255 255 255 / 0.15);
   --crt-t-hover-bg: rgb(255 255 255 / 0.06);
-  --crt-t-close-hover-bg: #ff4d8d;
+  --crt-t-close-hover-bg: var(--vercel-docs-pink);
 }

@@ -1,7 +1,6 @@
 import { promises as fs } from "fs"
 import path from "path"
 import { cache } from "react"
-import { createHighlighter, type Highlighter } from "shiki"
 
 import {
   codeViewContentForRegistryFile,
@@ -9,10 +8,10 @@ import {
 } from "@/lib/registry-code-view"
 import { installCommandWithMediaFetch } from "@/lib/registry-install-media"
 import {
+  getVercelDocsHighlighter,
   SHIKI_THEME_VERCEL_DARK,
   SHIKI_THEME_VERCEL_LIGHT,
-  vercelDocsShikiThemes,
-} from "@/lib/shiki-vercel-docs-themes"
+} from "@/lib/shiki-vercel-docs-highlighter"
 
 export type HighlightedRegistryFile = {
   path: string
@@ -32,18 +31,6 @@ type RawFile = {
   content?: string
   type?: string
   meta?: { installUrl?: string }
-}
-
-let highlighterPromise: Promise<Highlighter> | null = null
-
-function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      themes: vercelDocsShikiThemes,
-      langs: ["tsx", "jsx", "typescript", "javascript", "css", "json", "markdown", "bash", "text"],
-    })
-  }
-  return highlighterPromise
 }
 
 function getLang(filePath: string): string {
@@ -69,7 +56,7 @@ export const getBlockRegistryData = cache(
       const jsonPath = path.join(process.cwd(), "public", "r", `${versionId}.json`)
       const raw = JSON.parse(await fs.readFile(jsonPath, "utf-8")) as { files?: RawFile[] }
       const rawFiles: RawFile[] = raw.files ?? []
-      const hl = await getHighlighter()
+      const hl = await getVercelDocsHighlighter()
 
       const files = await Promise.all(
         rawFiles.map(async (file) => {

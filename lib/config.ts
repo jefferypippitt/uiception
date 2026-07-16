@@ -42,6 +42,10 @@ export const siteConfig = {
       label: "Blocks",
     },
     {
+      href: "/docs",
+      label: "Docs",
+    },
+    {
       href: "/changelog",
       label: "Changelog",
     },
