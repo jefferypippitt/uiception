@@ -50,7 +50,7 @@ export default function NavbarSectionV4() {
         {NAV_ITEMS.map((item, i) => {
           const shared = cn(linkClass, item.signInSpacing && "ml-1 sm:ml-2")
           const handleClick = (e: { preventDefault: () => void }) => {
-            e.preventDefault()
+            if (!item.external) e.preventDefault()
             setActiveIndex(i)
           }
           if (item.external) {

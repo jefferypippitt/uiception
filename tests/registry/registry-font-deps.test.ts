@@ -14,10 +14,6 @@ const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 // layout-dependent and must be imported directly inside the block.
 const TAILWIND_BUILTIN_FONTS = new Set(["font-sans", "font-mono", "font-serif"])
 
-// Package-based fonts (e.g. geist/font/pixel) are caught by registry-npm-deps.
-// These are safe as long as the package is declared — skip them here.
-const PACKAGE_FONT_PREFIX = ["font-pixel-"]
-
 /**
  * Parse globals.css and return every Tailwind font utility that comes from
  * a layout-defined CSS variable, e.g. --font-instrument-serif → font-instrument-serif
@@ -35,14 +31,15 @@ function getLayoutFontClasses(): Set<string> {
   while ((m = varRe.exec(themeMatch[1])) !== null) {
     const cls = `font-${m[1]}`
     if (TAILWIND_BUILTIN_FONTS.has(cls)) continue
-    if (PACKAGE_FONT_PREFIX.some((p) => cls.startsWith(p))) continue
     classes.add(cls)
   }
   return classes
 }
 
-// Detects a self-contained font import (next/font/google or next/font/local)
-const NEXT_FONT_IMPORT_RE = /from\s+["']next\/font\/(google|local)["']/
+// Detects a self-contained font import: next/font/google, next/font/local,
+// or a package-based font (e.g. geist/font/pixel) — any of these satisfy
+// the "this block owns its font, doesn't rely on the host site's globals.css" rule.
+const NEXT_FONT_IMPORT_RE = /from\s+["'](next\/font\/(google|local)|geist\/font\/pixel)["']/
 
 describe("registry font dependencies", () => {
   it("does not use layout-only font classes — import next/font directly in the block instead", () => {

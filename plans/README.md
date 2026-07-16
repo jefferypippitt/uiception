@@ -6,16 +6,18 @@ before starting, honor its STOP conditions, and update your row here when
 done. **Each plan stamps its own "Planned at" commit in its Status
 block** — do not assume every plan in this index shares one base commit;
 Round 1 (001–009) was planned against `8c219d4`, Round 2 (010–011) against
-`fc930a3` (Round 1, fully merged, landed in between). Always trust the
-individual plan file's own "Planned at" SHA and drift check over any commit
-mentioned here.
+`fc930a3`, Round 3 (012–016) against `059f954` (Rounds 1 and 2, fully
+merged, landed in between each). Always trust the individual plan file's own
+"Planned at" SHA and drift check over any commit mentioned here.
 
 Round 1 covers the 8 highest-leverage findings from a standard-depth audit
 (correctness, security, performance, tests, dx, tech-debt) plus one direction
 spike, out of a fuller findings list the user selected from. See "Findings
 considered but not turned into a plan" below for what else the audit
 surfaced. Round 2 covers a direction-only audit (`/improve next`) run after
-Round 1 merged.
+Round 1 merged. Round 3 is another full standard-depth audit (bare
+`/improve`) run after ~2 weeks of further shipped work (new `gallery`
+category, a media-resolution rework, dependency bumps) — see "Round 3" below.
 
 ## Execution order & status
 
@@ -31,7 +33,12 @@ Round 1 merged.
 | 008 | Block-identity consistency test (`lib/blocks.ts` / preview map / `registry.json`) | P2 | M | — | DONE (merged to main `7741378`) |
 | 009 | Direction spike: 17 empty registry categories | P3 | S | — | DONE (merged to main `49e43fa`) |
 | 010 | Dynamic per-category OG/Twitter images | P3 | S/M | — | DONE (merged to main `2fbca6c`) |
-| 011 | Changelog RSS feed at `/feed.xml` | P3 | S | — | DONE (merged to main `2b9a035`) |
+| 011 | Changelog RSS feed at `/feed.xml` (route later renamed to `/rss.xml` in `170695f`, see Round 3 findings) | P3 | S | — | DONE (merged to main `2b9a035`) |
+| 012 | Fix `navbar-section-v4`'s external link (`preventDefault` fires unconditionally) | P1 | S | — | DONE (squash-merged to main, "navbar blocks updated") |
+| 013 | Close `font-pixel-*` blind spot in `registry-font-deps.test.ts` | P1 | S | — | DONE (squash-merged to main, "navbar blocks updated") |
+| 014 | Lazy-load remaining homepage terminal mini-games | P2 | S | — | DONE (squash-merged to main, "navbar blocks updated") |
+| 015 | Recompress oversized `gallery-section-v1`/`v3` images | P2 | S | — | DONE, budget not fully achieved — merged as-is per operator decision (keep current implementation, no hard-cap); see below |
+| 016 | Restore working `pnpm audit` + protect `pnpm.overrides` from the migration it requires | P1 | M | — | DONE (squash-merged to main, "navbar blocks updated") |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -88,11 +95,185 @@ Static (`○`) the plan predicted — the feed still works correctly on every
 request, it's just regenerated per-request instead of once at build time;
 worth a look if someone wants to understand why later, not urgent.
 
+## Round 3 — standard audit (2026-07-15, planned against `059f954`)
+
+Bare `/improve` invocation (all nine categories, standard depth), run after
+~2 weeks of further shipped work on top of Round 2: a new `gallery` block
+category (`d54ef0e`), a media-resolution rework supporting more file
+extensions (`080d39a`, added `lib/block-media.ts`), a terminal-demo content
+update (`059f954`), a dead-code removal pass (`b328383`), and a dependency
+bump (`e33444f`). Four parallel subagents covered
+correctness+tests, security+dependencies, performance+tech-debt, and
+DX+docs+direction; every finding that made the table below was personally
+re-verified against the live source by the advisor (not just trusted from
+subagent reports) before being presented — this caught and resolved one
+direct conflict between two subagents' reports (one claimed `/feed.xml` and
+`/rss.xml` both exist; confirmed only `/rss.xml` exists today, the route was
+renamed in `170695f` — `plans/README.md`'s Round 2 table above still said
+`/feed.xml` until this correction, which is itself Finding TECH-DEBT-01
+below).
+
+The user selected the top 5 by leverage (all S-effort/LOW-risk except one)
+out of 14 vetted findings + 2 direction options. Plans 012–016 cover the
+selection.
+
+**Selected (012–016):** see the execution table above.
+
+**Findings vetted but not selected this round** (recorded so they aren't
+re-audited from scratch next time — re-verify freshness before reviving):
+
+- **PERF-01** (M effort, MED risk): `components/block-preview-by-version.tsx`
+  statically imports all 82 registry blocks and selects one via
+  `blockComponents[versionId]` — a dynamic-key object access that defeats
+  bundler tree-shaking, so every block preview iframe (the highest-traffic
+  surface on the site) likely ships GSAP/shader/game code it never uses.
+  Real and high-impact, but higher effort/risk than the 5 selected (~80
+  call sites to convert to `next/dynamic`, needs per-block SSR
+  verification). Good candidate for a dedicated future round.
+- **SEC-01** (S effort, LOW-MED risk): no security response headers
+  (CSP/`X-Frame-Options`/`nosniff`) configured anywhere — hardening gap, not
+  an active exposure (no auth/PII on this site). Not selected this round;
+  worth doing but lower urgency than the 5 selected.
+- **DX-01**: `WORKFLOW.md`/`README.md` omit the `pnpm lint` step that
+  `pnpm check` actually runs (added to `check` in `c051faf`, after both
+  docs were last touched) — cheap doc fix, not selected this round.
+- **DX-02**: Prettier is configured (`.prettierrc`, a `format` script) but
+  never enforced — no `--check` variant, absent from `check`/CI. Not
+  selected; flagged MED risk since enforcing it might surface an existing
+  formatting backlog needing a one-time cleanup commit first.
+- **DX-04**: `.agents/skills/product-preview-ui/SKILL.md` links to a
+  `mock-ui` skill that doesn't exist anywhere on disk (dead reference).
+  Both directories are gitignored/local-only ("beta" skills per
+  `.gitignore`), so real-world blast radius is small — not selected.
+- **DOCS-01**: the changelog (`content/changelog/`, newest entry
+  `07-08-2026.mdx`) is ~1 week / 3 commits behind shipped work — the new
+  `gallery` category, the media-resolution rework, and the terminal update
+  have no changelog entries despite a dedicated `changelog-mdx` skill
+  existing for exactly this. Not selected this round; still open.
+- **TECH-DEBT-01**: `plans/README.md`'s own Round 2 entry for plan 011
+  described the RSS route as living at `/feed.xml`; it was renamed to
+  `/rss.xml` in commit `170695f` and the docs were never updated — this
+  round's own audit briefing repeated the stale claim as a result. Fixed
+  directly as part of writing this Round 3 section (see the updated plan
+  011 row above) rather than spun into a separate plan, since the fix is
+  this same paragraph.
+- **DEP-03**: three icon libraries coexist
+  (`lucide-react` dominant by usage, `@phosphor-icons/react`,
+  `@tabler/icons-react`) — real duplication, but consolidating touches
+  300+ call sites (L effort) for a bundle-hygiene win, not a bug or
+  vulnerability. **Rejected**: not worth it unless bundle size becomes a
+  stated problem for the maintainer.
+- **DIR-E** (direction, MED confidence): `/r/registry.json` is already a
+  lean (172KB, zero content blobs), public, machine-readable catalog of
+  every block — an `llms.txt` pointing at it would close the "AI agents
+  can't discover what blocks exist" gap cheaply. Revisits Round 1's
+  rejected DIR-B with cheaper grounding (the endpoint's leanness wasn't
+  previously confirmed). Still needs a maintainer call on format
+  (`llms.txt` vs. something else) before it's plannable — not selected.
+- **DIR-F** (direction, MED confidence): the recent investment in
+  flexible, zero-code-edit media swapping (`080d39a`,
+  `.cursor/rules/registry-block-media.mdc`) suggests a "bring your own
+  asset" live preview — try your own image/logo in a block before
+  installing it. Real product extension of that work, but M-L effort and
+  needs scoping (which block category first, where it lives in the UI).
+  Not selected — a design-spike candidate for a future round.
+
+**Areas audited with no finding this round** (per-audit confirmation,
+recorded so they aren't re-checked from scratch): `lib/block-media.ts` (new
+since Round 2 — traced all 28+ call sites, `blockId`/`filename` always trace
+to hardcoded literals or static config, never request-controlled — no path
+traversal); the preview route's allowlist gate (unchanged, still correct);
+the Wordle server action (untouched by this round's commits); `.env`/`.env.local`
+hygiene (gitignored, contain only 2 public `NEXT_PUBLIC_*` keys, no secret
+material); the RSS route and category OG-image route (proper escaping /
+JSX auto-escaping, no injection surface); Next.js version (`16.2.10` is
+still current `latest`, no newer patch to bump to).
+
+## Round 3 execution log (reviewed and merged)
+
+Plans 012–016 were each dispatched to an isolated executor subagent in a
+disposable git worktree, then independently reviewed by the advisor:
+every done criterion was re-run from scratch in the worktree (not trusted
+from the executor's report), `git diff --stat` was checked against each
+plan's declared scope, and the full diff was read. All 5 branches were then
+squash-merged into `main` in one commit at the operator's explicit request
+(single commit, message "navbar blocks updated" — chosen by the operator,
+not the advisor; spans navbar, tests, perf, and dependency-tooling changes
+despite the name). For 015 specifically, the operator explicitly chose to
+merge the marginal-compression commit as-is and not pursue a hard cap on
+image dimensions — see that plan's note below. Worktrees remain in
+`.claude/worktrees/` for inspection until pruned; the `advisor/*` branches
+are now fully merged and safe to delete.
+
+| Plan | Branch | Worktree path | Commit | Verdict |
+|------|--------|----------------|--------|---------|
+| 012 | `advisor/012-fix-navbar-v4-external-link` | `.claude/worktrees/agent-a0128da6637b0ad8b` | `4c6dadf` | APPROVE — merged |
+| 013 | `advisor/013-fix-font-portability-test-blind-spot` | `.claude/worktrees/agent-ae6c0d004313f2d68` | `4eadc7f` | APPROVE — merged |
+| 014 | `advisor/014-lazy-load-homepage-terminal-games` | `.claude/worktrees/agent-ab697a8ae014a041a` | `4b03ea3` | APPROVE — merged |
+| 015 | `advisor/015-recompress-oversized-gallery-images` | `.claude/worktrees/agent-aaf808a70ef0cc994` | `e45b3e5` | BLOCKED — merged as-is per operator decision (see below) |
+| 016 | `advisor/016-restore-pnpm-audit-and-protect-overrides` | `.claude/worktrees/agent-a886f9682a50e2308` | `733542f` | APPROVE — merged |
+
+**012**: one-line fix, diff matches the plan exactly. Executor went beyond
+the plan's manual-click instruction and drove a real Playwright interaction
+test (asserted `event.defaultPrevented` for both the external and
+non-external nav items, confirmed a genuine new tab opened only for the
+external one) — stronger evidence than the plan asked for. Advisor
+independently re-ran typecheck/lint/registry:validate, all clean.
+
+**013**: diff matches the plan exactly (removes the `PACKAGE_FONT_PREFIX`
+exclusion, broadens `NEXT_FONT_IMPORT_RE` to include `geist/font/pixel`).
+Advisor independently re-ran the full suite (65/65 pass) and typecheck.
+Spot-checked the executor's regression-check claim by inspecting the
+committed diff and worktree state; consistent with the reported failing →
+reverted → passing sequence.
+
+**014**: diff matches the plan exactly (4 static imports → `next/dynamic`,
+mirroring the already-shipped `Wordle` pattern in the same file). No
+browser-automation tool was available in the executor's environment for the
+plan's literal click-through check — it substituted a compiled-bundle
+inspection (confirmed via Turbopack's `next/dynamic entry, async loader`
+registrations that all four games code-split identically to `Wordle`), a
+reasonable documented deviation per the plan's intent. Advisor independently
+re-ran typecheck/lint and did a basic HTTP smoke check (homepage 200 OK,
+terminal widget present).
+
+**015 — BLOCKED**: the executor ran the compression script exactly as
+specified and hit every plan step, but the outcome the plan's done criteria
+required ("all 5 files under ~260KB") did not materialize: measured
+reductions were 16–549 bytes on 300–400KB files (0.004–0.18%), confirmed
+independently by the advisor via direct `ls -la` in the worktree. Root
+cause (per the executor's investigation, plausible and unchallenged): all 5
+images are already ≤1600px on their long edge, so the script's resize step
+never engages, and they're high-entropy photographic content already near
+mozjpeg-q82's practical compression floor — there's little redundancy left
+to remove. This is the same shape of problem Round 1's Plan 004 Part 2 hit
+with the video budget: the mechanical fix (re-run the existing script) does
+not actually solve it for these specific assets, and the plan's own scope
+explicitly forbade the moves that would (lowering quality further,
+resizing below 1600px unconditionally, or re-sourcing the source images) —
+those are quality/product trade-offs a script shouldn't make unilaterally,
+so this needed an explicit maintainer decision, not another executor attempt
+at the same constrained approach. **Operator decision (2026-07-15): merge
+the marginal-compression commit as-is; explicitly do not hard-cap image
+dimensions below 1600px to force further reduction.** These 5 gallery
+images remain ~300-400KB in production, over the ~250KB budget established
+in `plans/004-media-compression-budget.md` — this is a known, accepted
+state, not a bug. If this budget matters again later, the options that
+were on the table and declined this round were: lower JPEG quality below
+82, force a smaller max dimension, or re-source the original assets.
+
 ## Dependency notes
 
 None of these plans hard-block each other — each is independently
-executable and independently verifiable. Two soft-pairing notes worth
+executable and independently verifiable. Three soft-pairing notes worth
 knowing:
+
+- **016 deliberately bundles two coupled findings** (a broken `pnpm audit`
+  and a `pnpm.overrides` field that would go silently inert the moment the
+  toolchain is upgraded to fix the audit) into one plan rather than two,
+  specifically so the fix for one can't land without the fix for the other
+  — see that plan's "Why this matters" for the full reasoning. Don't split
+  it into two plans later without re-checking that reasoning still holds.
 
 - **002 (CI) pairs with 006 and 008** (both add new Vitest tests). Landing
   002 first means those new tests are enforced automatically on every PR the
