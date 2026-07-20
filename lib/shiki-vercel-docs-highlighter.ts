@@ -20,15 +20,72 @@ const LANGS = [
 ] as const
 
 let highlighterPromise: Promise<Highlighter> | null = null
+/** Serializes WASM Oniguruma use — concurrent codeToHtml/Hast corrupts the singleton. */
+let highlightQueue: Promise<void> = Promise.resolve()
+
+function createVercelDocsHighlighter() {
+  return createHighlighter({
+    themes: vercelDocsShikiThemes,
+    langs: [...LANGS],
+  })
+}
 
 export function getVercelDocsHighlighter() {
   if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      themes: vercelDocsShikiThemes,
-      langs: [...LANGS],
-    })
+    highlighterPromise = createVercelDocsHighlighter()
   }
   return highlighterPromise
+}
+
+function isWasmMemoryError(error: unknown) {
+  if (!(error instanceof Error)) return false
+  const message = error.message.toLowerCase()
+  return (
+    message.includes("memory access out of bounds") ||
+    message.includes("out of memory") ||
+    message.includes("cannot allocate") ||
+    error.name === "RuntimeError"
+  )
+}
+
+async function resetVercelDocsHighlighter() {
+  const pending = highlighterPromise
+  highlighterPromise = null
+  if (!pending) return
+  try {
+    const hl = await pending
+    hl.dispose()
+  } catch {
+    // Previous instance already failed — drop it.
+  }
+}
+
+/**
+ * Run work against the shared highlighter one-at-a-time.
+ * Retries once after disposing/recreating if WASM memory errors.
+ */
+export function withVercelDocsHighlighter<T>(
+  fn: (hl: Highlighter) => T | Promise<T>
+): Promise<T> {
+  const run = async (retried: boolean): Promise<T> => {
+    const hl = await getVercelDocsHighlighter()
+    try {
+      return await fn(hl)
+    } catch (error) {
+      if (!retried && isWasmMemoryError(error)) {
+        await resetVercelDocsHighlighter()
+        return run(true)
+      }
+      throw error
+    }
+  }
+
+  const result = highlightQueue.then(() => run(false))
+  highlightQueue = result.then(
+    () => undefined,
+    () => undefined
+  )
+  return result
 }
 
 export function resolveShikiLang(lang: string | undefined | null): string {

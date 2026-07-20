@@ -1,5 +1,6 @@
 import { blockCategories } from "@/lib/blocks"
 import { siteConfig } from "@/lib/config"
+import { templateCategories } from "@/lib/templates"
 import { MetadataRoute } from "next"
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteConfig.url}/blocks`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/templates`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
@@ -39,5 +46,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }))
 
-  return [...staticRoutes, ...blockCategoryRoutes]
+  const templateCategoryRoutes: MetadataRoute.Sitemap = templateCategories.map(
+    (category) => ({
+      url: `${siteConfig.url}/templates/${category.id}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })
+  )
+
+  return [...staticRoutes, ...blockCategoryRoutes, ...templateCategoryRoutes]
 }

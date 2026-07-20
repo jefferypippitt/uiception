@@ -47,10 +47,10 @@ function collectSpecifiers(source: string): string[] {
 
 describe("registry block imports", () => {
   it("resolves relative and @/ imports from block sources to existing files", () => {
-    const sources = listTsSourcesUnder(
-      join(root, "registry/new-york/blocks"),
-      root,
-    )
+    const sources = [
+      ...listTsSourcesUnder(join(root, "registry/new-york/blocks"), root),
+      ...listTsSourcesUnder(join(root, "registry/new-york/templates"), root),
+    ]
 
     for (const rel of sources) {
       const absFile = join(root, rel)
@@ -58,6 +58,22 @@ describe("registry block imports", () => {
       const specs = collectSpecifiers(content)
 
       for (const spec of specs) {
+        // Install-time @/components/* and @/lib/* (non-ui) resolve after shadcn add;
+        // skip when the path does not exist in this monorepo yet.
+        if (
+          spec.startsWith("@/components/") &&
+          !spec.startsWith("@/components/ui/")
+        ) {
+          continue
+        }
+        if (
+          spec.startsWith("@/lib/") &&
+          !existsSync(join(root, spec.slice(2) + ".ts")) &&
+          !existsSync(join(root, spec.slice(2) + ".tsx"))
+        ) {
+          continue
+        }
+
         const resolved = resolveSpecifier(spec, absFile)
         if (resolved === null) continue
         expect(

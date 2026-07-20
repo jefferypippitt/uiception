@@ -1,14 +1,12 @@
-import type { Highlighter } from "shiki"
-
 import {
   highlightFileTreeHast,
   isFileTreeLang,
 } from "@/lib/highlight-file-tree"
 import {
-  getVercelDocsHighlighter,
   resolveShikiLang,
   SHIKI_THEME_VERCEL_DARK,
   SHIKI_THEME_VERCEL_LIGHT,
+  withVercelDocsHighlighter,
 } from "@/lib/shiki-vercel-docs-highlighter"
 
 type HastNode = {
@@ -67,7 +65,6 @@ function replacePreWithHighlighted(pre: HastNode, highlighted: HastNode) {
  */
 export function rehypeVercelShiki() {
   return async (tree: HastNode) => {
-    const hl: Highlighter = await getVercelDocsHighlighter()
     const pres: HastNode[] = []
 
     walk(tree, (node) => {
@@ -91,14 +88,17 @@ export function rehypeVercelShiki() {
       }
 
       const lang = resolveShikiLang(rawLang)
-      const hast = hl.codeToHast(source, {
-        lang,
-        themes: {
-          light: SHIKI_THEME_VERCEL_LIGHT,
-          dark: SHIKI_THEME_VERCEL_DARK,
-        },
-        defaultColor: false,
-      }) as HastNode
+      const hast = await withVercelDocsHighlighter(
+        (hl) =>
+          hl.codeToHast(source, {
+            lang,
+            themes: {
+              light: SHIKI_THEME_VERCEL_LIGHT,
+              dark: SHIKI_THEME_VERCEL_DARK,
+            },
+            defaultColor: false,
+          }) as HastNode
+      )
 
       replacePreWithHighlighted(pre, hast)
     }

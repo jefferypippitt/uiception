@@ -4426,6 +4426,192 @@
           "target": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep"
         }
       ]
+    },
+    {
+      "name": "portfolio-v1",
+      "type": "registry:block",
+      "title": "Portfolio v1",
+      "description": "Next.js starter for a physicist and science communicator portfolio: writing, books, Saturn decoration, and a Basin contact form. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "next-mdx-remote",
+        "gray-matter",
+        "class-variance-authority",
+        "radix-ui",
+        "lucide-react",
+        "sonner",
+        "zod"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v1.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site (app routes, content, components).\n\nThen set BASIN_ENDPOINT in .env.local. Edit your name/bio/social links in app/page.tsx and app/layout.tsx. Writing posts live in content/writing/*.mdx and books live in content/books/*.mdx.",
+      "envVars": {
+        "BASIN_ENDPOINT": "https://usebasin.com/f/your-basin-form-id"
+      },
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinner.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/typeset.css",
+          "type": "registry:file",
+          "target": "app/typeset.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/writing/page.tsx",
+          "type": "registry:page",
+          "target": "app/writing/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/writing/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/writing/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/books/page.tsx",
+          "type": "registry:page",
+          "target": "app/books/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/books/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/books/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/app/contact/page.tsx",
+          "type": "registry:page",
+          "target": "app/contact/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/contact-form.tsx",
+          "type": "registry:component",
+          "target": "components/contact-form.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/saturn-decoration.tsx",
+          "type": "registry:component",
+          "target": "components/saturn-decoration.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/components/theme-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/theme-toggle.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/styles/saturn-decoration.css",
+          "type": "registry:file",
+          "target": "styles/saturn-decoration.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/lib/posts.ts",
+          "type": "registry:lib",
+          "target": "lib/posts.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/lib/actions.ts",
+          "type": "registry:lib",
+          "target": "lib/actions.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/lib/schemas.ts",
+          "type": "registry:lib",
+          "target": "lib/schemas.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/styles/typeset-article.css",
+          "type": "registry:file",
+          "target": "styles/typeset-article.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/writing/rip-pluto.mdx",
+          "type": "registry:file",
+          "target": "content/writing/rip-pluto.mdx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/writing/how-big-is-far.mdx",
+          "type": "registry:file",
+          "target": "content/writing/how-big-is-far.mdx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/writing/what-the-sky-is-made-of.mdx",
+          "type": "registry:file",
+          "target": "content/writing/what-the-sky-is-made-of.mdx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/writing/the-book-that-started-it.mdx",
+          "type": "registry:file",
+          "target": "content/writing/the-book-that-started-it.mdx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/books/wonders-of-the-outer-system.mdx",
+          "type": "registry:file",
+          "target": "content/books/wonders-of-the-outer-system.mdx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/content/books/why-anything-happens.mdx",
+          "type": "registry:file",
+          "target": "content/books/why-anything-happens.mdx"
+        }
+      ]
     }
   ]
 }

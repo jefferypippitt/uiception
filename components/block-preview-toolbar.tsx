@@ -320,8 +320,10 @@ export function BlockPreviewToolbar({
     [registryData]
   )
 
-  const installCommand = registryData?.installCommand ?? `npx shadcn@latest add "${versionId}"`
-  const installCommandDisplay = `npx shadcn add ${versionId}`
+  const installCommand =
+    registryData?.installCommand ?? `npx shadcn@latest add "${versionId}"`
+  const installCommandDisplay =
+    registryData?.installCommandDisplay ?? `npx shadcn add ${versionId}`
 
   // Hard-refresh can complete the iframe load before React hydration attaches
   // event handlers. This effect covers that case by checking readyState.

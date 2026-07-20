@@ -28,6 +28,7 @@ const SHADCN_COMPONENTS: Record<string, string> = {
   dialog: "components/ui/dialog",
   drawer: "components/ui/drawer",
   "dropdown-menu": "components/ui/dropdown-menu",
+  field: "components/ui/field",
   "hover-card": "components/ui/hover-card",
   input: "components/ui/input",
   "input-otp": "components/ui/input-otp",
@@ -57,7 +58,7 @@ const SHADCN_COMPONENTS: Record<string, string> = {
   tooltip: "components/ui/tooltip",
 }
 
-const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
+const BLOCK_DIR_RE = /registry\/new-york\/(?:blocks|templates)\/([^/]+)\//
 
 describe("registry registryDependencies format", () => {
   it("uses full URLs (not @uiception/ aliases) for cross-registry dependencies", () => {
@@ -89,10 +90,10 @@ describe("registry shadcn registryDependencies", () => {
     const blocks = items.filter((i) => i.type === "registry:block")
     const byName = new Map(blocks.map((b) => [b.name!, b]))
 
-    const sources = listTsSourcesUnder(
-      join(root, "registry/new-york/blocks"),
-      root,
-    )
+    const sources = [
+      ...listTsSourcesUnder(join(root, "registry/new-york/blocks"), root),
+      ...listTsSourcesUnder(join(root, "registry/new-york/templates"), root),
+    ]
 
     for (const rel of sources) {
       const blockMatch = rel.match(BLOCK_DIR_RE)
@@ -103,12 +104,25 @@ describe("registry shadcn registryDependencies", () => {
 
       const content = readFileSync(join(root, rel), "utf8")
       const declared = new Set(block.registryDependencies ?? [])
+      const shippedUi = new Set(
+        (block.files ?? [])
+          .map((f) => {
+            const target = (f.target ?? "").replace(/\\/g, "/")
+            const path = f.path.replace(/\\/g, "/")
+            const match =
+              target.match(/(?:^|\/)components\/ui\/([^/]+)\.tsx$/) ??
+              target.match(/^@ui\/([^/]+)\.tsx$/) ??
+              path.match(/\/components\/ui\/([^/]+)\.tsx$/)
+            return match?.[1]
+          })
+          .filter((name): name is string => Boolean(name)),
+      )
 
       for (const [dep, importFragment] of Object.entries(SHADCN_COMPONENTS)) {
         if (content.includes(`@/${importFragment}`)) {
           expect(
-            declared.has(dep),
-            `${rel}: imports "${importFragment}" but "${dep}" is missing from registryDependencies in registry.json`,
+            declared.has(dep) || shippedUi.has(dep),
+            `${rel}: imports "${importFragment}" but "${dep}" is missing from registryDependencies and is not shipped as components/ui/${dep}.tsx`,
           ).toBe(true)
         }
       }

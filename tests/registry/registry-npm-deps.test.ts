@@ -54,7 +54,7 @@ function isAlwaysAvailable(pkg: string): boolean {
   return ALWAYS_AVAILABLE_PREFIX.some((prefix) => pkg.startsWith(prefix))
 }
 
-const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
+const BLOCK_DIR_RE = /registry\/new-york\/(?:blocks|templates)\/([^/]+)\//
 const IMPORT_FROM_RE = /^import\b[^"'\n]*\bfrom\s+["']([^"']+)["']/gm
 
 describe("registry npm dependencies", () => {
@@ -63,10 +63,10 @@ describe("registry npm dependencies", () => {
     const blocks = items.filter((i) => i.type === "registry:block")
     const byName = new Map(blocks.map((b) => [b.name!, b]))
 
-    const sources = listTsSourcesUnder(
-      join(root, "registry/new-york/blocks"),
-      root,
-    )
+    const sources = [
+      ...listTsSourcesUnder(join(root, "registry/new-york/blocks"), root),
+      ...listTsSourcesUnder(join(root, "registry/new-york/templates"), root),
+    ]
 
     for (const rel of sources) {
       const blockMatch = rel.match(BLOCK_DIR_RE)

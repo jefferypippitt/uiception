@@ -2,7 +2,10 @@ import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
-import { installCommandWithMediaFetch } from "@/lib/registry-install-media"
+import {
+  getInstallCommand,
+  installCommandWithMediaFetch,
+} from "@/lib/registry-install-media"
 import {
   loadRegistry,
   registryProjectRoot as root,
@@ -25,6 +28,14 @@ describe("shadcn add + bundled media install", () => {
       'npx shadcn@latest add "https://uiception.com/r/hero-section-v1.json"',
     )
     expect(command).not.toContain("curl")
+  })
+
+  it("templates use shadcn init --template next with the registry item URL", () => {
+    const install = getInstallCommand("portfolio-v1")
+    expect(install.command).toBe(
+      'npx shadcn@latest init --template next -y "https://uiception.com/r/portfolio-v1.json"',
+    )
+    expect(install.display).toBe("npx shadcn init portfolio-v1")
   })
 
   it("no block depends on uiception-media-fetch", () => {

@@ -6,11 +6,11 @@ import {
   codeViewContentForRegistryFile,
   shouldStripRegistryFileContent,
 } from "@/lib/registry-code-view"
-import { installCommandWithMediaFetch } from "@/lib/registry-install-media"
+import { getInstallCommand } from "@/lib/registry-install-media"
 import {
-  getVercelDocsHighlighter,
   SHIKI_THEME_VERCEL_DARK,
   SHIKI_THEME_VERCEL_LIGHT,
+  withVercelDocsHighlighter,
 } from "@/lib/shiki-vercel-docs-highlighter"
 
 export type HighlightedRegistryFile = {
@@ -23,6 +23,7 @@ export type HighlightedRegistryFile = {
 export type BlockRegistryData = {
   files: HighlightedRegistryFile[]
   installCommand: string
+  installCommandDisplay: string
 }
 
 type RawFile = {
@@ -56,28 +57,38 @@ export const getBlockRegistryData = cache(
       const jsonPath = path.join(process.cwd(), "public", "r", `${versionId}.json`)
       const raw = JSON.parse(await fs.readFile(jsonPath, "utf-8")) as { files?: RawFile[] }
       const rawFiles: RawFile[] = raw.files ?? []
-      const hl = await getVercelDocsHighlighter()
 
-      const files = await Promise.all(
-        rawFiles.map(async (file) => {
-          const displayPath = file.target ?? file.path
-          const content = codeViewContentForRegistryFile(displayPath, file.content, file.meta)
+      const files: HighlightedRegistryFile[] = []
+      for (const file of rawFiles) {
+        const displayPath = file.target ?? file.path
+        const content = codeViewContentForRegistryFile(displayPath, file.content, file.meta)
 
-          if (shouldStripRegistryFileContent(displayPath, file.content, file.meta)) {
-            return { path: displayPath, content, htmlLight: "", htmlDark: "" }
-          }
+        if (shouldStripRegistryFileContent(displayPath, file.content, file.meta)) {
+          files.push({ path: displayPath, content, htmlLight: "", htmlDark: "" })
+          continue
+        }
 
-          const lang = getLang(displayPath)
-          const [htmlLight, htmlDark] = await Promise.all([
-            hl.codeToHtml(content, { lang, theme: SHIKI_THEME_VERCEL_LIGHT }),
-            hl.codeToHtml(content, { lang, theme: SHIKI_THEME_VERCEL_DARK }),
-          ])
+        const lang = getLang(displayPath)
+        const { htmlLight, htmlDark } = await withVercelDocsHighlighter((hl) => ({
+          htmlLight: hl.codeToHtml(content, {
+            lang,
+            theme: SHIKI_THEME_VERCEL_LIGHT,
+          }),
+          htmlDark: hl.codeToHtml(content, {
+            lang,
+            theme: SHIKI_THEME_VERCEL_DARK,
+          }),
+        }))
 
-          return { path: displayPath, content, htmlLight, htmlDark }
-        })
-      )
+        files.push({ path: displayPath, content, htmlLight, htmlDark })
+      }
 
-      return { files, installCommand: installCommandWithMediaFetch(versionId, rawFiles) }
+      const install = getInstallCommand(versionId)
+      return {
+        files,
+        installCommand: install.command,
+        installCommandDisplay: install.display,
+      }
     } catch {
       return null
     }

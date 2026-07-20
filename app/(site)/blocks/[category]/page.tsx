@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { IconChevronLeft } from "@tabler/icons-react"
+import { ChevronLeftIcon } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -49,16 +49,17 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="pb-14 md:pb-20">
       <BlocksCategoryHashScroll />
       <div className="mx-auto w-full max-w-6xl px-6">
-        <Button variant="link" asChild className="h-auto justify-start px-0 py-1.5">
-          <Link href="/blocks">
-            <IconChevronLeft />
-            Back
-          </Link>
-        </Button>
-
-        <h1 className="mt-4 text-3xl tracking-tighter md:text-4xl">
-          {categoryData.title}
-        </h1>
+        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <h1 className="text-3xl tracking-tighter md:text-4xl">
+            {categoryData.title}
+          </h1>
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/blocks">
+              <ChevronLeftIcon data-icon="inline-start" />
+              Back
+            </Link>
+          </Button>
+        </div>
 
         {categoryData.versions.length === 0 ? (
           <p className="mt-8 text-sm text-muted-foreground">No blocks available yet.</p>

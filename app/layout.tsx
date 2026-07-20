@@ -6,7 +6,7 @@ import {
   GeistPixelGrid,
   GeistPixelCircle,
 } from "geist/font/pixel"
-import { IBM_Plex_Serif, Instrument_Serif } from "next/font/google"
+import { IBM_Plex_Serif, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
@@ -26,6 +26,11 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
 })
 
 export const metadata: Metadata = {
@@ -118,6 +123,7 @@ export default function RootLayout({
           GeistPixelCircle.variable,
           ibmPlexSerif.variable,
           instrumentSerif.variable,
+          jetbrainsMono.variable,
           "font-sans",
         )}
       >

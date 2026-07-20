@@ -13,10 +13,15 @@
   --typeset-flow: 1.25em;
 }
 
-/*
- * Site docs typeset — same rhythm as .typeset-docs, but code blocks use the
- * Vercel docs Shiki themes (lib/shiki-themes/vercel-docs-*.source.json).
- */
+.typeset-article {
+  --typeset-font-body: var(--font-geist-mono);
+  --typeset-font-heading: var(--font-geist-mono);
+  --typeset-font-mono: var(--font-geist-mono);
+  --typeset-size: 15px;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.25em;
+}
+
 .typeset-site-docs {
   --typeset-font-body: var(--font-geist-sans);
   --typeset-font-heading: var(--font-geist-sans);
@@ -24,12 +29,9 @@
   --typeset-size: 15px;
   --typeset-leading: 1.75;
   --typeset-flow: 1.25em;
-
   --typeset-code-bg: var(--vercel-docs-bg);
   --typeset-code-fg: var(--vercel-docs-fg);
   --typeset-code-border: var(--vercel-docs-border);
-
-  /* Same accents as homepage terminal (cyan / green / pink / dim) */
   --ft-folder: var(--vercel-docs-cyan);
   --ft-tsx: var(--vercel-docs-green);
   --ft-css: var(--vercel-docs-pink);
@@ -42,7 +44,6 @@
   border: 1px solid var(--typeset-code-border);
 }
 
-/* Dual-theme Shiki tokens (defaultColor: false) */
 .typeset-site-docs pre.shiki {
   background-color: var(--shiki-light-bg, var(--typeset-code-bg)) !important;
 }
@@ -62,9 +63,6 @@
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-/*
- * Docs file-tree fences (```file-tree) — folders / .tsx / .css each share one color.
- */
 .typeset-site-docs pre.file-tree .ft-folder {
   color: var(--ft-folder);
 }
@@ -217,7 +215,6 @@
   }
 }
 
-/* Shiki code panel */
 .shiki-panel .shiki {
   background: transparent !important;
   font-size: 0.75rem;
@@ -242,17 +239,11 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Vercel docs code workspace — line numbers match editor gutter tokens */
 .code-view-vercel-docs .shiki-panel-vercel-docs code .line::before {
   opacity: 1;
   color: #a0a0a0;
 }
 
-/*
- * Radix ScrollArea wraps content in display:table + minWidth:100%, so wide labels
- * widen the inner layer; the viewport then clips rows without text-overflow ellipsis.
- * Force block + full width so row buttons and .file-tree-label get a real width cap.
- */
 .file-tree-scroll-area [data-slot="scroll-area-viewport"] > div {
   display: block !important;
   box-sizing: border-box;
@@ -274,7 +265,6 @@
   padding-inline: 2rem;
 }
 
-/* ── Theme toggle transition ──────────────────────────────────────────── */
 .theme-transitioning::view-transition-group(root) {
   animation-duration: 0.35s;
 }
@@ -294,7 +284,6 @@
   to   { opacity: 1; }
 }
 
-/* ── Reduced motion ───────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(*),
   ::view-transition-new(*),
@@ -304,7 +293,6 @@
   }
 }
 
-/* Logo cloud — infinite horizontal marquee + soft edge composite */
 @keyframes logo-marquee {
     from {
         transform: translate3d(0, 0, 0);
@@ -315,10 +303,6 @@
     }
 }
 
-/*
- * Edge fog only (no viewport mask): stacking a mask on the whole row + blurred
- * overlays exaggerates opacity steps and reads as vertical banding / streaks.
- */
 .logo-marquee-viewport {
     isolation: isolate;
 }
@@ -331,7 +315,6 @@
     pointer-events: none;
     transform: translateZ(0);
     backface-visibility: hidden;
-    /* Slightly lower saturate() reduces posterized fringe next to blur */
     backdrop-filter: blur(88px) saturate(1.08);
     -webkit-backdrop-filter: blur(88px) saturate(1.08);
 }
@@ -348,7 +331,6 @@
         color-mix(in oklch, var(--background) 8%, transparent) 76%,
         transparent 100%
     );
-    /* Long feathered mask avoids a hard “vertical seam” in the blur composite */
     mask-image: linear-gradient(
         90deg,
         black 0%,
@@ -422,10 +404,6 @@
     }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Block preview — styled scrollbar to match Radix ScrollArea                  */
-/* -------------------------------------------------------------------------- */
-
 .preview-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
@@ -447,7 +425,6 @@
     background-clip: padding-box;
 }
 
-/* Iframe loads /view/* with .preview-embed-root — scrollbar is on html/body */
 html:has(.preview-embed-root) {
     scrollbar-width: none;
     -ms-overflow-style: none;

@@ -1,0 +1,232 @@
+.saturn-decoration {
+  --orbit-size: 3.5rem;
+  --eclipse-yaw: -27deg;
+  --eclipse-scale-y: 0.3;
+  position: relative;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  flex-shrink: 0;
+  overflow: visible;
+  color: var(--foreground);
+}
+
+.saturn-decoration__planet-under {
+  position: absolute;
+  inset: 33%;
+  z-index: 0;
+}
+
+.saturn-decoration__eclipse {
+  position: absolute;
+  inset: -42%;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(var(--eclipse-yaw));
+}
+
+.saturn-decoration__planet-cap {
+  position: absolute;
+  inset: 33%;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 9999px;
+  transform: rotate(var(--eclipse-yaw));
+  clip-path: inset(0 0 50% 0);
+  pointer-events: none;
+}
+
+.saturn-decoration__planet-cap .saturn-decoration__planet {
+  position: absolute;
+  inset: 0;
+  transform: rotate(calc(var(--eclipse-yaw) * -1));
+}
+
+.saturn-decoration__plane {
+  position: absolute;
+  inset: 16%;
+  transform: scaleY(var(--eclipse-scale-y));
+}
+
+.saturn-decoration__rings {
+  position: absolute;
+  inset: -8%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at center,
+    transparent 40%,
+    color-mix(in oklab, currentColor 28%, transparent) 44%,
+    color-mix(in oklab, currentColor 52%, white 4%) 56%,
+    color-mix(in oklab, currentColor 62%, white 5%) 66%,
+    color-mix(in oklab, currentColor 44%, transparent) 69%,
+    transparent 71%,
+    transparent 74%,
+    color-mix(in oklab, currentColor 40%, white 2%) 78%,
+    color-mix(in oklab, currentColor 30%, transparent) 88%,
+    color-mix(in oklab, currentColor 16%, transparent) 93%,
+    transparent 97%
+  );
+}
+
+.saturn-decoration__orbit {
+  --moon-size: 0.2rem;
+  --orbit-inset: 0%;
+  --orbit-duration: 12s;
+  --orbit-phase: 0;
+  position: absolute;
+  inset: var(--orbit-inset);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  animation: saturn-spin var(--orbit-duration) linear infinite;
+  animation-delay: calc(var(--orbit-duration) * var(--orbit-phase) * -1);
+}
+
+.saturn-decoration__orbit--reverse {
+  animation-direction: reverse;
+}
+
+.saturn-decoration__moon-pivot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  animation: saturn-spin-cancel var(--orbit-duration) linear infinite;
+  animation-delay: calc(var(--orbit-duration) * var(--orbit-phase) * -1);
+}
+
+.saturn-decoration__orbit--reverse .saturn-decoration__moon-pivot {
+  animation-name: saturn-spin-cancel-reverse;
+}
+
+.saturn-decoration__moon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--moon-size);
+  height: var(--moon-size);
+  overflow: hidden;
+  border-radius: 9999px;
+  background:
+    radial-gradient(
+      circle at 30% 26%,
+      color-mix(in oklab, currentColor 48%, white) 0%,
+      color-mix(in oklab, currentColor 28%, transparent) 34%,
+      color-mix(in oklab, currentColor 16%, transparent) 52%,
+      color-mix(in oklab, currentColor 10%, black) 78%,
+      color-mix(in oklab, black 55%, currentColor) 100%
+    );
+  box-shadow:
+    inset -0.08rem 0.02rem 0.12rem color-mix(in oklab, black 45%, transparent),
+    inset 0.05rem -0.04rem 0.08rem color-mix(in oklab, currentColor 18%, transparent),
+    0.04rem 0.07rem 0.12rem color-mix(in oklab, currentColor 14%, transparent),
+    0 0 0 0.5px color-mix(in oklab, currentColor 20%, transparent);
+  transform:
+    translate(-50%, -50%)
+    scaleY(calc(1 / var(--eclipse-scale-y)))
+    rotate(calc(var(--eclipse-yaw) * -1));
+}
+
+.saturn-decoration__moon--tone {
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in oklab, currentColor 55%, white) 0 48%,
+      color-mix(in oklab, black 70%, currentColor) 52% 100%
+    );
+}
+
+.saturn-decoration__moon--bright {
+  background:
+    radial-gradient(
+      circle at 32% 28%,
+      color-mix(in oklab, currentColor 70%, white) 0%,
+      color-mix(in oklab, currentColor 40%, white 10%) 40%,
+      color-mix(in oklab, currentColor 18%, black) 100%
+    );
+  opacity: 0.95;
+}
+
+.saturn-decoration__moon--soft {
+  opacity: 0.85;
+}
+
+.saturn-decoration__planet {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+  background:
+    radial-gradient(
+      circle at 30% 26%,
+      color-mix(in oklab, currentColor 55%, white) 0%,
+      color-mix(in oklab, currentColor 78%, white) 22%,
+      currentColor 48%,
+      color-mix(in oklab, currentColor 70%, black) 72%,
+      color-mix(in oklab, currentColor 35%, black) 100%
+    );
+  box-shadow:
+    inset -0.22rem 0.04rem 0.34rem color-mix(in oklab, black 55%, currentColor),
+    inset 0.1rem -0.08rem 0.18rem color-mix(in oklab, white 12%, currentColor),
+    0.05rem 0.1rem 0.18rem color-mix(in oklab, black 40%, transparent),
+    0 0 0 1px color-mix(in oklab, currentColor 35%, black);
+}
+
+.saturn-decoration__planet-under .saturn-decoration__planet {
+  inset: 0;
+}
+
+.saturn-decoration__glare {
+  position: absolute;
+  top: 12%;
+  left: 16%;
+  width: 36%;
+  height: 28%;
+  border-radius: 9999px;
+  background: color-mix(in oklab, white 70%, currentColor);
+  filter: blur(0.09rem);
+  opacity: 0.45;
+}
+
+.saturn-decoration__planet > .saturn-decoration__glare {
+  opacity: 0.5;
+}
+
+.saturn-decoration__moon .saturn-decoration__glare {
+  filter: blur(0.04rem);
+  opacity: 0.6;
+}
+
+@keyframes saturn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes saturn-spin-cancel {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes saturn-spin-cancel-reverse {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saturn-decoration__orbit,
+  .saturn-decoration__moon-pivot {
+    animation: none;
+  }
+
+  .saturn-decoration__moon-pivot {
+    transform: translate(-50%, -50%);
+  }
+}

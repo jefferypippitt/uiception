@@ -34,32 +34,31 @@ export async function getDocsEntries(): Promise<DocEntry[]> {
 
   const mdxFiles = filenames.filter((filename) => filename.endsWith(".mdx"))
 
-  const entries = await Promise.all(
-    mdxFiles.map(async (filename) => {
-      const fullPath = path.join(docsDirectory, filename)
-      const source = await fs.readFile(fullPath, "utf8")
-      const { data, content } = matter(source)
-      const frontmatter = data as DocFrontmatter
-      const compiled = await compileMDX<DocFrontmatter>({
-        source: content,
-        options: {
-          parseFrontmatter: false,
-          mdxOptions: {
-            rehypePlugins: [rehypeVercelShiki],
-          },
+  const entries: DocEntry[] = []
+  for (const filename of mdxFiles) {
+    const fullPath = path.join(docsDirectory, filename)
+    const source = await fs.readFile(fullPath, "utf8")
+    const { data, content } = matter(source)
+    const frontmatter = data as DocFrontmatter
+    const compiled = await compileMDX<DocFrontmatter>({
+      source: content,
+      options: {
+        parseFrontmatter: false,
+        mdxOptions: {
+          rehypePlugins: [rehypeVercelShiki],
         },
-      })
-      const Body = () => compiled.content
-
-      return {
-        slug: filename.replace(/\.mdx$/, ""),
-        title: frontmatter.title,
-        description: frontmatter.description,
-        order: frontmatter.order ?? Number.MAX_SAFE_INTEGER,
-        body: Body,
-      } satisfies DocEntry
+      },
     })
-  )
+    const Body = () => compiled.content
+
+    entries.push({
+      slug: filename.replace(/\.mdx$/, ""),
+      title: frontmatter.title,
+      description: frontmatter.description,
+      order: frontmatter.order ?? Number.MAX_SAFE_INTEGER,
+      body: Body,
+    })
+  }
 
   return entries.sort((a, b) => {
     if (a.order !== b.order) return a.order - b.order

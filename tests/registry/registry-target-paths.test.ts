@@ -40,14 +40,16 @@ describe("registry target paths", () => {
     for (const block of blocks) {
       const name = block.name!
       const blockPrefix = `registry/new-york/blocks/${name}/`
+      const templatePrefix = `registry/new-york/templates/${name}/`
 
       for (const f of block.files ?? []) {
+        if (f.path.startsWith(templatePrefix)) continue
         if (!f.path.startsWith(blockPrefix)) continue
         if (isSharedFile(f.path, f.target)) continue
 
         expect(
           f.target.startsWith(`app/${name}/`),
-          `${name}: file "${f.path}" has target "${f.target}" â€” expected it to start with "app/${name}/"`,
+          `${name}: file "${f.path}" has target "${f.target}" — expected it to start with "app/${name}/"`,
         ).toBe(true)
       }
     }
