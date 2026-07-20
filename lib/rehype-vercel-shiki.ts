@@ -1,8 +1,4 @@
 import {
-  highlightFileTreeHast,
-  isFileTreeLang,
-} from "@/lib/highlight-file-tree"
-import {
   resolveShikiLang,
   SHIKI_THEME_VERCEL_DARK,
   SHIKI_THEME_VERCEL_LIGHT,
@@ -60,7 +56,6 @@ function replacePreWithHighlighted(pre: HastNode, highlighted: HastNode) {
 
 /**
  * Highlight fenced code blocks with the Vercel docs Shiki themes (light + dark CSS vars).
- * File trees use a dedicated folder / .tsx / .css color system.
  * Used by site docs MDX only — keep changelog on plain typeset.
  */
 export function rehypeVercelShiki() {
@@ -81,12 +76,6 @@ export function rehypeVercelShiki() {
 
       const source = textOf(code).replace(/\n$/, "")
       const rawLang = langFromCode(code)
-
-      if (isFileTreeLang(rawLang)) {
-        replacePreWithHighlighted(pre, highlightFileTreeHast(source))
-        continue
-      }
-
       const lang = resolveShikiLang(rawLang)
       const hast = await withVercelDocsHighlighter(
         (hl) =>

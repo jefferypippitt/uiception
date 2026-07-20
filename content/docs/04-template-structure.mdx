@@ -1,0 +1,31 @@
+---
+title: Template structure
+description: How templates differ from blocks and how a new one is registered.
+order: 4
+---
+
+Templates are full standalone Next.js apps, not a single component. They live under
+`registry/new-york/templates` instead of `registry/new-york/blocks`, and there's no fixed
+folder shape beyond what the app itself needs:
+
+```text
+registry/new-york/templates/{template-name}/
+  app/            # Routes — layout.tsx, page.tsx, nested route folders
+  components/     # UI components, including shadcn's own components/ui
+  content/        # MDX or other content the app reads at build/runtime
+  lib/            # Actions, data access, schemas
+  styles/         # Extra CSS beyond globals
+  .env.example    # Any env vars the template expects (e.g. form endpoints)
+```
+
+A new template touches four places, same pattern as blocks:
+
+1. `registry/new-york/templates/{template-name}/` — the template itself
+2. `lib/templates.ts` — adds the version under its category (`id`, `title`,
+   `registryPath`, `description`)
+3. `registry.json` — a `registry:block` entry with `categories: ["template", ...]`,
+   listing every file, `dependencies`, and any `envVars`
+4. `components/template-previews/{id}.tsx` plus
+   `components/template-preview-by-version.tsx` — preview definition and id map
+
+Unlike blocks, templates are installed into a **new** projects only.

@@ -43,7 +43,7 @@ export default async function DocsPage() {
                     </p>
                   )}
 
-                  <div className="typeset typeset-site-docs mt-6">
+                  <div className="typeset typeset-docs max-w-[37em] mt-6">
                     <entry.body />
                   </div>
                 </article>
