@@ -17,6 +17,7 @@ import { Toaster } from "@/registry/new-york/templates/portfolio-v1/components/u
 
 import "@/registry/new-york/templates/portfolio-v1/app/typeset.css"
 import "@/registry/new-york/templates/portfolio-v1/styles/typeset-article.css"
+import "katex/dist/katex.min.css"
 
 async function generateStaticParams() {
   const [writing, books] = await Promise.all([

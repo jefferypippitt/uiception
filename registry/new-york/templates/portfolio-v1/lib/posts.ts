@@ -4,6 +4,9 @@ import path from "node:path"
 import matter from "gray-matter"
 import { compileMDX } from "next-mdx-remote/rsc"
 import type { ComponentType } from "react"
+import rehypeKatex from "rehype-katex"
+import remarkGfm from "remark-gfm"
+import remarkMath from "remark-math"
 
 export type ContentFrontmatter = {
   title: string
@@ -93,6 +96,10 @@ async function loadEntries(kind: "writing" | "books"): Promise<ContentEntry[]> {
         source: content,
         options: {
           parseFrontmatter: false,
+          mdxOptions: {
+            remarkPlugins: [remarkGfm, remarkMath],
+            rehypePlugins: [rehypeKatex],
+          },
         },
       })
       const Body = () => compiled.content

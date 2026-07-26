@@ -4435,6 +4435,10 @@
       "dependencies": [
         "next-mdx-remote",
         "gray-matter",
+        "remark-gfm",
+        "remark-math",
+        "rehype-katex",
+        "katex",
         "class-variance-authority",
         "radix-ui",
         "lucide-react",
@@ -4446,7 +4450,7 @@
         "template",
         "portfolio"
       ],
-      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v1.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site (app routes, content, components).\n\nThen set BASIN_ENDPOINT in .env.local. Edit your name/bio/social links in app/page.tsx and app/layout.tsx. Writing posts live in content/writing/*.mdx and books live in content/books/*.mdx.",
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v1.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site (app routes, content, components).\n\nThen set BASIN_ENDPOINT in .env.local. Edit your name/bio/social links in app/page.tsx and app/layout.tsx. Writing posts live in content/writing/*.mdx and books live in content/books/*.mdx. MDX supports GFM tables and LaTeX math ($inline$ / $$block$$) via remark-gfm, remark-math, and rehype-katex.",
       "envVars": {
         "BASIN_ENDPOINT": "https://usebasin.com/f/your-basin-form-id"
       },

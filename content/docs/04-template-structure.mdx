@@ -10,12 +10,12 @@ folder shape beyond what the app itself needs:
 
 ```text
 registry/new-york/templates/{template-name}/
-  app/            # Routes — layout.tsx, page.tsx, nested route folders
-  components/     # UI components, including shadcn's own components/ui
-  content/        # MDX or other content the app reads at build/runtime
-  lib/            # Actions, data access, schemas
-  styles/         # Extra CSS beyond globals
-  .env.example    # Any env vars the template expects (e.g. form endpoints)
+  app/         # Routes — layout, pages, nested folders
+  components/  # UI, including components/ui
+  content/     # MDX or other app content
+  lib/         # Actions, data, schemas
+  styles/      # Extra CSS beyond globals
+  .env.example # Env vars the template expects
 ```
 
 A new template touches four places, same pattern as blocks:
@@ -27,5 +27,3 @@ A new template touches four places, same pattern as blocks:
    listing every file, `dependencies`, and any `envVars`
 4. `components/template-previews/{id}.tsx` plus
    `components/template-preview-by-version.tsx` — preview definition and id map
-
-Unlike blocks, templates are installed into a **new** projects only.

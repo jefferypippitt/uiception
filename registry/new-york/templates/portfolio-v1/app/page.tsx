@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 
 import { SaturnDecoration } from "../components/saturn-decoration"
 import { formatContentDate, getWriting } from "../lib/posts"
@@ -44,20 +45,29 @@ export default async function HomePage() {
       <p>Find your way around:</p>
       <ul>
         <li>
-          <Link href="/writing">Writing</Link>
+          <Link href="/writing" className="inline-flex items-center gap-1">
+            Writing
+            <ChevronRight className="size-[0.9em]" aria-hidden />
+          </Link>
           <span className="text-muted-foreground">
-            {" — short notes and essays"}
+            {" short notes and essays"}
           </span>
         </li>
         <li>
-          <Link href="/books">Books</Link>
+          <Link href="/books" className="inline-flex items-center gap-1">
+            Books
+            <ChevronRight className="size-[0.9em]" aria-hidden />
+          </Link>
           <span className="text-muted-foreground">
-            {" — longer, book-length work"}
+            {" longer, book-length work"}
           </span>
         </li>
         <li>
-          <Link href="/contact">Contact Me</Link>
-          <span className="text-muted-foreground">{" — say hello"}</span>
+          <Link href="/contact" className="inline-flex items-center gap-1">
+            Contact Me
+            <ChevronRight className="size-[0.9em]" aria-hidden />
+          </Link>
+          <span className="text-muted-foreground">{" say hello"}</span>
         </li>
       </ul>
 

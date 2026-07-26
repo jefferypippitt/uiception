@@ -8,13 +8,13 @@ Every block follows the same shadcn-style layout:
 
 ```text
 registry/new-york/blocks/{block-name}/
-  {block-name}.tsx      # Entry point — section wrapper + imports only, no logic
-  page.tsx              # Preview page
-  components/           # Visual sub-components (swappable with GSAP / Three.js)
-  hooks/                # Client animation logic (useEffect, GSAP timelines)
-  lib/                  # Data, types, constants, config
+  {block-name}.tsx   # Entry — wrapper + imports only
+  page.tsx           # Preview page
+  components/        # Visual sub-components
+  hooks/             # Client animation logic
+  lib/               # Data, types, constants
   styles/
-    {block-name}.css    # Keyframes, layout vars, dark mode via CSS vars
+    {block-name}.css # Keyframes, layout vars
 ```
 
 Simple static blocks with no animation or sub-components stay as a single entry file —

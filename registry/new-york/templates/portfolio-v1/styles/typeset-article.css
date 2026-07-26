@@ -6,3 +6,15 @@
   --typeset-leading: 1.75;
   --typeset-flow: 1.25em;
 }
+
+/* KaTeX inherits theme text; display math follows typeset rhythm. */
+.typeset-article .katex {
+  color: inherit;
+}
+
+.typeset-article .katex-display {
+  margin-block: var(--typeset-flow) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25em;
+}

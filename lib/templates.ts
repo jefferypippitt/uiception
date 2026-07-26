@@ -18,8 +18,7 @@ export const templateCategories: TemplateCategory[] = [
   {
     id: "portfolio",
     title: "Portfolio",
-    description:
-      "Next.js portfolio starters for developers, writers, and personal websites.",
+    description: "For developers, writers, and personal websites.",
     versions: [
       {
         id: "portfolio-v1",

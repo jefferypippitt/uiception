@@ -5,6 +5,7 @@ import type { ReactNode } from "react"
 import { ThemeProvider } from "../components/theme-provider"
 import { Toaster } from "../components/ui/sonner"
 
+import "katex/dist/katex.min.css"
 import "./globals.css"
 import "./typeset.css"
 import "../styles/typeset-article.css"
