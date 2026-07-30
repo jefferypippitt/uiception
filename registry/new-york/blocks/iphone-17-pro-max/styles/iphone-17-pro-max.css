@@ -1,0 +1,133 @@
+/* iphone-17-pro-max — silver titanium tokens, rail/button gradients, camera pseudo-elements */
+
+.ip17-root {
+  --ip17-silver-light: #cfcfd3;
+  --ip17-silver-mid: #b4b4b9;
+  --ip17-silver-dark: #96969c;
+  --ip17-silver-deep: #7a7a80;
+  --ip17-bezel: #060608;
+  --ip17-screen: #f5f5f7;
+  --ip17-island: #0a0a0c;
+  --ip17-frame-highlight: rgb(255 255 255 / 0.45);
+  --ip17-frame-shadow: rgb(0 0 0 / 0.28);
+  --ip17-shell-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.28);
+  --ip17-shell-ring: rgb(0 0 0 / 0.14);
+  --ip17-button: #b0b0b5;
+  --ip17-button-edge: #909096;
+  --ip17-rail-width: 3px;
+  --ip17-bezel-width: 3.5px;
+  --ip17-battery-low-power: #ffd60a;
+  --ip17-battery-low: #ff453a;
+  --ip17-battery-charging: #34c759;
+}
+
+.dark .ip17-root {
+  --ip17-shell-shadow: 0 28px 56px -16px rgb(0 0 0 / 0.55);
+  --ip17-shell-ring: rgb(255 255 255 / 0.1);
+}
+
+.ip17-shell {
+  box-shadow: 0 0 0 1px var(--ip17-shell-ring);
+}
+
+/*
+  Silver titanium ring drawn as an overlay (masked gradient border).
+  Center stays transparent so media underneath shows through.
+*/
+.ip17-rail-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: var(--ip17-rail-width);
+  background: linear-gradient(
+    180deg,
+    var(--ip17-silver-light) 0%,
+    var(--ip17-silver-mid) 55%,
+    var(--ip17-silver-dark) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 var(--ip17-frame-highlight),
+    inset 0 -1px 0 var(--ip17-frame-shadow);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+/* Black display lip on top of media — separates content from the silver ring. */
+.ip17-bezel-overlay {
+  position: absolute;
+  inset: var(--ip17-rail-width);
+  z-index: 5;
+  border-radius: calc(3rem - var(--ip17-rail-width));
+  pointer-events: none;
+  box-shadow: inset 0 0 0 var(--ip17-bezel-width) var(--ip17-bezel);
+}
+
+.ip17-button {
+  background: linear-gradient(
+    180deg,
+    var(--ip17-silver-light) 0%,
+    var(--ip17-button) 45%,
+    var(--ip17-button-edge) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.45),
+    inset 0 -1px 0 rgb(0 0 0 / 0.2),
+    0 0 0 0.5px rgb(0 0 0 / 0.12);
+}
+
+.ip17-camera {
+  background: radial-gradient(
+    circle at 38% 32%,
+    #2e2e38 0%,
+    #17171e 42%,
+    #0a0a0e 78%,
+    #050507 100%
+  );
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.7),
+    inset 0 1px 1.5px rgb(0 0 0 / 0.6),
+    inset 0 -0.5px 0 rgb(255 255 255 / 0.05);
+}
+
+.ip17-camera::before {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #181820 0%, #08080c 100%);
+  box-shadow: inset 0 0 1px rgb(0 0 0 / 0.8);
+}
+
+.ip17-camera::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  left: 30%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(255 255 255 / 0.35) 0%,
+    rgb(255 255 255 / 0.08) 55%,
+    transparent 100%
+  );
+}
+
+.ip17-screen-slot > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Overscale so object-cover media fully covers the curved clip, including AA fringe. */
+  transform: scale(1.08);
+  transform-origin: center;
+}

@@ -32,6 +32,8 @@ import MacbookProWithImage from "@/registry/new-york/blocks/macbook-pro-with-ima
 import MacbookProWithVideo from "@/registry/new-york/blocks/macbook-pro-with-video/components/macbook-pro-with-video"
 import MacStudioDisplayWithImage from "@/registry/new-york/blocks/mac-studio-display-with-image/components/mac-studio-display-with-image"
 import MacStudioDisplayWithVideo from "@/registry/new-york/blocks/mac-studio-display-with-video/components/mac-studio-display-with-video"
+import Iphone17ProMaxWithImage from "@/registry/new-york/blocks/iphone-17-pro-max-with-image/components/iphone-17-pro-max-with-image"
+import Iphone17ProMaxWithVideo from "@/registry/new-york/blocks/iphone-17-pro-max-with-video/components/iphone-17-pro-max-with-video"
 import BrandsSectionV3 from "@/registry/new-york/blocks/brands-section-v3/components/brands-section-v3"
 import BrandsSectionV4 from "@/registry/new-york/blocks/brands-section-v4/components/brands-section-v4"
 import FeatureSectionV1 from "@/registry/new-york/blocks/feature-section-v1/components/feature-section-v1"
@@ -49,9 +51,11 @@ import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
 import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
 import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
+import FaqSectionV4 from "@/registry/new-york/blocks/faq-section-v4/components/faq-section-v4"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
 import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3"
+import TestimonialsSectionV4 from "@/registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
@@ -112,6 +116,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "macbook-pro-with-video": MacbookProWithVideo,
   "mac-studio-display-with-image": MacStudioDisplayWithImage,
   "mac-studio-display-with-video": MacStudioDisplayWithVideo,
+  "iphone-17-pro-max-with-image": Iphone17ProMaxWithImage,
+  "iphone-17-pro-max-with-video": Iphone17ProMaxWithVideo,
   "brands-section-v3": BrandsSectionV3,
   "brands-section-v4": BrandsSectionV4,
   "brands-section-v5": BrandsSectionV5,
@@ -138,9 +144,11 @@ const blockComponents: Record<string, React.ComponentType> = {
   "faq-section-v1": FaqSectionV1,
   "faq-section-v2": FaqSectionV2,
   "faq-section-v3": FaqSectionV3,
+  "faq-section-v4": FaqSectionV4,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
   "testimonials-section-v3": TestimonialsSectionV3,
+  "testimonials-section-v4": TestimonialsSectionV4,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "gallery-section-v1": GallerySectionV1,

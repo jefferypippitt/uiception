@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "iphone-17-pro-max-with-image",
+  "title": "iPhone 17 Pro Max (w/ image)",
+  "description": "Example iPhone 17 Pro Max mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "https://uiception.com/r/iphone-17-pro-max.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/iphone-17-pro-max-with-image/page.tsx",
+      "content": "import Iphone17ProMaxWithImage from \"./components/iphone-17-pro-max-with-image\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <Iphone17ProMaxWithImage />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/iphone-17-pro-max-with-image/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/iphone-17-pro-max-with-image/components/iphone-17-pro-max-with-image.tsx",
+      "content": "import Image from \"next/image\"\nimport { createBlockImage } from \"@/lib/block-media\"\n\nimport Iphone17ProMax from \"../../iphone-17-pro-max/components/iphone-17-pro-max\"\n\nconst blockImage = createBlockImage(\"iphone-17-pro-max-with-image\")\nconst SCREEN_WALLPAPER = blockImage(\"image.png\")\n\nexport default function Iphone17ProMaxWithImage() {\n  return (\n    <Iphone17ProMax statusBar={{ tint: \"light\" }}>\n      <div className=\"relative size-full overflow-hidden\">\n        <Image\n          src={SCREEN_WALLPAPER}\n          alt=\"iPhone screen wallpaper\"\n          unoptimized\n          fill\n          className=\"object-cover object-center\"\n          sizes=\"(max-width: 768px) 100vw, 384px\"\n          loading=\"eager\"\n        />\n      </div>\n    </Iphone17ProMax>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/iphone-17-pro-max-with-image/components/iphone-17-pro-max-with-image.tsx"
+    },
+    {
+      "path": "public/images/blocks/iphone-17-pro-max-with-image/image.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/images/blocks/iphone-17-pro-max-with-image/image.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

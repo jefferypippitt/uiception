@@ -3226,6 +3226,99 @@
       ]
     },
     {
+      "name": "iphone-17-pro-max",
+      "type": "registry:block",
+      "title": "iPhone 17 Pro Max",
+      "description": "Front-facing iPhone 17 Pro Max device frame with silver titanium rail, black rounded bezel, Dynamic Island, and iOS status bar - empty screen by default; optional children slot.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/page.tsx",
+          "type": "registry:page",
+          "target": "app/iphone-17-pro-max/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/components/iphone-17-pro-max.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max/components/iphone-17-pro-max.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/components/iphone-screen.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max/components/iphone-screen.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/components/iphone-status-bar.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max/components/iphone-status-bar.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/components/iphone-dynamic-island.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max/components/iphone-dynamic-island.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max/styles/iphone-17-pro-max.css",
+          "type": "registry:file",
+          "target": "app/iphone-17-pro-max/styles/iphone-17-pro-max.css"
+        }
+      ]
+    },
+    {
+      "name": "iphone-17-pro-max-with-image",
+      "type": "registry:block",
+      "title": "iPhone 17 Pro Max (w/ image)",
+      "description": "Example iPhone 17 Pro Max mockup with a bundled screen wallpaper; shows the children slot and /images/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "https://uiception.com/r/iphone-17-pro-max.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max-with-image/page.tsx",
+          "type": "registry:page",
+          "target": "app/iphone-17-pro-max-with-image/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max-with-image/components/iphone-17-pro-max-with-image.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max-with-image/components/iphone-17-pro-max-with-image.tsx"
+        },
+        {
+          "path": "public/images/blocks/iphone-17-pro-max-with-image/image.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/iphone-17-pro-max-with-image/image.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "iphone-17-pro-max-with-video",
+      "type": "registry:block",
+      "title": "iPhone 17 Pro Max (w/ video)",
+      "description": "Example iPhone 17 Pro Max mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "https://uiception.com/r/iphone-17-pro-max.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max-with-video/page.tsx",
+          "type": "registry:page",
+          "target": "app/iphone-17-pro-max-with-video/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/iphone-17-pro-max-with-video/components/iphone-17-pro-max-with-video.tsx",
+          "type": "registry:component",
+          "target": "app/iphone-17-pro-max-with-video/components/iphone-17-pro-max-with-video.tsx"
+        },
+        {
+          "path": "public/videos/blocks/iphone-17-pro-max-with-video/video.mp4.gitkeep",
+          "type": "registry:file",
+          "target": "public/videos/blocks/iphone-17-pro-max-with-video/video.mp4.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "google-chrome-with-image",
       "type": "registry:block",
       "title": "Google Chrome (macOS, w/ image)",
@@ -3435,6 +3528,38 @@
           "path": "registry/new-york/blocks/faq-section-v3/lib/faq-content.ts",
           "type": "registry:lib",
           "target": "app/faq-section-v3/lib/faq-content.ts"
+        }
+      ]
+    },
+    {
+      "name": "faq-section-v4",
+      "type": "registry:block",
+      "title": "FAQ Section v4",
+      "description": "Two-column FAQ with left marketing copy and CTAs, plus a plus/minus accordion on the right.",
+      "registryDependencies": [
+        "accordion",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/faq-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/faq-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v4/components/faq-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v4/components/faq-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v4/components/faq-accordion.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v4/components/faq-accordion.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v4/lib/faq-content.ts",
+          "type": "registry:lib",
+          "target": "app/faq-section-v4/lib/faq-content.ts"
         }
       ]
     },
@@ -3675,6 +3800,92 @@
           "path": "components/ui/svgs/convexWordmarkDark.tsx",
           "type": "registry:component",
           "target": "@ui/svgs/convexWordmarkDark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v4",
+      "type": "registry:block",
+      "title": "Testimonials Section v4",
+      "description": "Centered headline with dual CTAs above a three-up shader portrait carousel of six customer stories with grouped navigation.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "carousel",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v4/components/testimonials-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4-root.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v4/components/testimonials-section-v4-root.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/components/testimonials-carousel.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v4/components/testimonials-carousel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/components/testimonial-card.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v4/components/testimonial-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/components/testimonial-shader.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v4/components/testimonial-shader.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/lib/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v4/lib/testimonials-content.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v4/styles/testimonials-section-v4.css",
+          "type": "registry:file",
+          "target": "app/testimonials-section-v4/styles/testimonials-section-v4.css"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-1.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-2.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-2.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-3.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-3.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-4.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-4.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-5.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-5.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v4/avatar-6.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v4/avatar-6.png.gitkeep"
         }
       ]
     },

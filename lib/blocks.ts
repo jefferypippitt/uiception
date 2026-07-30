@@ -350,6 +350,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Testimonials Section v3",
         registryPath: "registry/new-york/blocks/testimonials-section-v3",
       },
+      {
+        id: "testimonials-section-v4",
+        title: "Testimonials Section v4",
+        registryPath: "registry/new-york/blocks/testimonials-section-v4",
+      },
     ],
   },
   {
@@ -410,6 +415,11 @@ export const blockCategories: BlockCategory[] = [
         id: "faq-section-v3",
         title: "FAQ Section v3",
         registryPath: "registry/new-york/blocks/faq-section-v3",
+      },
+      {
+        id: "faq-section-v4",
+        title: "FAQ Section v4",
+        registryPath: "registry/new-york/blocks/faq-section-v4",
       },
     ],
   },
@@ -641,6 +651,16 @@ export const blockCategories: BlockCategory[] = [
         id: "mac-studio-display-with-video",
         title: "Mac Studio Display (w/ video)",
         registryPath: "registry/new-york/blocks/mac-studio-display-with-video",
+      },
+      {
+        id: "iphone-17-pro-max-with-image",
+        title: "iPhone 17 Pro Max (w/ image)",
+        registryPath: "registry/new-york/blocks/iphone-17-pro-max-with-image",
+      },
+      {
+        id: "iphone-17-pro-max-with-video",
+        title: "iPhone 17 Pro Max (w/ video)",
+        registryPath: "registry/new-york/blocks/iphone-17-pro-max-with-video",
       },
     ],
   },

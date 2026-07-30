@@ -1,0 +1,39 @@
+.ts4-shader-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ts4-shader-canvas {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  min-width: calc(100% + 4px);
+  min-height: calc(100% + 4px);
+}
+
+.ts4-shader-frame canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.ts4-portrait {
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts4-shader-frame {
+    display: none;
+  }
+
+  .ts4-portrait {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+}

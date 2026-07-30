@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "iphone-17-pro-max-with-video",
+  "title": "iPhone 17 Pro Max (w/ video)",
+  "description": "Example iPhone 17 Pro Max mockup with a bundled screen video; shows the children slot and /videos/blocks/... swap pattern.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "https://uiception.com/r/iphone-17-pro-max.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/iphone-17-pro-max-with-video/page.tsx",
+      "content": "import Iphone17ProMaxWithVideo from \"./components/iphone-17-pro-max-with-video\"\n\nexport default function Page() {\n  return (\n    <div className=\"px-4 py-4 md:px-6 md:py-6\">\n      <Iphone17ProMaxWithVideo />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/iphone-17-pro-max-with-video/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/iphone-17-pro-max-with-video/components/iphone-17-pro-max-with-video.tsx",
+      "content": "import { createBlockVideo } from \"@/lib/block-media\"\n\nimport Iphone17ProMax from \"../../iphone-17-pro-max/components/iphone-17-pro-max\"\n\nconst blockVideo = createBlockVideo(\"iphone-17-pro-max-with-video\")\nconst SCREEN_VIDEO = blockVideo(\"video.mp4\")\n\nexport default function Iphone17ProMaxWithVideo() {\n  return (\n    <Iphone17ProMax statusBar={{ tint: \"light\" }}>\n      <div className=\"relative size-full overflow-hidden\">\n        <video\n          className=\"absolute inset-0 size-full max-w-none border-none object-cover object-center\"\n          src={SCREEN_VIDEO}\n          muted\n          loop\n          playsInline\n          autoPlay\n          aria-label=\"Screen content video demo\"\n        />\n      </div>\n    </Iphone17ProMax>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/iphone-17-pro-max-with-video/components/iphone-17-pro-max-with-video.tsx"
+    },
+    {
+      "path": "public/videos/blocks/iphone-17-pro-max-with-video/video.mp4.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: mp4, webm, mov, or m4v. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/videos/blocks/iphone-17-pro-max-with-video/video.mp4.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,9 @@
+import Iphone17ProMax from "./components/iphone-17-pro-max"
+
+export default function Page() {
+  return (
+    <div className="px-4 py-4 md:px-6 md:py-6">
+      <Iphone17ProMax />
+    </div>
+  )
+}
