@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import { portfolioV1Preview } from "@/components/template-previews/portfolio-v1"
+import { portfolioV2Preview } from "@/components/template-previews/portfolio-v2"
 import type { TemplatePreviewDefinition } from "@/components/template-previews/types"
 import { getFreeTemplateVersions } from "@/lib/templates"
 
@@ -9,6 +10,7 @@ export type { TemplatePreviewDefinition } from "@/components/template-previews/t
 /** Host-only preview map — add an entry when you ship a new template. */
 export const templatePreviews: Record<string, TemplatePreviewDefinition> = {
   "portfolio-v1": portfolioV1Preview,
+  "portfolio-v2": portfolioV2Preview,
 }
 
 export function isKnownTemplateVersion(versionId: string): boolean {

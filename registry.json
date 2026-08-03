@@ -4827,6 +4827,102 @@
           "target": "content/books/why-anything-happens.mdx"
         }
       ]
+    },
+    {
+      "name": "portfolio-v2",
+      "type": "registry:block",
+      "title": "Portfolio v2",
+      "description": "Static personal portfolio for a fullstack developer — notes, fictional projects, and experience. Typed TypeScript content — no CMS, no markdown. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "class-variance-authority",
+        "radix-ui",
+        "lucide-react",
+        "geist",
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v2.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nEdit your name, bio, social links, projects, and experience directly in app/page.tsx. Drop a photo at public/avatar.png to replace the JD initials. The email link copies jefferyspippitt@gmail.com (edit components/copy-email.tsx). Notes live in lib/notes.tsx as typed React bodies — no markdown or CMS. Preview at /view/portfolio-v2. Press D to toggle theme.\n\nCanvas UI Liquid: trails work everywhere. Text distortion needs Chromium html-in-canvas. Register one Origin Trial token for your production origin at https://developer.chrome.com/origintrials (html-in-canvas), then set NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN in .env.local. Local-only warp without a token: chrome://flags/#canvas-draw-element.",
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/app/notes/page.tsx",
+          "type": "registry:page",
+          "target": "app/notes/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/app/notes/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/notes/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/theme-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/theme-toggle.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/copy-email.tsx",
+          "type": "registry:component",
+          "target": "components/copy-email.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/avatar.tsx",
+          "type": "registry:component",
+          "target": "components/avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/liquid-shell.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/components/canvasui/liquid.tsx",
+          "type": "registry:component",
+          "target": "components/canvasui/liquid.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/public/avatar.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/avatar.png.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/lib/notes.tsx",
+          "type": "registry:lib",
+          "target": "lib/notes.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
+        }
+      ]
     }
   ]
 }

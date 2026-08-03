@@ -50,6 +50,7 @@ describe("template registry target paths", () => {
       "lib/",
       "styles/",
       "content/",
+      "public/",
       ".env",
     ]
 

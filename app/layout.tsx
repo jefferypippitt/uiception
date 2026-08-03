@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 import Providers from "@/components/providers"
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/next"
+import { getHtmlInCanvasOriginTrialTokens } from "@/lib/html-in-canvas-trial"
 
 
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -105,6 +106,8 @@ export const metadata: Metadata = {
   },
 }
 
+const ORIGIN_TRIAL_TOKENS = getHtmlInCanvasOriginTrialTokens()
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -127,6 +130,17 @@ export default function RootLayout({
           "font-sans",
         )}
       >
+        {ORIGIN_TRIAL_TOKENS.length > 0 ? (
+          <head>
+            {ORIGIN_TRIAL_TOKENS.map((token) => (
+              <meta
+                key={token.slice(0, 24)}
+                httpEquiv="origin-trial"
+                content={token}
+              />
+            ))}
+          </head>
+        ) : null}
         <body>
           <script
             type="application/ld+json"

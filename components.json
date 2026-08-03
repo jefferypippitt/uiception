@@ -21,6 +21,7 @@
   "registries": {
     "@svgl": "https://svgl.app/r/{name}.json",
     "@uiception": "https://uiception.com/r/{name}.json",
-    "@soundcn": "https://soundcn.xyz/r/{name}.json"
+    "@soundcn": "https://soundcn.xyz/r/{name}.json",
+    "@canvas-ui": "https://canvasui.dev/r/{name}.json"
   }
 }
