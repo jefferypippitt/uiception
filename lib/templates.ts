@@ -27,6 +27,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Minimal Next.js starter for a physicist and science communicator — writing, books, and a Basin contact form.",
       },
+      {
+        id: "portfolio-v2",
+        title: "Portfolio v2",
+        registryPath: "registry/new-york/templates/portfolio-v2",
+        description:
+          "Static personal site — notes, projects, and experience hardcoded in pages. No CMS or markdown.",
+      },
     ],
   },
 ]
