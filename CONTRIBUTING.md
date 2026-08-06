@@ -73,6 +73,28 @@ dead preview links.
 blocks in `app/globals.css` — missing one breaks the view-transition morph between
 sections.
 
+## Adding or editing a template
+
+Templates are full standalone Next.js apps under `registry/new-york/templates/`,
+structurally different from the single-component blocks above — see
+[`.cursor/rules/registry-templates.mdc`](./.cursor/rules/registry-templates.mdc)
+for the full folder-shape and self-containment rules.
+
+A **new template** touches four places, same pattern as blocks:
+
+1. `registry/new-york/templates/<template-name>/` — the template itself
+2. `lib/templates.ts` — adds the version under its category (`id`, `title`,
+   `registryPath`, `description`)
+3. `registry.json` — a `registry:block` entry with `categories: ["template", ...]`,
+   listing every file, `dependencies`, and any `envVars`
+4. `components/template-previews/<id>.tsx` plus
+   `components/template-preview-by-version.tsx` — preview definition and id map
+
+**Deleting a template** means removing it everywhere it was added, same as
+deleting a block: the template folder, its `public/r/*.json` output, and
+its entries in `registry.json`, `lib/templates.ts`, and
+`template-preview-by-version.tsx`.
+
 ## Style conventions
 
 - Use Next.js `<Link href="#">` instead of raw `<a>` tags for links inside blocks.

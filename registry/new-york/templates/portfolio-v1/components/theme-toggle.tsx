@@ -1,10 +1,17 @@
 "use client"
 
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
+
+const TOGGLE_COOLDOWN_MS = 650
+
+/** Pure so it can be unit tested without a DOM. */
+export function shouldAllowToggle(lastToggleAt: number, now: number): boolean {
+  return now - lastToggleAt >= TOGGLE_COOLDOWN_MS
+}
 
 function isEditableTarget(target: EventTarget | null) {
   return (
@@ -33,8 +40,12 @@ export function ThemeToggle() {
 
 export function ThemeKeyboardShortcut() {
   const { resolvedTheme, setTheme } = useTheme()
+  const lastToggleAt = useRef<number>(0)
 
   const toggleTheme = useCallback(() => {
+    const now = Date.now()
+    if (!shouldAllowToggle(lastToggleAt.current, now)) return
+    lastToggleAt.current = now
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }, [resolvedTheme, setTheme])
 

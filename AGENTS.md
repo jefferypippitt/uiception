@@ -1,8 +1,9 @@
 # Project conventions
 
-Before touching anything under `registry/new-york/blocks/`, read these
-project-specific rules — they are not optional style preferences, they are
-enforced by `pnpm registry:validate` and reviewed in every PR:
+Before touching anything under `registry/new-york/blocks/` or
+`registry/new-york/templates/`, read these project-specific rules — they
+are not optional style preferences, they are enforced by
+`pnpm registry:validate` and reviewed in every PR:
 
 - **`.cursor/rules/registry-blocks-source-layout.mdc`** — the required block
   folder structure (`page.tsx`, `components/`, `hooks/`, `lib/`, `styles/`)
@@ -18,6 +19,11 @@ enforced by `pnpm registry:validate` and reviewed in every PR:
   works immediately and swapping an asset never requires a code edit. No
   `mediaOrigin` / env. `next/image` always gets `unoptimized`, and every
   expected asset gets a `.gitkeep` placeholder declared in `registry.json`.
+- **`.cursor/rules/registry-templates.mdc`** — how installable page
+  templates (`registry/new-york/templates/`) differ from blocks: no fixed
+  folder shape, self-contained (no cross-imports from the host site or
+  other templates), and the four registration points a new template must
+  touch.
 
 After adding or editing a block, also see `README.md` ("Block structure") and
 `WORKFLOW.md` (pre-push commands: `pnpm check` then `pnpm build`).

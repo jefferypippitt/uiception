@@ -125,3 +125,48 @@ describe("template preview host", () => {
     }
   })
 })
+
+function extractTemplatePreviewKeys(): string[] {
+  const filePath = join(root, "components/template-preview-by-version.tsx")
+  const source = readFileSync(filePath, "utf8")
+
+  const objMatch = source.match(/export const templatePreviews[^{]*\{([\s\S]*?)\n\}/)
+  if (!objMatch) {
+    throw new Error(
+      "Could not find the `templatePreviews` object literal in " +
+        "components/template-preview-by-version.tsx — has its structure changed?"
+    )
+  }
+
+  const body = objMatch[1]
+  const keyRe = /^\s*(?:"([^"]+)"|([A-Za-z_$][\w$]*))\s*:/gm
+  const keys: string[] = []
+  let match: RegExpExecArray | null
+  while ((match = keyRe.exec(body))) {
+    keys.push(match[1] ?? match[2])
+  }
+  return keys
+}
+
+describe("template preview host has no stale entries", () => {
+  it("has no template-preview-by-version.tsx entries with no matching lib/templates.ts version", () => {
+    const versionIds = getFreeTemplateVersions().map((v) => v.id)
+    const previewKeys = extractTemplatePreviewKeys()
+    const stale = previewKeys.filter((key) => !versionIds.includes(key))
+    expect(stale, `templatePreviews keys with no matching lib/templates.ts version: ${stale.join(", ")}`).toEqual([])
+  })
+})
+
+describe("template catalog has no stale registry.json entries", () => {
+  it("has no registry.json template item with no matching lib/templates.ts version", () => {
+    const freeVersions = getFreeTemplateVersions()
+    const versionIds = freeVersions.map((v) => v.id)
+    const { items } = loadRegistry()
+    const templateItems = items.filter(
+      (i) => i.type === "registry:block" && isTemplateItem(i.files)
+    )
+    const registryNames = templateItems.map((i) => i.name)
+    const stale = registryNames.filter((name) => !versionIds.includes(name!))
+    expect(stale, `registry.json template entries with no matching lib/templates.ts version: ${stale.join(", ")}`).toEqual([])
+  })
+})

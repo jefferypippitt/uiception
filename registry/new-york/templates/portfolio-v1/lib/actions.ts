@@ -3,6 +3,13 @@
 import { ContactFormSchema } from "./schemas"
 
 export async function contactFormAction(formData: FormData) {
+  // Honeypot: real users never see or fill this field (hidden + off-screen
+  // in the form). Bots that auto-fill every field will trip it.
+  const honeypot = String(formData.get("company") ?? "").trim()
+  if (honeypot !== "") {
+    return { success: true as const }
+  }
+
   const endpoint = process.env.BASIN_ENDPOINT
 
   if (!endpoint) {

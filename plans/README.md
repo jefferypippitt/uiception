@@ -6,9 +6,10 @@ before starting, honor its STOP conditions, and update your row here when
 done. **Each plan stamps its own "Planned at" commit in its Status
 block** — do not assume every plan in this index shares one base commit;
 Round 1 (001–009) was planned against `8c219d4`, Round 2 (010–011) against
-`fc930a3`, Round 3 (012–016) against `059f954` (Rounds 1 and 2, fully
-merged, landed in between each). Always trust the individual plan file's own
-"Planned at" SHA and drift check over any commit mentioned here.
+`fc930a3`, Round 3 (012–016) against `059f954`, Round 4 (017–021) against
+`8cdba30` (Rounds 1–3, fully merged, landed in between each). Always trust
+the individual plan file's own "Planned at" SHA and drift check over any
+commit mentioned here.
 
 Round 1 covers the 8 highest-leverage findings from a standard-depth audit
 (correctness, security, performance, tests, dx, tech-debt) plus one direction
@@ -18,6 +19,10 @@ surfaced. Round 2 covers a direction-only audit (`/improve next`) run after
 Round 1 merged. Round 3 is another full standard-depth audit (bare
 `/improve`) run after ~2 weeks of further shipped work (new `gallery`
 category, a media-resolution rework, dependency bumps) — see "Round 3" below.
+Round 4 is another full standard-depth audit run after ~3 weeks of further
+shipped work, dominated by one new feature: `registry/new-york/templates/`
+(installable full-page templates, `portfolio-v1`/`portfolio-v2`) — see
+"Round 4" below.
 
 ## Execution order & status
 
@@ -39,6 +44,11 @@ category, a media-resolution rework, dependency bumps) — see "Round 3" below.
 | 014 | Lazy-load remaining homepage terminal mini-games | P2 | S | — | DONE (squash-merged to main, "navbar blocks updated") |
 | 015 | Recompress oversized `gallery-section-v1`/`v3` images | P2 | S | — | DONE, budget not fully achieved — merged as-is per operator decision (keep current implementation, no hard-cap); see below |
 | 016 | Restore working `pnpm audit` + protect `pnpm.overrides` from the migration it requires | P1 | M | — | DONE (squash-merged to main, "navbar blocks updated") |
+| 017 | Restore anti-strobing cooldown + reduced-motion gate in both templates' theme toggles | P1 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/017-theme-toggle-strobe-safety-parity`, commit `8cc7427`) |
+| 018 | Gate `TestimonialShader`'s WebGL canvas behind visibility + reduced-motion checks | P1 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/018-testimonial-shader-visibility-gating`, commit `3c4b322`) |
+| 019 | Harden `portfolio-v1` contact form (honeypot + double-submit guard) | P2 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/019-harden-contact-form-action`, commit `bae6ee7`) |
+| 020 | Formalize templates contributor contract (docs + stale-entry tests) | P2 | S/M | — | DONE (reviewed & approved, not yet merged — branch `advisor/020-formalize-templates-contributor-contract`, commit `b037613`) |
+| 021 | `portfolio-v1` content pipeline: frontmatter validation, per-file error isolation, O(1) single-entry lookups | P2 | M | — | DONE (reviewed & approved, not yet merged — branch `advisor/021-portfolio-v1-content-pipeline-hardening`, commit `acd5e76`) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -262,11 +272,202 @@ state, not a bug. If this budget matters again later, the options that
 were on the table and declined this round were: lower JPEG quality below
 82, force a smaller max dimension, or re-source the original assets.
 
+## Round 4 — standard audit (2026-08-06, planned against `8cdba30`)
+
+Bare `/improve` invocation (all nine categories, standard depth), run after
+~3 weeks of further shipped work on top of Round 3: `registry/new-york/templates/`
+— a new product surface, full installable page templates (`portfolio-v1`,
+`portfolio-v2`), not just single sections — plus new hero/feature blocks
+(`8cdba30`). ~204 files / +14.7k lines changed since `059f954`. Four
+parallel subagents covered correctness+tests, security+dependencies,
+performance+tech-debt, and DX+docs+direction, focused on the new templates
+(unaudited by any prior round) plus carryover items from Round 3. Every
+finding that made the table below was personally re-read and confirmed
+against the live source by the advisor before being presented — this caught
+one mis-framed finding: a subagent reported the template copy of `liquid.tsx`
+as having "already drifted" from the host copy as if it were an accidental
+bug; a direct `diff` showed the delta is a small, comment-explained,
+intentional adaptation (a scrollbar-hiding style needed only in the
+distributed template, not the host preview) — folded into Plan 020's
+stale-entry test work instead of being presented as a standalone "drift"
+defect.
+
+`pnpm audit --prod --audit-level high` came back clean (zero HIGH/CRITICAL
+reachable from production dependencies). Next.js was already at `16.2.12`,
+newer than Round 3's confirmed-latest baseline, no action needed.
+
+The user selected the top 5 by leverage (all HIGH-confidence, S/M effort,
+LOW risk) out of 8 vetted findings + 2 direction options. Plans 017–021
+cover the selection.
+
+**Selected (017–021):** see the execution table above.
+
+**Findings vetted but not selected this round** (recorded so they aren't
+re-audited from scratch next time — re-verify freshness before reviving):
+
+- **SEC-01** (S effort, LOW-MED risk): still no security response headers
+  (CSP/`X-Frame-Options`/`nosniff`) anywhere — a **carryover from Round 3**
+  (recorded there, not selected then either), now with more weight since
+  `portfolio-v1`'s `/contact` page is a real state-changing form with no
+  clickjacking defense. `next.config.mjs`'s only `headers()` logic is a
+  conditional Origin-Trial header. Not selected this round; still a good
+  future-round candidate, especially paired with a verification pass that
+  Analytics/fonts still work under a CSP.
+- **SEC-03** (S effort, MED risk, MED confidence): the block/template
+  preview `<iframe>` (`components/block-preview-toolbar.tsx:495-505`) has
+  no `sandbox` attribute. Low active risk today (previewed content is
+  first-party/static, allowlist-gated), forward-looking defense-in-depth
+  only. Not selected — MED risk (sandboxing can silently break preview
+  features) makes it a better fit alongside a broader preview-surface pass
+  than a standalone plan.
+- **DX-02** (S effort, LOW risk): `scripts/compress-images.mjs`/`compress-videos.mjs`
+  hardcode a `public/images|videos/blocks` path, so template media
+  (`public/images/templates/portfolio-v2/avatar.png` already exists outside
+  it) silently bypasses compression tooling. Real but low current impact
+  (one 56KB asset today); cheap fix, good candidate whenever templates ship
+  more media-heavy content.
+- **Cookie hygiene** (not a standalone finding): `components/ui/sidebar.tsx:85`
+  sets a `sidebar_state` cookie with no explicit `SameSite`/`Secure`. Real
+  but non-sensitive (boolean UI-state flag, not session/auth data) —
+  rejected as not worth a dedicated fix; bundle into any future header/cookie
+  hardening pass instead.
+- **`recharts` pinned without `^`** unlike every other dependency in
+  `package.json` — cosmetic manifest inconsistency, too low-leverage for a
+  line item.
+- **PERF-01** (already tracked since Round 3, re-confirmed this round):
+  `components/block-preview-by-version.tsx` still statically imports all
+  ~84+ registry blocks via `blockComponents[versionId]`, defeating
+  tree-shaking; grown slightly with new blocks (`feature-section-v11`,
+  `hero-section-v11`). Templates use a separate, better-architected preview
+  system (`template-preview-by-version.tsx`, mounted once at layout level)
+  that does **not** have this problem — confirmed as a positive contrast,
+  not a new finding. PERF-01 itself remains unselected (M effort/MED risk);
+  still the best future-round candidate if bundle size becomes a stated
+  concern.
+- **DIR-A** (direction, MED confidence): templates already substantially
+  answer Round 2's old "no starter-kit bundling" finding (DIR-D, rejected
+  then) — but `TemplateCategoryId` is a literal union of exactly
+  `"portfolio"` (`lib/templates.ts:1`), so the proven engineering bet is
+  capped at one vertical. Whether to build a second vertical (SaaS/agency/blog)
+  is a product call, not something to spec speculatively — no plan written.
+- **DIR-B** (direction, MED confidence): templates share zero code with the
+  89-block catalog (`grep` for `registry/new-york/blocks` imports inside
+  `registry/new-york/templates/` returns nothing) despite the site's own
+  tagline ("Start from complete sections. Just make it yours."). Real
+  architectural direction (a template composed from existing blocks would
+  reinforce the site's core flywheel and cut future template build cost),
+  but L-effort and needs a block-versioning/drift story first — a spike
+  candidate, not a build plan, if pursued.
+
+**Areas audited with no finding this round** (recorded so they aren't
+re-checked from scratch): `registry/new-york/templates/portfolio-v2/components/canvasui/liquid.tsx`
+(1035 lines, WebGL fluid sim — read end-to-end, correctly
+`IntersectionObserver`-gated, respects `prefers-reduced-motion`, self-idles,
+clamps DPR, complete `destroy()` cleanup); `components/canvasui/particle-object.tsx`
+and `displacement.tsx` (single-sourced, no duplication); the Wordle server
+action, block-media path resolution, preview-route allowlist, sound engine,
+and mini-game RAF/effect cleanup (all re-confirmed clean, no drift since
+Round 3); MDX pipeline injection surface (`next-mdx-remote` compiles only
+locally-bundled `.mdx`, KaTeX `trust` not enabled); `BASIN_ENDPOINT`
+handling (env-only, never request-controlled — no SSRF); `@shadcn/react` in
+`package.json` (verified legitimate shadcn-ui/ui monorepo package, not a
+typosquat); no prompt-injection content found in any audited file.
+
+## Round 4 execution log (reviewed, approved, not yet merged)
+
+Plans 017–021 were each dispatched to an isolated executor subagent in a
+disposable git worktree (`pnpm install` run first in each — worktrees share
+git history but not `node_modules`), then independently reviewed by the
+advisor: every done criterion was re-run from scratch in the worktree (not
+trusted from the executor's report), `git diff --stat` was checked against
+each plan's declared scope, and the full diff was read. Unlike Round 3,
+these branches have **not** been merged to `main` — that decision is left to
+the operator. Worktrees remain in `.claude/worktrees/` for inspection.
+
+| Plan | Branch | Worktree path | Commit | Verdict |
+|------|--------|----------------|--------|---------|
+| 017 | `advisor/017-theme-toggle-strobe-safety-parity` | `.claude/worktrees/agent-a5ac14f593882276d` | `8cc7427` | APPROVE — not merged |
+| 018 | `advisor/018-testimonial-shader-visibility-gating` | `.claude/worktrees/agent-a6297f06376ff3336` | `3c4b322` | APPROVE — not merged |
+| 019 | `advisor/019-harden-contact-form-action` | `.claude/worktrees/agent-aed9fe842ebefa86a` | `bae6ee7` | APPROVE — not merged |
+| 020 | `advisor/020-formalize-templates-contributor-contract` | `.claude/worktrees/agent-aaf5c70180d7edef5` | `b037613` | APPROVE — not merged |
+| 021 | `advisor/021-portfolio-v1-content-pipeline-hardening` | `.claude/worktrees/agent-ab4e55ea59767e09d` | `acd5e76` | APPROVE — not merged |
+
+**017**: diff matches the plan exactly across both templates' `theme-toggle.tsx`
+files (cooldown guard ported to `portfolio-v1`, cooldown + reduced-motion
+guard to `portfolio-v2`). Executor correctly omitted `prefersReducedMotion`
+from `portfolio-v1` per the plan's explicit allowance (no view-transition
+path in that file). Advisor independently re-ran typecheck (0 errors),
+full suite (76/76 pass, incl. the 6 new pure-function tests), lint (0
+errors), and `registry:validate` (92 items valid) in the worktree.
+
+**018**: diff matches the plan's intent with one documented, in-scope
+deviation — the plan's literal `usePrefersReducedMotion` snippet called
+`setState` synchronously inside `useEffect`, which fails this repo's
+`react-hooks/set-state-in-effect` lint rule; the executor substituted a
+lazy `useState` initializer (reads `matchMedia` synchronously on first
+render, SSR-guarded) with the effect only registering the `change`
+listener. Advisor independently confirmed this is behaviorally equivalent
+and introduces no hydration-mismatch risk (`viewport.ready` is `false` on
+every first render regardless, so `shouldRender` is `false` on first paint
+either way). No automated test was added, per the plan's own reasoning
+(no jsdom/`IntersectionObserver` polyfill in this repo's Node-environment
+Vitest setup); the executor's Step 2 manual verification was honestly
+scoped to what its sandboxed environment actually allowed (dev-server SSR
+response check via `curl`, not an interactive browser scroll-test) and it
+said so plainly rather than overclaiming. Advisor independently re-ran
+typecheck (0 errors), full suite (70/70 pass, no regressions), lint (0
+errors in the changed file), `registry:validate` (valid), and both grep
+done-criteria.
+
+**019**: diff matches the plan exactly (honeypot check in `contactFormAction`,
+honeypot input + `ContactFields` wrapper with `disabled={pending}` in
+`contact-form.tsx`). Advisor read all 6 new tests and confirmed each
+asserts real behavior (fetch called/not-called, exact URL/method, exact
+error strings) rather than trivially passing. Independently re-ran
+typecheck (0 errors), full suite (76/76 pass), lint (0 errors), `registry:validate`
+(valid), and both grep done-criteria.
+
+**020**: diff matches the plan exactly across all four in-scope files (new
+`.cursor/rules/registry-templates.mdc`, `AGENTS.md` pointer + broadened
+opening sentence, new `CONTRIBUTING.md` section, two new stale-entry tests
+in `registry-templates.test.ts` mirroring `registry-block-preview-map.test.ts`'s
+technique). Both new tests passed against current repo state, confirming
+no pre-existing orphaned entries. Advisor independently re-ran typecheck (0
+errors), full suite (72/72 pass, up from 70), lint (0 errors), `registry:validate`
+(valid), and all three grep/head done-criteria.
+
+**021**: diff matches the plan exactly (`ContentFrontmatterSchema` + pure
+`parseFrontmatter`, per-file try/catch isolation in `loadEntries`, new
+`loadEntry` single-file loader powering `getWritingEntry`/`getBook`, the
+`loadEntries`/`loadEntry` duplication accepted per the plan's own
+reasoning). Executor went beyond the plan's ask and wrote a temporary
+(uncommitted, correctly not left behind) test confirming `compileMDX`
+actually throws on malformed MDX, validating the try/catch isolation
+does what it claims rather than assuming it. Advisor read all 10 new tests
+and confirmed the integration tests exercise real shipped fixture content
+(no mocking). Independently re-ran typecheck (0 errors), full suite
+(80/80 pass, up from 70), lint (0 errors), `registry:validate` (valid),
+and all three grep done-criteria (including confirming the unchecked
+`as ContentFrontmatter` cast is gone).
+
+**Not done by this pass**: none of these five branches have been merged.
+The operator should review each branch (or trust this log) and decide
+whether to merge individually or squash-merge as a batch, matching the
+pattern used for Rounds 1 and 3.
+
 ## Dependency notes
 
 None of these plans hard-block each other — each is independently
-executable and independently verifiable. Three soft-pairing notes worth
+executable and independently verifiable. Four soft-pairing notes worth
 knowing:
+
+- **017–021 (Round 4) are fully independent of each other and of every
+  earlier plan** — no shared files between them (017 touches both
+  templates' `theme-toggle.tsx`; 018 touches a block; 019 and 021 both
+  touch `portfolio-v1` but different files, `contact-form.tsx`/`actions.ts`
+  vs. `lib/posts.ts`; 020 touches docs + `registry-templates.test.ts`
+  only). Any order is fine; 017 and 018 are recommended first only because
+  they're P1 (accessibility/perf), not because of a dependency.
 
 - **016 deliberately bundles two coupled findings** (a broken `pnpm audit`
   and a `pnpm.overrides` field that would go silently inert the moment the

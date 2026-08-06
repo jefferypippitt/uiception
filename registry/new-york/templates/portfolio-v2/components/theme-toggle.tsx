@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useSyncExternalStore } from "react"
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react"
 import { flushSync } from "react-dom"
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -16,6 +16,21 @@ const themes = [
 type ThemeValue = (typeof themes)[number]["value"]
 
 const emptySubscribe = () => () => {}
+
+const TOGGLE_COOLDOWN_MS = 650
+
+/** Pure so it can be unit tested without a DOM. */
+export function shouldAllowToggle(lastToggleAt: number, now: number): boolean {
+  return now - lastToggleAt >= TOGGLE_COOLDOWN_MS
+}
+
+/** Returns true when the OS/browser has requested reduced motion. */
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
+}
 
 type VtDocument = Document & {
   startViewTransition?: (cb: () => void | Promise<void>) => {
@@ -39,7 +54,7 @@ function isEditableTarget(target: EventTarget | null) {
 /** Canvas UI pattern: set theme inside flushSync (± view transition). */
 function applyTheme(setTheme: (theme: string) => void, next: string) {
   const doc = document as VtDocument
-  if (doc.startViewTransition) {
+  if (doc.startViewTransition && !prefersReducedMotion()) {
     doc.startViewTransition(() => {
       flushSync(() => setTheme(next))
     })
@@ -87,8 +102,12 @@ export function ThemeToggle() {
 
 export function ThemeKeyboardShortcut() {
   const { resolvedTheme, setTheme } = useTheme()
+  const lastToggleAt = useRef<number>(0)
 
   const toggleTheme = useCallback(() => {
+    const now = Date.now()
+    if (!shouldAllowToggle(lastToggleAt.current, now)) return
+    lastToggleAt.current = now
     applyTheme(setTheme, resolvedTheme === "dark" ? "light" : "dark")
   }, [resolvedTheme, setTheme])
 

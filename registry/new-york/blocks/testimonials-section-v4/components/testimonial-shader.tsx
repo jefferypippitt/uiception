@@ -1,6 +1,6 @@
 "use client"
 
-import { useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { GrainGradient } from "@paper-design/shaders-react"
 
 import type { GrainShaderTheme } from "../lib/testimonials-content"
@@ -49,9 +49,28 @@ function adaptShader(theme: GrainShaderTheme, viewport: ShaderViewport) {
   }
 }
 
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(() =>
+    typeof window === "undefined"
+      ? false
+      : window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
+
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const onChange = () => setReduced(mql.matches)
+    mql.addEventListener("change", onChange)
+    return () => mql.removeEventListener("change", onChange)
+  }, [])
+
+  return reduced
+}
+
 export function TestimonialShader({ theme }: { theme: GrainShaderTheme }) {
   const ref = useRef<HTMLDivElement>(null)
   const [viewport, setViewport] = useState<ShaderViewport>(initialViewport)
+  const [isVisible, setIsVisible] = useState(false)
+  const reducedMotion = usePrefersReducedMotion()
 
   useLayoutEffect(() => {
     const el = ref.current
@@ -69,12 +88,23 @@ export function TestimonialShader({ theme }: { theme: GrainShaderTheme }) {
     }
 
     update()
-    const observer = new ResizeObserver(update)
-    observer.observe(el)
-    return () => observer.disconnect()
+    const resizeObserver = new ResizeObserver(update)
+    resizeObserver.observe(el)
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "200px" }
+    )
+    intersectionObserver.observe(el)
+
+    return () => {
+      resizeObserver.disconnect()
+      intersectionObserver.disconnect()
+    }
   }, [])
 
-  const renderProps = viewport.ready ? adaptShader(theme, viewport) : null
+  const shouldRender = viewport.ready && isVisible && !reducedMotion
+  const renderProps = shouldRender ? adaptShader(theme, viewport) : null
 
   return (
     <div

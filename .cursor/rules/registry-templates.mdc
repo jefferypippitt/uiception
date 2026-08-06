@@ -1,0 +1,54 @@
+---
+description: Registry templates are full standalone Next.js apps, structurally different from single-component blocks
+globs: registry/new-york/templates/**,registry.json
+alwaysApply: true
+---
+
+# Registry templates
+
+Templates are full standalone Next.js apps, not a single component. They live under
+`registry/new-york/templates/` instead of `registry/new-york/blocks/`, and there's no
+fixed folder shape beyond what the app itself needs:
+
+```
+registry/new-york/templates/{template-name}/
+  app/         # Routes — layout, pages, nested folders
+  components/  # UI, including components/ui
+  content/     # MDX or other app content
+  lib/         # Actions, data, schemas
+  styles/      # Extra CSS beyond globals
+  .env.example # Env vars the template expects
+```
+
+## A new template touches four places
+
+1. `registry/new-york/templates/{template-name}/` — the template itself
+2. `lib/templates.ts` — adds the version under its category (`id`, `title`,
+   `registryPath`, `description`)
+3. `registry.json` — a `registry:block` entry with `categories: ["template", ...]`,
+   listing every file, `dependencies`, and any `envVars`
+4. `components/template-previews/{id}.tsx` plus
+   `components/template-preview-by-version.tsx` — preview definition and id map
+
+Missing any of these breaks `pnpm registry:validate` or
+`tests/registry/registry-templates.test.ts`, or leaves a dead/orphaned entry
+that no test currently catches for #2/#4 (only #3's declared-files check is
+enforced both directions).
+
+## Templates are self-contained
+
+Unlike blocks, which may cross-import from other blocks (see
+`registry-blocks-source-layout.mdc`), each template must not import from the
+host site's own `components/`/`lib/`, nor from another template. Every
+dependency a template needs — including UI primitives like `Button` — is
+copied into the template's own `components/ui/` rather than shared. This is
+deliberate: a template is meant to be installed via `npx shadcn@latest init
+--template ...` as a self-contained starting point, not tied to this
+repo's own component tree.
+
+## Do not
+
+- Import from `@/components/*` or `@/lib/*` paths that resolve to the host
+  site rather than the template's own copies.
+- Add a template file without a matching `registry.json` entry (breaks
+  `pnpm registry:validate`).
