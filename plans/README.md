@@ -44,11 +44,11 @@ shipped work, dominated by one new feature: `registry/new-york/templates/`
 | 014 | Lazy-load remaining homepage terminal mini-games | P2 | S | — | DONE (squash-merged to main, "navbar blocks updated") |
 | 015 | Recompress oversized `gallery-section-v1`/`v3` images | P2 | S | — | DONE, budget not fully achieved — merged as-is per operator decision (keep current implementation, no hard-cap); see below |
 | 016 | Restore working `pnpm audit` + protect `pnpm.overrides` from the migration it requires | P1 | M | — | DONE (squash-merged to main, "navbar blocks updated") |
-| 017 | Restore anti-strobing cooldown + reduced-motion gate in both templates' theme toggles | P1 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/017-theme-toggle-strobe-safety-parity`, commit `8cc7427`) |
-| 018 | Gate `TestimonialShader`'s WebGL canvas behind visibility + reduced-motion checks | P1 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/018-testimonial-shader-visibility-gating`, commit `3c4b322`) |
-| 019 | Harden `portfolio-v1` contact form (honeypot + double-submit guard) | P2 | S | — | DONE (reviewed & approved, not yet merged — branch `advisor/019-harden-contact-form-action`, commit `bae6ee7`) |
-| 020 | Formalize templates contributor contract (docs + stale-entry tests) | P2 | S/M | — | DONE (reviewed & approved, not yet merged — branch `advisor/020-formalize-templates-contributor-contract`, commit `b037613`) |
-| 021 | `portfolio-v1` content pipeline: frontmatter validation, per-file error isolation, O(1) single-entry lookups | P2 | M | — | DONE (reviewed & approved, not yet merged — branch `advisor/021-portfolio-v1-content-pipeline-hardening`, commit `acd5e76`) |
+| 017 | Restore anti-strobing cooldown + reduced-motion gate in both templates' theme toggles | P1 | S | — | DONE (squash-merged to main `251746a`, "plan patch") |
+| 018 | Gate `TestimonialShader`'s WebGL canvas behind visibility + reduced-motion checks | P1 | S | — | DONE (squash-merged to main `251746a`, "plan patch") |
+| 019 | Harden `portfolio-v1` contact form (honeypot + double-submit guard) | P2 | S | — | DONE (squash-merged to main `251746a`, "plan patch") |
+| 020 | Formalize templates contributor contract (docs + stale-entry tests) | P2 | S/M | — | DONE (squash-merged to main `251746a`, "plan patch") |
+| 021 | `portfolio-v1` content pipeline: frontmatter validation, per-file error isolation, O(1) single-entry lookups | P2 | M | — | DONE (squash-merged to main `251746a`, "plan patch") |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -373,24 +373,34 @@ handling (env-only, never request-controlled — no SSRF); `@shadcn/react` in
 `package.json` (verified legitimate shadcn-ui/ui monorepo package, not a
 typosquat); no prompt-injection content found in any audited file.
 
-## Round 4 execution log (reviewed, approved, not yet merged)
+## Round 4 execution log (reviewed, approved, merged)
 
 Plans 017–021 were each dispatched to an isolated executor subagent in a
 disposable git worktree (`pnpm install` run first in each — worktrees share
 git history but not `node_modules`), then independently reviewed by the
 advisor: every done criterion was re-run from scratch in the worktree (not
 trusted from the executor's report), `git diff --stat` was checked against
-each plan's declared scope, and the full diff was read. Unlike Round 3,
-these branches have **not** been merged to `main` — that decision is left to
-the operator. Worktrees remain in `.claude/worktrees/` for inspection.
+each plan's declared scope, and the full diff was read. All 5 branches were
+then squash-merged into `main` in one commit at the operator's explicit
+request (single commit `251746a`, message "plan patch" — chosen by the
+operator, not the advisor). Before committing, `pnpm check` (registry
+validate + lint + 94/94 tests + typecheck) and `pnpm build` (full production
+build, 149 pages) were both re-run against the combined staged state and
+passed clean. The push to `origin/main` bypassed this repo's branch
+protection (PR + required "check" status normally enforced per
+`CONTRIBUTING.md`) via the operator's account bypass permission — flagged to
+the operator at the time, not something the advisor did silently. Worktrees
+and the `advisor/017`–`021` branches have since been pruned/deleted at the
+operator's request (content is preserved in `main`'s history via the squash
+commit).
 
-| Plan | Branch | Worktree path | Commit | Verdict |
-|------|--------|----------------|--------|---------|
-| 017 | `advisor/017-theme-toggle-strobe-safety-parity` | `.claude/worktrees/agent-a5ac14f593882276d` | `8cc7427` | APPROVE — not merged |
-| 018 | `advisor/018-testimonial-shader-visibility-gating` | `.claude/worktrees/agent-a6297f06376ff3336` | `3c4b322` | APPROVE — not merged |
-| 019 | `advisor/019-harden-contact-form-action` | `.claude/worktrees/agent-aed9fe842ebefa86a` | `bae6ee7` | APPROVE — not merged |
-| 020 | `advisor/020-formalize-templates-contributor-contract` | `.claude/worktrees/agent-aaf5c70180d7edef5` | `b037613` | APPROVE — not merged |
-| 021 | `advisor/021-portfolio-v1-content-pipeline-hardening` | `.claude/worktrees/agent-ab4e55ea59767e09d` | `acd5e76` | APPROVE — not merged |
+| Plan | Branch (deleted post-merge) | Commit (pre-squash) | Verdict |
+|------|------------------------------|----------------------|---------|
+| 017 | `advisor/017-theme-toggle-strobe-safety-parity` | `8cc7427` | APPROVE — merged |
+| 018 | `advisor/018-testimonial-shader-visibility-gating` | `3c4b322` | APPROVE — merged |
+| 019 | `advisor/019-harden-contact-form-action` | `bae6ee7` | APPROVE — merged |
+| 020 | `advisor/020-formalize-templates-contributor-contract` | `b037613` | APPROVE — merged |
+| 021 | `advisor/021-portfolio-v1-content-pipeline-hardening` | `acd5e76` | APPROVE — merged |
 
 **017**: diff matches the plan exactly across both templates' `theme-toggle.tsx`
 files (cooldown guard ported to `portfolio-v1`, cooldown + reduced-motion
@@ -450,10 +460,9 @@ and confirmed the integration tests exercise real shipped fixture content
 and all three grep done-criteria (including confirming the unchecked
 `as ContentFrontmatter` cast is gone).
 
-**Not done by this pass**: none of these five branches have been merged.
-The operator should review each branch (or trust this log) and decide
-whether to merge individually or squash-merge as a batch, matching the
-pattern used for Rounds 1 and 3.
+**Update**: the operator subsequently requested all five be squash-merged to
+`main` and pushed in one commit (`251746a`, "plan patch"), matching the
+pattern used for Round 3. Done — see the table above.
 
 ## Dependency notes
 
