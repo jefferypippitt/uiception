@@ -113,32 +113,41 @@
   overflow: hidden;
 }
 
-.hero-v9-activity-chart-live::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 38%,
-    var(--pp-accent-soft) 50%,
-    transparent 62%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: hero-v9-chart-scan 7s ease-in-out infinite;
-}
-
 .hero-v9-bar {
   transform-origin: bottom;
-  transition:
-    height 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 400ms ease;
+  transition: height 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero-v9-bar-live {
   animation: hero-v9-bar-rise 580ms cubic-bezier(0.34, 1.2, 0.64, 1) backwards;
+}
+
+.hero-v9-bar-fill {
+  transform-origin: bottom;
+  animation: hero-v9-bar-wave var(--wave-duration, 2.4s) ease-in-out
+    var(--wave-delay, 0s) infinite alternate;
+  will-change: transform;
+}
+
+.hero-v9-bar-fill-new {
+  animation:
+    hero-v9-bar-wave var(--wave-duration, 2.4s) ease-in-out
+      var(--wave-delay, 0s) infinite alternate,
+    hero-v9-bar-print 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-v9-bar-fill-hollow {
+  background-color: transparent;
+  border: 1px solid var(--pp-accent-muted);
+  transition:
+    background-color 400ms ease,
+    border-color 400ms ease;
+}
+
+.hero-v9-bar-fill-queued {
+  background-color: transparent;
+  border: 1px dashed var(--pp-accent-muted);
+  animation: hero-v9-bar-queued-pulse 2.6s ease-in-out infinite;
 }
 
 .hero-v9-metric-live {
@@ -175,25 +184,34 @@
   }
 }
 
-@keyframes hero-v9-chart-scan {
+@keyframes hero-v9-bar-wave {
+  0% {
+    transform: scaleY(0.92);
+  }
+
+  100% {
+    transform: scaleY(1.07);
+  }
+}
+
+@keyframes hero-v9-bar-print {
+  0% {
+    filter: brightness(1.55) saturate(1.25);
+  }
+
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+}
+
+@keyframes hero-v9-bar-queued-pulse {
   0%,
   100% {
-    transform: translateX(-100%);
-    opacity: 0;
+    opacity: 0.55;
   }
 
-  5% {
+  50% {
     opacity: 1;
-  }
-
-  32% {
-    transform: translateX(100%);
-    opacity: 1;
-  }
-
-  38% {
-    opacity: 0;
-    transform: translateX(100%);
   }
 }
 
@@ -249,7 +267,10 @@
 
   .hero-v9-bar,
   .hero-v9-bar-live,
-  .hero-v9-activity-chart-live::after,
+  .hero-v9-bar-fill,
+  .hero-v9-bar-fill-new,
+  .hero-v9-bar-fill-hollow,
+  .hero-v9-bar-fill-queued,
   .hero-v9-metric-live,
   .hero-v9-status-live,
   .hero-v9-table-row-live {

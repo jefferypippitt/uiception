@@ -20,9 +20,16 @@ export default function ProductPreviewShell({
       role="img"
       aria-label="Operations dashboard preview"
     >
-      <MetricsRow metrics={live.metrics} pulseKey={live.pulseKey} />
+      <MetricsRow metrics={live.metrics} />
       <div className="hero-v9-panels grid grid-cols-1 items-stretch lg:grid-cols-2">
-        <ActivityPanel activity={live.panels.activity} live />
+        <ActivityPanel
+          activity={live.panels.activity}
+          live
+          pulseKey={live.barsPulseKey}
+          taskStates={live.panels.tasks.rows.map((row) => row.state)}
+          queuedJobs={live.queuedJobs}
+          barPeaks={live.barPeaks}
+        />
         <TasksPanel tasks={live.panels.tasks} />
       </div>
     </div>

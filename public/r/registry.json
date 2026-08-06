@@ -2629,6 +2629,38 @@
       ]
     },
     {
+      "name": "hero-section-v11",
+      "type": "registry:block",
+      "title": "Hero Section v11",
+      "description": "Two-panel travel hero with integrated ACME nav, dual CTAs, and a full-bleed destination image with Canvas UI Displacement on pointer move.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v11/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v11/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v11/components/hero-section-v11.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v11/components/hero-section-v11.tsx"
+        },
+        {
+          "path": "components/canvasui/displacement.tsx",
+          "type": "registry:component",
+          "target": "components/canvasui/displacement.tsx"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v11/image.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v11/image.jpg.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "stats-section-v1",
       "type": "registry:block",
       "title": "Stats Section v1",
@@ -4338,6 +4370,67 @@
           "path": "registry/new-york/blocks/feature-section-v10/lib/features.ts",
           "type": "registry:lib",
           "target": "app/feature-section-v10/lib/features.ts"
+        }
+      ]
+    },
+    {
+      "name": "feature-section-v11",
+      "type": "registry:block",
+      "title": "Feature Section v11",
+      "description": "Two-column features section with a left Canvas UI ParticleObject flat image effect, Geist Sans title, and a 2×3 icon feature grid.",
+      "dependencies": [
+        "three",
+        "geist@^1.7.0",
+        "@phosphor-icons/react"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/page.tsx",
+          "type": "registry:page",
+          "target": "app/feature-section-v11/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/components/feature-section-v11.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v11/components/feature-section-v11.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/components/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v11/components/feature-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/components/feature-icons.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v11/components/feature-icons.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/components/particle-panel.tsx",
+          "type": "registry:component",
+          "target": "app/feature-section-v11/components/particle-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/hooks/use-css-color.ts",
+          "type": "registry:hook",
+          "target": "app/feature-section-v11/hooks/use-css-color.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/feature-section-v11/lib/features.ts",
+          "type": "registry:lib",
+          "target": "app/feature-section-v11/lib/features.ts"
+        },
+        {
+          "path": "components/canvasui/particle-object.tsx",
+          "type": "registry:component",
+          "target": "components/canvasui/particle-object.tsx"
+        },
+        {
+          "path": "public/images/blocks/feature-section-v11/image.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/feature-section-v11/image.png.gitkeep"
         }
       ]
     },

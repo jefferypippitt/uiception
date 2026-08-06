@@ -983,18 +983,26 @@ export function Liquid({
         {native ? (
           <div
             ref={contentRef}
+            data-liquid-content
             style={{
               position: "relative",
               width: "100%",
               minHeight: "100%",
               height: "100%",
               overflow: "auto",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
             }}
           >
             {children}
           </div>
         ) : null}
       </canvas>
+      {/* html-in-canvas keeps this subtree in the real layout tree so it can
+          be captured — its scrollbar would otherwise render on top of the
+          WebGL output. Hidden here since it ships to consumer repos without
+          our host-only preview CSS. */}
+      <style>{`[data-liquid-content]::-webkit-scrollbar{display:none}`}</style>
       {!native ? (
         <div
           ref={contentRef}

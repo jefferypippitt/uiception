@@ -50,7 +50,7 @@ export const heroV9Preview: ProductPreviewConfig = {
   ],
   panels: {
     activity: {
-      title: "Run volume",
+      title: "Volume overview",
       bars: [
         42, 68, 55, 88, 72, 95, 60, 78, 50, 82, 65, 90, 58, 74, 63, 85, 70,
         92, 48, 80, 67, 86, 52, 76, 61, 94, 45, 83, 69, 91, 56, 79, 64, 87,
@@ -58,7 +58,7 @@ export const heroV9Preview: ProductPreviewConfig = {
       ],
     },
     tasks: {
-      legendTitle: "Status mix",
+      legendTitle: "Status overview",
       legend: [
         { label: "Success", state: "success" },
         { label: "In progress", state: "running" },
