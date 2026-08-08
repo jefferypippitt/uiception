@@ -404,6 +404,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Pricing Section v2",
         registryPath: "registry/new-york/blocks/pricing-section-v2",
       },
+      {
+        id: "pricing-section-v3",
+        title: "Pricing Section v3",
+        registryPath: "registry/new-york/blocks/pricing-section-v3",
+      },
     ],
   },
   {

@@ -69,6 +69,7 @@ import HeroSectionV10 from "@/registry/new-york/blocks/hero-section-v10/componen
 import HeroSectionV11 from "@/registry/new-york/blocks/hero-section-v11/components/hero-section-v11"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
+import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
@@ -155,6 +156,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "testimonials-section-v4": TestimonialsSectionV4,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
+  "pricing-section-v3": PricingSectionV3,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,

@@ -52,6 +52,9 @@ describe("template registry target paths", () => {
       "content/",
       "public/",
       ".env",
+      // Root-level Next.js request interceptor (Next 16 name for middleware.ts),
+      // required by Clerk's clerkMiddleware().
+      "proxy.ts",
     ]
 
     for (const item of templateItems) {

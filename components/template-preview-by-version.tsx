@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 
+import { landingPageV1Preview } from "@/components/template-previews/landing-page-v1"
 import { portfolioV1Preview } from "@/components/template-previews/portfolio-v1"
 import { portfolioV2Preview } from "@/components/template-previews/portfolio-v2"
 import type { TemplatePreviewDefinition } from "@/components/template-previews/types"
@@ -11,6 +12,7 @@ export type { TemplatePreviewDefinition } from "@/components/template-previews/t
 export const templatePreviews: Record<string, TemplatePreviewDefinition> = {
   "portfolio-v1": portfolioV1Preview,
   "portfolio-v2": portfolioV2Preview,
+  "landing-page-v1": landingPageV1Preview,
 }
 
 export function isKnownTemplateVersion(versionId: string): boolean {

@@ -1,4 +1,4 @@
-export type TemplateCategoryId = "portfolio"
+export type TemplateCategoryId = "portfolio" | "landing-pages"
 
 export type TemplateVersion = {
   id: string
@@ -33,6 +33,20 @@ export const templateCategories: TemplateCategory[] = [
         registryPath: "registry/new-york/templates/portfolio-v2",
         description:
           "Static personal site — notes, projects, and experience hardcoded in pages. No CMS or markdown.",
+      },
+    ],
+  },
+  {
+    id: "landing-pages",
+    title: "Landing Pages",
+    description: "For product launches, marketing sites, and campaigns.",
+    versions: [
+      {
+        id: "landing-page-v1",
+        title: "Landing Page v1",
+        registryPath: "registry/new-york/templates/landing-page-v1",
+        description:
+          "Fullscreen startup waitlist — monochrome ink-print hero with a boiling misregistered title, Clerk <Waitlist /> (shadcn theme) on the right. Works keyless with a demo form.",
       },
     ],
   },

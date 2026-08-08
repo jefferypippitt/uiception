@@ -1,7 +1,10 @@
 allowBuilds:
+  bufferutil: false
+  core-js: false
   msw: true
   sharp: true
   unrs-resolver: true
+  utf-8-validate: false
 minimumReleaseAgeExclude:
   - '@next/env@16.2.12'
   - '@next/swc-darwin-arm64@16.2.12'

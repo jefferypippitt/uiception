@@ -3,6 +3,8 @@
 @import "./vercel-docs-theme.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+/* Clerk shadcn theme (landing-page-v1 preview) — Tailwind must scan these classes. */
+@import "@clerk/ui/themes/shadcn.css";
 
 .typeset-docs {
   --typeset-font-body: var(--font-geist-sans);

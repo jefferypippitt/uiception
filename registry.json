@@ -4501,6 +4501,43 @@
       ]
     },
     {
+      "name": "pricing-section-v3",
+      "type": "registry:block",
+      "title": "Pricing Section v3",
+      "description": "Three-tier pricing cards with a monthly/yearly switch, grouped feature lists, and centered two-line headline.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "switch",
+        "badge",
+        "label",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/pricing-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/pricing-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/pricing-section-v3/components/pricing-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v3/components/pricing-card.tsx",
+          "type": "registry:component",
+          "target": "app/pricing-section-v3/components/pricing-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/pricing-section-v3/lib/pricing-plans.ts",
+          "type": "registry:lib",
+          "target": "app/pricing-section-v3/lib/pricing-plans.ts"
+        }
+      ]
+    },
+    {
       "name": "gallery-section-v1",
       "type": "registry:block",
       "title": "Gallery Section v1",
@@ -5012,6 +5049,82 @@
         },
         {
           "path": "registry/new-york/templates/portfolio-v2/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
+        }
+      ]
+    },
+    {
+      "name": "landing-page-v1",
+      "type": "registry:block",
+      "title": "Landing Page v1",
+      "description": "Fullscreen startup waitlist — monochrome ink-print hero with a boiling misregistered display title and floating hex-tile cursor effect on the left, Clerk's <Waitlist /> component (shadcn theme) on the right. Palette in app/globals.css; layout and type via Tailwind on the page. Renders a keyless demo form until Clerk keys are set. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "@clerk/nextjs",
+        "@clerk/ui",
+        "geist"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "landing-pages"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/landing-page-v1.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nClerk setup — fastest path is the Clerk CLI (https://clerk.com/docs/cli):\n  npx clerk init -y\nThis links (or creates) a Clerk app and writes both keys to .env.local — no dashboard copy-paste. Alternatively, copy the keys from https://dashboard.clerk.com/~/api-keys into .env.local (see .env.example).\n\nThen enable Waitlist mode: Clerk Dashboard → Waitlist → toggle \"Enable waitlist\".\n\n<Waitlist /> submits to Clerk's Frontend API; entries show in the Dashboard. app/api/webhooks/route.ts verifies waitlistEntry.created / waitlistEntry.updated (add side effects there). Local test:\n  clerk webhooks listen --forward-to http://localhost:3000/api/webhooks\nAdd the printed relay URL as a Dashboard webhook endpoint (subscribe to waitlistEntry.*), set CLERK_WEBHOOK_SIGNING_SECRET from that endpoint, restart the app, then join the waitlist.\n\nUntil keys are set, the page renders a local demo form that stores nothing. The <Waitlist /> component is mounted on the home page, so waitlistUrl is \"/\" (set on ClerkProvider in app/layout.tsx). The shadcn theme comes from @clerk/ui/themes and its CSS is imported in app/globals.css.\n\nEdit all page copy (name, tagline, footer links) in lib/site.ts.",
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "",
+        "CLERK_SECRET_KEY": "",
+        "CLERK_WEBHOOK_SIGNING_SECRET": "",
+        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/",
+        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/"
+      },
+      "files": [
+        {
+          "path": "registry/new-york/templates/landing-page-v1/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/app/globals.css",
+          "type": "registry:file",
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/app/api/webhooks/route.ts",
+          "type": "registry:page",
+          "target": "app/api/webhooks/route.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/components/waitlist-panel.tsx",
+          "type": "registry:component",
+          "target": "components/waitlist-panel.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/components/texture-title.tsx",
+          "type": "registry:component",
+          "target": "components/texture-title.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/components/hex-float.tsx",
+          "type": "registry:component",
+          "target": "components/hex-float.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/lib/site.ts",
+          "type": "registry:lib",
+          "target": "lib/site.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/proxy.ts",
+          "type": "registry:file",
+          "target": "proxy.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v1/.env.example",
           "type": "registry:file",
           "target": ".env.example"
         }
