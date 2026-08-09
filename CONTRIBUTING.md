@@ -78,7 +78,10 @@ sections.
 Templates are full standalone Next.js apps under `registry/new-york/templates/`,
 structurally different from the single-component blocks above — see
 [`.cursor/rules/registry-templates.mdc`](./.cursor/rules/registry-templates.mdc)
-for the full folder-shape and self-containment rules.
+for the full folder-shape and self-containment rules. If your template
+accepts inbound requests (a webhook, an API route), see that file's
+"Backend-integrated templates" section for the verification and
+test-coverage requirements.
 
 A **new template** touches four places, same pattern as blocks:
 
