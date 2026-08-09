@@ -1,0 +1,103 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gallery-section-v4",
+  "title": "Gallery Section v4",
+  "description": "A responsive CSS-grid masonry gallery with varied tile heights and a quick blur-in reveal as each tile scrolls into view, no title or copy — just the grid.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/gallery-section-v4/page.tsx",
+      "content": "import GallerySectionV4 from \"./components/gallery-section-v4\"\n\nexport default function Page() {\n  return <GallerySectionV4 />\n}\n",
+      "type": "registry:page",
+      "target": "app/gallery-section-v4/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v4/components/gallery-section-v4.tsx",
+      "content": "import { GalleryMasonryItem } from \"./gallery-masonry-item\"\nimport { createBlockImage } from \"@/lib/block-media\"\nimport { ROW_UNIT, imageFiles, type GalleryItem } from \"../lib/config\"\n\nconst blockImage = createBlockImage(\"gallery-section-v4\")\nconst galleryItems: GalleryItem[] = imageFiles.map(\n  ({ file, alt, heightPx }, index) => ({\n    id: `image-${index + 1}`,\n    alt,\n    span: Math.round(heightPx / ROW_UNIT),\n    imageSrc: blockImage(file),\n  }),\n)\n\nexport type GallerySectionV4Props = {\n  items?: GalleryItem[]\n}\n\nexport default function GallerySectionV4({\n  items = galleryItems,\n}: GallerySectionV4Props = {}) {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-7xl px-4\">\n        <div className=\"grid grid-flow-dense auto-rows-[4px] grid-cols-2 gap-x-4 md:grid-cols-3 lg:grid-cols-4\">\n          {items.map((item, index) => (\n            <GalleryMasonryItem\n              key={item.id}\n              item={item}\n              priority={index < 4}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v4/components/gallery-section-v4.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v4/components/gallery-masonry-item.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\nimport Image from \"next/image\"\n\nimport { useInView } from \"../hooks/use-in-view\"\nimport type { GalleryItem } from \"../lib/config\"\n\ntype GalleryMasonryItemProps = {\n  item: GalleryItem\n  priority?: boolean\n}\n\nexport function GalleryMasonryItem({\n  item,\n  priority = false,\n}: GalleryMasonryItemProps) {\n  const [loaded, setLoaded] = useState(false)\n  const [ref, inView] = useInView<HTMLDivElement>()\n  const revealed = loaded && inView\n\n  return (\n    <div style={{ gridRowEnd: `span ${item.span}` }}>\n      <div\n        ref={ref}\n        className=\"relative h-[calc(100%-1rem)] overflow-hidden rounded-lg bg-muted\"\n      >\n        <Image\n          src={item.imageSrc}\n          alt={item.alt}\n          fill\n          unoptimized\n          priority={priority}\n          sizes=\"(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw\"\n          className={`object-cover transition-[opacity,filter,translate] duration-500 ease-out${revealed ? \" translate-y-0 opacity-100 blur-none\" : \" translate-y-6 opacity-0 blur-sm\"}`}\n          onLoad={() => setLoaded(true)}\n          onError={() => setLoaded(true)}\n        />\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v4/components/gallery-masonry-item.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v4/hooks/use-in-view.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useRef, useState } from \"react\"\n\n/** Flips to `true` once the node crosses into the viewport, then stops observing. */\nexport function useInView<T extends HTMLElement>(threshold = 0.15) {\n  const ref = useRef<T>(null)\n  const [inView, setInView] = useState(false)\n\n  useEffect(() => {\n    const node = ref.current\n    if (!node) return\n\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (!entry.isIntersecting) return\n        setInView(true)\n        observer.disconnect()\n      },\n      { threshold, rootMargin: \"0px 0px -10% 0px\" },\n    )\n\n    observer.observe(node)\n    return () => observer.disconnect()\n  }, [threshold])\n\n  return [ref, inView] as const\n}\n",
+      "type": "registry:hook",
+      "target": "app/gallery-section-v4/hooks/use-in-view.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v4/lib/config.ts",
+      "content": "export type GalleryItem = {\n  id: string\n  alt: string\n  span: number\n  imageSrc: string\n}\n\n/** Grid row height in px — keep in sync with the `auto-rows-[…]` class on the grid. */\nexport const ROW_UNIT = 4\n\nexport const imageFiles = [\n  { file: \"image-1.jpg\", alt: \"Mountain landscape at golden hour\", heightPx: 320 },\n  { file: \"image-2.jpg\", alt: \"Coastal cliffs and ocean waves\", heightPx: 220 },\n  { file: \"image-3.jpg\", alt: \"Forest trail through tall trees\", heightPx: 380 },\n  { file: \"image-4.jpg\", alt: \"City skyline at dusk\", heightPx: 260 },\n  { file: \"image-5.jpg\", alt: \"Desert dunes under a clear sky\", heightPx: 300 },\n  { file: \"image-6.jpg\", alt: \"Snow-capped peaks above a valley\", heightPx: 420 },\n  { file: \"image-7.jpg\", alt: \"Lush green hills and farmland\", heightPx: 240 },\n  { file: \"image-8.jpg\", alt: \"Rocky shoreline at sunset\", heightPx: 340 },\n  { file: \"image-9.jpg\", alt: \"Misty lake surrounded by mountains\", heightPx: 280 },\n  { file: \"image-10.jpg\", alt: \"Cherry blossoms in spring light\", heightPx: 360 },\n  { file: \"image-1.jpg\", alt: \"Mountain landscape at golden hour\", heightPx: 260 },\n  { file: \"image-2.jpg\", alt: \"Coastal cliffs and ocean waves\", heightPx: 360 },\n  { file: \"image-3.jpg\", alt: \"Forest trail through tall trees\", heightPx: 300 },\n  { file: \"image-4.jpg\", alt: \"City skyline at dusk\", heightPx: 220 },\n  { file: \"image-5.jpg\", alt: \"Desert dunes under a clear sky\", heightPx: 400 },\n  { file: \"image-6.jpg\", alt: \"Snow-capped peaks above a valley\", heightPx: 280 },\n  { file: \"image-7.jpg\", alt: \"Lush green hills and farmland\", heightPx: 340 },\n  { file: \"image-8.jpg\", alt: \"Rocky shoreline at sunset\", heightPx: 240 },\n  { file: \"image-9.jpg\", alt: \"Misty lake surrounded by mountains\", heightPx: 380 },\n  { file: \"image-10.jpg\", alt: \"Cherry blossoms in spring light\", heightPx: 320 },\n]\n",
+      "type": "registry:lib",
+      "target": "app/gallery-section-v4/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-2.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-2.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-3.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-3.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-4.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-4.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-5.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-5.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-6.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-6.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-7.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-7.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-8.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-8.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-9.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-9.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v4/image-10.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v4/image-10.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

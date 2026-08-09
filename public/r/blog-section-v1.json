@@ -1,0 +1,63 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blog-section-v1",
+  "title": "Blog Section v1",
+  "description": "Editorial All Articles layout with a featured Spotlight post (image, headline, author) and a Trending list of three compact articles.",
+  "dependencies": [
+    "geist@^1.7.0"
+  ],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/blog-section-v1/page.tsx",
+      "content": "import BlogSectionV1 from \"./components/blog-section-v1\"\r\n\r\nexport default function Page() {\r\n  return <BlogSectionV1 />\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/blog-section-v1/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/blog-section-v1/components/blog-section-v1.tsx",
+      "content": "import Image from \"next/image\"\r\nimport Link from \"next/link\"\r\nimport { GeistSans } from \"geist/font/sans\"\r\nimport { FlameIcon, RadioTowerIcon } from \"lucide-react\"\r\n\r\nimport { createBlockImage } from \"@/lib/block-media\"\r\n\r\nimport { sectionMeta, spotlight, trending } from \"../lib/config\"\r\n\r\nconst blockImage = createBlockImage(\"blog-section-v1\")\r\n\r\nconst featured = {\r\n  src: blockImage(spotlight.imageFile),\r\n  alt: spotlight.alt,\r\n  title: spotlight.title,\r\n  href: spotlight.href,\r\n  author: {\r\n    name: spotlight.author.name,\r\n    avatarSrc: blockImage(spotlight.author.avatarFile),\r\n  },\r\n}\r\n\r\nconst trendingPosts = trending.map((post) => ({\r\n  src: blockImage(post.imageFile),\r\n  alt: post.alt,\r\n  title: post.title,\r\n  href: post.href,\r\n}))\r\n\r\nexport default function BlogSectionV1() {\r\n  return (\r\n    <section className=\"py-4 md:py-6 lg:py-8\">\r\n      <div className=\"mx-auto max-w-6xl px-4\">\r\n        <h2\r\n          className={`m-0 font-sans text-4xl font-medium leading-[1.08] tracking-[-0.03em] text-balance sm:text-[2.625rem] lg:text-5xl lg:leading-[1.06] ${GeistSans.className}`}\r\n        >\r\n          {sectionMeta.title}\r\n        </h2>\r\n\r\n        <div className=\"mt-6 border-t border-border\" />\r\n\r\n        <div className=\"mt-10 grid gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0\">\r\n          <div className=\"flex flex-col lg:border-r lg:border-border lg:pr-10\">\r\n            <p className=\"mb-4 flex items-center gap-2 text-base font-semibold tracking-tight text-foreground\">\r\n              <RadioTowerIcon className=\"size-4.5 shrink-0\" aria-hidden />\r\n              {sectionMeta.spotlightLabel}\r\n            </p>\r\n\r\n            <Link\r\n              href={featured.href}\r\n              className=\"group flex min-h-0 flex-1 flex-col outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\r\n            >\r\n              <div className=\"relative aspect-2/1 w-full overflow-hidden rounded-xl bg-muted sm:aspect-video\">\r\n                <Image\r\n                  src={featured.src}\r\n                  alt={featured.alt}\r\n                  fill\r\n                  unoptimized\r\n                  className=\"object-cover transition-transform duration-500 group-hover:scale-[1.02]\"\r\n                  sizes=\"(max-width: 1024px) 100vw, 50vw\"\r\n                  priority\r\n                />\r\n              </div>\r\n\r\n              <h3 className=\"mt-4 text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-2xl\">\r\n                {featured.title}\r\n              </h3>\r\n            </Link>\r\n\r\n            <div className=\"mt-4 flex items-center gap-3\">\r\n              <Image\r\n                src={featured.author.avatarSrc}\r\n                alt=\"\"\r\n                width={36}\r\n                height={36}\r\n                unoptimized\r\n                className=\"size-9 rounded-full object-cover\"\r\n              />\r\n              <span className=\"text-base text-muted-foreground\">\r\n                {featured.author.name}\r\n              </span>\r\n            </div>\r\n          </div>\r\n\r\n          <div className=\"flex flex-col lg:pl-10\">\r\n            <p className=\"mb-4 flex items-center gap-2 text-base font-semibold tracking-tight text-foreground\">\r\n              <FlameIcon className=\"size-4.5 shrink-0\" aria-hidden />\r\n              {sectionMeta.trendingLabel}\r\n            </p>\r\n\r\n            <ul className=\"flex flex-1 flex-col justify-between divide-y divide-border\">\r\n              {trendingPosts.map((post) => (\r\n                <li key={post.title + post.src} className=\"flex flex-1 items-center py-4 first:pt-0 last:pb-0\">\r\n                  <Link\r\n                    href={post.href}\r\n                    className=\"group flex w-full items-start gap-4 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\r\n                  >\r\n                    <div className=\"relative size-18 shrink-0 overflow-hidden rounded-lg bg-muted sm:size-20\">\r\n                      <Image\r\n                        src={post.src}\r\n                        alt={post.alt}\r\n                        fill\r\n                        unoptimized\r\n                        className=\"object-cover transition-transform duration-500 group-hover:scale-[1.03]\"\r\n                        sizes=\"80px\"\r\n                      />\r\n                    </div>\r\n                    <h3 className=\"min-w-0 flex-1 pt-0.5 text-base font-medium leading-snug tracking-tight text-foreground transition-colors group-hover:text-foreground/80 sm:text-lg\">\r\n                      {post.title}\r\n                    </h3>\r\n                  </Link>\r\n                </li>\r\n              ))}\r\n            </ul>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/blog-section-v1/components/blog-section-v1.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/blog-section-v1/lib/config.ts",
+      "content": "export const sectionMeta = {\r\n  title: \"All Articles\",\r\n  spotlightLabel: \"Spotlight\",\r\n  trendingLabel: \"Trending\",\r\n} as const\r\n\r\nexport const spotlight = {\r\n  imageFile: \"image-1.jpg\",\r\n  alt: \"Mountain landscape at golden hour\",\r\n  title:\r\n    \"How Real-Time Collaboration Transformed Product Delivery for Distributed Teams\",\r\n  href: \"#\",\r\n  author: {\r\n    name: \"Maya Chen\",\r\n    avatarFile: \"avatar-1.png\",\r\n  },\r\n} as const\r\n\r\nexport const trending = [\r\n  {\r\n    imageFile: \"image-2.jpg\",\r\n    alt: \"Coastal cliffs and ocean waves\",\r\n    title:\r\n      \"How Real-Time Collaboration Transformed Product Delivery for Distributed Teams\",\r\n    href: \"#\",\r\n  },\r\n  {\r\n    imageFile: \"image-3.jpg\",\r\n    alt: \"Forest trail through tall trees\",\r\n    title:\r\n      \"What is Design System Governance? A Practical Guide for Growing Product Teams\",\r\n    href: \"#\",\r\n  },\r\n  {\r\n    imageFile: \"image-4.jpg\",\r\n    alt: \"City skyline at dusk\",\r\n    title:\r\n      \"Shipping in Public: Building Trust Through Transparent Product Roadmaps\",\r\n    href: \"#\",\r\n  },\r\n] as const\r\n",
+      "type": "registry:lib",
+      "target": "app/blog-section-v1/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v1/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v1/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v1/image-2.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v1/image-2.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v1/image-3.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v1/image-3.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v1/image-4.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v1/image-4.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v1/avatar-1.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v1/avatar-1.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonials-section-v5",
+  "title": "Testimonials Section v5",
+  "description": "Centered badge, headline, and description above a masonry wall-of-love grid of quote cards with avatar and name.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "badge",
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/testimonials-section-v5/page.tsx",
+      "content": "import TestimonialsSectionV5 from \"./components/testimonials-section-v5\"\n\nexport default function Page() {\n  return <TestimonialsSectionV5 />\n}\n",
+      "type": "registry:page",
+      "target": "app/testimonials-section-v5/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/testimonials-section-v5/components/testimonials-section-v5.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nimport TestimonialCard from \"./testimonial-card\"\nimport { sectionMeta, testimonials } from \"../lib/testimonials-content\"\n\nexport default function TestimonialsSectionV5() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-4 text-center\">\n          <Badge variant=\"secondary\">{sectionMeta.badge}</Badge>\n          <h2 className=\"text-4xl font-medium tracking-tighter sm:text-5xl\">\n            {sectionMeta.title}\n          </h2>\n          <p className=\"max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base\">\n            {sectionMeta.description}\n          </p>\n        </div>\n\n        <div className=\"mt-10 columns-1 gap-4 sm:columns-2 md:mt-12 lg:mt-14 lg:columns-3\">\n          {testimonials.map((testimonial) => (\n            <TestimonialCard key={testimonial.id} testimonial={testimonial} />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/testimonials-section-v5/components/testimonials-section-v5.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/testimonials-section-v5/components/testimonial-card.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\n\nimport type { Testimonial } from \"../lib/testimonials-content\"\n\nexport default function TestimonialCard({\n  testimonial,\n}: {\n  testimonial: Testimonial\n}) {\n  return (\n    <article className=\"mb-4 break-inside-avoid rounded-lg border border-border bg-muted p-5 dark:bg-background md:p-6\">\n      <p className=\"text-sm leading-relaxed text-foreground\">\n        {testimonial.quote}\n      </p>\n      <div className=\"mt-5 flex items-center gap-3\">\n        <Avatar>\n          <AvatarImage\n            src={testimonial.avatarSrc}\n            alt={testimonial.name}\n            className=\"object-cover object-center\"\n          />\n          <AvatarFallback>{testimonial.initials}</AvatarFallback>\n        </Avatar>\n        <p className=\"text-sm font-medium\">{testimonial.name}</p>\n      </div>\n    </article>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/testimonials-section-v5/components/testimonial-card.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/testimonials-section-v5/lib/testimonials-content.ts",
+      "content": "import { createBlockImage } from \"@/lib/block-media\"\n\nconst blockAvatar = createBlockImage(\"testimonials-section-v5\")\n\nexport type Testimonial = {\n  id: string\n  quote: string\n  name: string\n  initials: string\n  avatarSrc: string\n}\n\nexport const sectionMeta = {\n  badge: \"Customer Stories\",\n  title: \"Our Wall of Love\",\n  description:\n    \"Read what our talented community members are saying about Acme\",\n}\n\nexport const testimonials: Testimonial[] = [\n  {\n    id: \"will-barron\",\n    quote:\n      \"A hiring manager found my profile on Acme while searching for local designers. She reached out directly, and after one quick call I had an offer before the week was out.\",\n    name: \"Will Barron\",\n    initials: \"WB\",\n    avatarSrc: blockAvatar(\"avatar-2.png\"),\n  },\n  {\n    id: \"priya-nair\",\n    quote: \"Acme completely changed how our team collaborates. Simple as that.\",\n    name: \"Priya Nair\",\n    initials: \"PN\",\n    avatarSrc: blockAvatar(\"avatar-1.png\"),\n  },\n  {\n    id: \"marcus-webb\",\n    quote:\n      \"I joined Acme mostly to get feedback on side projects, but ended up landing three freelance clients within my first month. The critique threads alone are worth more than most paid courses I've taken, and people actually follow up to see how your work turned out.\",\n    name: \"Marcus Webb\",\n    initials: \"MW\",\n    avatarSrc: blockAvatar(\"avatar-4.png\"),\n  },\n  {\n    id: \"elena-ross\",\n    quote: \"Best design community I've found online. Full stop.\",\n    name: \"Elena Ross\",\n    initials: \"ER\",\n    avatarSrc: blockAvatar(\"avatar-5.png\"),\n  },\n  {\n    id: \"daniel-park\",\n    quote:\n      \"I posted my portfolio on Acme on a whim and within a week had a recruiter reach out about a role I wasn't even actively looking for. Wouldn't have happened anywhere else.\",\n    name: \"Daniel Park\",\n    initials: \"DP\",\n    avatarSrc: blockAvatar(\"avatar-6.png\"),\n  },\n  {\n    id: \"grace-kim\",\n    quote:\n      \"What keeps me coming back to Acme is how generous everyone is with their time. I've had senior designers walk me through their entire process just because I asked a question in the comments. That kind of mentorship is rare, and it's the reason I've stuck around for three years now.\",\n    name: \"Grace Kim\",\n    initials: \"GK\",\n    avatarSrc: blockAvatar(\"avatar-3.png\"),\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/testimonials-section-v5/lib/testimonials-content.ts"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-1.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-1.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-2.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-2.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-3.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-3.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-4.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-4.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-5.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-5.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

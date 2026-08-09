@@ -11,9 +11,11 @@ import CtaSectionV2 from "@/registry/new-york/blocks/cta-section-v2/components/c
 import CtaSectionV3 from "@/registry/new-york/blocks/cta-section-v3/components/cta-section-v3"
 import CtaSectionV4 from "@/registry/new-york/blocks/cta-section-v4/components/cta-section-v4"
 import CtaSectionV5 from "@/registry/new-york/blocks/cta-section-v5/components/cta-section-v5"
+import CtaSectionV6 from "@/registry/new-york/blocks/cta-section-v6/components/cta-section-v6"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/components/footer-section-v1"
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/components/footer-section-v2"
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/components/footer-section-v3"
+import FooterSectionV4 from "@/registry/new-york/blocks/footer-section-v4/components/footer-section-v4"
 import ChatBotPage from "@/registry/new-york/blocks/chat-bot/page"
 import SimpleChatbotPage from "@/registry/new-york/blocks/simple-chatbot/page"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/components/stats-section-v1"
@@ -49,14 +51,17 @@ import FeatureSectionV9 from "@/registry/new-york/blocks/feature-section-v9/comp
 import FeatureSectionV10 from "@/registry/new-york/blocks/feature-section-v10/components/feature-section-v10"
 import FeatureSectionV11 from "@/registry/new-york/blocks/feature-section-v11/components/feature-section-v11"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/components/changelog-section-v1"
+import ChangelogSectionV2 from "@/registry/new-york/blocks/changelog-section-v2/components/changelog-section-v2"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
 import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
 import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
 import FaqSectionV4 from "@/registry/new-york/blocks/faq-section-v4/components/faq-section-v4"
+import FaqSectionV5 from "@/registry/new-york/blocks/faq-section-v5/components/faq-section-v5"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
 import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3"
 import TestimonialsSectionV4 from "@/registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4"
+import TestimonialsSectionV5 from "@/registry/new-york/blocks/testimonials-section-v5/components/testimonials-section-v5"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
@@ -67,12 +72,15 @@ import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components
 import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/components/hero-section-v9"
 import HeroSectionV10 from "@/registry/new-york/blocks/hero-section-v10/components/hero-section-v10"
 import HeroSectionV11 from "@/registry/new-york/blocks/hero-section-v11/components/hero-section-v11"
+import HeroSectionV12 from "@/registry/new-york/blocks/hero-section-v12/components/hero-section-v12"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
+import GallerySectionV4 from "@/registry/new-york/blocks/gallery-section-v4/components/gallery-section-v4"
+import BlogSectionV1 from "@/registry/new-york/blocks/blog-section-v1/components/blog-section-v1"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
 import NavbarSectionV2Page from "@/registry/new-york/blocks/navbar-section-v2/page"
 import NavbarSectionV3Page from "@/registry/new-york/blocks/navbar-section-v3/page"
@@ -98,9 +106,11 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cta-section-v3": CtaSectionV3,
   "cta-section-v4": CtaSectionV4,
   "cta-section-v5": CtaSectionV5,
+  "cta-section-v6": CtaSectionV6,
   "footer-section-v1": FooterSectionV1,
   "footer-section-v2": FooterSectionV2,
   "footer-section-v3": FooterSectionV3,
+  "footer-section-v4": FooterSectionV4,
   "chat-bot": ChatBotPage,
   "simple-chatbot": SimpleChatbotPage,
   "stats-section-v1": StatsSectionV1,
@@ -136,6 +146,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v9": HeroSectionV9,
   "hero-section-v10": HeroSectionV10,
   "hero-section-v11": HeroSectionV11,
+  "hero-section-v12": HeroSectionV12,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
   "feature-section-v5": FeatureSectionV5,
@@ -146,20 +157,25 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v10": FeatureSectionV10,
   "feature-section-v11": FeatureSectionV11,
   "changelog-section-v1": ChangelogSectionV1,
+  "changelog-section-v2": ChangelogSectionV2,
   "faq-section-v1": FaqSectionV1,
   "faq-section-v2": FaqSectionV2,
   "faq-section-v3": FaqSectionV3,
   "faq-section-v4": FaqSectionV4,
+  "faq-section-v5": FaqSectionV5,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
   "testimonials-section-v3": TestimonialsSectionV3,
   "testimonials-section-v4": TestimonialsSectionV4,
+  "testimonials-section-v5": TestimonialsSectionV5,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "pricing-section-v3": PricingSectionV3,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,
+  "gallery-section-v4": GallerySectionV4,
+  "blog-section-v1": BlogSectionV1,
   "navbar-section-v1": NavbarSectionV1Page,
   "navbar-section-v2": NavbarSectionV2Page,
   "navbar-section-v3": NavbarSectionV3Page,

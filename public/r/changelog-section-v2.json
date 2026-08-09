@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "changelog-section-v2",
+  "title": "Changelog Section v2",
+  "description": "Left-aligned changelog section with three bordered cards, each pairing a title and description with a date/category mini-table and a 'Read announcement' button.",
+  "dependencies": [
+    "geist@^1.7.0"
+  ],
+  "registryDependencies": [
+    "button",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/changelog-section-v2/page.tsx",
+      "content": "import ChangelogSectionV2 from \"./components/changelog-section-v2\"\n\nexport default function Page() {\n  return <ChangelogSectionV2 />\n}\n",
+      "type": "registry:page",
+      "target": "app/changelog-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v2/components/changelog-section-v2.tsx",
+      "content": "import Link from \"next/link\"\nimport { ArrowUpRightIcon } from \"lucide-react\"\nimport { GeistMono } from \"geist/font/mono\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\n\nconst entries = [\n  {\n    title: \"Composable Tool SDK\",\n    description:\n      \"Our new tool primitives let you build and deploy AI coding agents faster. Mix, chain, and extend them to fit however your team works.\",\n    date: \"July 24, 2026\",\n    category: \"Feature\",\n    href: \"#\",\n  },\n  {\n    title: \"Deep Codebase Context\",\n    description:\n      \"Your agents can now reason across multiple repositories, branches, and file trees all within a single session.\",\n    date: \"August 6, 2026\",\n    category: \"Improvement\",\n    href: \"#\",\n  },\n  {\n    title: \"Intelligent Model Routing\",\n    description:\n      \"Agents now pick the right model for each task on their own, so you get the best balance of speed, cost, and quality without lifting a finger.\",\n    date: \"August 19, 2026\",\n    category: \"Performance\",\n    href: \"#\",\n  },\n]\n\nexport default function ChangelogSectionV2() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"text-3xl font-medium tracking-tighter sm:text-4xl\">\n          Release Notes\n        </h2>\n\n        <div className=\"mt-10 grid grid-cols-1 gap-8 md:grid-cols-3\">\n          {entries.map((entry) => (\n            <Card\n              key={entry.title}\n              className=\"gap-0 border-border/80 py-0 shadow-none\"\n            >\n              <CardHeader className=\"gap-3 px-6 pt-7\">\n                <CardTitle className=\"text-lg leading-snug font-semibold\">\n                  {entry.title}\n                </CardTitle>\n                <CardDescription className=\"text-sm leading-relaxed text-muted-foreground\">\n                  {entry.description}\n                </CardDescription>\n              </CardHeader>\n\n              <CardContent className=\"px-6 pt-6 pb-6\">\n                <dl className=\"text-sm\">\n                  <div className=\"flex items-center justify-between border-t border-border/80 py-3\">\n                    <dt\n                      className={`${GeistMono.className} text-xs tracking-widest uppercase`}\n                    >\n                      Date\n                    </dt>\n                    <dd className=\"font-medium text-foreground\">\n                      {entry.date}\n                    </dd>\n                  </div>\n                  <div className=\"flex items-center justify-between border-y border-border/80 py-3\">\n                    <dt\n                      className={`${GeistMono.className} text-xs tracking-widest uppercase`}\n                    >\n                      Category\n                    </dt>\n                    <dd className=\"font-medium text-foreground\">\n                      {entry.category}\n                    </dd>\n                  </div>\n                </dl>\n              </CardContent>\n\n              <CardFooter className=\"border-t-0 bg-transparent px-6 pt-0 pb-7\">\n                <Button asChild variant=\"outline\">\n                  <Link href={entry.href}>\n                    Read announcement\n                    <ArrowUpRightIcon />\n                  </Link>\n                </Button>\n              </CardFooter>\n            </Card>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/changelog-section-v2/components/changelog-section-v2.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

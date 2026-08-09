@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-section-v5",
+  "title": "FAQ Section v5",
+  "description": "Top-down, docs-style FAQ list with a last-updated date and a was-this-helpful item at the end.",
+  "registryDependencies": [
+    "button",
+    "item"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/faq-section-v5/page.tsx",
+      "content": "import FaqSectionV5 from \"./components/faq-section-v5\"\n\nexport default function Page() {\n  return <FaqSectionV5 />\n}\n",
+      "type": "registry:page",
+      "target": "app/faq-section-v5/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v5/components/faq-section-v5.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Item,\n  ItemActions,\n  ItemContent,\n  ItemDescription,\n} from \"@/components/ui/item\"\n\nimport { faqItems, faqSectionMeta } from \"../lib/faq-content\"\n\nexport default function FaqSectionV5() {\n  return (\n    <section className=\"bg-background py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-3xl px-4\">\n        <div className=\"flex flex-col gap-2 pb-6\">\n          <h2 className=\"text-3xl font-medium tracking-tight text-foreground sm:text-4xl\">\n            {faqSectionMeta.title}\n          </h2>\n          <p className=\"text-sm text-muted-foreground\">\n            Last updated — {faqSectionMeta.lastUpdated}\n          </p>\n        </div>\n\n        <div className=\"flex flex-col\">\n          {faqItems.map((item) => (\n            <div key={item.id} className=\"flex flex-col gap-3 py-8\">\n              <h3 className=\"text-xl font-medium tracking-tight text-foreground\">\n                {item.question}\n              </h3>\n              <p className=\"text-[0.9375rem] leading-relaxed text-muted-foreground\">\n                {item.answer}\n              </p>\n            </div>\n          ))}\n        </div>\n\n        <Item variant=\"muted\" className=\"mt-8\">\n          <ItemContent>\n            <ItemDescription>Was this helpful?</ItemDescription>\n            <ItemDescription>\n              Have more questions? Visit our{\" \"}\n              <Button variant=\"link\" size=\"sm\" className=\"h-auto p-0\" asChild>\n                <Link href=\"#\" target=\"_blank\" rel=\"noopener noreferrer\">\n                  community\n                </Link>\n              </Button>\n              , its open to everyone!\n            </ItemDescription>\n          </ItemContent>\n          <ItemActions>\n            <Button variant=\"outline\" size=\"sm\">\n              Yes\n            </Button>\n            <Button variant=\"destructive\" size=\"sm\">\n              No\n            </Button>\n          </ItemActions>\n        </Item>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/faq-section-v5/components/faq-section-v5.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v5/lib/faq-content.ts",
+      "content": "export type FaqItem = {\n  id: string\n  question: string\n  answer: string\n}\n\nexport const faqSectionMeta = {\n  title: \"Frequently asked questions\",\n  lastUpdated: \"January 1, 2026\",\n}\n\nexport const faqItems: FaqItem[] = [\n  {\n    id: \"getting-started\",\n    question: \"How long does it take to get started?\",\n    answer:\n      \"Most teams are up and running in under 10 minutes. Connect your workspace, drop in your knowledge base, and Acme starts answering with your brand voice right away.\",\n  },\n  {\n    id: \"data-privacy\",\n    question: \"Is my company data used to train models?\",\n    answer:\n      \"No. Your prompts, documents, and conversations stay private to your workspace. We never use customer data to train foundation models.\",\n  },\n  {\n    id: \"integrations\",\n    question: \"Which tools does Acme integrate with?\",\n    answer:\n      \"Acme connects with Slack, Notion, Google Drive, Confluence, Zendesk, and more via native integrations or webhooks. You can also bring your own API endpoints.\",\n  },\n  {\n    id: \"billing-cancel\",\n    question: \"What if I need to cancel or change plans?\",\n    answer:\n      \"Upgrade, downgrade, or cancel anytime from billing settings. Changes are prorated, and you keep access through the end of your current billing period.\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/faq-section-v5/lib/faq-content.ts"
+    }
+  ],
+  "type": "registry:block"
+}

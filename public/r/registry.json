@@ -394,6 +394,60 @@
       ]
     },
     {
+      "name": "blog-section-v1",
+      "type": "registry:block",
+      "title": "Blog Section v1",
+      "description": "Editorial All Articles layout with a featured Spotlight post (image, headline, author) and a Trending list of three compact articles.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/blog-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/blog-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/blog-section-v1/components/blog-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/blog-section-v1/components/blog-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/blog-section-v1/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/blog-section-v1/lib/config.ts"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v1/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v1/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v1/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v1/image-2.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v1/image-3.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v1/image-3.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v1/image-4.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v1/image-4.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v1/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v1/avatar-1.png.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "brands-section-v1",
       "type": "registry:block",
       "title": "Brands Section v1",
@@ -1849,6 +1903,32 @@
       ]
     },
     {
+      "name": "cta-section-v6",
+      "type": "registry:block",
+      "title": "CTA Section v6",
+      "description": "Bordered centered CTA with Canvas UI Retro Dither pointer lens and product-focused copy.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/cta-section-v6/page.tsx",
+          "type": "registry:page",
+          "target": "app/cta-section-v6/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/cta-section-v6/components/cta-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/cta-section-v6/components/cta-section-v6.tsx"
+        },
+        {
+          "path": "components/canvasui/retro-dither.tsx",
+          "type": "registry:component",
+          "target": "components/canvasui/retro-dither.tsx"
+        }
+      ]
+    },
+    {
       "name": "footer-section-v1",
       "type": "registry:block",
       "title": "Footer Section v1",
@@ -1929,6 +2009,37 @@
           "path": "public/images/blocks/footer-section-v3/logo.svg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/footer-section-v3/logo.svg.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "footer-section-v4",
+      "type": "registry:block",
+      "title": "Footer Section v4",
+      "description": "Spacious footer with the uiception logo lockup, three link columns, a noise texture overlay, and bottom-left copyright and office lines.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/footer-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/footer-section-v4/components/footer-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/footer-section-v4/components/footer-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/footer-section-v4/lib/footer-content.ts",
+          "type": "registry:lib",
+          "target": "app/footer-section-v4/lib/footer-content.ts"
+        },
+        {
+          "path": "public/images/blocks/footer-section-v4/logo.svg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/footer-section-v4/logo.svg.gitkeep"
         }
       ]
     },
@@ -2657,6 +2768,72 @@
           "path": "public/images/blocks/hero-section-v11/image.jpg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/hero-section-v11/image.jpg.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "hero-section-v12",
+      "type": "registry:block",
+      "title": "Hero Section v12",
+      "description": "Sans headline above a split product card: Atelier brand-kit copy with default/outline pill CTAs, plus a 6-slide poster panel with crossfade zoom transitions and rounded-full icon pagination.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/hero-section-v12/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-section-v12/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v12/components/hero-section-v12.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v12/components/hero-section-v12.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v12/components/hero-v12-carousel.tsx",
+          "type": "registry:component",
+          "target": "app/hero-section-v12/components/hero-v12-carousel.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/hero-section-v12/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/hero-section-v12/lib/config.ts"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-2.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-3.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-3.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-4.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-4.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-5.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-5.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/hero-section-v12/image-6.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/hero-section-v12/image-6.jpg.gitkeep"
         }
       ]
     },
@@ -3471,6 +3648,31 @@
       ]
     },
     {
+      "name": "changelog-section-v2",
+      "type": "registry:block",
+      "title": "Changelog Section v2",
+      "description": "Left-aligned changelog section with three bordered cards, each pairing a title and description with a date/category mini-table and a 'Read announcement' button.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/changelog-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/changelog-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v2/components/changelog-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v2/components/changelog-section-v2.tsx"
+        }
+      ]
+    },
+    {
       "name": "faq-section-v1",
       "type": "registry:block",
       "title": "FAQ Section v1",
@@ -3592,6 +3794,33 @@
           "path": "registry/new-york/blocks/faq-section-v4/lib/faq-content.ts",
           "type": "registry:lib",
           "target": "app/faq-section-v4/lib/faq-content.ts"
+        }
+      ]
+    },
+    {
+      "name": "faq-section-v5",
+      "type": "registry:block",
+      "title": "FAQ Section v5",
+      "description": "Top-down, docs-style FAQ list with a last-updated date and a was-this-helpful item at the end.",
+      "registryDependencies": [
+        "button",
+        "item"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/faq-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/faq-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v5/components/faq-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/faq-section-v5/components/faq-section-v5.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/faq-section-v5/lib/faq-content.ts",
+          "type": "registry:lib",
+          "target": "app/faq-section-v5/lib/faq-content.ts"
         }
       ]
     },
@@ -3918,6 +4147,69 @@
           "path": "public/images/blocks/testimonials-section-v4/avatar-6.png.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/testimonials-section-v4/avatar-6.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v5",
+      "type": "registry:block",
+      "title": "Testimonials Section v5",
+      "description": "Centered badge, headline, and description above a masonry wall-of-love grid of quote cards with avatar and name.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "badge",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v5/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v5/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v5/components/testimonials-section-v5.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v5/components/testimonials-section-v5.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v5/components/testimonial-card.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v5/components/testimonial-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v5/lib/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v5/lib/testimonials-content.ts"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-1.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-2.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-2.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-3.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-3.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-4.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-4.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-5.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-5.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep"
         }
       ]
     },
@@ -4765,6 +5057,93 @@
           "path": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/gallery-section-v3/image-5.jpg.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "gallery-section-v4",
+      "type": "registry:block",
+      "title": "Gallery Section v4",
+      "description": "A responsive CSS-grid masonry gallery with varied tile heights and a quick blur-in reveal as each tile scrolls into view, no title or copy — just the grid.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/gallery-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/gallery-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v4/components/gallery-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v4/components/gallery-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v4/components/gallery-masonry-item.tsx",
+          "type": "registry:component",
+          "target": "app/gallery-section-v4/components/gallery-masonry-item.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v4/hooks/use-in-view.ts",
+          "type": "registry:hook",
+          "target": "app/gallery-section-v4/hooks/use-in-view.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/gallery-section-v4/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/gallery-section-v4/lib/config.ts"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-2.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-3.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-3.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-4.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-4.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-5.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-5.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-6.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-6.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-7.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-7.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-8.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-8.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-9.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-9.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/gallery-section-v4/image-10.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/gallery-section-v4/image-10.jpg.gitkeep"
         }
       ]
     },

@@ -163,6 +163,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v11",
         registryPath: "registry/new-york/blocks/hero-section-v11",
       },
+      {
+        id: "hero-section-v12",
+        title: "Hero Section v12",
+        registryPath: "registry/new-york/blocks/hero-section-v12",
+      },
     ],
   },
   {
@@ -365,6 +370,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Testimonials Section v4",
         registryPath: "registry/new-york/blocks/testimonials-section-v4",
       },
+      {
+        id: "testimonials-section-v5",
+        title: "Testimonials Section v5",
+        registryPath: "registry/new-york/blocks/testimonials-section-v5",
+      },
     ],
   },
   {
@@ -436,6 +446,11 @@ export const blockCategories: BlockCategory[] = [
         title: "FAQ Section v4",
         registryPath: "registry/new-york/blocks/faq-section-v4",
       },
+      {
+        id: "faq-section-v5",
+        title: "FAQ Section v5",
+        registryPath: "registry/new-york/blocks/faq-section-v5",
+      },
     ],
   },
   {
@@ -467,6 +482,11 @@ export const blockCategories: BlockCategory[] = [
         id: "cta-section-v5",
         title: "CTA Section v5",
         registryPath: "registry/new-york/blocks/cta-section-v5",
+      },
+      {
+        id: "cta-section-v6",
+        title: "CTA Section v6",
+        registryPath: "registry/new-york/blocks/cta-section-v6",
       },
     ],
   },
@@ -502,6 +522,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Footer Section v3",
         registryPath: "registry/new-york/blocks/footer-section-v3",
       },
+      {
+        id: "footer-section-v4",
+        title: "Footer Section v4",
+        registryPath: "registry/new-york/blocks/footer-section-v4",
+      },
     ],
   },
   {
@@ -513,6 +538,11 @@ export const blockCategories: BlockCategory[] = [
         id: "changelog-section-v1",
         title: "Changelog Section v1",
         registryPath: "registry/new-york/blocks/changelog-section-v1",
+      },
+      {
+        id: "changelog-section-v2",
+        title: "Changelog Section v2",
+        registryPath: "registry/new-york/blocks/changelog-section-v2",
       },
     ],
   },
@@ -532,7 +562,13 @@ export const blockCategories: BlockCategory[] = [
     id: "blog",
     title: "Blog",
     description: "Article grids, featured posts, and editorial layouts.",
-    versions: [],
+    versions: [
+      {
+        id: "blog-section-v1",
+        title: "Blog Section v1",
+        registryPath: "registry/new-york/blocks/blog-section-v1",
+      },
+    ],
   },
   {
     id: "gallery",
@@ -553,6 +589,11 @@ export const blockCategories: BlockCategory[] = [
         id: "gallery-section-v3",
         title: "Gallery Section v3",
         registryPath: "registry/new-york/blocks/gallery-section-v3",
+      },
+      {
+        id: "gallery-section-v4",
+        title: "Gallery Section v4",
+        registryPath: "registry/new-york/blocks/gallery-section-v4",
       },
     ],
   },

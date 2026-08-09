@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-section-v4",
+  "title": "Footer Section v4",
+  "description": "Spacious footer with the uiception logo lockup, three link columns, a noise texture overlay, and bottom-left copyright and office lines.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/footer-section-v4/page.tsx",
+      "content": "import FooterSectionV4 from \"./components/footer-section-v4\"\n\nexport default function Page() {\n  return <FooterSectionV4 />\n}\n",
+      "type": "registry:page",
+      "target": "app/footer-section-v4/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/footer-section-v4/components/footer-section-v4.tsx",
+      "content": "import Image from \"next/image\"\nimport Link from \"next/link\"\n\nimport { createBlockImage } from \"@/lib/block-media\"\n\nimport { footerColumns, footerMeta } from \"../lib/footer-content\"\n\nconst blockImage = createBlockImage(\"footer-section-v4\")\nconst LOGO_SRC = blockImage(\"logo.svg\")\n\nexport default function FooterSectionV4() {\n  return (\n    <section className=\"relative overflow-hidden bg-background py-4 md:py-6 lg:py-8\">\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 opacity-[0.05] dark:opacity-[0.08]\"\n        style={{\n          backgroundImage:\n            \"url(\\\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\\\")\",\n          backgroundSize: \"128px 128px\",\n        }}\n      />\n\n      <div className=\"relative mx-auto flex max-w-7xl flex-col justify-between gap-10 px-4 md:gap-12\">\n        <div className=\"flex flex-col gap-10 sm:flex-row sm:justify-between\">\n          <Link\n            href=\"#\"\n            className=\"inline-flex w-fit items-center gap-2 font-medium tracking-tight text-foreground\"\n          >\n            <Image\n              alt=\"Logo\"\n              src={LOGO_SRC}\n              width={32}\n              height={32}\n              className=\"size-8 shrink-0\"\n              unoptimized\n            />\n            <span className=\"text-lg tracking-tight\">{footerMeta.name}</span>\n          </Link>\n\n          <div className=\"grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 sm:gap-x-16\">\n            {footerColumns.map((column) => (\n              <div key={column.title} className=\"space-y-4\">\n                <h3 className=\"text-sm text-muted-foreground/70\">\n                  {column.title}\n                </h3>\n                <ul className=\"space-y-3\">\n                  {column.links.map((link) => (\n                    <li key={link.label}>\n                      <Link\n                        href={link.href}\n                        className=\"text-sm font-medium text-foreground transition-colors hover:text-muted-foreground\"\n                      >\n                        {link.label}\n                      </Link>\n                    </li>\n                  ))}\n                </ul>\n              </div>\n            ))}\n          </div>\n        </div>\n\n        <div className=\"space-y-1 text-xs text-muted-foreground\">\n          <p>{footerMeta.copyright}</p>\n          <p>{footerMeta.offices}</p>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/footer-section-v4/components/footer-section-v4.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/footer-section-v4/lib/footer-content.ts",
+      "content": "export type FooterLink = {\n  label: string\n  href: string\n}\n\nexport type FooterColumn = {\n  title: string\n  links: FooterLink[]\n}\n\nexport const footerColumns: FooterColumn[] = [\n  {\n    title: \"Product\",\n    links: [\n      { label: \"Live monitoring\", href: \"#\" },\n      { label: \"Incident response\", href: \"#\" },\n      { label: \"Postmortems\", href: \"#\" },\n    ],\n  },\n  {\n    title: \"Resources\",\n    links: [\n      { label: \"Blog\", href: \"#\" },\n      { label: \"Video library\", href: \"#\" },\n      { label: \"LinkedIn\", href: \"#\" },\n    ],\n  },\n  {\n    title: \"About\",\n    links: [\n      { label: \"Careers\", href: \"#\" },\n      { label: \"Contact\", href: \"#\" },\n    ],\n  },\n]\n\nexport const footerMeta = {\n  name: \"uiception\",\n  copyright: \"Copyright © 2026 uiception. All rights reserved.\",\n  offices: \"Offices in LA, NY, and Texas.\",\n}\n",
+      "type": "registry:lib",
+      "target": "app/footer-section-v4/lib/footer-content.ts"
+    },
+    {
+      "path": "public/images/blocks/footer-section-v4/logo.svg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/footer-section-v4/logo.svg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

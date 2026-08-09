@@ -1,0 +1,77 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-section-v12",
+  "title": "Hero Section v12",
+  "description": "Sans headline above a split product card: Atelier brand-kit copy with default/outline pill CTAs, plus a 6-slide poster panel with crossfade zoom transitions and rounded-full icon pagination.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "button",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/hero-section-v12/page.tsx",
+      "content": "import HeroSectionV12 from \"./components/hero-section-v12\"\r\n\r\nexport default function Page() {\r\n  return <HeroSectionV12 />\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/hero-section-v12/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v12/components/hero-section-v12.tsx",
+      "content": "import { createBlockImage } from \"@/lib/block-media\"\r\n\r\nimport { slideFiles } from \"../lib/config\"\r\nimport { HeroV12Carousel } from \"./hero-v12-carousel\"\r\n\r\nconst blockImage = createBlockImage(\"hero-section-v12\")\r\n\r\nconst slides = slideFiles.map(({ file, alt }) => ({\r\n  src: blockImage(file),\r\n  alt,\r\n}))\r\n\r\nexport default function HeroSectionV12() {\r\n  return <HeroV12Carousel slides={slides} />\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v12/components/hero-section-v12.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v12/components/hero-v12-carousel.tsx",
+      "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport Image from \"next/image\"\nimport Link from \"next/link\"\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\"\nimport { AnimatePresence, MotionConfig, motion } from \"motion/react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card } from \"@/components/ui/card\"\n\nimport {\n  AUTOPLAY_MS,\n  body,\n  headline,\n  primaryCta,\n  secondaryCta,\n  title,\n} from \"../lib/config\"\n\nexport type HeroSlide = {\n  src: string\n  alt: string\n}\n\nconst SLIDE_EASE = [0.22, 1, 0.36, 1] as const\n\nexport function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {\n  const [index, setIndex] = useState(0)\n  const count = slides.length\n  const active = slides[index] ?? slides[0]\n\n  useEffect(() => {\n    if (count <= 1) return\n\n    const timer = window.setTimeout(() => {\n      setIndex((current) => (current + 1) % count)\n    }, AUTOPLAY_MS)\n\n    return () => {\n      window.clearTimeout(timer)\n    }\n  }, [index, count])\n\n  if (!active || count === 0) {\n    return null\n  }\n\n  function goPrev() {\n    setIndex((current) => (current - 1 + count) % count)\n  }\n\n  function goNext() {\n    setIndex((current) => (current + 1) % count)\n  }\n\n  return (\n    <MotionConfig reducedMotion=\"user\">\n      <section className=\"bg-background py-4 text-foreground md:py-6 lg:py-8\">\n        <div className=\"mx-auto max-w-6xl px-4\">\n          <h1 className=\"max-w-4xl text-4xl font-medium leading-[1.1] tracking-[-0.03em] sm:text-5xl lg:text-6xl\">\n            {headline}\n          </h1>\n\n          <Card className=\"mt-8 gap-0 overflow-hidden rounded-2xl bg-foreground py-0 text-background ring-0 sm:mt-10\">\n            <div className=\"grid lg:grid-cols-5 lg:items-stretch\">\n              <div className=\"flex flex-col justify-center p-8 sm:p-10 lg:col-span-2 lg:p-12\">\n                <h2 className=\"text-3xl font-medium leading-[1.15] tracking-[-0.03em] sm:text-4xl\">\n                  {title}\n                </h2>\n                <p className=\"mt-4 max-w-md text-[0.9375rem] leading-relaxed text-background/75 sm:text-base\">\n                  {body}\n                </p>\n                <div className=\"mt-8 flex flex-wrap gap-3\">\n                  <Button\n                    asChild\n                    variant=\"default\"\n                    size=\"lg\"\n                    className=\"rounded-full bg-background text-foreground hover:bg-background/90\"\n                  >\n                    <Link href={primaryCta.href}>{primaryCta.label}</Link>\n                  </Button>\n                  <Button\n                    asChild\n                    variant=\"outline\"\n                    size=\"lg\"\n                    className=\"rounded-full border-background/25 bg-transparent text-background hover:bg-background/10 hover:text-background\"\n                  >\n                    <Link href={secondaryCta.href}>{secondaryCta.label}</Link>\n                  </Button>\n                </div>\n              </div>\n\n              <div className=\"relative min-h-90 w-full overflow-hidden lg:col-span-3 sm:min-h-110 lg:min-h-140\">\n                <AnimatePresence initial={false}>\n                  <motion.div\n                    key={active.src}\n                    className=\"absolute inset-0\"\n                    initial={{ opacity: 0, scale: 1.04 }}\n                    animate={{ opacity: 1, scale: 1 }}\n                    exit={{ opacity: 0, scale: 0.985 }}\n                    transition={{\n                      duration: 0.7,\n                      ease: SLIDE_EASE,\n                    }}\n                  >\n                    <Image\n                      src={active.src}\n                      unoptimized\n                      alt=\"\"\n                      fill\n                      aria-hidden\n                      className=\"scale-125 object-cover object-center blur-2xl\"\n                      sizes=\"(max-width: 1024px) 100vw, 60vw\"\n                    />\n                    <Image\n                      src={active.src}\n                      unoptimized\n                      alt={active.alt}\n                      fill\n                      className=\"object-contain object-center\"\n                      sizes=\"(max-width: 1024px) 100vw, 60vw\"\n                      preload={index === 0}\n                    />\n                  </motion.div>\n                </AnimatePresence>\n\n                <div className=\"absolute inset-x-0 bottom-0 z-10 flex justify-end gap-2 p-5 sm:p-6\">\n                  <Button\n                    type=\"button\"\n                    variant=\"default\"\n                    size=\"icon\"\n                    className=\"rounded-full bg-background text-foreground hover:bg-background/90\"\n                    aria-label=\"Previous image\"\n                    onClick={goPrev}\n                  >\n                    <ChevronLeftIcon />\n                  </Button>\n                  <Button\n                    type=\"button\"\n                    variant=\"default\"\n                    size=\"icon\"\n                    className=\"rounded-full bg-background text-foreground hover:bg-background/90\"\n                    aria-label=\"Next image\"\n                    onClick={goNext}\n                  >\n                    <ChevronRightIcon />\n                  </Button>\n                </div>\n              </div>\n            </div>\n          </Card>\n        </div>\n      </section>\n    </MotionConfig>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v12/components/hero-v12-carousel.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v12/lib/config.ts",
+      "content": "export type HeroSlideFile = {\r\n  file: string\r\n  alt: string\r\n}\r\n\r\n/** Milliseconds between autoplay slide advances. */\r\nexport const AUTOPLAY_MS = 5000\r\n\r\nexport const headline = \"Brand systems that look intentional on every surface.\"\r\n\r\nexport const title = \"Atelier for product teams\"\r\n\r\nexport const body =\r\n  \"Keep posters, packaging comps, and launch decks in one shared kit. Swap art direction once and every asset stays on-brand without rebuilding the deck from scratch.\"\r\n\r\nexport const primaryCta = {\r\n  label: \"Browse kits\",\r\n  href: \"#\",\r\n} as const\r\n\r\nexport const secondaryCta = {\r\n  label: \"Book a walkthrough\",\r\n  href: \"#\",\r\n} as const\r\n\r\nexport const slideFiles: HeroSlideFile[] = [\r\n  {\r\n    file: \"image-1.jpg\",\r\n    alt: \"Bakery poster stacking four filled doughnuts beneath bold 'Dusted Filled' display type\",\r\n  },\r\n  {\r\n    file: \"image-2.jpg\",\r\n    alt: \"Night Owl cold brew bottle poster set against bold 'Awake' display type\",\r\n  },\r\n  {\r\n    file: \"image-3.jpg\",\r\n    alt: \"Reissued Leica M6 film camera poster titled 'Grain' on a grayscale gradient\",\r\n  },\r\n  {\r\n    file: \"image-4.jpg\",\r\n    alt: \"Mechanical keyboard poster titled 'Clack' on a cool gray backdrop\",\r\n  },\r\n  {\r\n    file: \"image-5.jpg\",\r\n    alt: \"Rose gold safety razor poster titled 'Smooth' over layered serif type\",\r\n  },\r\n  {\r\n    file: \"image-6.jpg\",\r\n    alt: \"Lavender sleep mist bottle poster titled 'Exhale' on a lilac background\",\r\n  },\r\n]\r\n",
+      "type": "registry:lib",
+      "target": "app/hero-section-v12/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-2.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-2.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-3.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-3.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-4.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-4.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-5.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-5.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/hero-section-v12/image-6.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/hero-section-v12/image-6.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}
