@@ -5,6 +5,9 @@ import { useState, type FormEvent } from "react"
 
 const clerkEnabled = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY)
 
+const panelClassName =
+  "w-full max-w-sm rounded-lg border border-border bg-card p-6 shadow-sm"
+
 /**
  * Renders Clerk's prebuilt <Waitlist /> (shadcn theme is applied at the
  * ClerkProvider level in app/layout.tsx). Until Clerk keys are set in
@@ -28,12 +31,12 @@ function WaitlistDemoForm() {
   }
 
   return (
-    <div className="w-full max-w-sm rounded-lg border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)]">
+    <div className={panelClassName}>
       {joined ? (
         <div className="flex flex-col items-center py-8 text-center">
           <span
             aria-hidden
-            className="flex size-10 items-center justify-center rounded-md border-2 border-foreground text-lg"
+            className="flex size-10 items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground"
           >
             ✓
           </span>
@@ -76,16 +79,13 @@ function WaitlistDemoForm() {
           </form>
         </>
       )}
-      <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
-        Demo form — add your Clerk keys in .env.local to collect real signups.
-      </p>
     </div>
   )
 }
 
 function WaitlistSkeleton() {
   return (
-    <div className="w-full max-w-sm rounded-lg border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)]">
+    <div className={panelClassName}>
       <div className="h-5 w-2/5 animate-pulse rounded-md bg-muted" />
       <div className="mt-3 h-4 w-4/5 animate-pulse rounded-md bg-muted" />
       <div className="mt-6 h-9 w-full animate-pulse rounded-md bg-muted" />
