@@ -46,6 +46,26 @@ deliberate: a template is meant to be installed via `npx shadcn@latest init
 --template ...` as a self-contained starting point, not tied to this
 repo's own component tree.
 
+## Backend-integrated templates
+
+- Any template that accepts inbound requests from a third party (a webhook,
+  a form-submission endpoint that does more than proxy to a static external
+  service) must verify the request's authenticity before acting on it. See
+  `landing-page-v1`'s `app/api/webhooks/route.ts` for the reference
+  pattern: Svix/Clerk signature verification via `verifyWebhook`, wrapped
+  in try/catch, returning 400 before the payload is ever touched.
+- Secrets (signing secrets, API keys) are documented as blank placeholders
+  in the template's `.env.example` only — never a real value. Follow the
+  convention already used by `landing-page-v1/.env.example` and
+  `portfolio-v1`'s `BASIN_ENDPOINT`.
+- Any new server route (webhook handler, API route, server action calling
+  an external service) needs test coverage under
+  `tests/templates/{template-name}/` before it's considered complete. See
+  `tests/templates/portfolio-v1/actions.test.ts` and
+  `tests/templates/landing-page-v1/webhook.test.ts` for the reference
+  pattern: mock the external boundary (`fetch` via `vi.stubGlobal`, or a
+  package import via `vi.mock`), not the route's own logic.
+
 ## Do not
 
 - Import from `@/components/*` or `@/lib/*` paths that resolve to the host
