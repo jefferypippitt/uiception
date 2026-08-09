@@ -22,7 +22,9 @@ category, a media-resolution rework, dependency bumps) — see "Round 3" below.
 Round 4 is another full standard-depth audit run after ~3 weeks of further
 shipped work, dominated by one new feature: `registry/new-york/templates/`
 (installable full-page templates, `portfolio-v1`/`portfolio-v2`) — see
-"Round 4" below.
+"Round 4" below. Round 5 is a direction-only audit (`/improve next`) run
+after a second template category (`landing-pages`) and 8 new blocks shipped
+— see "Round 5" below.
 
 ## Execution order & status
 
@@ -49,6 +51,8 @@ shipped work, dominated by one new feature: `registry/new-york/templates/`
 | 019 | Harden `portfolio-v1` contact form (honeypot + double-submit guard) | P2 | S | — | DONE (squash-merged to main `251746a`, "plan patch") |
 | 020 | Formalize templates contributor contract (docs + stale-entry tests) | P2 | S/M | — | DONE (squash-merged to main `251746a`, "plan patch") |
 | 021 | `portfolio-v1` content pipeline: frontmatter validation, per-file error isolation, O(1) single-entry lookups | P2 | M | — | DONE (squash-merged to main `251746a`, "plan patch") |
+| 022 | Add `/llms.txt` machine-readable discovery surface | P3 | S | — | DONE (reviewed, `advisor/022-llms-txt-discovery-surface` @ `cbb326f`, not merged) |
+| 023 | Codify backend-integrated-template contract + webhook route tests for `landing-page-v1` | P2 | S/M | — | DONE (reviewed, `advisor/023-backend-template-contract-and-webhook-tests` @ `e8cbadd`, not merged) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -373,6 +377,132 @@ handling (env-only, never request-controlled — no SSRF); `@shadcn/react` in
 `package.json` (verified legitimate shadcn-ui/ui monorepo package, not a
 typosquat); no prompt-injection content found in any audited file.
 
+## Round 5 — direction audit (2026-08-08, planned against `560927f`)
+
+Run via `/improve next` after ~2 days of further shipped work on top of
+Round 4: `lib/templates.ts` gained a second template *category*
+(`landing-pages`, not just a second portfolio variant) with
+`landing-page-v1` — the first template with a real backend surface (a
+Clerk-verified webhook route + `clerkMiddleware()`), plus 8 new blocks
+(`blog-section-v1`, `gallery-section-v4`, `hero-section-v12`,
+`changelog-section-v2`, `cta-section-v6`, `faq-section-v5`,
+`footer-section-v4`, `testimonials-section-v5`). Direction-only audit, done
+directly (no subagents — small enough diff to read end-to-end), grounded in
+diffing against Round 4's baseline (`8cdba30..560927f`, 152 files / +12.9k
+lines) plus re-reading `lib/blocks.ts`'s full category list.
+
+Four grounded findings, presented separately from the (unaudited this
+round) bug/security categories:
+
+- **DIR-G** (fresh, HIGH confidence): templates keep hand-building
+  components that exactly match still-empty block categories but never get
+  promoted to the installable catalog — `lib/blocks.ts`'s `contact` and
+  `waitlist` categories are both `versions: []`, yet
+  `portfolio-v1/components/contact-form.tsx` (hardened in Plan 019) and
+  `landing-page-v1/components/waitlist-panel.tsx`'s dependency-free demo
+  form are both finished implementations one directory away. **Not
+  selected this round** — real and cheap (S effort per category), but the
+  user prioritized the backend-contract gap (DIR-H) and the
+  three-times-recurring discovery-surface gap (DIR-J) instead. Good
+  candidate for a near-term future round; re-verify the two categories are
+  still empty before reviving.
+- **DIR-H** (fresh, MED-HIGH confidence) → **Plan 023**. `landing-page-v1`
+  is the first template with a live backend surface (webhook signature
+  verification, middleware, signing secrets) and neither the templates
+  contributor contract (`.cursor/rules/registry-templates.mdc`, formalized
+  in Plan 020) nor `tests/templates/` has caught up — zero test coverage
+  for the webhook route, no documented convention for the next
+  backend-integrated template to follow.
+- **DIR-I** (carryover of Round 4's DIR-B, re-verified): templates still
+  share zero code with the 90+ block catalog — `grep` for
+  `registry/new-york/blocks` imports inside `registry/new-york/templates/`
+  (now including `landing-page-v1`) still returns nothing, confirmed again
+  with fresh evidence. **Not selected** — still L-effort, still needs a
+  block-versioning/drift story before it's safely plannable; the gap keeps
+  growing (3 templates deep now vs. 2) but the blocking question hasn't
+  changed.
+- **DIR-J** (carryover of Round 2's DIR-B / Round 3's DIR-E, re-verified) →
+  **Plan 022**. No AI/agent discovery surface (`llms.txt`) — raised and
+  left unselected twice before, each time blocked on "needs a maintainer
+  format call." This round resolved the blocker with a concrete
+  recommendation (a static-shaped `llms.txt` pointing at the existing
+  `public/r/registry.json`, S effort, no new build step) rather than
+  re-presenting it as an open question.
+
+**Selected (022–023):** see the execution table above. Both are S/S-M
+effort, LOW risk, independent of each other and of every prior plan.
+
+**Not selected this round, not carried forward as open findings** (already
+tracked as carryovers in Round 3/4's notes above, unchanged, not
+re-verified this round): PERF-01 (`block-preview-by-version.tsx` static
+imports), SEC-01 (no CSP/security headers), SEC-03 (preview iframe missing
+`sandbox`), DX-02 (compression scripts hardcode the `blocks/` media path).
+
+## Round 5 execution log (reviewed, not yet merged)
+
+Plans 022–023 were each dispatched to an isolated executor subagent in a
+disposable git worktree (`pnpm install` run first in each), then
+independently reviewed by the advisor: every done criterion was re-run from
+scratch in the worktree (not trusted from the executor's report),
+`git diff --stat 560927f..HEAD` was checked against each plan's declared
+scope, and the full diff was read. **Unlike prior rounds, these branches
+have not been merged to `main`** — no merge/squash request was made this
+round; both remain on their `advisor/*` branches in their worktrees,
+reviewed and approved, awaiting the operator's decision on when/how to
+land them.
+
+| Plan | Branch | Worktree path | Commit | Verdict |
+|------|--------|----------------|--------|---------|
+| 022 | `advisor/022-llms-txt-discovery-surface` | `.claude/worktrees/agent-a28e23a0baf2c3e6d` | `cbb326f` | APPROVE — not merged |
+| 023 | `advisor/023-backend-template-contract-and-webhook-tests` | `.claude/worktrees/agent-a9299e089e2bd34d3` | `e8cbadd` (2 commits: `9d41b36`, `e8cbadd`) | APPROVE — not merged |
+
+**022**: diff matches the plan exactly — a single new file,
+`app/llms.txt/route.ts` (50 lines), deriving its content from
+`blockCategories`/`templateCategories` rather than hardcoding category
+data, filtering out 0-version categories as specified. Advisor
+independently re-ran `pnpm typecheck` (clean), `pnpm check` (registry:validate
+102 items valid, lint 0 errors/14 pre-existing warnings, 94/94 tests,
+typecheck clean), and `pnpm build` (confirmed `ƒ /llms.txt` in the route
+table). Independently started the production build (`pnpm start` on a
+scratch port) and curled `/llms.txt` directly: HTTP 200,
+`content-type: text/plain; charset=utf-8`, body correctly lists all 18
+non-empty block/template categories with correct singular/plural version
+counts (e.g. "1 version" for `blog`, "12 versions" for `hero-section`) and
+correctly omits every 0-version category (`waitlist`, `contact`,
+`about-us`, `resources`, `team`, `video`, `timeline`, `comparison`,
+`newsletter`, `social-proof`, `partners`, `backgrounds`, `sidebar`,
+`banner`, `value-proposition`, `case-study`). One executor note worth
+recording: `pnpm build`'s `prebuild` step (`registry:build`) rewrites
+`public/r/*.json` with CRLF line endings on this Windows checkout as a
+side effect unrelated to this plan — the executor correctly discarded
+that noise (`git checkout -- public/r/`) before committing so only the
+in-scope route file landed; not a defect in this plan, a pre-existing
+Windows/git line-ending quirk worth knowing about for future rounds that
+run `pnpm build` in a worktree.
+
+**023**: diff matches the plan across all three in-scope files — new
+`tests/templates/landing-page-v1/webhook.test.ts` (4 tests), a new
+"Backend-integrated templates" section in
+`.cursor/rules/registry-templates.mdc` (20 lines, file grows from 54 to
+74), and one added sentence in `CONTRIBUTING.md` pointing at it. The
+executor used `vi.hoisted()` to define the `verifyWebhook` mock before the
+hoisted `vi.mock("@clerk/nextjs/webhooks", ...)` factory references it —
+the technically correct way to mock a named import in Vitest (a plain
+outer-scope `vi.fn()` would be undefined at mock-factory-eval time); a
+sound, in-spec adaptation of the plan's mocking instruction, not a
+deviation. Advisor read all 4 tests and confirmed each asserts both exact
+status code and exact body text (not just truthy), matching
+`actions.test.ts`'s convention of specific assertions over loose ones.
+Independently re-ran `pnpm vitest run tests/templates/landing-page-v1/webhook.test.ts`
+(4/4 pass), `pnpm check` (registry:validate 102 items valid, lint 0
+errors/14 pre-existing warnings — same warnings as 022's baseline, none in
+files this plan touched — 98/98 tests up from 94, typecheck clean). One
+executor note worth recording: a cold-cache first `pnpm test:run` right
+after `pnpm install` showed spurious transform-timeout failures on 9
+unrelated files; a second run immediately after was clean — environment
+noise, not a regression, and the advisor's own from-scratch run in this
+same worktree came back clean on the first try.
+
 ## Round 4 execution log (reviewed, approved, merged)
 
 Plans 017–021 were each dispatched to an isolated executor subagent in a
@@ -465,6 +595,12 @@ and all three grep done-criteria (including confirming the unchecked
 pattern used for Round 3. Done — see the table above.
 
 ## Dependency notes
+
+- **022 and 023 (Round 5) are independent of each other and of every
+  earlier plan** — no shared files (022 touches `app/llms.txt/route.ts`;
+  023 touches `tests/templates/landing-page-v1/`,
+  `.cursor/rules/registry-templates.mdc`, and `CONTRIBUTING.md`). Any order
+  is fine.
 
 None of these plans hard-block each other — each is independently
 executable and independently verifiable. Four soft-pairing notes worth
