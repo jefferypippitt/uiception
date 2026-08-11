@@ -48,6 +48,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Fullscreen startup waitlist — monochrome ink-print hero with a boiling misregistered title, Clerk <Waitlist /> (shadcn theme) on the right. Works keyless with a demo form.",
       },
+      {
+        id: "landing-page-v2",
+        title: "Landing Page v2",
+        registryPath: "registry/new-york/templates/landing-page-v2",
+        description:
+          "Event landing hero — brand-first display type over a WebGL color-field glow (noise warp, mouse pull, auto-cycling palettes), staggered blur reveal, ticket CTA into a multi-step questionnaire register with Base UI toast.",
+      },
     ],
   },
 ]

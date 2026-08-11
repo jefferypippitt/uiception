@@ -5508,6 +5508,104 @@
           "target": ".env.example"
         }
       ]
+    },
+    {
+      "name": "landing-page-v2",
+      "type": "registry:block",
+      "title": "Landing Page v2",
+      "description": "Event landing hero — brand-first display type over a WebGL color-field glow (noise warp, mouse pull, auto-cycling palettes), staggered blur reveal, mono meta, shadcn ticket CTA with a multi-step questionnaire register flow and Base UI toast on submit. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "@base-ui/react",
+        "@shadcn/react",
+        "class-variance-authority",
+        "geist",
+        "lucide-react",
+        "next-themes",
+        "radix-ui"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "landing-pages"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/landing-page-v2.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nEdit all page copy (name, tagline, event meta, register questions) in lib/site.ts. The home CTA links to /register, which runs a multi-step Questionnaire and posts via lib/actions.ts — replace the stub body with your own persistence / email / CRM call. Successful submits toast via Base UI Toast (https://ui.shadcn.com/docs/components/base/toast). ThemeProvider (next-themes) drives light/dark class tokens used by the toaster.\n\nPreview at /view/landing-page-v2 (and /view/landing-page-v2/register).",
+      "files": [
+        {
+          "path": "registry/new-york/templates/landing-page-v2/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/app/register/page.tsx",
+          "type": "registry:page",
+          "target": "app/register/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/app/globals.css",
+          "type": "registry:file",
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/directional-transition.tsx",
+          "type": "registry:component",
+          "target": "components/directional-transition.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/glow-canvas.tsx",
+          "type": "registry:component",
+          "target": "components/glow-canvas.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/hero-section.tsx",
+          "type": "registry:component",
+          "target": "components/hero-section.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/register-form.tsx",
+          "type": "registry:component",
+          "target": "components/register-form.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/ui/questionnaire.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toast.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/lib/actions.ts",
+          "type": "registry:lib",
+          "target": "lib/actions.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/lib/site.ts",
+          "type": "registry:lib",
+          "target": "lib/site.ts"
+        }
+      ]
     }
   ]
 }
