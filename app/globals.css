@@ -16,9 +16,9 @@
 }
 
 .typeset-article {
-  --typeset-font-body: var(--font-geist-mono);
-  --typeset-font-heading: var(--font-geist-mono);
-  --typeset-font-mono: var(--font-geist-mono);
+  --typeset-font-body: var(--font-inter);
+  --typeset-font-heading: var(--font-inter);
+  --typeset-font-mono: var(--font-inter);
   --typeset-size: 15px;
   --typeset-leading: 1.75;
   --typeset-flow: 1.25em;

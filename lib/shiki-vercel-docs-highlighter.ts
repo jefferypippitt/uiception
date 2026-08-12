@@ -15,9 +15,26 @@ const LANGS = [
   "css",
   "json",
   "markdown",
+  "mdx",
+  "yaml",
   "bash",
   "text",
 ] as const
+
+const EXT_TO_LANG: Record<string, string> = {
+  tsx: "tsx",
+  jsx: "jsx",
+  ts: "typescript",
+  js: "javascript",
+  mjs: "javascript",
+  css: "css",
+  json: "json",
+  md: "markdown",
+  mdx: "mdx",
+  yml: "yaml",
+  yaml: "yaml",
+  sh: "bash",
+}
 
 let highlighterPromise: Promise<Highlighter> | null = null
 /** Serializes WASM Oniguruma use — concurrent codeToHtml/Hast corrupts the singleton. */
@@ -99,5 +116,11 @@ export function resolveShikiLang(lang: string | undefined | null): string {
   if (raw === "ts") return "typescript"
   if (raw === "js") return "javascript"
   if (raw === "md") return "markdown"
+  if (raw === "yml") return "yaml"
   return LANGS.includes(raw as (typeof LANGS)[number]) ? raw : "text"
+}
+
+export function getShikiLangFromPath(filePath: string): string {
+  const ext = filePath.split(".").pop()?.toLowerCase() ?? ""
+  return resolveShikiLang(EXT_TO_LANG[ext] ?? "text")
 }

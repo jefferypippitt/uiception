@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { Inter } from "next/font/google"
 import type { ReactNode } from "react"
 
 import { TemplatePreviewNav } from "@/components/template-previews/preview-nav"
@@ -18,6 +19,11 @@ import { Toaster } from "@/registry/new-york/templates/portfolio-v1/components/u
 import "@/registry/new-york/templates/portfolio-v1/app/typeset.css"
 import "@/registry/new-york/templates/portfolio-v1/styles/typeset-article.css"
 import "katex/dist/katex.min.css"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
 
 async function generateStaticParams() {
   const [writing, books] = await Promise.all([
@@ -76,7 +82,9 @@ function Frame({
 
   return (
     <TemplatePreviewNav basePath={basePath}>
-      <div className="min-h-svh bg-background font-mono text-foreground">
+      <div
+        className={`${inter.variable} ${inter.className} min-h-svh bg-background text-foreground`}
+      >
         <div className="mx-auto w-full max-w-[90ch] px-6 py-16 md:py-24">
           <main>{children}</main>
         </div>

@@ -2,12 +2,27 @@
   --orbit-size: 3.5rem;
   --eclipse-yaw: -27deg;
   --eclipse-scale-y: 0.3;
+  /* Cassini true-color: pale gold disk, cooler icy rings. */
+  --saturn-highlight: oklch(0.9 0.045 92);
+  --saturn-body: oklch(0.76 0.08 85);
+  --saturn-band: oklch(0.66 0.09 76);
+  --saturn-shadow: oklch(0.42 0.072 68);
+  --saturn-ring: oklch(0.7 0.048 82);
+  --saturn-ring-dense: oklch(0.55 0.058 74);
   position: relative;
   width: var(--orbit-size);
   height: var(--orbit-size);
   flex-shrink: 0;
   overflow: visible;
-  color: var(--foreground);
+}
+
+.dark .saturn-decoration {
+  --saturn-highlight: oklch(0.94 0.042 92);
+  --saturn-body: oklch(0.8 0.08 85);
+  --saturn-band: oklch(0.7 0.09 76);
+  --saturn-shadow: oklch(0.38 0.06 65);
+  --saturn-ring: oklch(0.86 0.036 88);
+  --saturn-ring-dense: oklch(0.72 0.045 80);
 }
 
 .saturn-decoration__planet-under {
@@ -54,15 +69,15 @@
   background: radial-gradient(
     circle at center,
     transparent 40%,
-    color-mix(in oklab, currentColor 28%, transparent) 44%,
-    color-mix(in oklab, currentColor 52%, white 4%) 56%,
-    color-mix(in oklab, currentColor 62%, white 5%) 66%,
-    color-mix(in oklab, currentColor 44%, transparent) 69%,
+    color-mix(in oklab, var(--saturn-ring-dense) 55%, transparent) 44%,
+    color-mix(in oklab, var(--saturn-ring) 82%, var(--saturn-highlight)) 56%,
+    color-mix(in oklab, var(--saturn-ring-dense) 90%, var(--saturn-highlight)) 66%,
+    color-mix(in oklab, var(--saturn-ring-dense) 50%, transparent) 69%,
     transparent 71%,
     transparent 74%,
-    color-mix(in oklab, currentColor 40%, white 2%) 78%,
-    color-mix(in oklab, currentColor 30%, transparent) 88%,
-    color-mix(in oklab, currentColor 16%, transparent) 93%,
+    color-mix(in oklab, var(--saturn-ring) 70%, transparent) 78%,
+    color-mix(in oklab, var(--saturn-ring-dense) 42%, transparent) 88%,
+    color-mix(in oklab, var(--saturn-ring) 22%, transparent) 93%,
     transparent 97%
   );
 }
@@ -99,6 +114,9 @@
 }
 
 .saturn-decoration__moon {
+  --moon-highlight: oklch(0.78 0.02 85);
+  --moon-body: oklch(0.62 0.025 78);
+  --moon-shade: oklch(0.4 0.03 70);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -109,45 +127,117 @@
   background:
     radial-gradient(
       circle at 30% 26%,
-      color-mix(in oklab, currentColor 48%, white) 0%,
-      color-mix(in oklab, currentColor 28%, transparent) 34%,
-      color-mix(in oklab, currentColor 16%, transparent) 52%,
-      color-mix(in oklab, currentColor 10%, black) 78%,
-      color-mix(in oklab, black 55%, currentColor) 100%
+      var(--moon-highlight) 0%,
+      var(--moon-body) 42%,
+      var(--moon-shade) 100%
     );
   box-shadow:
-    inset -0.08rem 0.02rem 0.12rem color-mix(in oklab, black 45%, transparent),
-    inset 0.05rem -0.04rem 0.08rem color-mix(in oklab, currentColor 18%, transparent),
-    0.04rem 0.07rem 0.12rem color-mix(in oklab, currentColor 14%, transparent),
-    0 0 0 0.5px color-mix(in oklab, currentColor 20%, transparent);
+    inset -0.08rem 0.02rem 0.12rem color-mix(in oklab, var(--moon-shade) 55%, transparent),
+    inset 0.05rem -0.04rem 0.08rem color-mix(in oklab, var(--moon-highlight) 28%, transparent),
+    0.04rem 0.07rem 0.12rem color-mix(in oklab, var(--moon-shade) 28%, transparent),
+    0 0 0 0.5px color-mix(in oklab, var(--moon-body) 40%, transparent);
   transform:
     translate(-50%, -50%)
     scaleY(calc(1 / var(--eclipse-scale-y)))
     rotate(calc(var(--eclipse-yaw) * -1));
 }
 
-.saturn-decoration__moon--tone {
+/* Titan — orange haze from the nitrogen atmosphere. */
+.saturn-decoration__moon--titan {
+  --moon-highlight: oklch(0.72 0.12 68);
+  --moon-body: oklch(0.58 0.14 58);
+  --moon-shade: oklch(0.36 0.11 50);
+}
+
+.dark .saturn-decoration__moon--titan {
+  --moon-highlight: oklch(0.76 0.13 68);
+  --moon-body: oklch(0.62 0.15 58);
+  --moon-shade: oklch(0.34 0.1 50);
+}
+
+/* Rhea — dirty water ice, slightly tan-gray. */
+.saturn-decoration__moon--rhea {
+  --moon-highlight: oklch(0.8 0.022 82);
+  --moon-body: oklch(0.66 0.028 75);
+  --moon-shade: oklch(0.42 0.03 68);
+}
+
+.dark .saturn-decoration__moon--rhea {
+  --moon-highlight: oklch(0.86 0.02 85);
+  --moon-body: oklch(0.72 0.025 78);
+  --moon-shade: oklch(0.4 0.028 68);
+}
+
+/* Iapetus — two-faced: bright ice vs dark reddish Cassini Regio. */
+.saturn-decoration__moon--iapetus {
+  --moon-highlight: oklch(0.9 0.015 95);
+  --moon-body: oklch(0.32 0.055 42);
+  --moon-shade: oklch(0.22 0.04 38);
   background:
     linear-gradient(
       105deg,
-      color-mix(in oklab, currentColor 55%, white) 0 48%,
-      color-mix(in oklab, black 70%, currentColor) 52% 100%
+      var(--moon-highlight) 0 46%,
+      var(--moon-body) 54% 100%
     );
 }
 
-.saturn-decoration__moon--bright {
-  background:
-    radial-gradient(
-      circle at 32% 28%,
-      color-mix(in oklab, currentColor 70%, white) 0%,
-      color-mix(in oklab, currentColor 40%, white 10%) 40%,
-      color-mix(in oklab, currentColor 18%, black) 100%
-    );
-  opacity: 0.95;
+.dark .saturn-decoration__moon--iapetus {
+  --moon-highlight: oklch(0.93 0.014 95);
+  --moon-body: oklch(0.3 0.055 42);
+  --moon-shade: oklch(0.2 0.04 38);
 }
 
-.saturn-decoration__moon--soft {
-  opacity: 0.85;
+/* Dione — icy, a bit less bright than Tethys. */
+.saturn-decoration__moon--dione {
+  --moon-highlight: oklch(0.88 0.016 95);
+  --moon-body: oklch(0.74 0.02 88);
+  --moon-shade: oklch(0.48 0.025 75);
+}
+
+.dark .saturn-decoration__moon--dione {
+  --moon-highlight: oklch(0.92 0.014 95);
+  --moon-body: oklch(0.8 0.018 90);
+  --moon-shade: oklch(0.46 0.022 75);
+}
+
+/* Tethys — very high albedo, near-white ice. */
+.saturn-decoration__moon--tethys {
+  --moon-highlight: oklch(0.94 0.012 95);
+  --moon-body: oklch(0.84 0.016 92);
+  --moon-shade: oklch(0.56 0.02 80);
+}
+
+.dark .saturn-decoration__moon--tethys {
+  --moon-highlight: oklch(0.96 0.01 95);
+  --moon-body: oklch(0.88 0.014 92);
+  --moon-shade: oklch(0.54 0.018 80);
+}
+
+/* Enceladus — brightest, fresh ice with a faint blue. */
+.saturn-decoration__moon--enceladus {
+  --moon-highlight: oklch(0.97 0.012 230);
+  --moon-body: oklch(0.9 0.018 220);
+  --moon-shade: oklch(0.62 0.02 230);
+}
+
+.dark .saturn-decoration__moon--enceladus {
+  --moon-highlight: oklch(0.98 0.012 230);
+  --moon-body: oklch(0.93 0.016 220);
+  --moon-shade: oklch(0.6 0.02 230);
+}
+
+/* Mimas — small gray ice. */
+.saturn-decoration__moon--mimas {
+  --moon-highlight: oklch(0.72 0.018 80);
+  --moon-body: oklch(0.56 0.022 72);
+  --moon-shade: oklch(0.36 0.025 65);
+  opacity: 0.9;
+}
+
+.dark .saturn-decoration__moon--mimas {
+  --moon-highlight: oklch(0.78 0.016 82);
+  --moon-body: oklch(0.62 0.02 75);
+  --moon-shade: oklch(0.34 0.022 65);
 }
 
 .saturn-decoration__planet {
@@ -158,17 +248,34 @@
   background:
     radial-gradient(
       circle at 30% 26%,
-      color-mix(in oklab, currentColor 55%, white) 0%,
-      color-mix(in oklab, currentColor 78%, white) 22%,
-      currentColor 48%,
-      color-mix(in oklab, currentColor 70%, black) 72%,
-      color-mix(in oklab, currentColor 35%, black) 100%
+      var(--saturn-highlight) 0%,
+      color-mix(in oklab, var(--saturn-body) 55%, var(--saturn-highlight)) 22%,
+      var(--saturn-body) 48%,
+      color-mix(in oklab, var(--saturn-body) 45%, var(--saturn-shadow)) 72%,
+      var(--saturn-shadow) 100%
     );
   box-shadow:
-    inset -0.22rem 0.04rem 0.34rem color-mix(in oklab, black 55%, currentColor),
-    inset 0.1rem -0.08rem 0.18rem color-mix(in oklab, white 12%, currentColor),
-    0.05rem 0.1rem 0.18rem color-mix(in oklab, black 40%, transparent),
-    0 0 0 1px color-mix(in oklab, currentColor 35%, black);
+    inset -0.22rem 0.04rem 0.34rem color-mix(in oklab, var(--saturn-shadow) 70%, transparent),
+    inset 0.1rem -0.08rem 0.18rem color-mix(in oklab, var(--saturn-highlight) 35%, transparent),
+    0.05rem 0.1rem 0.18rem color-mix(in oklab, var(--saturn-shadow) 40%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--saturn-band) 55%, var(--saturn-shadow));
+}
+
+.saturn-decoration__planet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 16%,
+    color-mix(in oklab, var(--saturn-band) 42%, transparent) 16% 22%,
+    transparent 22% 36%,
+    color-mix(in oklab, var(--saturn-band) 28%, transparent) 36% 44%,
+    transparent 44% 58%,
+    color-mix(in oklab, var(--saturn-shadow) 22%, transparent) 58% 66%
+  );
+  pointer-events: none;
 }
 
 .saturn-decoration__planet-under .saturn-decoration__planet {
@@ -182,7 +289,7 @@
   width: 36%;
   height: 28%;
   border-radius: 9999px;
-  background: color-mix(in oklab, white 70%, currentColor);
+  background: color-mix(in oklab, var(--saturn-highlight) 55%, white);
   filter: blur(0.09rem);
   opacity: 0.45;
 }
@@ -192,8 +299,18 @@
 }
 
 .saturn-decoration__moon .saturn-decoration__glare {
+  background: color-mix(in oklab, var(--moon-highlight) 70%, white);
   filter: blur(0.04rem);
-  opacity: 0.6;
+  opacity: 0.55;
+}
+
+.saturn-decoration__moon--titan .saturn-decoration__glare {
+  opacity: 0.28;
+}
+
+.saturn-decoration__moon--enceladus .saturn-decoration__glare,
+.saturn-decoration__moon--tethys .saturn-decoration__glare {
+  opacity: 0.7;
 }
 
 @keyframes saturn-spin {

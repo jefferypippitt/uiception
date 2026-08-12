@@ -8,6 +8,7 @@ import {
 } from "@/lib/registry-code-view"
 import { getInstallCommand } from "@/lib/registry-install-media"
 import {
+  getShikiLangFromPath,
   SHIKI_THEME_VERCEL_DARK,
   SHIKI_THEME_VERCEL_LIGHT,
   withVercelDocsHighlighter,
@@ -34,23 +35,6 @@ type RawFile = {
   meta?: { installUrl?: string }
 }
 
-function getLang(filePath: string): string {
-  const ext = filePath.split(".").pop()?.toLowerCase() ?? ""
-  const map: Record<string, string> = {
-    tsx: "tsx",
-    jsx: "jsx",
-    ts: "typescript",
-    js: "javascript",
-    mjs: "javascript",
-    css: "css",
-    json: "json",
-    md: "markdown",
-    mdx: "markdown",
-    sh: "bash",
-  }
-  return map[ext] ?? "text"
-}
-
 export const getBlockRegistryData = cache(
   async (versionId: string): Promise<BlockRegistryData | null> => {
     try {
@@ -68,7 +52,7 @@ export const getBlockRegistryData = cache(
           continue
         }
 
-        const lang = getLang(displayPath)
+        const lang = getShikiLangFromPath(displayPath)
         const { htmlLight, htmlDark } = await withVercelDocsHighlighter((hl) => ({
           htmlLight: hl.codeToHtml(content, {
             lang,

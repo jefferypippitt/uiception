@@ -2,23 +2,32 @@ import type { CSSProperties } from "react"
 
 import "../styles/saturn-decoration.css"
 
+type MoonName =
+  | "titan"
+  | "rhea"
+  | "iapetus"
+  | "dione"
+  | "tethys"
+  | "enceladus"
+  | "mimas"
+
 type Moon = {
+  name: MoonName
   size: string
   inset: string
   duration: string
   phase: number
-  look?: "tone" | "bright" | "soft"
   reverse?: boolean
 }
 
 const MOONS: Moon[] = [
-  { size: "0.4rem", inset: "2%", duration: "20s", phase: 0.08 },
-  { size: "0.22rem", inset: "14%", duration: "14s", phase: 0.42 },
-  { size: "0.21rem", inset: "-4%", duration: "28s", phase: 0.71, look: "tone", reverse: true },
-  { size: "0.18rem", inset: "22%", duration: "11s", phase: 0.33 },
-  { size: "0.17rem", inset: "30%", duration: "9s", phase: 0.55, look: "bright" },
-  { size: "0.12rem", inset: "38%", duration: "6.5s", phase: 0.88, look: "bright" },
-  { size: "0.1rem", inset: "44%", duration: "5s", phase: 0.23, look: "soft" },
+  { name: "titan", size: "0.4rem", inset: "2%", duration: "20s", phase: 0.08 },
+  { name: "rhea", size: "0.22rem", inset: "14%", duration: "14s", phase: 0.42 },
+  { name: "iapetus", size: "0.21rem", inset: "-4%", duration: "28s", phase: 0.71, reverse: true },
+  { name: "dione", size: "0.18rem", inset: "22%", duration: "11s", phase: 0.33 },
+  { name: "tethys", size: "0.17rem", inset: "30%", duration: "9s", phase: 0.55 },
+  { name: "enceladus", size: "0.12rem", inset: "38%", duration: "6.5s", phase: 0.88 },
+  { name: "mimas", size: "0.1rem", inset: "44%", duration: "5s", phase: 0.23 },
 ]
 
 function EclipseMoons() {
@@ -42,13 +51,7 @@ function EclipseMoons() {
           }
         >
           <span className="saturn-decoration__moon-pivot">
-            <span
-              className={
-                moon.look
-                  ? `saturn-decoration__moon saturn-decoration__moon--${moon.look}`
-                  : "saturn-decoration__moon"
-              }
-            >
+            <span className={`saturn-decoration__moon saturn-decoration__moon--${moon.name}`}>
               <span className="saturn-decoration__glare" />
             </span>
           </span>
