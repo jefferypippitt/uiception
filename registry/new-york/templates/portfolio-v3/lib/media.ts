@@ -1,5 +1,13 @@
 import { existsSync } from "node:fs"
-import { extname, join } from "node:path"
+import { join } from "node:path"
+
+import {
+  IMAGE_EXTENSIONS,
+  VIDEO_EXTENSIONS,
+  createTemplateImage,
+  createTemplateVideo,
+  resolveLocalMediaFilename,
+} from "@/lib/block-media"
 
 import type {
   LifelineEvent,
@@ -14,51 +22,16 @@ import {
   type JonMilestone,
 } from "./jon-doe"
 
-export const IMAGE_EXTENSIONS = [
-  ".jpg",
-  ".jpeg",
-  ".png",
-  ".webp",
-  ".avif",
-  ".gif",
-  ".svg",
-] as const
-
-export const VIDEO_EXTENSIONS = [".mp4", ".webm", ".mov", ".m4v", ".mkv"] as const
+export {
+  IMAGE_EXTENSIONS,
+  VIDEO_EXTENSIONS,
+  resolveLocalMediaFilename,
+} from "@/lib/block-media"
 
 const TEMPLATE_ID = "portfolio-v3"
+const CDN_ORIGIN = "https://uiception.com"
 
-function basenameWithoutExt(filename: string): string {
-  const ext = extname(filename)
-  return ext ? filename.slice(0, -ext.length) : filename
-}
-
-export function resolveLocalMediaFilename(
-  dir: string,
-  canonicalFilename: string,
-  allowedExtensions: readonly string[],
-): string | null {
-  const exactPath = join(dir, canonicalFilename)
-  if (existsSync(exactPath) && !canonicalFilename.endsWith(".gitkeep")) {
-    return canonicalFilename
-  }
-
-  const base = basenameWithoutExt(canonicalFilename)
-  for (const ext of allowedExtensions) {
-    const candidate = `${base}${ext}`
-    if (
-      candidate !== canonicalFilename &&
-      !candidate.endsWith(".gitkeep") &&
-      existsSync(join(dir, candidate))
-    ) {
-      return candidate
-    }
-  }
-
-  return null
-}
-
-function resolveInRoots(
+function resolveConsumerMediaUrl(
   kind: "images" | "videos",
   relPath: string,
   allowedExtensions: readonly string[],
@@ -67,61 +40,45 @@ function resolveInRoots(
   const slash = normalized.lastIndexOf("/")
   const dirPart = slash >= 0 ? normalized.slice(0, slash) : ""
   const filename = slash >= 0 ? normalized.slice(slash + 1) : normalized
-
-  const roots = [
-    {
-      abs: join(process.cwd(), "public", kind, ...(dirPart ? [dirPart] : [])),
-      urlBase: dirPart ? `/${kind}/${dirPart}` : `/${kind}`,
-    },
-    {
-      abs: join(
-        process.cwd(),
-        "public",
-        kind,
-        "templates",
-        TEMPLATE_ID,
-        ...(dirPart ? [dirPart] : []),
-      ),
-      urlBase: dirPart
-        ? `/${kind}/templates/${TEMPLATE_ID}/${dirPart}`
-        : `/${kind}/templates/${TEMPLATE_ID}`,
-    },
-  ]
-
-  for (const root of roots) {
-    const resolved = resolveLocalMediaFilename(
-      root.abs,
-      filename,
-      allowedExtensions,
-    )
-    if (resolved) {
-      return `${root.urlBase}/${resolved}`
-    }
-  }
-
-  return null
+  const abs = join(process.cwd(), "public", kind, ...(dirPart ? [dirPart] : []))
+  const resolved = resolveLocalMediaFilename(abs, filename, allowedExtensions)
+  if (!resolved || resolved.endsWith(".gitkeep")) return null
+  const urlBase = dirPart ? `/${kind}/${dirPart}` : `/${kind}`
+  return `${urlBase}/${resolved}`
 }
 
-export function resolveTemplateImage(relPath: string): string | null {
-  return resolveInRoots("images", relPath, IMAGE_EXTENSIONS)
+export function resolveTemplateImage(
+  relPath: string,
+  origin = CDN_ORIGIN,
+): string {
+  return (
+    resolveConsumerMediaUrl("images", relPath, IMAGE_EXTENSIONS) ??
+    createTemplateImage(TEMPLATE_ID, origin)(relPath)
+  )
 }
 
-export function resolveTemplateVideo(relPath: string): string | null {
-  return resolveInRoots("videos", relPath, VIDEO_EXTENSIONS)
+export function resolveTemplateVideo(
+  relPath: string,
+  origin = CDN_ORIGIN,
+): string {
+  return (
+    resolveConsumerMediaUrl("videos", relPath, VIDEO_EXTENSIONS) ??
+    createTemplateVideo(TEMPLATE_ID, origin)(relPath)
+  )
 }
 
 function mediaRel(filename: string, fallbackFolder: string) {
   return filename.includes("/") ? filename : `${fallbackFolder}/${filename}`
 }
 
-function resolveEvent(event: JonEvent): LifelineEvent {
+function resolveEvent(event: JonEvent, origin: string): LifelineEvent {
   if (typeof event === "string" || Array.isArray(event)) return event
 
   const imageSrc = event.image
-    ? resolveTemplateImage(mediaRel(event.image, "moments"))
+    ? resolveTemplateImage(mediaRel(event.image, "moments"), origin)
     : null
   const videoSrc = event.video
-    ? resolveTemplateVideo(mediaRel(event.video, "moments"))
+    ? resolveTemplateVideo(mediaRel(event.video, "moments"), origin)
     : null
   const alt =
     typeof event.text === "string" ? event.text : "Timeline moment"
@@ -140,13 +97,16 @@ function resolveEvent(event: JonEvent): LifelineEvent {
   }
 }
 
-function resolveMilestone(milestone: JonMilestone): {
+function resolveMilestone(
+  milestone: JonMilestone,
+  origin: string,
+): {
   id: string
   events: LifelineEvent[]
   companies?: LifelineMarker["companies"]
   met?: LifelineMarker["met"]
 } {
-  const events = milestone.events.map(resolveEvent)
+  const events = milestone.events.map((event) => resolveEvent(event, origin))
 
   return {
     id: milestone.id,
@@ -156,10 +116,10 @@ function resolveMilestone(milestone: JonMilestone): {
   }
 }
 
-export function getJonDoeLifeline() {
+export function getJonDoeLifeline(origin = CDN_ORIGIN) {
   const milestones: Record<number, ReturnType<typeof resolveMilestone>> = {}
   for (const [year, milestone] of Object.entries(jonDoeMilestones)) {
-    milestones[Number(year)] = resolveMilestone(milestone)
+    milestones[Number(year)] = resolveMilestone(milestone, origin)
   }
 
   return defineLifeline({
@@ -171,4 +131,16 @@ export function getJonDoeLifeline() {
     legend: jonDoeMeta.legend,
     milestones,
   })
+}
+
+export function resolveAvatarSrc(origin = CDN_ORIGIN): string {
+  const installDir = join(process.cwd(), "public")
+  for (const ext of IMAGE_EXTENSIONS) {
+    const filename = `avatar${ext}`
+    if (existsSync(join(installDir, filename))) {
+      return `/${filename}`
+    }
+  }
+
+  return resolveTemplateImage("avatar.png", origin)
 }

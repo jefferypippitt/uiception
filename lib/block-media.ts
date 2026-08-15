@@ -15,7 +15,7 @@ export const IMAGE_EXTENSIONS = [
 ] as const
 
 /** Most-used web video formats, in popularity order for alternate lookup. */
-export const VIDEO_EXTENSIONS = [".mp4", ".webm", ".mov", ".m4v"] as const
+export const VIDEO_EXTENSIONS = [".mp4", ".webm", ".mov", ".m4v", ".mkv"] as const
 
 function basenameWithoutExt(filename: string): string {
   const ext = extname(filename)
@@ -45,25 +45,64 @@ export function resolveLocalMediaFilename(
   return null
 }
 
-function resolveBlockMediaUrl(
+function resolveCollectionMediaUrl(
   kind: "images" | "videos",
-  blockId: string,
+  collection: "blocks" | "templates",
+  id: string,
   filename: string,
   allowedExtensions: readonly string[],
   origin: string,
 ): string {
-  const dir = join(process.cwd(), "public", kind, "blocks", blockId)
+  const dir = join(process.cwd(), "public", kind, collection, id)
   const resolved = resolveLocalMediaFilename(dir, filename, allowedExtensions)
-  const relPath = `${kind}/blocks/${blockId}/${resolved ?? filename}`
+  const relPath = `${kind}/${collection}/${id}/${resolved ?? filename}`
   return resolved ? `/${relPath}` : `${origin}/${relPath}`
 }
 
 export function createBlockImage(blockId: string, origin = CDN_ORIGIN) {
   return (filename: string) =>
-    resolveBlockMediaUrl("images", blockId, filename, IMAGE_EXTENSIONS, origin)
+    resolveCollectionMediaUrl(
+      "images",
+      "blocks",
+      blockId,
+      filename,
+      IMAGE_EXTENSIONS,
+      origin,
+    )
 }
 
 export function createBlockVideo(blockId: string, origin = CDN_ORIGIN) {
   return (filename: string) =>
-    resolveBlockMediaUrl("videos", blockId, filename, VIDEO_EXTENSIONS, origin)
+    resolveCollectionMediaUrl(
+      "videos",
+      "blocks",
+      blockId,
+      filename,
+      VIDEO_EXTENSIONS,
+      origin,
+    )
+}
+
+export function createTemplateImage(templateId: string, origin = CDN_ORIGIN) {
+  return (filename: string) =>
+    resolveCollectionMediaUrl(
+      "images",
+      "templates",
+      templateId,
+      filename,
+      IMAGE_EXTENSIONS,
+      origin,
+    )
+}
+
+export function createTemplateVideo(templateId: string, origin = CDN_ORIGIN) {
+  return (filename: string) =>
+    resolveCollectionMediaUrl(
+      "videos",
+      "templates",
+      templateId,
+      filename,
+      VIDEO_EXTENSIONS,
+      origin,
+    )
 }

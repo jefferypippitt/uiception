@@ -246,7 +246,7 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
       },
       {
         text: "Attended Vercel Ship in New York.",
-        image: "vercel-ship-2024.jpg",
+        image: "vercel-ship-2024.png",
       },
     ],
     met: [
@@ -262,11 +262,11 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
     events: [
       {
         text: "Attended CES 2025 — NVIDIA keynote.",
-        video: "ces-2025-nvidia.mp4",
+        video: "ces-2025-nvidia.mkv",
       },
       {
         text: "Attended Vercel Ship 2025 in New York.",
-        image: "vercel-ship-2025.jpg",
+        image: "vercel-ship-2025.png",
       },
     ],
     met: [
@@ -287,7 +287,7 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
     events: [
       {
         text: "Attended Compile 26 — Michael Truell's opening keynote.",
-        video: "compile-26.mp4",
+        video: "compile-26.mkv",
       },
     ],
     met: [

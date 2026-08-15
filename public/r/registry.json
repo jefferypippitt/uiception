@@ -5445,12 +5445,14 @@
         "radix-ui",
         "class-variance-authority"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
       "categories": [
         "template",
         "portfolio"
       ],
-      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full timeline site.\n\nEdit milestones, people, and companies in lib/jon-doe.ts. Four color-coded tracks: set an event's `category` to \"work\", \"college\", or \"destination\" for an amber/violet/teal timeline dot, and list conference/meetup people under a milestone's `met` for a pink dot with a company icon. Drop moment stills into public/images/moments/, destination photos into public/images/destinations/, and clips into public/videos/moments/ (matching the .gitkeep names). Destination events also accept a `video` filename under public/videos/destinations/. Missing media is omitted automatically. Drop public/avatar.png to replace the JD initials. Preview at /view/portfolio-v3. Theme switcher is in the footer.\n\nLifeline components are vendored from https://github.com/evilrabbit/lifeline (MIT).",
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full timeline site.\n\nEdit milestones, people, and companies in lib/jon-doe.ts. Four color-coded tracks: set an event's `category` to \"work\", \"college\", or \"destination\" for an amber/violet/teal timeline dot, and list conference/meetup people under a milestone's `met` for a pink dot with a company icon. Drop moment stills into public/images/moments/, destination photos into public/images/destinations/, and clips into public/videos/moments/ (matching the .gitkeep names). Destination events also accept a `video` filename under public/videos/destinations/. Fresh install uses the same local-first + CDN fallback as blocks (https://uiception.com/images|videos/templates/portfolio-v3/...). A local file with the same base name wins. Drop public/avatar.png to replace the demo avatar. Preview at /view/portfolio-v3. Theme switcher is in the footer.\n\nLifeline components are vendored from https://github.com/evilrabbit/lifeline (MIT).",
       "files": [
         {
           "path": "registry/new-york/templates/portfolio-v3/app/layout.tsx",

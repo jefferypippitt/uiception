@@ -1,14 +1,17 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 
 import {
   getJonDoeLifeline,
+  resolveAvatarSrc,
   resolveLocalMediaFilename,
   resolveTemplateImage,
   resolveTemplateVideo,
 } from "@/registry/new-york/templates/portfolio-v3/lib/media"
+
+const repoRoot = process.cwd()
 
 const IMAGE_EXTENSIONS = [
   ".jpg",
@@ -26,6 +29,22 @@ describe("portfolio-v3 media", () => {
   afterEach(() => {
     for (const dir of dirs.splice(0)) {
       rmSync(dir, { recursive: true, force: true })
+    }
+  })
+
+  it("CDN-referenced demo assets exist on the authoring disk", () => {
+    const assets = [
+      "public/images/templates/portfolio-v3/avatar.png",
+      "public/images/templates/portfolio-v3/destinations/japan.jpg",
+      "public/images/templates/portfolio-v3/destinations/italy.jpg",
+      "public/images/templates/portfolio-v3/destinations/greece.jpg",
+      "public/images/templates/portfolio-v3/moments/vercel-ship-2024.png",
+      "public/images/templates/portfolio-v3/moments/vercel-ship-2025.png",
+      "public/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mkv",
+      "public/videos/templates/portfolio-v3/moments/compile-26.mkv",
+    ]
+    for (const rel of assets) {
+      expect(existsSync(join(repoRoot, rel)), `missing ${rel}`).toBe(true)
     }
   })
 
@@ -80,7 +99,7 @@ describe("portfolio-v3 media", () => {
   })
 
   describe("resolveTemplateImage", () => {
-    it("returns null when neither install nor preview path has the file", () => {
+    it("falls back to CDN when neither install nor preview path has the file", () => {
       const tempRoot = mkdtempSync(join(tmpdir(), "p3-app-"))
       dirs.push(tempRoot)
       mkdirSync(join(tempRoot, "public"), { recursive: true })
@@ -88,7 +107,11 @@ describe("portfolio-v3 media", () => {
       const prev = process.cwd()
       process.chdir(tempRoot)
       try {
-        expect(resolveTemplateImage("people/ryan-park.png")).toBe(null)
+        expect(
+          resolveTemplateImage("people/ryan-park.png", "https://example.com"),
+        ).toBe(
+          "https://example.com/images/templates/portfolio-v3/people/ryan-park.png",
+        )
       } finally {
         process.chdir(prev)
       }
@@ -148,7 +171,43 @@ describe("portfolio-v3 media", () => {
     })
   })
 
+  describe("resolveAvatarSrc", () => {
+    it("falls back to CDN when no local avatar exists", () => {
+      const tempRoot = mkdtempSync(join(tmpdir(), "p3-app-"))
+      dirs.push(tempRoot)
+      mkdirSync(join(tempRoot, "public"), { recursive: true })
+
+      const prev = process.cwd()
+      process.chdir(tempRoot)
+      try {
+        expect(resolveAvatarSrc("https://example.com")).toBe(
+          "https://example.com/images/templates/portfolio-v3/avatar.png",
+        )
+      } finally {
+        process.chdir(prev)
+      }
+    })
+  })
+
   describe("resolveTemplateVideo", () => {
+    it("falls back to CDN when neither install nor preview path has the file", () => {
+      const tempRoot = mkdtempSync(join(tmpdir(), "p3-app-"))
+      dirs.push(tempRoot)
+      mkdirSync(join(tempRoot, "public"), { recursive: true })
+
+      const prev = process.cwd()
+      process.chdir(tempRoot)
+      try {
+        expect(
+          resolveTemplateVideo("moments/compile-26.mkv", "https://example.com"),
+        ).toBe(
+          "https://example.com/videos/templates/portfolio-v3/moments/compile-26.mkv",
+        )
+      } finally {
+        process.chdir(prev)
+      }
+    })
+
     it("resolves host preview video path", () => {
       const tempRoot = mkdtempSync(join(tmpdir(), "p3-app-"))
       dirs.push(tempRoot)
@@ -201,7 +260,7 @@ describe("portfolio-v3 media", () => {
   })
 
   describe("getJonDoeLifeline", () => {
-    it("builds markers without media when no assets exist", () => {
+    it("uses CDN urls when no local assets exist", () => {
       const tempRoot = mkdtempSync(join(tmpdir(), "p3-app-"))
       dirs.push(tempRoot)
       mkdirSync(join(tempRoot, "public"), { recursive: true })
@@ -209,7 +268,7 @@ describe("portfolio-v3 media", () => {
       const prev = process.cwd()
       process.chdir(tempRoot)
       try {
-        const life = getJonDoeLifeline()
+        const life = getJonDoeLifeline("https://example.com")
         expect(life.name).toBe("Jon Doe")
         expect(life.birthYear).toBe(1992)
         expect(life.markers.length).toBeGreaterThan(10)
@@ -267,6 +326,38 @@ describe("portfolio-v3 media", () => {
         expect(life.legend?.some((item) => item.type === "destination")).toBe(
           true,
         )
+        expect(japanEvent).toMatchObject({
+          image: {
+            src: "https://example.com/images/templates/portfolio-v3/destinations/japan.jpg",
+          },
+        })
+
+        const year2024 = life.markers.find((m) => m.year === 2024)
+        const ship2024 = year2024?.events.find(
+          (event) =>
+            typeof event === "object" &&
+            !Array.isArray(event) &&
+            typeof event.text === "string" &&
+            event.text.includes("Vercel Ship"),
+        )
+        expect(ship2024).toMatchObject({
+          image: {
+            src: "https://example.com/images/templates/portfolio-v3/moments/vercel-ship-2024.png",
+          },
+        })
+
+        const ces = year2025?.events.find(
+          (event) =>
+            typeof event === "object" &&
+            !Array.isArray(event) &&
+            typeof event.text === "string" &&
+            event.text.includes("CES 2025"),
+        )
+        expect(ces).toMatchObject({
+          video: {
+            src: "https://example.com/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mkv",
+          },
+        })
       } finally {
         process.chdir(prev)
       }

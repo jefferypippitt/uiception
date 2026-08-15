@@ -8,6 +8,8 @@ import {
   VIDEO_EXTENSIONS,
   createBlockImage,
   createBlockVideo,
+  createTemplateImage,
+  createTemplateVideo,
   resolveLocalMediaFilename,
 } from "@/lib/block-media"
 
@@ -97,6 +99,30 @@ describe("block-media", () => {
       const blockVideo = createBlockVideo("nonexistent-block-slot", "https://example.com")
       expect(blockVideo("video.mp4")).toBe(
         "https://example.com/videos/blocks/nonexistent-block-slot/video.mp4",
+      )
+    })
+  })
+
+  describe("createTemplateImage", () => {
+    it("falls back to CDN when no local file exists", () => {
+      const templateImage = createTemplateImage(
+        "nonexistent-template-slot",
+        "https://example.com",
+      )
+      expect(templateImage("moments/image.png")).toBe(
+        "https://example.com/images/templates/nonexistent-template-slot/moments/image.png",
+      )
+    })
+  })
+
+  describe("createTemplateVideo", () => {
+    it("falls back to CDN when no local file exists", () => {
+      const templateVideo = createTemplateVideo(
+        "nonexistent-template-slot",
+        "https://example.com",
+      )
+      expect(templateVideo("moments/video.mkv")).toBe(
+        "https://example.com/videos/templates/nonexistent-template-slot/moments/video.mkv",
       )
     })
   })
