@@ -34,6 +34,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Static personal site — notes, projects, and experience hardcoded in pages. No CMS or markdown.",
       },
+      {
+        id: "portfolio-v3",
+        title: "Portfolio v3",
+        registryPath: "registry/new-york/templates/portfolio-v3",
+        description:
+          "Scroll-scrubbed lifeline timeline for a fullstack developer — Jon Doe filler career. Drop media into public/images and public/videos.",
+      },
     ],
   },
   {

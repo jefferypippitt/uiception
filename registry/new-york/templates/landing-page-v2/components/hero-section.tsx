@@ -26,7 +26,7 @@ export function HeroSection() {
         >
           <Badge
             variant="glass"
-            className="h-6 px-2.5 text-sm tracking-wide"
+            className="h-5 px-2 text-xs tracking-wide"
           >
             {site.date}
             <span aria-hidden className="mx-1.5 text-white/35">
@@ -37,21 +37,21 @@ export function HeroSection() {
         </div>
 
         <h1
-          className="hero-reveal mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.9] font-medium tracking-[-0.12rem] text-white [text-shadow:0_0_40px_rgba(0,0,0,0.55)]"
+          className="hero-reveal mt-4 max-w-[16ch] text-balance text-[clamp(2.25rem,6vw,4rem)] leading-[0.95] font-medium tracking-[-0.08rem] text-white [text-shadow:0_0_40px_rgba(0,0,0,0.55)]"
           style={{ "--hero-delay": "160ms" } as CSSProperties}
         >
           {site.name}
         </h1>
 
         <p
-          className="hero-reveal mt-7 max-w-md text-[clamp(1.5rem,3.5vw,2.25rem)] leading-[1.15] font-medium tracking-[-0.04em] text-white/70"
+          className="hero-reveal mt-4 max-w-md text-[clamp(1.125rem,2.25vw,1.5rem)] leading-[1.3] font-medium tracking-[-0.02em] text-white/70"
           style={{ "--hero-delay": "260ms" } as CSSProperties}
         >
           {site.tagline}
         </p>
 
         <div
-          className="hero-reveal mt-9"
+          className="hero-reveal mt-7"
           style={{ "--hero-delay": "340ms" } as CSSProperties}
         >
           <Button variant="default" size="lg" asChild>

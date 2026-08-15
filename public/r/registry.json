@@ -5434,6 +5434,262 @@
       ]
     },
     {
+      "name": "portfolio-v3",
+      "type": "registry:block",
+      "title": "Portfolio v3",
+      "description": "Scroll-scrubbed lifeline timeline for a fullstack developer — Jon Doe filler career with fictional companies. Drop images and videos into public/ slots. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "lucide-react",
+        "geist",
+        "next-themes",
+        "radix-ui",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full timeline site.\n\nEdit milestones, people, and companies in lib/jon-doe.ts. Four color-coded tracks: set an event's `category` to \"work\", \"college\", or \"destination\" for an amber/violet/teal timeline dot, and list conference/meetup people under a milestone's `met` for a pink dot with a company icon. Drop moment stills into public/images/moments/, destination photos into public/images/destinations/, and clips into public/videos/moments/ (matching the .gitkeep names). Destination events also accept a `video` filename under public/videos/destinations/. Missing media is omitted automatically. Drop public/avatar.png to replace the JD initials. Preview at /view/portfolio-v3. Theme switcher is in the footer.\n\nLifeline components are vendored from https://github.com/evilrabbit/lifeline (MIT).",
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v3/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/avatar.tsx",
+          "type": "registry:component",
+          "target": "components/avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/company-icons.tsx",
+          "type": "registry:component",
+          "target": "components/company-icons.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline-shell.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline-shell.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/index.ts",
+          "type": "registry:component",
+          "target": "components/lifeline/index.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/company-icon.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/company-icon.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-desktop.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-desktop.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-event.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-event.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-hover-image.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-hover-image.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-inline-clip.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-inline-clip.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-inline-still.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-inline-still.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-labels.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-labels.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-legend.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-legend.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-lightbox.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-lightbox.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-marker.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-marker.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-people.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-people.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-vertical.tsx",
+          "type": "registry:component",
+          "target": "components/lifeline/lifeline-vertical.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/use-lifeline-intro.ts",
+          "type": "registry:hook",
+          "target": "components/lifeline/use-lifeline-intro.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/use-lifeline-scroll.ts",
+          "type": "registry:hook",
+          "target": "components/lifeline/use-lifeline-scroll.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/use-lifeline-vertical-scroll.ts",
+          "type": "registry:hook",
+          "target": "components/lifeline/use-lifeline-vertical-scroll.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-intro-timing.ts",
+          "type": "registry:lib",
+          "target": "components/lifeline/lifeline-intro-timing.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-layout.ts",
+          "type": "registry:lib",
+          "target": "components/lifeline/lifeline-layout.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-utils.ts",
+          "type": "registry:lib",
+          "target": "components/lifeline/lifeline-utils.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/types.ts",
+          "type": "registry:lib",
+          "target": "components/lifeline/types.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline.css",
+          "type": "registry:file",
+          "target": "components/lifeline/lifeline.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/theme-switcher.tsx",
+          "type": "registry:component",
+          "target": "components/theme-switcher.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/cursorDark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/cursorDark.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/cursorLight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/cursorLight.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/nvidiaIconDark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/nvidiaIconDark.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/nvidiaIconLight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/nvidiaIconLight.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/vercel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/vercel.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/components/ui/svgs/vercelDark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/svgs/vercelDark.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/lib/jon-doe.ts",
+          "type": "registry:lib",
+          "target": "lib/jon-doe.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/lib/lifeline-data.ts",
+          "type": "registry:lib",
+          "target": "lib/lifeline-data.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/lib/media.ts",
+          "type": "registry:lib",
+          "target": "lib/media.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/avatar.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/avatar.png.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/images/destinations/japan.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/destinations/japan.jpg.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/images/destinations/italy.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/destinations/italy.jpg.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/images/destinations/greece.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/destinations/greece.jpg.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/images/moments/vercel-ship-2024.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/moments/vercel-ship-2024.jpg.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/images/moments/vercel-ship-2025.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/moments/vercel-ship-2025.jpg.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/videos/moments/ces-2025-nvidia.mp4.gitkeep",
+          "type": "registry:file",
+          "target": "public/videos/moments/ces-2025-nvidia.mp4.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/public/videos/moments/compile-26.mp4.gitkeep",
+          "type": "registry:file",
+          "target": "public/videos/moments/compile-26.mp4.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "landing-page-v1",
       "type": "registry:block",
       "title": "Landing Page v1",
