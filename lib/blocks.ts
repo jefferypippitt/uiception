@@ -375,6 +375,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Testimonials Section v5",
         registryPath: "registry/new-york/blocks/testimonials-section-v5",
       },
+      {
+        id: "testimonials-section-v6",
+        title: "Testimonials Section v6",
+        registryPath: "registry/new-york/blocks/testimonials-section-v6",
+      },
     ],
   },
   {
@@ -494,7 +499,13 @@ export const blockCategories: BlockCategory[] = [
     id: "about-us",
     title: "About us",
     description: "Company story, mission, and positioning sections.",
-    versions: [],
+    versions: [
+      {
+        id: "about-section-v1",
+        title: "About Section v1",
+        registryPath: "registry/new-york/blocks/about-section-v1",
+      },
+    ],
   },
   {
     id: "resources",
@@ -567,6 +578,11 @@ export const blockCategories: BlockCategory[] = [
         id: "blog-section-v1",
         title: "Blog Section v1",
         registryPath: "registry/new-york/blocks/blog-section-v1",
+      },
+      {
+        id: "blog-section-v2",
+        title: "Blog Section v2",
+        registryPath: "registry/new-york/blocks/blog-section-v2",
       },
     ],
   },

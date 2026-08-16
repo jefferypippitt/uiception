@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blog-section-v2",
+  "title": "Blog Section v2",
+  "description": "Two-column editorial layout with a sticky author sidebar (square photo, label, name, title, GitHub) and two title/description/image/body content sections.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/blog-section-v2/page.tsx",
+      "content": "import BlogSectionV2 from \"./components/blog-section-v2\"\r\n\r\nexport default function Page() {\r\n  return <BlogSectionV2 />\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/blog-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/blog-section-v2/components/blog-section-v2.tsx",
+      "content": "import Image from \"next/image\"\r\nimport Link from \"next/link\"\r\n\r\nimport { createBlockImage } from \"@/lib/block-media\"\r\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\r\nimport { GithubDark } from \"@/components/ui/svgs/githubDark\"\r\nimport { GithubLight } from \"@/components/ui/svgs/githubLight\"\r\n\r\nimport { author, sections } from \"../lib/config\"\r\n\r\nconst blockImage = createBlockImage(\"blog-section-v2\")\r\n\r\nconst authorData = {\r\n  label: author.label,\r\n  name: author.name,\r\n  title: author.title,\r\n  avatarSrc: blockImage(author.avatarFile),\r\n  initials: author.initials,\r\n  githubHref: author.githubHref,\r\n  githubLabel: author.githubLabel,\r\n}\r\n\r\nconst contentSections = sections.map((section) => ({\r\n  title: section.title,\r\n  description: section.description,\r\n  body: section.body,\r\n  alt: section.alt,\r\n  src: blockImage(section.imageFile),\r\n}))\r\n\r\nexport default function BlogSectionV2() {\r\n  return (\r\n    <section className=\"py-4 md:py-6 lg:py-8\">\r\n      <div className=\"mx-auto max-w-6xl px-4\">\r\n        <div className=\"grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,16rem)_1fr] lg:gap-0\">\r\n          <aside className=\"flex flex-col gap-4 border-b border-border pb-10 lg:sticky lg:top-8 lg:self-start lg:border-b-0 lg:pb-0 lg:pr-10\">\r\n            <Avatar className=\"size-24 rounded-none after:rounded-none\">\r\n              <AvatarImage\r\n                src={authorData.avatarSrc}\r\n                alt={authorData.name}\r\n                className=\"rounded-none\"\r\n              />\r\n              <AvatarFallback className=\"rounded-none\">\r\n                {authorData.initials}\r\n              </AvatarFallback>\r\n            </Avatar>\r\n\r\n            <p className=\"text-sm tracking-tight text-muted-foreground\">\r\n              {authorData.label}\r\n            </p>\r\n\r\n            <div className=\"flex flex-col gap-1\">\r\n              <p className=\"text-lg font-semibold tracking-tight text-foreground\">\r\n                {authorData.name}\r\n              </p>\r\n              <p className=\"text-sm text-muted-foreground\">{authorData.title}</p>\r\n            </div>\r\n\r\n            <Link\r\n              href={authorData.githubHref}\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\r\n            >\r\n              <GithubLight className=\"size-4 shrink-0 dark:hidden\" aria-hidden />\r\n              <GithubDark\r\n                className=\"hidden size-4 shrink-0 dark:block\"\r\n                aria-hidden\r\n              />\r\n              {authorData.githubLabel}\r\n            </Link>\r\n          </aside>\r\n\r\n          <div className=\"flex flex-col gap-14 lg:border-l lg:border-border lg:pl-10\">\r\n            {contentSections.map((section) => (\r\n              <article key={section.title} className=\"flex flex-col gap-4\">\r\n                <h2 className=\"text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-balance lg:text-4xl\">\r\n                  {section.title}\r\n                </h2>\r\n                <p className=\"max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground\">\r\n                  {section.description}\r\n                </p>\r\n                <div className=\"relative aspect-video w-full overflow-hidden rounded-none bg-muted\">\r\n                  <Image\r\n                    src={section.src}\r\n                    alt={section.alt}\r\n                    fill\r\n                    unoptimized\r\n                    className=\"object-cover\"\r\n                    sizes=\"(max-width: 1024px) 100vw, 48rem\"\r\n                  />\r\n                </div>\r\n                <p className=\"max-w-2xl text-[0.9375rem] leading-relaxed text-foreground\">\r\n                  {section.body}\r\n                </p>\r\n              </article>\r\n            ))}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/blog-section-v2/components/blog-section-v2.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/blog-section-v2/lib/config.ts",
+      "content": "export const author = {\r\n  label: \"Author\",\r\n  name: \"Jon Doe\",\r\n  title: \"Fullstack Developer\",\r\n  avatarFile: \"avatar.png\",\r\n  initials: \"JD\",\r\n  githubHref: \"https://github.com/\",\r\n  githubLabel: \"GitHub\",\r\n} as const\r\n\r\nexport const sections = [\r\n  {\r\n    title: \"Golden Hour Field Notes\",\r\n    description:\r\n      \"Last light on the mountains, and the work you leave unfinished on purpose.\",\r\n    imageFile: \"image-1.jpg\",\r\n    alt: \"Mountain landscape at golden hour\",\r\n    body: \"There is a short window when the mountains keep time. Shadows climb the ridges in minutes, and I have to decide where to stand and what to leave out of the frame before the color drains. I treat that hour the way I treat a shipping deadline. The hard edge makes the rest of the day honest. I can walk the trail again in the morning, and I cannot get this light back.\",\r\n  },\r\n  {\r\n    title: \"A Walk Along the Cliffs\",\r\n    description:\r\n      \"Notes from a coastal path where the weather changes faster than the plan.\",\r\n    imageFile: \"image-2.jpg\",\r\n    alt: \"Coastal cliffs and ocean waves\",\r\n    body: \"Spray hits the path. The ocean keeps the same argument it has always kept with the shore. I walk slower than usual on days like this. The ground is difficult. The water is loud, and that makes room for quieter thoughts about what to build next and what to delete.\",\r\n  },\r\n] as const\r\n",
+      "type": "registry:lib",
+      "target": "app/blog-section-v2/lib/config.ts"
+    },
+    {
+      "path": "components/ui/svgs/githubLight.tsx",
+      "content": "import type { SVGProps } from \"react\";\n\nconst GithubLight = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 1024 1024\" fill=\"none\">\n    <path\n      fill=\"#1b1f23\"\n      fillRule=\"evenodd\"\n      d=\"M512 0C229.12 0 0 229.12 0 512c0 226.56 146.56 417.92 350.08 485.76 25.6 4.48 35.2-10.88 35.2-24.32 0-12.16-.64-52.48-.64-95.36-128.64 23.68-161.92-31.36-172.16-60.16-5.76-14.72-30.72-60.16-52.48-72.32-17.92-9.6-43.52-33.28-.64-33.92 40.32-.64 69.12 37.12 78.72 52.48 46.08 77.44 119.68 55.68 149.12 42.24 4.48-33.28 17.92-55.68 32.64-68.48-113.92-12.8-232.96-56.96-232.96-252.8 0-55.68 19.84-101.76 52.48-137.6-5.12-12.8-23.04-65.28 5.12-135.68 0 0 42.88-13.44 140.8 52.48 40.96-11.52 84.48-17.28 128-17.28s87.04 5.76 128 17.28c97.92-66.56 140.8-52.48 140.8-52.48 28.16 70.4 10.24 122.88 5.12 135.68 32.64 35.84 52.48 81.28 52.48 137.6 0 196.48-119.68 240-233.6 252.8 18.56 16 34.56 46.72 34.56 94.72 0 68.48-.64 123.52-.64 140.8 0 13.44 9.6 29.44 35.2 24.32C877.44 929.92 1024 737.92 1024 512 1024 229.12 794.88 0 512 0\"\n      clipRule=\"evenodd\"\n    />\n  </svg>\n);\n\nexport { GithubLight };\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/githubLight.tsx"
+    },
+    {
+      "path": "components/ui/svgs/githubDark.tsx",
+      "content": "import type { SVGProps } from \"react\";\n\nconst GithubDark = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} viewBox=\"0 0 1024 1024\" fill=\"none\">\n    <path\n      fillRule=\"evenodd\"\n      clipRule=\"evenodd\"\n      d=\"M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z\"\n      transform=\"scale(64)\"\n      fill=\"#ffff\"\n    />\n  </svg>\n);\n\nexport { GithubDark };\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/githubDark.tsx"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v2/avatar.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v2/avatar.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v2/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v2/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/blog-section-v2/image-2.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.\r\n",
+      "type": "registry:file",
+      "target": "public/images/blocks/blog-section-v2/image-2.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

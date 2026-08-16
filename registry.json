@@ -448,6 +448,82 @@
       ]
     },
     {
+      "name": "blog-section-v2",
+      "type": "registry:block",
+      "title": "Blog Section v2",
+      "description": "Two-column editorial layout with a sticky author sidebar (square photo, label, name, title, GitHub) and two title/description/image/body content sections.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/blog-section-v2/page.tsx",
+          "type": "registry:page",
+          "target": "app/blog-section-v2/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/blog-section-v2/components/blog-section-v2.tsx",
+          "type": "registry:component",
+          "target": "app/blog-section-v2/components/blog-section-v2.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/blog-section-v2/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/blog-section-v2/lib/config.ts"
+        },
+        {
+          "path": "components/ui/svgs/githubLight.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubLight.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubDark.tsx"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v2/avatar.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v2/avatar.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v2/image-1.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v2/image-1.jpg.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/blog-section-v2/image-2.jpg.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/blog-section-v2/image-2.jpg.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "about-section-v1",
+      "type": "registry:block",
+      "title": "About Section v1",
+      "description": "About us section with an eyebrow label, heading and intro copy, two feature highlight cards, and a full-width stats strip.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/about-section-v1/page.tsx",
+          "type": "registry:page",
+          "target": "app/about-section-v1/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/about-section-v1/components/about-section-v1.tsx",
+          "type": "registry:component",
+          "target": "app/about-section-v1/components/about-section-v1.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/about-section-v1/lib/config.ts",
+          "type": "registry:lib",
+          "target": "app/about-section-v1/lib/config.ts"
+        }
+      ]
+    },
+    {
       "name": "brands-section-v1",
       "type": "registry:block",
       "title": "Brands Section v1",
@@ -4210,6 +4286,102 @@
           "path": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep",
           "type": "registry:file",
           "target": "public/images/blocks/testimonials-section-v5/avatar-6.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-section-v6",
+      "type": "registry:block",
+      "title": "Testimonials Section v6",
+      "description": "Borderless portrait cards with a white company wordmark over the photo, a short description, and a round button that opens the story in a new tab.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v6/page.tsx",
+          "type": "registry:page",
+          "target": "app/testimonials-section-v6/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v6/components/testimonials-section-v6.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v6/components/testimonials-section-v6.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v6/components/testimonial-grid.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v6/components/testimonial-grid.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v6/components/testimonial-card.tsx",
+          "type": "registry:component",
+          "target": "app/testimonials-section-v6/components/testimonial-card.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/testimonials-section-v6/lib/testimonials-content.ts",
+          "type": "registry:lib",
+          "target": "app/testimonials-section-v6/lib/testimonials-content.ts"
+        },
+        {
+          "path": "components/ui/svgs/stripeWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/stripeWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/githubWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/githubWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/vercelWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/vercelWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/convexWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/convexWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/clerkWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/clerkWordmarkDark.tsx"
+        },
+        {
+          "path": "components/ui/svgs/supabaseWordmarkDark.tsx",
+          "type": "registry:component",
+          "target": "@ui/svgs/supabaseWordmarkDark.tsx"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-1.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-2.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-2.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-3.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-3.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-4.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-4.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-5.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-5.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/testimonials-section-v6/avatar-6.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/testimonials-section-v6/avatar-6.png.gitkeep"
         }
       ]
     },

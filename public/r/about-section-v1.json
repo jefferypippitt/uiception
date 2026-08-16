@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "about-section-v1",
+  "title": "About Section v1",
+  "description": "About us section with an eyebrow label, heading and intro copy, two feature highlight cards, and a full-width stats strip.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/about-section-v1/page.tsx",
+      "content": "import AboutSectionV1 from \"./components/about-section-v1\"\n\nexport default function Page() {\n  return <AboutSectionV1 />\n}\n",
+      "type": "registry:page",
+      "target": "app/about-section-v1/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/about-section-v1/components/about-section-v1.tsx",
+      "content": "import { FEATURES, HEADING, PARAGRAPHS, STATS } from \"../lib/config\"\n\nexport default function AboutSectionV1() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16\">\n          <h2 className=\"text-3xl font-medium tracking-[-0.03em] text-balance text-foreground lg:text-4xl\">\n            {HEADING}\n          </h2>\n\n          <div className=\"flex flex-col gap-8\">\n            <div className=\"flex flex-col gap-5\">\n              {PARAGRAPHS.map((paragraph, index) => (\n                <p\n                  key={index}\n                  className=\"max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground\"\n                >\n                  {paragraph}\n                </p>\n              ))}\n            </div>\n\n            <div className=\"grid grid-cols-1 gap-6 sm:grid-cols-2\">\n              {FEATURES.map((feature) => (\n                <div key={feature.id} className=\"flex flex-col gap-2\">\n                  <h3 className=\"text-base font-medium tracking-[-0.01em] text-foreground\">\n                    {feature.title}\n                  </h3>\n                  <p className=\"text-sm leading-relaxed text-muted-foreground\">\n                    {feature.description}\n                  </p>\n                </div>\n              ))}\n            </div>\n          </div>\n        </div>\n\n        <div className=\"mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3 lg:mt-16\">\n          {STATS.map((stat) => (\n            <div key={stat.id} className=\"flex flex-col gap-1\">\n              <span className=\"text-4xl font-medium tracking-[-0.02em] text-foreground lg:text-5xl\">\n                {stat.value}\n              </span>\n              <span className=\"text-sm text-muted-foreground\">\n                {stat.label}\n              </span>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/about-section-v1/components/about-section-v1.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/about-section-v1/lib/config.ts",
+      "content": "export const HEADING = \"What is Acme?\"\n\nexport const PARAGRAPHS = [\n  \"Acme is an AI operations platform for engineering teams. It pairs an autonomous agent layer with workflow tools so ops work costs less time and focus.\",\n  \"Companies like Nimbus, Fractal, and Lumen use Acme to automate deployments, monitoring, and incident response. They resolve incidents 6x faster and cut on-call hours in half.\",\n] as const\n\nexport type AboutFeature = {\n  id: string\n  title: string\n  description: string\n}\n\nexport const FEATURES: AboutFeature[] = [\n  {\n    id: \"autonomous\",\n    title: \"Autonomous by default\",\n    description:\n      \"AI agents triage alerts, patch known failure modes, and hand off only what actually needs a human.\",\n  },\n  {\n    id: \"scale\",\n    title: \"One control plane\",\n    description:\n      \"Keeps pace with millions of events without adding headcount.\",\n  },\n]\n\nexport type AboutStat = {\n  id: string\n  value: string\n  label: string\n}\n\nexport const STATS: AboutStat[] = [\n  {\n    id: \"teams\",\n    value: \"12,000+\",\n    label: \"Teams using Acme\",\n  },\n  {\n    id: \"saved\",\n    value: \"$40M+\",\n    label: \"Saved in engineering time\",\n  },\n  {\n    id: \"resolved\",\n    value: \"6M+\",\n    label: \"Incidents auto-resolved\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/about-section-v1/lib/config.ts"
+    }
+  ],
+  "type": "registry:block"
+}

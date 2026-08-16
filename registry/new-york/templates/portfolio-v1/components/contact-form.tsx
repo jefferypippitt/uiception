@@ -76,7 +76,7 @@ function ContactFields() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Project details, timeline, and anything else I should know..."
+            placeholder="Speaking, a question about a book, or whatever you wanted to say."
             required
           />
         </Field>

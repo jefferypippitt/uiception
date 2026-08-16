@@ -21,10 +21,10 @@ export default async function HomePage() {
       </p>
 
       <p>
-        Most of my public work is about why planets are the way they are, what
-        &ldquo;far&rdquo; means, and how small rules make a sky this large. I
-        write books and notes for anyone who has looked up and wanted a
-        clearer picture of what we&apos;re seeing out there.
+        Most of my public work is about why planets are the way they are, and
+        what &ldquo;far&rdquo; actually measures. I write books and notes for
+        people who have looked up and wanted a clearer picture of what we are
+        seeing.
       </p>
 
       {recentNotes.length > 0 && (

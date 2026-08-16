@@ -13,7 +13,7 @@ export default async function BooksIndexPage() {
     <div className="typeset typeset-article max-w-[42em]">
       <h1>Books</h1>
       <p>
-        Longer popular-science books from my public work.
+        Popular-science books from the same public work.
       </p>
       {books.length === 0 ? (
         <p>No books yet.</p>

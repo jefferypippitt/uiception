@@ -58,7 +58,7 @@ export function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {
     <MotionConfig reducedMotion="user">
       <section className="bg-background py-4 text-foreground md:py-6 lg:py-8">
         <div className="mx-auto max-w-6xl px-4">
-          <h1 className="max-w-4xl text-4xl font-medium leading-[1.1] tracking-[-0.03em] sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-4xl text-4xl leading-[1.2] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
             {headline}
           </h1>
 
@@ -76,15 +76,15 @@ export function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {
                     asChild
                     variant="default"
                     size="lg"
-                    className="rounded-full bg-background text-foreground hover:bg-background/90"
+                    className="rounded-full"
                   >
                     <Link href={primaryCta.href}>{primaryCta.label}</Link>
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
+                    variant="secondary"
                     size="lg"
-                    className="rounded-full border-background/25 bg-transparent text-background hover:bg-background/10 hover:text-background"
+                    className="rounded-full"
                   >
                     <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
                   </Button>
@@ -130,7 +130,7 @@ export function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {
                     type="button"
                     variant="default"
                     size="icon"
-                    className="rounded-full bg-background text-foreground hover:bg-background/90"
+                    className="rounded-full bg-background text-foreground hover:bg-muted"
                     aria-label="Previous image"
                     onClick={goPrev}
                   >
@@ -140,7 +140,7 @@ export function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {
                     type="button"
                     variant="default"
                     size="icon"
-                    className="rounded-full bg-background text-foreground hover:bg-background/90"
+                    className="rounded-full bg-background text-foreground hover:bg-muted"
                     aria-label="Next image"
                     onClick={goNext}
                   >

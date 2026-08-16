@@ -1,3 +1,10 @@
+import { Instrument_Serif } from "next/font/google"
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+})
+
 function Spacer({ size = "md" }: { size?: "sm" | "md" | "lg" | "xl" }) {
   const heights = { sm: "h-4", md: "h-8", lg: "h-16", xl: "h-28" }
   return <div className={heights[size]} />
@@ -24,7 +31,7 @@ export default function NavbarLoremDemo() {
         className="mx-auto w-full max-w-2xl rounded-none border border-border bg-card text-card-foreground shadow-sm"
       >
         <header className="px-8 py-8 pt-10 sm:px-10">
-          <span className="font-serif text-2xl text-foreground">
+          <span className={`${instrumentSerif.className} text-2xl text-foreground`}>
             uiception.com
           </span>
         </header>

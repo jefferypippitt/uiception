@@ -62,6 +62,7 @@ import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-secti
 import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3"
 import TestimonialsSectionV4 from "@/registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4"
 import TestimonialsSectionV5 from "@/registry/new-york/blocks/testimonials-section-v5/components/testimonials-section-v5"
+import TestimonialsSectionV6 from "@/registry/new-york/blocks/testimonials-section-v6/components/testimonials-section-v6"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
@@ -81,6 +82,7 @@ import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/comp
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
 import GallerySectionV4 from "@/registry/new-york/blocks/gallery-section-v4/components/gallery-section-v4"
 import BlogSectionV1 from "@/registry/new-york/blocks/blog-section-v1/components/blog-section-v1"
+import BlogSectionV2 from "@/registry/new-york/blocks/blog-section-v2/components/blog-section-v2"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
 import NavbarSectionV2Page from "@/registry/new-york/blocks/navbar-section-v2/page"
 import NavbarSectionV3Page from "@/registry/new-york/blocks/navbar-section-v3/page"
@@ -91,6 +93,7 @@ import NavbarSectionV7Page from "@/registry/new-york/blocks/navbar-section-v7/pa
 import NavbarSectionV8Page from "@/registry/new-york/blocks/navbar-section-v8/page"
 import NavbarSectionV9Page from "@/registry/new-york/blocks/navbar-section-v9/page"
 import NavbarSectionV10Page from "@/registry/new-york/blocks/navbar-section-v10/page"
+import AboutSectionV1 from "@/registry/new-york/blocks/about-section-v1/components/about-section-v1"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -168,6 +171,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "testimonials-section-v3": TestimonialsSectionV3,
   "testimonials-section-v4": TestimonialsSectionV4,
   "testimonials-section-v5": TestimonialsSectionV5,
+  "testimonials-section-v6": TestimonialsSectionV6,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "pricing-section-v3": PricingSectionV3,
@@ -176,6 +180,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "gallery-section-v3": GallerySectionV3,
   "gallery-section-v4": GallerySectionV4,
   "blog-section-v1": BlogSectionV1,
+  "blog-section-v2": BlogSectionV2,
   "navbar-section-v1": NavbarSectionV1Page,
   "navbar-section-v2": NavbarSectionV2Page,
   "navbar-section-v3": NavbarSectionV3Page,
@@ -186,6 +191,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v8": NavbarSectionV8Page,
   "navbar-section-v9": NavbarSectionV9Page,
   "navbar-section-v10": NavbarSectionV10Page,
+  "about-section-v1": AboutSectionV1,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "John Doe",
   description:
-    "Physicist and science communicator. Planetary science, the solar system, and clear public writing about how the universe works.",
+    "Physicist and science communicator. Planetary science, the solar system, and public writing about how the universe works.",
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

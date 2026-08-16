@@ -8,7 +8,7 @@ export const AUTOPLAY_MS = 5000
 
 export const headline = "Brand systems that look intentional on every surface."
 
-export const title = "Atelier for product teams"
+export const title = "Acme Corp. for product teams"
 
 export const body =
   "Keep posters, packaging comps, and launch decks in one shared kit. Swap art direction once and every asset stays on-brand without rebuilding the deck from scratch."
