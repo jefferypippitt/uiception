@@ -320,9 +320,11 @@ export function GlowCanvas({
     if (!canvas) return
 
     const gl = canvas.getContext("webgl2", {
-      alpha: true,
+      alpha: false,
       premultipliedAlpha: false,
-      preserveDrawingBuffer: false,
+      // Named `glow-canvas` group snapshots the bitmap. Without this the
+      // buffer is cleared after composite and the group captures empty.
+      preserveDrawingBuffer: true,
     })
     if (!gl) {
       console.error("WebGL2 not supported")

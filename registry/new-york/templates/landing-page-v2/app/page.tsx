@@ -4,7 +4,7 @@ import { HeroSection } from "../components/hero-section"
 export default function HomePage() {
   return (
     <DirectionalTransition>
-      <main>
+      <main className="relative z-10">
         <HeroSection />
       </main>
     </DirectionalTransition>

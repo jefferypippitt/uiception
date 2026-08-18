@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 
 import { landingPageV1Preview } from "@/components/template-previews/landing-page-v1"
 import { landingPageV2Preview } from "@/components/template-previews/landing-page-v2"
+import { landingPageV3Preview } from "@/components/template-previews/landing-page-v3"
 import { portfolioV1Preview } from "@/components/template-previews/portfolio-v1"
 import { portfolioV2Preview } from "@/components/template-previews/portfolio-v2"
 import { portfolioV3Preview } from "@/components/template-previews/portfolio-v3"
@@ -17,6 +18,7 @@ export const templatePreviews: Record<string, TemplatePreviewDefinition> = {
   "portfolio-v3": portfolioV3Preview,
   "landing-page-v1": landingPageV1Preview,
   "landing-page-v2": landingPageV2Preview,
+  "landing-page-v3": landingPageV3Preview,
 }
 
 export function isKnownTemplateVersion(versionId: string): boolean {

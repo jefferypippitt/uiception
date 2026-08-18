@@ -1,0 +1,303 @@
+.solari-board {
+  --solari-ink: 6%;
+  --solari-empty-ink: 1.5%;
+  --solari-duration: 260ms;
+  --solari-paper: var(--secondary);
+  --solari-text: var(--foreground);
+
+  position: relative;
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+.solari-board-fill {
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solari-sizer {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.solari-sizer .solari-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+.dark .solari-board {
+  --solari-ink: 10%;
+  --solari-empty-ink: 2%;
+  --solari-paper: var(--card);
+  --solari-text: var(--foreground);
+}
+
+.solari-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.solari-grid {
+  position: relative;
+  display: grid;
+  gap: clamp(0.16rem, 0.5vw, 0.3rem);
+  perspective: 900px;
+}
+
+.solari-cell {
+  --cell-ink: var(--solari-ink);
+  --flap-top-ink: calc(var(--cell-ink) - 3%);
+  --flap-bottom-ink: calc(var(--cell-ink) + 6%);
+  --paper-mix: color-mix(
+    in oklch,
+    var(--foreground) var(--cell-ink),
+    var(--background)
+  );
+  --solari-well: color-mix(in oklch, var(--solari-paper) 58%, var(--paper-mix));
+  --solari-flap-top: color-mix(
+    in oklch,
+    var(--solari-paper) 70%,
+    color-mix(in oklch, var(--foreground) var(--flap-top-ink), var(--background))
+  );
+  --solari-flap-bottom: color-mix(
+    in oklch,
+    var(--solari-paper) 48%,
+    color-mix(in oklch, var(--foreground) var(--flap-bottom-ink), var(--background))
+  );
+  --solari-hinge: color-mix(in oklch, var(--foreground) 30%, var(--solari-paper));
+  --solari-tab: color-mix(in oklch, var(--foreground) 28%, var(--solari-paper));
+
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 0.16rem;
+  background: var(--solari-well);
+  box-shadow:
+    0.5px 0 1.5px color-mix(in oklch, var(--foreground) 18%, transparent) inset,
+    -0.5px 0 1.5px color-mix(in oklch, var(--foreground) 12%, transparent) inset,
+    0 1px 1px color-mix(in oklch, var(--foreground) 14%, transparent) inset,
+    0 0 0 1px color-mix(in oklch, var(--foreground) 7%, transparent) inset;
+  overflow: hidden;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-weight: 600;
+  font-size: clamp(0.7rem, 2.8vw, 1.55rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--solari-text);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.solari-board-fill .solari-cell {
+  font-size: calc(var(--solari-cell-size, 2.5rem) * 0.52);
+}
+
+.solari-cell:nth-child(3n):not(.solari-cell-empty) {
+  --cell-ink: calc(var(--solari-ink) + 1.4%);
+}
+
+.solari-cell:nth-child(5n):not(.solari-cell-empty) {
+  --cell-ink: calc(var(--solari-ink) - 1.1%);
+}
+
+.solari-cell:nth-child(7n):not(.solari-cell-empty) {
+  --flap-top-ink: calc(var(--cell-ink) - 4.5%);
+}
+
+.solari-cell-empty {
+  --cell-ink: var(--solari-empty-ink);
+  --flap-top-ink: var(--cell-ink);
+  --flap-bottom-ink: var(--cell-ink);
+  --solari-hinge: color-mix(in oklch, var(--foreground) 6%, var(--background));
+  --solari-tab: transparent;
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.dark .solari-cell-empty {
+  opacity: 0.22;
+}
+
+.solari-cell::before,
+.solari-cell::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: 5;
+  width: 28%;
+  height: 8%;
+  transform: translateX(-50%);
+  background: var(--solari-tab);
+  border-radius: 0.05rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.solari-cell::before {
+  top: 3%;
+}
+
+.solari-cell::after {
+  bottom: 3%;
+}
+
+.solari-cell-empty::before,
+.solari-cell-empty::after {
+  opacity: 0;
+}
+
+.solari-half {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.solari-half::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #737373;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  filter: url(#solari-paper-grain);
+  pointer-events: none;
+}
+
+.dark .solari-half::before {
+  opacity: 0.1;
+}
+
+.solari-cell-empty .solari-half::before {
+  opacity: 0.03;
+}
+
+.solari-half-top {
+  top: 0;
+  transform-origin: bottom center;
+  border-radius: 0.14rem 0.14rem 0 0;
+  background-color: var(--solari-flap-top);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--foreground) 4%, transparent) 0 1px,
+      transparent 1px 4px
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--solari-paper) 55%, var(--solari-flap-top)) 0%,
+      var(--solari-flap-top) 42%,
+      color-mix(in oklch, var(--solari-flap-top) 78%, var(--solari-hinge)) 100%
+    );
+  box-shadow:
+    0 1.5px 0 color-mix(in oklch, var(--solari-paper) 75%, oklch(1 0 0)) inset,
+    0 -1px 0 color-mix(in oklch, var(--solari-paper) 55%, oklch(1 0 0)),
+    0 1px 0 var(--solari-hinge);
+  z-index: 2;
+}
+
+.solari-half-bottom {
+  bottom: 0;
+  transform-origin: top center;
+  border-radius: 0 0 0.14rem 0.14rem;
+  background-color: var(--solari-flap-bottom);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--foreground) 4%, transparent) 0 1px,
+      transparent 1px 4px
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--solari-flap-bottom) 72%, var(--solari-hinge)) 0%,
+      var(--solari-flap-bottom) 28%,
+      color-mix(in oklch, var(--solari-flap-bottom) 88%, var(--solari-paper)) 100%
+    );
+  box-shadow:
+    0 3px 4px color-mix(in oklch, var(--foreground) 28%, transparent) inset,
+    0 3px 4px color-mix(in oklch, var(--foreground) 18%, transparent);
+  z-index: 1;
+}
+
+.solari-glyph {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow:
+    0 0.6px 0 color-mix(in oklch, var(--foreground) 22%, transparent),
+    0 0 0.4px color-mix(in oklch, var(--foreground) 35%, transparent);
+}
+
+.solari-half-top .solari-glyph {
+  top: 0;
+}
+
+.solari-half-bottom .solari-glyph {
+  bottom: 0;
+}
+
+.solari-static-top {
+  z-index: 0;
+}
+
+.solari-static-bottom {
+  z-index: 0;
+}
+
+.solari-flip-top {
+  z-index: 3;
+  animation: solari-flip-top var(--solari-duration) ease-in both;
+}
+
+.solari-flip-bottom {
+  z-index: 3;
+  animation: solari-flip-bottom var(--solari-duration) ease-out both;
+}
+
+@keyframes solari-flip-top {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes solari-flip-bottom {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solari-board {
+    --solari-duration: 0ms;
+  }
+
+  .solari-flip-top,
+  .solari-flip-bottom {
+    animation: none;
+  }
+}

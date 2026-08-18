@@ -14,7 +14,7 @@ export type JonEvent =
       category?: JonEventCategory
     }
 
-export type JonPerson = {
+export type JonGlobalEvent = {
   name: string
   role?: string
   icon?: string
@@ -24,7 +24,7 @@ export type JonMilestone = {
   id: string
   events: JonEvent[]
   companies?: { id: string; name: string }[]
-  met?: JonPerson[]
+  globalEvents?: JonGlobalEvent[]
 }
 
 export const jonDoeMeta = {
@@ -35,7 +35,7 @@ export const jonDoeMeta = {
   description:
     "Fullstack developer — education, shipped projects, and the rooms where the work happens.",
   legend: [
-    { type: "met" as const, label: "Global events" },
+    { type: "globalEvent" as const, label: "Global events" },
     { type: "destination" as const, label: "Destinations" },
     { type: "work" as const, label: "Work" },
     { type: "college" as const, label: "College" },
@@ -249,7 +249,7 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
         image: "vercel-ship-2024.png",
       },
     ],
-    met: [
+    globalEvents: [
       {
         name: "Vercel Ship 2024",
         role: "New York · May 23, 2024",
@@ -269,7 +269,7 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
         image: "vercel-ship-2025.png",
       },
     ],
-    met: [
+    globalEvents: [
       {
         name: "CES 2025 Keynote NVIDIA",
         role: "Las Vegas · Jan 6, 2025",
@@ -290,7 +290,7 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
         video: "compile-26.mkv",
       },
     ],
-    met: [
+    globalEvents: [
       {
         name: "Compile 26",
         role: "Fort Mason, San Francisco · Jun 22, 2026",

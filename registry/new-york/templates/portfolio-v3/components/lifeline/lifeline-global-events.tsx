@@ -1,13 +1,13 @@
 import { CompanyIcon } from "./company-icon"
-import type { LifelineMarker, LifelineMetPerson } from "./types"
+import type { LifelineGlobalEvent, LifelineMarker } from "./types"
 
-export function aggregateLifelinePeople(
+export function aggregateLifelineGlobalEvents(
   marker: LifelineMarker,
-): LifelineMetPerson[] {
-  const map = new Map<string, LifelineMetPerson>()
+): LifelineGlobalEvent[] {
+  const map = new Map<string, LifelineGlobalEvent>()
 
-  marker.met?.forEach((person) => {
-    if (!map.has(person.name)) map.set(person.name, person)
+  marker.globalEvents?.forEach((item) => {
+    if (!map.has(item.name)) map.set(item.name, item)
   })
 
   return [...map.values()]
@@ -22,38 +22,38 @@ function getInitials(name: string) {
     .slice(0, 2)
 }
 
-interface LifelinePeopleProps {
-  people: LifelineMetPerson[]
+interface LifelineGlobalEventsProps {
+  events: LifelineGlobalEvent[]
   allowWrap?: boolean
 }
 
-export function LifelinePeople({
-  people,
+export function LifelineGlobalEvents({
+  events,
   allowWrap = false,
-}: LifelinePeopleProps) {
-  if (people.length === 0) return null
+}: LifelineGlobalEventsProps) {
+  if (events.length === 0) return null
 
   return (
     <div className="flex w-full flex-col gap-3">
-      {people.map((person) => (
-        <div key={person.name} className="flex w-full items-center gap-2.5">
+      {events.map((item) => (
+        <div key={item.name} className="flex w-full items-center gap-2.5">
           <div className="flex w-3 shrink-0 items-center justify-center">
             <span
               className="size-1.5 rounded-full bg-pink-500"
               aria-hidden="true"
             />
           </div>
-          {person.icon ? (
+          {item.icon ? (
             <span className="flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted text-foreground">
               <CompanyIcon
-                id={person.icon}
-                label={person.name}
+                id={item.icon}
+                label={item.name}
                 className="h-4 w-5"
               />
             </span>
           ) : (
             <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-foreground text-[10px] font-medium text-background transition-colors duration-300">
-              {getInitials(person.name)}
+              {getInitials(item.name)}
             </span>
           )}
           <div
@@ -64,11 +64,11 @@ export function LifelinePeople({
             }
           >
             <p className="text-[13px] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-              {person.name}
+              {item.name}
             </p>
-            {person.role ? (
+            {item.role ? (
               <p className="text-[11px] text-muted-foreground/80">
-                {person.role}
+                {item.role}
               </p>
             ) : null}
           </div>

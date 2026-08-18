@@ -94,7 +94,7 @@ export function LifelineDesktop({
       >
         <div
           ref={trackRef}
-          className="relative flex w-max items-start will-change-transform [--lifeline-people-top:calc(14.5rem+40px)] [--lifeline-rail:5rem]"
+          className="relative flex w-max items-start will-change-transform [--lifeline-global-events-top:calc(14.5rem+40px)] [--lifeline-rail:5rem]"
           style={{ width: trackWidth }}
         >
           <div

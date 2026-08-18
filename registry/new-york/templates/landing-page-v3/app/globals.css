@@ -2,7 +2,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Same light/dark palette as the host app/globals.css */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -121,25 +120,6 @@
   }
 }
 
-.hero-fade-bottom {
-  background: linear-gradient(
-    to top,
-    black 0%,
-    rgba(0, 0, 0, 0.738) 19%,
-    rgba(0, 0, 0, 0.541) 34%,
-    rgba(0, 0, 0, 0.382) 47%,
-    rgba(0, 0, 0, 0.278) 56.5%,
-    rgba(0, 0, 0, 0.194) 65%,
-    rgba(0, 0, 0, 0.126) 73%,
-    rgba(0, 0, 0, 0.075) 80.2%,
-    rgba(0, 0, 0, 0.042) 86.1%,
-    rgba(0, 0, 0, 0.021) 91%,
-    rgba(0, 0, 0, 0.008) 95.2%,
-    rgba(0, 0, 0, 0.002) 98.2%,
-    transparent 100%
-  );
-}
-
 @keyframes hero-reveal {
   from {
     opacity: 0;
@@ -165,96 +145,5 @@
     animation: none;
     filter: none;
     transform: none;
-  }
-}
-
-/* Home <-> register view transition — see components/directional-transition.tsx.
-   The glow canvas lives in app/layout.tsx as a persistent, named group so it
-   stays put while the DirectionalTransition-wrapped page content slides. */
-:root {
-  --duration-exit: 150ms;
-  --duration-enter: 210ms;
-  --duration-move: 400ms;
-}
-
-.glow-canvas-vt {
-  view-transition-name: glow-canvas;
-}
-
-/* Suppresses the browser's default root cross-fade so it doesn't stack
-   with the nav-forward/nav-back slide below. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-group(glow-canvas) {
-  animation: none;
-  z-index: 0;
-}
-::view-transition-old(glow-canvas) {
-  display: none;
-}
-::view-transition-new(glow-canvas) {
-  animation: none;
-}
-
-::view-transition {
-  pointer-events: none;
-}
-
-@keyframes vt-fade {
-  from {
-    filter: blur(3px);
-    opacity: 0;
-  }
-  to {
-    filter: blur(0);
-    opacity: 1;
-  }
-}
-
-@keyframes vt-slide {
-  from {
-    translate: var(--slide-offset);
-  }
-  to {
-    translate: 0;
-  }
-}
-
-::view-transition-old(.nav-forward) {
-  --slide-offset: -60px;
-  animation:
-    var(--duration-exit) ease-in both vt-fade reverse,
-    var(--duration-move) ease-in-out both vt-slide reverse;
-}
-::view-transition-new(.nav-forward) {
-  --slide-offset: 60px;
-  animation:
-    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
-    var(--duration-move) ease-in-out both vt-slide;
-}
-
-::view-transition-old(.nav-back) {
-  --slide-offset: 60px;
-  animation:
-    var(--duration-exit) ease-in both vt-fade reverse,
-    var(--duration-move) ease-in-out both vt-slide reverse;
-}
-::view-transition-new(.nav-back) {
-  --slide-offset: -60px;
-  animation:
-    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
-    var(--duration-move) ease-in-out both vt-slide;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(*),
-  ::view-transition-new(*),
-  ::view-transition-group(*) {
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
   }
 }

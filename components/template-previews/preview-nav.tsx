@@ -6,6 +6,10 @@ import { useEffect, type ReactNode } from "react"
 /**
  * Host-only: rewrites absolute in-app links (/writing) to the nested
  * preview route (/view/<id>/writing). Never ships in the registry template.
+ *
+ * Capture-phase intercept so Next's <Link> does not start a view transition
+ * toward the unprefixed href before we rewrite it. Forwards
+ * `data-transition-types` onto router.push so typed page transitions still run.
  */
 export function TemplatePreviewNav({
   basePath,
@@ -30,11 +34,23 @@ export function TemplatePreviewNav({
       if (href.startsWith(basePath)) return
 
       event.preventDefault()
-      router.push(`${basePath}${href === "/" ? "" : href}`)
+      event.stopPropagation()
+
+      const types = anchor
+        .getAttribute("data-transition-types")
+        ?.split(/[\s,]+/)
+        .filter(Boolean)
+      const url = `${basePath}${href === "/" ? "" : href}`
+
+      if (types?.length) {
+        router.push(url, { transitionTypes: types })
+      } else {
+        router.push(url)
+      }
     }
 
-    document.addEventListener("click", onClick)
-    return () => document.removeEventListener("click", onClick)
+    document.addEventListener("click", onClick, true)
+    return () => document.removeEventListener("click", onClick, true)
   }, [basePath, router])
 
   return children

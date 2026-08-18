@@ -1,6 +1,6 @@
 import type { CompanyIconId } from "./company-icon"
 
-export interface LifelineMetPerson {
+export interface LifelineGlobalEvent {
   name: string
   role?: string
   icon?: CompanyIconId
@@ -47,11 +47,11 @@ export interface LifelineMarker {
   events: LifelineEvent[]
   badges?: { src: string; alt: string }[]
   companies?: LifelineCompany[]
-  met?: LifelineMetPerson[]
+  globalEvents?: LifelineGlobalEvent[]
 }
 
 export interface LifelineLegendItem {
-  type: "met" | LifelineEventCategory
+  type: "globalEvent" | LifelineEventCategory
   label: string
 }
 

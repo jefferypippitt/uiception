@@ -5624,7 +5624,7 @@
         "template",
         "portfolio"
       ],
-      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full timeline site.\n\nEdit milestones, people, and companies in lib/jon-doe.ts. Four color-coded tracks: set an event's `category` to \"work\", \"college\", or \"destination\" for an amber/violet/teal timeline dot, and list conference/meetup people under a milestone's `met` for a pink dot with a company icon. Drop moment stills into public/images/moments/, destination photos into public/images/destinations/, and clips into public/videos/moments/ (matching the .gitkeep names). Destination events also accept a `video` filename under public/videos/destinations/. Fresh install uses the same local-first + CDN fallback as blocks (https://uiception.com/images|videos/templates/portfolio-v3/...). A local file with the same base name wins. Drop public/avatar.png to replace the demo avatar. Preview at /view/portfolio-v3. Theme switcher is in the footer.\n\nLifeline components are vendored from https://github.com/evilrabbit/lifeline (MIT).",
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full timeline site.\n\nEdit milestones, global events, and companies in lib/jon-doe.ts. Four color-coded tracks: set an event's `category` to \"work\", \"college\", or \"destination\" for an amber/violet/teal timeline dot, and list conference/meetup entries under a milestone's `globalEvents` for a pink dot with a company icon. Drop moment stills into public/images/moments/, destination photos into public/images/destinations/, and clips into public/videos/moments/ (matching the .gitkeep names). Destination events also accept a `video` filename under public/videos/destinations/. Fresh install uses the same local-first + CDN fallback as blocks (https://uiception.com/images|videos/templates/portfolio-v3/...). A local file with the same base name wins. Drop public/avatar.png to replace the demo avatar. Preview at /view/portfolio-v3. Theme switcher is in the footer.\n\nLifeline components are vendored from https://github.com/evilrabbit/lifeline (MIT).",
       "files": [
         {
           "path": "registry/new-york/templates/portfolio-v3/app/layout.tsx",
@@ -5712,9 +5712,9 @@
           "target": "components/lifeline/lifeline-marker.tsx"
         },
         {
-          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-people.tsx",
+          "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-global-events.tsx",
           "type": "registry:component",
-          "target": "components/lifeline/lifeline-people.tsx"
+          "target": "components/lifeline/lifeline-global-events.tsx"
         },
         {
           "path": "registry/new-york/templates/portfolio-v3/components/lifeline/lifeline-vertical.tsx",
@@ -5981,6 +5981,16 @@
           "target": "app/globals.css"
         },
         {
+          "path": "registry/new-york/templates/landing-page-v2/next.config.ts",
+          "type": "registry:file",
+          "target": "next.config.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/components/back-link.tsx",
+          "type": "registry:component",
+          "target": "components/back-link.tsx"
+        },
+        {
           "path": "registry/new-york/templates/landing-page-v2/components/directional-transition.tsx",
           "type": "registry:component",
           "target": "components/directional-transition.tsx"
@@ -6034,6 +6044,73 @@
           "path": "registry/new-york/templates/landing-page-v2/lib/site.ts",
           "type": "registry:lib",
           "target": "lib/site.ts"
+        }
+      ]
+    },
+    {
+      "name": "landing-page-v3",
+      "type": "registry:block",
+      "title": "Landing Page v3",
+      "description": "Coming-soon countdown — a wide Solari split-flap board for Acme 2.0 where the headline, name, and live days/hours/minutes/seconds all live inside the grid as a single hero section. Flaps track the host light/dark tokens and blank cells recede into the page so the board sits without a bezel, with mechanical flips on power-up and every second as digits change. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "geist"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "landing-pages"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/landing-page-v3.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nEdit the headline, name, unit labels, and countdown targetDate in lib/site.ts — every field renders as flaps on a fixed 23-module board, nothing floats outside it. The headline is the alignment origin; the name and each countdown row (number, empty flap, label) hang off the same word-gap column (see lib/board.ts). Flaps mix from the host light/dark tokens; blank cells recede so the board needs no bezel. Anatomy in styles/solari.css.\n\nPreview at /view/landing-page-v3.",
+      "files": [
+        {
+          "path": "registry/new-york/templates/landing-page-v3/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/app/globals.css",
+          "type": "registry:file",
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/components/countdown-hero.tsx",
+          "type": "registry:component",
+          "target": "components/countdown-hero.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/components/solari-board.tsx",
+          "type": "registry:component",
+          "target": "components/solari-board.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/components/solari-cell.tsx",
+          "type": "registry:component",
+          "target": "components/solari-cell.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/lib/board.ts",
+          "type": "registry:lib",
+          "target": "lib/board.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/lib/countdown.ts",
+          "type": "registry:lib",
+          "target": "lib/countdown.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/lib/site.ts",
+          "type": "registry:lib",
+          "target": "lib/site.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/styles/solari.css",
+          "type": "registry:file",
+          "target": "styles/solari.css"
         }
       ]
     }

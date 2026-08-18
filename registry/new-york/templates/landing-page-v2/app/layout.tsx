@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import type { ReactNode } from "react"
 
+import { GlowCanvas } from "../components/glow-canvas"
 import { ThemeProvider } from "../components/theme-provider"
 import { Toaster } from "../components/ui/toast"
 import { site } from "../lib/site"
@@ -22,6 +23,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="flex min-h-svh flex-col bg-background font-sans text-foreground selection:bg-primary/20">
+        {/* Persistent shader: isolated from page snapshots so it stays put
+            while home <-> register content slides. */}
+        <div className="glow-canvas-vt fixed inset-0 z-0 bg-black">
+          <GlowCanvas />
+        </div>
+
         <ThemeProvider>
           <Toaster>{children}</Toaster>
         </ThemeProvider>

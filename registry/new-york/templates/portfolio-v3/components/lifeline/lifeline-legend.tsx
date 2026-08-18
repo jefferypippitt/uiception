@@ -1,14 +1,14 @@
 import type { LifelineLegendItem } from "./types"
 
 const LEGEND_DOT_CLASS: Record<LifelineLegendItem["type"], string> = {
-  met: "bg-pink-500",
+  globalEvent: "bg-pink-500",
   work: "bg-amber-500",
   college: "bg-violet-500",
   destination: "bg-teal-500",
 }
 
 const DEFAULT_ITEMS: LifelineLegendItem[] = [
-  { type: "met", label: "Global events" },
+  { type: "globalEvent", label: "Global events" },
   { type: "destination", label: "Destinations" },
   { type: "work", label: "Work" },
   { type: "college", label: "College" },

@@ -280,19 +280,23 @@ describe("portfolio-v3 media", () => {
         expect(life.markers.find((m) => m.year === 2024)?.companies).toBeUndefined()
 
         const year2025 = life.markers.find((m) => m.year === 2025)
-        expect(year2025?.met?.[0]?.name).toBe("CES 2025 Keynote NVIDIA")
-        expect(year2025?.met?.[0]?.role).toBe("Las Vegas · Jan 6, 2025")
-        expect(year2025?.met?.[0]?.icon).toBe("nvidia")
-        expect(year2025?.met?.[1]?.name).toBe("Vercel Ship 2025")
+        expect(year2025?.globalEvents?.[0]?.name).toBe("CES 2025 Keynote NVIDIA")
+        expect(year2025?.globalEvents?.[0]?.role).toBe("Las Vegas · Jan 6, 2025")
+        expect(year2025?.globalEvents?.[0]?.icon).toBe("nvidia")
+        expect(year2025?.globalEvents?.[1]?.name).toBe("Vercel Ship 2025")
 
-        const withPeople = life.markers.find((m) => m.year === 2026)
-        expect(withPeople?.met?.[0]?.name).toBe("Compile 26")
-        expect(withPeople?.met?.[0]?.icon).toBe("cursor")
-        expect(withPeople?.met?.[1]?.name).toBe("Grok Bot Founder Build Night")
-        expect(withPeople?.met?.[1]?.icon).toBe("cursor")
-        expect(withPeople?.met?.[2]?.name).toBe("Cursor Conversations London")
-        expect(withPeople?.met?.[3]?.name).toBe("Vercel Ship 2026")
-        expect(withPeople?.met?.[3]?.icon).toBe("vercel")
+        const withGlobalEvents = life.markers.find((m) => m.year === 2026)
+        expect(withGlobalEvents?.globalEvents?.[0]?.name).toBe("Compile 26")
+        expect(withGlobalEvents?.globalEvents?.[0]?.icon).toBe("cursor")
+        expect(withGlobalEvents?.globalEvents?.[1]?.name).toBe(
+          "Grok Bot Founder Build Night",
+        )
+        expect(withGlobalEvents?.globalEvents?.[1]?.icon).toBe("cursor")
+        expect(withGlobalEvents?.globalEvents?.[2]?.name).toBe(
+          "Cursor Conversations London",
+        )
+        expect(withGlobalEvents?.globalEvents?.[3]?.name).toBe("Vercel Ship 2026")
+        expect(withGlobalEvents?.globalEvents?.[3]?.icon).toBe("vercel")
 
         const college = life.markers.find((m) => m.year === 2010)
         const collegeEvent = college?.events[0]

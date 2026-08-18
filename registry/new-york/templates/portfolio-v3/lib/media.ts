@@ -104,7 +104,7 @@ function resolveMilestone(
   id: string
   events: LifelineEvent[]
   companies?: LifelineMarker["companies"]
-  met?: LifelineMarker["met"]
+  globalEvents?: LifelineMarker["globalEvents"]
 } {
   const events = milestone.events.map((event) => resolveEvent(event, origin))
 
@@ -112,7 +112,9 @@ function resolveMilestone(
     id: milestone.id,
     events,
     ...(milestone.companies ? { companies: milestone.companies } : {}),
-    ...(milestone.met?.length ? { met: milestone.met } : {}),
+    ...(milestone.globalEvents?.length
+      ? { globalEvents: milestone.globalEvents }
+      : {}),
   }
 }
 

@@ -195,18 +195,20 @@ export function CursorTerminal() {
       </div>
 
       {/* Wordle stays mounted to avoid re-firing the submit-gate server action on every tab switch */}
-      <div className={activeTab !== "Wordle" ? "hidden" : ""}>
+      <div className={activeTab !== "Wordle" ? "hidden" : "min-h-96"}>
         <Wordle isActive={activeTab === "Wordle"} />
       </div>
 
+      {/* min-h-96 reserves the games' final height so the panel doesn't collapse
+          to 0 while the lazy chunk loads, then snap open once it lands */}
       {activeTab === "Trex Runner" ? (
-        <TrexRunner />
+        <div className="min-h-96"><TrexRunner /></div>
       ) : activeTab === "Reaction Time" ? (
-        <ReactionTime />
+        <div className="min-h-96"><ReactionTime /></div>
       ) : activeTab === "Color Memory" ? (
-        <ColorMemory />
+        <div className="min-h-96"><ColorMemory /></div>
       ) : activeTab === "Sequence Memory" ? (
-        <SequenceMemory />
+        <div className="min-h-96"><SequenceMemory /></div>
       ) : activeTab !== "Wordle" ? (
         <>
           <div

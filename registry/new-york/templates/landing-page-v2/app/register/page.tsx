@@ -1,23 +1,13 @@
-import Link from "next/link"
-
+import { BackLink } from "../../components/back-link"
 import { DirectionalTransition } from "../../components/directional-transition"
-import { GlowCanvas } from "../../components/glow-canvas"
 import { RegisterForm } from "../../components/register-form"
 import { site } from "../../lib/site"
 
 export default function RegisterPage() {
   return (
     <DirectionalTransition>
-      <main className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden">
-        <GlowCanvas className="opacity-70" />
-
-        <Link
-          href="/"
-          transitionTypes={["nav-back"]}
-          className="absolute top-6 left-6 z-10 text-sm text-white/45 transition-colors hover:text-white/80 md:top-8 md:left-10"
-        >
-          ← {site.name}
-        </Link>
+      <main className="relative z-10 flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden">
+        <BackLink className="absolute top-6 left-6 z-10 md:top-8 md:left-10" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-14 px-8 py-16 md:px-12 lg:flex-row lg:items-center lg:gap-24 lg:px-16 lg:py-24">
           <section className="flex w-full flex-col lg:w-[42%] lg:shrink-0">

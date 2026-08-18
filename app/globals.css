@@ -370,11 +370,10 @@
     background-clip: padding-box;
 }
 
-/* Safety net for React's <ViewTransition> (used by the landing-page-v2
-   template preview's home <-> register slide): suppresses the browser's
-   default root cross-fade so it can't leak into unrelated navigations.
-   Individual <ViewTransition> components still animate normally since they
-   use their own named pseudo-elements, not `root`. */
+/* Default root view-transition is off so unrelated host navigations don't
+   cross-fade. landing-page-v2's typed selectors (nav-forward / nav-back)
+   override this during home <-> register. mix-blend-mode stays normal so
+   snapshots never composite into each other. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation: none;

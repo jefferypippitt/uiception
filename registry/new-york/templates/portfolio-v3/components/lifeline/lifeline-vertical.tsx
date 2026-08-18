@@ -13,7 +13,10 @@ import {
 } from "./lifeline-event"
 import { LifelineInlineClip } from "./lifeline-inline-clip"
 import { LifelineInlineStill } from "./lifeline-inline-still"
-import { aggregateLifelinePeople, LifelinePeople } from "./lifeline-people"
+import {
+  aggregateLifelineGlobalEvents,
+  LifelineGlobalEvents,
+} from "./lifeline-global-events"
 import type { LifelineEvent, LifelineMarker, LifelineProps } from "./types"
 import { getMarkerHeight, hasMarkerContent } from "./lifeline-utils"
 import { useLifelineIntro } from "./use-lifeline-intro"
@@ -79,7 +82,7 @@ const LifelineVerticalEntry = forwardRef<
   ref,
 ) {
   const age = marker.age ?? marker.year - birthYear
-  const people = aggregateLifelinePeople(marker)
+  const globalEvents = aggregateLifelineGlobalEvents(marker)
   const hasContent = hasMarkerContent(marker)
 
   return (
@@ -159,9 +162,9 @@ const LifelineVerticalEntry = forwardRef<
                 </div>
               )}
 
-              {people.length > 0 && (
+              {globalEvents.length > 0 && (
                 <div className="mt-6 border-t border-border/70 pt-5 transition-colors duration-300">
-                  <LifelinePeople people={people} allowWrap />
+                  <LifelineGlobalEvents events={globalEvents} allowWrap />
                 </div>
               )}
             </div>

@@ -62,6 +62,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Event landing hero — brand-first display type over a WebGL color-field glow (noise warp, mouse pull, auto-cycling palettes), staggered blur reveal, ticket CTA into a multi-step questionnaire register with Base UI toast.",
       },
+      {
+        id: "landing-page-v3",
+        title: "Landing Page v3",
+        registryPath: "registry/new-york/templates/landing-page-v3",
+        description:
+          "Coming-soon countdown — a Solari split-flap board for Acme 2.0 that tracks light and dark, with mechanical flips on power-up and live days/hours/minutes/seconds.",
+      },
     ],
   },
 ]

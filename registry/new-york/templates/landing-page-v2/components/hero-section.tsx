@@ -5,15 +5,12 @@ import type { CSSProperties } from "react"
 
 import { Button } from "@/components/ui/button"
 
-import { GlowCanvas } from "./glow-canvas"
 import { Badge } from "./ui/badge"
 import { site } from "../lib/site"
 
 export function HeroSection() {
   return (
-    <section className="relative flex h-dvh w-full flex-col overflow-hidden bg-black text-white">
-      <GlowCanvas />
-
+    <section className="relative flex h-dvh w-full flex-col overflow-hidden text-white">
       <div
         aria-hidden
         className="hero-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 z-5 h-64"
@@ -44,7 +41,7 @@ export function HeroSection() {
         </h1>
 
         <p
-          className="hero-reveal mt-4 max-w-md text-[clamp(1.125rem,2.25vw,1.5rem)] leading-[1.3] font-medium tracking-[-0.02em] text-white/70"
+          className="hero-reveal mt-4 max-w-md text-[clamp(1rem,2vw,1.25rem)] leading-[1.3] font-medium tracking-[-0.02em] text-white"
           style={{ "--hero-delay": "260ms" } as CSSProperties}
         >
           {site.tagline}
@@ -55,7 +52,11 @@ export function HeroSection() {
           style={{ "--hero-delay": "340ms" } as CSSProperties}
         >
           <Button variant="default" size="lg" asChild>
-            <Link href={site.ctaHref} transitionTypes={["nav-forward"]}>
+            <Link
+              href={site.ctaHref}
+              transitionTypes={["nav-forward"]}
+              data-transition-types="nav-forward"
+            >
               {site.ctaLabel}
             </Link>
           </Button>

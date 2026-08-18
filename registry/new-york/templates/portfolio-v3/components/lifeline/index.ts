@@ -12,9 +12,9 @@ export type {
   LifelineEventClip,
   LifelineEventImage,
   LifelineEventSegment,
+  LifelineGlobalEvent,
   LifelineLegendItem,
   LifelineMarker,
-  LifelineMetPerson,
   LifelineMode,
   LifelineProps,
 } from "./types"

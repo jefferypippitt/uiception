@@ -11,7 +11,10 @@ import {
 } from "./lifeline-event"
 import { LifelineInlineClip } from "./lifeline-inline-clip"
 import { LifelineInlineStill } from "./lifeline-inline-still"
-import { aggregateLifelinePeople, LifelinePeople } from "./lifeline-people"
+import {
+  aggregateLifelineGlobalEvents,
+  LifelineGlobalEvents,
+} from "./lifeline-global-events"
 import type { LifelineMarker } from "./types"
 
 interface LifelineMarkerColumnProps {
@@ -38,7 +41,7 @@ export const LifelineMarkerColumn = forwardRef<
   ref,
 ) {
   const age = marker.age ?? marker.year - birthYear
-  const people = aggregateLifelinePeople(marker)
+  const globalEvents = aggregateLifelineGlobalEvents(marker)
 
   return (
     <div
@@ -75,8 +78,8 @@ export const LifelineMarkerColumn = forwardRef<
           <div className="relative w-full pb-10 text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
             <div
               className={cn("flex w-full flex-col items-start pt-6",
-                people.length > 0 &&
-                  "min-h-[var(--lifeline-people-top)] pb-6",
+                globalEvents.length > 0 &&
+                  "min-h-[var(--lifeline-global-events-top)] pb-6",
               )}
             >
               {marker.badges && marker.badges.length > 0 && (
@@ -133,9 +136,9 @@ export const LifelineMarkerColumn = forwardRef<
               </div>
             </div>
 
-            {people.length > 0 && (
+            {globalEvents.length > 0 && (
               <div className="w-full">
-                <LifelinePeople people={people} />
+                <LifelineGlobalEvents events={globalEvents} />
               </div>
             )}
           </div>
