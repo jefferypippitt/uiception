@@ -606,7 +606,7 @@ export function useLifelineScroll(
         dragVelocity.current * (1 - WHEEL_MOMENTUM_BLEND) +
         impulse * WHEEL_MOMENTUM_BLEND
 
-      if (isEmbedRef.current && prefersReducedMotionRef.current) return
+      if (prefersReducedMotionRef.current) return
 
       if (momentumId.current === 0) {
         startMomentum()

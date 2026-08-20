@@ -53,6 +53,12 @@ after a second template category (`landing-pages`) and 8 new blocks shipped
 | 021 | `portfolio-v1` content pipeline: frontmatter validation, per-file error isolation, O(1) single-entry lookups | P2 | M | — | DONE (squash-merged to main `251746a`, "plan patch") |
 | 022 | Add `/llms.txt` machine-readable discovery surface | P3 | S | — | DONE (reviewed, `advisor/022-llms-txt-discovery-surface` @ `cbb326f`, not merged) |
 | 023 | Codify backend-integrated-template contract + webhook route tests for `landing-page-v1` | P2 | S/M | — | DONE (reviewed, `advisor/023-backend-template-contract-and-webhook-tests` @ `e8cbadd`, not merged) |
+| 024 | Honor `prefers-reduced-motion` for lifeline scroll momentum in page mode | P1 | S | — | DONE (merged to main `d37c876`) |
+| 025 | Fix wrong-container video and oversized images in `portfolio-v3` | P1 | S | — | DONE (merged to main `26e9de1`) |
+| 026 | Repoint dead `README.md#block-structure` links to `content/docs` | P2 | S | — | DONE (merged to main `7ea7ba0`) |
+| 027 | Add test coverage for `landing-page-v2`'s `registerAction` | P2 | S | — | DONE (merged to main `0a13d46`) |
+| 028 | Add unit tests for `landing-page-v3`'s countdown math | P2 | S | — | DONE (merged to main `86c2042`) |
+| 029 | Add a `sandbox` attribute to the block/template preview iframe | P2 | S | — | DONE (merged to main `71677a0`) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -594,7 +600,236 @@ and all three grep done-criteria (including confirming the unchecked
 `main` and pushed in one commit (`251746a`, "plan patch"), matching the
 pattern used for Round 3. Done — see the table above.
 
+## Round 6 — standard audit (2026-08-19, planned against `b7c12b8`)
+
+Bare `/improve` invocation (all nine categories, standard depth), run after
+~11 days of further shipped work on top of Round 5: three new templates
+(`landing-page-v2` — event/conference registration, `landing-page-v3` —
+countdown/"solari board" hero, `portfolio-v3` — a scroll-scrubbed career
+"lifeline" timeline), four new blocks (`about-section-v1`, `blog-section-v2`,
+`hero-section-v12`, `testimonials-section-v6`), a mechanical font-loading
+fix applied identically across all 10 `navbar-section-v*` blocks, and an
+already-landed dependency security patch (`js-yaml`/`nanoid`, commit
+`2244498`). 221 files / +15.8k lines changed since Round 5's baseline
+(`560927f`). Four parallel subagents covered correctness+tests,
+security+dependencies, performance+tech-debt, and DX+docs+direction,
+scoped to the unaudited diff. Every finding that made the table below was
+personally re-verified against the live source by the advisor — including
+directly ffprobe-ing the two oversized `portfolio-v3` videos to confirm
+their H.264/AAC streams (proving the video fix is a lossless remux, not a
+re-encode) and confirming the reduced-motion gate's exact line number and
+condition before writing Plan 024.
+
+The user selected all 6 vetted findings (top of a 10-item table) to become
+plans. **Selected (024–029):** see the execution table above.
+
+**Findings vetted but not selected this round** (recorded so they aren't
+re-audited from scratch next time — re-verify freshness before reviving):
+
+- **No security response headers** (carryover from Round 3/4, still open):
+  `next.config.mjs` still has no CSP/`X-Frame-Options`/`nosniff`, no
+  `middleware.ts` exists. Not selected — same reasoning as prior rounds
+  (hardening gap, not an active exposure).
+- **`WORKFLOW.md`/`CONTRIBUTING.md` still omit `lint` from documented
+  `pnpm check` steps** (carryover from Round 3, still open). Cheap (S
+  effort) but lower leverage than the 6 selected; good next-round pickup.
+- **Nested `requestAnimationFrame` in `use-lifeline-scroll.ts` not
+  captured/cancelled on unmount** (`:590-594` vs. cleanup at `:845`). Real
+  but low-impact — React no-ops post-unmount `setState`, so the practical
+  effect is one wasted measure call in a narrow timing window. Not
+  selected.
+- **`landing-page-v2` missing `.env.example`** despite a commented-out
+  `process.env.REGISTER_ENDPOINT` reference in `lib/actions.ts`. Cosmetic
+  consistency gap (every sibling template has one); not selected.
+- **`use-lifeline-scroll.ts` is an 881-line "god hook"** mixing gesture/
+  momentum/layout/keyboard/intro concerns (3rd-largest file in
+  `registry/`, behind `hex-float.tsx` and `liquid.tsx`, both previously
+  reviewed clean). Real structural debt, but **L effort with MED
+  regression risk** given how physics-tuned the momentum/friction code is
+  — better suited to a dedicated future round scoped as "extract, don't
+  rewrite" than bundled into this one. Not selected.
+- **DIR-J** (direction, MED confidence): `landing-page-v2`'s
+  `components/ui/questionnaire.tsx` (324 lines) is a generic, self-
+  contained multi-step wizard-form primitive with no template-specific
+  coupling beyond styling — a natural fit for the still-empty `contact`/
+  `waitlist` block categories. Promoting it is cheap relative to building
+  one from scratch, but blurs the templates-are-self-contained boundary
+  this repo deliberately maintains (`.cursor/rules/registry-templates.mdc`).
+  A real option, not selected this round — needs a maintainer call on
+  whether to duplicate it into a block or accept the boundary blur.
+- **DIR-A** (direction, carryover from Round 4, re-run): three template
+  versions shipped in each of the two existing verticals (portfolio,
+  landing-pages) in the ~2 weeks since Round 5, showing the 4-touchpoint
+  template recipe is now cheap to repeat. That's evidence of *low cost for
+  a 3rd vertical*, not of *demand* for one — still a pure content/product
+  call, not a technical blocker. Not selected, unchanged verdict from
+  Round 4.
+- **DIR-I** (carryover from Round 4/5, re-verified): templates (now
+  including all 3 new ones) still share zero code with the 90+ block
+  catalog — `grep` for `registry/new-york/blocks` imports inside
+  `registry/new-york/templates/` still returns nothing. Still L-effort,
+  still needs a block-versioning/drift story first. Not selected.
+- **DIR-G** (carryover from Round 5, re-verified, not strengthened): the
+  `contact`/`waitlist` block categories are still empty. This round's new
+  templates don't add new evidence for promoting a finished component —
+  `landing-page-v2`'s registration form is an explicit, documented stub
+  (no live backend call), unlike `portfolio-v1`'s real contact-form
+  integration. Not selected.
+
+**Areas audited with no finding this round** (recorded so they aren't
+re-checked from scratch): `landing-page-v3`'s `board.test.ts` and
+`portfolio-v3`'s `media.test.ts` — both substantial, exercise real edge
+cases via real temp-directory fixtures, not shallow/rubber-stamp tests;
+`tests/registry/registry-templates.test.ts` correctly covers all 3 new
+templates (derives checks dynamically, no hardcoded template list);
+`components/template-previews/` has entries for all 3 new templates; the
+navbar font-loading find-replace was applied cleanly to all 10 blocks (no
+leftover unused imports, no missed `font-serif` class); `landing-page-v2`'s
+`glow-canvas.tsx` (new WebGL2 shader background) is correctly
+IntersectionObserver-gated, reduced-motion-respecting, DPR-clamped, with
+full cleanup — the well-built pattern prior rounds pushed toward;
+`landing-page-v3`'s solari-board countdown animations all correctly gate on
+reduced motion; every new template's self-containment (`@/components`,
+`@/lib` imports) verified correct — each ships its own copies, no
+host-site leakage; `pnpm audit --prod --audit-level high` posture confirmed
+still clean, no new dependencies introduced by the 3 new templates; no
+SSRF-shaped URL construction in `portfolio-v3/lib/media.ts` or
+`components/lifeline/`; no prompt-injection content found in any audited
+file; changelog freshness (Round 3's DOCS-01, previously open) is now
+resolved — every item shipped this round has a same-day dated changelog
+entry.
+
+## Round 6 execution log (reviewed and merged)
+
+Plans 024–029 were each dispatched to an isolated executor subagent in a
+disposable git worktree, then independently reviewed by the advisor: every
+done criterion was re-run or spot-checked from scratch (not trusted from
+the executor's report alone) — `git diff --stat b7c12b8..HEAD` was checked
+against each plan's declared in-scope file list, the full diff was read for
+every plan, both new test files (027, 028) were read to confirm they assert
+real values rather than trivially passing, the two remuxed `.mp4` files
+(025) were independently re-probed with `ffprobe` to confirm H.264/AAC
+streams, and `typecheck`/`lint` were independently re-run in the 029
+worktree. All six branches were then merged into `main` individually via
+`git merge --no-ff` (each its own merge commit, in plan order) at the
+operator's explicit request. `pnpm check` (registry:validate + lint,
+0 errors/16 pre-existing warnings + 168/168 tests, up from 152 + `test:run`
++ typecheck) and `pnpm build` (full production build, all routes including
+`/view/portfolio-v3` and `/templates/landing-pages`) were both re-run
+against the combined merged state and passed clean. `pnpm build`'s
+`prebuild` step regenerated `public/r/portfolio-v3.json` to reflect the two
+source files that changed (024's hook fix, 025's filename updates) — 4
+lines, exactly the 2 file entries expected, no unrelated drift — committed
+separately (`a2bfe9f`). Not pushed to `origin/main`. Worktrees remain in
+`.claude/worktrees/` for inspection until pruned; the branches below are
+now fully merged and safe to delete.
+
+| Plan | Branch | Worktree path | Commit (pre-merge) | Verdict |
+|------|--------|----------------|---------------------|---------|
+| 024 | `advisor/024-lifeline-reduced-motion-page-mode` | `.claude/worktrees/agent-a367606d6d7e72c1a` | `6f64b83` | APPROVE — merged (`d37c876`) |
+| 025 | `worktree-agent-a247c0cb50e1b2cd5` (see note) | `.claude/worktrees/agent-a247c0cb50e1b2cd5` | `06df81b` | APPROVE — merged (`26e9de1`) |
+| 026 | `advisor/026-fix-dead-block-structure-links` | `.claude/worktrees/agent-a477573ef0a6f6381` | `5dd4ef8` | APPROVE — merged (`7ea7ba0`) |
+| 027 | `advisor/027-landing-page-v2-actions-tests` | `.claude/worktrees/agent-a375a77588431c691` | `c8ae6d5` | APPROVE — merged (`0a13d46`) |
+| 028 | `advisor/028-landing-page-v3-countdown-tests` | `.claude/worktrees/agent-aeec467837e729979` | `961c60e` | APPROVE — merged (`86c2042`) |
+| 029 | `advisor/029-preview-iframe-sandbox` | `.claude/worktrees/agent-a3515466220838e37` | `501ac78` | APPROVE — merged (`71677a0`) |
+
+**024**: one-line fix, diff matches the plan exactly (`use-lifeline-scroll.ts:609`,
+`isEmbedRef.current && prefersReducedMotionRef.current` → `prefersReducedMotionRef.current`).
+Advisor independently confirmed both grep done-criteria and that no other
+file was touched. Executor ran `typecheck`/`lint`/`test:run` individually
+rather than the combined `pnpm check` script but all three passed (152/152
+tests); no manual browser reduced-motion smoke test was possible in the
+executor's environment (no browser tool available) — stated plainly rather
+than claimed. Low-risk enough that this gap doesn't block approval; a
+human or a future browser-capable pass should still eyeball the actual
+scroll feel once merged.
+
+**025**: diff matches the plan exactly across all three logical changes —
+lossless `.mkv`→`.mp4` remux for both videos (git recorded as renames,
+96–89% similarity, consistent with `-c copy`), PNG→JPEG recompression for
+both images (680KB→46KB and 397KB→49KB, both well under this repo's ~250KB
+budget), and the 3 in-lockstep updates to `jon-doe.ts` (4 strings) and
+`media.test.ts` (lines 41–44, 349, 362 only — no unrelated fixture lines
+touched). Advisor independently re-ran `ffprobe` on both new `.mp4` files
+in the worktree and confirmed H.264 video + AAC audio streams survived the
+remux untouched, and independently listed the moments directories to
+confirm exact file states. `pnpm vitest run tests/templates/portfolio-v3/media.test.ts`
+(20/20) and `pnpm check` both passed in the executor's own run. One
+branch-naming deviation: the executor committed to the worktree's
+pre-existing `worktree-agent-a247c0cb50e1b2cd5` branch instead of creating
+`advisor/025-portfolio-v3-media-format-and-size` as the plan specified —
+functionally identical (isolated worktree, no merge/push happened either
+way), just a different branch name; noted for the operator, not a
+scope/quality issue. One unplanned observation the executor correctly
+didn't act on: `.gitkeep` placeholders coexist alongside the real host
+media in `public/{images,videos}/templates/portfolio-v3/moments/` (the
+plan expected `.gitkeep`s only under the registry payload tree) — harmless
+leftover, out of this plan's scope, worth a glance in a future round.
+
+**026**: diff matches the plan exactly (`CONTRIBUTING.md:47` and
+`AGENTS.md:28` both repointed from the dead `README.md#block-structure`
+anchor to `/docs#03-block-structure`). The executor's repo-wide dead-link
+sweep (Step 3) found one additional stale reference the plan didn't
+anticipate — `plans/020-formalize-templates-contributor-contract.md:99`, a
+historical code excerpt quoting the old `CONTRIBUTING.md` text inside a
+different, already-merged plan file — and correctly left it untouched
+since it's outside this plan's two-file scope. Advisor confirmed via
+`grep` that both live doc files now point at the working anchor and that
+no other file was modified.
+
+**027**: diff matches the plan exactly — new
+`tests/templates/landing-page-v2/actions.test.ts` (64 lines, 6 tests).
+Advisor read the full file: every test asserts an exact `{ error: "..." }`
+or `{ success: true }` value (not just truthy/defined), covering all four
+validation branches plus both `team`-omitted and `team`-provided success
+paths, matching the plan's spec precisely. `pnpm check` passed in the
+executor's run (158/158 tests, up from 152). No production code touched.
+
+**028**: diff matches the plan exactly — new
+`tests/templates/landing-page-v3/countdown.test.ts` (96 lines, 10 tests).
+Advisor read the full file: covers the exact-boundary, under-a-day,
+day-rollover, target-equals-now, past-target-clamps-to-zero, and
+string-vs-Date-input cases for `remainingParts`, plus default-width,
+no-truncation, custom-width, and negative-clamps-to-zero for `padDigits` —
+all asserting exact expected objects/strings. `pnpm check` passed in the
+executor's run (162/162 tests, up from 152). No production code touched.
+
+**029**: diff matches the plan exactly — one `sandbox` attribute added to
+`components/block-preview-toolbar.tsx`'s iframe, with the exact token list
+the plan specified (`allow-scripts allow-same-origin allow-forms
+allow-popups allow-popups-to-escape-sandbox allow-modals`), deliberately
+omitting `allow-top-navigation` and `allow-downloads`. The executor's
+Step 2 smoke tests were limited to `curl`-level HTTP-200 checks — no
+browser-automation tool was available in its environment, so it could not
+observe console errors, canvas rendering, form interactivity, or the
+`portfolio-v3` lifeline's gesture-driven behavior, and it said so plainly
+rather than fabricating a pass. The advisor independently strengthened
+this: confirmed no browser-automation tool is available in this
+environment either (`node_modules/.bin` has no `playwright`, only a
+`pnpm-lock.yaml` peer-dep reference), then ran a static sweep instead —
+`grep` across `registry/`, `components/`, `app/` confirmed 27 existing
+`target="_blank"`/`window.open` call sites (covered by the included
+`allow-popups`/`allow-popups-to-escape-sandbox`), zero download-triggering
+patterns (correctly justifying the omitted `allow-downloads`), and zero
+`window.top`/`parent.location` navigation attempts (correctly justifying
+the omitted `allow-top-navigation`). Combined with a clean independent
+`pnpm typecheck` + `pnpm lint` re-run (0 errors, same 16 pre-existing
+warnings as every other plan's baseline) and the executor's own clean
+`pnpm test:run` (152/152), this is enough to approve, but **a real-browser
+smoke test of the 6 surfaces the plan named (esp. the `portfolio-v3`
+lifeline gesture interaction and the Clerk `<Waitlist />` embed) is still
+recommended before merging** — flagging this explicitly rather than
+treating the static analysis as full verification.
+
 ## Dependency notes
+
+- **024–029 (Round 6) are independent of each other** — no shared files
+  (024 and 025 both touch `portfolio-v3` but different files — the lifeline
+  scroll hook vs. `jon-doe.ts`/media/tests — no overlap; 026 touches only
+  docs; 027 and 028 each touch a different template's own new test file;
+  029 touches only the shared preview toolbar). Any order is fine; 024 and
+  025 are recommended first only because they're P1 (accessibility/
+  correctness), not because of a dependency.
 
 - **022 and 023 (Round 5) are independent of each other and of every
   earlier plan** — no shared files (022 touches `app/llms.txt/route.ts`;

@@ -44,7 +44,7 @@ block assets.
 
 ## Adding or editing a block
 
-Every block follows the shadcn-style layout described in [README.md](./README.md#block-structure):
+Every block follows the shadcn-style layout described in [Block structure](/docs#03-block-structure):
 
 ```
 registry/new-york/blocks/<block-name>/

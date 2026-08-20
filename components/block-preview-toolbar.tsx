@@ -498,6 +498,7 @@ export function BlockPreviewToolbar({
                   title={displayTitle}
                   ref={iframeRef}
                   loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
                   className={cn(
                     "block h-full w-full rounded-lg border border-border/80 bg-background shadow-sm",
                     !iframeLoaded && "invisible"

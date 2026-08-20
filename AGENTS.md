@@ -25,8 +25,8 @@ are not optional style preferences, they are enforced by
   other templates), and the four registration points a new template must
   touch.
 
-After adding or editing a block, also see `README.md` ("Block structure") and
-`WORKFLOW.md` (pre-push commands: `pnpm check` then `pnpm build`).
+After adding or editing a block, also see [Block structure](/docs#03-block-structure)
+and `WORKFLOW.md` (pre-push commands: `pnpm check` then `pnpm build`).
 
 ---
 

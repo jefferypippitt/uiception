@@ -38,10 +38,10 @@ describe("portfolio-v3 media", () => {
       "public/images/templates/portfolio-v3/destinations/japan.jpg",
       "public/images/templates/portfolio-v3/destinations/italy.jpg",
       "public/images/templates/portfolio-v3/destinations/greece.jpg",
-      "public/images/templates/portfolio-v3/moments/vercel-ship-2024.png",
-      "public/images/templates/portfolio-v3/moments/vercel-ship-2025.png",
-      "public/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mkv",
-      "public/videos/templates/portfolio-v3/moments/compile-26.mkv",
+      "public/images/templates/portfolio-v3/moments/vercel-ship-2024.jpg",
+      "public/images/templates/portfolio-v3/moments/vercel-ship-2025.jpg",
+      "public/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mp4",
+      "public/videos/templates/portfolio-v3/moments/compile-26.mp4",
     ]
     for (const rel of assets) {
       expect(existsSync(join(repoRoot, rel)), `missing ${rel}`).toBe(true)
@@ -346,7 +346,7 @@ describe("portfolio-v3 media", () => {
         )
         expect(ship2024).toMatchObject({
           image: {
-            src: "https://example.com/images/templates/portfolio-v3/moments/vercel-ship-2024.png",
+            src: "https://example.com/images/templates/portfolio-v3/moments/vercel-ship-2024.jpg",
           },
         })
 
@@ -359,7 +359,7 @@ describe("portfolio-v3 media", () => {
         )
         expect(ces).toMatchObject({
           video: {
-            src: "https://example.com/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mkv",
+            src: "https://example.com/videos/templates/portfolio-v3/moments/ces-2025-nvidia.mp4",
           },
         })
       } finally {
