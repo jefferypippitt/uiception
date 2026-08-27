@@ -41,6 +41,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Scroll-scrubbed lifeline timeline for a fullstack developer — Jon Doe filler career. Drop media into public/images and public/videos.",
       },
+      {
+        id: "portfolio-v4",
+        title: "Portfolio v4",
+        registryPath: "registry/new-york/templates/portfolio-v4",
+        description:
+          "Bash-style terminal portfolio — type about, work, resume, help. Same Jon Doe career data as v3.",
+      },
     ],
   },
   {

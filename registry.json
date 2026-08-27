@@ -5864,6 +5864,69 @@
       ]
     },
     {
+      "name": "portfolio-v4",
+      "type": "registry:block",
+      "title": "Portfolio v4",
+      "description": "Bash-style terminal portfolio for a fullstack developer — Jon Doe filler career. Type about, work, resume, or help. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "geist",
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v4.json\"\n\nThis scaffolds Next.js + shadcn, then installs the terminal portfolio.\n\nEdit name, bio, projects, experience, and education in lib/portfolio.ts. Common commands: about, work, projects, resume, help. Also on disk (via ls): destinations, events. Colors use the uiception cyan palette (see styles/terminal.css) — aligned with app/vercel-docs-theme.css.",
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v4/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/components/terminal.tsx",
+          "type": "registry:component",
+          "target": "components/terminal.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/components/terminal-line.tsx",
+          "type": "registry:component",
+          "target": "components/terminal-line.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/lib/ascii.ts",
+          "type": "registry:lib",
+          "target": "lib/ascii.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/lib/commands.ts",
+          "type": "registry:lib",
+          "target": "lib/commands.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/lib/portfolio.ts",
+          "type": "registry:lib",
+          "target": "lib/portfolio.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/styles/terminal.css",
+          "type": "registry:file",
+          "target": "styles/terminal.css"
+        }
+      ]
+    },
+    {
       "name": "landing-page-v1",
       "type": "registry:block",
       "title": "Landing Page v1",

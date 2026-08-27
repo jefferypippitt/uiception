@@ -1,0 +1,124 @@
+/* Portfolio v4 terminal — cyan accent from vercel-docs-theme */
+
+.pt-root {
+  /* Light */
+  --pt-bg: #fff;
+  --pt-fg: #171717;
+  --pt-cursor: #000;
+  --pt-cyan: #0070f3;
+  --pt-bright-cyan: #3291ff;
+  --pt-bright-black: #6b7280;
+  --pt-red: #cd0000;
+
+  box-sizing: border-box;
+  position: relative;
+  min-height: 100dvh;
+  max-width: 100%;
+  margin: 0;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: 16px;
+  padding-bottom: calc(50vh + env(safe-area-inset-bottom, 0px));
+  padding-left: 16px;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  background-color: var(--pt-bg);
+  color: var(--pt-fg);
+  font-family: var(--font-geist-mono), "Geist Mono", "SF Mono", Menlo, monospace;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  outline: none;
+}
+
+.dark .pt-root,
+html.dark .pt-root {
+  /* Dark */
+  --pt-bg: #000;
+  --pt-fg: #eeeeee;
+  --pt-cursor: #fff;
+  --pt-cyan: #47a8ff;
+  --pt-bright-cyan: #79c0ff;
+  --pt-bright-black: #a0a0a0;
+  --pt-red: #ff0000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .pt-root {
+    --pt-bg: #000;
+    --pt-fg: #eeeeee;
+    --pt-cursor: #fff;
+    --pt-cyan: #47a8ff;
+    --pt-bright-cyan: #79c0ff;
+    --pt-bright-black: #a0a0a0;
+    --pt-red: #ff0000;
+  }
+}
+
+.pt-root ::selection {
+  background: color-mix(in srgb, var(--pt-cyan) 35%, transparent);
+  color: var(--pt-fg);
+}
+
+.pt-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-height: 1.2em;
+}
+
+.pt-bold {
+  font-weight: bold;
+}
+
+.pt-dim {
+  opacity: 0.6;
+}
+
+.pt-cyan {
+  color: var(--pt-cyan);
+}
+
+.pt-error {
+  color: var(--pt-red);
+}
+
+.pt-link {
+  color: var(--pt-cyan);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pt-link:hover {
+  color: var(--pt-bright-cyan);
+}
+
+.pt-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.2em;
+  margin-left: 0;
+  vertical-align: text-bottom;
+  background-color: var(--pt-cursor);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.pt-cursor.blink {
+  animation: pt-blink 1s step-end infinite;
+}
+
+@keyframes pt-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pt-cursor.blink {
+    animation: none;
+    opacity: 1;
+  }
+}

@@ -6,6 +6,7 @@ import { landingPageV3Preview } from "@/components/template-previews/landing-pag
 import { portfolioV1Preview } from "@/components/template-previews/portfolio-v1"
 import { portfolioV2Preview } from "@/components/template-previews/portfolio-v2"
 import { portfolioV3Preview } from "@/components/template-previews/portfolio-v3"
+import { portfolioV4Preview } from "@/components/template-previews/portfolio-v4"
 import type { TemplatePreviewDefinition } from "@/components/template-previews/types"
 import { getFreeTemplateVersions } from "@/lib/templates"
 
@@ -16,6 +17,7 @@ export const templatePreviews: Record<string, TemplatePreviewDefinition> = {
   "portfolio-v1": portfolioV1Preview,
   "portfolio-v2": portfolioV2Preview,
   "portfolio-v3": portfolioV3Preview,
+  "portfolio-v4": portfolioV4Preview,
   "landing-page-v1": landingPageV1Preview,
   "landing-page-v2": landingPageV2Preview,
   "landing-page-v3": landingPageV3Preview,
