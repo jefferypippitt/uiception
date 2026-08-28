@@ -5,7 +5,12 @@ import {
   LIFELINE_STICKY_LEFT,
   LIFELINE_STICKY_SHIELD_WIDTH,
 } from "./lifeline-labels"
-import { clamp, snapToDevicePixel } from "./lifeline-utils"
+import {
+  clamp,
+  emitLifelineExpandGesture,
+  findLifelineExpandHost,
+  snapToDevicePixel,
+} from "./lifeline-utils"
 import type { LifelineMode } from "./types"
 
 const FADE_ZONE = 200
@@ -17,7 +22,7 @@ const WHEEL_VELOCITY_FRAME_MS = 16.67
 const WHEEL_MOMENTUM_BLEND = 0.65
 const DRAG_SPEED = 1
 const TOUCH_DRAG_SPEED = 1.15
-const TOUCH_GESTURE_LOCK_PX = 8
+const GESTURE_LOCK_PX = 8
 const NAV_HORIZONTAL_PADDING = 24
 const MOMENTUM_FRICTION = 0.94
 const MOMENTUM_MIN_VELOCITY = 0.025
@@ -123,7 +128,11 @@ export function useLifelineScroll(
   const gestureStart = useRef({ x: 0, y: 0 })
   const dragOrigin = useRef({ x: 0, translate: 0 })
   const dragVelocity = useRef(0)
-  const lastPointerSample = useRef({ x: 0, t: 0 })
+  const lastPointerSample = useRef({ x: 0, y: 0, t: 0 })
+  const expanding = useRef(false)
+  const expandHost = useRef<Element | null>(null)
+  const expandVelocityY = useRef(0)
+  const lastPointerY = useRef(0)
   const activePointerId = useRef<number | null>(null)
   const isCoarsePointerRef = useRef(options.isCoarsePointer ?? false)
   const momentumId = useRef(0)
@@ -632,15 +641,54 @@ export function useLifelineScroll(
       boundaryHitAt.current = 0
     }
 
+    let expandWheelEndTimer = 0
+    let lastExpandWheelAt = 0
+    let expandWheelHost: Element | null = null
+
     const onWheel = (event: WheelEvent) => {
       if (isScrollLocked()) return
+
+      if (expanding.current || dragging.current) return
+
+      const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      const wheelExpandHost = findLifelineExpandHost(event.target)
+
+      if (wheelExpandHost && !horizontalIntent) {
+        event.preventDefault()
+        const now = performance.now()
+        if (
+          expandWheelHost !== wheelExpandHost ||
+          now - lastExpandWheelAt > WHEEL_GESTURE_QUIET_MS
+        ) {
+          emitLifelineExpandGesture(wheelExpandHost, {
+            phase: "start",
+            deltaY: 0,
+            velocityY: 0,
+          })
+          expandWheelHost = wheelExpandHost
+        }
+        lastExpandWheelAt = now
+        emitLifelineExpandGesture(wheelExpandHost, {
+          phase: "move",
+          deltaY: event.deltaY,
+          velocityY: 0,
+        })
+        window.clearTimeout(expandWheelEndTimer)
+        expandWheelEndTimer = window.setTimeout(() => {
+          emitLifelineExpandGesture(wheelExpandHost, {
+            phase: "end",
+            deltaY: 0,
+            velocityY: 0,
+          })
+          expandWheelHost = null
+        }, WHEEL_GESTURE_QUIET_MS)
+        return
+      }
 
       if (maxTranslate.current <= 0) {
         scheduleMeasure()
         return
       }
-
-      const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY)
 
       const delta = normalizeWheelDelta(event)
       const movement = (horizontalIntent ? delta : -delta) * WHEEL_SPEED
@@ -690,17 +738,7 @@ export function useLifelineScroll(
       if (section.scrollTop !== 0) section.scrollTop = 0
     }
 
-    const beginDrag = (event: PointerEvent) => {
-      stopMomentum()
-      dragVelocity.current = 0
-      dragging.current = true
-      activePointerId.current = event.pointerId
-      dragOrigin.current = { x: event.clientX, translate: translatePx.current }
-      lastPointerSample.current = {
-        x: event.clientX,
-        t: performance.now(),
-      }
-
+    const capturePointer = (event: PointerEvent) => {
       if (section.setPointerCapture) {
         section.setPointerCapture(event.pointerId)
       }
@@ -709,21 +747,54 @@ export function useLifelineScroll(
       section.style.touchAction = "none"
     }
 
+    const beginDrag = (event: PointerEvent) => {
+      window.clearTimeout(expandWheelEndTimer)
+      expandWheelHost = null
+      stopMomentum()
+      dragVelocity.current = 0
+      dragging.current = true
+      activePointerId.current = event.pointerId
+      dragOrigin.current = { x: event.clientX, translate: translatePx.current }
+      lastPointerSample.current = {
+        x: event.clientX,
+        y: event.clientY,
+        t: performance.now(),
+      }
+      capturePointer(event)
+    }
+
+    const beginExpand = (event: PointerEvent) => {
+      window.clearTimeout(expandWheelEndTimer)
+      expandWheelHost = null
+      expanding.current = true
+      activePointerId.current = event.pointerId
+      lastPointerY.current = event.clientY
+      expandVelocityY.current = 0
+      lastPointerSample.current = {
+        x: event.clientX,
+        y: event.clientY,
+        t: performance.now(),
+      }
+      capturePointer(event)
+      emitLifelineExpandGesture(expandHost.current, {
+        phase: "start",
+        deltaY: 0,
+        velocityY: 0,
+      })
+    }
+
     const onPointerDown = (event: PointerEvent) => {
       if (isScrollLocked()) return
       if (isInteractiveTarget(event.target)) return
-      if (maxTranslate.current <= 0) return
       if (activePointerId.current !== null) return
 
+      expandHost.current = findLifelineExpandHost(event.target)
+      if (maxTranslate.current <= 0 && !expandHost.current) return
+
       gestureAxis.current = null
+      expanding.current = false
       gestureStart.current = { x: event.clientX, y: event.clientY }
-
-      if (event.pointerType === "touch") {
-        activePointerId.current = event.pointerId
-        return
-      }
-
-      beginDrag(event)
+      activePointerId.current = event.pointerId
     }
 
     const onPointerMove = (event: PointerEvent) => {
@@ -731,14 +802,16 @@ export function useLifelineScroll(
         return
       }
 
-      if (!dragging.current && event.pointerType === "touch") {
+      if (!dragging.current && !expanding.current) {
+        if (activePointerId.current === null) return
+
         const deltaX = event.clientX - gestureStart.current.x
         const deltaY = event.clientY - gestureStart.current.y
 
         if (gestureAxis.current === null) {
           if (
-            Math.abs(deltaX) < TOUCH_GESTURE_LOCK_PX &&
-            Math.abs(deltaY) < TOUCH_GESTURE_LOCK_PX
+            Math.abs(deltaX) < GESTURE_LOCK_PX &&
+            Math.abs(deltaY) < GESTURE_LOCK_PX
           ) {
             return
           }
@@ -746,13 +819,42 @@ export function useLifelineScroll(
           gestureAxis.current =
             Math.abs(deltaX) >= Math.abs(deltaY) ? "x" : "y"
 
-          if (gestureAxis.current === "y") {
+          if (gestureAxis.current === "x") {
+            if (maxTranslate.current <= 0) {
+              activePointerId.current = null
+              return
+            }
+            beginDrag(event)
+          } else if (expandHost.current) {
+            beginExpand(event)
+          } else {
             activePointerId.current = null
             return
           }
-
-          beginDrag(event)
         }
+      }
+
+      if (expanding.current) {
+        event.preventDefault()
+        const now = performance.now()
+        const sample = lastPointerSample.current
+        const elapsed = now - sample.t
+        const deltaY = event.clientY - lastPointerY.current
+
+        if (elapsed > 0 && elapsed < 80) {
+          expandVelocityY.current =
+            ((event.clientY - sample.y) / elapsed) * 0.65 +
+            expandVelocityY.current * 0.35
+        }
+
+        lastPointerY.current = event.clientY
+        lastPointerSample.current = { x: event.clientX, y: event.clientY, t: now }
+        emitLifelineExpandGesture(expandHost.current, {
+          phase: "move",
+          deltaY,
+          velocityY: expandVelocityY.current,
+        })
+        return
       }
 
       if (!dragging.current) return
@@ -773,10 +875,10 @@ export function useLifelineScroll(
           instantVelocity * 0.65 + dragVelocity.current * 0.35
       }
 
-      lastPointerSample.current = { x: event.clientX, t: now }
+      lastPointerSample.current = { x: event.clientX, y: event.clientY, t: now }
 
-      const deltaX = event.clientX - dragOrigin.current.x
-      applyTranslate(dragOrigin.current.translate - deltaX * dragSpeed)
+      const panDeltaX = event.clientX - dragOrigin.current.x
+      applyTranslate(dragOrigin.current.translate - panDeltaX * dragSpeed)
     }
 
     const endDrag = (event: PointerEvent) => {
@@ -785,8 +887,10 @@ export function useLifelineScroll(
       }
 
       const wasDragging = dragging.current
+      const wasExpanding = expanding.current
 
       dragging.current = false
+      expanding.current = false
       gestureAxis.current = null
       activePointerId.current = null
 
@@ -796,6 +900,19 @@ export function useLifelineScroll(
 
       section.style.cursor = ""
       section.style.touchAction = ""
+
+      if (wasExpanding) {
+        emitLifelineExpandGesture(expandHost.current, {
+          phase: "end",
+          deltaY: 0,
+          velocityY: expandVelocityY.current,
+        })
+        expandHost.current = null
+        expandVelocityY.current = 0
+        return
+      }
+
+      expandHost.current = null
 
       if (wasDragging) {
         startMomentum()
@@ -858,12 +975,15 @@ export function useLifelineScroll(
       section.removeEventListener("pointercancel", endDrag)
       window.removeEventListener("keydown", onKeyDown)
       dragging.current = false
+      expanding.current = false
+      expandHost.current = null
       gestureAxis.current = null
       activePointerId.current = null
       gestureStartedHere.current = false
       gestureReleased.current = false
       boundaryHitAt.current = 0
       wheelGapMs.current = Number.POSITIVE_INFINITY
+      window.clearTimeout(expandWheelEndTimer)
       section.style.cursor = ""
       section.style.touchAction = ""
     }

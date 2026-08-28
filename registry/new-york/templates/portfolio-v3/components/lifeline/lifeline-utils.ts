@@ -9,6 +9,41 @@ export function snapToDevicePixel(value: number) {
   return Math.round(value * dpr) / dpr
 }
 
+export const LIFELINE_EXPAND_SELECTOR = "[data-lifeline-expand]"
+export const LIFELINE_EXPAND_GESTURE = "lifelineexpandgesture"
+
+export interface LifelineExpandGestureDetail {
+  phase: "start" | "move" | "end"
+  deltaY: number
+  velocityY: number
+}
+
+export function emitLifelineExpandGesture(
+  host: Element | null,
+  detail: LifelineExpandGestureDetail,
+) {
+  if (!host) return false
+  host.dispatchEvent(
+    new CustomEvent<LifelineExpandGestureDetail>(LIFELINE_EXPAND_GESTURE, {
+      detail,
+    }),
+  )
+  return true
+}
+
+export function dispatchLifelineExpandGesture(
+  target: EventTarget | null,
+  detail: LifelineExpandGestureDetail,
+) {
+  return emitLifelineExpandGesture(findLifelineExpandHost(target), detail)
+}
+
+export function findLifelineExpandHost(target: EventTarget | null) {
+  return target instanceof Element
+    ? target.closest(LIFELINE_EXPAND_SELECTOR)
+    : null
+}
+
 export function hasMarkerContent(marker: LifelineMarker) {
   return (
     marker.events.length > 0 ||

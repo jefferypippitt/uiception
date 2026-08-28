@@ -209,7 +209,7 @@ export function LifelineLightbox({
     >
       <div
         className={cn(
-          "absolute inset-0 cursor-zoom-out bg-foreground/70 transition-opacity",
+          "absolute inset-0 cursor-zoom-out bg-black/60 transition-opacity",
           entered ? "opacity-100" : "opacity-0",
         )}
         style={{ transitionDuration: `${OPEN_MS}ms` }}
@@ -218,7 +218,7 @@ export function LifelineLightbox({
       <figure
         ref={figureRef}
         className={cn(
-          "absolute overflow-hidden shadow-2xl ring-1 ring-black/10 dark:ring-white/15",
+          "absolute overflow-hidden shadow-2xl ring-1 ring-black/20",
           clip ? "cursor-default" : "cursor-zoom-out",
         )}
         style={{

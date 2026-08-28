@@ -2,6 +2,10 @@ import type { CompanyIconId } from "./company-icon"
 
 export interface LifelineGlobalEvent {
   name: string
+  /** Venue or city. Wraps onto the next line when it does not fit. */
+  place?: string
+  date?: string
+  /** Freeform subtitle if `place` / `date` are not split. */
   role?: string
   icon?: CompanyIconId
 }

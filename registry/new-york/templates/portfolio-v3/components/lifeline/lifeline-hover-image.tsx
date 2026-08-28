@@ -192,13 +192,13 @@ export function LifelineHoverImageProvider({
       <div
         ref={containerRef}
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[60] opacity-0 transition-opacity duration-200 ease-out will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-60 opacity-0 transition-opacity duration-200 ease-out will-change-transform"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imageRef}
           alt=""
-          className="w-[280px] scale-95 rounded-xl shadow-2xl ring-1 ring-black/10 transition-[transform,box-shadow] duration-200 ease-out dark:ring-white/15"
+          className="w-70 scale-95 rounded-xl shadow-2xl ring-1 ring-black/10 transition-[transform,box-shadow] duration-200 ease-out dark:ring-black/40"
           decoding="async"
         />
       </div>

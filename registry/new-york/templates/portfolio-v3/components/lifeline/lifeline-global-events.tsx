@@ -1,5 +1,9 @@
+import { forwardRef } from "react"
 import { CompanyIcon } from "./company-icon"
 import type { LifelineGlobalEvent, LifelineMarker } from "./types"
+
+/** Max global events a single year lists before the rest collapse behind "More". */
+export const LIFELINE_GLOBAL_EVENTS_VISIBLE = 4
 
 export function aggregateLifelineGlobalEvents(
   marker: LifelineMarker,
@@ -22,22 +26,48 @@ function getInitials(name: string) {
     .slice(0, 2)
 }
 
-interface LifelineGlobalEventsProps {
-  events: LifelineGlobalEvent[]
-  allowWrap?: boolean
+function LifelineGlobalEventPlace({ item }: { item: LifelineGlobalEvent }) {
+  const place = item.place?.trim()
+  const date = item.date?.trim()
+  const fallback = item.role?.trim()
+
+  if (!place && !date && !fallback) return null
+
+  const label = [place, date].filter(Boolean).join(" · ") || fallback
+
+  return (
+    <p
+      className="text-[11px] leading-snug text-pretty text-muted-foreground/80"
+      title={label}
+    >
+      {place && date ? (
+        <>
+          <span className="wrap-break-word">{place}</span>
+          <span className="text-muted-foreground/40"> · </span>
+          <span className="whitespace-nowrap tabular-nums">{date}</span>
+        </>
+      ) : (
+        <span className="wrap-break-word">{place || date || fallback}</span>
+      )}
+    </p>
+  )
 }
 
-export function LifelineGlobalEvents({
-  events,
-  allowWrap = false,
-}: LifelineGlobalEventsProps) {
+interface LifelineGlobalEventsProps {
+  events: LifelineGlobalEvent[]
+}
+
+export const LifelineGlobalEvents = forwardRef<
+  HTMLDivElement,
+  LifelineGlobalEventsProps
+>(function LifelineGlobalEvents({ events }, ref) {
   if (events.length === 0) return null
 
   return (
-    <div className="flex w-full flex-col gap-3">
+    <div ref={ref} className="flex w-full flex-col gap-3">
       {events.map((item) => (
-        <div key={item.name} className="flex w-full items-center gap-2.5">
-          <div className="flex w-3 shrink-0 items-center justify-center">
+        <div key={item.name} className="flex w-full items-start gap-2.5">
+          <div className="flex h-7 w-3 shrink-0 items-center justify-center">
             <span
               className="size-1.5 rounded-full bg-pink-500"
               aria-hidden="true"
@@ -56,24 +86,14 @@ export function LifelineGlobalEvents({
               {getInitials(item.name)}
             </span>
           )}
-          <div
-            className={
-              allowWrap
-                ? "min-w-0 text-left leading-snug"
-                : "min-w-0 whitespace-nowrap text-left"
-            }
-          >
-            <p className="text-[13px] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+          <div className="min-w-0 text-left leading-snug">
+            <p className="text-[13px] text-pretty text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
               {item.name}
             </p>
-            {item.role ? (
-              <p className="text-[11px] text-muted-foreground/80">
-                {item.role}
-              </p>
-            ) : null}
+            <LifelineGlobalEventPlace item={item} />
           </div>
         </div>
       ))}
     </div>
   )
-}
+})

@@ -54,7 +54,7 @@ export function LifelineInlineClip({
         ref={cardRef}
         data-lifeline-interactive=""
         className={cn(
-          "relative mt-3 w-full max-w-[200px] cursor-zoom-in overflow-hidden rounded-xl shadow-lg ring-1 ring-black/10 dark:ring-white/15",
+          "relative mt-3 w-full max-w-[200px] cursor-zoom-in overflow-hidden rounded-xl shadow-lg ring-1 ring-black/10 dark:ring-black/40",
           lightboxStart && "invisible",
           className,
         )}

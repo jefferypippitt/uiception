@@ -99,10 +99,18 @@ export function LifelineDesktop({
         >
           <div
             ref={labelsRef}
-            className="lifeline-labels shrink-0 bg-background transition-colors duration-300 will-change-transform"
+            className="lifeline-labels relative shrink-0 will-change-transform"
             style={{ width: LIFELINE_STICKY_SHIELD_WIDTH }}
           >
-            <div className={cn(showIntro && "lifeline-labels-intro")}>
+            {/* Opaque backdrop for the pinned labels. Reaches past the left
+                edge so scrolled-away content never peeks through the gutter,
+                and dissolves on its right edge so markers slide behind it
+                instead of hitting a hard box seam. */}
+            <div
+              aria-hidden="true"
+              className="lifeline-labels-shield pointer-events-none absolute inset-y-0 -left-16 right-0 bg-background transition-colors duration-300"
+            />
+            <div className={cn("relative", showIntro && "lifeline-labels-intro")}>
               <LifelineStickyLabels />
             </div>
           </div>
@@ -110,7 +118,7 @@ export function LifelineDesktop({
           <div className="relative">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-[var(--lifeline-rail)] h-px overflow-hidden"
+              className="pointer-events-none absolute inset-x-0 top-(--lifeline-rail) h-px overflow-hidden"
             >
               <div
                 className={cn("h-px w-full border-t border-dashed border-border transition-colors duration-300",

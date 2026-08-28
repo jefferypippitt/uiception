@@ -106,7 +106,7 @@ const LifelineVerticalEntry = forwardRef<
         }}
       >
         <div className={`${GRID_CLASS} items-center`}>
-          <p className="text-right text-[11px] font-medium leading-4 tabular-nums text-muted-foreground transition-colors duration-300">
+          <p className="text-right text-[15px] font-medium leading-5 tabular-nums text-muted-foreground transition-colors duration-300">
             {age}
           </p>
 
@@ -164,7 +164,7 @@ const LifelineVerticalEntry = forwardRef<
 
               {globalEvents.length > 0 && (
                 <div className="mt-6 border-t border-border/70 pt-5 transition-colors duration-300">
-                  <LifelineGlobalEvents events={globalEvents} allowWrap />
+                  <LifelineGlobalEvents events={globalEvents} />
                 </div>
               )}
             </div>
@@ -300,11 +300,11 @@ export function LifelineVertical({
       style={showIntro ? introStyle : undefined}
     >
       <div className={cn(`${GRID_CLASS} mb-6 items-end`, showIntro && "lifeline-labels-intro")}>
-        <p className="text-right text-[11px] font-medium uppercase leading-4 tracking-[0.08em] text-muted-foreground transition-colors duration-300">
+        <p className="text-right text-[15px] font-medium uppercase leading-5 tracking-[0.08em] text-muted-foreground transition-colors duration-300">
           Age
         </p>
         <div aria-hidden="true" />
-        <p className="text-[11px] font-medium uppercase leading-5 tracking-[0.08em] text-muted-foreground transition-colors duration-300">
+        <p className="text-[15px] font-medium uppercase leading-5 tracking-[0.08em] text-muted-foreground transition-colors duration-300">
           Years
         </p>
       </div>

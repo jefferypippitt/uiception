@@ -281,12 +281,17 @@ describe("portfolio-v3 media", () => {
 
         const year2025 = life.markers.find((m) => m.year === 2025)
         expect(year2025?.globalEvents?.[0]?.name).toBe("CES 2025 Keynote NVIDIA")
-        expect(year2025?.globalEvents?.[0]?.role).toBe("Las Vegas · Jan 6, 2025")
+        expect(year2025?.globalEvents?.[0]?.place).toBe("Las Vegas")
+        expect(year2025?.globalEvents?.[0]?.date).toBe("Jan 6, 2025")
         expect(year2025?.globalEvents?.[0]?.icon).toBe("nvidia")
         expect(year2025?.globalEvents?.[1]?.name).toBe("Vercel Ship 2025")
 
         const withGlobalEvents = life.markers.find((m) => m.year === 2026)
         expect(withGlobalEvents?.globalEvents?.[0]?.name).toBe("Compile 26")
+        expect(withGlobalEvents?.globalEvents?.[0]?.place).toBe(
+          "Fort Mason, San Francisco",
+        )
+        expect(withGlobalEvents?.globalEvents?.[0]?.date).toBe("Jun 22, 2026")
         expect(withGlobalEvents?.globalEvents?.[0]?.icon).toBe("cursor")
         expect(withGlobalEvents?.globalEvents?.[1]?.name).toBe(
           "Grok Bot Founder Build Night",
@@ -296,6 +301,9 @@ describe("portfolio-v3 media", () => {
           "Cursor Conversations London",
         )
         expect(withGlobalEvents?.globalEvents?.[3]?.name).toBe("Vercel Ship 2026")
+        expect(withGlobalEvents?.globalEvents?.[3]?.place).toBe(
+          "Palace of Fine Arts, San Francisco",
+        )
         expect(withGlobalEvents?.globalEvents?.[3]?.icon).toBe("vercel")
 
         const college = life.markers.find((m) => m.year === 2010)

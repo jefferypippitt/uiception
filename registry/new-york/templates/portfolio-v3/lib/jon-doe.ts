@@ -16,6 +16,8 @@ export type JonEvent =
 
 export type JonGlobalEvent = {
   name: string
+  place?: string
+  date?: string
   role?: string
   icon?: string
 }
@@ -252,7 +254,8 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
     globalEvents: [
       {
         name: "Vercel Ship 2024",
-        role: "New York · May 23, 2024",
+        place: "New York",
+        date: "May 23, 2024",
         icon: "vercel",
       },
     ],
@@ -272,12 +275,14 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
     globalEvents: [
       {
         name: "CES 2025 Keynote NVIDIA",
-        role: "Las Vegas · Jan 6, 2025",
+        place: "Las Vegas",
+        date: "Jan 6, 2025",
         icon: "nvidia",
       },
       {
         name: "Vercel Ship 2025",
-        role: "New York · June 25, 2025",
+        place: "New York",
+        date: "June 25, 2025",
         icon: "vercel",
       },
     ],
@@ -293,23 +298,39 @@ export const jonDoeMilestones: Record<number, JonMilestone> = {
     globalEvents: [
       {
         name: "Compile 26",
-        role: "Fort Mason, San Francisco · Jun 22, 2026",
+        place: "Fort Mason, San Francisco",
+        date: "Jun 22, 2026",
         icon: "cursor",
       },
       {
         name: "Grok Bot Founder Build Night",
-        role: "Cursor HQ, San Francisco · Aug 20, 2026",
+        place: "Cursor HQ, San Francisco",
+        date: "Aug 20, 2026",
         icon: "cursor",
       },
       {
         name: "Cursor Conversations London",
-        role: "Central London · Sep 15, 2026",
+        place: "Central London",
+        date: "Sep 15, 2026",
         icon: "cursor",
       },
       {
         name: "Vercel Ship 2026",
-        role: "Palace of Fine Arts, San Francisco · Oct 15, 2026",
+        place: "Palace of Fine Arts, San Francisco",
+        date: "Oct 15, 2026",
         icon: "vercel",
+      },
+      {
+        name: "Next.js Conf 2026",
+        place: "Moscone West, San Francisco",
+        date: "Nov 5, 2026",
+        icon: "vercel",
+      },
+      {
+        name: "AI Engineer Summit",
+        place: "Marines' Memorial, San Francisco",
+        date: "Nov 19, 2026",
+        icon: "cursor",
       },
     ],
   },

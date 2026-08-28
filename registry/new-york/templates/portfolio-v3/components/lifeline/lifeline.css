@@ -53,6 +53,17 @@
   z-index: 20;
 }
 
+/* Fade the shield's trailing edge so horizontally scrolled markers dissolve
+   behind the pinned labels rather than clipping against a visible box edge. */
+.lifeline-labels-shield {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 18px),
+    transparent
+  );
+  mask-image: linear-gradient(to right, #000 calc(100% - 18px), transparent);
+}
+
 .lifeline-typeset {
   font-family: var(
     --lifeline-font,

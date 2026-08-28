@@ -47,7 +47,7 @@ export function Lifeline(props: LifelineProps) {
   return (
     <LifelineDesktop
       {...props}
-      className={cn("lifeline-typeset pt-5", props.className)}
+      className={cn("lifeline-typeset py-5", props.className)}
     />
   )
 }

@@ -37,7 +37,10 @@ async function resolveContentDir(kind: "writing" | "books"): Promise<string | nu
 
   for (const dir of candidates) {
     try {
-      await fs.access(dir)
+      // Build-time content reads are scoped to the known content dir; the
+      // ignore comment stops Turbopack from tracing the whole project into
+      // the server bundle just because the path is computed at runtime.
+      await fs.access(/*turbopackIgnore: true*/ dir)
       return dir
     } catch {
       // try next
@@ -107,7 +110,7 @@ async function loadEntries(kind: "writing" | "books"): Promise<ContentEntry[]> {
 
   let filenames: string[] = []
   try {
-    filenames = await fs.readdir(directory)
+    filenames = await fs.readdir(/*turbopackIgnore: true*/ directory)
   } catch {
     return []
   }
@@ -117,8 +120,8 @@ async function loadEntries(kind: "writing" | "books"): Promise<ContentEntry[]> {
   const entries = await Promise.all(
     mdxFiles.map(async (filename) => {
       try {
-        const fullPath = path.join(directory, filename)
-        const source = await fs.readFile(fullPath, "utf8")
+        const fullPath = path.join(/*turbopackIgnore: true*/ directory, filename)
+        const source = await fs.readFile(/*turbopackIgnore: true*/ fullPath, "utf8")
         const { data, content } = matter(source)
 
         const parsed = parseFrontmatter(data)
@@ -169,11 +172,11 @@ async function loadEntry(kind: "writing" | "books", slug: string): Promise<Conte
   if (!directory) return null
 
   const filename = `${slug}.mdx`
-  const fullPath = path.join(directory, filename)
+  const fullPath = path.join(/*turbopackIgnore: true*/ directory, filename)
 
   let source: string
   try {
-    source = await fs.readFile(fullPath, "utf8")
+    source = await fs.readFile(/*turbopackIgnore: true*/ fullPath, "utf8")
   } catch {
     return null
   }
