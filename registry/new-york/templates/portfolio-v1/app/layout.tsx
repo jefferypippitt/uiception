@@ -16,7 +16,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "John Doe",
+  title: "Jon Doe",
   description:
     "Physicist and science communicator. Planetary science, the solar system, and public writing about how the universe works.",
 }

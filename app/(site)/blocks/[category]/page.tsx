@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { blockCategories } from "@/lib/blocks"
 import { getBlockRegistryData } from "@/lib/registry-server"
 
-import { BlocksCategoryHashScroll } from "./blocks-category-hash-scroll"
+import { CategoryHashScroll } from "@/components/category-hash-scroll"
 
 type CategoryPageProps = {
   params: Promise<{ category: string }>
@@ -47,7 +47,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="pb-14 md:pb-20">
-      <BlocksCategoryHashScroll />
+      <CategoryHashScroll />
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h1 className="text-3xl tracking-tighter md:text-4xl">

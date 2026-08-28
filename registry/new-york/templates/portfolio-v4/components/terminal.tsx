@@ -74,11 +74,19 @@ export function Terminal() {
   }, [entries, booted])
 
   useEffect(() => {
-    inputRef.current?.focus()
+    if (!booted) return
+    // Preview iframes that steal focus scroll the parent catalog to this
+    // section. Only autofocus when this template is the top-level page.
+    try {
+      if (window.self !== window.top) return
+    } catch {
+      return
+    }
+    inputRef.current?.focus({ preventScroll: true })
   }, [booted])
 
   function focusInput() {
-    inputRef.current?.focus()
+    inputRef.current?.focus({ preventScroll: true })
   }
 
   function resetScreen() {

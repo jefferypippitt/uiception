@@ -4,6 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { BlockPreviewToolbar } from "@/components/block-preview-toolbar"
+import { CategoryHashScroll } from "@/components/category-hash-scroll"
 import { Button } from "@/components/ui/button"
 import type { BlockVersion } from "@/lib/blocks"
 import { getBlockRegistryData } from "@/lib/registry-server"
@@ -50,6 +51,7 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
 
   return (
     <div className="pb-14 md:pb-20">
+      <CategoryHashScroll />
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h1 className="text-3xl tracking-tighter md:text-4xl">

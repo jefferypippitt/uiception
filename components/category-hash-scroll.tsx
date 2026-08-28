@@ -13,7 +13,7 @@ function scrollToHash(): boolean {
   return true
 }
 
-export function BlocksCategoryHashScroll() {
+export function CategoryHashScroll() {
   const pathname = usePathname()
 
   useEffect(() => {

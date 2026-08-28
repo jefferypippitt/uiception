@@ -10,7 +10,7 @@ export default async function HomePage() {
   return (
     <div className="typeset typeset-article max-w-[42em]">
       <h1 className="flex items-center justify-between gap-4">
-        <span>John Doe</span>
+        <span>Jon Doe</span>
         <SaturnDecoration />
       </h1>
 
