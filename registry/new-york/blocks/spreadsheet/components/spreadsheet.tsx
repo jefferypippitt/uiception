@@ -1,9 +1,16 @@
 "use client"
 
 import { ChevronDown, Menu, Plus } from "lucide-react"
+import { Instrument_Serif } from "next/font/google"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+})
 
 import { Cursor } from "./cursor"
 import {
@@ -97,7 +104,10 @@ export default function Spreadsheet({ className }: { className?: string }) {
           aria-hidden
         />
         <span
-          className="flex w-7 shrink-0 items-center justify-center font-serif text-xs text-(--ss-fx-fg) italic md:w-8 md:text-sm"
+          className={cn(
+            instrumentSerif.className,
+            "flex w-7 shrink-0 items-center justify-center text-xs text-(--ss-fx-fg) italic md:w-8 md:text-sm"
+          )}
           aria-hidden
         >
           fx

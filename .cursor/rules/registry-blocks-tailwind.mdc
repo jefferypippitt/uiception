@@ -15,12 +15,19 @@ Put layout, typography, spacing, and colors on `className` in `.tsx`:
 ```tsx
 <h2 className="text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl">
   Title{" "}
-  <span className="font-serif italic font-normal tracking-[-0.01em]">accent</span>
+  <span className="italic font-normal tracking-[-0.01em]">accent</span>
 </h2>
 <p className="max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground" />
 ```
 
-Use theme utilities: `text-foreground`, `text-muted-foreground`, `bg-background`, `border-border`, `font-mono`, `font-serif`, `rounded-lg`, etc.
+Use theme utilities: `text-foreground`, `text-muted-foreground`, `bg-background`, `border-border`, `font-mono`, `rounded-lg`, etc.
+
+**Fonts:** `font-sans` / `font-mono` are fine as bare utilities. Do **not** use
+bare `font-serif` — `globals.css` remaps it to Instrument Serif, which a consumer
+project doesn't have, so the block silently falls back to Georgia. A block that
+wants a serif must own it: `import { Instrument_Serif } from "next/font/google"`,
+then apply `instrumentSerif.className`. Enforced by
+`tests/registry/registry-font-deps.test.ts`.
 
 Do **not** add block-prefixed classes for simple one-off typography (e.g. `.fsv5-heading { font-weight: 500; }`).
 

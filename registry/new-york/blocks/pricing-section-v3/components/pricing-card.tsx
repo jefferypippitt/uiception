@@ -1,4 +1,5 @@
 import { CheckIcon } from "lucide-react"
+import { Instrument_Serif } from "next/font/google"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -12,6 +13,11 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import type { BillingCycle, PricingPlan } from "../lib/pricing-plans"
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 
 type PricingCardProps = {
   plan: PricingPlan
@@ -41,7 +47,7 @@ export default function PricingCard({ plan, billingCycle }: PricingCardProps) {
             ) : null}
           </div>
           <div className="flex flex-col gap-1 pt-1">
-            <p className="font-serif text-4xl leading-[1.15] tracking-normal text-foreground">
+            <p className={`${instrumentSerif.className} text-4xl leading-[1.15] tracking-normal text-foreground`}>
               {pricing.price}
             </p>
             <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">

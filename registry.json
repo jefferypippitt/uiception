@@ -6107,6 +6107,11 @@
           "path": "registry/new-york/templates/landing-page-v2/lib/site.ts",
           "type": "registry:lib",
           "target": "lib/site.ts"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v2/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
         }
       ]
     },

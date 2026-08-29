@@ -1,14 +1,21 @@
 "use client"
 
+import { Instrument_Serif } from "next/font/google"
+
 import FeatureGrid from "./feature-grid"
 import { featureSectionDescription, featureSectionTitle } from "../lib/features"
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 
 export default function FeatureSectionV9() {
   return (
     <section className="py-4 md:py-6 lg:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <header className="flex max-w-3xl flex-col items-start gap-3 text-left">
-          <h2 className="m-0 font-serif text-4xl font-medium leading-[1.08] tracking-[-0.03em] text-balance sm:text-[2.625rem] lg:text-5xl lg:leading-[1.06]">
+          <h2 className={`${instrumentSerif.className} m-0 text-4xl leading-[1.08] tracking-[-0.03em] text-balance sm:text-[2.625rem] lg:text-5xl lg:leading-[1.06]`}>
             {featureSectionTitle}
           </h2>
           <p className="m-0 mt-2 max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground sm:text-base">

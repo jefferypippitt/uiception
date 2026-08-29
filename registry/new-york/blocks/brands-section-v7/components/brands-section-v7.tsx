@@ -1,3 +1,5 @@
+import { Instrument_Serif } from "next/font/google"
+
 import { cn } from "@/lib/utils"
 
 import MarqueeRow from "./marquee-row"
@@ -5,6 +7,11 @@ import { rowOneBrands, rowTwoBrands } from "../lib/brands"
 import { brandsSectionV7Content } from "../lib/config"
 
 import "../styles/brands-section-v7.css"
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 
 type Props = {
   embedded?: boolean
@@ -27,7 +34,7 @@ export default function BrandsSectionV7({ embedded = false }: Props) {
         )}
       >
         <div className="flex max-w-2xl flex-col items-center gap-3 text-center">
-          <h2 className="font-serif text-3xl leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.75rem]">
+          <h2 className={`${instrumentSerif.className} text-3xl leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.75rem]`}>
             {heading}
           </h2>
           <p className="max-w-xl text-[0.9375rem] leading-relaxed text-muted-foreground">

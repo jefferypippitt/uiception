@@ -12,7 +12,14 @@ const BLOCK_DIR_RE = /registry\/new-york\/blocks\/([^/]+)\//
 // Standard Tailwind font utilities — safe to use anywhere, no self-contained
 // import needed. Everything else defined in globals.css @theme inline is
 // layout-dependent and must be imported directly inside the block.
-const TAILWIND_BUILTIN_FONTS = new Set(["font-sans", "font-mono", "font-serif"])
+//
+// NOTE: font-serif is deliberately NOT in this set. globals.css @theme inline
+// remaps --font-serif to Instrument Serif (a display serif). font-sans/font-mono
+// degrade acceptably in a consumer project (system-ui / monospace), but a block
+// using bare font-serif renders Georgia there instead of Instrument Serif — the
+// exact silent-fallback bug this test exists to catch. Blocks that want the
+// Instrument Serif look must import it from next/font/google directly.
+const TAILWIND_BUILTIN_FONTS = new Set(["font-sans", "font-mono"])
 
 /**
  * Parse globals.css and return every Tailwind font utility that comes from

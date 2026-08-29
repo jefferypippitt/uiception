@@ -20,6 +20,13 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+No environment variables are required — the whole site runs without an `.env`
+file. A few optional previews (the live landing-page-v1 waitlist, the
+portfolio-v2 canvas warp, the "Open in v0" links) only light up when you supply
+keys; copy [`.env.example`](./.env.example) to `.env.local` and fill in the ones
+you want. Each template under `registry/new-york/templates/` also ships its own
+`.env.example` describing what that template needs once installed.
+
 ## Before opening a pull request
 
 Run the same checks CI runs:
