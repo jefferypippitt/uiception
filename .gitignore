@@ -35,26 +35,6 @@ pnpm-debug.log*
 # claude / cursor — local permission overrides (machine-specific)
 .claude/settings.local.json
 
-# illustration skills- testing not ready for production
-.claude/skills/illustrations/
-.agents/skills/illustrations/
-
-# svg-ui skill — beta, local iteration only
-.claude/skills/svg-ui/
-.agents/skills/svg-ui/
-
-# product-preview-ui skill — beta, local iteration only
-.claude/skills/product-preview-ui/
-.agents/skills/product-preview-ui/
-
-# geo-wireframe skill — beta, local iteration only
-.claude/skills/geo-wireframe/
-.agents/skills/geo-wireframe/
-
-# narrative-mini-mocks skill — beta, local iteration only
-.claude/skills/narrative-mini-mocks/
-.agents/skills/narrative-mini-mocks/
-
 # changelog-mdx skill — beta, local iteration only
 .claude/skills/changelog-mdx/
 .agents/skills/changelog-mdx/

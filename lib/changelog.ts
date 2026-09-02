@@ -6,6 +6,7 @@ import { compileMDX } from "next-mdx-remote/rsc"
 import type { ComponentType } from "react"
 
 import { blockCategories } from "@/lib/blocks"
+import { changelogMdxComponents } from "@/lib/changelog-mdx-components"
 
 type ChangelogItem = {
   name: string
@@ -115,6 +116,7 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
       const compiled = await compileMDX<ChangelogFrontmatter>({
         source: content,
         options: { parseFrontmatter: false },
+        components: changelogMdxComponents,
       })
       const Body = () => compiled.content
 

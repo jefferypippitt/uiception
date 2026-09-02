@@ -13,7 +13,7 @@ export default async function DocsPage() {
   return (
     <div className="pb-14 md:pb-20">
       <div className="mx-auto w-full max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <div className="mb-12">
             <h1 className="text-3xl tracking-tighter md:text-4xl">Docs</h1>
             <p className="mt-2 text-muted-foreground">
@@ -43,7 +43,7 @@ export default async function DocsPage() {
                     </p>
                   )}
 
-                  <div className="typeset typeset-docs max-w-[37em] mt-6">
+                  <div className="typeset typeset-docs mt-6">
                     <entry.body />
                   </div>
                 </article>

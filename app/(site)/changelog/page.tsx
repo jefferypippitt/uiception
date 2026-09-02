@@ -33,7 +33,7 @@ export default async function ChangelogPage() {
   return (
     <div className="pb-14 md:pb-20">
       <div className="mx-auto w-full max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h1 className="text-3xl tracking-tighter md:text-4xl">Changelog</h1>

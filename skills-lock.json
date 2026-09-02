@@ -106,6 +106,12 @@
       "sourceType": "github",
       "computedHash": "844401be868754beba2e7dc2c66abbe08b740eeefdec69c630ff6cbd81cc4c62"
     },
+    "no-ai-slop": {
+      "source": "petergyang/no-ai-slop",
+      "sourceType": "github",
+      "skillPath": "skills/no-ai-slop/SKILL.md",
+      "computedHash": "109e265d222da64314b5f08634e4c4ab91051c81eff92d52beea8f3cd81ddb3d"
+    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",

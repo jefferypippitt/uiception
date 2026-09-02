@@ -15,7 +15,7 @@ export default function TemplatesPage() {
   return (
     <div className="pb-14 md:pb-20">
       <div className="mx-auto w-full max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <div className="mb-12">
             <h1 className="text-3xl tracking-tighter md:text-4xl">Templates</h1>
             <p className="mt-2 text-muted-foreground">
