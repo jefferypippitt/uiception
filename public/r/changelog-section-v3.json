@@ -1,0 +1,85 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "changelog-section-v3",
+  "title": "Changelog Section v3",
+  "description": "Two-column changelog with a bracket timeline of long-form dates on the left and, on the right, entry title, description, and a contributor avatar group; entries sharing a date stack under one timeline node.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json",
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/page.tsx",
+      "content": "import ChangelogSectionV3 from \"./components/changelog-section-v3\"\n\nexport default function Page() {\n  return <ChangelogSectionV3 />\n}\n",
+      "type": "registry:page",
+      "target": "app/changelog-section-v3/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/components/changelog-section-v3.tsx",
+      "content": "import ChangelogGroup from \"./changelog-group\"\nimport { sectionMeta } from \"../lib/changelog-content\"\nimport { changelogGroups } from \"../lib/changelog-format\"\n\nexport default function ChangelogSectionV3() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <h2 className=\"text-3xl font-medium tracking-tight sm:text-4xl\">\n          {sectionMeta.title}\n        </h2>\n\n        <div className=\"mt-12 sm:mt-16\">\n          {changelogGroups.map((group, index) => (\n            <ChangelogGroup\n              key={group.date}\n              group={group}\n              isFirst={index === 0}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/changelog-section-v3/components/changelog-section-v3.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/components/changelog-group.tsx",
+      "content": "import Link from \"next/link\"\n\nimport ContributorGroup from \"./contributor-group\"\nimport type { ChangelogDateGroup } from \"../lib/changelog-format\"\n\n/**\n * One date node on the timeline: a bracket rail + date on the left, and every\n * entry published on that date stacked on the right. Two columns from `sm` up;\n * on mobile the date sits above its entries with the rail still on the left.\n * The first node closes at the elbow (nothing above it); the rest run edge to\n * edge so the rail is continuous down the list.\n */\nexport default function ChangelogGroup({\n  group,\n  isFirst = false,\n}: {\n  group: ChangelogDateGroup\n  isFirst?: boolean\n}) {\n  return (\n    <div className=\"relative pl-7 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-12 sm:pl-0\">\n      {/* vertical rail */}\n      <span\n        aria-hidden\n        className={`absolute bottom-0 left-0 w-px bg-border ${\n          isFirst ? \"top-[0.45rem] sm:top-[1.45rem]\" : \"top-0\"\n        }`}\n      />\n      {/* elbow — the right angle into the date (offset on sm to match the entry's top padding) */}\n      <span\n        aria-hidden\n        className=\"absolute top-[0.45rem] left-0 h-px w-4 bg-border sm:top-[1.45rem] sm:w-6\"\n      />\n\n      <time\n        dateTime={group.date}\n        className=\"block text-sm leading-tight whitespace-nowrap text-muted-foreground sm:pt-4 sm:pl-9\"\n      >\n        {group.label}\n      </time>\n\n      <div className=\"mt-2 space-y-8 pb-14 sm:mt-0 sm:space-y-10 sm:pb-24\">\n        {group.entries.map((entry) => (\n          <article key={entry.id} className=\"-mx-4 sm:-mx-6\">\n            <Link\n              href=\"#\"\n              target=\"_blank\"\n              rel=\"noreferrer\"\n              className=\"block cursor-pointer rounded-none px-4 py-4 transition-colors hover:bg-muted/40 sm:px-6\"\n            >\n              <h3 className=\"text-xl font-medium tracking-tight text-balance text-foreground sm:text-2xl\">\n                {entry.title}\n              </h3>\n              <p className=\"mt-3 max-w-2xl leading-relaxed text-muted-foreground\">\n                {entry.description}\n              </p>\n              <div className=\"mt-5\">\n                <ContributorGroup contributors={entry.contributors} />\n              </div>\n            </Link>\n          </article>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/changelog-section-v3/components/changelog-group.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/components/contributor-group.tsx",
+      "content": "import {\n  Avatar,\n  AvatarFallback,\n  AvatarGroup,\n  AvatarImage,\n} from \"@/components/ui/avatar\"\n\nimport type { Contributor } from \"../lib/changelog-content\"\nimport {\n  MAX_VISIBLE_CONTRIBUTORS,\n  formatContributorNames,\n} from \"../lib/changelog-format\"\n\nexport default function ContributorGroup({\n  contributors,\n}: {\n  contributors: Contributor[]\n}) {\n  // Never more than three avatars — anyone past that is covered by the names\n  // label (\"…and 2 others\"), so there is no \"+N\" count bubble.\n  const visible = contributors.slice(0, MAX_VISIBLE_CONTRIBUTORS)\n\n  return (\n    <div className=\"flex items-center gap-3\">\n      <AvatarGroup className=\"shrink-0\">\n        {visible.map((person) => (\n          <Avatar key={person.id} size=\"sm\">\n            <AvatarImage\n              src={person.avatarSrc}\n              alt={person.name}\n              className=\"object-cover object-center\"\n            />\n            <AvatarFallback>{person.initials}</AvatarFallback>\n          </Avatar>\n        ))}\n      </AvatarGroup>\n      <span className=\"min-w-0 text-sm font-medium text-foreground\">\n        {formatContributorNames(contributors)}\n      </span>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/changelog-section-v3/components/contributor-group.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/lib/changelog-content.ts",
+      "content": "import { createBlockImage } from \"@/lib/block-media\"\n\nconst blockAvatar = createBlockImage(\"changelog-section-v3\")\n\nexport type Contributor = {\n  id: string\n  name: string\n  initials: string\n  avatarSrc: string\n}\n\nexport type ChangelogEntry = {\n  id: string\n  /** ISO date (YYYY-MM-DD). Entries that share a date render under one timeline node. */\n  date: string\n  title: string\n  description: string\n  contributors: Contributor[]\n}\n\nexport const sectionMeta = {\n  title: \"Changelog\",\n}\n\nconst people = {\n  claire: {\n    id: \"claire-donovan\",\n    name: \"Claire Donovan\",\n    initials: \"CD\",\n    avatarSrc: blockAvatar(\"avatar-1.png\"),\n  },\n  ethan: {\n    id: \"ethan-morrison\",\n    name: \"Ethan Morrison\",\n    initials: \"EM\",\n    avatarSrc: blockAvatar(\"avatar-2.png\"),\n  },\n  mei: {\n    id: \"mei-lin-chen\",\n    name: \"Mei Lin Chen\",\n    initials: \"MC\",\n    avatarSrc: blockAvatar(\"avatar-3.png\"),\n  },\n  jordan: {\n    id: \"jordan-ellis\",\n    name: \"Jordan Ellis\",\n    initials: \"JE\",\n    avatarSrc: blockAvatar(\"avatar-4.png\"),\n  },\n  hannah: {\n    id: \"hannah-bergstrom\",\n    name: \"Hannah Bergstrom\",\n    initials: \"HB\",\n    avatarSrc: blockAvatar(\"avatar-5.png\"),\n  },\n  ryan: {\n    id: \"ryan-park\",\n    name: \"Ryan Park\",\n    initials: \"RP\",\n    avatarSrc: blockAvatar(\"avatar-6.png\"),\n  },\n} satisfies Record<string, Contributor>\n\nexport const changelog: ChangelogEntry[] = [\n  {\n    id: \"composable-tool-sdk\",\n    date: \"2026-09-02\",\n    title: \"Composable Tool SDK\",\n    description:\n      \"Our new tool primitives let you build and deploy AI coding agents faster. Mix, chain, and extend them to fit however your team works.\",\n    contributors: [people.claire, people.ethan, people.mei],\n  },\n  {\n    id: \"deep-codebase-context\",\n    date: \"2026-09-02\",\n    title: \"Deep Codebase Context\",\n    description:\n      \"Your agents can now reason across multiple repositories, branches, and file trees all within a single session.\",\n    contributors: [people.jordan, people.hannah],\n  },\n  {\n    id: \"intelligent-model-routing\",\n    date: \"2026-08-21\",\n    title: \"Intelligent Model Routing\",\n    description:\n      \"Agents now pick the right model for each task on their own, so you get the best balance of speed, cost, and quality without lifting a finger.\",\n    contributors: [people.ryan, people.mei, people.claire, people.ethan],\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/changelog-section-v3/lib/changelog-content.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/changelog-section-v3/lib/changelog-format.ts",
+      "content": "import type { ChangelogEntry, Contributor } from \"./changelog-content\"\nimport { changelog } from \"./changelog-content\"\n\nexport type ChangelogDateGroup = {\n  date: string\n  /** Display label, e.g. \"2 September 2026\". */\n  label: string\n  entries: ChangelogEntry[]\n}\n\nconst MONTHS = [\n  \"January\",\n  \"February\",\n  \"March\",\n  \"April\",\n  \"May\",\n  \"June\",\n  \"July\",\n  \"August\",\n  \"September\",\n  \"October\",\n  \"November\",\n  \"December\",\n]\n\n/** \"2026-09-02\" -> \"2 September 2026\" */\nexport function formatChangelogDate(iso: string): string {\n  const [year, month, day] = iso.split(\"-\").map(Number)\n  return `${day} ${MONTHS[month - 1]} ${year}`\n}\n\n/**\n * Names line under an entry. Up to two names are spelled out; everyone else is\n * folded into \"and N other(s)\" — e.g. \"Jeremy Dopkin, Elliot Dauber, and 1 other\".\n */\nexport function formatContributorNames(contributors: Contributor[]): string {\n  const names = contributors.map((person) => person.name)\n  if (names.length <= 2) return names.join(\", \")\n  const rest = names.length - 2\n  return `${names[0]}, ${names[1]}, and ${rest} other${rest === 1 ? \"\" : \"s\"}`\n}\n\n/** Collapse a flat entry list into date groups, newest date first. */\nexport function groupEntriesByDate(\n  entries: ChangelogEntry[]\n): ChangelogDateGroup[] {\n  const byDate = new Map<string, ChangelogEntry[]>()\n  for (const entry of entries) {\n    const existing = byDate.get(entry.date)\n    if (existing) existing.push(entry)\n    else byDate.set(entry.date, [entry])\n  }\n\n  return [...byDate.entries()]\n    .sort(([a], [b]) => (a < b ? 1 : a > b ? -1 : 0))\n    .map(([date, dateEntries]) => ({\n      date,\n      label: formatChangelogDate(date),\n      entries: dateEntries,\n    }))\n}\n\nexport const changelogGroups = groupEntriesByDate(changelog)\n\n/** Max avatars rendered before the \"+N\" count bubble takes over. */\nexport const MAX_VISIBLE_CONTRIBUTORS = 3\n",
+      "type": "registry:lib",
+      "target": "app/changelog-section-v3/lib/changelog-format.ts"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-1.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-1.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-2.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-2.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-3.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-3.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-4.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-4.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-5.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-5.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/changelog-section-v3/avatar-6.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/changelog-section-v3/avatar-6.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -52,6 +52,8 @@ import FeatureSectionV10 from "@/registry/new-york/blocks/feature-section-v10/co
 import FeatureSectionV11 from "@/registry/new-york/blocks/feature-section-v11/components/feature-section-v11"
 import ChangelogSectionV1 from "@/registry/new-york/blocks/changelog-section-v1/components/changelog-section-v1"
 import ChangelogSectionV2 from "@/registry/new-york/blocks/changelog-section-v2/components/changelog-section-v2"
+import ChangelogSectionV3 from "@/registry/new-york/blocks/changelog-section-v3/components/changelog-section-v3"
+import ChangelogSectionV4 from "@/registry/new-york/blocks/changelog-section-v4/components/changelog-section-v4"
 import FaqSectionV1 from "@/registry/new-york/blocks/faq-section-v1/components/faq-section-v1"
 import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/faq-section-v2"
 import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
@@ -161,6 +163,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "feature-section-v11": FeatureSectionV11,
   "changelog-section-v1": ChangelogSectionV1,
   "changelog-section-v2": ChangelogSectionV2,
+  "changelog-section-v3": ChangelogSectionV3,
+  "changelog-section-v4": ChangelogSectionV4,
   "faq-section-v1": FaqSectionV1,
   "faq-section-v2": FaqSectionV2,
   "faq-section-v3": FaqSectionV3,

@@ -20,11 +20,11 @@ export type BlockCategoryId =
   | "contact"
   | "blog"
   | "gallery"
-  | "video"
+  | "bento"
   | "timeline"
   | "comparison"
   | "newsletter"
-  | "waitlist"
+  | "guarantee"
   | "social-proof"
   | "partners"
   | "backgrounds"
@@ -555,6 +555,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Changelog Section v2",
         registryPath: "registry/new-york/blocks/changelog-section-v2",
       },
+      {
+        id: "changelog-section-v3",
+        title: "Changelog Section v3",
+        registryPath: "registry/new-york/blocks/changelog-section-v3",
+      },
+      {
+        id: "changelog-section-v4",
+        title: "Changelog Section v4",
+        registryPath: "registry/new-york/blocks/changelog-section-v4",
+      },
     ],
   },
   {
@@ -614,9 +624,10 @@ export const blockCategories: BlockCategory[] = [
     ],
   },
   {
-    id: "video",
-    title: "Video",
-    description: "Video embeds, players, and media-forward hero sections.",
+    id: "bento",
+    title: "Bento",
+    description:
+      "Bento-grid feature showcases—mixed-size tiles that pack product highlights into one section.",
     versions: [],
   },
   {
@@ -638,9 +649,10 @@ export const blockCategories: BlockCategory[] = [
     versions: [],
   },
   {
-    id: "waitlist",
-    title: "Waitlist",
-    description: "Pre-launch signup and early access capture sections.",
+    id: "guarantee",
+    title: "Guarantee",
+    description:
+      "Risk-reversal sections—money-back promises, free trials, and cancel-anytime assurances.",
     versions: [],
   },
   {

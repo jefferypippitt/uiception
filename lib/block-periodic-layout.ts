@@ -25,7 +25,7 @@ export const blockPeriodicCells: BlockPeriodicCell[] = [
   // Row 3
   { id: "testimonials",      z: 9,  symbol: "Te", row: 3, col: 1  },
   { id: "stats",             z: 10, symbol: "St", row: 3, col: 2  },
-  { id: "waitlist",          z: 11, symbol: "Wl", row: 3, col: 3  },
+  { id: "guarantee",         z: 11, symbol: "Gu", row: 3, col: 3  },
   { id: "social-proof",      z: 12, symbol: "Sp", row: 3, col: 4  },
   { id: "partners",          z: 13, symbol: "Pt", row: 3, col: 5  },
   { id: "pricing",           z: 14, symbol: "Pr", row: 3, col: 6  },
@@ -41,7 +41,7 @@ export const blockPeriodicCells: BlockPeriodicCell[] = [
   { id: "contact",           z: 22, symbol: "Co", row: 4, col: 4  },
   { id: "blog",              z: 23, symbol: "Bl", row: 4, col: 5  },
   { id: "gallery",           z: 24, symbol: "Gl", row: 4, col: 6  },
-  { id: "video",             z: 25, symbol: "Vi", row: 4, col: 7  },
+  { id: "bento",             z: 25, symbol: "Be", row: 4, col: 7  },
   { id: "timeline",          z: 26, symbol: "Tl", row: 4, col: 8  },
   { id: "comparison",        z: 27, symbol: "Cp", row: 4, col: 9  },
   { id: "newsletter",        z: 28, symbol: "Nw", row: 4, col: 10 },

@@ -3749,6 +3749,158 @@
       ]
     },
     {
+      "name": "changelog-section-v3",
+      "type": "registry:block",
+      "title": "Changelog Section v3",
+      "description": "Two-column changelog with a bracket timeline of long-form dates on the left and, on the right, entry title, description, and a contributor avatar group; entries sharing a date stack under one timeline node.",
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/page.tsx",
+          "type": "registry:page",
+          "target": "app/changelog-section-v3/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/components/changelog-section-v3.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v3/components/changelog-section-v3.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/components/changelog-group.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v3/components/changelog-group.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/components/contributor-group.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v3/components/contributor-group.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/lib/changelog-content.ts",
+          "type": "registry:lib",
+          "target": "app/changelog-section-v3/lib/changelog-content.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v3/lib/changelog-format.ts",
+          "type": "registry:lib",
+          "target": "app/changelog-section-v3/lib/changelog-format.ts"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-1.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-2.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-2.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-3.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-3.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-4.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-4.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-5.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-5.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v3/avatar-6.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v3/avatar-6.png.gitkeep"
+        }
+      ]
+    },
+    {
+      "name": "changelog-section-v4",
+      "type": "registry:block",
+      "title": "Changelog Section v4",
+      "description": "Changelog log layout: each date group opens on a horizontal rule instead of a timeline rail, with entries listed underneath by title, description, and a contributor avatar group.",
+      "dependencies": [
+        "geist@^1.7.0"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/page.tsx",
+          "type": "registry:page",
+          "target": "app/changelog-section-v4/page.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/components/changelog-section-v4.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v4/components/changelog-section-v4.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/components/changelog-date-divider.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v4/components/changelog-date-divider.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/components/changelog-entry-row.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v4/components/changelog-entry-row.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/components/contributor-group.tsx",
+          "type": "registry:component",
+          "target": "app/changelog-section-v4/components/contributor-group.tsx"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/lib/changelog-content.ts",
+          "type": "registry:lib",
+          "target": "app/changelog-section-v4/lib/changelog-content.ts"
+        },
+        {
+          "path": "registry/new-york/blocks/changelog-section-v4/lib/changelog-format.ts",
+          "type": "registry:lib",
+          "target": "app/changelog-section-v4/lib/changelog-format.ts"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-1.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-1.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-2.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-2.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-3.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-3.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-4.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-4.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-5.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-5.png.gitkeep"
+        },
+        {
+          "path": "public/images/blocks/changelog-section-v4/avatar-6.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/images/blocks/changelog-section-v4/avatar-6.png.gitkeep"
+        }
+      ]
+    },
+    {
       "name": "faq-section-v1",
       "type": "registry:block",
       "title": "FAQ Section v1",
