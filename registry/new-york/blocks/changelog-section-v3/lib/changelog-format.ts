@@ -23,9 +23,23 @@ const MONTHS = [
   "December",
 ]
 
-/** "2026-09-02" -> "2 September 2026" */
+/** "2026-09-02" -> "2 September 2026". Returns the raw input unchanged if it
+ *  isn't a valid YYYY-MM-DD date. */
 export function formatChangelogDate(iso: string): string {
-  const [year, month, day] = iso.split("-").map(Number)
+  const parts = iso.split("-")
+  if (parts.length !== 3) return iso
+  const [year, month, day] = parts.map(Number)
+  if (
+    !Number.isInteger(year) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(day) ||
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > 31
+  ) {
+    return iso
+  }
   return `${day} ${MONTHS[month - 1]} ${year}`
 }
 

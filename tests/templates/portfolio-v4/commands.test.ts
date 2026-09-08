@@ -2,8 +2,12 @@ import { describe, expect, it } from "vitest"
 
 import { shouldShowAscii, ASCII_MIN_COLS, ASCII_ART } from "@/registry/new-york/templates/portfolio-v4/lib/ascii"
 import {
+  MAX_COMMAND_HISTORY,
+  MAX_SCROLLBACK_ENTRIES,
+  capScrollback,
   getPromptPrefix,
   getWelcomeLines,
+  pushCommand,
   runCommand,
   type TerminalLine,
 } from "@/registry/new-york/templates/portfolio-v4/lib/commands"
@@ -126,5 +130,34 @@ describe("portfolio-v4 runCommand", () => {
 describe("portfolio-v4 getPromptPrefix", () => {
   it("is a bash-style prompt", () => {
     expect(getPromptPrefix()).toBe("$ ")
+  })
+})
+
+describe("portfolio-v4 history + scrollback bounds", () => {
+  it("pushCommand appends to the end", () => {
+    expect(pushCommand(["a", "b"], "c")).toEqual(["a", "b", "c"])
+  })
+
+  it("pushCommand keeps only the newest MAX_COMMAND_HISTORY", () => {
+    const full = Array.from({ length: MAX_COMMAND_HISTORY }, (_, i) => `c${i}`)
+    const next = pushCommand(full, "newest")
+    expect(next).toHaveLength(MAX_COMMAND_HISTORY)
+    expect(next.at(-1)).toBe("newest")
+    expect(next[0]).toBe("c1")
+  })
+
+  it("capScrollback returns the same array when under the cap", () => {
+    const entries = [{ id: 1 }, { id: 2 }]
+    expect(capScrollback(entries)).toBe(entries)
+  })
+
+  it("capScrollback drops the oldest groups past the cap", () => {
+    const entries = Array.from(
+      { length: MAX_SCROLLBACK_ENTRIES + 5 },
+      (_, i) => ({ id: i })
+    )
+    const capped = capScrollback(entries)
+    expect(capped).toHaveLength(MAX_SCROLLBACK_ENTRIES)
+    expect(capped[0]).toEqual({ id: 5 })
   })
 })

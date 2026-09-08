@@ -30,10 +30,11 @@ registry/new-york/templates/{template-name}/
 4. `components/template-previews/{id}.tsx` plus
    `components/template-preview-by-version.tsx` — preview definition and id map
 
-Missing any of these breaks `pnpm registry:validate` or
-`tests/registry/registry-templates.test.ts`, or leaves a dead/orphaned entry
-that no test currently catches for #2/#4 (only #3's declared-files check is
-enforced both directions).
+Missing #1, #3, or #4 breaks `pnpm registry:validate` or
+`tests/registry/registry-templates.test.ts` (which now enforces #3 and #4 in
+both directions — missing entries and orphaned ones). #2 (`lib/templates.ts`)
+is the catalog's source of truth; a template folder that exists but isn't listed
+there is the one gap a test doesn't independently catch.
 
 ## Templates are self-contained
 

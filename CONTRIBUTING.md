@@ -32,7 +32,7 @@ you want. Each template under `registry/new-york/templates/` also ships its own
 Run the same checks CI runs:
 
 ```bash
-pnpm check   # registry:validate + test:run + typecheck
+pnpm check   # registry:validate + lint + test:run + typecheck
 pnpm build   # prebuild runs registry:build, then next build (same as Vercel)
 ```
 

@@ -10,16 +10,16 @@ import {
 } from "react"
 
 import {
+  capScrollback,
   getPromptPrefix,
   getWelcomeLines,
+  pushCommand,
   runCommand,
   type TerminalLine,
 } from "../lib/commands"
 import { TerminalLineView } from "./terminal-line"
 
 import "../styles/terminal.css"
-
-const MAX_HISTORY = 100
 
 type HistoryEntry = {
   id: number
@@ -125,6 +125,7 @@ export function Terminal() {
       ])
       setInput("")
       setHistoryIndex(null)
+      setDraft("")
       return
     }
 
@@ -141,10 +142,7 @@ export function Terminal() {
       ],
     }
 
-    setCommandHistory((prev) => {
-      const next = [...prev, trimmed]
-      return next.length > MAX_HISTORY ? next.slice(-MAX_HISTORY) : next
-    })
+    setCommandHistory((prev) => pushCommand(prev, trimmed))
     setHistoryIndex(null)
     setDraft("")
     setInput("")
@@ -159,13 +157,15 @@ export function Terminal() {
       return
     }
 
-    setEntries((prev) => [
-      ...prev,
-      echo,
-      ...(result.lines.length > 0
-        ? [{ id: nextId(), kind: "output" as const, lines: result.lines }]
-        : []),
-    ])
+    setEntries((prev) =>
+      capScrollback([
+        ...prev,
+        echo,
+        ...(result.lines.length > 0
+          ? [{ id: nextId(), kind: "output" as const, lines: result.lines }]
+          : []),
+      ])
+    )
   }
 
   function onSubmit(event: FormEvent) {

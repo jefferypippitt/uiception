@@ -6012,6 +6012,11 @@
           "path": "registry/new-york/templates/portfolio-v3/public/videos/moments/compile-26.mp4.gitkeep",
           "type": "registry:file",
           "target": "public/videos/moments/compile-26.mp4.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v3/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
         }
       ]
     },
@@ -6075,6 +6080,11 @@
           "path": "registry/new-york/templates/portfolio-v4/styles/terminal.css",
           "type": "registry:file",
           "target": "styles/terminal.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v4/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
         }
       ]
     },
@@ -6331,6 +6341,11 @@
           "path": "registry/new-york/templates/landing-page-v3/styles/solari.css",
           "type": "registry:file",
           "target": "styles/solari.css"
+        },
+        {
+          "path": "registry/new-york/templates/landing-page-v3/.env.example",
+          "type": "registry:file",
+          "target": ".env.example"
         }
       ]
     }

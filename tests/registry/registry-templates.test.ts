@@ -162,6 +162,42 @@ describe("template preview host has no stale entries", () => {
   })
 })
 
+describe("every template ships a .env.example", () => {
+  it("has a .env.example file on disk for every catalog template", () => {
+    const missing = getFreeTemplateVersions()
+      .map((v) => v.id)
+      .filter(
+        (id) =>
+          !existsSync(
+            join(root, "registry/new-york/templates", id, ".env.example")
+          )
+      )
+    expect(
+      missing,
+      `templates missing .env.example: ${missing.join(", ")}`
+    ).toEqual([])
+  })
+
+  it("declares that .env.example in registry.json with a .env.example target", () => {
+    const { items } = loadRegistry()
+    const failures: string[] = []
+    for (const version of getFreeTemplateVersions()) {
+      const item = items.find((i) => i.name === version.id)
+      const hasEntry = (item?.files ?? []).some(
+        (f) =>
+          f.target === ".env.example" &&
+          f.path.replace(/\\/g, "/") ===
+            `registry/new-york/templates/${version.id}/.env.example`
+      )
+      if (!hasEntry) failures.push(version.id)
+    }
+    expect(
+      failures,
+      `templates whose .env.example is not declared in registry.json: ${failures.join(", ")}`
+    ).toEqual([])
+  })
+})
+
 describe("template catalog has no stale registry.json entries", () => {
   it("has no registry.json template item with no matching lib/templates.ts version", () => {
     const freeVersions = getFreeTemplateVersions()

@@ -486,3 +486,28 @@ export function runCommand(raw: string, cols = 80): CommandResult {
 export function getPromptPrefix(): string {
   return "$ "
 }
+
+/** Max commands kept for ArrowUp/ArrowDown recall. */
+export const MAX_COMMAND_HISTORY = 100
+
+/**
+ * Max output/input entry groups kept in the rendered scrollback. Older groups
+ * fall off the top. Large enough that running every command once still shows
+ * full output; bounded so a long session can't grow the DOM without limit.
+ */
+export const MAX_SCROLLBACK_ENTRIES = 60
+
+/** Append `value`, keeping only the newest `MAX_COMMAND_HISTORY`. */
+export function pushCommand(history: string[], value: string): string[] {
+  const next = [...history, value]
+  return next.length > MAX_COMMAND_HISTORY
+    ? next.slice(-MAX_COMMAND_HISTORY)
+    : next
+}
+
+/** Keep only the newest `MAX_SCROLLBACK_ENTRIES` entry groups. */
+export function capScrollback<T>(entries: T[]): T[] {
+  return entries.length > MAX_SCROLLBACK_ENTRIES
+    ? entries.slice(-MAX_SCROLLBACK_ENTRIES)
+    : entries
+}

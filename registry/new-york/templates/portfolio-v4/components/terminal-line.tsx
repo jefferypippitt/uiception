@@ -1,3 +1,5 @@
+import { memo } from "react"
+
 import type { LineSegment, TerminalLine } from "../lib/commands"
 
 function segmentClass(tone: LineSegment["tone"]): string {
@@ -20,7 +22,11 @@ function segmentClass(tone: LineSegment["tone"]): string {
   }
 }
 
-function SegmentView({ segment }: { segment: LineSegment }) {
+const SegmentView = memo(function SegmentView({
+  segment,
+}: {
+  segment: LineSegment
+}) {
   const className = segmentClass(segment.tone)
 
   if (segment.type === "link") {
@@ -43,9 +49,13 @@ function SegmentView({ segment }: { segment: LineSegment }) {
   }
 
   return <span className={className}>{segment.value}</span>
-}
+})
 
-export function TerminalLineView({ line }: { line: TerminalLine }) {
+export const TerminalLineView = memo(function TerminalLineView({
+  line,
+}: {
+  line: TerminalLine
+}) {
   const empty =
     line.segments.length === 0 ||
     line.segments.every((s) => s.type === "text" && s.value === "")
@@ -64,4 +74,4 @@ export function TerminalLineView({ line }: { line: TerminalLine }) {
       ))}
     </div>
   )
-}
+})

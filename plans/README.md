@@ -59,6 +59,11 @@ after a second template category (`landing-pages`) and 8 new blocks shipped
 | 027 | Add test coverage for `landing-page-v2`'s `registerAction` | P2 | S | — | DONE (merged to main `0a13d46`) |
 | 028 | Add unit tests for `landing-page-v3`'s countdown math | P2 | S | — | DONE (merged to main `86c2042`) |
 | 029 | Add a `sandbox` attribute to the block/template preview iframe | P2 | S | — | DONE (merged to main `71677a0`) |
+| 030 | portfolio-v4 terminal: memoize scrollback rows + cap stored history | P2 | S | — | DONE (reviewed, `advisor/030-portfolio-v4-terminal-render-perf` @ `e2614a9`, not merged) |
+| 031 | `changelog-section-v3`/`v4`: guard `formatChangelogDate` + add pure-function tests | P2 | S | — | DONE (reviewed, `advisor/031-changelog-format-date-guard-and-tests` @ `9b27a33`, not merged) |
+| 032 | Test asserting `pnpm-workspace.yaml` security `overrides` are applied in the lockfile | P2 | S | — | DONE (reviewed, `advisor/032-pnpm-overrides-regression-guard` @ `e437425`, not merged) |
+| 033 | Fix stale lint-step / `minimumReleaseAgeExclude` / template-test-claim / `.env.example` fragments | P3 | S | — | DONE (reviewed, `advisor/033-contributor-docs-and-workspace-config-refresh` @ `6fe7416`, not merged) |
+| 034 | Add `.env.example` to portfolio-v3/v4 + landing-page-v3, enforce with a test | P3 | S | — | DONE (reviewed after one revision, `advisor/034-template-env-example-consistency` @ `7857527`, not merged) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -821,7 +826,279 @@ lifeline gesture interaction and the Clerk `<Waitlist />` embed) is still
 recommended before merging** — flagging this explicitly rather than
 treating the static analysis as full verification.
 
+## Round 7 — standard audit (2026-09-07, planned against `088cc3e`)
+
+Bare `/improve` invocation (all nine categories, standard depth), run after
+~19 days of further shipped work on top of Round 6's merged plans (`4356e29`,
+"new plans and test files"). ~127 files / +3.8k lines changed since. Dominated
+by: **`portfolio-v4`** — a new installable template, a bash-style
+terminal-emulator portfolio (command parser + REPL, `commands.ts`,
+`terminal.tsx`, `commands.test.ts`); **`changelog-section-v3` / `v4`** — two new
+blocks; a large new **pointer/wheel "expand-scrub" gesture system** in
+`portfolio-v3`'s lifeline (`lifeline-marker.tsx` +412, `use-lifeline-scroll.ts`
++172 — now past 1000 lines); `font-serif`→self-imported `Instrument_Serif` fixes
+across 7 blocks (commit `5cc7057`, matches the documented rule — verified
+comprehensive, no `font-serif` left in `registry/`); a new root `.env.example`;
+CI `pnpm audit` retry logic; a `browserslist ^4.28.7` security override
+(commit `83a3b17` — verified it resolves two real HIGH CVEs published 2026-09-01
+and does not bypass Plan 016's override migration).
+
+Four parallel subagents covered correctness+tests, security+dependencies,
+performance+tech-debt, and DX+docs+direction, scoped to the unaudited diff.
+Every finding that made the table was personally re-verified against the live
+source by the advisor before being presented — this caught that CORRECTNESS-01
+(wheel-expand can strand a marker in a stuck disabled state) is **unreachable in
+the shipped Jon Doe data** (only the 2026 year is truncated; the bug needs two
+adjacent truncated year-columns), so it was presented as latent/low-priority,
+not a shipped defect.
+
+`pnpm audit --prod --audit-level high` exits 0 (3 moderate transitive advisories
+in Clerk's unused Solana wallet chain + PostCSS build tooling, none new, none
+runtime-reachable; 2 `image-size` highs acknowledged in `auditConfig.ignoreGhsas`
+pre-baseline). Next.js is at `16.3.0`, current.
+
+Baseline at `088cc3e`: `pnpm typecheck` clean, `pnpm test:run` 188/188,
+`pnpm lint` 0 errors / 16 pre-existing warnings (2 now in the lifeline files —
+`use-lifeline-scroll.ts:964` and `lifeline-hover-image.tsx:70`, both
+ref-in-cleanup `exhaustive-deps` warnings).
+
+The user selected the top 5 by leverage (all S effort, LOW risk, HIGH
+confidence). **Plans 030–034 cover the selection.**
+
+**Selected (030–034):** see the execution table above.
+
+**Findings vetted but not selected this round** (recorded so they aren't
+re-audited from scratch — re-verify freshness before reviving):
+
+- **PERF — `block-preview-by-version.tsx` static imports** (PERF-01, carryover
+  since Round 3): now statically imports ~98 registry blocks (grew by
+  `ChangelogSectionV3`/`V4` this round) and selects via `blockComponents[versionId]`
+  dynamic-key access, defeating tree-shaking. Still M effort / MED risk (~98
+  call sites → `next/dynamic`, per-block SSR verification). Templates' separate
+  preview system (`template-preview-by-version.tsx`) still does NOT have this
+  problem. Best future-round candidate if bundle size becomes a stated concern.
+- **`use-lifeline-scroll.ts` god hook** (carryover Round 6): crossed 1000 lines
+  (881 → 1001) and absorbed a 3rd gesture subsystem (vertical expand-scrub)
+  whose hook↔marker contract is an untyped `CustomEvent("lifelineexpandgesture")`
+  string + a `[data-lifeline-expand]` attribute selector — invisible to types
+  and to grep. Physics constants (`SNAP_VELOCITY`, blend factors) now duplicated
+  across `use-lifeline-scroll.ts` and `lifeline-marker.tsx`. **L effort,
+  MED-HIGH regression risk** (physics-tuned by feel). Recommended scoping if
+  picked: "split the file into co-located modules sharing a constants file — no
+  logic change" first, then separately replace the CustomEvent channel with a
+  typed subscription. Not selected — same reasoning as Round 6.
+- **CORRECTNESS-01 — wheel-expand strands a marker** (`use-lifeline-scroll.ts:657-685`):
+  a continuous wheel scroll drifting between two truncated year-columns leaves
+  the first without a `phase:"end"` event → `scrubbing` stuck true → dead "More"
+  button + frozen track. S effort. **Not selected: unreachable in the shipped
+  data** (needs ≥2 adjacent truncated years; only 2026 is truncated). Latent for
+  a consumer who edits `jon-doe.ts` to add more `globalEvents`. Fix sketch: emit
+  `phase:"end"` to the old host before `start` on the new one in `onWheel` /
+  `beginDrag` / `beginExpand`.
+- **PERF — changelog avatars oversized** (PERF-03): `changelog-section-v3`/`v4`
+  each ship 6 × 192×192 ~60 KB PNG photos rendered at ~28 px (via shadcn
+  `AvatarImage`, a plain `<img>`), byte-identical between the two blocks
+  (~700 KB duplicated). S effort — downscale to ~64–96 px and/or WebP; unlike
+  Round 3's Plan 015 the resize step *would* engage here (they're above the
+  1600 px... no — they're 192 px but 6× their display size, so a display-size
+  clamp is the lever, not the 1600 px cap). Not selected this round; good cheap
+  pickup.
+- **TESTS-02 — portfolio-v4 terminal state machine untested** (`terminal.tsx:176-221`):
+  arrow-key history nav, Ctrl+C/L, draft restore, `MAX_HISTORY` slicing live only
+  in the component; Node-env vitest can't test it in place. M effort (extract an
+  input/history `useReducer`, then unit-test it). The history logic is correct
+  today (traced by hand). Plan 030 removes the *performance* motivation for the
+  extraction via `memo`; the testability motivation remains. Not selected —
+  larger than the 5 picked.
+- **CORRECTNESS-03 — terminal blank-Enter leaves a stale draft**
+  (`terminal.tsx:110-129` omits `setDraft("")`): cosmetic, one line. **Folded
+  into Plan 030 Step 4** (same file, same area) rather than a standalone plan.
+- **TECH-DEBT — `spreadsheet.tsx` puts a `const` between two import groups**
+  (`spreadsheet/components/spreadsheet.tsx:9-15`, from the font migration): the
+  other 6 blocks in commit `5cc7057` put it after all imports. Lint doesn't
+  enforce `import/first` here so CI is green. Cosmetic; too low-leverage for a
+  line item. **Rejected** — fix opportunistically if the file is touched again.
+- **TECH-DEBT — `LifelineMarkerColumn` not memoized** (`lifeline-marker.tsx:68`):
+  rebuilds `aggregateLifelineGlobalEvents` (a `Map`) + `innerContent` JSX every
+  render; during a wheel expand-scrub that's per-wheel-tick. Minor at current
+  data volume (one truncated column). S effort. Not selected; latent multiplier
+  if a consumer's data has several truncated years.
+- **DX — compression scripts hardcode `public/{images,videos}/blocks`** (DX-02,
+  carryover Round 4): template media bypasses `pnpm images:compress`. No new
+  violation this round (portfolio-v4 has no raster media; changelog avatars are
+  under the covered `blocks/` path). Latent. Not selected.
+- **SEC — no security response headers** (CSP / X-Frame-Options / nosniff),
+  carryover since Round 3: `next.config.mjs` has only a conditional Origin-Trial
+  header, no `middleware.ts`. portfolio-v4's terminal input never reaches an HTML
+  sink (React text nodes only, static link `href`s) so it adds no XSS surface —
+  the finding's weight is unchanged. Not selected — hardening gap, no active
+  exposure (no auth/PII).
+- **Preview iframe `sandbox`** (Plan 029) — confirmed still present at
+  `components/block-preview-toolbar.tsx:501`, not reverted.
+- **DIR-1** (carryover DIR-G, 4th round running): `lib/blocks.ts` `contact` /
+  `newsletter` / `waitlist` categories still `versions: []` while finished form
+  implementations sit in `portfolio-v1/components/contact-form.tsx`,
+  `landing-page-v1/components/waitlist-panel.tsx`,
+  `landing-page-v2/components/ui/questionnaire.tsx`. portfolio-v4 doesn't change
+  this. A harvest, not a build — the only design call is a headless
+  bring-your-own-endpoint contract. Not selected.
+- **DIR-2** (fresh): the catalog's `mac-os-terminal` / `cursor-terminal` blocks
+  are scripted animations; portfolio-v4 just shipped a real, tested interactive
+  REPL. An interactive-terminal block would be a re-extraction of that command
+  model into the block layout convention. MED confidence — capability proven,
+  catalog fit is a product call. Not selected — spike candidate.
+- **DIR-3** (carryover DIR-I): templates still share zero code with the ~92-block
+  catalog (`grep` for block imports inside `templates/` returns nothing;
+  portfolio-v4 continues the pattern). L effort, blocked on a
+  block-versioning/vendoring story. Unchanged.
+
+**Areas audited with no finding this round** (recorded so they aren't
+re-checked from scratch): `portfolio-v4/lib/commands.ts` (no eval / Function /
+dynamic import / fetch / URL-from-input; user input is whitelist-matched then
+rendered as React text nodes — no XSS); `portfolio-v4/components/terminal-line.tsx`
+link `href`s all trace to static `lib/portfolio.ts` data, `target="_blank"`
+carries `rel="noreferrer noopener"`; `commands.ts` `never` exhaustiveness checks
+are sound; terminal history-index nav has no off-by-one (traced both
+boundaries); `equalGapListing` wrapping is correct; the `MAX_HISTORY` slice
+keeps the newest 100; the iframe autofocus guard (`window.self !== window.top`
+in try/catch) is correct; hash-scroll refactor (commit `1a85348`) is a
+byte-for-byte logic copy into a shared `CategoryHashScroll` with full effect
+cleanup, both call sites prop-less, old file removed; `use-lifeline-scroll.ts`
+new expand code — all listeners / RAF / observers / timers have matching
+teardown in cleanup (only the cross-host `end` gap of CORRECTNESS-01 stands
+out); `lifeline-marker.tsx` new expand component — `ResizeObserver` disconnect,
+RAF cancel, listener + timeout cleanup all present; changelog blocks — `next/link`
+used, `AvatarImage`/`AvatarFallback` (not raw `next/image`), stable keys, empty
+`changelog` array degrades to an empty section; `changelog-format.ts` `formatContributorNames`
+plural pivot is actually correct (`rest === 1 ? "" : "s"` — the audit's "and 1
+others" example was wrong, the code is right — but still untested → Plan 031);
+`lib/changelog.ts` + `changelog-mdx-components.tsx` — `compileMDX` source is
+repo-authored `.mdx` compiled at build time, external links get
+`rel="noopener noreferrer"`, `parseFrontmatter: false` retained; the `.gitignore`
+−20 lines (commit `69ff09a`) removed only now-deleted beta-skill dir ignores —
+`.env` / `.env.local` / `*.pem` still ignored (`git check-ignore` confirmed);
+the CI `pnpm audit` retry loop fails closed on a real HIGH and only retries on
+timeout/error-23; `pnpm/action-setup@v4` runs off the hash-pinned
+`packageManager` field; new `.env.example` files (root + `landing-page-v2`)
+contain only blank-valued keys; `changelog-section-v3`/`v4` `changelog-content.ts`
+differ (data + `createBlockImage` id + `sectionMeta.title`) while
+`changelog-format.ts` is byte-identical; changelog freshness — `08-26-2026.mdx`
+covers portfolio-v4, `09-03-2026.mdx` covers the changelog blocks, both same-day;
+no prompt-injection content in any audited file (`AGENTS.md` / `CLAUDE.md` /
+`.cursor/rules/*.mdc` are the maintainer's own contributor guidance).
+
+## Round 7 execution log (reviewed, not yet merged)
+
+Plans 030–034 were each dispatched to an isolated executor subagent in a
+disposable git worktree (`pnpm install` run first in each), then independently
+reviewed by the advisor: every done criterion re-run from scratch in the
+worktree (not trusted from the executor's report), `git diff --stat 088cc3e..HEAD`
+checked against each plan's declared scope, the full diff read, and new tests
+read to confirm they assert real values. **All 5 plans APPROVED; no branch has
+been merged to `main`** — each remains on its `advisor/*` branch in its worktree,
+awaiting the operator's decision on when/how to land them. 034 took one REVISE
+round (documented below); the other four passed first review.
+
+| Plan | Branch | Worktree | Commit | Verdict |
+|------|--------|----------|--------|---------|
+| 030 | `advisor/030-portfolio-v4-terminal-render-perf` | `.claude/worktrees/agent-a591c9ac784007ef3` | `e2614a9` | APPROVE — not merged |
+| 031 | `advisor/031-changelog-format-date-guard-and-tests` | `.claude/worktrees/agent-aab99bd2c4e303a90` | `9b27a33` | APPROVE — not merged |
+| 032 | `advisor/032-pnpm-overrides-regression-guard` | `.claude/worktrees/agent-a1d0d2995e9e5a2c9` | `e437425` | APPROVE — not merged |
+| 033 | `advisor/033-contributor-docs-and-workspace-config-refresh` | `.claude/worktrees/agent-a1bc66de928b3f3fa` | `6fe7416` | APPROVE — not merged |
+| 034 | `advisor/034-template-env-example-consistency` | `.claude/worktrees/agent-aa89c6f177eaf72b6` | `7857527` | APPROVE (after 1 revision) — not merged |
+
+**030**: diff matches the plan exactly across all 5 in-scope files —
+`memo(...)` wraps both `SegmentView` and `TerminalLineView`
+(`terminal-line.tsx`); `MAX_HISTORY` local const removed; `pushCommand` /
+`capScrollback` added to `lib/commands.ts` (additive, at end) and wired into
+`submitCommand`; `setDraft("")` added to the blank-Enter branch (the deferred
+CORRECTNESS-03 nit, folded in per this index's Round 7 notes). 4 new tests in
+`commands.test.ts`. Advisor independently re-ran in the worktree: 24/24
+portfolio-v4 tests, 192/192 full suite, typecheck clean, lint 16 warnings
+(unchanged), `registry:validate` valid. `public/r/portfolio-v4.json` diff is
+limited to the 3 changed `content` strings, LF preserved; `git status public/r/`
+clean (the ~107 other payloads reverted after the Windows `registry:build`
+CRLF rewrite). No behavior change — purely structural.
+
+**031**: diff matches the plan exactly — identical `formatChangelogDate` guard
+(early-return the raw ISO on a non-`YYYY-MM-DD` string) applied byte-for-byte to
+both `changelog-section-v3` and `v4` `lib/changelog-format.ts` (`git diff`
+confirms both blobs go `4a65ea5..8f7effd`), plus a new
+`tests/registry/changelog-format.test.ts` running a 7-case suite against each
+block via `describe.each` (14 cases). Advisor independently re-ran: 14/14
+targeted, 202/202 full suite, typecheck clean, lint 16 warnings, `v3 diff v4`
+identical, `public/r/changelog-section-v{3,4}.json` diffs limited to the one
+`content` string with LF preserved, no stray scratchpad files, `git status`
+clean. Executor handled the same Windows CRLF-churn the plan anticipated —
+reverted the ~105 unrelated payloads and normalized `\r\n`→`\n` in the two
+in-scope ones via a Node script written outside the repo.
+
+**032**: diff is a single new file, `tests/registry/pnpm-overrides.test.ts`
+(83 lines). Advisor read the full test: the load-bearing assertion
+(`effective` lockfile-header overrides deep-equal `declared` pnpm-workspace.yaml
+overrides, quotes normalised) plus a per-package caret-floor check on every
+resolved version of the 5 simple pins and a matching-major presence check for
+the 1 scoped pin (`gray-matter>js-yaml`). Executor used the plan's sanctioned
+simpler regex escape. Independently re-ran: 7/7 passing, 195/195 full suite,
+typecheck clean, lint 16 warnings, diff is the one file.
+
+**033**: diff matches the plan exactly across all 5 files — `lint` added to the
+`pnpm check` comment in `WORKFLOW.md` + `CONTRIBUTING.md` and as its own line in
+WORKFLOW.md's step-by-step block; the 12 `minimumReleaseAgeExclude` strings
+bumped `16.2.12`→`16.3.0` (the `overrides:` / `auditConfig:` / `allowBuilds:`
+blocks untouched); the `registry-templates.mdc` "no test currently catches"
+sentence replaced with an accurate one; the two `.env.example` comment
+fragments completed (no key values added). Advisor independently re-ran:
+`pnpm-lock.yaml` + `package.json` byte-unchanged, `grep -c 16.2.12
+pnpm-workspace.yaml` → 0, 188/188 tests, typecheck clean, `registry:validate`
+valid.
+
+**034**: STOPPED on first run at Step 4 (Windows `pnpm registry:build` full-tree
+CRLF churn — same obstacle 030/031 hit), then completed after one REVISE.
+Diff matches the plan across all 8 in-scope files — 3 new `.env.example` files
+(comments only, zero values), 3 `files` entries appended to `registry.json`
+matching the `portfolio-v2` shape, a new
+`describe("every template ships a .env.example")` (2 cases: on-disk +
+registry.json declaration) in `registry-templates.test.ts`, and the 3 `public/r`
+payloads each gaining exactly the one `.env.example` entry. **Deviation on Step 4,
+judged sound**: the executor found that a blanket `\r\n`→`\n` normalization
+(what the REVISE directed) would *corrupt* `portfolio-v3.json` /
+`portfolio-v4.json`, whose HEAD `content` strings already legitimately contain
+CRLF in some files (`.gitkeep` bodies, `terminal.css`). Instead it spliced the
+single new entry into each payload's verified-faithful HEAD JSON and
+re-serialized — net-identical to what a clean-EOL machine's `registry:build`
+would emit, with a genuinely minimal 3-file diff. Advisor independently re-ran
+in the worktree: `registry:validate` valid (111 items), 8/8 template tests
+(up from 6), 190/190 full suite, typecheck clean, lint 16 warnings, working tree
+clean, diff scope exactly the 8 files.
+
+**Cross-cutting note for the operator — Windows line endings**: three of the
+five plans regenerate `public/r/*.json`, and every executor on a fresh worktree
+hit the same issue — this repo has no `.gitattributes`, so a Windows checkout
+gets `registry/**` source as CRLF, and `pnpm registry:build` then rewrites
+*every* payload's embedded `content` with `\r\n`. Each executor worked around it
+(revert unrelated payloads + normalize the in-scope ones), and each produced a
+verified-clean diff, but it's fragile. Adding a `.gitattributes` normalizing
+`registry/**` and `public/r/**` (and probably the whole repo) to LF would remove
+this failure mode permanently — worth a small dedicated plan next round
+(flagged by two executors independently).
+
 ## Dependency notes
+
+- **030–034 (Round 7) are independent of each other** — no shared files. 030
+  touches `portfolio-v4` (`terminal*.tsx`, `commands.ts`, its test) +
+  `public/r/portfolio-v4.json`. 031 touches `changelog-section-v{3,4}/lib/changelog-format.ts`
+  + a new `tests/registry/changelog-format.test.ts` + the two changelog
+  `public/r` payloads. 032 adds one new `tests/registry/pnpm-overrides.test.ts`.
+  033 touches `WORKFLOW.md` / `CONTRIBUTING.md` / `pnpm-workspace.yaml` (inert
+  `minimumReleaseAgeExclude` strings only) / `.cursor/rules/registry-templates.mdc`
+  / `.env.example`. 034 touches `registry/new-york/templates/{portfolio-v3,portfolio-v4,landing-page-v3}/.env.example`
+  + `registry.json` + `tests/registry/registry-templates.test.ts` + three
+  `public/r` payloads. **030 and 034 both add a file to the `portfolio-v4`
+  registry item and regenerate `public/r/portfolio-v4.json`** — no logical
+  conflict (030 adds nothing to `registry.json`; 034 adds the `.env.example`
+  entry), but if both merge, `public/r/portfolio-v4.json` needs one clean
+  rebuild over the combined state. Any execution order is fine.
 
 - **024–029 (Round 6) are independent of each other** — no shared files
   (024 and 025 both touch `portfolio-v3` but different files — the lifeline
