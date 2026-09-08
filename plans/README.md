@@ -59,11 +59,11 @@ after a second template category (`landing-pages`) and 8 new blocks shipped
 | 027 | Add test coverage for `landing-page-v2`'s `registerAction` | P2 | S | — | DONE (merged to main `0a13d46`) |
 | 028 | Add unit tests for `landing-page-v3`'s countdown math | P2 | S | — | DONE (merged to main `86c2042`) |
 | 029 | Add a `sandbox` attribute to the block/template preview iframe | P2 | S | — | DONE (merged to main `71677a0`) |
-| 030 | portfolio-v4 terminal: memoize scrollback rows + cap stored history | P2 | S | — | DONE (reviewed, `advisor/030-portfolio-v4-terminal-render-perf` @ `e2614a9`, not merged) |
-| 031 | `changelog-section-v3`/`v4`: guard `formatChangelogDate` + add pure-function tests | P2 | S | — | DONE (reviewed, `advisor/031-changelog-format-date-guard-and-tests` @ `9b27a33`, not merged) |
-| 032 | Test asserting `pnpm-workspace.yaml` security `overrides` are applied in the lockfile | P2 | S | — | DONE (reviewed, `advisor/032-pnpm-overrides-regression-guard` @ `e437425`, not merged) |
-| 033 | Fix stale lint-step / `minimumReleaseAgeExclude` / template-test-claim / `.env.example` fragments | P3 | S | — | DONE (reviewed, `advisor/033-contributor-docs-and-workspace-config-refresh` @ `6fe7416`, not merged) |
-| 034 | Add `.env.example` to portfolio-v3/v4 + landing-page-v3, enforce with a test | P3 | S | — | DONE (reviewed after one revision, `advisor/034-template-env-example-consistency` @ `7857527`, not merged) |
+| 030 | portfolio-v4 terminal: memoize scrollback rows + cap stored history | P2 | S | — | DONE (squash-merged to main `093b664`) |
+| 031 | `changelog-section-v3`/`v4`: guard `formatChangelogDate` + add pure-function tests | P2 | S | — | DONE (squash-merged to main `093b664`) |
+| 032 | Test asserting `pnpm-workspace.yaml` security `overrides` are applied in the lockfile | P2 | S | — | DONE (squash-merged to main `093b664`) |
+| 033 | Fix stale lint-step / `minimumReleaseAgeExclude` / template-test-claim / `.env.example` fragments | P3 | S | — | DONE (squash-merged to main `093b664`) |
+| 034 | Add `.env.example` to portfolio-v3/v4 + landing-page-v3, enforce with a test | P3 | S | — | DONE (squash-merged to main `093b664`, after one revision) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -987,25 +987,38 @@ covers portfolio-v4, `09-03-2026.mdx` covers the changelog blocks, both same-day
 no prompt-injection content in any audited file (`AGENTS.md` / `CLAUDE.md` /
 `.cursor/rules/*.mdc` are the maintainer's own contributor guidance).
 
-## Round 7 execution log (reviewed, not yet merged)
+## Round 7 execution log (reviewed, approved, squash-merged)
 
 Plans 030–034 were each dispatched to an isolated executor subagent in a
 disposable git worktree (`pnpm install` run first in each), then independently
 reviewed by the advisor: every done criterion re-run from scratch in the
 worktree (not trusted from the executor's report), `git diff --stat 088cc3e..HEAD`
 checked against each plan's declared scope, the full diff read, and new tests
-read to confirm they assert real values. **All 5 plans APPROVED; no branch has
-been merged to `main`** — each remains on its `advisor/*` branch in its worktree,
-awaiting the operator's decision on when/how to land them. 034 took one REVISE
-round (documented below); the other four passed first review.
+read to confirm they assert real values. All 5 plans APPROVED (034 after one
+REVISE round, documented below; the other four on first review).
 
-| Plan | Branch | Worktree | Commit | Verdict |
-|------|--------|----------|--------|---------|
-| 030 | `advisor/030-portfolio-v4-terminal-render-perf` | `.claude/worktrees/agent-a591c9ac784007ef3` | `e2614a9` | APPROVE — not merged |
-| 031 | `advisor/031-changelog-format-date-guard-and-tests` | `.claude/worktrees/agent-aab99bd2c4e303a90` | `9b27a33` | APPROVE — not merged |
-| 032 | `advisor/032-pnpm-overrides-regression-guard` | `.claude/worktrees/agent-a1d0d2995e9e5a2c9` | `e437425` | APPROVE — not merged |
-| 033 | `advisor/033-contributor-docs-and-workspace-config-refresh` | `.claude/worktrees/agent-a1bc66de928b3f3fa` | `6fe7416` | APPROVE — not merged |
-| 034 | `advisor/034-template-env-example-consistency` | `.claude/worktrees/agent-aa89c6f177eaf72b6` | `7857527` | APPROVE (after 1 revision) — not merged |
+At the operator's explicit request, all 5 `advisor/*` branches plus the Round 7
+plan docs were then **squash-merged into `main` as one commit `093b664`
+("plan updates")** and pushed to `origin/main`. Before committing, `pnpm check`
+was re-run against the combined staged state — `registry:validate` valid
+(111 items), lint 0 errors / 16 pre-existing warnings, `test:run` 215/215 (up
+from 188: +14 changelog-format, +4 portfolio-v4 history, +7 pnpm-overrides,
++2 registry-templates), typecheck clean. `pnpm build` was **not** re-run against
+the combined state (it CRLF-churns `public/r/` on this Windows checkout — the
+per-plan payload regens were verified individually instead). The push to
+`origin/main` reported bypassing this repo's branch protection (PR requirement +
+required "check" status per `CONTRIBUTING.md`) via the operator's account bypass
+permission — surfaced here, not done silently. The `advisor/030`–`034` branches
+and their worktrees under `.claude/worktrees/` remain for inspection until
+pruned; they are now fully contained in `093b664` and safe to delete.
+
+| Plan | Branch (pre-squash) | Worktree | Commit (pre-squash) | Verdict |
+|------|---------------------|----------|---------------------|---------|
+| 030 | `advisor/030-portfolio-v4-terminal-render-perf` | `.claude/worktrees/agent-a591c9ac784007ef3` | `e2614a9` | APPROVE — merged (`093b664`) |
+| 031 | `advisor/031-changelog-format-date-guard-and-tests` | `.claude/worktrees/agent-aab99bd2c4e303a90` | `9b27a33` | APPROVE — merged (`093b664`) |
+| 032 | `advisor/032-pnpm-overrides-regression-guard` | `.claude/worktrees/agent-a1d0d2995e9e5a2c9` | `e437425` | APPROVE — merged (`093b664`) |
+| 033 | `advisor/033-contributor-docs-and-workspace-config-refresh` | `.claude/worktrees/agent-a1bc66de928b3f3fa` | `6fe7416` | APPROVE — merged (`093b664`) |
+| 034 | `advisor/034-template-env-example-consistency` | `.claude/worktrees/agent-aa89c6f177eaf72b6` | `7857527` | APPROVE (after 1 revision) — merged (`093b664`) |
 
 **030**: diff matches the plan exactly across all 5 in-scope files —
 `memo(...)` wraps both `SegmentView` and `TerminalLineView`
