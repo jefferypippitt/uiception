@@ -5688,7 +5688,7 @@
         "template",
         "portfolio"
       ],
-      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v2.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nEdit your name, bio, social links, projects, and experience directly in app/page.tsx. Drop a photo at public/avatar.png to replace the JD initials. The email link copies jefferyspippitt@gmail.com (edit components/copy-email.tsx). Notes live in lib/notes.tsx as typed React bodies — no markdown or CMS. Preview at /view/portfolio-v2. Press D to toggle theme.\n\nCanvas UI Liquid: trails work everywhere. Text distortion needs Chromium html-in-canvas. Register one Origin Trial token for your production origin at https://developer.chrome.com/origintrials (html-in-canvas), then set NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN in .env.local. Local-only warp without a token: chrome://flags/#canvas-draw-element.",
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v2.json\"\n\nThis scaffolds Next.js + shadcn, then installs the full site.\n\nTo personalize: attach your resume and point your coding agent at AGENTS.md — it re-skins the whole site (name, bio, links, notes, projects, experience) and runs the UNSLOP.md pass on the prose it writes. Or edit app/page.tsx directly. Drop a photo at public/avatar.png to replace the JD initials. The email link copies jefferyspippitt@gmail.com (edit components/copy-email.tsx). Notes live in lib/notes.tsx as typed React bodies — no markdown or CMS. Preview at /view/portfolio-v2. Press D to toggle theme.\n\nCanvas UI Liquid: trails work everywhere. Text distortion needs Chromium html-in-canvas. Register one Origin Trial token for your production origin at https://developer.chrome.com/origintrials (html-in-canvas), then set NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN in .env.local. Local-only warp without a token: chrome://flags/#canvas-draw-element.",
       "files": [
         {
           "path": "registry/new-york/templates/portfolio-v2/components/ui/badge.tsx",
@@ -5764,6 +5764,16 @@
           "path": "registry/new-york/templates/portfolio-v2/.env.example",
           "type": "registry:file",
           "target": ".env.example"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/AGENTS.md",
+          "type": "registry:file",
+          "target": "AGENTS.md"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v2/UNSLOP.md",
+          "type": "registry:file",
+          "target": "UNSLOP.md"
         }
       ]
     },
