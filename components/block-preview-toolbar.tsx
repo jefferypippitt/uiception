@@ -309,6 +309,7 @@ export function BlockPreviewToolbar({
 
   const selectedFile = registryData?.files.find((f) => f.path === selectedPath) ?? null
   const selectedContent = selectedFile?.content ?? ""
+  const markdownHtml = selectedFile?.markdownHtml || ""
   const highlightedHtml = selectedFile
     ? resolvedTheme === "dark"
       ? selectedFile.htmlDark
@@ -551,7 +552,12 @@ export function BlockPreviewToolbar({
                 </Button>
               </div>
               <div className="min-h-0 flex-1 overflow-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
-                {highlightedHtml ? (
+                {markdownHtml ? (
+                  <div
+                    className="typeset typeset-docs mx-auto max-w-3xl px-6 py-6"
+                    dangerouslySetInnerHTML={{ __html: markdownHtml }}
+                  />
+                ) : highlightedHtml ? (
                   <div
                     className="shiki-panel shiki-panel-vercel-docs shiki-panel-editor [&_.shiki]:rounded-none [&_.shiki]:border-0"
                     dangerouslySetInnerHTML={{ __html: highlightedHtml }}

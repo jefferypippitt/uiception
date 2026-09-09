@@ -1,5 +1,6 @@
 import { promises as fs } from "fs"
 import path from "path"
+import { marked } from "marked"
 import { cache } from "react"
 
 import {
@@ -19,6 +20,23 @@ export type HighlightedRegistryFile = {
   content: string
   htmlLight: string
   htmlDark: string
+  /**
+   * Rendered-Markdown HTML for `.md` / `.markdown` files, shown instead of the
+   * syntax-highlighted source in the code viewer. Empty string for every other
+   * file type.
+   */
+  markdownHtml: string
+}
+
+const MARKDOWN_EXTS = new Set(["md", "markdown"])
+
+/**
+ * Render a registry `.md` file to HTML. Content originates from our own
+ * `public/r/*.json` manifests (authored in this repo), so raw HTML passed
+ * through by `marked` is trusted.
+ */
+function renderRegistryMarkdown(source: string): string {
+  return marked.parse(source, { async: false, gfm: true }) as string
 }
 
 export type BlockRegistryData = {
@@ -48,7 +66,19 @@ export const getBlockRegistryData = cache(
         const content = codeViewContentForRegistryFile(displayPath, file.content, file.meta)
 
         if (shouldStripRegistryFileContent(displayPath, file.content, file.meta)) {
-          files.push({ path: displayPath, content, htmlLight: "", htmlDark: "" })
+          files.push({ path: displayPath, content, htmlLight: "", htmlDark: "", markdownHtml: "" })
+          continue
+        }
+
+        const ext = displayPath.split(".").pop()?.toLowerCase() ?? ""
+        if (MARKDOWN_EXTS.has(ext)) {
+          files.push({
+            path: displayPath,
+            content,
+            htmlLight: "",
+            htmlDark: "",
+            markdownHtml: renderRegistryMarkdown(content),
+          })
           continue
         }
 
@@ -64,7 +94,7 @@ export const getBlockRegistryData = cache(
           }),
         }))
 
-        files.push({ path: displayPath, content, htmlLight, htmlDark })
+        files.push({ path: displayPath, content, htmlLight, htmlDark, markdownHtml: "" })
       }
 
       const install = getInstallCommand(versionId)
