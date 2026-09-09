@@ -149,10 +149,12 @@ this is a nav item, not a sentence.
 
 ## Step 3 — Links
 
-Do not shorten or remove the "Elsewhere, I'm on Instagram, Twitter, and
+Do not shorten or remove the "Elsewhere, I'm on Instagram, X, and
 GitHub" section in `app/page.tsx` — keep all three labels and the sentence
 structure exactly as they are. This section is a fixed set of redirect
 slots, not a list you edit down to what the resume happens to mention.
+("X" is the platform formerly called Twitter — a resume may still label it
+either way.)
 
 For each of the three, the `href` rule is the same for every platform,
 every time — resolved or not:
@@ -161,7 +163,7 @@ every time — resolved or not:
   GitHub) → replace that one `href` with the real URL. Keep
   `target="_blank" rel="noreferrer"` as-is — it already opens in a new tab.
 - Resume doesn't mention the platform (Instagram usually won't; a resume
-  link labeled "X" is the same platform as Twitter — fill the Twitter slot
+  link labeled "Twitter" is the same platform as X — fill the X slot
   with it, don't treat it as a new one), **or you can't recover a real URL
   for it** (see the PDF caveat below) → set `href="#"`. Don't leave the
   original bare-domain placeholder (`https://instagram.com`, etc.) —
@@ -189,8 +191,8 @@ any of the original three to make room for them, only append:
 
 - **LinkedIn** — check for this every time. It's the single most common
   link on a resume that isn't already one of the three slots. If found, it
-  goes right after Twitter and before GitHub, so the order reads
-  Instagram, Twitter, LinkedIn, and GitHub.
+  goes right after X and before GitHub, so the order reads
+  Instagram, X, LinkedIn, and GitHub.
 - Anything else the resume links to (Dribbble, a Mastodon handle, etc.)
   also goes at the end, in the order you found it. This isn't a closed
   list — LinkedIn is just the one to never skip checking for.
@@ -206,7 +208,7 @@ in `app/page.tsx` that changes shape:
   </Link>
   ,{" "}
   <Link href="#" target="_blank" rel="noreferrer">
-    Twitter
+    X
   </Link>
   ,{" "}
   <Link href="https://linkedin.com/in/their-real-handle" target="_blank" rel="noreferrer">
@@ -221,7 +223,7 @@ in `app/page.tsx` that changes shape:
 ```
 
 This example shows a resume with LinkedIn and GitHub but no Instagram or
-Twitter, which is the common case — Instagram and Twitter fall back to
+X, which is the common case — Instagram and X fall back to
 `#`, LinkedIn gets appended, GitHub gets its real handle. If LinkedIn
 isn't on the resume, don't add that block at all; just apply the `#`-or-real
 rule to the original three.

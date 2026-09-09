@@ -77,8 +77,8 @@ export default async function HomePage() {
           Instagram
         </Link>
         ,{" "}
-        <Link href="https://twitter.com" target="_blank" rel="noreferrer">
-          Twitter
+        <Link href="https://x.com" target="_blank" rel="noreferrer">
+          X
         </Link>
         , and{" "}
         <Link href="https://github.com" target="_blank" rel="noreferrer">
