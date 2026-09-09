@@ -5,13 +5,24 @@ communicator ("Jon Doe"). It's a demo persona, not a template you fill in
 field-by-field — your job is to fully re-skin the site as the real person
 who owns this project.
 
-**Trigger:** the user drops a `resume.pdf` in the project root (or attaches
-one directly to you) and asks you to personalize the site — e.g. by
-mentioning `@AGENTS.md`. When that happens, follow the steps below.
+**Trigger:** the user attaches their resume (a PDF) directly to you and
+asks you to personalize the site — e.g. by mentioning `@AGENTS.md`. When
+that happens, follow the steps below.
+
+The resume is personal data and has no reason to live in this repo. Work
+from the attachment. Do **not** copy it into the project directory at any
+point — not to read it, not to run the extraction in Step 1, not
+"just temporarily while I work." As a safety net in case someone saves it
+here by hand, add a line to `.gitignore` before you start (skip if it's
+already listed):
+
+```
+grep -qxF 'resume.pdf' .gitignore || echo 'resume.pdf' >> .gitignore
+```
 
 ## Step 1 — Read the resume
 
-Read `resume.pdf` at the project root. Pull out:
+Read the attached resume. Pull out:
 
 - Full name
 - Real profession / field / title (e.g. "Full-Stack Developer", "Product
@@ -30,11 +41,25 @@ Read `resume.pdf` at the project root. Pull out:
 
 Reading the PDF only gives you visible text — "GitHub" as a clickable
 label doesn't tell you what it links to. Before treating any link as
-unresolved, try recovering the actual target directly from the file:
+unresolved, try recovering the actual target from the raw bytes of the
+file.
+
+This needs a real filesystem path, and the resume is an attachment, not a
+file in the repo. Copy it to a scratch location **outside the project** —
+your OS temp directory — run the search there, and delete it when done:
 
 ```
-grep -a -o "/URI[^)]*)" resume.pdf
+# adjust the source to wherever the attachment actually is on disk
+cp <attached-resume-path> "${TMPDIR:-/tmp}/resume.pdf"
+grep -a -o "/URI[^)]*)" "${TMPDIR:-/tmp}/resume.pdf"
+rm "${TMPDIR:-/tmp}/resume.pdf"
 ```
+
+On Windows use the temp dir (`"$TEMP/resume.pdf"` in Git Bash,
+`$env:TEMP` in PowerShell). Never copy it under the project directory,
+even for a moment. If you can't get a filesystem path to the attachment at
+all, ask the user for the path to the file on their machine and grep it in
+place — still don't bring it into the repo.
 
 Most resumes (exported from Google Docs, Word, or a resume builder) store
 their hyperlink targets as plain-text `/URI (...)` entries even when the
@@ -45,10 +70,9 @@ and so on. Do this for every link-looking label in the resume, not just
 the obvious ones — it's what makes Step 3 actually work instead of falling
 back to asking every time.
 
-Only fall back to asking the user for the real link if this command comes
-up empty and the resume text still shows an unresolved label — some PDFs
-compress the annotation objects too, which a plain-text search can't see
-through.
+Only fall back to asking the user for the real link if this comes up empty
+and the resume text still shows an unresolved label — some PDFs compress
+the annotation objects too, which a plain-text search can't see through.
 
 ## Step 2 — Identity & tone
 
@@ -228,21 +252,28 @@ be asked.
   as a folder average, since the demo entries aren't all the same length
   to begin with.
 - Match the existing structure of the current demo entries — prose
-  paragraphs, an occasional `<figure>` image with `<figcaption>`, a pull
+  paragraphs, a `<figure>` image with `<figcaption>` (see below), a pull
   quote via `>`, a table or two if relevant to the field
-- Images: see "Sourcing images" below before adding any `<figure>` — the
-  match has to be exact, not just thematic, and video is never an option
-  in this template
+- Images: every `content/writing/*.mdx` entry gets a `<figure>` unless the
+  topic is genuinely non-visual — see "Sourcing images" below for how to
+  find a real URL (a required step, not a nice-to-have) and how exact the
+  match has to be. Video is never an option in this template.
 - Titles and topics should read as genuinely written by this person about
   their real field, not a generic reskin — use the specifics from their
   resume (technologies, industries, notable work) as material
 
 ### Sourcing images
 
+Images are expected. Personalization should not produce a set of text-only
+posts when the demo had a photo on nearly every one. Every
+`content/writing/*.mdx` entry gets one `<figure>` unless the topic is
+genuinely non-visual (a pure-abstract argument, a math-heavy note).
+Books / long-form entries: one where it fits, optional otherwise. "I
+couldn't find one" is a per-figure outcome after a real search — never the
+reason the whole set ships bare.
+
 Images only — this template has no video component or pattern anywhere in
-it, so never add a `<video>` tag or embed. If you want to show something
-that isn't a still photo, that's a sign this entry shouldn't have a
-`<figure>` at all (see the density guidance below).
+it, so never add a `<video>` tag or embed.
 
 Images are plain hotlinked URLs in the MDX itself — no upload, no local
 file, no attachment. Use exactly the pattern the demo content already
@@ -261,35 +292,44 @@ uses:
 </figure>
 ```
 
+**Finding the URL is a required step, not optional.** Unsplash photo IDs
+are not guessable, and a plausible-looking one is almost always a dead
+link. Never write a `src` from memory. For each figure:
+
+1. Web-search or fetch for a real Unsplash photo matching the topic — the
+   `firecrawl` skill, or `WebSearch` / `WebFetch`, all work.
+2. Take the actual photo ID from the real page URL
+   (`unsplash.com/photos/<slug>-<id>`) and build the `src` with the query
+   string shown above.
+3. Only if that specific search turns up nothing that is an *exact* match
+   (see below) do you skip that one `<figure>` — and say so in your
+   summary: which entries you left imageless and why.
+
+If you have no web access at all in this environment, stop and tell the
+user before finishing: either they supply the image URLs, or the
+personalization pass runs somewhere with web access. Do not ship the
+content silently image-free.
+
 **The match has to be exact, not thematic.** `rip-pluto.mdx` is the bar:
 the post is specifically about Pluto, and the image is an actual photo of
 Pluto, not a generic nebula or star field. A post about a specific
-product, a specific place, or a specific piece of hardware needs a photo
-of that thing (or something concretely evocative of it), not a generic
-"coding" or "office" stock photo standing in for the topic. If you can't
-find an image that specific, that's a reason to skip the `<figure>`
-entirely, not to use a vaguer one.
+product, place, or piece of hardware needs a photo of that thing (or
+something concretely evocative of it), not a generic "coding" or "office"
+stock photo standing in for the topic.
 
-How often to use one at all depends on the resume's field — don't apply it
-uniformly:
+What *kind* of photo fits depends on the field, but the answer is rarely
+"none":
 
-- **Developer / technical field** — an editorial stock photo rarely fits a
-  technical note. Prefer no `<figure>` at all, or at most one per entry,
-  and only when something concretely photographable is actually being
-  discussed — never fake a screenshot or diagram as a photo.
-- **Writer / creative field** — closest to the current demo content.
-  A specific, exact-match photo is expected for most entries, similar
-  density to what's there now (roughly one per post).
-- **Other / general personal site** — use sparingly, one relevant image at
-  most per entry, only when it's an exact match — favor no image over a
-  vague one.
-
-**Do not invent a photo URL from memory.** Unsplash photo IDs are not
-guessable — a plausible-looking one is very likely a dead link. Look one up
-for real (web search/fetch for a relevant Unsplash photo and take its
-actual CDN URL). If you can't browse the web in this environment, skip the
-`<figure>` entirely rather than insert an unverified URL — a missing image
-is fine, a broken one isn't.
+- **Developer / technical field** — skip the laptop-on-a-desk cliché. When
+  the work has no photographable subject of its own, a clean editorial
+  shot of the real-world domain it serves (a warehouse floor, a hospital
+  ward, a trading desk, transit signage) carries the post. Never pass off
+  a screenshot, chart, or diagram as a photo.
+- **Writer / creative field** — closest to the current demo. An exact,
+  specific photo on essentially every entry.
+- **Other / general personal site** — one exact-match image per entry;
+  favor a precise photo of the real subject over an evocative-but-vague
+  one.
 
 ## Step 5 — Unslop pass
 
@@ -303,17 +343,21 @@ most likely to have it. Rewrite what trips those patterns before finishing.
 
 - `BASIN_ENDPOINT` / `.env.local` — separate manual setup, not derived from
   the resume (see `.env.example`)
-- `components/contact-form.tsx`, `components/saturn-decoration.tsx` — the
-  component files themselves. The *usage* of `<SaturnDecoration />` in
-  `app/page.tsx` is a different matter: it's a Saturn-and-moons animation,
-  clearly themed to the physicist persona. Drop it from the page for any
-  field where it doesn't fit; keep it only if the person's field is
-  genuinely space/astronomy-adjacent.
+- `components/contact-form.tsx`, `components/saturn-decoration.tsx`, **and
+  the `<SaturnDecoration />` usage in `app/page.tsx`.** Leave the
+  decoration on the page exactly as it is, whatever the person's field. It
+  ships on by default; the owner removes it themselves if they don't want
+  it. Don't drop it, don't gate it on whether the field is
+  space-adjacent, don't move it.
 - Theme, CSS, and routing (URLs stay `/writing`, `/books`, `/contact` —
   only the visible labels change, per "Section labels" in Step 2, never
   the folder names or routes themselves)
 
 ## When you're done
 
-`resume.pdf` contains personal data and doesn't need to stay in the repo —
-ask the user if they'd like it deleted once the swap is complete.
+The resume was never copied into the repo, so there's nothing to clean up
+there. If you made a scratch copy in a temp directory for the Step 1
+extraction, confirm it's deleted. If the user has a `resume.pdf` sitting in
+the project root anyway (a manual drop, or a previous run), point it out
+and offer to remove it — `.gitignore` now keeps it from being committed
+either way.
