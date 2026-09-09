@@ -57,6 +57,11 @@ describe("template registry target paths", () => {
       "proxy.ts",
       // Root-level Next.js config shipped by landing-page-v2.
       "next.config.ts",
+      // Root-level agent instruction files shipped by portfolio-v1: the
+      // personalization guide the consumer's coding agent follows, plus the
+      // unslop pass it references.
+      "AGENTS.md",
+      "UNSLOP.md",
     ]
 
     for (const item of templateItems) {

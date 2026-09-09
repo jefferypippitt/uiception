@@ -5630,6 +5630,16 @@
           "target": ".env.example"
         },
         {
+          "path": "registry/new-york/templates/portfolio-v1/AGENTS.md",
+          "type": "registry:file",
+          "target": "AGENTS.md"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v1/UNSLOP.md",
+          "type": "registry:file",
+          "target": "UNSLOP.md"
+        },
+        {
           "path": "registry/new-york/templates/portfolio-v1/content/writing/rip-pluto.mdx",
           "type": "registry:file",
           "target": "content/writing/rip-pluto.mdx"
