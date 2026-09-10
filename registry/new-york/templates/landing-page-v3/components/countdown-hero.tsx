@@ -22,6 +22,8 @@ import { site } from "../lib/site"
 import { SolariBoard } from "./solari-board"
 import { SOLARI_FLIP_MS } from "./solari-cell"
 
+import "../styles/motion.css"
+
 const SPIN_GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const ZERO_PARTS: CountdownParts = { days: 0, hours: 0, minutes: 0, seconds: 0 }
 

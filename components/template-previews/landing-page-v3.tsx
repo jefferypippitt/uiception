@@ -5,9 +5,11 @@ import { TemplatePreviewNav } from "@/components/template-previews/preview-nav"
 import type { TemplatePreviewDefinition } from "@/components/template-previews/types"
 import HomePage from "@/registry/new-york/templates/landing-page-v3/app/page"
 
-// Preview doesn't mount the template layout — pull in globals so hero-reveal
-// and theme tokens match an installed copy. Solari CSS is imported by the board.
-import "@/registry/new-york/templates/landing-page-v3/app/globals.css"
+// Preview doesn't mount the template layout, so it pulls in the same scoped
+// motion stylesheet the template's countdown-hero imports. Theme tokens come
+// from the host (an install gets them from the shadcn starter globals). Solari
+// CSS is imported by the board.
+import "@/registry/new-york/templates/landing-page-v3/styles/motion.css"
 
 function Page({ slug }: { slug: string[] }) {
   if (slug.length === 0) return <HomePage />

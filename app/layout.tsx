@@ -6,12 +6,7 @@ import {
   GeistPixelGrid,
   GeistPixelCircle,
 } from "geist/font/pixel"
-import {
-  IBM_Plex_Serif,
-  Instrument_Serif,
-  JetBrains_Mono,
-  Oxanium,
-} from "next/font/google"
+import { IBM_Plex_Serif, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/lib/config"
 import { cn } from "@/lib/utils"
@@ -37,12 +32,6 @@ const instrumentSerif = Instrument_Serif({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
-})
-
-// portfolio-v5 template type
-const oxanium = Oxanium({
-  subsets: ["latin"],
-  variable: "--font-oxanium",
 })
 
 export const metadata: Metadata = {
@@ -138,7 +127,6 @@ export default function RootLayout({
           ibmPlexSerif.variable,
           instrumentSerif.variable,
           jetbrainsMono.variable,
-          oxanium.variable,
           "font-sans",
         )}
       >

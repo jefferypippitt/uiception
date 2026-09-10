@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { GeistSans } from "geist/font/sans"
 import type { ReactNode } from "react"
 
 import { TemplatePreviewNav } from "@/components/template-previews/preview-nav"
@@ -51,7 +52,9 @@ function Frame({
         Uses the host site's ThemeProvider (same as portfolio-v1 preview).
         LiquidShell reads resolvedTheme and retunes trail color for light/dark.
       */}
-      <div className="flex min-h-svh flex-col font-sans antialiased">
+      <div
+        className={`${GeistSans.variable} ${GeistSans.className} flex min-h-svh flex-col font-sans antialiased [--font-sans:var(--font-geist-sans)]`}
+      >
         <LiquidShell>
           <div className="mx-auto flex min-h-svh w-full max-w-6xl flex-1 flex-col px-6 py-12 md:px-12 md:py-16 lg:px-16">
             <main className="flex flex-1 flex-col">{children}</main>

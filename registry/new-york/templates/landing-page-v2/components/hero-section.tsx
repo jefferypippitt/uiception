@@ -5,7 +5,6 @@ import type { CSSProperties } from "react"
 
 import { Button } from "@/components/ui/button"
 
-import { Badge } from "./ui/badge"
 import { site } from "../lib/site"
 
 export function HeroSection() {
@@ -17,31 +16,27 @@ export function HeroSection() {
       />
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-8 py-24 text-center">
-        <div
-          className="hero-reveal"
+        <p
+          className="hero-reveal flex items-center gap-2 text-[clamp(1rem,2vw,1.25rem)] leading-[1.3] font-light tracking-[-0.02em] text-white/90"
           style={{ "--hero-delay": "80ms" } as CSSProperties}
         >
-          <Badge
-            variant="glass"
-            className="h-5 px-2 text-xs tracking-wide"
-          >
-            {site.date}
-            <span aria-hidden className="mx-1.5 text-white/35">
-              ·
-            </span>
-            {site.city}
-          </Badge>
-        </div>
+          <span>{site.date}</span>
+          <span>{site.city}</span>
+        </p>
 
         <h1
-          className="hero-reveal mt-4 max-w-[16ch] text-balance text-[clamp(2.25rem,6vw,4rem)] leading-[0.95] font-medium tracking-[-0.08rem] text-white [text-shadow:0_0_40px_rgba(0,0,0,0.55)]"
+          className="hero-reveal mt-4 max-w-[11ch] text-balance text-[clamp(2.75rem,8.5vw,5.5rem)] leading-[0.88] font-bold tracking-[-0.04em] uppercase"
           style={{ "--hero-delay": "160ms" } as CSSProperties}
         >
-          {site.name}
+          {/* horizontal gradient fill + soft dark halo; kept on an inner span so
+              the hero-reveal blur animation on <h1> doesn't clobber the filter */}
+          <span className="box-decoration-clone bg-linear-to-r from-white via-white to-white/60 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(0,0,0,0.55)]">
+            {site.name}
+          </span>
         </h1>
 
         <p
-          className="hero-reveal mt-4 max-w-md text-[clamp(1rem,2vw,1.25rem)] leading-[1.3] font-medium tracking-[-0.02em] text-white"
+          className="hero-reveal mt-4 max-w-md text-[clamp(1rem,2vw,1.25rem)] leading-[1.3] font-light tracking-[-0.02em] text-white/90"
           style={{ "--hero-delay": "260ms" } as CSSProperties}
         >
           {site.tagline}

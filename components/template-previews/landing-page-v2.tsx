@@ -8,9 +8,11 @@ import RegisterPage from "@/registry/new-york/templates/landing-page-v2/app/regi
 import { GlowCanvas } from "@/registry/new-york/templates/landing-page-v2/components/glow-canvas"
 import { Toaster } from "@/registry/new-york/templates/landing-page-v2/components/ui/toast"
 
-// Preview doesn't mount the template layout — pull in globals so hero-reveal
-// and theme tokens match an installed copy.
-import "@/registry/new-york/templates/landing-page-v2/app/globals.css"
+// Preview doesn't mount the template layout, so it pulls in the same scoped
+// motion/view-transition stylesheet the template's own app/layout.tsx imports.
+// Theme tokens come from the host (an install gets them from the shadcn starter
+// globals); the Frame below reproduces the dark shell.
+import "@/registry/new-york/templates/landing-page-v2/styles/motion.css"
 
 function Page({ slug }: { slug: string[] }) {
   if (slug.length === 0) return <HomePage />

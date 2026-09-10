@@ -9,6 +9,7 @@ import { Toaster } from "../components/ui/toast"
 import { site } from "../lib/site"
 
 import "./globals.css"
+import "../styles/motion.css"
 
 export const metadata: Metadata = {
   title: `${site.name} — ${site.tagline}`,

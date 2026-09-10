@@ -1,0 +1,147 @@
+/* landing-page-v2 motion + view transitions.
+ *
+ * Theme tokens (:root / .dark / @theme) come from the shadcn starter's
+ * app/globals.css — this file only carries the template's own animation and
+ * view-transition rules, scoped to their own classes so it is safe to import
+ * anywhere (the template layout, and the host preview route).
+ *
+ * Imported by app/layout.tsx.
+ */
+
+.hero-fade-bottom {
+  background: linear-gradient(
+    to top,
+    black 0%,
+    rgba(0, 0, 0, 0.738) 19%,
+    rgba(0, 0, 0, 0.541) 34%,
+    rgba(0, 0, 0, 0.382) 47%,
+    rgba(0, 0, 0, 0.278) 56.5%,
+    rgba(0, 0, 0, 0.194) 65%,
+    rgba(0, 0, 0, 0.126) 73%,
+    rgba(0, 0, 0, 0.075) 80.2%,
+    rgba(0, 0, 0, 0.042) 86.1%,
+    rgba(0, 0, 0, 0.021) 91%,
+    rgba(0, 0, 0, 0.008) 95.2%,
+    rgba(0, 0, 0, 0.002) 98.2%,
+    transparent 100%
+  );
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: hero-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* Home <-> register directional view transition — see
+   components/directional-transition.tsx. The glow canvas is a persistent,
+   named group so it stays put while the page content slides. */
+:root {
+  --lpv2-vt-exit: 150ms;
+  --lpv2-vt-enter: 210ms;
+  --lpv2-vt-move: 400ms;
+}
+
+.glow-canvas-vt {
+  view-transition-name: glow-canvas;
+}
+
+/* Suppresses the browser's default root cross-fade so it doesn't stack
+   with the nav-forward/nav-back slide below. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(glow-canvas) {
+  animation: none;
+  z-index: 0;
+}
+::view-transition-old(glow-canvas) {
+  display: none;
+}
+::view-transition-new(glow-canvas) {
+  animation: none;
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+@keyframes vt-fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--lpv2-vt-exit) ease-in both vt-fade reverse,
+    var(--lpv2-vt-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--lpv2-vt-enter) ease-out var(--lpv2-vt-exit) both vt-fade,
+    var(--lpv2-vt-move) ease-in-out both vt-slide;
+}
+
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--lpv2-vt-exit) ease-in both vt-fade reverse,
+    var(--lpv2-vt-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--lpv2-vt-enter) ease-out var(--lpv2-vt-exit) both vt-fade,
+    var(--lpv2-vt-move) ease-in-out both vt-slide;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

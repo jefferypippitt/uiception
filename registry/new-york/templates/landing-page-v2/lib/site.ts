@@ -1,13 +1,13 @@
 /**
- * Edit this file to make the landing page yours — every string on the
+ * Edit this file to make the landing page yours. Every string on the
  * page lives here. Brand colors and hero motion live in app/globals.css;
  * registration submit wiring lives in lib/actions.ts.
  */
 export const site = {
-  name: "uiception ship 2026",
+  name: "Where ideas get built",
   date: "January 1, 2026",
   city: "San Francisco",
-  tagline: "48 hours. One idea. Build it with the best.",
+  tagline: "48 hours. The best people in the room. One demo.",
   ctaLabel: "Get Your Ticket",
   ctaHref: "/register",
   register: {
@@ -23,7 +23,7 @@ export const site = {
         name: "role",
         required: true,
         prompt: "What do you build?",
-        description: "Pick the role that fits you best — or write your own.",
+        description: "Pick whichever one fits best, or write your own.",
         choices: [
           {
             value: "engineer",
@@ -70,7 +70,7 @@ export const site = {
           {
             value: "open",
             label: "Open exploration",
-            description: "Still deciding — surprise us.",
+            description: "Still deciding? Surprise us.",
           },
         ],
       },
@@ -78,7 +78,7 @@ export const site = {
         name: "team",
         required: false,
         prompt: "How are you showing up?",
-        description: "Optional — skip if you’re not sure yet.",
+        description: "Optional. Skip it if you’re not sure yet.",
         choices: [
           { value: "solo", label: "Flying solo" },
           { value: "have-team", label: "I have a team" },

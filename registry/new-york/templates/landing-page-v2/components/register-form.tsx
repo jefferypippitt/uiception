@@ -75,11 +75,18 @@ export function RegisterForm() {
 
   if (done) {
     return (
-      <div className="flex flex-col gap-3">
-        <p className="text-2xl font-medium tracking-[-0.03em] text-white">
+      <div className="flex flex-col items-center gap-4 py-8 text-center">
+        <span
+          role="img"
+          aria-label="Celebration"
+          className="text-[clamp(2.5rem,6vw,3.75rem)] leading-none"
+        >
+          🎉
+        </span>
+        <p className="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.03em] text-white uppercase [text-shadow:0_0_40px_rgba(0,0,0,0.55)]">
           {site.register.successTitle}
         </p>
-        <p className="max-w-sm text-sm leading-relaxed text-white/55">
+        <p className="max-w-sm text-base leading-relaxed text-white/60 md:text-lg">
           {site.register.successDescription}
         </p>
       </div>

@@ -6342,9 +6342,9 @@
           "target": "app/register/page.tsx"
         },
         {
-          "path": "registry/new-york/templates/landing-page-v2/app/globals.css",
+          "path": "registry/new-york/templates/landing-page-v2/styles/motion.css",
           "type": "registry:file",
-          "target": "app/globals.css"
+          "target": "styles/motion.css"
         },
         {
           "path": "registry/new-york/templates/landing-page-v2/next.config.ts",
@@ -6380,11 +6380,6 @@
           "path": "registry/new-york/templates/landing-page-v2/components/theme-provider.tsx",
           "type": "registry:component",
           "target": "components/theme-provider.tsx"
-        },
-        {
-          "path": "registry/new-york/templates/landing-page-v2/components/ui/badge.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/badge.tsx"
         },
         {
           "path": "registry/new-york/templates/landing-page-v2/components/ui/button.tsx",
@@ -6444,9 +6439,9 @@
           "target": "app/page.tsx"
         },
         {
-          "path": "registry/new-york/templates/landing-page-v3/app/globals.css",
+          "path": "registry/new-york/templates/landing-page-v3/styles/motion.css",
           "type": "registry:file",
-          "target": "app/globals.css"
+          "target": "styles/motion.css"
         },
         {
           "path": "registry/new-york/templates/landing-page-v3/components/countdown-hero.tsx",

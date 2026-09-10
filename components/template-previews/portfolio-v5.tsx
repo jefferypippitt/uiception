@@ -7,8 +7,11 @@ import type { TemplatePreviewDefinition } from "@/components/template-previews/t
 import HomePage from "@/registry/new-york/templates/portfolio-v5/app/page"
 import { BlackHole } from "@/registry/new-york/templates/portfolio-v5/components/black-hole"
 
-// Preview skips the template layout — pull globals + background so it matches an install.
-import "@/registry/new-york/templates/portfolio-v5/app/globals.css"
+// The preview reproduces the template shell in <Frame> below (dark class, Oxanium,
+// black-hole background). It must NOT import the template's app/globals.css: that file
+// is a standalone root stylesheet whose bare `:root`, `html, body` and
+// `@theme inline { --font-sans: var(--font-oxanium) }` rules would leak into the host
+// build and override every block/template preview's theme tokens and font.
 
 const oxanium = Oxanium({
   subsets: ["latin"],
@@ -37,7 +40,7 @@ function Frame({
   return (
     <TemplatePreviewNav basePath={basePath}>
       <div
-        className={`${oxanium.variable} ${oxanium.className} relative dark min-h-svh overflow-x-hidden bg-black font-sans text-base text-white antialiased`}
+        className={`${oxanium.variable} ${oxanium.className} relative dark min-h-svh overflow-x-hidden bg-black text-base text-white antialiased`}
       >
         <div
           className="fixed inset-0 z-0 overflow-hidden bg-black"

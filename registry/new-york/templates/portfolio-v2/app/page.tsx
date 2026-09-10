@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
@@ -155,12 +156,10 @@ export default function HomePage() {
               className="group inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-foreground"
             >
               More
-              <span
+              <ArrowUpRightIcon
                 aria-hidden
-                className="text-muted-foreground transition-colors group-hover:text-foreground"
-              >
-                ↗
-              </span>
+                className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+              />
             </Link>
           </div>
         </section>
@@ -186,12 +185,10 @@ export default function HomePage() {
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-foreground">
                     {project.name}
-                    <span
+                    <ArrowUpRightIcon
                       aria-hidden
-                      className="text-muted-foreground transition-colors group-hover:text-foreground"
-                    >
-                      ↗
-                    </span>
+                      className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+                    />
                   </span>
                   <span className="col-start-2 text-xs text-muted-foreground">
                     {project.description}
@@ -236,12 +233,10 @@ export default function HomePage() {
               className="group inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-foreground"
             >
               LinkedIn
-              <span
+              <ArrowUpRightIcon
                 aria-hidden
-                className="text-muted-foreground transition-colors group-hover:text-foreground"
-              >
-                ↗
-              </span>
+                className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+              />
             </a>
           </div>
         </section>
