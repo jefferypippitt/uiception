@@ -1,10 +1,12 @@
 allowBuilds:
+  '@vgpu/adapter-node': true
   bufferutil: false
   core-js: false
   msw: true
   sharp: true
   unrs-resolver: true
   utf-8-validate: false
+  webgpu: true
 auditConfig:
   ignoreGhsas:
     - GHSA-w3rx-r6r6-pgpr

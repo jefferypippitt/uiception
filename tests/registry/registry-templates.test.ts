@@ -167,38 +167,34 @@ describe("template preview host has no stale entries", () => {
   })
 })
 
-describe("every template ships a .env.example", () => {
-  it("has a .env.example file on disk for every catalog template", () => {
-    const missing = getFreeTemplateVersions()
-      .map((v) => v.id)
-      .filter(
-        (id) =>
-          !existsSync(
-            join(root, "registry/new-york/templates", id, ".env.example")
-          )
-      )
-    expect(
-      missing,
-      `templates missing .env.example: ${missing.join(", ")}`
-    ).toEqual([])
-  })
-
-  it("declares that .env.example in registry.json with a .env.example target", () => {
+describe("template .env.example is opt-in but must stay in sync", () => {
+  // A template ships a .env.example only when it actually reads an env var
+  // (portfolio-v1's BASIN_ENDPOINT, portfolio-v2's OT token). Templates that
+  // need no config must not carry a placeholder file. Whichever way a
+  // template goes, disk and registry.json have to agree.
+  it("declares a .env.example in registry.json exactly when one exists on disk", () => {
     const { items } = loadRegistry()
     const failures: string[] = []
     for (const version of getFreeTemplateVersions()) {
+      const onDisk = existsSync(
+        join(root, "registry/new-york/templates", version.id, ".env.example")
+      )
       const item = items.find((i) => i.name === version.id)
-      const hasEntry = (item?.files ?? []).some(
+      const declared = (item?.files ?? []).some(
         (f) =>
           f.target === ".env.example" &&
           f.path.replace(/\\/g, "/") ===
             `registry/new-york/templates/${version.id}/.env.example`
       )
-      if (!hasEntry) failures.push(version.id)
+      if (onDisk !== declared) {
+        failures.push(
+          `${version.id}: on disk=${onDisk}, declared in registry.json=${declared}`
+        )
+      }
     }
     expect(
       failures,
-      `templates whose .env.example is not declared in registry.json: ${failures.join(", ")}`
+      `templates whose .env.example is out of sync: ${failures.join("; ")}`
     ).toEqual([])
   })
 })

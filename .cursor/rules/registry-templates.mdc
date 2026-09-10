@@ -17,8 +17,16 @@ registry/new-york/templates/{template-name}/
   content/     # MDX or other app content
   lib/         # Actions, data, schemas
   styles/      # Extra CSS beyond globals
-  .env.example # Env vars the template expects
+  .env.example # Only when the template actually reads an env var
 ```
+
+Add a `.env.example` **only when the template genuinely needs env config** —
+a form endpoint, an API key, an origin-trial token it reads at runtime.
+`portfolio-v1` ships one for `BASIN_ENDPOINT` (contact form); `portfolio-v2`
+for its `html-in-canvas` origin-trial token. A template that runs with no
+config (`portfolio-v3`/`v4`/`v5`) ships no `.env.example` — don't add a
+placeholder file just to have one. `tests/registry/registry-templates.test.ts`
+checks that disk and `registry.json` agree either way.
 
 ## A new template touches four places
 

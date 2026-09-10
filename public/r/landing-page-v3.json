@@ -70,7 +70,7 @@
     },
     {
       "path": "registry/new-york/templates/landing-page-v3/.env.example",
-      "content": "# Landing Page v3 needs no environment variables to run. Countdown target,\n# copy, and the solari-board content all live in the template's lib/ files.\n# Wire up your own form/CRM backend where the template marks the stub.\n",
+      "content": "# Landing Page v3 needs no environment variables to run. Countdown target,\r\n# copy, and the solari-board content all live in the template's lib/ files.\r\n# Wire up your own form/CRM backend where the template marks the stub.\r\n",
       "type": "registry:file",
       "target": ".env.example"
     }

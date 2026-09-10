@@ -48,6 +48,13 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Bash-style terminal portfolio — type about, work, resume, help. Same Jon Doe career data as v3.",
       },
+      {
+        id: "portfolio-v5",
+        title: "Portfolio v5",
+        registryPath: "registry/new-york/templates/portfolio-v5",
+        description:
+          "Left-column about and projects over a WebGPU Optimized Black Hole background — Jon Doe filler.",
+      },
     ],
   },
   {

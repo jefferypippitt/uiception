@@ -6032,11 +6032,6 @@
           "path": "registry/new-york/templates/portfolio-v3/public/videos/moments/compile-26.mp4.gitkeep",
           "type": "registry:file",
           "target": "public/videos/moments/compile-26.mp4.gitkeep"
-        },
-        {
-          "path": "registry/new-york/templates/portfolio-v3/.env.example",
-          "type": "registry:file",
-          "target": ".env.example"
         }
       ]
     },
@@ -6100,11 +6095,137 @@
           "path": "registry/new-york/templates/portfolio-v4/styles/terminal.css",
           "type": "registry:file",
           "target": "styles/terminal.css"
+        }
+      ]
+    },
+    {
+      "name": "portfolio-v5",
+      "type": "registry:block",
+      "title": "Portfolio v5",
+      "description": "Left-column about and projects over a WebGPU Optimized Black Hole background — Jon Doe filler. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "vgpu",
+        "@vgpu/wgsl",
+        "@webgpu/types",
+        "class-variance-authority",
+        "radix-ui"
+      ],
+      "registryDependencies": [],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v5.json\"\n\nThis scaffolds Next.js + shadcn, then installs the black-hole portfolio.\n\nSingle-page site — a left column of about copy, social links, and projects over a WebGPU black hole. No blog, no other routes.\n\nType is Oxanium (next/font/google), wired to --font-sans in app/globals.css at text-base. Social and project links use Button variant=\"link\". Edit about, social links, and projects in app/page.tsx. The black hole lives in app/layout.tsx as a fixed full-viewport background. Requires a browser with WebGPU; otherwise the page stays black with the same copy. next.config.ts registers the WGSL loader for Turbopack and webpack.\n\nPreview at /view/portfolio-v5.",
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
         },
         {
-          "path": "registry/new-york/templates/portfolio-v4/.env.example",
+          "path": "registry/new-york/templates/portfolio-v5/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/app/globals.css",
           "type": "registry:file",
-          "target": ".env.example"
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole.tsx",
+          "type": "registry:component",
+          "target": "components/black-hole.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/renderer.ts",
+          "type": "registry:lib",
+          "target": "components/black-hole/renderer.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/pipeline.ts",
+          "type": "registry:lib",
+          "target": "components/black-hole/pipeline.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/settings.ts",
+          "type": "registry:lib",
+          "target": "components/black-hole/settings.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/noise-volume.mjs",
+          "type": "registry:lib",
+          "target": "components/black-hole/noise-volume.mjs"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/bake.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/bake.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/bloom.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/bloom.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/composite.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/composite.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/disk.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/disk.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/gbuffer.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/gbuffer.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/geodesic.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/geodesic.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/refine.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/refine.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/shade.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/shade.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/components/black-hole/stars.wgsl",
+          "type": "registry:file",
+          "target": "components/black-hole/stars.wgsl"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/lib/wgsl-env.d.ts",
+          "type": "registry:lib",
+          "target": "lib/wgsl-env.d.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/next.config.ts",
+          "type": "registry:file",
+          "target": "next.config.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/AGENTS.md",
+          "type": "registry:file",
+          "target": "AGENTS.md"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v5/UNSLOP.md",
+          "type": "registry:file",
+          "target": "UNSLOP.md"
         }
       ]
     },

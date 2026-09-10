@@ -98,7 +98,7 @@
     },
     {
       "path": "registry/new-york/templates/portfolio-v2/.env.example",
-      "content": "# Optional: Chrome Origin Trial so Liquid warps HTML without chrome://flags.\r\n# Register once for your production origin (check \"match all subdomains\" if needed):\r\n# https://developer.chrome.com/origintrials → html-in-canvas\r\n# Example: Web Origin = https://yoursite.com\r\nNEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN=\r\n",
+      "content": "# Optional: Chrome Origin Trial so Liquid warps HTML without chrome://flags.\r\n# Register once for your production origin (check \"match all subdomains\" if needed):\r\n# https://developer.chrome.com/origintrials → html-in-canvas\r\n# Example: Web Origin = https://yoursite.com\r\nNEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN=",
       "type": "registry:file",
       "target": ".env.example"
     },
