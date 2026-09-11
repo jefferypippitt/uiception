@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-section-v6",
+  "title": "FAQ Section v6",
+  "description": "Two-column FAQ with a large pixel-font title on the left and a custom dashed-ruled accordion table on the right.",
+  "dependencies": [
+    "geist@^1.7.0",
+    "radix-ui"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/faq-section-v6/page.tsx",
+      "content": "import FaqSectionV6 from \"./components/faq-section-v6\"\n\nexport default function Page() {\n  return <FaqSectionV6 />\n}\n",
+      "type": "registry:page",
+      "target": "app/faq-section-v6/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v6/components/faq-section-v6.tsx",
+      "content": "import { GeistPixelSquare } from \"geist/font/pixel\"\n\nimport FaqAccordion from \"./faq-accordion\"\n\nexport default function FaqSectionV6() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] md:gap-16 lg:gap-24\">\n          <div className=\"md:sticky md:top-24 md:self-start\">\n            <h2\n              className={`${GeistPixelSquare.className} text-6xl leading-none tracking-tight text-foreground sm:text-7xl lg:text-8xl`}\n            >\n              FAQ\n            </h2>\n          </div>\n\n          <FaqAccordion />\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/faq-section-v6/components/faq-section-v6.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v6/components/faq-accordion.tsx",
+      "content": "\"use client\"\n\nimport { PlusIcon } from \"lucide-react\"\nimport { Accordion as AccordionPrimitive } from \"radix-ui\"\n\nimport { faqItems } from \"../lib/faq-content\"\n\nexport default function FaqAccordion() {\n  return (\n    <AccordionPrimitive.Root type=\"single\" collapsible className=\"w-full\">\n      {faqItems.map((item) => (\n        <AccordionPrimitive.Item\n          key={item.id}\n          value={item.id}\n          className=\"border-b border-dashed border-border\"\n        >\n          <AccordionPrimitive.Header className=\"flex\">\n            <AccordionPrimitive.Trigger className=\"group/faq flex flex-1 items-start justify-between gap-5 py-6 text-left text-xl font-medium tracking-tight text-foreground outline-none transition-colors hover:text-foreground/70 focus-visible:underline sm:text-2xl\">\n              {item.question}\n              <PlusIcon className=\"mt-1 size-7 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/faq:rotate-45\" />\n            </AccordionPrimitive.Trigger>\n          </AccordionPrimitive.Header>\n          <AccordionPrimitive.Content className=\"overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up\">\n            <p className=\"pb-6 pr-12 font-mono text-base leading-relaxed text-muted-foreground sm:text-lg\">\n              {item.answer}\n            </p>\n          </AccordionPrimitive.Content>\n        </AccordionPrimitive.Item>\n      ))}\n    </AccordionPrimitive.Root>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/faq-section-v6/components/faq-accordion.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/faq-section-v6/lib/faq-content.ts",
+      "content": "export type FaqItem = {\n  id: string\n  question: string\n  answer: string\n}\n\nexport const faqSectionMeta = {\n  title: \"Frequently Asked Questions\",\n  description: \"Quick answers about billing, plans, and your account.\",\n}\n\nexport const faqItems: FaqItem[] = [\n  {\n    id: \"free-trial\",\n    question: \"Is there a free trial?\",\n    answer:\n      \"Yes. Every plan includes a 14-day free trial with no credit card required. You can upgrade, downgrade, or cancel at any time.\",\n  },\n  {\n    id: \"billing-cycle\",\n    question: \"How does billing work?\",\n    answer:\n      \"Plans are billed monthly or annually. Annual plans include a 20% discount. You'll receive an invoice by email at the start of each cycle.\",\n  },\n  {\n    id: \"change-plan\",\n    question: \"Can I change my plan later?\",\n    answer:\n      \"Yes. You can upgrade or downgrade at any time from your account settings. Upgrades take effect immediately; downgrades apply at the next billing cycle.\",\n  },\n  {\n    id: \"team-seats\",\n    question: \"How do team seats work?\",\n    answer:\n      \"Each seat covers one user. You can add or remove seats at any time and only pay for what you use, prorated to the day.\",\n  },\n  {\n    id: \"refunds\",\n    question: \"What is your refund policy?\",\n    answer:\n      \"We offer a full refund within 30 days of your first payment if you're not satisfied. Reach out to support and we'll sort it out, no questions asked.\",\n  },\n]\n",
+      "type": "registry:lib",
+      "target": "app/faq-section-v6/lib/faq-content.ts"
+    }
+  ],
+  "type": "registry:block"
+}

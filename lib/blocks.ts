@@ -215,6 +215,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Brands Section v8",
         registryPath: "registry/new-york/blocks/brands-section-v8",
       },
+      {
+        id: "brands-section-v9",
+        title: "Brands Section v9",
+        registryPath: "registry/new-york/blocks/brands-section-v9",
+      },
+      {
+        id: "brands-section-v10",
+        title: "Brands Section v10",
+        registryPath: "registry/new-york/blocks/brands-section-v10",
+      },
     ],
   },
   {
@@ -424,6 +434,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Pricing Section v3",
         registryPath: "registry/new-york/blocks/pricing-section-v3",
       },
+      {
+        id: "pricing-section-v4",
+        title: "Pricing Section v4",
+        registryPath: "registry/new-york/blocks/pricing-section-v4",
+      },
     ],
   },
   {
@@ -455,6 +470,11 @@ export const blockCategories: BlockCategory[] = [
         id: "faq-section-v5",
         title: "FAQ Section v5",
         registryPath: "registry/new-york/blocks/faq-section-v5",
+      },
+      {
+        id: "faq-section-v6",
+        title: "FAQ Section v6",
+        registryPath: "registry/new-york/blocks/faq-section-v6",
       },
     ],
   },

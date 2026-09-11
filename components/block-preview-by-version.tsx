@@ -59,6 +59,7 @@ import FaqSectionV2 from "@/registry/new-york/blocks/faq-section-v2/components/f
 import FaqSectionV3 from "@/registry/new-york/blocks/faq-section-v3/components/faq-section-v3"
 import FaqSectionV4 from "@/registry/new-york/blocks/faq-section-v4/components/faq-section-v4"
 import FaqSectionV5 from "@/registry/new-york/blocks/faq-section-v5/components/faq-section-v5"
+import FaqSectionV6 from "@/registry/new-york/blocks/faq-section-v6/components/faq-section-v6"
 import TestimonialsSectionV1 from "@/registry/new-york/blocks/testimonials-section-v1/components/testimonials-section-v1"
 import TestimonialsSectionV2 from "@/registry/new-york/blocks/testimonials-section-v2/components/testimonials-section-v2"
 import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-section-v3/components/testimonials-section-v3"
@@ -69,6 +70,8 @@ import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/compon
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
 import BrandsSectionV8 from "@/registry/new-york/blocks/brands-section-v8/components/brands-section-v8"
+import BrandsSectionV9 from "@/registry/new-york/blocks/brands-section-v9/components/brands-section-v9"
+import BrandsSectionV10 from "@/registry/new-york/blocks/brands-section-v10/components/brands-section-v10"
 import HeroSectionV6 from "@/registry/new-york/blocks/hero-section-v6/components/hero-section-v6"
 import HeroSectionV7 from "@/registry/new-york/blocks/hero-section-v7/components/hero-section-v7"
 import HeroSectionV8 from "@/registry/new-york/blocks/hero-section-v8/components/hero-section-v8"
@@ -79,6 +82,7 @@ import HeroSectionV12 from "@/registry/new-york/blocks/hero-section-v12/componen
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
+import PricingSectionV4 from "@/registry/new-york/blocks/pricing-section-v4/components/pricing-section-v4"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
@@ -142,6 +146,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v6": BrandsSectionV6,
   "brands-section-v7": BrandsSectionV7,
   "brands-section-v8": BrandsSectionV8,
+  "brands-section-v9": BrandsSectionV9,
+  "brands-section-v10": BrandsSectionV10,
   "feature-section-v1": FeatureSectionV1,
   "feature-section-v2": FeatureSectionV2,
   "hero-section-v5": HeroSectionV5,
@@ -170,6 +176,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "faq-section-v3": FaqSectionV3,
   "faq-section-v4": FaqSectionV4,
   "faq-section-v5": FaqSectionV5,
+  "faq-section-v6": FaqSectionV6,
   "testimonials-section-v1": TestimonialsSectionV1,
   "testimonials-section-v2": TestimonialsSectionV2,
   "testimonials-section-v3": TestimonialsSectionV3,
@@ -179,6 +186,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "pricing-section-v3": PricingSectionV3,
+  "pricing-section-v4": PricingSectionV4,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,

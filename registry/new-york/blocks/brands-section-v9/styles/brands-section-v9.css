@@ -1,0 +1,19 @@
+.bs9-track {
+  animation: bs9-marquee 36s linear infinite;
+}
+
+@keyframes bs9-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bs9-track {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}
