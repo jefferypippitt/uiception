@@ -8,7 +8,6 @@ import {
   Copy,
   ExternalLink,
   Folder,
-  FolderCog,
   FolderOpen,
   Monitor,
   RefreshCw,
@@ -36,19 +35,29 @@ import { ReactLight } from "@/components/ui/svgs/reactLight"
 import { ReactDark } from "@/components/ui/svgs/reactDark"
 import { Typescript } from "@/components/ui/svgs/typescript"
 import { Javascript } from "@/components/ui/svgs/javascript"
-import { CssOld } from "@/components/ui/svgs/cssOld"
+import { Css } from "@/components/ui/svgs/css"
 import { MarkdownLight } from "@/components/ui/svgs/markdownLight"
 import { MarkdownDark } from "@/components/ui/svgs/markdownDark"
 import { Bash } from "@/components/ui/svgs/bash"
 import { BashDark } from "@/components/ui/svgs/bashDark"
 import { Git } from "@/components/ui/svgs/git"
+import { Dotenv } from "@/components/ui/svgs/dotenv"
 
 // ---------------------------------------------------------------------------
 // File-type icons
 // ---------------------------------------------------------------------------
 
+function isEnvFile(name: string) {
+  const lower = name.toLowerCase()
+  return lower === ".env" || lower.startsWith(".env.") || lower.endsWith(".env")
+}
+
 function FileTypeIcon({ name }: { name: string }) {
   const ext = name.split(".").pop()?.toLowerCase() ?? ""
+
+  if (isEnvFile(name)) {
+    return <Dotenv className="size-4 shrink-0" aria-hidden />
+  }
 
   if (ext === "tsx" || ext === "jsx") {
     return (
@@ -60,7 +69,7 @@ function FileTypeIcon({ name }: { name: string }) {
   }
   if (ext === "ts") return <Typescript className="size-4 shrink-0" aria-hidden />
   if (ext === "js" || ext === "mjs") return <Javascript className="size-4 shrink-0" aria-hidden />
-  if (ext === "css") return <CssOld className="size-4 shrink-0" aria-hidden />
+  if (ext === "css") return <Css className="size-4 shrink-0" aria-hidden />
   if (ext === "md" || ext === "mdx") {
     return (
       <>
@@ -170,14 +179,10 @@ type TreeCallbacks = {
   onSelect: (path: string) => void
 }
 
-function FolderTypeIcon({ name, open }: { name: string; open: boolean }) {
+function FolderTypeIcon({ open }: { open: boolean }) {
   const Icon = open ? FolderOpen : Folder
 
-  if (name.toLowerCase() === "app") {
-    return <FolderCog className="size-4 shrink-0 fill-emerald-500 text-emerald-700" aria-hidden />
-  }
-
-  return <Icon className="size-4 shrink-0 fill-amber-500/80 text-amber-500" aria-hidden />
+  return <Icon className="size-4 shrink-0" aria-hidden />
 }
 
 function FolderRow({
@@ -196,7 +201,7 @@ function FolderRow({
         title={node.name}
         onClick={() => setOpen((v) => !v)}
         style={{ paddingLeft: `${depth * INDENT + 6}px` }}
-        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] font-medium tracking-tight text-foreground transition-colors hover:bg-muted"
       >
         <ChevronRight
           className={cn(
@@ -204,7 +209,7 @@ function FolderRow({
             open && "rotate-90"
           )}
         />
-        <FolderTypeIcon name={node.name} open={open} />
+        <FolderTypeIcon open={open} />
         <span className="file-tree-label truncate font-mono text-[12px] tracking-tight text-left">{node.name}</span>
       </button>
 
@@ -228,7 +233,7 @@ function TreeRows({
   onSelect,
 }: { nodes: TreeNode[]; depth: number } & TreeCallbacks) {
   return (
-    <>
+    <div className="flex flex-col gap-0.5">
       {nodes.map((node) => {
         if (node.kind === "folder") {
           return (
@@ -254,7 +259,7 @@ function TreeRows({
               "file-tree-row flex h-7 w-full max-w-full min-w-0 items-center gap-1.5 overflow-hidden rounded-sm pr-2 text-left font-mono text-[12px] tracking-tight transition-colors",
               active
                 ? "bg-muted text-foreground"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                : "text-foreground hover:bg-muted"
             )}
           >
             <span className="size-3 shrink-0" />
@@ -265,7 +270,7 @@ function TreeRows({
           </button>
         )
       })}
-    </>
+    </div>
   )
 }
 
@@ -478,13 +483,18 @@ export function BlockPreviewToolbar({
 
       <div className={cn("overflow-hidden rounded-xl border bg-background", PREVIEW_SHELL)}>
         <TabsContent value="preview" className="m-0 h-full min-h-0 p-0">
-          <div className="preview-scrollbar flex h-full items-center justify-center overflow-auto bg-muted/15 p-3">
+          <div
+            className={cn(
+              "preview-scrollbar flex h-full items-center justify-center overflow-auto bg-muted/15 p-3",
+              viewport !== "desktop" && "preview-stage-pattern"
+            )}
+          >
             <div
               className={cn(
                 "h-full min-h-0 transition-[max-width] duration-200",
                 viewport === "desktop" && "w-full max-w-none",
-                viewport === "tablet" && "w-full max-w-[768px]",
-                viewport === "mobile" && "w-full max-w-[390px]"
+                viewport === "tablet" && "w-full max-w-3xl",
+                viewport === "mobile" && "w-full max-w-97.5"
               )}
             >
               <div className="relative h-full min-h-80 w-full">
@@ -511,8 +521,8 @@ export function BlockPreviewToolbar({
         </TabsContent>
 
         <TabsContent value="code" className="m-0 h-full min-h-0 p-0">
-          <div className="code-view-vercel-docs flex h-full min-h-0 overflow-hidden bg-sidebar">
-            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-border bg-sidebar sm:w-62">
+          <div className="code-view-vercel-docs flex h-full min-h-0 overflow-hidden bg-background">
+            <div className="flex h-full w-54 shrink-0 flex-col overflow-hidden border-r border-border bg-background sm:w-62">
               <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
                 <div className="min-w-0 w-full max-w-full overflow-hidden pt-2 pb-3 pr-1 pl-1">
                   {!registryData ? (

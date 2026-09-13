@@ -13,29 +13,31 @@ const GRAIN_DARK =
 
 export default function HomePage() {
   return (
-    <main className="relative flex min-h-svh flex-col overflow-hidden bg-background text-foreground lg:flex-row">
-      <section className="relative flex-1 overflow-hidden">
-        {/* Hex field only — brand copy sits in the overlay above so tiles don't sample the title. */}
-        <HexFloat
-          className="h-full"
-          grain={0}
-          iridescence={0.15}
-          speed={0.15}
-          tilt={6}
-          bevel={1.5}
-          shine={0.15}
-        >
-          <div aria-hidden className="size-full bg-background" />
-        </HexFloat>
+    <main className="relative flex min-h-svh flex-col bg-background text-foreground lg:h-svh lg:flex-row lg:overflow-hidden">
+      <section className="relative flex min-h-svh min-w-0 flex-col lg:min-h-0 lg:flex-1">
+        {/* Hex field is out of flow so the hero can size to copy on small screens. */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <HexFloat
+            className="size-full"
+            grain={0}
+            iridescence={0.15}
+            speed={0.15}
+            tilt={6}
+            bevel={1.5}
+            shine={0.15}
+          >
+            <div aria-hidden className="size-full bg-background" />
+          </HexFloat>
+        </div>
 
-        <div className="pointer-events-none absolute inset-0 z-1 flex flex-col items-center justify-center px-8 py-20 text-center md:px-14 lg:py-0">
-          <div className="pointer-events-auto">
+        <div className="pointer-events-none relative z-1 flex flex-1 flex-col items-center justify-center px-6 py-16 text-center sm:px-10 sm:py-20 md:px-14 lg:py-0">
+          <div className="pointer-events-auto max-w-full">
             <TextureTitle>{site.name}</TextureTitle>
           </div>
-          <p className="mt-8 max-w-xl text-[clamp(1.25rem,2vw,1.75rem)] font-medium leading-[1.2] tracking-[-0.02em]">
+          <p className="mt-6 max-w-xl text-[clamp(1.125rem,4.5vw,1.75rem)] font-medium leading-[1.2] tracking-[-0.02em] sm:mt-8">
             {site.tagline}
           </p>
-          <ul className="mt-8 flex max-w-80 flex-col gap-2 text-left text-sm leading-[1.4] tracking-[-0.01em] text-foreground">
+          <ul className="mt-6 flex w-full max-w-80 flex-col gap-2 text-left text-sm leading-[1.4] tracking-[-0.01em] text-foreground sm:mt-8">
             {site.perks.map((perk) => (
               <li key={perk} className="flex gap-2.5">
                 <span
@@ -49,7 +51,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative flex flex-col items-center justify-center gap-4 border-t border-border px-8 py-20 lg:flex-1 lg:border-l lg:border-t-0 lg:py-0">
+      <section className="relative flex min-w-0 flex-col items-center justify-center gap-4 border-t border-border bg-background px-6 py-16 sm:px-8 sm:py-20 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:border-l lg:border-t-0 lg:py-0">
         <WaitlistPanel />
       </section>
 

@@ -3,7 +3,6 @@
 @import "./vercel-docs-theme.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/* Clerk shadcn theme (landing-page-v1 preview) — Tailwind must scan these classes. */
 @import "@clerk/ui/themes/shadcn.css";
 
 .typeset-docs {
@@ -352,6 +351,27 @@
 .preview-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.preview-stage-pattern {
+    position: relative;
+}
+
+.preview-stage-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: var(--foreground);
+    opacity: 0.2;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 48' fill='none'%3E%3Cpath stroke='%23000' stroke-width='.5' stroke-linecap='butt' stroke-linejoin='miter' d='M0 8 14 0 28 8 28 24 14 32M0 24 14 32 14 48'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 48' fill='none'%3E%3Cpath stroke='%23000' stroke-width='.5' stroke-linecap='butt' stroke-linejoin='miter' d='M0 8 14 0 28 8 28 24 14 32M0 24 14 32 14 48'/%3E%3C/svg%3E");
+    -webkit-mask-size: 56px 96px;
+    mask-size: 56px 96px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
 }
 
 .preview-scrollbar::-webkit-scrollbar {

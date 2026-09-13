@@ -19,7 +19,11 @@ export function WaitlistPanel() {
     return <WaitlistDemoForm />
   }
 
-  return <Waitlist fallback={<WaitlistSkeleton />} />
+  return (
+    <div className="w-full max-w-sm">
+      <Waitlist fallback={<WaitlistSkeleton />} />
+    </div>
+  )
 }
 
 function WaitlistDemoForm() {

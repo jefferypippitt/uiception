@@ -73,7 +73,7 @@ export function TextureTitle({ children }: { children: ReactNode }) {
 
   return (
     <span
-      className="relative block w-fit"
+      className="relative block w-fit max-w-full"
       onPointerEnter={() => setBoost(true)}
       onPointerLeave={() => setBoost(false)}
     >
@@ -134,13 +134,13 @@ export function TextureTitle({ children }: { children: ReactNode }) {
       </svg>
       <span
         aria-hidden
-        className="absolute inset-0 translate-x-[0.04em] translate-y-[0.045em] select-none text-[clamp(3rem,8vw,6.5rem)] font-bold leading-[0.9] tracking-[-0.04em] opacity-55"
+        className="absolute inset-0 max-w-full translate-x-[0.04em] translate-y-[0.045em] select-none text-[clamp(2.75rem,12vw,6.5rem)] font-bold leading-[0.9] tracking-[-0.04em] wrap-break-word opacity-55"
         style={{ filter: `url(#${GHOST_FILTER_ID})` }}
       >
         {children}
       </span>
       <h1
-        className="relative text-[clamp(3rem,8vw,6.5rem)] font-bold leading-[0.9] tracking-[-0.04em]"
+        className="relative max-w-full text-[clamp(2.75rem,12vw,6.5rem)] font-bold leading-[0.9] tracking-[-0.04em] wrap-break-word"
         style={{ filter: `url(#${MAIN_FILTER_ID})` }}
       >
         {children}
