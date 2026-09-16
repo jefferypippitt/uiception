@@ -10,6 +10,8 @@ export type TemplateVersion = {
 export type TemplateCategory = {
   id: TemplateCategoryId
   title: string
+  /** Singular noun used before "Templates" in page headings, e.g. "All {heading} Templates". */
+  heading: string
   description: string
   versions: TemplateVersion[]
 }
@@ -18,6 +20,7 @@ export const templateCategories: TemplateCategory[] = [
   {
     id: "portfolio",
     title: "Portfolio",
+    heading: "Portfolio",
     description: "For developers, writers, and personal websites.",
     versions: [
       {
@@ -55,11 +58,19 @@ export const templateCategories: TemplateCategory[] = [
         description:
           "Left-column about and projects over a WebGPU Optimized Black Hole background — Jon Doe filler.",
       },
+      {
+        id: "portfolio-v6",
+        title: "Portfolio v6",
+        registryPath: "registry/new-york/templates/portfolio-v6",
+        description:
+          "Centered CV portfolio for a fullstack developer — About and Writing, same Jon Doe career data as v3.",
+      },
     ],
   },
   {
     id: "landing-pages",
     title: "Landing Pages",
+    heading: "Landing Page",
     description: "For product launches, marketing sites, and campaigns.",
     versions: [
       {

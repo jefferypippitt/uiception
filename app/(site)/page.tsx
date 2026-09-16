@@ -27,7 +27,7 @@ export default function Home() {
                     </p>
 
                     <div className='flex w-full items-center justify-center gap-2 pt-2'>
-                        <Button asChild variant='default'>
+                        <Button asChild variant='default' className='rounded-full'>
                             <Link href='/blocks'>Get Started</Link>
                         </Button>
                     </div>

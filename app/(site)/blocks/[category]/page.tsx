@@ -51,7 +51,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h1 className="text-3xl tracking-tighter md:text-4xl">
-            {categoryData.title}
+            All {categoryData.title} Blocks
           </h1>
           <Button variant="outline" size="sm" asChild>
             <Link href="/blocks">

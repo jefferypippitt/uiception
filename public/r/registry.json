@@ -6562,6 +6562,125 @@
       ]
     },
     {
+      "name": "portfolio-v6",
+      "type": "registry:block",
+      "title": "Portfolio v6",
+      "description": "Centered CV portfolio for a fullstack developer — About and Writing, same Jon Doe career data as v3. New projects only (shadcn init --template next).",
+      "dependencies": [
+        "next-themes",
+        "lucide-react",
+        "class-variance-authority",
+        "radix-ui",
+        "geist",
+        "gsap"
+      ],
+      "registryDependencies": [
+        "https://uiception.com/r/block-media.json"
+      ],
+      "categories": [
+        "template",
+        "portfolio"
+      ],
+      "docs": "New Next.js project only (same flow as https://ui.shadcn.com/create):\n  npx shadcn@latest init --template next -y \"https://uiception.com/r/portfolio-v6.json\"\n\nThis scaffolds Next.js + shadcn, then installs the centered CV portfolio.\n\nCentered CV column with About on / and Writing under /writing. Career sections and rows ease in as you scroll (GSAP ScrollTrigger, reduced-motion safe). Floating About | Writing pill at the bottom. Edit career data in lib/portfolio.ts and posts in lib/writing.tsx. Drop public/avatar.png to replace the portrait. System light/dark via next-themes; sun/moon toggle sits beside the pill.\n\nPreview at /view/portfolio-v6.",
+      "files": [
+        {
+          "path": "registry/new-york/templates/portfolio-v6/app/layout.tsx",
+          "type": "registry:page",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/app/writing/page.tsx",
+          "type": "registry:page",
+          "target": "app/writing/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/app/writing/[slug]/page.tsx",
+          "type": "registry:page",
+          "target": "app/writing/[slug]/page.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/profile-header.tsx",
+          "type": "registry:component",
+          "target": "components/profile-header.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/site-nav.tsx",
+          "type": "registry:component",
+          "target": "components/site-nav.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/gsap-animation.tsx",
+          "type": "registry:component",
+          "target": "components/gsap-animation.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/resume-section.tsx",
+          "type": "registry:component",
+          "target": "components/resume-section.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/resume-row.tsx",
+          "type": "registry:component",
+          "target": "components/resume-row.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/avatar.tsx",
+          "type": "registry:component",
+          "target": "components/avatar.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/theme-switcher.tsx",
+          "type": "registry:component",
+          "target": "components/theme-switcher.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/lib/portfolio.ts",
+          "type": "registry:lib",
+          "target": "lib/portfolio.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/lib/writing.tsx",
+          "type": "registry:lib",
+          "target": "lib/writing.tsx"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/lib/media.ts",
+          "type": "registry:lib",
+          "target": "lib/media.ts"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/public/avatar.png.gitkeep",
+          "type": "registry:file",
+          "target": "public/avatar.png.gitkeep"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/AGENTS.md",
+          "type": "registry:file",
+          "target": "AGENTS.md"
+        },
+        {
+          "path": "registry/new-york/templates/portfolio-v6/UNSLOP.md",
+          "type": "registry:file",
+          "target": "UNSLOP.md"
+        }
+      ]
+    },
+    {
       "name": "landing-page-v1",
       "type": "registry:block",
       "title": "Landing Page v1",
