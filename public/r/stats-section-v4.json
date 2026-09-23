@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-section-v4",
+  "title": "Stats Section v4",
+  "description": "A two-tone heading (title plus muted description) pinned to the top and a 2×2 grid of large stats resting just above the flat end of the curve, over an edge-to-edge growth chart that fills the section: a gray line curving up from the bottom-left above a field of fading hairline bars. Static data, no API.",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "chart"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/stats-section-v4/page.tsx",
+      "content": "import StatsSectionV4 from \"./components/stats-section-v4\"\n\nexport default function Page() {\n  return <StatsSectionV4 />\n}\n",
+      "type": "registry:page",
+      "target": "app/stats-section-v4/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/stats-section-v4/components/stats-section-v4.tsx",
+      "content": "import { sectionHeader, stats } from \"../lib/config\"\nimport { ScaleChart } from \"./scale-chart\"\n\nexport default function StatsSectionV4() {\n  return (\n    <section className=\"relative overflow-hidden\">\n      <div className=\"relative z-10 mx-auto flex max-w-6xl flex-col px-6 pt-16 md:min-h-[36rem] md:justify-between md:pt-24 md:pb-36 lg:min-h-[40rem] lg:pb-40\">\n        <h2 className=\"max-w-lg text-3xl leading-[1.15] font-medium tracking-tight md:text-4xl\">\n          {sectionHeader.title}{\" \"}\n          <span className=\"text-muted-foreground\">\n            {sectionHeader.subtitle}\n          </span>\n        </h2>\n\n        <dl className=\"mt-10 grid max-w-md grid-cols-2 gap-x-10 gap-y-8 md:mt-16\">\n          {stats.map((stat) => (\n            <div key={stat.id} className=\"flex flex-col-reverse gap-1\">\n              <dt className=\"text-sm text-muted-foreground\">{stat.label}</dt>\n              <dd className=\"text-3xl font-semibold tracking-tight tabular-nums md:text-4xl\">\n                {stat.value}\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n\n      <div\n        aria-hidden\n        className=\"pointer-events-none relative mt-10 h-56 sm:h-72 md:absolute md:inset-0 md:mt-0 md:h-auto\"\n      >\n        <ScaleChart />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/stats-section-v4/components/stats-section-v4.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/stats-section-v4/components/scale-chart.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Bar, ComposedChart, Line, XAxis, YAxis } from \"recharts\"\n\nimport { type ChartConfig, ChartContainer } from \"@/components/ui/chart\"\nimport { cn } from \"@/lib/utils\"\n\nimport { CHART_COLOR, weeklyInstalls } from \"../lib/config\"\n\nconst chartConfig = {\n  installs: { label: \"Installs\", color: CHART_COLOR },\n} satisfies ChartConfig\n\nconst peak = Math.max(...weeklyInstalls.map((point) => point.installs))\n\nexport function ScaleChart({ className }: { className?: string }) {\n  const gradientId = `ssv4-bars-${React.useId().replace(/:/g, \"\")}`\n\n  return (\n    <ChartContainer\n      config={chartConfig}\n      className={cn(\"aspect-auto h-full w-full\", className)}\n    >\n      <ComposedChart\n        data={weeklyInstalls}\n        margin={{ left: 0, right: 0, top: 32, bottom: 0 }}\n        barCategoryGap={0}\n      >\n        <defs>\n          <linearGradient id={gradientId} x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\">\n            <stop\n              offset=\"0%\"\n              stopColor=\"var(--color-installs)\"\n              stopOpacity={0.35}\n            />\n            <stop\n              offset=\"100%\"\n              stopColor=\"var(--color-installs)\"\n              stopOpacity={0.03}\n            />\n          </linearGradient>\n        </defs>\n        <XAxis dataKey=\"week\" hide />\n        <YAxis hide domain={[0, peak]} />\n        <Bar\n          dataKey=\"installs\"\n          fill={`url(#${gradientId})`}\n          barSize={1}\n          isAnimationActive={false}\n        />\n        <Line\n          dataKey=\"installs\"\n          type=\"monotone\"\n          stroke=\"var(--color-installs)\"\n          strokeWidth={2}\n          dot={false}\n          isAnimationActive={false}\n        />\n      </ComposedChart>\n    </ChartContainer>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/stats-section-v4/components/scale-chart.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/stats-section-v4/lib/config.ts",
+      "content": "/** Same neutral gray as the Next.js series in stats-section-v2. */\nexport const CHART_COLOR = \"#888888\"\n\nexport const sectionHeader = {\n  title: \"Adoption that compounds.\",\n  subtitle: \"Every block installed makes the next project faster to ship.\",\n} as const\n\nexport type Stat = {\n  id: string\n  value: string\n  label: string\n}\n\nexport const stats: Stat[] = [\n  { id: \"installs\", value: \"1.2M\", label: \"installs this week\" },\n  { id: \"projects\", value: \"48k\", label: \"projects shipped\" },\n  { id: \"blocks\", value: \"310\", label: \"blocks and templates\" },\n  { id: \"countries\", value: \"140+\", label: \"countries building\" },\n]\n\nexport type WeekPoint = {\n  week: number\n  installs: number\n}\n\nconst WEEKS = 180\nconst FINAL_INSTALLS = 1200\nconst START_INSTALLS = 18\n/** Higher values keep the curve flat for longer before it bends upward. */\nconst GROWTH = 4.2\n\n/**\n * Weekly installs, in thousands: flat at first, then compounding up to the\n * 1.2M \"installs this week\" stat in the final week.\n */\nexport const weeklyInstalls: WeekPoint[] = Array.from(\n  { length: WEEKS },\n  (_, index) => {\n    const t = index / (WEEKS - 1)\n    const curve = (Math.exp(GROWTH * t) - 1) / (Math.exp(GROWTH) - 1)\n    return {\n      week: index + 1,\n      installs: Math.round(\n        START_INSTALLS + (FINAL_INSTALLS - START_INSTALLS) * curve\n      ),\n    }\n  }\n)\n",
+      "type": "registry:lib",
+      "target": "app/stats-section-v4/lib/config.ts"
+    }
+  ],
+  "type": "registry:block"
+}

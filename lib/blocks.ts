@@ -353,7 +353,13 @@ export const blockCategories: BlockCategory[] = [
     id: "case-study",
     title: "Case study",
     description: "Narrative sections with context, results, and proof points.",
-    versions: [],
+    versions: [
+      {
+        id: "case-study-section-v1",
+        title: "Case Study Section v1",
+        registryPath: "registry/new-york/blocks/case-study-section-v1",
+      },
+    ],
   },
   {
     id: "testimonials",
@@ -416,6 +422,11 @@ export const blockCategories: BlockCategory[] = [
         id: "stats-section-v3",
         title: "Stats Section v3",
         registryPath: "registry/new-york/blocks/stats-section-v3",
+      },
+      {
+        id: "stats-section-v4",
+        title: "Stats Section v4",
+        registryPath: "registry/new-york/blocks/stats-section-v4",
       },
     ],
   },
@@ -601,7 +612,13 @@ export const blockCategories: BlockCategory[] = [
     id: "team",
     title: "Team",
     description: "Team member grids, bios, and org structures.",
-    versions: [],
+    versions: [
+      {
+        id: "team-section-v1",
+        title: "Team Section v1",
+        registryPath: "registry/new-york/blocks/team-section-v1",
+      },
+    ],
   },
   {
     id: "contact",
@@ -650,6 +667,16 @@ export const blockCategories: BlockCategory[] = [
         id: "gallery-section-v4",
         title: "Gallery Section v4",
         registryPath: "registry/new-york/blocks/gallery-section-v4",
+      },
+      {
+        id: "gallery-section-v5",
+        title: "Gallery Section v5",
+        registryPath: "registry/new-york/blocks/gallery-section-v5",
+      },
+      {
+        id: "gallery-section-v6",
+        title: "Gallery Section v6",
+        registryPath: "registry/new-york/blocks/gallery-section-v6",
       },
     ],
   },

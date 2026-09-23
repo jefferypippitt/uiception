@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "case-study-section-v1",
+  "title": "Case Study Section v1",
+  "description": "A minimal split case study: a vertically centered headline, summary, three results in a hairline-divided list, and a text link on the left, beside a tall rounded cover image on the right.",
+  "registryDependencies": [
+    "button",
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/case-study-section-v1/page.tsx",
+      "content": "import CaseStudySectionV1 from \"./components/case-study-section-v1\"\n\nexport default function Page() {\n  return <CaseStudySectionV1 />\n}\n",
+      "type": "registry:page",
+      "target": "app/case-study-section-v1/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/case-study-section-v1/components/case-study-section-v1.tsx",
+      "content": "import Image from \"next/image\"\nimport Link from \"next/link\"\nimport { ArrowRightIcon } from \"lucide-react\"\n\nimport { createBlockImage } from \"@/lib/block-media\"\nimport { Button } from \"@/components/ui/button\"\n\nimport { caseStudy, metrics } from \"../lib/config\"\n\nconst blockImage = createBlockImage(\"case-study-section-v1\")\n\nconst study = {\n  title: caseStudy.title,\n  summary: caseStudy.summary,\n  src: blockImage(caseStudy.imageFile),\n  alt: caseStudy.alt,\n  href: caseStudy.href,\n  linkLabel: caseStudy.linkLabel,\n}\n\nexport default function CaseStudySectionV1() {\n  return (\n    <section className=\"py-16 md:py-24\">\n      <div className=\"mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-12 md:gap-12\">\n        <div className=\"flex flex-col md:col-span-5 md:justify-center\">\n          <h2 className=\"text-3xl leading-[1.15] font-medium tracking-tight text-foreground md:text-4xl\">\n            {study.title}\n          </h2>\n          <p className=\"mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground\">\n            {study.summary}\n          </p>\n\n          <dl className=\"mt-8 divide-y divide-border border-y border-border\">\n            {metrics.map((metric) => (\n              <div\n                key={metric.id}\n                className=\"flex items-baseline justify-between gap-6 py-3\"\n              >\n                <dt className=\"text-sm text-muted-foreground\">\n                  {metric.label}\n                </dt>\n                <dd className=\"text-xl font-medium tracking-tight text-foreground tabular-nums\">\n                  {metric.value}\n                </dd>\n              </div>\n            ))}\n          </dl>\n\n          <div className=\"mt-4\">\n            <Button variant=\"link\" asChild className=\"px-0\">\n              <Link href={study.href}>\n                {study.linkLabel}\n                <ArrowRightIcon />\n              </Link>\n            </Button>\n          </div>\n        </div>\n\n        <div className=\"relative aspect-4/3 overflow-hidden rounded-xl bg-muted md:col-span-7 md:aspect-auto md:min-h-128\">\n          <Image\n            src={study.src}\n            alt={study.alt}\n            fill\n            unoptimized\n            priority\n            sizes=\"(max-width: 768px) 100vw, 680px\"\n            className=\"object-cover\"\n          />\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/case-study-section-v1/components/case-study-section-v1.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/case-study-section-v1/lib/config.ts",
+      "content": "export const caseStudy = {\n  title: \"How we rebuilt Acme's checkout.\",\n  summary:\n    \"Acme's checkout was spread across nine legacy pages, each with its own form styles. We rebuilt it as one flow on a shared component library that their team now maintains.\",\n  imageFile: \"image-1.jpg\",\n  alt: \"A brand mark on a soft gray background surrounded by paper shapes\",\n  href: \"#\",\n  linkLabel: \"View the project\",\n} as const\n\nexport type Metric = {\n  id: string\n  value: string\n  label: string\n}\n\nexport const metrics: Metric[] = [\n  { id: \"checkout\", value: \"38%\", label: \"Fewer abandoned checkouts\" },\n  { id: \"timeline\", value: \"6 weeks\", label: \"From kickoff to launch\" },\n  { id: \"speed\", value: \"2.4×\", label: \"Faster page loads\" },\n]\n",
+      "type": "registry:lib",
+      "target": "app/case-study-section-v1/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/case-study-section-v1/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/case-study-section-v1/image-1.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

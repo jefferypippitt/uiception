@@ -21,6 +21,8 @@ import SimpleChatbotPage from "@/registry/new-york/blocks/simple-chatbot/page"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/components/stats-section-v1"
 import StatsSectionV2 from "@/registry/new-york/blocks/stats-section-v2/components/stats-section-v2"
 import StatsSectionV3 from "@/registry/new-york/blocks/stats-section-v3/components/stats-section-v3"
+import StatsSectionV4 from "@/registry/new-york/blocks/stats-section-v4/components/stats-section-v4"
+import CaseStudySectionV1 from "@/registry/new-york/blocks/case-study-section-v1/components/case-study-section-v1"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/components/hero-section-v4"
 import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/components/how-it-works-section-v1"
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/components/how-it-works-section-v2"
@@ -89,6 +91,9 @@ import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/comp
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
 import GallerySectionV4 from "@/registry/new-york/blocks/gallery-section-v4/components/gallery-section-v4"
+import GallerySectionV5 from "@/registry/new-york/blocks/gallery-section-v5/components/gallery-section-v5"
+import GallerySectionV6 from "@/registry/new-york/blocks/gallery-section-v6/components/gallery-section-v6"
+import TeamSectionV1 from "@/registry/new-york/blocks/team-section-v1/components/team-section-v1"
 import BlogSectionV1 from "@/registry/new-york/blocks/blog-section-v1/components/blog-section-v1"
 import BlogSectionV2 from "@/registry/new-york/blocks/blog-section-v2/components/blog-section-v2"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
@@ -127,6 +132,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "stats-section-v1": StatsSectionV1,
   "stats-section-v2": StatsSectionV2,
   "stats-section-v3": StatsSectionV3,
+  "stats-section-v4": StatsSectionV4,
+  "case-study-section-v1": CaseStudySectionV1,
   "hero-section-v4": HeroSectionV4,
   "how-it-works-section-v1": HowItWorksSectionV1,
   "how-it-works-section-v2": HowItWorksSectionV2,
@@ -195,6 +202,9 @@ const blockComponents: Record<string, React.ComponentType> = {
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,
   "gallery-section-v4": GallerySectionV4,
+  "gallery-section-v5": GallerySectionV5,
+  "gallery-section-v6": GallerySectionV6,
+  "team-section-v1": TeamSectionV1,
   "blog-section-v1": BlogSectionV1,
   "blog-section-v2": BlogSectionV2,
   "navbar-section-v1": NavbarSectionV1Page,

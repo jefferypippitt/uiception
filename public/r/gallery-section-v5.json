@@ -1,0 +1,73 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gallery-section-v5",
+  "title": "Gallery Section v5",
+  "description": "An arc carousel gallery: square photo cards ride a slow, endlessly rotating ring over a dashed orbit line, framing a short centered title and description. Pauses on card hover.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/gallery-section-v5/page.tsx",
+      "content": "import GallerySectionV5 from \"./components/gallery-section-v5\"\n\nexport default function Page() {\n  return <GallerySectionV5 />\n}\n",
+      "type": "registry:page",
+      "target": "app/gallery-section-v5/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v5/components/gallery-section-v5.tsx",
+      "content": "import { GalleryArcCard } from \"./gallery-arc-card\"\nimport { createBlockImage } from \"@/lib/block-media\"\nimport {\n  RING_SLOTS,\n  galleryFiles,\n  sectionMeta,\n  type GalleryItem,\n} from \"../lib/config\"\nimport \"../styles/gallery-section-v5.css\"\n\nconst blockImage = createBlockImage(\"gallery-section-v5\")\nconst galleryItems: GalleryItem[] = galleryFiles.map(({ file, alt }, index) => ({\n  id: String(index + 1),\n  alt,\n  imageSrc: blockImage(file),\n}))\n\nexport type GallerySectionV5Props = {\n  header?: { title: string; description?: string } | false\n  items?: GalleryItem[]\n}\n\nexport default function GallerySectionV5({\n  header = sectionMeta,\n  items = galleryItems,\n}: GallerySectionV5Props = {}) {\n  const slots = Array.from({ length: RING_SLOTS }, (_, slot) => ({\n    slot,\n    item: items[slot % items.length],\n  }))\n\n  return (\n    <section className=\"gsv5-stage relative isolate overflow-hidden py-4 md:py-6 lg:py-8\">\n      <div aria-hidden className=\"gsv5-fade pointer-events-none absolute inset-0 -z-10\">\n        <div className=\"gsv5-orbit absolute left-1/2 rounded-full border border-dashed border-border\" />\n      </div>\n\n      <div className=\"gsv5-fade absolute inset-0 -z-10\">\n        <ul className=\"gsv5-ring absolute left-1/2\" aria-label=\"Gallery\">\n          {slots.map(({ slot, item }) => (\n            <GalleryArcCard\n              key={slot}\n              item={item}\n              angle={(360 / RING_SLOTS) * slot}\n              decorative={slot >= items.length}\n              priority={slot < 3 || slot > RING_SLOTS - 3}\n            />\n          ))}\n        </ul>\n      </div>\n\n      {header !== false ? (\n        <div className=\"gsv5-header pointer-events-none mx-auto max-w-md px-4 text-center *:pointer-events-auto\">\n          <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] lg:text-5xl\">\n            {header.title}\n          </h2>\n          {header.description ? (\n            <p className=\"mx-auto mt-4 max-w-sm text-[0.9375rem] leading-relaxed text-muted-foreground\">\n              {header.description}\n            </p>\n          ) : null}\n        </div>\n      ) : null}\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v5/components/gallery-section-v5.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v5/components/gallery-arc-card.tsx",
+      "content": "import type { CSSProperties } from \"react\"\nimport Image from \"next/image\"\n\nimport type { GalleryItem } from \"../lib/config\"\n\ntype GalleryArcCardProps = {\n  item: GalleryItem\n  angle: number\n  /** Repeated copies are decorative — only the first pass is announced. */\n  decorative?: boolean\n  priority?: boolean\n}\n\nexport function GalleryArcCard({\n  item,\n  angle,\n  decorative = false,\n  priority = false,\n}: GalleryArcCardProps) {\n  return (\n    <li\n      className=\"gsv5-card\"\n      style={{ \"--gsv5-angle\": `${angle}deg` } as CSSProperties}\n      aria-hidden={decorative || undefined}\n    >\n      <div className=\"relative size-full overflow-hidden rounded-2xl bg-muted shadow-xl shadow-foreground/10 ring-1 ring-border transition-transform duration-500 ease-out hover:scale-105\">\n        <Image\n          src={item.imageSrc}\n          alt={decorative ? \"\" : item.alt}\n          fill\n          unoptimized\n          priority={priority}\n          sizes=\"13rem\"\n          className=\"object-cover\"\n        />\n      </div>\n    </li>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/gallery-section-v5/components/gallery-arc-card.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v5/lib/config.ts",
+      "content": "export type GalleryItem = {\n  id: string\n  imageSrc: string\n  alt: string\n}\n\nexport const sectionMeta = {\n  title: \"Always something new on the easel\",\n  description:\n    \"Recent canvases and paper studies drift past one by one.\",\n} as const\n\n/** Cards spaced evenly around the full ring — items repeat to fill every slot. */\nexport const RING_SLOTS = 20\n\nexport const galleryFiles = [\n  { file: \"image-1.jpg\", alt: \"Oil painting of a morning harbor\" },\n  { file: \"image-2.jpg\", alt: \"Acrylic field study painting\" },\n  { file: \"image-3.jpg\", alt: \"Oil painting of a quiet interior\" },\n  { file: \"image-4.jpg\", alt: \"Watercolor of coastal light\" },\n  { file: \"image-5.jpg\", alt: \"Oil painting of an autumn orchard\" },\n] as const\n",
+      "type": "registry:lib",
+      "target": "app/gallery-section-v5/lib/config.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/gallery-section-v5/styles/gallery-section-v5.css",
+      "content": "/* Ring geometry — the ring is a 0×0 point at the circle's center; each card\n   is rotated to its slot then pushed out by the radius, so rotating the point\n   spins the whole arc. One full turn loops seamlessly. */\n.gsv5-stage {\n  --gsv5-card: 7rem;\n  --gsv5-radius: 28rem;\n  --gsv5-top: 2.5rem;\n  --gsv5-center: calc(var(--gsv5-top) + var(--gsv5-card) / 2 + var(--gsv5-radius));\n  min-height: calc(var(--gsv5-top) + var(--gsv5-card) / 2 + var(--gsv5-radius) * 0.7);\n}\n\n@media (min-width: 768px) {\n  .gsv5-stage {\n    --gsv5-card: 11rem;\n    --gsv5-radius: 40rem;\n    --gsv5-top: 3rem;\n  }\n}\n\n@media (min-width: 1024px) {\n  .gsv5-stage {\n    --gsv5-card: 13rem;\n    --gsv5-radius: 48rem;\n  }\n}\n\n.gsv5-fade {\n  mask-image: linear-gradient(to bottom, #000 50%, transparent 92%);\n}\n\n.gsv5-orbit {\n  top: calc(var(--gsv5-center) - var(--gsv5-radius));\n  width: calc(var(--gsv5-radius) * 2);\n  height: calc(var(--gsv5-radius) * 2);\n  translate: -50% 0;\n}\n\n.gsv5-ring {\n  top: var(--gsv5-center);\n  width: 0;\n  height: 0;\n  animation: gsv5-spin 90s linear infinite;\n}\n\n.gsv5-ring:has(.gsv5-card:hover) {\n  animation-play-state: paused;\n}\n\n.gsv5-card {\n  position: absolute;\n  top: calc(var(--gsv5-card) / -2);\n  left: calc(var(--gsv5-card) / -2);\n  width: var(--gsv5-card);\n  height: var(--gsv5-card);\n  transform: rotate(var(--gsv5-angle)) translateY(calc(var(--gsv5-radius) * -1));\n}\n\n.gsv5-header {\n  padding-top: calc(var(--gsv5-top) + var(--gsv5-card) + 2.5rem);\n  padding-bottom: 4rem;\n}\n\n@keyframes gsv5-spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .gsv5-ring {\n    animation-play-state: paused;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "app/gallery-section-v5/styles/gallery-section-v5.css"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v5/image-1.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v5/image-1.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v5/image-2.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v5/image-2.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v5/image-3.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v5/image-3.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v5/image-4.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v5/image-4.jpg.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/gallery-section-v5/image-5.jpg.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/gallery-section-v5/image-5.jpg.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}
