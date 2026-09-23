@@ -66,6 +66,7 @@ import TestimonialsSectionV3 from "@/registry/new-york/blocks/testimonials-secti
 import TestimonialsSectionV4 from "@/registry/new-york/blocks/testimonials-section-v4/components/testimonials-section-v4"
 import TestimonialsSectionV5 from "@/registry/new-york/blocks/testimonials-section-v5/components/testimonials-section-v5"
 import TestimonialsSectionV6 from "@/registry/new-york/blocks/testimonials-section-v6/components/testimonials-section-v6"
+import TestimonialsSectionV7 from "@/registry/new-york/blocks/testimonials-section-v7/components/testimonials-section-v7"
 import BrandsSectionV5 from "@/registry/new-york/blocks/brands-section-v5/components/brands-section-v5"
 import BrandsSectionV6 from "@/registry/new-york/blocks/brands-section-v6/components/brands-section-v6"
 import BrandsSectionV7 from "@/registry/new-york/blocks/brands-section-v7/components/brands-section-v7"
@@ -83,6 +84,7 @@ import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/comp
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
 import PricingSectionV4 from "@/registry/new-york/blocks/pricing-section-v4/components/pricing-section-v4"
+import PricingSectionV5 from "@/registry/new-york/blocks/pricing-section-v5/components/pricing-section-v5"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
@@ -183,10 +185,12 @@ const blockComponents: Record<string, React.ComponentType> = {
   "testimonials-section-v4": TestimonialsSectionV4,
   "testimonials-section-v5": TestimonialsSectionV5,
   "testimonials-section-v6": TestimonialsSectionV6,
+  "testimonials-section-v7": TestimonialsSectionV7,
   "pricing-section-v1": PricingSectionV1,
   "pricing-section-v2": PricingSectionV2,
   "pricing-section-v3": PricingSectionV3,
   "pricing-section-v4": PricingSectionV4,
+  "pricing-section-v5": PricingSectionV5,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,

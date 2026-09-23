@@ -17,6 +17,11 @@ import {
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
 import { Spinner } from "@/components/ui/spinner"
 import { OpenInV0Button } from "@/components/open-in-v0-button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -31,6 +36,7 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import type { BlockVersion } from "@/lib/blocks"
 import type { BlockRegistryData } from "@/lib/registry-server"
 import { cn } from "@/lib/utils"
+import { usePanelRef, type Layout } from "react-resizable-panels"
 import { ReactLight } from "@/components/ui/svgs/reactLight"
 import { ReactDark } from "@/components/ui/svgs/reactDark"
 import { Typescript } from "@/components/ui/svgs/typescript"
@@ -280,9 +286,21 @@ function TreeRows({
 
 const PREVIEW_SHELL = "h-[min(44rem,72vh)]"
 const TOOLBAR_CTRL_H = "h-8"
+/** Iframe widths for the tablet / mobile presets */
+const VIEWPORT_WIDTH_PX = {
+  tablet: 768,
+  mobile: 390,
+} as const
+/** Horizontal padding around the iframe inside the preview panel (p-3 × 2) */
+const PREVIEW_PANEL_PAD_PX = 24
+/** Tolerance when matching a dragged width back to a preset */
+const VIEWPORT_SNAP_PX = 2
 
 type MainView = "preview" | "code"
 type Viewport = "desktop" | "tablet" | "mobile"
+
+const panelWidthFor = (v: Exclude<Viewport, "desktop">) =>
+  VIEWPORT_WIDTH_PX[v] + PREVIEW_PANEL_PAD_PX
 
 export function BlockPreviewToolbar({
   version,
@@ -294,11 +312,14 @@ export function BlockPreviewToolbar({
   const versionId = version.id
 
   const [mainView, setMainView] = React.useState<MainView>("preview")
-  const [viewport, setViewport] = React.useState<Viewport>("desktop")
+  const [viewport, setViewport] = React.useState<Viewport | null>("desktop")
   const [iframeKey, setIframeKey] = React.useState(0)
   const [loadedKey, setLoadedKey] = React.useState<number | null>(null)
   const iframeLoaded = loadedKey === iframeKey
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null)
+  const previewPanelRef = usePanelRef()
+  const previewGroupRef = React.useRef<HTMLDivElement | null>(null)
+  const previewPanelId = `preview-${versionId}`
   const [selectedPath, setSelectedPath] = React.useState<string | null>(
     registryData?.files[0]?.path ?? null
   )
@@ -361,6 +382,33 @@ export function BlockPreviewToolbar({
     }
   }, [iframeKey, previewPath])
 
+  const applyViewportSize = React.useCallback((next: Viewport) => {
+    const panel = previewPanelRef.current
+    if (!panel) return
+    panel.resize(next === "desktop" ? "100%" : panelWidthFor(next))
+  }, [previewPanelRef])
+
+  /**
+   * Derive the active preset from the new layout (drag or toggle). Pixels come
+   * from the layout % × group width — `panel.getSize().inPixels` reads the DOM,
+   * which hasn't been updated yet when `onLayoutChanged` fires for `resize()`.
+   */
+  const syncViewportFromLayout = React.useCallback((layout: Layout) => {
+    const asPercentage = layout[previewPanelId]
+    const groupWidth = previewGroupRef.current?.offsetWidth
+    if (asPercentage === undefined || !groupWidth) return
+    const inPixels = (asPercentage / 100) * groupWidth
+    if (asPercentage >= 99.9) {
+      setViewport("desktop")
+    } else if (Math.abs(inPixels - panelWidthFor("tablet")) <= VIEWPORT_SNAP_PX) {
+      setViewport("tablet")
+    } else if (inPixels <= panelWidthFor("mobile") + VIEWPORT_SNAP_PX) {
+      setViewport("mobile")
+    } else {
+      setViewport(null)
+    }
+  }, [previewPanelId])
+
   const displayTitle = version.title
 
   return (
@@ -390,10 +438,11 @@ export function BlockPreviewToolbar({
                 type="single"
                 variant="outline"
                 spacing={0}
-                value={viewport}
+                value={viewport ?? ""}
                 onValueChange={(v) => {
                   if (v === "desktop" || v === "tablet" || v === "mobile") {
                     setViewport(v)
+                    applyViewportSize(v)
                   }
                 }}
                 className="shrink-0"
@@ -483,40 +532,55 @@ export function BlockPreviewToolbar({
 
       <div className={cn("overflow-hidden rounded-xl border bg-background", PREVIEW_SHELL)}>
         <TabsContent value="preview" className="m-0 h-full min-h-0 p-0">
-          <div
-            className={cn(
-              "preview-scrollbar flex h-full items-center justify-center overflow-auto bg-muted/15 p-3",
-              viewport !== "desktop" && "preview-stage-pattern"
-            )}
-          >
-            <div
-              className={cn(
-                "h-full min-h-0 transition-[max-width] duration-200",
-                viewport === "desktop" && "w-full max-w-none",
-                viewport === "tablet" && "w-full max-w-3xl",
-                viewport === "mobile" && "w-full max-w-97.5"
-              )}
+          <div className="h-full bg-muted/15">
+            <ResizablePanelGroup
+              orientation="horizontal"
+              className="group/preview h-full"
+              elementRef={previewGroupRef}
+              onLayoutChanged={syncViewportFromLayout}
             >
-              <div className="relative h-full min-h-80 w-full">
-                {!iframeLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center rounded-lg border border-border/80 bg-muted/20">
-                    <Spinner className="size-5 text-muted-foreground" />
+              <ResizablePanel
+                id={previewPanelId}
+                defaultSize="100%"
+                minSize={panelWidthFor("mobile")}
+                panelRef={previewPanelRef}
+              >
+                <div className="preview-scrollbar h-full overflow-auto p-3">
+                  <div className="relative h-full min-h-80 w-full">
+                    {!iframeLoaded && (
+                      <div className="absolute inset-0 flex items-center justify-center rounded-lg border border-border/80 bg-muted/20">
+                        <Spinner className="size-5 text-muted-foreground" />
+                      </div>
+                    )}
+                    <iframe
+                      key={iframeKey}
+                      src={previewPath}
+                      title={displayTitle}
+                      ref={iframeRef}
+                      loading="lazy"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
+                      className={cn(
+                        "block h-full w-full rounded-lg border border-border/80 bg-background shadow-sm",
+                        // Iframes swallow pointer events, which stalls the drag once the cursor enters the preview.
+                        "group-has-data-[separator=active]/preview:pointer-events-none",
+                        !iframeLoaded && "invisible"
+                      )}
+                    />
                   </div>
-                )}
-                <iframe
-                  key={iframeKey}
-                  src={previewPath}
-                  title={displayTitle}
-                  ref={iframeRef}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
-                  className={cn(
-                    "block h-full w-full rounded-lg border border-border/80 bg-background shadow-sm",
-                    !iframeLoaded && "invisible"
-                  )}
-                />
-              </div>
-            </div>
+                </div>
+              </ResizablePanel>
+              <ResizableHandle
+                withHandle
+                aria-label="Resize preview width"
+                className="bg-transparent after:w-2"
+              />
+              <ResizablePanel
+                id={`spacer-${versionId}`}
+                defaultSize="0%"
+                minSize="0%"
+                collapsible
+              />
+            </ResizablePanelGroup>
           </div>
         </TabsContent>
 
