@@ -4,19 +4,11 @@
   height: 2px;
   background-image: repeating-linear-gradient(
     90deg,
-    rgb(22 163 74) 0 4px,
+    var(--muted-foreground) 0 4px,
     transparent 4px 8px
   );
   background-size: 16px 2px;
   animation: hiw1-dash-flow 1.5s linear infinite;
-}
-
-.dark .hiw1-beam-h {
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgb(74 222 128) 0 4px,
-    transparent 4px 8px
-  );
 }
 
 @media (min-width: 1024px) {
@@ -30,19 +22,11 @@
   width: 2px;
   background-image: repeating-linear-gradient(
     180deg,
-    rgb(22 163 74) 0 4px,
+    var(--muted-foreground) 0 4px,
     transparent 4px 8px
   );
   background-size: 2px 16px;
   animation: hiw1-dash-flow-v 1.5s linear infinite;
-}
-
-.dark .hiw1-beam-vertical {
-  background-image: repeating-linear-gradient(
-    180deg,
-    rgb(74 222 128) 0 4px,
-    transparent 4px 8px
-  );
 }
 
 @keyframes hiw1-dash-flow {

@@ -1,0 +1,64 @@
+.tsv2-frame {
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease-out;
+}
+
+.tsv2-frame[data-ready="false"] {
+  transition: none;
+}
+
+@media (min-width: 1024px) {
+  .tsv2-frame {
+    transform: translateY(var(--tsv2-y, 0px));
+  }
+
+  /* The server can't measure the active row, so the frame renders at 0px.
+     Keep it hidden until the client has measured and moved it into place. */
+  .tsv2-frame[data-ready="false"] {
+    opacity: 0;
+  }
+}
+
+@keyframes tsv2-portrait-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tsv2-portrait-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+.tsv2-portrait-in {
+  opacity: 1;
+  transform: scale(1);
+  animation: tsv2-portrait-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tsv2-portrait-out {
+  opacity: 0;
+  transform: scale(0.94);
+  animation: tsv2-portrait-out 420ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tsv2-frame,
+  .tsv2-portrait-in,
+  .tsv2-portrait-out {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "team-section-v2",
+  "title": "Team Section v2",
+  "description": "The same team title, description, and portraits as an index. Names sit in a list, and a greyscale portrait slides to the row you hover or reach with the arrow keys.",
+  "dependencies": [
+    "geist@^1.7.0"
+  ],
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/team-section-v2/page.tsx",
+      "content": "import TeamSectionV2 from \"./components/team-section-v2\"\r\n\r\nexport default function Page() {\r\n  return <TeamSectionV2 />\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/team-section-v2/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v2/components/team-section-v2.tsx",
+      "content": "import { createBlockImage } from \"@/lib/block-media\"\r\n\r\nimport { TeamSectionV2Root } from \"./team-section-v2-root\"\r\nimport { teamFiles, type TeamMember } from \"../lib/config\"\r\n\r\nconst blockImage = createBlockImage(\"team-section-v2\")\r\n\r\nconst teamMembers: TeamMember[] = teamFiles.map((member, index) => ({\r\n  id: String(index + 1),\r\n  name: member.name,\r\n  title: member.title,\r\n  avatarSrc: blockImage(member.file),\r\n}))\r\n\r\nexport type TeamSectionV2Props = {\r\n  members?: TeamMember[]\r\n}\r\n\r\nexport default function TeamSectionV2({\r\n  members = teamMembers,\r\n}: TeamSectionV2Props = {}) {\r\n  return <TeamSectionV2Root members={members} />\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/team-section-v2/components/team-section-v2.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v2/components/team-section-v2-root.tsx",
+      "content": "\"use client\"\r\n\r\nimport { GeistPixelCircle } from \"geist/font/pixel\"\r\nimport Image from \"next/image\"\r\nimport {\r\n  useCallback,\r\n  useLayoutEffect,\r\n  useRef,\r\n  useState,\r\n  type CSSProperties,\r\n  type KeyboardEvent,\r\n} from \"react\"\r\n\r\nimport { sectionHeader, type TeamMember } from \"../lib/config\"\r\nimport \"../styles/team-section-v2.css\"\r\n\r\ntype TeamSectionV2RootProps = {\r\n  members: TeamMember[]\r\n}\r\n\r\nfunction optionId(id: string) {\r\n  return `team-section-v2-option-${id}`\r\n}\r\n\r\nexport function TeamSectionV2Root({ members }: TeamSectionV2RootProps) {\r\n  const count = members.length\r\n  const [activeIndex, setActiveIndex] = useState(0)\r\n  const [previousIndex, setPreviousIndex] = useState(0)\r\n  const [revealKey, setRevealKey] = useState(0)\r\n  const [offsetY, setOffsetY] = useState(0)\r\n  const [motionReady, setMotionReady] = useState(false)\r\n  const listRef = useRef<HTMLUListElement>(null)\r\n  const frameRef = useRef<HTMLDivElement>(null)\r\n  const active = members[activeIndex]\r\n\r\n  const measure = useCallback(() => {\r\n    const list = listRef.current\r\n    const frame = frameRef.current\r\n    const row = list?.querySelector<HTMLElement>(\r\n      `[data-index=\"${activeIndex}\"]`\r\n    )\r\n    if (!list || !frame || !row) return\r\n\r\n    const listRect = list.getBoundingClientRect()\r\n    const rowRect = row.getBoundingClientRect()\r\n    const circle = frame.querySelector<HTMLElement>(\"[data-tsv2-portrait]\")\r\n    const circleHeight = circle?.offsetHeight ?? frame.offsetHeight\r\n    const rowCenter = rowRect.top - listRect.top + rowRect.height / 2\r\n    const raw = rowCenter - circleHeight / 2\r\n    const sectionRect = list.closest(\"section\")?.getBoundingClientRect()\r\n    const minY = sectionRect ? sectionRect.top + 32 - listRect.top : raw\r\n    const next = Math.round(Math.max(raw, minY))\r\n    setOffsetY((current) => (current === next ? current : next))\r\n  }, [activeIndex])\r\n\r\n  useLayoutEffect(() => {\r\n    measure()\r\n    const list = listRef.current\r\n    const frame = frameRef.current\r\n    if (!list) return\r\n    const observer = new ResizeObserver(() => measure())\r\n    observer.observe(list)\r\n    if (frame) observer.observe(frame)\r\n    return () => observer.disconnect()\r\n  }, [measure])\r\n\r\n  useLayoutEffect(() => {\r\n    const frame = requestAnimationFrame(() => setMotionReady(true))\r\n    return () => cancelAnimationFrame(frame)\r\n  }, [])\r\n\r\n  function select(index: number) {\r\n    if (count < 1) return\r\n    const normalized = ((index % count) + count) % count\r\n    if (normalized === activeIndex) return\r\n    setPreviousIndex(activeIndex)\r\n    setActiveIndex(normalized)\r\n    setRevealKey((key) => key + 1)\r\n  }\r\n\r\n  function onKeyDown(event: KeyboardEvent<HTMLUListElement>) {\r\n    if (event.key === \"ArrowDown\") {\r\n      event.preventDefault()\r\n      select(activeIndex + 1)\r\n    } else if (event.key === \"ArrowUp\") {\r\n      event.preventDefault()\r\n      select(activeIndex - 1)\r\n    } else if (event.key === \"Home\") {\r\n      event.preventDefault()\r\n      select(0)\r\n    } else if (event.key === \"End\") {\r\n      event.preventDefault()\r\n      select(count - 1)\r\n    }\r\n  }\r\n\r\n  if (!active) return null\r\n\r\n  return (\r\n    <section aria-label=\"Team\" className=\"pt-16 pb-24 lg:pt-24 lg:pb-36\">\r\n      <div className=\"mx-auto max-w-6xl px-6\">\r\n        <header className=\"max-w-xl\">\r\n          <h2 className=\"text-4xl leading-[1.1] font-medium tracking-[-0.03em] text-foreground lg:text-5xl\">\r\n            {sectionHeader.title}\r\n          </h2>\r\n          <p className=\"mt-4 max-w-md text-[0.9375rem] leading-relaxed text-muted-foreground\">\r\n            {sectionHeader.description}\r\n          </p>\r\n        </header>\r\n\r\n        <div className=\"mt-12 grid items-start gap-10 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_16.5rem] lg:gap-x-16\">\r\n          <ul\r\n            ref={listRef}\r\n            role=\"listbox\"\r\n            aria-label=\"Team members\"\r\n            aria-activedescendant={optionId(active.id)}\r\n            tabIndex={0}\r\n            className=\"border-t border-border outline-none focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-ring\"\r\n            onKeyDown={onKeyDown}\r\n          >\r\n            {members.map((member, index) => {\r\n              const selected = index === activeIndex\r\n              return (\r\n                <li\r\n                  key={member.id}\r\n                  id={optionId(member.id)}\r\n                  role=\"option\"\r\n                  aria-selected={selected}\r\n                  aria-label={`${member.name}, ${member.title}`}\r\n                  data-index={index}\r\n                  className=\"flex cursor-pointer items-start border-b border-border py-5\"\r\n                  onMouseEnter={() => select(index)}\r\n                  onClick={() => select(index)}\r\n                >\r\n                  <span\r\n                    className={`min-w-0 transition-opacity duration-300 motion-reduce:transition-none ${\r\n                      selected ? \"opacity-100\" : \"opacity-30\"\r\n                    }`}\r\n                  >\r\n                    <span\r\n                      className={`${GeistPixelCircle.className} block text-[1.65rem] leading-none font-normal tracking-normal text-foreground lg:text-4xl`}\r\n                    >\r\n                      {member.name}\r\n                    </span>\r\n                    <span className=\"mt-1.5 block text-sm text-muted-foreground\">\r\n                      {member.title}\r\n                    </span>\r\n                  </span>\r\n                </li>\r\n              )\r\n            })}\r\n          </ul>\r\n\r\n          <div className=\"relative order-first lg:order-0\">\r\n            <div\r\n              ref={frameRef}\r\n              data-ready={motionReady ? \"true\" : \"false\"}\r\n              style={{ \"--tsv2-y\": `${offsetY}px` } as CSSProperties}\r\n              className=\"tsv2-frame mx-auto w-full max-w-xs lg:absolute lg:inset-x-0 lg:top-0 lg:max-w-none\"\r\n            >\r\n              <Portrait\r\n                members={members}\r\n                activeIndex={activeIndex}\r\n                previousIndex={previousIndex}\r\n                revealKey={revealKey}\r\n              />\r\n              <p className=\"mt-4 text-center lg:hidden\">\r\n                <span className=\"block text-sm font-medium text-foreground\">\r\n                  {active.name}\r\n                </span>\r\n                <span className=\"mt-0.5 block text-sm text-muted-foreground\">\r\n                  {active.title}\r\n                </span>\r\n              </p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n\r\nfunction Portrait({\r\n  members,\r\n  activeIndex,\r\n  previousIndex,\r\n  revealKey,\r\n}: {\r\n  members: TeamMember[]\r\n  activeIndex: number\r\n  previousIndex: number\r\n  revealKey: number\r\n}) {\r\n  return (\r\n    <div\r\n      data-tsv2-portrait\r\n      className=\"relative aspect-square overflow-hidden rounded-full bg-muted ring-1 ring-border\"\r\n    >\r\n      {members.map((member, index) => {\r\n        const active = index === activeIndex\r\n        const leaving = revealKey > 0 && index === previousIndex && !active\r\n        return (\r\n          <Image\r\n            key={member.id}\r\n            src={member.avatarSrc}\r\n            alt=\"\"\r\n            fill\r\n            unoptimized\r\n            sizes=\"280px\"\r\n            priority={index === 0}\r\n            draggable={false}\r\n            className={`object-cover grayscale ${\r\n              revealKey > 0 && active\r\n                ? \"tsv2-portrait-in\"\r\n                : leaving\r\n                  ? \"tsv2-portrait-out\"\r\n                  : active\r\n                    ? \"opacity-100\"\r\n                    : \"opacity-0\"\r\n            }`}\r\n            style={{ zIndex: active ? 2 : leaving ? 1 : 0 }}\r\n          />\r\n        )\r\n      })}\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/team-section-v2/components/team-section-v2-root.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v2/lib/config.ts",
+      "content": "export type TeamMember = {\r\n  id: string\r\n  name: string\r\n  title: string\r\n  avatarSrc: string\r\n}\r\n\r\nexport const sectionHeader = {\r\n  title: \"Who we are\",\r\n  description:\r\n    \"Engineers, operators, designers, and data people who build and run Acme every day.\",\r\n} as const\r\n\r\nexport const teamFiles = [\r\n  { file: \"avatar-1.png\", name: \"Jane Doe\", title: \"VP of Engineering\" },\r\n  { file: \"avatar-2.png\", name: \"John Doe\", title: \"Director of Operations\" },\r\n  { file: \"avatar-3.png\", name: \"Jane Smith\", title: \"Chief Product Officer\" },\r\n  { file: \"avatar-4.png\", name: \"John Smith\", title: \"Head of Autonomy\" },\r\n  { file: \"avatar-5.png\", name: \"Alex Johnson\", title: \"Staff Data Engineer\" },\r\n  { file: \"avatar-6.png\", name: \"Sam Wilson\", title: \"SVP of Digital\" },\r\n] as const\r\n",
+      "type": "registry:lib",
+      "target": "app/team-section-v2/lib/config.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v2/styles/team-section-v2.css",
+      "content": ".tsv2-frame {\r\n  transition:\r\n    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),\r\n    opacity 240ms ease-out;\r\n}\r\n\r\n.tsv2-frame[data-ready=\"false\"] {\r\n  transition: none;\r\n}\r\n\r\n@media (min-width: 1024px) {\r\n  .tsv2-frame {\r\n    transform: translateY(var(--tsv2-y, 0px));\r\n  }\r\n\r\n  /* The server can't measure the active row, so the frame renders at 0px.\r\n     Keep it hidden until the client has measured and moved it into place. */\r\n  .tsv2-frame[data-ready=\"false\"] {\r\n    opacity: 0;\r\n  }\r\n}\r\n\r\n@keyframes tsv2-portrait-in {\r\n  from {\r\n    opacity: 0;\r\n    transform: scale(1.08);\r\n  }\r\n  to {\r\n    opacity: 1;\r\n    transform: scale(1);\r\n  }\r\n}\r\n\r\n@keyframes tsv2-portrait-out {\r\n  from {\r\n    opacity: 1;\r\n    transform: scale(1);\r\n  }\r\n  to {\r\n    opacity: 0;\r\n    transform: scale(0.94);\r\n  }\r\n}\r\n\r\n.tsv2-portrait-in {\r\n  opacity: 1;\r\n  transform: scale(1);\r\n  animation: tsv2-portrait-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;\r\n}\r\n\r\n.tsv2-portrait-out {\r\n  opacity: 0;\r\n  transform: scale(0.94);\r\n  animation: tsv2-portrait-out 420ms cubic-bezier(0.4, 0, 1, 1) both;\r\n}\r\n\r\n@media (prefers-reduced-motion: reduce) {\r\n  .tsv2-frame,\r\n  .tsv2-portrait-in,\r\n  .tsv2-portrait-out {\r\n    animation: none;\r\n    transition: none;\r\n  }\r\n}\r\n",
+      "type": "registry:file",
+      "target": "app/team-section-v2/styles/team-section-v2.css"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-1.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-1.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-2.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-2.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-3.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-3.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-4.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-4.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-5.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-5.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v2/avatar-6.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v2/avatar-6.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

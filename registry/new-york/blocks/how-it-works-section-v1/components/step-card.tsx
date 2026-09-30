@@ -17,7 +17,7 @@ export default function StepCard({ step }: Props) {
   return (
     <Card className="flex h-full flex-col rounded-[2rem] py-0">
       <CardHeader className="p-8 pb-0">
-        <CardTitle className="text-base text-green-600 dark:text-green-400">
+        <CardTitle className="text-base text-muted-foreground">
           {step.number}
         </CardTitle>
       </CardHeader>

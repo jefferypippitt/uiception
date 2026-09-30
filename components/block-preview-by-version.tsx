@@ -23,6 +23,7 @@ import StatsSectionV2 from "@/registry/new-york/blocks/stats-section-v2/componen
 import StatsSectionV3 from "@/registry/new-york/blocks/stats-section-v3/components/stats-section-v3"
 import StatsSectionV4 from "@/registry/new-york/blocks/stats-section-v4/components/stats-section-v4"
 import CaseStudySectionV1 from "@/registry/new-york/blocks/case-study-section-v1/components/case-study-section-v1"
+import CaseStudySectionV2 from "@/registry/new-york/blocks/case-study-section-v2/components/case-study-section-v2"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/components/hero-section-v4"
 import HowItWorksSectionV1 from "@/registry/new-york/blocks/how-it-works-section-v1/components/how-it-works-section-v1"
 import HowItWorksSectionV2 from "@/registry/new-york/blocks/how-it-works-section-v2/components/how-it-works-section-v2"
@@ -82,6 +83,7 @@ import HeroSectionV9 from "@/registry/new-york/blocks/hero-section-v9/components
 import HeroSectionV10 from "@/registry/new-york/blocks/hero-section-v10/components/hero-section-v10"
 import HeroSectionV11 from "@/registry/new-york/blocks/hero-section-v11/components/hero-section-v11"
 import HeroSectionV12 from "@/registry/new-york/blocks/hero-section-v12/components/hero-section-v12"
+import HeroSectionV13 from "@/registry/new-york/blocks/hero-section-v13/components/hero-section-v13"
 import PricingSectionV1 from "@/registry/new-york/blocks/pricing-section-v1/components/pricing-section-v1"
 import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/components/pricing-section-v2"
 import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
@@ -94,6 +96,7 @@ import GallerySectionV4 from "@/registry/new-york/blocks/gallery-section-v4/comp
 import GallerySectionV5 from "@/registry/new-york/blocks/gallery-section-v5/components/gallery-section-v5"
 import GallerySectionV6 from "@/registry/new-york/blocks/gallery-section-v6/components/gallery-section-v6"
 import TeamSectionV1 from "@/registry/new-york/blocks/team-section-v1/components/team-section-v1"
+import TeamSectionV2 from "@/registry/new-york/blocks/team-section-v2/components/team-section-v2"
 import BlogSectionV1 from "@/registry/new-york/blocks/blog-section-v1/components/blog-section-v1"
 import BlogSectionV2 from "@/registry/new-york/blocks/blog-section-v2/components/blog-section-v2"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
@@ -134,6 +137,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "stats-section-v3": StatsSectionV3,
   "stats-section-v4": StatsSectionV4,
   "case-study-section-v1": CaseStudySectionV1,
+  "case-study-section-v2": CaseStudySectionV2,
   "hero-section-v4": HeroSectionV4,
   "how-it-works-section-v1": HowItWorksSectionV1,
   "how-it-works-section-v2": HowItWorksSectionV2,
@@ -167,6 +171,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "hero-section-v10": HeroSectionV10,
   "hero-section-v11": HeroSectionV11,
   "hero-section-v12": HeroSectionV12,
+  "hero-section-v13": HeroSectionV13,
   "feature-section-v3": FeatureSectionV3,
   "feature-section-v4": FeatureSectionV4,
   "feature-section-v5": FeatureSectionV5,
@@ -205,6 +210,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "gallery-section-v5": GallerySectionV5,
   "gallery-section-v6": GallerySectionV6,
   "team-section-v1": TeamSectionV1,
+  "team-section-v2": TeamSectionV2,
   "blog-section-v1": BlogSectionV1,
   "blog-section-v2": BlogSectionV2,
   "navbar-section-v1": NavbarSectionV1Page,

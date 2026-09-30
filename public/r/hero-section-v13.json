@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-section-v13",
+  "title": "Hero Section v13",
+  "description": "Minimal centered hero for a freelancer finance app: secondary badge, two-line headline, muted description, and a single rounded-full button CTA.",
+  "dependencies": [],
+  "registryDependencies": [
+    "badge",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/hero-section-v13/page.tsx",
+      "content": "import HeroSectionV13 from \"./components/hero-section-v13\"\n\nexport default function Page() {\n  return <HeroSectionV13 />\n}\n",
+      "type": "registry:page",
+      "target": "app/hero-section-v13/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v13/components/hero-section-v13.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\n\nimport { badge, cta, description, headline } from \"../lib/config\"\n\nexport default function HeroSectionV13() {\n  return (\n    <section className=\"py-4 md:py-6 lg:py-8\">\n      <div className=\"mx-auto max-w-6xl px-4\">\n        <div className=\"flex flex-col items-center gap-6 text-center\">\n          <Badge variant=\"secondary\" className=\"text-sm\">\n            {badge}\n          </Badge>\n\n          <h1 className=\"text-3xl font-medium tracking-tighter sm:text-4xl lg:text-5xl lg:leading-[1.15]\">\n            {headline[0]}\n            <br />\n            {headline[1]}\n          </h1>\n\n          <p className=\"max-w-lg text-base leading-relaxed text-muted-foreground\">\n            {description}\n          </p>\n\n          <Button asChild className=\"rounded-full\">\n            <Link href={cta.href}>{cta.label}</Link>\n          </Button>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/hero-section-v13/components/hero-section-v13.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/hero-section-v13/lib/config.ts",
+      "content": "export const badge = \"Built for freelancers\"\n\nexport const headline = [\n  \"Your money, in order\",\n  \"long before tax season\",\n] as const\n\nexport const description =\n  \"When a client pays, a share goes straight to your quarterly estimate and the rest shows up as money you can spend this month.\"\n\nexport const cta = {\n  label: \"Start budgeting free\",\n  href: \"#\",\n} as const\n",
+      "type": "registry:lib",
+      "target": "app/hero-section-v13/lib/config.ts"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -168,6 +168,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Hero Section v12",
         registryPath: "registry/new-york/blocks/hero-section-v12",
       },
+      {
+        id: "hero-section-v13",
+        title: "Hero Section v13",
+        registryPath: "registry/new-york/blocks/hero-section-v13",
+      },
     ],
   },
   {
@@ -328,7 +333,7 @@ export const blockCategories: BlockCategory[] = [
   },
   {
     id: "how-it-works",
-    title: "How it works",
+    title: "How It Works",
     description: "Process sections that explain steps, flows, and timelines.",
     versions: [
       {
@@ -345,19 +350,24 @@ export const blockCategories: BlockCategory[] = [
   },
   {
     id: "value-proposition",
-    title: "Value proposition",
+    title: "Value Proposition",
     description: "Messaging blocks that clarify outcomes, benefits, and differentiation.",
     versions: [],
   },
   {
     id: "case-study",
-    title: "Case study",
+    title: "Case Study",
     description: "Narrative sections with context, results, and proof points.",
     versions: [
       {
         id: "case-study-section-v1",
         title: "Case Study Section v1",
         registryPath: "registry/new-york/blocks/case-study-section-v1",
+      },
+      {
+        id: "case-study-section-v2",
+        title: "Case Study Section v2",
+        registryPath: "registry/new-york/blocks/case-study-section-v2",
       },
     ],
   },
@@ -538,7 +548,7 @@ export const blockCategories: BlockCategory[] = [
   },
   {
     id: "about-us",
-    title: "About us",
+    title: "About Us",
     description: "Company story, mission, and positioning sections.",
     versions: [
       {
@@ -617,6 +627,11 @@ export const blockCategories: BlockCategory[] = [
         id: "team-section-v1",
         title: "Team Section v1",
         registryPath: "registry/new-york/blocks/team-section-v1",
+      },
+      {
+        id: "team-section-v2",
+        title: "Team Section v2",
+        registryPath: "registry/new-york/blocks/team-section-v2",
       },
     ],
   },
