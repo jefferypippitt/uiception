@@ -16,6 +16,7 @@ import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/compon
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/components/footer-section-v2"
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/components/footer-section-v3"
 import FooterSectionV4 from "@/registry/new-york/blocks/footer-section-v4/components/footer-section-v4"
+import FooterSectionV5 from "@/registry/new-york/blocks/footer-section-v5/components/footer-section-v5"
 import ChatBotPage from "@/registry/new-york/blocks/chat-bot/page"
 import SimpleChatbotPage from "@/registry/new-york/blocks/simple-chatbot/page"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/components/stats-section-v1"
@@ -89,6 +90,7 @@ import PricingSectionV2 from "@/registry/new-york/blocks/pricing-section-v2/comp
 import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/components/pricing-section-v3"
 import PricingSectionV4 from "@/registry/new-york/blocks/pricing-section-v4/components/pricing-section-v4"
 import PricingSectionV5 from "@/registry/new-york/blocks/pricing-section-v5/components/pricing-section-v5"
+import PricingSectionV6 from "@/registry/new-york/blocks/pricing-section-v6/components/pricing-section-v6"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
@@ -130,6 +132,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "footer-section-v2": FooterSectionV2,
   "footer-section-v3": FooterSectionV3,
   "footer-section-v4": FooterSectionV4,
+  "footer-section-v5": FooterSectionV5,
   "chat-bot": ChatBotPage,
   "simple-chatbot": SimpleChatbotPage,
   "stats-section-v1": StatsSectionV1,
@@ -203,6 +206,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "pricing-section-v3": PricingSectionV3,
   "pricing-section-v4": PricingSectionV4,
   "pricing-section-v5": PricingSectionV5,
+  "pricing-section-v6": PricingSectionV6,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,

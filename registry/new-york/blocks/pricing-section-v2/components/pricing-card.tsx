@@ -14,7 +14,7 @@ export default function PricingCard({ plan, billingCycle }: PricingCardProps) {
 
   return (
     <li className="min-w-0">
-      <Card className="flex h-full flex-col justify-between rounded-sm border p-5 shadow-none gap-4">
+      <Card className="flex h-full flex-col justify-between rounded-sm p-5 shadow-none gap-4">
         <div>
           <p className="text-3xl font-semibold tracking-tight text-foreground">{plan.name}</p>
           <p className="mt-2 text-2xl font-medium text-muted-foreground">

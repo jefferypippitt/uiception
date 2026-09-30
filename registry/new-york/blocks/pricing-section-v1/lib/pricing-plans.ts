@@ -4,7 +4,6 @@ export type PricingPlan = {
   subtitle: string
   priceLabel: string
   priceSuffix?: string
-  monthlyLabel: string
   intro: string
   features: string[]
   ctaLabel: string
@@ -15,10 +14,9 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "core",
     name: "Starter",
-    subtitle: "For individuals and early-stage teams",
+    subtitle: "For individuals and small teams",
     priceLabel: "$29",
     priceSuffix: "/month",
-    monthlyLabel: "Includes 3 seats",
     intro: "Everything you need to launch:",
     features: [
       "Up to 10,000 monthly active users",
@@ -37,7 +35,6 @@ export const pricingPlans: PricingPlan[] = [
     subtitle: "For scaling product and operations teams",
     priceLabel: "$99",
     priceSuffix: "/month",
-    monthlyLabel: "Includes 10 seats",
     intro: "Everything in Starter, plus:",
     features: [
       "Up to 50,000 monthly active users",
@@ -55,7 +52,6 @@ export const pricingPlans: PricingPlan[] = [
     subtitle: "For mature teams with advanced requirements",
     priceLabel: "$249",
     priceSuffix: "/month",
-    monthlyLabel: "Includes 25 seats",
     intro: "Everything in Growth, plus:",
     features: [
       "Up to 200,000 monthly active users",
@@ -72,7 +68,6 @@ export const pricingPlans: PricingPlan[] = [
     name: "Enterprise",
     subtitle: "For large organizations with compliance needs",
     priceLabel: "Custom",
-    monthlyLabel: "Annual contract",
     intro: "Everything in Business, plus:",
     features: [
       "Unlimited seats and advanced user governance",

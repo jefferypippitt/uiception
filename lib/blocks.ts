@@ -470,6 +470,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Pricing Section v5",
         registryPath: "registry/new-york/blocks/pricing-section-v5",
       },
+      {
+        id: "pricing-section-v6",
+        title: "Pricing Section v6",
+        registryPath: "registry/new-york/blocks/pricing-section-v6",
+      },
     ],
   },
   {
@@ -588,6 +593,11 @@ export const blockCategories: BlockCategory[] = [
         id: "footer-section-v4",
         title: "Footer Section v4",
         registryPath: "registry/new-york/blocks/footer-section-v4",
+      },
+      {
+        id: "footer-section-v5",
+        title: "Footer Section v5",
+        registryPath: "registry/new-york/blocks/footer-section-v5",
       },
     ],
   },

@@ -17,30 +17,24 @@ type PricingCardProps = {
 
 export default function PricingCard({ plan }: PricingCardProps) {
   return (
-    <li className="min-w-0">
-      <Card
-        className="relative h-full gap-0 border border-border/80 py-0 shadow-none"
-      >
-        <CardHeader className="gap-3 border-b px-5 pt-5 pb-4">
-          <div className="flex flex-col gap-1">
-            <CardTitle className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-              {plan.name}
-            </CardTitle>
-            <CardDescription className="text-sm leading-relaxed text-muted-foreground">
-              {plan.subtitle}
-            </CardDescription>
-          </div>
-          <div className="flex items-end gap-1">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-muted-foreground uppercase">
+            {plan.name}
+          </CardTitle>
+          <CardDescription className="text-muted-foreground">
+            {plan.subtitle}
+          </CardDescription>
+          <div className="flex items-end gap-2">
             <p className="text-4xl leading-none font-semibold tracking-tight">
               {plan.priceLabel}
             </p>
             {plan.priceSuffix ? (
-              <p className="pb-1 text-sm text-muted-foreground">
+              <p className="pb-2 text-muted-foreground">
                 {plan.priceSuffix}
               </p>
             ) : null}
           </div>
-          <p className="text-sm text-muted-foreground">{plan.monthlyLabel}</p>
         </CardHeader>
         <CardContent className="flex-1 px-5 pt-4 pb-5">
           <p className="mb-3 text-sm font-medium text-foreground">
@@ -70,6 +64,5 @@ export default function PricingCard({ plan }: PricingCardProps) {
           </Button>
         </CardFooter>
       </Card>
-    </li>
   )
 }
