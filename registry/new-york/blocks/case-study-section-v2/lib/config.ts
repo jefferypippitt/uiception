@@ -1,7 +1,7 @@
 export const caseStudy = {
   title: "One identity system for Acme's twelve products.",
   summary:
-    "Acme's products were built by separate teams and had drifted into four logo variants and nine type scales. We replaced them with a single mark and a shared set of design tokens that every team now builds from.",
+    "Separate teams built Acme's products, and by last year they used four logo variants and nine type scales. We replaced them with one mark and a shared set of design tokens that every team now uses.",
   imageFile: "image-1.jpg",
   alt: "A brand mark on a soft gray background surrounded by paper shapes",
 } as const

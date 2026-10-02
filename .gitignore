@@ -39,6 +39,10 @@ pnpm-debug.log*
 .claude/skills/changelog-mdx/
 .agents/skills/changelog-mdx/
 
+# unslop skill — local only, not committed
+.claude/skills/unslop/
+.agents/skills/unslop/
+
 # firecrawl scrape artifacts (local research only)
 .firecrawl/
 

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "contact-section-v1",
+  "title": "Contact Section v1",
+  "description": "Two-column contact section. The left column has a light \"Let's collaborate\" title and YouTube, LinkedIn, and X icon links. The right column has a form with name, email, company, and message fields.",
+  "registryDependencies": [
+    "button",
+    "field",
+    "input",
+    "textarea"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/contact-section-v1/page.tsx",
+      "content": "import ContactSectionV1 from \"./components/contact-section-v1\"\n\nexport default function Page() {\n  return <ContactSectionV1 />\n}\n",
+      "type": "registry:page",
+      "target": "app/contact-section-v1/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/contact-section-v1/components/contact-section-v1.tsx",
+      "content": "import Link from \"next/link\"\n\nimport { LinkedinIcon } from \"@/components/ui/svgs/linkedinIcon\"\nimport { LinkedinIconDark } from \"@/components/ui/svgs/linkedinIconDark\"\nimport { X } from \"@/components/ui/svgs/x\"\nimport { XDark } from \"@/components/ui/svgs/xDark\"\nimport { Youtube } from \"@/components/ui/svgs/youtube\"\n\nimport ContactForm from \"./contact-form\"\n\nexport default function ContactSectionV1() {\n  return (\n    <section className=\"py-16 md:py-20 lg:py-24\">\n      <div className=\"mx-auto grid max-w-6xl gap-16 px-4 md:grid-cols-2 md:gap-12\">\n        <div className=\"flex flex-col justify-between gap-16\">\n          <h2 className=\"text-5xl font-light tracking-tight text-foreground sm:text-6xl lg:text-7xl\">\n            Let&apos;s collaborate\n          </h2>\n\n          <div className=\"flex flex-col gap-3 text-sm\">\n            <p className=\"font-medium text-foreground\">Find us</p>\n            <div className=\"flex items-center gap-4\">\n              <Link\n                href=\"#\"\n                aria-label=\"YouTube\"\n                className=\"transition-opacity hover:opacity-70\"\n              >\n                <Youtube className=\"h-5 w-auto\" />\n              </Link>\n              <Link\n                href=\"#\"\n                aria-label=\"LinkedIn\"\n                className=\"transition-opacity hover:opacity-70\"\n              >\n                <LinkedinIcon className=\"size-5 dark:hidden\" />\n                <LinkedinIconDark className=\"hidden size-5 dark:block\" />\n              </Link>\n              <Link\n                href=\"#\"\n                aria-label=\"X\"\n                className=\"transition-opacity hover:opacity-70\"\n              >\n                <X className=\"size-5 dark:hidden\" />\n                <XDark className=\"hidden size-5 dark:block\" />\n              </Link>\n            </div>\n          </div>\n        </div>\n\n        <ContactForm />\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/contact-section-v1/components/contact-section-v1.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/contact-section-v1/components/contact-form.tsx",
+      "content": "\"use client\"\n\nimport type { FormEvent } from \"react\"\nimport { ArrowRight } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Field, FieldGroup, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport default function ContactForm() {\n  function handleSubmit(event: FormEvent<HTMLFormElement>) {\n    event.preventDefault()\n    // Wire this up to your own endpoint or form service.\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <FieldGroup>\n        <div className=\"grid gap-5 sm:grid-cols-2\">\n          <Field>\n            <FieldLabel htmlFor=\"contact-name\">Name</FieldLabel>\n            <Input\n              id=\"contact-name\"\n              name=\"name\"\n              autoComplete=\"name\"\n              placeholder=\"Jane Doe\"\n              required\n            />\n          </Field>\n          <Field>\n            <FieldLabel htmlFor=\"contact-email\">Email</FieldLabel>\n            <Input\n              id=\"contact-email\"\n              name=\"email\"\n              type=\"email\"\n              autoComplete=\"email\"\n              placeholder=\"jane@acme.com\"\n              required\n            />\n          </Field>\n        </div>\n        <Field>\n          <FieldLabel htmlFor=\"contact-company\">\n            Company <span className=\"text-muted-foreground\">(optional)</span>\n          </FieldLabel>\n          <Input\n            id=\"contact-company\"\n            name=\"company\"\n            autoComplete=\"organization\"\n            placeholder=\"Acme\"\n          />\n        </Field>\n        <Field>\n          <FieldLabel htmlFor=\"contact-message\">Message</FieldLabel>\n          <Textarea\n            id=\"contact-message\"\n            name=\"message\"\n            placeholder=\"A few lines about the project, timeline, and budget.\"\n            required\n          />\n        </Field>\n        <Button type=\"submit\" className=\"w-full sm:w-fit\">\n          Send message\n          <ArrowRight className=\"size-4\" />\n        </Button>\n      </FieldGroup>\n    </form>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/contact-section-v1/components/contact-form.tsx"
+    },
+    {
+      "path": "components/ui/svgs/linkedinIcon.tsx",
+      "content": "import type { SVGProps } from \"react\";\r\n\r\nconst LinkedinIcon = (props: SVGProps<SVGSVGElement>) => (\r\n  <svg {...props} fill=\"none\" viewBox=\"0 0 24 24\">\r\n    <path\r\n      fill=\"#000\"\r\n      d=\"M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z\"\r\n    />\r\n  </svg>\r\n);\r\n\r\nexport { LinkedinIcon };\r\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/linkedinIcon.tsx"
+    },
+    {
+      "path": "components/ui/svgs/linkedinIconDark.tsx",
+      "content": "import type { SVGProps } from \"react\";\r\n\r\nconst LinkedinIconDark = (props: SVGProps<SVGSVGElement>) => (\r\n  <svg {...props} fill=\"none\" viewBox=\"0 0 24 24\">\r\n    <path\r\n      fill=\"#fff\"\r\n      d=\"M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z\"\r\n    />\r\n  </svg>\r\n);\r\n\r\nexport { LinkedinIconDark };\r\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/linkedinIconDark.tsx"
+    },
+    {
+      "path": "components/ui/svgs/x.tsx",
+      "content": "import type { SVGProps } from \"react\";\n\nconst X = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} fill=\"none\" viewBox=\"0 0 1200 1227\">\n    <path\n      fill=\"#000\"\n      d=\"M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z\"\n    />\n  </svg>\n);\n\nexport { X };\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/x.tsx"
+    },
+    {
+      "path": "components/ui/svgs/xDark.tsx",
+      "content": "import type { SVGProps } from \"react\";\n\nconst XDark = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} fill=\"none\" viewBox=\"0 0 1200 1227\">\n    <path\n      fill=\"#fff\"\n      d=\"M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z\"\n    />\n  </svg>\n);\n\nexport { XDark };\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/xDark.tsx"
+    },
+    {
+      "path": "components/ui/svgs/youtube.tsx",
+      "content": "import type { SVGProps } from \"react\";\n\nconst Youtube = (props: SVGProps<SVGSVGElement>) => (\n  <svg {...props} preserveAspectRatio=\"xMidYMid\" viewBox=\"0 0 256 180\">\n    <path\n      fill=\"red\"\n      d=\"M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z\"\n    />\n    <path fill=\"#FFF\" d=\"m102.421 128.06 66.328-38.418-66.328-38.418z\" />\n  </svg>\n);\n\nexport { Youtube };\n",
+      "type": "registry:component",
+      "target": "@ui/svgs/youtube.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

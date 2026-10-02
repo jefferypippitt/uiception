@@ -17,12 +17,15 @@ import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/compon
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/components/footer-section-v3"
 import FooterSectionV4 from "@/registry/new-york/blocks/footer-section-v4/components/footer-section-v4"
 import FooterSectionV5 from "@/registry/new-york/blocks/footer-section-v5/components/footer-section-v5"
+import ContactSectionV1 from "@/registry/new-york/blocks/contact-section-v1/components/contact-section-v1"
 import ChatBotPage from "@/registry/new-york/blocks/chat-bot/page"
 import SimpleChatbotPage from "@/registry/new-york/blocks/simple-chatbot/page"
 import StatsSectionV1 from "@/registry/new-york/blocks/stats-section-v1/components/stats-section-v1"
 import StatsSectionV2 from "@/registry/new-york/blocks/stats-section-v2/components/stats-section-v2"
 import StatsSectionV3 from "@/registry/new-york/blocks/stats-section-v3/components/stats-section-v3"
 import StatsSectionV4 from "@/registry/new-york/blocks/stats-section-v4/components/stats-section-v4"
+import StatsSectionV5 from "@/registry/new-york/blocks/stats-section-v5/components/stats-section-v5"
+import StatsSectionV6 from "@/registry/new-york/blocks/stats-section-v6/components/stats-section-v6"
 import CaseStudySectionV1 from "@/registry/new-york/blocks/case-study-section-v1/components/case-study-section-v1"
 import CaseStudySectionV2 from "@/registry/new-york/blocks/case-study-section-v2/components/case-study-section-v2"
 import HeroSectionV4 from "@/registry/new-york/blocks/hero-section-v4/components/hero-section-v4"
@@ -112,6 +115,7 @@ import NavbarSectionV8Page from "@/registry/new-york/blocks/navbar-section-v8/pa
 import NavbarSectionV9Page from "@/registry/new-york/blocks/navbar-section-v9/page"
 import NavbarSectionV10Page from "@/registry/new-york/blocks/navbar-section-v10/page"
 import AboutSectionV1 from "@/registry/new-york/blocks/about-section-v1/components/about-section-v1"
+import PartnersSectionV1 from "@/registry/new-york/blocks/partners-section-v1/components/partners-section-v1"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -133,12 +137,15 @@ const blockComponents: Record<string, React.ComponentType> = {
   "footer-section-v3": FooterSectionV3,
   "footer-section-v4": FooterSectionV4,
   "footer-section-v5": FooterSectionV5,
+  "contact-section-v1": ContactSectionV1,
   "chat-bot": ChatBotPage,
   "simple-chatbot": SimpleChatbotPage,
   "stats-section-v1": StatsSectionV1,
   "stats-section-v2": StatsSectionV2,
   "stats-section-v3": StatsSectionV3,
   "stats-section-v4": StatsSectionV4,
+  "stats-section-v5": StatsSectionV5,
+  "stats-section-v6": StatsSectionV6,
   "case-study-section-v1": CaseStudySectionV1,
   "case-study-section-v2": CaseStudySectionV2,
   "hero-section-v4": HeroSectionV4,
@@ -228,6 +235,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v9": NavbarSectionV9Page,
   "navbar-section-v10": NavbarSectionV10Page,
   "about-section-v1": AboutSectionV1,
+  "partners-section-v1": PartnersSectionV1,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

@@ -438,6 +438,16 @@ export const blockCategories: BlockCategory[] = [
         title: "Stats Section v4",
         registryPath: "registry/new-york/blocks/stats-section-v4",
       },
+      {
+        id: "stats-section-v5",
+        title: "Stats Section v5",
+        registryPath: "registry/new-york/blocks/stats-section-v5",
+      },
+      {
+        id: "stats-section-v6",
+        title: "Stats Section v6",
+        registryPath: "registry/new-york/blocks/stats-section-v6",
+      },
     ],
   },
   {
@@ -649,7 +659,13 @@ export const blockCategories: BlockCategory[] = [
     id: "contact",
     title: "Contact",
     description: "Contact forms, maps, and support entry points.",
-    versions: [],
+    versions: [
+      {
+        id: "contact-section-v1",
+        title: "Contact Section v1",
+        registryPath: "registry/new-york/blocks/contact-section-v1",
+      },
+    ],
   },
   {
     id: "blog",
@@ -747,7 +763,13 @@ export const blockCategories: BlockCategory[] = [
     id: "partners",
     title: "Partners",
     description: "Partner, investor, and ecosystem logo grids.",
-    versions: [],
+    versions: [
+      {
+        id: "partners-section-v1",
+        title: "Partners Section v1",
+        registryPath: "registry/new-york/blocks/partners-section-v1",
+      },
+    ],
   },
   {
     id: "backgrounds",
