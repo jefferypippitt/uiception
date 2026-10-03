@@ -5,9 +5,9 @@ import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 import { useOptionalSoundPreference } from "@/contexts/sound-preference"
-import { clickSoftSound } from "@/lib/click-soft"
-import { click8bitSound } from "@/lib/click-8bit"
-import { error008Sound } from "@/lib/error-008"
+import { clickSoftSound } from "@/lib/sounds/click-soft"
+import { click8bitSound } from "@/lib/sounds/click-8bit"
+import { error008Sound } from "@/lib/sounds/error-008"
 
 type Phase = "showing" | "input" | "gameover"
 

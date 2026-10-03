@@ -16,20 +16,20 @@ import {
   SoundPreferenceProvider,
   useSoundPreference,
 } from "@/contexts/sound-preference"
-import { playSound } from "@/lib/sound-engine"
-import { switchOffSound } from "@/lib/switch-off"
-import { switchOnSound } from "@/lib/switch-on"
+import { playSound } from "@/lib/sounds/sound-engine"
+import { switchOffSound } from "@/lib/sounds/switch-off"
+import { switchOnSound } from "@/lib/sounds/switch-on"
 
 import { useTerminalAnimation } from "@/registry/new-york/blocks/cursor-terminal/hooks/use-terminal-animation"
 import Spinner from "@/registry/new-york/blocks/cursor-terminal/components/spinner"
 import PromptShell from "@/registry/new-york/blocks/cursor-terminal/components/prompt-shell"
 import { ICON_SM, ICON_XS, type Line, type LineColor } from "@/registry/new-york/blocks/cursor-terminal/lib/config"
 import dynamic from "next/dynamic"
-const TrexRunner = dynamic(() => import("./trex-runner"), { ssr: false })
-const Wordle = dynamic(() => import("./wordle"), { ssr: false })
-const ReactionTime = dynamic(() => import("./reaction-time"), { ssr: false })
-const ColorMemory = dynamic(() => import("./color-memory"), { ssr: false })
-const SequenceMemory = dynamic(() => import("./sequence-memory"), { ssr: false })
+const TrexRunner = dynamic(() => import("./games/trex-runner"), { ssr: false })
+const Wordle = dynamic(() => import("./games/wordle"), { ssr: false })
+const ReactionTime = dynamic(() => import("./games/reaction-time"), { ssr: false })
+const ColorMemory = dynamic(() => import("./games/color-memory"), { ssr: false })
+const SequenceMemory = dynamic(() => import("./games/sequence-memory"), { ssr: false })
 
 import "@/registry/new-york/blocks/cursor-terminal/styles/cursor-terminal.css"
 import "./cursor-terminal.css"

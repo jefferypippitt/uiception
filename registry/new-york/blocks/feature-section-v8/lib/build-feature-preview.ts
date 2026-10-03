@@ -190,7 +190,7 @@ function panelTitleFromCopy(title: string, description: string): string {
   return words.join(" ")
 }
 
-function metricLabelFromClause(clause: string, fallback: string): string {
+function metricLabelFromClause(clause: string): string {
   const trimmed = clause.trim()
   if (trimmed.length <= 22) return trimmed
   const words = trimmed.split(/\s+/).slice(-3)
@@ -266,11 +266,11 @@ function buildDashboardZone(
   const metrics = [
     {
       value: `${seededValue(`${id}-m0`, 89, 99)}.${seededValue(`${id}-m0d`, 1, 9)}%`,
-      label: metricLabelFromClause(clauses[0] ?? "Uptime trend", "Uptime trend"),
+      label: metricLabelFromClause(clauses[0] ?? "Uptime trend"),
     },
     {
       value: `${seededValue(`${id}-m1`, 12, 148)}`,
-      label: metricLabelFromClause(clauses[1] ?? words[0] ?? "Depth", "Queue depth"),
+      label: metricLabelFromClause(clauses[1] ?? words[0] ?? "Depth"),
     },
   ]
 
@@ -309,11 +309,11 @@ function buildChartZone(
   const metrics = [
     {
       value: `${seededValue(`${id}-r0`, 120, 890)}`,
-      label: metricLabelFromClause(clauses[0] ?? "Active now", "Active now"),
+      label: metricLabelFromClause(clauses[0] ?? "Active now"),
     },
     {
       value: `${seededValue(`${id}-r1`, 1, 8)}.${seededValue(`${id}-r1d`, 1, 9)}s`,
-      label: metricLabelFromClause(clauses[1] ?? "Avg delay", "Avg delay"),
+      label: metricLabelFromClause(clauses[1] ?? "Avg delay"),
     },
   ]
 

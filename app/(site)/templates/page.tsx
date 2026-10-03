@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Templates",
   description:
     "Next.js starters for new projects",
+  alternates: {
+    canonical: "/templates",
+  },
 }
 
 export default function TemplatesPage() {

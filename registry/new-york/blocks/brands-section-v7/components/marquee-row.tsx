@@ -9,11 +9,9 @@ type MarqueeRowProps = {
 
 function MarqueeTrack({
   brands,
-  direction,
   ariaHidden = false,
 }: {
   brands: Brand[]
-  direction: "left" | "right"
   ariaHidden?: boolean
 }) {
   return (
@@ -58,8 +56,8 @@ export default function MarqueeRow({
       <div
         className={`${trackClass} flex w-max flex-nowrap items-center py-1 will-change-transform backface-hidden${offset ? " translate-x-8 md:translate-x-12" : ""}`}
       >
-        <MarqueeTrack brands={brands} direction={direction} />
-        <MarqueeTrack brands={brands} direction={direction} ariaHidden />
+        <MarqueeTrack brands={brands} />
+        <MarqueeTrack brands={brands} ariaHidden />
       </div>
     </div>
   )

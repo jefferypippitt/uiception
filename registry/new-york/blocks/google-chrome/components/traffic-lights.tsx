@@ -1,8 +1,8 @@
-import { ArrowsOutSimple, Minus, X } from "@phosphor-icons/react"
+import { Maximize2, Minus, X } from "lucide-react"
 
 const lightIcon = {
   size: 8,
-  weight: "bold" as const,
+  strokeWidth: 3,
   className: "gc-light-icon shrink-0 text-black/55",
 }
 
@@ -34,7 +34,7 @@ export default function TrafficLights() {
         className="gc-light flex size-2.75 shrink-0 cursor-default items-center justify-center rounded-full border-none bg-[#28c840] p-0 shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.18),0_0.5px_0_rgb(255_255_255/0.35)] transition-[filter] duration-120 ease-out"
         aria-label="Maximize"
       >
-        <ArrowsOutSimple {...lightIcon} />
+        <Maximize2 {...lightIcon} />
       </button>
     </div>
   )

@@ -2,10 +2,10 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "feature-section-v9",
   "title": "Feature Section v9",
-  "description": "Platform capabilities section with a left-aligned serif headline, eyebrow label, and four-column feature grid—Phosphor icons centered over per-card GrainGradient shader backgrounds.",
+  "description": "Platform capabilities section with a left-aligned serif headline, eyebrow label, and four-column feature grid—Lucide icons centered over per-card GrainGradient shader backgrounds.",
   "dependencies": [
     "@paper-design/shaders-react",
-    "@phosphor-icons/react"
+    "lucide-react"
   ],
   "registryDependencies": [],
   "files": [
@@ -35,7 +35,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v9/components/feature-icons.tsx",
-      "content": "\"use client\"\n\nimport {\n  Handshake,\n  MagnifyingGlass,\n  PencilSimple,\n  ShieldCheck,\n  type IconProps,\n} from \"@phosphor-icons/react\"\nimport type { ComponentType } from \"react\"\n\nimport type { FeatureIconId } from \"../lib/features\"\n\nconst FEATURE_ICONS: Record<FeatureIconId, ComponentType<IconProps>> = {\n  \"magnifying-glass\": MagnifyingGlass,\n  pencil: PencilSimple,\n  handshake: Handshake,\n  shield: ShieldCheck,\n}\n\nexport function FeatureIcon({\n  icon,\n  className,\n}: {\n  icon: FeatureIconId\n  className?: string\n}) {\n  const Icon = FEATURE_ICONS[icon]\n\n  return (\n    <Icon\n      aria-hidden\n      className={className}\n      weight=\"regular\"\n    />\n  )\n}\n",
+      "content": "\"use client\"\n\nimport {\n  Handshake,\n  Pencil,\n  Search,\n  ShieldCheck,\n  type LucideIcon,\n} from \"lucide-react\"\n\nimport type { FeatureIconId } from \"../lib/features\"\n\nconst FEATURE_ICONS: Record<FeatureIconId, LucideIcon> = {\n  \"magnifying-glass\": Search,\n  pencil: Pencil,\n  handshake: Handshake,\n  shield: ShieldCheck,\n}\n\nexport function FeatureIcon({\n  icon,\n  className,\n}: {\n  icon: FeatureIconId\n  className?: string\n}) {\n  const Icon = FEATURE_ICONS[icon]\n\n  return <Icon aria-hidden className={className} />\n}\n",
       "type": "registry:component",
       "target": "app/feature-section-v9/components/feature-icons.tsx"
     },

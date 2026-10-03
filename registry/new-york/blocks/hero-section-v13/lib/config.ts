@@ -1,14 +1,14 @@
-export const badge = "Built for freelancers"
+export const badge = "Built For Freelancers"
 
 export const headline = [
-  "Your money, in order",
-  "long before tax season",
+  "Your Money, In Order",
+  "Long Before Tax Season",
 ] as const
 
 export const description =
-  "When a client pays, a share goes straight to your quarterly estimate and the rest shows up as money you can spend this month."
+  "When A Client Pays, A Share Goes Straight To Your Quarterly Estimate And The Rest Shows Up As Money You Can Spend This Month."
 
 export const cta = {
-  label: "Start budgeting free",
+  label: "Start Budgeting Free",
   href: "#",
 } as const

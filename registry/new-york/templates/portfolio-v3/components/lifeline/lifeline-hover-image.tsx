@@ -55,19 +55,20 @@ export function LifelineHoverImageProvider({
   })
 
   useEffect(() => {
-    state.current.hoverCapable = window.matchMedia(
+    const s = state.current
+    s.hoverCapable = window.matchMedia(
       "(hover: hover) and (pointer: fine)",
     ).matches
 
     const onMouseMove = (event: MouseEvent) => {
-      state.current.targetX = event.clientX
-      state.current.targetY = event.clientY
+      s.targetX = event.clientX
+      s.targetY = event.clientY
     }
 
     window.addEventListener("mousemove", onMouseMove, { passive: true })
     return () => {
       window.removeEventListener("mousemove", onMouseMove)
-      cancelAnimationFrame(state.current.frame)
+      cancelAnimationFrame(s.frame)
     }
   }, [])
 

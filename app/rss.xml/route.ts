@@ -10,6 +10,8 @@ function escapeXml(value: string): string {
     .replace(/'/g, "&apos;")
 }
 
+export const dynamic = "force-static"
+
 export async function GET() {
   const entries = await getChangelogEntries()
 

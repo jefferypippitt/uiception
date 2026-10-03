@@ -3,13 +3,15 @@
 import { useCallback } from "react"
 
 import {
-  ArrowClockwise,
   ArrowLeft,
   ArrowRight,
-  PuzzlePiece,
+  MoreVertical,
+  Plus,
+  Puzzle,
+  RotateCw,
   Star,
-} from "@phosphor-icons/react"
-import { MoreVertical, Plus, X } from "lucide-react"
+  X,
+} from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -31,7 +33,7 @@ const toolbarIconSize = 18
 
 const toolbarIcon = {
   size: toolbarIconSize,
-  weight: "regular" as const,
+  strokeWidth: 1.75,
   className: "shrink-0",
 }
 
@@ -147,7 +149,7 @@ export default function GoogleChromeWindows({
             tabIndex={-1}
             aria-hidden
           >
-            <ArrowClockwise {...toolbarIcon} />
+            <RotateCw {...toolbarIcon} />
           </button>
         </div>
 
@@ -182,7 +184,7 @@ export default function GoogleChromeWindows({
             tabIndex={-1}
             aria-hidden
           >
-            <PuzzlePiece {...toolbarIcon} />
+            <Puzzle {...toolbarIcon} />
           </button>
           <ToolbarSeparator />
           <ProfileAvatar />

@@ -1,4 +1,4 @@
-import type { SoundAsset } from "@/lib/sound-types";
+import type { SoundAsset } from "@/lib/sounds/sound-types";
 
 export const gFireworkBoomGeneral1Sound: SoundAsset = {
   name: "g-firework-boom-general-1",

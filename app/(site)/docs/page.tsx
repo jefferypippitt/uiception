@@ -4,7 +4,10 @@ import { getDocsEntries, type DocEntry } from "@/lib/docs"
 
 export const metadata: Metadata = {
   title: "Docs",
-  description: "How uiception is built, and how to install a block.",
+  description: "How uiception is built, and how to install a block or template.",
+  alternates: {
+    canonical: "/docs",
+  },
 }
 
 export default async function DocsPage() {

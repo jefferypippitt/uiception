@@ -1,4 +1,4 @@
-import type { SoundAsset } from "@/lib/sound-types";
+import type { SoundAsset } from "@/lib/sounds/sound-types";
 
 export const clickSoftSound: SoundAsset = {
   name: "click-soft",

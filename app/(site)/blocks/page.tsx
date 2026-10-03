@@ -9,10 +9,14 @@ import {
 
 import { BlockPeriodicTile } from "./block-periodic-tile"
 import { BlocksSearchInput } from "./blocks-search-input"
+import { BlocksSearchView } from "./blocks-search-view"
 
 export const metadata: Metadata = {
   title: "Blocks",
   description: "Browse all UI block categories",
+  alternates: {
+    canonical: "/blocks",
+  },
 }
 
 const COLS = 10
@@ -56,20 +60,65 @@ function periodicBorderClass(cell: BlockPeriodicCell, siblings: BlockPeriodicCel
 const mainCells = mainCategories.map(({ cell }) => cell)
 const extendedCells = extendedCategories.map(({ cell }) => cell)
 
-export default async function BlocksPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>
-}) {
-  const { q } = await searchParams
-  const query = q?.trim().toLowerCase() ?? ""
+export default function BlocksPage() {
+  const browse = (
+    <>
+      {/* Category grid — desktop */}
+      <div className="mx-auto mt-10 hidden w-full max-w-6xl px-4 sm:px-6 md:block">
+        <div className="grid" style={{ gridTemplateColumns, gap: 0 }}>
+          {mainCategories.map(({ category, cell }) => (
+            <BlockPeriodicTile
+              key={cell.id}
+              periodic
+              category={category}
+              cell={cell}
+              style={periodicPlacement(cell)}
+              className={periodicBorderClass(cell, mainCells)}
+            />
+          ))}
+        </div>
 
-  const filteredCategories = query
-    ? allCategories.filter(({ category }) =>
-        category.title.toLowerCase().includes(query) ||
-        category.id.toLowerCase().includes(query),
-      )
-    : null
+        <div className="mt-10 grid" style={{ gridTemplateColumns, gap: 0 }}>
+          {extendedCategories.map(({ category, cell }) => (
+            <BlockPeriodicTile
+              key={cell.id}
+              periodic
+              category={category}
+              cell={cell}
+              style={extendedPlacement(cell)}
+              className={periodicBorderClass(cell, extendedCells)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: flat card grid */}
+      <div className="mx-auto mt-10 w-full max-w-[min(64rem,calc(100%-2rem))] px-4 sm:px-6 md:hidden">
+        <section
+          className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3"
+          aria-label="Block categories"
+        >
+          {allCategories.map(({ category, cell }) => (
+            <BlockPeriodicTile key={category.id} category={category} cell={cell} />
+          ))}
+        </section>
+      </div>
+    </>
+  )
+
+  /* Search results — flat grid, all screen sizes; filtered on the client */
+  const searchableTiles = allCategories.map(({ category, cell }) => ({
+    id: category.id,
+    title: category.title,
+    tile: (
+      <BlockPeriodicTile
+        periodic
+        category={category}
+        cell={cell}
+        className="-ml-px -mt-px border-t border-l"
+      />
+    ),
+  }))
 
   return (
     <div className="pb-14 md:pb-20">
@@ -83,74 +132,9 @@ export default async function BlocksPage({
         </div>
       </div>
 
-      {filteredCategories ? (
-        /* Search results — flat grid, all screen sizes */
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-          {filteredCategories.length > 0 ? (
-            <section
-              className="grid grid-cols-2 gap-0 overflow-hidden sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-              aria-label="Block category search results"
-            >
-              {filteredCategories.map(({ category, cell }) => (
-                <BlockPeriodicTile
-                  key={category.id}
-                  periodic
-                  category={category}
-                  cell={cell}
-                  className="-ml-px -mt-px border-t border-l"
-                />
-              ))}
-            </section>
-          ) : (
-            <p className="py-16 text-center text-sm text-muted-foreground">
-              No categories match &ldquo;{q}&rdquo;
-            </p>
-          )}
-        </div>
-      ) : (
-        <>
-          {/* Category grid — desktop */}
-          <div className="mx-auto mt-10 hidden w-full max-w-6xl px-4 sm:px-6 md:block">
-            <div className="grid" style={{ gridTemplateColumns, gap: 0 }}>
-              {mainCategories.map(({ category, cell }) => (
-                <BlockPeriodicTile
-                  key={cell.id}
-                  periodic
-                  category={category}
-                  cell={cell}
-                  style={periodicPlacement(cell)}
-                  className={periodicBorderClass(cell, mainCells)}
-                />
-              ))}
-            </div>
-
-            <div className="mt-10 grid" style={{ gridTemplateColumns, gap: 0 }}>
-              {extendedCategories.map(({ category, cell }) => (
-                <BlockPeriodicTile
-                  key={cell.id}
-                  periodic
-                  category={category}
-                  cell={cell}
-                  style={extendedPlacement(cell)}
-                  className={periodicBorderClass(cell, extendedCells)}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile: flat card grid */}
-          <div className="mx-auto mt-10 w-full max-w-[min(64rem,calc(100%-2rem))] px-4 sm:px-6 md:hidden">
-            <section
-              className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3"
-              aria-label="Block categories"
-            >
-              {allCategories.map(({ category, cell }) => (
-                <BlockPeriodicTile key={category.id} category={category} cell={cell} />
-              ))}
-            </section>
-          </div>
-        </>
-      )}
+      <Suspense fallback={browse}>
+        <BlocksSearchView browse={browse} tiles={searchableTiles} />
+      </Suspense>
     </div>
   )
 }

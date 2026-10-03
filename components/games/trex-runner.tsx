@@ -3,8 +3,8 @@
 import { useEffect, useRef, useCallback } from "react"
 import { useSound } from "@/hooks/use-sound"
 import { useOptionalSoundPreference } from "@/contexts/sound-preference"
-import { select008Sound } from "@/lib/select-008"
-import { uEscapeScreenOpenSound } from "@/lib/u-escape-screen-open"
+import { select008Sound } from "@/lib/sounds/select-008"
+import { uEscapeScreenOpenSound } from "@/lib/sounds/u-escape-screen-open"
 
 const W = 800
 const H = 352

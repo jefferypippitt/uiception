@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  Bicycle,
-  Circle,
-  CookingPot,
-  Receipt,
-} from "@phosphor-icons/react"
+import { Bike, Circle, CookingPot, Receipt } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Doordash } from "@/components/ui/svgs/doordash"
@@ -30,7 +25,7 @@ const PLATFORM_LOGOS = {
 const STAGE_ICONS = {
   ingest: Receipt,
   transform: CookingPot,
-  deliver: Bicycle,
+  deliver: Bike,
 } as const
 
 type StageId = keyof typeof STAGE_ICONS
@@ -80,7 +75,7 @@ function StageNode({
         className="hero-v7-pipeline__node-icon inline-flex text-zinc-400 transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
         aria-hidden
       >
-        <Icon size={20} weight="duotone" />
+        <Icon size={20} strokeWidth={1.75} />
       </span>
       <span
         className={cn(
@@ -161,7 +156,7 @@ export default function PipelineDemo() {
                   stage !== "idle" && "text-green-500"
                 )}
                 size={8}
-                weight="fill"
+                fill="currentColor"
                 aria-hidden
               />
               <span className="font-mono text-2.75 tracking-wider uppercase">

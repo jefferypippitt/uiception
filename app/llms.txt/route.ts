@@ -2,6 +2,8 @@ import { blockCategories } from "@/lib/blocks"
 import { siteConfig } from "@/lib/config"
 import { templateCategories } from "@/lib/templates"
 
+export const dynamic = "force-static"
+
 export async function GET() {
   const blockLines = blockCategories
     .filter((category) => category.versions.length > 0)

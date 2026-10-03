@@ -25,6 +25,9 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   return {
     title: categoryData.title,
     description: categoryData.description,
+    alternates: {
+      canonical: `/blocks/${categoryData.id}`,
+    },
   }
 }
 

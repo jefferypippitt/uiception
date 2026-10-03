@@ -5,9 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
 import { useOptionalSoundPreference } from "@/contexts/sound-preference"
-import { clickSoftSound } from "@/lib/click-soft"
-import { error008Sound } from "@/lib/error-008"
-import { fishReelInSound } from "@/lib/fish-reel-in"
+import { clickSoftSound } from "@/lib/sounds/click-soft"
+import { error008Sound } from "@/lib/sounds/error-008"
+import { fishReelInSound } from "@/lib/sounds/fish-reel-in"
 
 const MIN_DELAY_MS = 1400
 const MAX_DELAY_MS = 3600

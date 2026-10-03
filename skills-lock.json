@@ -106,6 +106,12 @@
       "sourceType": "github",
       "computedHash": "844401be868754beba2e7dc2c66abbe08b740eeefdec69c630ff6cbd81cc4c62"
     },
+    "nextjs-app-architecture": {
+      "source": "aurorascharff/nextjs-app-architecture-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "1c7781230e383b538bca0e10b20b14ca53f83875d6bae25e7161a9590d4d9459"
+    },
     "no-ai-slop": {
       "source": "petergyang/no-ai-slop",
       "sourceType": "github",

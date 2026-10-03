@@ -6,7 +6,7 @@
   "dependencies": [
     "three",
     "geist@^1.7.0",
-    "@phosphor-icons/react"
+    "lucide-react"
   ],
   "registryDependencies": [
     "https://uiception.com/r/block-media.json"
@@ -32,7 +32,7 @@
     },
     {
       "path": "registry/new-york/blocks/feature-section-v11/components/feature-icons.tsx",
-      "content": "\"use client\"\r\n\r\nimport {\r\n  Code,\r\n  Compass,\r\n  Folders,\r\n  Package,\r\n  TerminalWindow,\r\n  Wrench,\r\n  type IconProps,\r\n} from \"@phosphor-icons/react\"\r\nimport type { ComponentType } from \"react\"\r\n\r\nimport type { FeatureIconId } from \"../lib/features\"\r\n\r\nconst FEATURE_ICONS: Record<FeatureIconId, ComponentType<IconProps>> = {\r\n  code: Code,\r\n  terminal: TerminalWindow,\r\n  folders: Folders,\r\n  wrench: Wrench,\r\n  package: Package,\r\n  compass: Compass,\r\n}\r\n\r\nexport function FeatureIcon({\r\n  icon,\r\n  className,\r\n}: {\r\n  icon: FeatureIconId\r\n  className?: string\r\n}) {\r\n  const Icon = FEATURE_ICONS[icon]\r\n\r\n  return <Icon aria-hidden className={className} weight=\"regular\" />\r\n}\r\n",
+      "content": "\"use client\"\n\nimport {\n  Code,\n  Compass,\n  Folders,\n  Package,\n  SquareTerminal,\n  Wrench,\n  type LucideIcon,\n} from \"lucide-react\"\n\nimport type { FeatureIconId } from \"../lib/features\"\n\nconst FEATURE_ICONS: Record<FeatureIconId, LucideIcon> = {\n  code: Code,\n  terminal: SquareTerminal,\n  folders: Folders,\n  wrench: Wrench,\n  package: Package,\n  compass: Compass,\n}\n\nexport function FeatureIcon({\n  icon,\n  className,\n}: {\n  icon: FeatureIconId\n  className?: string\n}) {\n  const Icon = FEATURE_ICONS[icon]\n\n  return <Icon aria-hidden className={className} />\n}\n",
       "type": "registry:component",
       "target": "app/feature-section-v11/components/feature-icons.tsx"
     },

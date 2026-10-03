@@ -1,14 +1,13 @@
 "use client"
 
 import { useCallback } from "react"
-import { useSearchParams, useRouter, usePathname } from "next/navigation"
+import { useSearchParams, usePathname } from "next/navigation"
 import { Search, X } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
 
 export function BlocksSearchInput() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const pathname = usePathname()
   const q = searchParams.get("q") ?? ""
 
@@ -20,9 +19,11 @@ export function BlocksSearchInput() {
       } else {
         params.delete("q")
       }
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+      const query = params.toString()
+      // Native history update: Next syncs useSearchParams without a server round trip.
+      window.history.replaceState(null, "", query ? `${pathname}?${query}` : pathname)
     },
-    [searchParams, router, pathname],
+    [searchParams, pathname],
   )
 
   return (

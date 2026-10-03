@@ -958,10 +958,12 @@ export function useLifelineScroll(
     section.addEventListener("pointercancel", endDrag)
     window.addEventListener("keydown", onKeyDown)
 
+    // Alias the ref (not its value): cleanup must cancel the latest settle frame.
+    const settle = settleId
     return () => {
       cancelAnimationFrame(frameId)
       stopMomentum()
-      cancelAnimationFrame(settleId.current)
+      cancelAnimationFrame(settle.current)
       settlingRef.current = false
       resizeObserver?.disconnect()
       motionQuery.removeEventListener("change", onMotionChange)

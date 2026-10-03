@@ -1,13 +1,13 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
-import { ThumbsUp } from "@phosphor-icons/react"
+import { ThumbsUp } from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useSound } from "@/hooks/use-sound"
 import { useOptionalSoundPreference } from "@/contexts/sound-preference"
-import { click8bitSound } from "@/lib/click-8bit"
-import { clickSoftSound } from "@/lib/click-soft"
-import { drop003Sound } from "@/lib/drop-003"
+import { click8bitSound } from "@/lib/sounds/click-8bit"
+import { clickSoftSound } from "@/lib/sounds/click-soft"
+import { drop003Sound } from "@/lib/sounds/drop-003"
 import { type ColorMemoryHsb, getColorMemoryTodayMeta } from "@/lib/color-memory-daily"
 
 const MEMORIZE_SECONDS = 5

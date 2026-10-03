@@ -51,9 +51,6 @@ export const metadata: Metadata = {
   creator: siteConfig.author.name,
   applicationName: siteConfig.name,
   category: "technology",
-  alternates: {
-    canonical: siteConfig.url,
-  },
   robots: {
     index: true,
     follow: true,
@@ -68,7 +65,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.metaDescription,
     siteName: siteConfig.name,

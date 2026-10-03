@@ -5,17 +5,16 @@ import {
   Compass,
   Folders,
   Package,
-  TerminalWindow,
+  SquareTerminal,
   Wrench,
-  type IconProps,
-} from "@phosphor-icons/react"
-import type { ComponentType } from "react"
+  type LucideIcon,
+} from "lucide-react"
 
 import type { FeatureIconId } from "../lib/features"
 
-const FEATURE_ICONS: Record<FeatureIconId, ComponentType<IconProps>> = {
+const FEATURE_ICONS: Record<FeatureIconId, LucideIcon> = {
   code: Code,
-  terminal: TerminalWindow,
+  terminal: SquareTerminal,
   folders: Folders,
   wrench: Wrench,
   package: Package,
@@ -31,5 +30,5 @@ export function FeatureIcon({
 }) {
   const Icon = FEATURE_ICONS[icon]
 
-  return <Icon aria-hidden className={className} weight="regular" />
+  return <Icon aria-hidden className={className} />
 }

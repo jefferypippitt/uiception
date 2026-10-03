@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Changelog",
   description: "Latest updates and announcements.",
   alternates: {
+    canonical: "/changelog",
     types: {
       "application/rss+xml": "/rss.xml",
     },

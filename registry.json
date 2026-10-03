@@ -2945,7 +2945,7 @@
       "description": "Centered hero with serif headline, mono description, Monad-style flip pill CTAs, animated food-delivery demo, and authentication brands marquee.",
       "dependencies": [
         "gsap",
-        "@phosphor-icons/react"
+        "lucide-react"
       ],
       "registryDependencies": [
         "https://uiception.com/r/brands-section-v6.json"
@@ -3239,6 +3239,7 @@
       "title": "Hero Section v12",
       "description": "Sans headline above a split product card: Atelier brand-kit copy with default/outline pill CTAs, plus a 6-slide poster panel with crossfade zoom transitions and rounded-full icon pagination.",
       "dependencies": [
+        "geist@^1.7.0",
         "motion"
       ],
       "registryDependencies": [
@@ -3724,7 +3725,7 @@
       "description": "macOS Google Chrome window mock with tab strip, omnibox, bookmarks bar, and Google new-tab preview (light/dark) in the viewport.",
       "registryDependencies": [],
       "dependencies": [
-        "@phosphor-icons/react"
+        "lucide-react"
       ],
       "files": [
         {
@@ -3815,7 +3816,7 @@
       "title": "Google Chrome (Windows)",
       "description": "Windows Google Chrome window mock with title-bar tabs, Win32 controls, omnibox with Google G, and Google new-tab preview (light/dark) in the viewport.",
       "dependencies": [
-        "@phosphor-icons/react"
+        "lucide-react"
       ],
       "registryDependencies": [],
       "files": [
@@ -5570,10 +5571,10 @@
       "name": "feature-section-v9",
       "type": "registry:block",
       "title": "Feature Section v9",
-      "description": "Platform capabilities section with a left-aligned serif headline, eyebrow label, and four-column feature grid—Phosphor icons centered over per-card GrainGradient shader backgrounds.",
+      "description": "Platform capabilities section with a left-aligned serif headline, eyebrow label, and four-column feature grid—Lucide icons centered over per-card GrainGradient shader backgrounds.",
       "dependencies": [
         "@paper-design/shaders-react",
-        "@phosphor-icons/react"
+        "lucide-react"
       ],
       "registryDependencies": [],
       "files": [
@@ -5705,7 +5706,7 @@
       "dependencies": [
         "three",
         "geist@^1.7.0",
-        "@phosphor-icons/react"
+        "lucide-react"
       ],
       "registryDependencies": [
         "https://uiception.com/r/block-media.json"

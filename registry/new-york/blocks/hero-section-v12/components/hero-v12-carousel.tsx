@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { GeistSans } from "geist/font/sans"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { AnimatePresence, MotionConfig, motion } from "motion/react"
 
@@ -58,7 +59,9 @@ export function HeroV12Carousel({ slides }: { slides: HeroSlide[] }) {
     <MotionConfig reducedMotion="user">
       <section className="bg-background py-4 text-foreground md:py-6 lg:py-8">
         <div className="mx-auto max-w-6xl px-4">
-          <h1 className="max-w-4xl text-4xl leading-[1.2] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+          <h1
+            className={`${GeistSans.className} max-w-[18ch] text-3xl tracking-tighter hyphens-none sm:text-4xl lg:text-5xl lg:leading-[1.15]`}
+          >
             {headline}
           </h1>
 

@@ -16,7 +16,7 @@ export default function Footer() {
           >
             {siteConfig.author.name}
           </Link>
-          . The source code is available on{" "}
+          . The source code is on{" "}
           <Link
             href={`${siteConfig.links.github}/uiception`}
             target="_blank"

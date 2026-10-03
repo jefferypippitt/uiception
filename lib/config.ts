@@ -7,9 +7,11 @@ export const siteConfig = {
   name: "uiception",
   url: "https://uiception.com",
   ogImage: "https://uiception.com/uiception_logo_og.png",
-  description: "Launch with everything built. Just make it yours.",
+  headline: "Skip to the good part\nof every project.",
+  description:
+    "Start with everything built. Install it all with one command, then make it yours.",
   metaDescription:
-    "Pre-built UI blocks for Next.js. Copy-paste hero sections, navbars, pricing tables, CTAs, and more. Built with shadcn/ui and Tailwind CSS.",
+    "UI blocks and page templates for Next.js: hero sections, pricing tables, portfolios, landing pages, and more. Built with shadcn/ui and Tailwind CSS.",
   keywords: [
     "uiception",
     "UI blocks",
@@ -24,6 +26,9 @@ export const siteConfig = {
     "React components",
     "Tailwind CSS",
     "website templates",
+    "Next.js templates",
+    "portfolio template",
+    "landing page template",
     "Next.js",
     "shadcn",
   ],

@@ -24,7 +24,7 @@ export default function HeroSectionV13() {
             {description}
           </p>
 
-          <Button asChild className="rounded-full">
+          <Button asChild size="lg" className="rounded-full">
             <Link href={cta.href}>{cta.label}</Link>
           </Button>
         </div>

@@ -2,18 +2,17 @@
 
 import {
   Handshake,
-  MagnifyingGlass,
-  PencilSimple,
+  Pencil,
+  Search,
   ShieldCheck,
-  type IconProps,
-} from "@phosphor-icons/react"
-import type { ComponentType } from "react"
+  type LucideIcon,
+} from "lucide-react"
 
 import type { FeatureIconId } from "../lib/features"
 
-const FEATURE_ICONS: Record<FeatureIconId, ComponentType<IconProps>> = {
-  "magnifying-glass": MagnifyingGlass,
-  pencil: PencilSimple,
+const FEATURE_ICONS: Record<FeatureIconId, LucideIcon> = {
+  "magnifying-glass": Search,
+  pencil: Pencil,
   handshake: Handshake,
   shield: ShieldCheck,
 }
@@ -27,11 +26,5 @@ export function FeatureIcon({
 }) {
   const Icon = FEATURE_ICONS[icon]
 
-  return (
-    <Icon
-      aria-hidden
-      className={className}
-      weight="regular"
-    />
-  )
+  return <Icon aria-hidden className={className} />
 }

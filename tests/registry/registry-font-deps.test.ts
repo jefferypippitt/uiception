@@ -69,7 +69,7 @@ describe("registry font dependencies", () => {
       blockFiles.get(m[1])!.push(rel)
     }
 
-    for (const [blockName, files] of blockFiles) {
+    for (const files of blockFiles.values()) {
       const hasSelfContainedImport = files.some((rel) =>
         NEXT_FONT_IMPORT_RE.test(readFileSync(join(root, rel), "utf8")),
       )
