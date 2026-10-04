@@ -1,0 +1,71 @@
+/* cta-section-v7: Windows Terminal chrome tokens and color schemes */
+
+.wt-window {
+  /* Windows 11 light chrome (Mica) */
+  --wt-tabrow-bg: #eeeeee;
+  --wt-border: rgb(0 0 0 / 0.14);
+  --wt-tab-fg: #1a1a1a;
+  --wt-tab-hover: rgb(0 0 0 / 0.05);
+  --wt-tab-sep: rgb(0 0 0 / 0.16);
+
+  /* Selected tab takes the terminal background (WT 1.16+ default theme) */
+  --wt-tab-fg-selected: #1a1a1a;
+  --wt-copy-hover: rgb(0 0 0 / 0.06);
+
+  /* One Half Light on a white background; the bright slots use the
+     scheme's normal colors so they stay readable on white */
+  --wt-term-bg: #ffffff;
+  --wt-fg: #383a42;
+  --wt-cyan: #0997b3;
+  --wt-bright-black: #a0a1a7;
+  --wt-bright-yellow: #c18301;
+}
+
+.dark .wt-window {
+  /* Windows 11 dark chrome (Mica) */
+  --wt-tabrow-bg: #202020;
+  --wt-border: rgb(255 255 255 / 0.1);
+  --wt-tab-fg: #c5c5c5;
+  --wt-tab-hover: rgb(255 255 255 / 0.05);
+  --wt-tab-sep: rgb(255 255 255 / 0.14);
+
+  --wt-tab-fg-selected: #f2f2f2;
+  --wt-copy-hover: rgb(255 255 255 / 0.08);
+
+  /* Campbell, the Windows Terminal default */
+  --wt-term-bg: #0c0c0c;
+  --wt-fg: #cccccc;
+  --wt-cyan: #3a96dd;
+  --wt-bright-black: #767676;
+  --wt-bright-yellow: #f9f1a5;
+}
+
+.wt-ui {
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+
+.wt-mono {
+  font-family: "Cascadia Mono", "Cascadia Code", Consolas, "Courier New", ui-monospace,
+    monospace;
+}
+
+/* WinUI TabView: the selected tab flares into the content below it */
+.wt-tab-selected::before,
+.wt-tab-selected::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+}
+
+.wt-tab-selected::before {
+  left: -8px;
+  background: radial-gradient(circle at 0 0, transparent 7.5px, var(--wt-term-bg) 8px);
+}
+
+.wt-tab-selected::after {
+  right: -8px;
+  background: radial-gradient(circle at 100% 0, transparent 7.5px, var(--wt-term-bg) 8px);
+}

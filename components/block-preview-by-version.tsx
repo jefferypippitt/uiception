@@ -12,6 +12,7 @@ import CtaSectionV3 from "@/registry/new-york/blocks/cta-section-v3/components/c
 import CtaSectionV4 from "@/registry/new-york/blocks/cta-section-v4/components/cta-section-v4"
 import CtaSectionV5 from "@/registry/new-york/blocks/cta-section-v5/components/cta-section-v5"
 import CtaSectionV6 from "@/registry/new-york/blocks/cta-section-v6/components/cta-section-v6"
+import CtaSectionV7 from "@/registry/new-york/blocks/cta-section-v7/components/cta-section-v7"
 import FooterSectionV1 from "@/registry/new-york/blocks/footer-section-v1/components/footer-section-v1"
 import FooterSectionV2 from "@/registry/new-york/blocks/footer-section-v2/components/footer-section-v2"
 import FooterSectionV3 from "@/registry/new-york/blocks/footer-section-v3/components/footer-section-v3"
@@ -116,6 +117,9 @@ import NavbarSectionV9Page from "@/registry/new-york/blocks/navbar-section-v9/pa
 import NavbarSectionV10Page from "@/registry/new-york/blocks/navbar-section-v10/page"
 import AboutSectionV1 from "@/registry/new-york/blocks/about-section-v1/components/about-section-v1"
 import PartnersSectionV1 from "@/registry/new-york/blocks/partners-section-v1/components/partners-section-v1"
+import PartnersSectionV2 from "@/registry/new-york/blocks/partners-section-v2/components/partners-section-v2"
+import PartnersSectionV3 from "@/registry/new-york/blocks/partners-section-v3/components/partners-section-v3"
+import PartnersSectionV4 from "@/registry/new-york/blocks/partners-section-v4/components/partners-section-v4"
 
 const blockComponents: Record<string, React.ComponentType> = {
   "brands-section-v1": BrandsSectionV1,
@@ -132,6 +136,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "cta-section-v4": CtaSectionV4,
   "cta-section-v5": CtaSectionV5,
   "cta-section-v6": CtaSectionV6,
+  "cta-section-v7": CtaSectionV7,
   "footer-section-v1": FooterSectionV1,
   "footer-section-v2": FooterSectionV2,
   "footer-section-v3": FooterSectionV3,
@@ -236,6 +241,9 @@ const blockComponents: Record<string, React.ComponentType> = {
   "navbar-section-v10": NavbarSectionV10Page,
   "about-section-v1": AboutSectionV1,
   "partners-section-v1": PartnersSectionV1,
+  "partners-section-v2": PartnersSectionV2,
+  "partners-section-v3": PartnersSectionV3,
+  "partners-section-v4": PartnersSectionV4,
 }
 
 export function BlockPreviewByVersionId({ versionId }: { versionId: string }) {

@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { ArrowUpRightIcon, RssIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { getChangelogEntries, type ChangelogEntry } from "@/lib/changelog"
-import { ChangelogBadgeLink } from "./badge-link"
 
 export const metadata: Metadata = {
   title: "Changelog",
@@ -67,7 +67,7 @@ export default async function ChangelogPage() {
                     {formatEntryDate(entry.date)}
                   </time>
 
-                  <h2 className="mt-2 text-balance text-2xl font-medium tracking-tight text-foreground md:text-[1.75rem]">
+                  <h2 className="mt-2 text-balancetext-2xl font-medium tracking-tight text-foreground md:text-[1.75rem]">
                     {entry.title}
                   </h2>
 
@@ -86,10 +86,14 @@ export default async function ChangelogPage() {
                       {entry.items.map((item: ChangelogEntry["items"][number]) => (
                         <span key={item.name}>
                           {item.href ? (
-                            <Badge variant="outline" asChild className="font-normal">
-                              <ChangelogBadgeLink href={item.href}>
+                            <Badge
+                              variant="outline"
+                              asChild
+                              className="font-normal transition-colors hover:border-foreground/25 [a]:hover:bg-transparent [a]:hover:text-foreground"
+                            >
+                              <Link href={item.href}>
                                 {item.label} <ArrowUpRightIcon data-icon="inline-end" />
-                              </ChangelogBadgeLink>
+                              </Link>
                             </Badge>
                           ) : (
                             <Badge variant="outline" className="font-normal">
