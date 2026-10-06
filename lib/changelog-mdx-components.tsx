@@ -27,6 +27,34 @@ function ChangelogMdxLink({ href = "", children, ...props }: ChangelogMdxLinkPro
   )
 }
 
+interface ChangelogGroupProps {
+  children?: ReactNode
+}
+
+function ChangelogGroup({ label, children }: ChangelogGroupProps & { label: string }) {
+  return (
+    <section className="mt-6 first:mt-0 [&_ul]:mt-1">
+      <p className="not-typeset text-sm text-muted-foreground">{label}</p>
+      {children}
+    </section>
+  )
+}
+
+function ChangelogNew({ children }: ChangelogGroupProps) {
+  return <ChangelogGroup label="New">{children}</ChangelogGroup>
+}
+
+function ChangelogImproved({ children }: ChangelogGroupProps) {
+  return <ChangelogGroup label="Improved">{children}</ChangelogGroup>
+}
+
+function ChangelogFixed({ children }: ChangelogGroupProps) {
+  return <ChangelogGroup label="Fixed">{children}</ChangelogGroup>
+}
+
 export const changelogMdxComponents = {
   a: ChangelogMdxLink,
+  New: ChangelogNew,
+  Improved: ChangelogImproved,
+  Fixed: ChangelogFixed,
 }

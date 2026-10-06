@@ -49,6 +49,11 @@ export function usePartnersV2Motion(rootRef: RefObject<HTMLElement | null>) {
       gsap.set(linesY, { scaleY: 0, transformOrigin: "center top" })
       gsap.set(marks, { autoAlpha: 0, scale: 0.3, rotate: -90 })
       gsap.set(firstLogos, { autoAlpha: 0, yPercent: 40, filter: "blur(8px)" })
+      root.dataset.pv2Ready = ""
+
+      // Touch browsers keep :hover on the last tapped element, which would
+      // freeze that cell, so only honor hover on devices that can hover.
+      const canHover = window.matchMedia("(hover: hover)").matches
 
       let inView = false
       let introDone = false
@@ -63,7 +68,7 @@ export function usePartnersV2Motion(rootRef: RefObject<HTMLElement | null>) {
             i !== lastCell &&
             !cell.busy &&
             cell.layers.length > 1 &&
-            !cell.el.matches(":hover")
+            !(canHover && cell.el.matches(":hover"))
         )
         if (!candidates.length) return
 
@@ -130,16 +135,13 @@ export function usePartnersV2Motion(rootRef: RefObject<HTMLElement | null>) {
         },
       })
 
+      // Title, then description, then the grid once both have mostly landed.
       intro
         .to(words, { yPercent: 0, duration: 0.9, stagger: 0.05, ease: "power4.out" })
-        .to(description, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.35)
-        .to(linesX, { scaleX: 1, duration: 1.1, stagger: 0.07, ease: "expo.inOut" }, 0.1)
-        .to(linesY, { scaleY: 1, duration: 1.1, stagger: 0.07, ease: "expo.inOut" }, 0.2)
-        .to(
-          marks,
-          { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.6, stagger: 0.06, ease: "back.out(2)" },
-          0.7
-        )
+        .to(description, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.45)
+        .addLabel("grid", "-=0.2")
+        .to(linesX, { scaleX: 1, duration: 1.1, stagger: 0.07, ease: "expo.inOut" }, "grid")
+        .to(linesY, { scaleY: 1, duration: 1.1, stagger: 0.07, ease: "expo.inOut" }, "grid+=0.1")
         .to(
           firstLogos,
           {
@@ -150,7 +152,12 @@ export function usePartnersV2Motion(rootRef: RefObject<HTMLElement | null>) {
             stagger: { each: 0.07, from: "random" },
             clearProps: "transform,filter",
           },
-          0.6
+          "grid+=0.5"
+        )
+        .to(
+          marks,
+          { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.6, stagger: 0.06, ease: "back.out(2)" },
+          "grid+=0.6"
         )
 
       ScrollTrigger.create({
@@ -172,6 +179,7 @@ export function usePartnersV2Motion(rootRef: RefObject<HTMLElement | null>) {
         stop()
         gsap.killTweensOf(allLayers)
         gsap.set(allLayers, { clearProps: "all" })
+        delete root.dataset.pv2Ready
       }
     })
 

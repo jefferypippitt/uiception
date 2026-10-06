@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState, type KeyboardEvent } from "react"
 import { Check, Copy } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -26,7 +26,37 @@ function Segments({ segments }: { segments: Segment[] }) {
 export default function WindowsTerminal({ className }: { className?: string }) {
   const [activeId, setActiveId] = useState(sessions[0].id)
   const [copied, setCopied] = useState(false)
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const active = sessions.find((session) => session.id === activeId) ?? sessions[0]
+
+  const selectTab = (index: number) => {
+    setActiveId(sessions[index].id)
+    setCopied(false)
+  }
+
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const last = sessions.length - 1
+    let next: number
+    switch (event.key) {
+      case "ArrowRight":
+        next = index === last ? 0 : index + 1
+        break
+      case "ArrowLeft":
+        next = index === 0 ? last : index - 1
+        break
+      case "Home":
+        next = 0
+        break
+      case "End":
+        next = last
+        break
+      default:
+        return
+    }
+    event.preventDefault()
+    selectTab(next)
+    tabRefs.current[next]?.focus()
+  }
 
   useEffect(() => {
     if (!copied) return
@@ -64,15 +94,17 @@ export default function WindowsTerminal({ className }: { className?: string }) {
             return (
               <button
                 key={session.id}
+                ref={(el) => {
+                  tabRefs.current[i] = el
+                }}
                 type="button"
                 role="tab"
                 id={`wt-tab-${session.id}`}
                 aria-selected={selected}
                 aria-controls={`wt-panel-${session.id}`}
-                onClick={() => {
-                  setActiveId(session.id)
-                  setCopied(false)
-                }}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => selectTab(i)}
+                onKeyDown={(event) => onTabKeyDown(event, i)}
                 className={cn(
                   "relative flex h-8 items-center rounded-t-lg px-4 text-xs",
                   selected
@@ -112,6 +144,9 @@ export default function WindowsTerminal({ className }: { className?: string }) {
         >
           {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
         </button>
+        <span role="status" className="sr-only">
+          {copied ? "Command copied" : ""}
+        </span>
       </div>
     </div>
   )

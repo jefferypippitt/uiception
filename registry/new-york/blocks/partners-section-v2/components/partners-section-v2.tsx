@@ -7,6 +7,8 @@ import { usePartnersV2Motion } from "../hooks/use-partners-v2-motion"
 import { partnersSectionV2Content } from "../lib/config"
 import { partners } from "../lib/partners"
 
+import "../styles/partners-section-v2.css"
+
 export default function PartnersSectionV2() {
   const { heading, description } = partnersSectionV2Content
   const sectionRef = useRef<HTMLElement>(null)
@@ -16,7 +18,7 @@ export default function PartnersSectionV2() {
   const words = heading.split(" ")
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24">
+    <section ref={sectionRef} data-pv2-root className="py-16 md:py-24">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-12 lg:items-center lg:gap-16">
         <div className="flex flex-col gap-5 lg:col-span-5">
           <h2 className="text-3xl leading-[1.05] font-medium tracking-[-0.035em] text-balance text-foreground sm:text-4xl lg:text-5xl">

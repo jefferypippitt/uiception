@@ -22,7 +22,7 @@ function CornerMark({ className }: { className: string }) {
 
 export default function PartnerGrid() {
   return (
-    <div aria-hidden className="relative">
+    <div aria-hidden data-pv2-grid className="relative">
       {/* Frame */}
       <span data-pv2-line="x" className="absolute inset-x-0 top-0 h-px bg-border" />
       <span data-pv2-line="x" className="absolute inset-x-0 bottom-0 h-px bg-border" />
