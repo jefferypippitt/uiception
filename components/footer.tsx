@@ -9,14 +9,14 @@ export default function Footer() {
         <p className="text-balance text-center text-sm text-muted-foreground">
           Built by{" "}
           <Link
-            href={siteConfig.author.url}
+            href={siteConfig.links.twitter}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground underline-offset-4 hover:underline"
           >
             {siteConfig.author.name}
           </Link>
-          . The source code is on{" "}
+          . The source code is available on{" "}
           <Link
             href={`${siteConfig.links.github}/uiception`}
             target="_blank"

@@ -1,5 +1,5 @@
 const links = {
-  twitter: "https://twitter.com/jefferypippitt",
+  twitter: "https://x.com/jefferypippitt",
   github: "https://github.com/jefferypippitt",
 } as const
 
@@ -34,7 +34,7 @@ export const siteConfig = {
   ],
   author: {
     name: "Jeffery Pippitt",
-    url: links.github,
+    url: links.twitter,
   },
   links,
   navItems: [
