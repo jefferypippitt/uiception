@@ -95,6 +95,8 @@ import PricingSectionV3 from "@/registry/new-york/blocks/pricing-section-v3/comp
 import PricingSectionV4 from "@/registry/new-york/blocks/pricing-section-v4/components/pricing-section-v4"
 import PricingSectionV5 from "@/registry/new-york/blocks/pricing-section-v5/components/pricing-section-v5"
 import PricingSectionV6 from "@/registry/new-york/blocks/pricing-section-v6/components/pricing-section-v6"
+import ComparisonSectionV1 from "@/registry/new-york/blocks/comparison-section-v1/components/comparison-section-v1"
+import ComparisonSectionV2 from "@/registry/new-york/blocks/comparison-section-v2/components/comparison-section-v2"
 import GallerySectionV1 from "@/registry/new-york/blocks/gallery-section-v1/components/gallery-section-v1"
 import GallerySectionV2 from "@/registry/new-york/blocks/gallery-section-v2/components/gallery-section-v2"
 import GallerySectionV3 from "@/registry/new-york/blocks/gallery-section-v3/components/gallery-section-v3"
@@ -103,6 +105,7 @@ import GallerySectionV5 from "@/registry/new-york/blocks/gallery-section-v5/comp
 import GallerySectionV6 from "@/registry/new-york/blocks/gallery-section-v6/components/gallery-section-v6"
 import TeamSectionV1 from "@/registry/new-york/blocks/team-section-v1/components/team-section-v1"
 import TeamSectionV2 from "@/registry/new-york/blocks/team-section-v2/components/team-section-v2"
+import TeamSectionV3 from "@/registry/new-york/blocks/team-section-v3/components/team-section-v3"
 import BlogSectionV1 from "@/registry/new-york/blocks/blog-section-v1/components/blog-section-v1"
 import BlogSectionV2 from "@/registry/new-york/blocks/blog-section-v2/components/blog-section-v2"
 import NavbarSectionV1Page from "@/registry/new-york/blocks/navbar-section-v1/page"
@@ -219,6 +222,8 @@ const blockComponents: Record<string, React.ComponentType> = {
   "pricing-section-v4": PricingSectionV4,
   "pricing-section-v5": PricingSectionV5,
   "pricing-section-v6": PricingSectionV6,
+  "comparison-section-v1": ComparisonSectionV1,
+  "comparison-section-v2": ComparisonSectionV2,
   "gallery-section-v1": GallerySectionV1,
   "gallery-section-v2": GallerySectionV2,
   "gallery-section-v3": GallerySectionV3,
@@ -227,6 +232,7 @@ const blockComponents: Record<string, React.ComponentType> = {
   "gallery-section-v6": GallerySectionV6,
   "team-section-v1": TeamSectionV1,
   "team-section-v2": TeamSectionV2,
+  "team-section-v3": TeamSectionV3,
   "blog-section-v1": BlogSectionV1,
   "blog-section-v2": BlogSectionV2,
   "navbar-section-v1": NavbarSectionV1Page,

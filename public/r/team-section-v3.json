@@ -1,0 +1,78 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "team-section-v3",
+  "title": "Team Section v3",
+  "description": "A centered title and description inside a circle of team portraits. The circle sizes itself to clear the heading and stretches into a tall oval on narrow screens.",
+  "registryDependencies": [
+    "https://uiception.com/r/block-media.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/blocks/team-section-v3/page.tsx",
+      "content": "import TeamSectionV3 from \"./components/team-section-v3\"\n\nexport default function Page() {\n  return <TeamSectionV3 />\n}\n",
+      "type": "registry:page",
+      "target": "app/team-section-v3/page.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v3/components/team-section-v3.tsx",
+      "content": "import { createBlockImage } from \"@/lib/block-media\"\n\nimport { TeamSectionV3Root } from \"./team-section-v3-root\"\nimport { teamFiles, type TeamMember } from \"../lib/config\"\n\nconst blockImage = createBlockImage(\"team-section-v3\")\n\nconst teamMembers: TeamMember[] = teamFiles.map((member, index) => ({\n  id: String(index + 1),\n  name: member.name,\n  title: member.title,\n  avatarSrc: blockImage(member.file),\n}))\n\nexport type TeamSectionV3Props = {\n  members?: TeamMember[]\n}\n\nexport default function TeamSectionV3({\n  members = teamMembers,\n}: TeamSectionV3Props = {}) {\n  return <TeamSectionV3Root members={members} />\n}\n",
+      "type": "registry:component",
+      "target": "app/team-section-v3/components/team-section-v3.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v3/components/team-section-v3-root.tsx",
+      "content": "\"use client\"\n\nimport Image from \"next/image\"\n\nimport { useTeamOrbit } from \"../hooks/use-team-orbit\"\nimport { sectionHeader, type TeamMember } from \"../lib/config\"\n\ntype TeamSectionV3RootProps = {\n  members: TeamMember[]\n}\n\nexport function TeamSectionV3Root({ members }: TeamSectionV3RootProps) {\n  const { stageRef, textRef } = useTeamOrbit(members.length)\n\n  return (\n    <section aria-label=\"Team\" className=\"relative overflow-hidden py-16\">\n      <div ref={stageRef} className=\"relative mx-auto h-[640px] max-w-5xl\">\n        <div\n          ref={textRef}\n          className=\"absolute top-[var(--tsv3-cy,50%)] left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 text-center\"\n        >\n          <h2 className=\"text-3xl leading-[1.1] font-medium tracking-[-0.03em] text-balance text-foreground sm:text-4xl lg:text-5xl\">\n            {sectionHeader.title}\n          </h2>\n          <p className=\"mx-auto mt-4 max-w-sm text-[0.9375rem] leading-relaxed text-balance text-muted-foreground\">\n            {sectionHeader.description}\n          </p>\n        </div>\n\n        <ul>\n          {members.map((member, index) => (\n            <li\n              key={member.id}\n              data-tsv3-card\n              className=\"invisible absolute top-0 left-1/2 w-[140px] will-change-transform\"\n            >\n              <div className=\"relative aspect-square overflow-hidden rounded-full bg-muted shadow-[0_14px_30px_-14px_rgba(0,0,0,0.35)]\">\n                <Image\n                  src={member.avatarSrc}\n                  alt={`${member.name}, ${member.title}`}\n                  fill\n                  unoptimized\n                  priority={index === 0}\n                  sizes=\"156px\"\n                  className=\"scale-[1.12] object-cover\"\n                />\n              </div>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "app/team-section-v3/components/team-section-v3-root.tsx"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v3/hooks/use-team-orbit.ts",
+      "content": "import { useLayoutEffect, useRef } from \"react\"\n\nconst CARD_MAX = 156\nconst CARD_MIN = 72\n/** Clear space, in px, kept between the cards and the centered heading. */\nconst GAP = 16\n/** Widest the heading block may grow, in px. */\nconst TEXT_MAX = 448\n/** Largest orbit radius, in px. */\nconst RADIUS_MAX = 420\n/** How far the orbit may stretch into a tall oval on narrow screens before the heading narrows instead. */\nconst STRETCH_MAX = 1.35\n/** Space between neighboring card centers along the orbit, in card widths. */\nconst SPACING_MIN = 1.5\n/** The section's vertical padding (py-16), counted against the viewport height. */\nconst SECTION_PADDING = 128\n/** Smallest share of the viewport height a card may shrink to on short screens. */\nconst CARD_VIEW_SHARE = 0.16\n\nfunction clamp(min: number, max: number, value: number) {\n  return Math.min(max, Math.max(min, value))\n}\n\n/**\n * Sizes the orbit so the heading always sits inside it and the whole section\n * fits one viewport. It prefers a true circle just big enough to clear the\n * heading block (plus half a card and a gap). When that circle is taller than\n * the viewport allows, it flattens into a wider oval. On narrow screens, where\n * the circle won't fit the width, it stretches into a tall oval, and past\n * STRETCH_MAX the heading narrows instead.\n */\nfunction measure(stage: HTMLElement, text: HTMLElement, count: number) {\n  const width = stage.clientWidth\n  const viewHeight = window.innerHeight\n  const card = clamp(\n    CARD_MIN,\n    CARD_MAX,\n    Math.min(width * 0.15, viewHeight * CARD_VIEW_SHARE)\n  )\n  const reach = card / 2 + GAP\n  const maxR = Math.max(card, Math.min(width / 2 - card * 0.2, RADIUS_MAX))\n  const minR = (count * card * SPACING_MIN) / (Math.PI * 2)\n  // Tallest radius that keeps the stage (orbit and cards) in view.\n  const maxRy = (viewHeight - SECTION_PADDING - card - 16) / 2\n\n  let textWidth = clamp(140, TEXT_MAX, 2 * (maxR * 0.85 - reach))\n  let rx = maxR\n  let ry = maxR\n  for (let attempt = 0; attempt < 10; attempt++) {\n    text.style.width = `${textWidth}px`\n    const halfW = textWidth / 2 + reach\n    const halfH = text.offsetHeight / 2 + reach\n    const circle = Math.max(Math.hypot(halfW, halfH), minR)\n\n    ry = Math.max(Math.min(circle, maxRy), halfH * 1.05)\n    rx =\n      ry >= circle\n        ? circle\n        : Math.max(ry, halfW / Math.sqrt(1 - (halfH / ry) ** 2))\n    if (rx <= maxR) break\n\n    rx = maxR\n    const across = Math.min(0.95, halfW / rx)\n    ry = halfH / Math.sqrt(1 - across ** 2)\n    if (ry <= rx * STRETCH_MAX || textWidth <= 140) break\n    textWidth = Math.max(140, textWidth - 24)\n  }\n\n  const cy = ry + card / 2 + 8\n  stage.style.height = `${cy + ry + card / 2 + 8}px`\n  stage.style.setProperty(\"--tsv3-cy\", `${cy}px`)\n\n  return { card, rx, ry, cy }\n}\n\n/** Lays the cards out around the heading, starting at the front (bottom). */\nexport function useTeamOrbit(count: number) {\n  const stageRef = useRef<HTMLDivElement>(null)\n  const textRef = useRef<HTMLDivElement>(null)\n\n  useLayoutEffect(() => {\n    const stage = stageRef.current\n    const text = textRef.current\n    if (!stage || !text || count < 1) return\n\n    const cards = [...stage.querySelectorAll<HTMLElement>(\"[data-tsv3-card]\")]\n    if (cards.length === 0) return\n\n    const layout = () => {\n      const { card, rx, ry, cy } = measure(stage, text, count)\n      cards.forEach((cardEl, index) => {\n        const angle = (index / count) * Math.PI * 2\n        const x = Math.sin(angle) * rx\n        const y = cy + Math.cos(angle) * ry\n\n        cardEl.style.width = `${card}px`\n        cardEl.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`\n        cardEl.style.visibility = \"visible\"\n      })\n    }\n\n    let lastWidth = stage.clientWidth\n    let lastTextHeight = text.offsetHeight\n    let lastViewHeight = window.innerHeight\n    const relayout = () => {\n      // Writing the stage height re-triggers the observer; only re-measure when\n      // the width, the viewport height, or the heading's wrapped height moved.\n      if (\n        stage.clientWidth === lastWidth &&\n        text.offsetHeight === lastTextHeight &&\n        window.innerHeight === lastViewHeight\n      ) {\n        return\n      }\n      layout()\n      lastWidth = stage.clientWidth\n      lastTextHeight = text.offsetHeight\n      lastViewHeight = window.innerHeight\n    }\n    const resizeObserver = new ResizeObserver(relayout)\n    resizeObserver.observe(stage)\n    resizeObserver.observe(text)\n    window.addEventListener(\"resize\", relayout)\n\n    layout()\n    lastTextHeight = text.offsetHeight\n\n    return () => {\n      resizeObserver.disconnect()\n      window.removeEventListener(\"resize\", relayout)\n    }\n  }, [count])\n\n  return { stageRef, textRef }\n}\n",
+      "type": "registry:hook",
+      "target": "app/team-section-v3/hooks/use-team-orbit.ts"
+    },
+    {
+      "path": "registry/new-york/blocks/team-section-v3/lib/config.ts",
+      "content": "export type TeamMember = {\n  id: string\n  name: string\n  title: string\n  avatarSrc: string\n}\n\nexport const sectionHeader = {\n  title: \"The people behind Acme\",\n  description:\n    \"You'll talk to the same six people whether you report a bug or ask about pricing.\",\n} as const\n\nexport const teamFiles = [\n  { file: \"avatar-1.png\", name: \"Jane Doe\", title: \"VP of Engineering\" },\n  { file: \"avatar-2.png\", name: \"John Doe\", title: \"Director of Operations\" },\n  { file: \"avatar-3.png\", name: \"Jane Smith\", title: \"Chief Product Officer\" },\n  { file: \"avatar-4.png\", name: \"John Smith\", title: \"Head of Autonomy\" },\n  { file: \"avatar-5.png\", name: \"Alex Johnson\", title: \"Staff Data Engineer\" },\n  { file: \"avatar-6.png\", name: \"Sam Wilson\", title: \"SVP of Digital\" },\n] as const\n",
+      "type": "registry:lib",
+      "target": "app/team-section-v3/lib/config.ts"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-1.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-1.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-2.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-2.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-3.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-3.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-4.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-4.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-5.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-5.png.gitkeep"
+    },
+    {
+      "path": "public/images/blocks/team-section-v3/avatar-6.png.gitkeep",
+      "content": "Place your asset here. Same base name, any supported format: jpg, jpeg, png, webp, avif, gif, or svg. Remove the .gitkeep extension from the filename.",
+      "type": "registry:file",
+      "target": "public/images/blocks/team-section-v3/avatar-6.png.gitkeep"
+    }
+  ],
+  "type": "registry:block"
+}

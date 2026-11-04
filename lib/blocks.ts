@@ -658,6 +658,11 @@ export const blockCategories: BlockCategory[] = [
         title: "Team Section v2",
         registryPath: "registry/new-york/blocks/team-section-v2",
       },
+      {
+        id: "team-section-v3",
+        title: "Team Section v3",
+        registryPath: "registry/new-york/blocks/team-section-v3",
+      },
     ],
   },
   {
@@ -742,8 +747,19 @@ export const blockCategories: BlockCategory[] = [
   {
     id: "comparison",
     title: "Comparison",
-    description: "Side-by-side feature and plan comparison tables.",
-    versions: [],
+    description: "Side-by-side comparisons with named alternatives.",
+    versions: [
+      {
+        id: "comparison-section-v1",
+        title: "Comparison Section v1",
+        registryPath: "registry/new-york/blocks/comparison-section-v1",
+      },
+      {
+        id: "comparison-section-v2",
+        title: "Comparison Section v2",
+        registryPath: "registry/new-york/blocks/comparison-section-v2",
+      },
+    ],
   },
   {
     id: "newsletter",

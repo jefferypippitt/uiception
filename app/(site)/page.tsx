@@ -155,13 +155,13 @@ export default function Home() {
                 </p>
 
                 <div className='flex w-full items-center justify-center gap-2 pt-2'>
-                    <Button asChild size='lg' className='rounded-full pr-3 pl-4'>
+                    <Button asChild size='lg' className='rounded-full px-4'>
                         <Link href='/blocks'>
                             Get Started
                             <ChevronRight data-icon='inline-end' aria-hidden />
                         </Link>
                     </Button>
-                    <Button asChild variant='secondary' size='lg' className='rounded-full px-4'>
+                    <Button asChild variant='secondary' size='lg' className='rounded-full'>
                         <Link href='/docs'>View Documentation</Link>
                     </Button>
                 </div>

@@ -58,6 +58,11 @@ const ENTER_MS = 460
 const SETTLE_MS = 300
 const LAND_MS = 500
 const GAP_MS = 250
+/**
+ * On load every card rests flat while the frame fades in (500ms); then the
+ * first card lifts, so the opening move is the motion itself, not a pose.
+ */
+const INTRO_MS = 700
 /** How far a card slides sideways on screen as it swaps, in scene px. */
 const SWAP_SLIDE = 72
 
@@ -453,13 +458,12 @@ export function HomeBlockStack({ layers }: { layers: HomeStackLayer[] }) {
   const [fieldReady, setFieldReady] = React.useState(false)
   /** Which version each card shows; every card starts on its starter (index 0). */
   const [shown, setShown] = React.useState<number[]>(() => layers.map(() => 0))
-  const [phase, setPhase] = React.useState<Phase>("up")
+  const [phase, setPhase] = React.useState<Phase>("down")
+  const [introDone, setIntroDone] = React.useState(false)
   const shownRef = React.useRef(shown)
   React.useEffect(() => {
     shownRef.current = shown
   }, [shown])
-  /** The card lifted on load keeps its starter until the stack has moved on once. */
-  const advanced = React.useRef(false)
   const frameRef = React.useRef<HTMLDivElement | null>(null)
   const sceneRef = React.useRef<HTMLDivElement | null>(null)
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null)
@@ -468,13 +472,22 @@ export function HomeBlockStack({ layers }: { layers: HomeStackLayer[] }) {
   const reducedMotion = usePrefersReducedMotion()
   const autoplay = !paused && !reducedMotion && layers.length > 1
 
+  // Hold the whole page flat until the frame has faded in. See INTRO_MS.
+  React.useEffect(() => {
+    if (!fitted || introDone) return
+    const id = window.setTimeout(() => setIntroDone(true), INTRO_MS)
+    return () => window.clearTimeout(id)
+  }, [fitted, introDone])
+
   // Autoplay: lift → swap → land, then on to the next card. Hover pauses with the
-  // card simply lifted; leaving resumes from there.
+  // card simply lifted; leaving resumes from there. Reduced motion skips the
+  // intro and shows the active card lifted from the start.
   React.useEffect(() => {
     if (!autoplay) {
       setPhase("up")
       return
     }
+    if (!introDone) return
     let cancelled = false
     const step = async (ms: number) => {
       await wait(ms)
@@ -485,7 +498,7 @@ export function HomeBlockStack({ layers }: { layers: HomeStackLayer[] }) {
       await step(LIFT_MS + HOLD_MS)
 
       const versions = layers[active]?.versions ?? []
-      if (advanced.current && versions.length > 1) {
+      if (versions.length > 1) {
         const next = (shownRef.current[active] + 1) % versions.length
         // Decode first so the incoming card never arrives blank.
         const theme = document.documentElement.classList.contains("dark") ? "dark" : "light"
@@ -507,14 +520,13 @@ export function HomeBlockStack({ layers }: { layers: HomeStackLayer[] }) {
 
       setPhase("down")
       await step(LAND_MS + GAP_MS)
-      advanced.current = true
       setActive((i) => (i + 1) % layers.length)
     }
     run().catch(() => {})
     return () => {
       cancelled = true
     }
-  }, [active, autoplay, layers])
+  }, [active, autoplay, introDone, layers])
 
   const sections = React.useMemo(() => {
     const heights = layers.map((layer) => SECTION_H[layer.id] ?? DEFAULT_H)
@@ -637,7 +649,6 @@ export function HomeBlockStack({ layers }: { layers: HomeStackLayer[] }) {
   const canvasOffset = project(-CANVAS_MARGIN, -CANVAS_MARGIN)
 
   const select = (index: number) => {
-    advanced.current = true
     setPaused(true)
     setActive(index)
   }
