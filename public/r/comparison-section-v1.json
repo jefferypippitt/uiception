@@ -16,7 +16,7 @@
     },
     {
       "path": "registry/new-york/blocks/comparison-section-v1/components/comparison-section-v1.tsx",
-      "content": "import { GeistSans } from \"geist/font/sans\"\n\nimport ComparisonBoard from \"./comparison-board\"\nimport { comparisonHeader } from \"../lib/comparison\"\n\nexport default function ComparisonSectionV1() {\n  return (\n    <section className={`py-16 font-sans md:py-24 ${GeistSans.className}`}>\n      <div className=\"mx-auto max-w-6xl px-6\">\n        <header className=\"max-w-2xl\">\n          <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] text-balance text-foreground md:text-5xl\">\n            {comparisonHeader.title}\n          </h2>\n        </header>\n        <ComparisonBoard />\n      </div>\n    </section>\n  )\n}\n",
+      "content": "import { GeistSans } from \"geist/font/sans\"\r\n\r\nimport ComparisonBoard from \"./comparison-board\"\r\nimport { comparisonHeader } from \"../lib/comparison\"\r\n\r\nexport default function ComparisonSectionV1() {\r\n  return (\r\n    <section className={`py-16 font-sans md:py-24 ${GeistSans.className}`}>\r\n      <div className=\"mx-auto max-w-6xl px-6\">\r\n        <header className=\"max-w-2xl\">\r\n          <h2 className=\"text-4xl font-medium leading-[1.1] tracking-[-0.03em] text-balance text-foreground md:text-5xl\">\r\n            {comparisonHeader.title}\r\n          </h2>\r\n        </header>\r\n        <ComparisonBoard />\r\n      </div>\r\n    </section>\r\n  )\r\n}\r\n",
       "type": "registry:component",
       "target": "app/comparison-section-v1/components/comparison-section-v1.tsx"
     },

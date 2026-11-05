@@ -87,6 +87,8 @@ function srgbToLinear(value: number): number {
 type PaintableCanvas = HTMLCanvasElement & {
   onpaint?: (() => void) | null;
   requestPaint?: () => void;
+  // Chrome 156+: children are only hit-testable once their geometry is registered.
+  updateElementGeometry?: (element: Element) => void;
 };
 
 type ElementImageContext = CanvasRenderingContext2D & {
@@ -355,6 +357,8 @@ export function createLiquid(
       try {
         sourceCtx!.reset();
         sourceCtx!.drawElementImage!(content, 0, 0);
+        // Register hit-test geometry so links/buttons under the canvas get clicks.
+        paintable.updateElementGeometry?.(content);
         contentDirty = true;
         wake();
       } catch {}
@@ -966,6 +970,10 @@ export function Liquid({
         ref={sourceRef}
         // @ts-expect-error experimental html-in-canvas attribute
         layoutsubtree="true"
+        // Newer html-in-canvas builds (Chrome 156+) replace `layoutsubtree`
+        // with `content="drawable"`. Without it, children are painted but
+        // never hit-tested, so every link/button under the canvas is dead.
+        content="drawable"
         suppressHydrationWarning
         style={
           native
