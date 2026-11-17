@@ -2,6 +2,7 @@
 const nextConfig = {
   poweredByHeader: false,
   experimental: {
+    agentUpgrade: "security",
     optimizePackageImports: ["@phosphor-icons/react", "motion", "radix-ui", "@base-ui/react"],
   },
   turbopack: {
