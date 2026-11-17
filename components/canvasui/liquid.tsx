@@ -990,6 +990,9 @@ export function Liquid({
         {native ? (
           <div
             ref={contentRef}
+            // Chrome 157+ rejects drawElementImage() on descendants without `drawable`.
+            // @ts-expect-error experimental html-in-canvas attribute
+            drawable=""
             style={{
               position: "relative",
               width: "100%",

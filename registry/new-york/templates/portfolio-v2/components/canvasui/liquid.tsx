@@ -992,6 +992,11 @@ export function Liquid({
           <div
             ref={contentRef}
             data-liquid-content
+            // Chrome 157+ rejects drawElementImage() on any descendant
+            // without `drawable` (InvalidStateError), which left the page
+            // blank: the WebGL output painted with no captured content.
+            // @ts-expect-error experimental html-in-canvas attribute
+            drawable=""
             style={{
               position: "relative",
               width: "100%",
