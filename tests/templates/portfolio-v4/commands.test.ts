@@ -60,6 +60,20 @@ describe("portfolio-v4 getWelcomeLines", () => {
     }
     expect(text).toContain("Try:")
   })
+
+  it("makes the listed commands clickable and each one runs", () => {
+    const clickable = getWelcomeLines(80)
+      .flatMap((line) => line.segments)
+      .filter((s) => s.type === "command")
+      .map((s) => s.value)
+    expect(clickable).toEqual(["about", "work", "projects", "resume", "help", "ls"])
+    for (const cmd of clickable) {
+      const result = runCommand(cmd, 80)
+      expect(result.kind).toBe("output")
+      if (result.kind !== "output") return
+      expect(allText(result.lines)).not.toContain("command not found")
+    }
+  })
 })
 
 describe("portfolio-v4 runCommand", () => {
@@ -100,6 +114,60 @@ describe("portfolio-v4 runCommand", () => {
       "work",
     ]) {
       expect(text).toContain(entry)
+    }
+  })
+
+  it("makes every `ls` entry clickable and each one runs", () => {
+    const result = runCommand("ls", 80)
+    if (result.kind !== "output") throw new Error("expected output")
+    const clickable = result.lines
+      .flatMap((line) => line.segments)
+      .filter((s) => s.type === "command")
+      .map((s) => s.value)
+    expect(clickable).toEqual([
+      "about",
+      "destinations",
+      "events",
+      "help",
+      "projects",
+      "resume",
+      "work",
+    ])
+    for (const cmd of clickable) {
+      const run = runCommand(cmd, 80)
+      if (run.kind !== "output") throw new Error("expected output")
+      expect(allText(run.lines)).not.toContain("command not found")
+    }
+  })
+
+  it("makes every `help` entry clickable and keeps the columns aligned", () => {
+    const result = runCommand("help", 80)
+    if (result.kind !== "output") throw new Error("expected output")
+    const rows = result.lines.filter((line) =>
+      line.segments.some((s) => s.type === "command")
+    )
+    expect(rows.map((line) => line.segments[1]?.value)).toEqual([
+      "about",
+      "work",
+      "projects",
+      "resume",
+      "ls",
+      "help",
+      "clear",
+      "destinations",
+      "events",
+    ])
+    // Descriptions all start at the same column.
+    const starts = rows.map(
+      (line) => lineText(line).length - (line.segments.at(-1)?.value.length ?? 0)
+    )
+    expect(new Set(starts).size).toBe(1)
+    for (const row of rows) {
+      const cmd = row.segments[1]?.value ?? ""
+      const run = runCommand(cmd, 80)
+      if (run.kind === "output") {
+        expect(allText(run.lines)).not.toContain("command not found")
+      }
     }
   })
 

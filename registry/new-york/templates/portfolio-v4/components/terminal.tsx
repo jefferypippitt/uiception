@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  useCallback,
   useEffect,
   useEffectEvent,
   useRef,
@@ -17,7 +18,7 @@ import {
   runCommand,
   type TerminalLine,
 } from "../lib/commands"
-import { TerminalLineView } from "./terminal-line"
+import { TerminalLineView, type RunCommand } from "./terminal-line"
 
 import "../styles/terminal.css"
 
@@ -168,6 +169,16 @@ export function Terminal() {
     )
   }
 
+  // Clicking a command in the output runs it as if typed. The ref keeps the
+  // callback identity stable so memoized lines don't re-render every keystroke.
+  const submitRef = useRef(submitCommand)
+  useEffect(() => {
+    submitRef.current = submitCommand
+  })
+  const runClickedCommand = useCallback<RunCommand>((command) => {
+    submitRef.current(command)
+  }, [])
+
   function onSubmit(event: FormEvent) {
     event.preventDefault()
     submitCommand(input)
@@ -228,7 +239,11 @@ export function Terminal() {
         {entries.map((entry) => (
           <div key={entry.id}>
             {entry.lines.map((line, index) => (
-              <TerminalLineView key={`${entry.id}-${index}`} line={line} />
+              <TerminalLineView
+                key={`${entry.id}-${index}`}
+                line={line}
+                onCommand={runClickedCommand}
+              />
             ))}
           </div>
         ))}

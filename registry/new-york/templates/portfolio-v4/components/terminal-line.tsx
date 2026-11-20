@@ -22,12 +22,28 @@ function segmentClass(tone: LineSegment["tone"]): string {
   }
 }
 
+export type RunCommand = (command: string) => void
+
 const SegmentView = memo(function SegmentView({
   segment,
+  onCommand,
 }: {
   segment: LineSegment
+  onCommand?: RunCommand
 }) {
   const className = segmentClass(segment.tone)
+
+  if (segment.type === "command") {
+    return (
+      <button
+        type="button"
+        onClick={() => onCommand?.(segment.value)}
+        className={`pt-command ${className}`.trim()}
+      >
+        {segment.value}
+      </button>
+    )
+  }
 
   if (segment.type === "link") {
     return (
@@ -53,8 +69,10 @@ const SegmentView = memo(function SegmentView({
 
 export const TerminalLineView = memo(function TerminalLineView({
   line,
+  onCommand,
 }: {
   line: TerminalLine
+  onCommand?: RunCommand
 }) {
   const empty =
     line.segments.length === 0 ||
@@ -70,6 +88,7 @@ export const TerminalLineView = memo(function TerminalLineView({
         <SegmentView
           key={`${segment.type}-${index}-${segment.value}`}
           segment={segment}
+          onCommand={onCommand}
         />
       ))}
     </div>

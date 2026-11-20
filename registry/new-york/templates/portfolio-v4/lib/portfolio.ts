@@ -54,7 +54,8 @@ export const portfolio = {
   promptUser: "jon@portfolio",
   location: "Portland, Oregon",
   email: "jon@example.com",
-  tagline: "Welcome to my portfolio. Type a command to look around.",
+  tagline:
+    "Welcome to my portfolio. Type a command or click the links to look around.",
   about: {
     summary:
       "Hey — I'm Jon. Fullstack developer from Portland, building for AI infrastructure startups and teams shipping real tools with real users.",

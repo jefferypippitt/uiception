@@ -6,6 +6,8 @@ export type LineTone = "default" | "dim" | "bold" | "cyan" | "error"
 export type LineSegment =
   | { type: "text"; value: string; tone?: LineTone }
   | { type: "link"; value: string; href: string; tone?: LineTone }
+  /** Click to run `value` as if it were typed at the prompt. */
+  | { type: "command"; value: string; tone?: LineTone }
 
 export type TerminalLine = {
   segments: LineSegment[]
@@ -50,7 +52,10 @@ function blank(): TerminalLine {
   return { segments: [{ type: "text", value: "", tone: "default" }] }
 }
 
-/** Equal gaps between names (navbar-style), wrapping when the row fills. */
+/**
+ * Equal gaps between names (navbar-style), wrapping when the row fills.
+ * Every name is a clickable command.
+ */
 function equalGapListing(names: readonly string[], cols: number): TerminalLine[] {
   const gap = "    "
   const gapLen = gap.length
@@ -65,7 +70,7 @@ function equalGapListing(names: readonly string[], cols: number): TerminalLine[]
       if (index > 0) {
         segments.push({ type: "text", value: gap, tone: "default" })
       }
-      segments.push({ type: "text", value: name, tone: "cyan" })
+      segments.push({ type: "command", value: name, tone: "cyan" })
     })
     lines.push({ segments })
     row = []
@@ -118,7 +123,7 @@ export function getWelcomeLines(cols: number): TerminalLine[] {
     { type: "text", value: "Commands: ", tone: "dim" },
   ]
   COMMON_COMMANDS.forEach((cmd, index) => {
-    commonSegments.push({ type: "text", value: cmd, tone: "cyan" })
+    commonSegments.push({ type: "command", value: cmd, tone: "cyan" })
     if (index < COMMON_COMMANDS.length - 1) {
       commonSegments.push({ type: "text", value: ", ", tone: "dim" })
     }
@@ -128,7 +133,7 @@ export function getWelcomeLines(cols: number): TerminalLine[] {
   lines.push({
     segments: [
       { type: "text", value: "Try: ", tone: "dim" },
-      { type: "text", value: "ls", tone: "cyan" },
+      { type: "command", value: "ls", tone: "cyan" },
     ],
   })
   lines.push(blank())
@@ -369,66 +374,34 @@ function eventsLines(): TerminalLine[] {
   return lines
 }
 
+/** One `help` row: indented clickable command, padded to a fixed column. */
+function helpRow(command: CommandName, description: string): TerminalLine {
+  const column = 14
+  return {
+    segments: [
+      { type: "text", value: "  ", tone: "default" },
+      { type: "command", value: command, tone: "cyan" },
+      { type: "text", value: " ".repeat(Math.max(2, column - command.length)), tone: "default" },
+      { type: "text", value: description, tone: "dim" },
+    ],
+  }
+}
+
 function helpLines(): TerminalLine[] {
   return [
     text("Available commands", "bold"),
     blank(),
-    {
-      segments: [
-        { type: "text", value: "  about         ", tone: "cyan" },
-        { type: "text", value: "Who I am, hobbies, links", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  work          ", tone: "cyan" },
-        { type: "text", value: "Jobs — title, company, what I did", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  projects      ", tone: "cyan" },
-        { type: "text", value: "Things I've shipped on the side", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  resume        ", tone: "cyan" },
-        { type: "text", value: "Full résumé — experience, skills, school, certs", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  ls            ", tone: "cyan" },
-        { type: "text", value: "List everything in this portfolio", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  help          ", tone: "cyan" },
-        { type: "text", value: "Show this list", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  clear         ", tone: "cyan" },
-        { type: "text", value: "Clear the screen (or Ctrl+L)", tone: "dim" },
-      ],
-    },
+    helpRow("about", "Who I am, hobbies, links"),
+    helpRow("work", "Jobs — title, company, what I did"),
+    helpRow("projects", "Things I've shipped on the side"),
+    helpRow("resume", "Full résumé — experience, skills, school, certs"),
+    helpRow("ls", "List everything in this portfolio"),
+    helpRow("help", "Show this list"),
+    helpRow("clear", "Clear the screen (or Ctrl+L)"),
     blank(),
     text("Also on disk (try ls):", "dim"),
-    {
-      segments: [
-        { type: "text", value: "  destinations  ", tone: "cyan" },
-        { type: "text", value: "Places I've been", tone: "dim" },
-      ],
-    },
-    {
-      segments: [
-        { type: "text", value: "  events        ", tone: "cyan" },
-        { type: "text", value: "Conferences & meetups", tone: "dim" },
-      ],
-    },
+    helpRow("destinations", "Places I've been"),
+    helpRow("events", "Conferences & meetups"),
   ]
 }
 

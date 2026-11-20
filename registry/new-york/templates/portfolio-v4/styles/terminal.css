@@ -91,6 +91,22 @@ html.dark .pt-root {
   color: var(--pt-bright-cyan);
 }
 
+/* Clickable command: a bare button that looks exactly like the text around it. */
+.pt-command {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pt-command.pt-cyan {
+  color: var(--pt-cyan);
+}
+
 .pt-cursor {
   display: inline-block;
   width: 0.6em;
